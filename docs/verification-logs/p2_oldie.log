@@ -1,0 +1,61 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:12] [CLIENT Oldie] Connecting to 127.0.0.1:7777 as 'Oldie' ...
+[14:55:12] [CLIENT Oldie] Connected to server as peer 864353237, logging in
+[14:55:12] [CLIENT Oldie] Login OK: Welcome back, Oldie!
+[14:55:12] [CLIENT Oldie] Class selection requested (existing account without a class)
+[14:55:12] [CLIENT Oldie] bot chooses class earth
+[14:55:12] [CLIENT Oldie] [chat] * Bot2 joined the world.
+[14:55:12] [CLIENT Oldie] [chat] * Oldie the Stone Guardian joined the world.
+[14:55:12] [CLIENT Oldie] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:13] [CLIENT Oldie] inventory: gold=12 inv={ "health_potion": 2, "lich_staff": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:55:13] [CLIENT Oldie] drinking a health_potion at hp 40/67
+[14:55:13] [CLIENT Oldie] trying to equip lich_staff (not allowed for earth)
+[14:55:13] [CLIENT Oldie] notice: Lich Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:55:13] [CLIENT Oldie] inventory: gold=12 inv={ "health_potion": 1, "lich_staff": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:55:15] [CLIENT Oldie] [chat] [Meadow] Bot1: Hello from Bot1!
+[14:55:15] [CLIENT Oldie] [chat] [Meadow] Victim: Hello from Victim!
+[14:55:15] [CLIENT Oldie] [chat] [Forest] Bot2: Hello from Bot2!
+[14:55:15] [CLIENT Oldie] [chat] [Meadow] Oldie: Hello from Oldie!
+[14:55:15] [CLIENT Oldie] inventory: gold=16 inv={ "health_potion": 1, "lich_staff": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:55:15] [CLIENT Oldie] status: zone=meadow players=3 Oldie(Lv4 55/67hp)@(874, 854), Bot1(Lv8 79/81hp)@(1323, 827), Victim(Lv1 26/26hp)@(1553, 656) | monsters: slime 6/10 | loot=0 | foreign_entities=0
+[14:55:16] [CLIENT Oldie] notice: Mountain's Challenge unlocks at level 6
+[14:55:17] [CLIENT Oldie] inventory: gold=16 inv={ "health_potion": 1, "lich_staff": 1, "iron_sword": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:55:17] [CLIENT Oldie] inventory: gold=17 inv={ "health_potion": 1, "lich_staff": 1, "iron_sword": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:55:17] [CLIENT Oldie] equipping iron_sword
+[14:55:17] [CLIENT Oldie] inventory: gold=17 inv={ "health_potion": 1, "lich_staff": 1 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:18] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv4 55/67hp)@(656, 755), Bot1(Lv8 78/81hp)@(1323, 1094) | monsters: slime 4/10 | loot=0 | foreign_entities=0
+[14:55:20] [CLIENT Oldie] notice: Earthquake unlocks at level 10
+[14:55:21] [CLIENT Oldie] inventory: gold=18 inv={ "health_potion": 1, "lich_staff": 1 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:21] [CLIENT Oldie] inventory: gold=18 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 1 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:21] [CLIENT Oldie] inventory: gold=20 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 1 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:21] [CLIENT Oldie] notice: Stone Skin is on cooldown (8.5s)
+[14:55:21] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv4 55/67hp)@(697, 1104), Bot1(Lv8 77/81hp)@(1041, 1168) | monsters: slime 4/10 | loot=1 | foreign_entities=0
+[14:55:22] [CLIENT Oldie] inventory: gold=26 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 1 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:22] [CLIENT Oldie] notice: Mountain's Challenge unlocks at level 6
+[14:55:22] [CLIENT Oldie] [chat] * Bot2 left the world.
+[14:55:23] [CLIENT Oldie] inventory: gold=28 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 2 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:24] [CLIENT Oldie] notice: Earthquake unlocks at level 10
+[14:55:24] [CLIENT Oldie] [chat] * Oldie reached level 5!
+[14:55:24] [CLIENT Oldie] inventory: gold=29 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 2 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:24] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv5 76/76hp)@(666, 1101), Bot1(Lv8 77/81hp)@(722, 1106) | monsters: slime 3/10 | loot=3 | foreign_entities=0
+[14:55:25] [CLIENT Oldie] inventory: gold=33 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 2 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:25] [CLIENT Oldie] inventory: gold=33 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 3 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:25] [CLIENT Oldie] inventory: gold=33 inv={ "health_potion": 1, "lich_staff": 1, "slime_gel": 4 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:27] [CLIENT Oldie] [chat] * Victim was defeated by Dire Rat!
+[14:55:27] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv5 76/76hp)@(658, 882), Bot1(Lv8 78/81hp)@(662, 894) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:55:30] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv5 76/76hp)@(570, 816), Bot1(Lv8 79/81hp)@(507, 737) | monsters: slime 8/10 | loot=2 | foreign_entities=0
+[14:55:32] [CLIENT Oldie] notice: Mountain's Challenge unlocks at level 6
+[14:55:33] [CLIENT Oldie] notice: Earthquake unlocks at level 10
+[14:55:33] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv5 76/76hp)@(826, 794), Bot1(Lv8 81/81hp)@(809, 631) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:55:34] [CLIENT Oldie] notice: Ground Slam is on cooldown (0.3s)
+[14:55:34] [CLIENT Oldie] inventory: gold=33 inv={ "health_potion": 2, "lich_staff": 1, "slime_gel": 4 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:35] [CLIENT Oldie] inventory: gold=38 inv={ "health_potion": 2, "lich_staff": 1, "slime_gel": 4 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:36] [CLIENT Oldie] [chat] * Bot1 reached level 9!
+[14:55:36] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv5 76/76hp)@(976, 671), Bot1(Lv9 88/88hp)@(1011, 347) | monsters: slime 6/10 | loot=2 | foreign_entities=0
+[14:55:37] [CLIENT Oldie] [chat] * Victim was defeated by Dire Rat!
+[14:55:39] [CLIENT Oldie] status: zone=meadow players=2 Oldie(Lv5 76/76hp)@(1029, 667), Bot1(Lv9 88/88hp)@(1451, 80) | monsters: slime 6/10 | loot=0 | foreign_entities=0
+[14:55:41] [CLIENT Oldie] notice: Stone Skin is on cooldown (5.3s)
+[14:55:41] [CLIENT Oldie] notice: Mountain's Challenge unlocks at level 6
+[14:55:42] [CLIENT Oldie] inventory: gold=44 inv={ "health_potion": 2, "lich_staff": 1, "slime_gel": 4 } equip={ "weapon": "iron_sword", "armor": "wooden_shield" }
+[14:55:42] [CLIENT Oldie] quit-after reached, exiting

@@ -1,0 +1,301 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT cryptHunter2] Connecting to 127.0.0.1:7777 as 'cryptHunter2' ...
+[14:55:59] [CLIENT cryptHunter2] Connected to server as peer 512577356, logging in
+[14:55:59] [CLIENT cryptHunter2] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT cryptHunter2] Class selection requested (new account)
+[14:55:59] [CLIENT cryptHunter2] bot chooses class earth
+[14:55:59] [CLIENT cryptHunter2] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT cryptHunter2] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT cryptHunter2] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT cryptHunter2] Entered zone crypt (Bone Crypt)
+[14:55:59] [CLIENT cryptHunter2] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:00] [CLIENT cryptHunter2] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:02] [CLIENT cryptHunter2] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT cryptHunter2] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:02] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv20 211/211hp)@(1040, 746), cryptHunter3(Lv20 132/132hp)@(1040, 670), cryptHunter1(Lv20 121/121hp)@(1040, 675) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:03] [CLIENT cryptHunter2] inventory: gold=273 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:04] [CLIENT cryptHunter2] inventory: gold=292 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:05] [CLIENT cryptHunter2] inventory: gold=312 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:05] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:56:05] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv20 211/211hp)@(1063, 467), cryptHunter3(Lv20 132/132hp)@(1088, 502), cryptHunter1(Lv20 106/121hp)@(1088, 502) | monsters: archer 5/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:56:06] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (11.8s)
+[14:56:06] [CLIENT cryptHunter2] inventory: gold=312 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:07] [CLIENT cryptHunter2] inventory: gold=321 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:07] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:07] [CLIENT cryptHunter2] inventory: gold=347 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:07] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (12.8s)
+[14:56:08] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv20 211/211hp)@(1047, 602), cryptHunter3(Lv20 122/132hp)@(1102, 559), cryptHunter1(Lv20 106/121hp)@(1102, 559) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:09] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (8.6s)
+[14:56:10] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (5.5s)
+[14:56:11] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (9.5s)
+[14:56:11] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv20 211/211hp)@(1058, 340), cryptHunter3(Lv20 107/132hp)@(1058, 337), cryptHunter1(Lv20 107/121hp)@(1058, 335) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:11] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:56:12] [CLIENT cryptHunter2] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT cryptHunter2] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT cryptHunter2] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:12] [CLIENT cryptHunter2] inventory: gold=347 inv={ "health_potion": 8, "greater_potion": 5, "bone_shield": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:12] [CLIENT cryptHunter2] inventory: gold=347 inv={ "health_potion": 8, "greater_potion": 8, "bone_shield": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:12] [CLIENT cryptHunter2] inventory: gold=347 inv={ "health_potion": 8, "greater_potion": 8, "bone_shield": 1, "lich_staff": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:12] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (5.3s)
+[14:56:12] [CLIENT cryptHunter2] equipping bone_shield
+[14:56:12] [CLIENT cryptHunter2] inventory: gold=347 inv={ "health_potion": 8, "greater_potion": 8, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:13] [CLIENT cryptHunter2] trying to equip lich_staff (not allowed for earth)
+[14:56:13] [CLIENT cryptHunter2] notice: Lich Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:56:14] [CLIENT cryptHunter2] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv21 220/220hp)@(1072, 457), cryptHunter3(Lv21 138/138hp)@(1073, 435), cryptHunter1(Lv21 126/126hp)@(1073, 438) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:15] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (0.7s)
+[14:56:15] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 21!
+[14:56:15] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (4.7s)
+[14:56:16] [CLIENT cryptHunter2] inventory: gold=368 inv={ "health_potion": 8, "greater_potion": 8, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:17] [CLIENT cryptHunter2] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT cryptHunter2] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT cryptHunter2] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv21 219/220hp)@(1386, 555), cryptHunter3(Lv21 138/138hp)@(1306, 496), cryptHunter1(Lv21 126/126hp)@(1390, 558) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:19] [CLIENT cryptHunter2] inventory: gold=376 inv={ "health_potion": 8, "greater_potion": 8, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:20] [CLIENT cryptHunter2] inventory: gold=392 inv={ "health_potion": 8, "greater_potion": 8, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:20] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv21 217/220hp)@(1706, 550), cryptHunter3(Lv21 138/138hp)@(1652, 593), cryptHunter1(Lv21 126/126hp)@(1715, 558) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:22] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:56:22] [CLIENT cryptHunter2] inventory: gold=392 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:22] [CLIENT cryptHunter2] inventory: gold=404 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:23] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (11.8s)
+[14:56:23] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT cryptHunter2] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT cryptHunter2] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT cryptHunter2] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT cryptHunter2] [chat] * cryptHunter3 reached level 22!
+[14:56:23] [CLIENT cryptHunter2] inventory: gold=418 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:23] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv21 217/220hp)@(1747, 860), cryptHunter3(Lv22 143/143hp)@(1773, 810), cryptHunter1(Lv21 126/126hp)@(1774, 817), Walker(Lv20 158/158hp)@(1008, 868) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:24] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:24] [CLIENT cryptHunter2] inventory: gold=443 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:24] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 22!
+[14:56:24] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (12.8s)
+[14:56:24] [CLIENT cryptHunter2] inventory: gold=459 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:25] [CLIENT cryptHunter2] inventory: gold=477 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:26] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv21 217/220hp)@(1776, 817), cryptHunter3(Lv22 143/143hp)@(1764, 766), cryptHunter1(Lv22 131/131hp)@(1769, 797), Walker(Lv20 158/158hp)@(1027, 624) | monsters: archer 5/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:27] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (7.7s)
+[14:56:28] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (4.7s)
+[14:56:28] [CLIENT cryptHunter2] inventory: gold=486 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:28] [CLIENT cryptHunter2] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (8.7s)
+[14:56:29] [CLIENT cryptHunter2] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:56:29] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv21 216/220hp)@(1777, 417), cryptHunter3(Lv22 135/143hp)@(1777, 394), cryptHunter1(Lv22 131/131hp)@(1777, 395), Walker(Lv20 158/158hp)@(1509, 624) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:30] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (4.5s)
+[14:56:30] [CLIENT cryptHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT cryptHunter2] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv21 216/220hp)@(1509, 624), cryptHunter3(Lv22 135/143hp)@(1543, 624), cryptHunter1(Lv22 131/131hp)@(1548, 624), Walker(Lv20 158/158hp)@(1973, 660) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:35] [CLIENT cryptHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv21 216/220hp)@(1103, 527), cryptHunter3(Lv22 135/143hp)@(1192, 494), cryptHunter1(Lv22 131/131hp)@(1192, 497) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:37] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv21 220/220hp)@(1166, 330), cryptHunter3(Lv22 122/143hp)@(1190, 351), cryptHunter1(Lv22 131/131hp)@(1190, 351) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:40] [CLIENT cryptHunter2] inventory: gold=497 inv={ "health_potion": 8, "greater_potion": 9, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:40] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:40] [CLIENT cryptHunter2] [chat] * forestHunter1 reached level 22!
+[14:56:40] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (12.8s)
+[14:56:41] [CLIENT cryptHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:56:41] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv21 220/220hp)@(1054, 166), cryptHunter3(Lv22 97/143hp)@(1054, 166), cryptHunter1(Lv22 131/131hp)@(1054, 166), Walker(Lv20 158/158hp)@(1904, 683) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:42] [CLIENT cryptHunter2] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT cryptHunter2] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:42] [CLIENT cryptHunter2] inventory: gold=497 inv={ "health_potion": 8, "greater_potion": 12, "lich_staff": 1, "wooden_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:42] [CLIENT cryptHunter2] inventory: gold=857 inv={ "health_potion": 8, "greater_potion": 12, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:44] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (10.2s)
+[14:56:44] [CLIENT cryptHunter2] [chat] * cryptHunter3 reached level 23!
+[14:56:44] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv22 229/229hp)@(825, 256), cryptHunter3(Lv23 149/149hp)@(733, 275), cryptHunter1(Lv23 136/136hp)@(759, 246), Walker(Lv20 149/158hp)@(1712, 1043) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:46] [CLIENT cryptHunter2] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT cryptHunter2] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT cryptHunter2] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (1.5s)
+[14:56:47] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv22 229/229hp)@(974, 570), cryptHunter3(Lv23 137/149hp)@(390, 326), cryptHunter1(Lv23 114/136hp)@(349, 264), Walker(Lv20 149/158hp)@(1637, 713) | monsters: archer 4/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:48] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (5.5s)
+[14:56:48] [CLIENT cryptHunter2] inventory: gold=877 inv={ "health_potion": 8, "greater_potion": 13, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:49] [CLIENT cryptHunter2] inventory: gold=895 inv={ "health_potion": 8, "greater_potion": 13, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:49] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (4.5s)
+[14:56:50] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv22 227/229hp)@(883, 528), cryptHunter3(Lv23 149/149hp)@(265, 321), cryptHunter1(Lv24 141/141hp)@(242, 329), Walker(Lv20 149/158hp)@(1173, 688) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:51] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (2.3s)
+[14:56:52] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:56:52] [CLIENT cryptHunter2] inventory: gold=904 inv={ "health_potion": 8, "greater_potion": 13, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:53] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (1.3s)
+[14:56:53] [CLIENT cryptHunter2] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT cryptHunter2] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT cryptHunter2] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT cryptHunter2] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT cryptHunter2] inventory: gold=904 inv={ "health_potion": 9, "greater_potion": 13, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:53] [CLIENT cryptHunter2] inventory: gold=904 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:53] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:53] [CLIENT cryptHunter2] status: zone=crypt players=4 cryptHunter2(Lv22 224/229hp)@(621, 524), cryptHunter3(Lv23 138/149hp)@(437, 276), cryptHunter1(Lv24 123/141hp)@(472, 338), Walker(Lv21 165/165hp)@(1072, 916) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:56:54] [CLIENT cryptHunter2] inventory: gold=926 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 1 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:54] [CLIENT cryptHunter2] inventory: gold=926 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:54] [CLIENT cryptHunter2] inventory: gold=945 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:54] [CLIENT cryptHunter2] inventory: gold=960 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:55] [CLIENT cryptHunter2] [chat] * cryptHunter2 reached level 23!
+[14:56:55] [CLIENT cryptHunter2] inventory: gold=971 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:56] [CLIENT cryptHunter2] inventory: gold=997 inv={ "health_potion": 9, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:56] [CLIENT cryptHunter2] inventory: gold=997 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:56] [CLIENT cryptHunter2] inventory: gold=1019 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:56] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv23 238/238hp)@(667, 687), cryptHunter3(Lv23 117/149hp)@(266, 275), cryptHunter1(Lv24 123/141hp)@(822, 368) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:56:57] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (5.5s)
+[14:56:57] [CLIENT cryptHunter2] [chat] * cryptHunter3 reached level 24!
+[14:56:57] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (12.8s)
+[14:56:57] [CLIENT cryptHunter2] inventory: gold=1042 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:58] [CLIENT cryptHunter2] inventory: gold=1065 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:59] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.0s)
+[14:56:59] [CLIENT cryptHunter2] inventory: gold=1076 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:56:59] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv23 238/238hp)@(737, 755), cryptHunter3(Lv24 154/154hp)@(374, 237), cryptHunter1(Lv24 123/141hp)@(543, 272) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=4 | foreign_entities=0
+[14:57:00] [CLIENT cryptHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:01] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (10.2s)
+[14:57:01] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (0.7s)
+[14:57:02] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (7.9s)
+[14:57:02] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv23 238/238hp)@(1010, 494), cryptHunter3(Lv24 154/154hp)@(711, 272), cryptHunter1(Lv24 141/141hp)@(773, 272) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:57:03] [CLIENT cryptHunter2] inventory: gold=1096 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:04] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (6.9s)
+[14:57:04] [CLIENT cryptHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT cryptHunter2] inventory: gold=1109 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:05] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (4.7s)
+[14:57:05] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv23 237/238hp)@(1324, 594), cryptHunter3(Lv24 130/154hp)@(1053, 216), cryptHunter1(Lv24 132/141hp)@(1053, 216) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:06] [CLIENT cryptHunter2] inventory: gold=1120 inv={ "health_potion": 10, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:06] [CLIENT cryptHunter2] inventory: gold=1120 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:06] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:57:07] [CLIENT cryptHunter2] inventory: gold=1136 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:07] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT cryptHunter2] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:07] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (3.7s)
+[14:57:08] [CLIENT cryptHunter2] inventory: gold=1146 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:08] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:57:08] [CLIENT cryptHunter2] inventory: gold=1162 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:08] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv23 234/238hp)@(1235, 624), cryptHunter3(Lv24 110/154hp)@(1072, 412), cryptHunter1(Lv25 146/146hp)@(1072, 427) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:09] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (1.5s)
+[14:57:09] [CLIENT cryptHunter2] inventory: gold=1179 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:10] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (0.5s)
+[14:57:11] [CLIENT cryptHunter2] inventory: gold=1185 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 1, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:11] [CLIENT cryptHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv23 233/238hp)@(1503, 624), cryptHunter3(Lv24 110/154hp)@(1227, 661), cryptHunter1(Lv25 146/146hp)@(1257, 663) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:12] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (4.7s)
+[14:57:13] [CLIENT cryptHunter2] [chat] * cryptHunter2 reached level 24!
+[14:57:13] [CLIENT cryptHunter2] inventory: gold=1185 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:13] [CLIENT cryptHunter2] inventory: gold=1196 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:13] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.0s)
+[14:57:14] [CLIENT cryptHunter2] inventory: gold=1222 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:14] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 246/247hp)@(1744, 669), cryptHunter3(Lv24 98/154hp)@(1008, 884), cryptHunter1(Lv25 146/146hp)@(1017, 874) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (1.5s)
+[14:57:15] [CLIENT cryptHunter2] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT cryptHunter2] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT cryptHunter2] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT cryptHunter2] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:16] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (12.8s)
+[14:57:16] [CLIENT cryptHunter2] inventory: gold=1242 inv={ "health_potion": 11, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:17] [CLIENT cryptHunter2] inventory: gold=1268 inv={ "health_potion": 12, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:17] [CLIENT cryptHunter2] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 246/247hp)@(1732, 732), cryptHunter3(Lv25 149/160hp)@(736, 1030), cryptHunter1(Lv25 128/146hp)@(1103, 695) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:18] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (11.8s)
+[14:57:18] [CLIENT cryptHunter2] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT cryptHunter2] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT cryptHunter2] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:19] [CLIENT cryptHunter2] inventory: gold=1268 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:19] [CLIENT cryptHunter2] inventory: gold=1283 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:19] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (9.5s)
+[14:57:20] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:57:20] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 246/247hp)@(1756, 813), cryptHunter3(Lv25 138/160hp)@(491, 1073), cryptHunter1(Lv25 128/146hp)@(1138, 621) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:21] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (8.5s)
+[14:57:21] [CLIENT cryptHunter2] inventory: gold=1306 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:22] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:57:22] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (6.3s)
+[14:57:23] [CLIENT cryptHunter2] inventory: gold=1316 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:23] [CLIENT cryptHunter2] inventory: gold=1334 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:23] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 245/247hp)@(1711, 995), cryptHunter3(Lv25 121/160hp)@(290, 857), cryptHunter1(Lv25 128/146hp)@(934, 369) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:57:24] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (5.3s)
+[14:57:25] [CLIENT cryptHunter2] inventory: gold=1352 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:25] [CLIENT cryptHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:25] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (5.5s)
+[14:57:26] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (3.1s)
+[14:57:26] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:57:26] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 242/247hp)@(1738, 806), cryptHunter3(Lv25 121/160hp)@(339, 762), cryptHunter1(Lv25 130/146hp)@(812, 206) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:57:27] [CLIENT cryptHunter2] inventory: gold=1365 inv={ "health_potion": 13, "greater_potion": 14, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:27] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (2.1s)
+[14:57:27] [CLIENT cryptHunter2] inventory: gold=1365 inv={ "health_potion": 13, "greater_potion": 15, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:28] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (2.3s)
+[14:57:29] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 241/247hp)@(1413, 590), cryptHunter3(Lv25 121/160hp)@(368, 799), cryptHunter1(Lv25 89/146hp)@(1061, 289) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT cryptHunter2] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:32] [CLIENT cryptHunter2] inventory: gold=1376 inv={ "health_potion": 13, "greater_potion": 15, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:33] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 241/247hp)@(1559, 663), cryptHunter3(Lv25 123/160hp)@(614, 976), cryptHunter1(Lv26 135/151hp)@(1321, 188) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:33] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (12.0s)
+[14:57:34] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:57:34] [CLIENT cryptHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:34] [CLIENT cryptHunter2] inventory: gold=1386 inv={ "health_potion": 13, "greater_potion": 15, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:34] [CLIENT cryptHunter2] inventory: gold=1386 inv={ "health_potion": 13, "greater_potion": 16, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:34] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (11.8s)
+[14:57:35] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:57:36] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv24 241/247hp)@(1710, 631), cryptHunter3(Lv25 124/160hp)@(870, 940), cryptHunter1(Lv26 135/151hp)@(1028, 450) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:36] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (8.7s)
+[14:57:36] [CLIENT cryptHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:38] [CLIENT cryptHunter2] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT cryptHunter2] inventory: gold=1407 inv={ "health_potion": 13, "greater_potion": 16, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:38] [CLIENT cryptHunter2] inventory: gold=1407 inv={ "health_potion": 14, "greater_potion": 16, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:38] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 27!
+[14:57:39] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(1718, 458), cryptHunter3(Lv25 126/160hp)@(1048, 805), cryptHunter1(Lv27 156/156hp)@(761, 570) | monsters: archer 4/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:57:40] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 26!
+[14:57:40] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (6.1s)
+[14:57:41] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (3.1s)
+[14:57:42] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(1489, 653), cryptHunter3(Lv25 118/160hp)@(1246, 592), cryptHunter1(Lv27 156/156hp)@(998, 364) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:42] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (3.1s)
+[14:57:42] [CLIENT cryptHunter2] inventory: gold=1407 inv={ "health_potion": 14, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:42] [CLIENT cryptHunter2] inventory: gold=1431 inv={ "health_potion": 15, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:45] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 255/256hp)@(1514, 694), cryptHunter3(Lv25 118/160hp)@(1521, 694), cryptHunter1(Lv27 156/156hp)@(569, 269) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT cryptHunter2] [chat] * Walker reached level 22!
+[14:57:47] [CLIENT cryptHunter2] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT cryptHunter2] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT cryptHunter2] [chat] * frostHunter3 reached level 25!
+[14:57:48] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 255/256hp)@(1559, 649), cryptHunter3(Lv25 119/160hp)@(1565, 642), cryptHunter1(Lv27 130/156hp)@(301, 274) | monsters: archer 4/6, ghost 4/6, crawler 4/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:57:48] [CLIENT cryptHunter2] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT cryptHunter2] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT cryptHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:50] [CLIENT cryptHunter2] inventory: gold=1441 inv={ "health_potion": 15, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:51] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(1770, 540), cryptHunter3(Lv25 160/160hp)@(1768, 545), cryptHunter1(Lv27 123/156hp)@(519, 306) | monsters: archer 4/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:52] [CLIENT cryptHunter2] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT cryptHunter2] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT cryptHunter2] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (1.2s)
+[14:57:53] [CLIENT cryptHunter2] [chat] * cryptHunter3 reached level 26!
+[14:57:53] [CLIENT cryptHunter2] inventory: gold=1463 inv={ "health_potion": 15, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:54] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(1449, 614), cryptHunter3(Lv26 165/165hp)@(1479, 624), cryptHunter1(Lv28 157/161hp)@(456, 248) | monsters: archer 5/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:54] [CLIENT cryptHunter2] inventory: gold=1487 inv={ "health_potion": 15, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:54] [CLIENT cryptHunter2] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT cryptHunter2] [chat] * frostHunter3 reached level 26!
+[14:57:55] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (8.6s)
+[14:57:56] [CLIENT cryptHunter2] inventory: gold=1512 inv={ "health_potion": 15, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:57:56] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (5.6s)
+[14:57:57] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(1161, 495), cryptHunter3(Lv26 165/165hp)@(1138, 493), cryptHunter1(Lv28 157/161hp)@(694, 335) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:57:57] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (11.1s)
+[14:57:59] [CLIENT cryptHunter2] notice: Stone Skin is on cooldown (5.3s)
+[14:57:59] [CLIENT cryptHunter2] notice: Mountain's Challenge is on cooldown (2.3s)
+[14:58:00] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(987, 192), cryptHunter3(Lv26 165/165hp)@(981, 202), cryptHunter1(Lv28 161/161hp)@(1002, 143) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:00] [CLIENT cryptHunter2] notice: Earthquake is on cooldown (7.9s)
+[14:58:01] [CLIENT cryptHunter2] notice: Ground Slam is on cooldown (2.8s)
+[14:58:02] [CLIENT cryptHunter2] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT cryptHunter2] [chat] * frostHunter2 reached level 27!
+[14:58:03] [CLIENT cryptHunter2] status: zone=crypt players=3 cryptHunter2(Lv25 256/256hp)@(1104, 241), cryptHunter3(Lv26 125/165hp)@(1104, 251), cryptHunter1(Lv28 161/161hp)@(1104, 248) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:03] [CLIENT cryptHunter2] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT cryptHunter2] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT cryptHunter2] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT cryptHunter2] [chat] * frostHunter1 left the world.
+[14:58:03] [CLIENT cryptHunter2] [chat] * forestHunter2 left the world.
+[14:58:03] [CLIENT cryptHunter2] [chat] * forestHunter3 left the world.
+[14:58:03] [CLIENT cryptHunter2] [chat] * frostHunter3 left the world.
+[14:58:03] [CLIENT cryptHunter2] inventory: gold=1531 inv={ "health_potion": 15, "greater_potion": 17, "lich_staff": 2, "wooden_shield": 1, "bone_shield": 2 } equip={ "weapon": "", "armor": "bone_shield" }
+[14:58:03] [CLIENT cryptHunter2] [chat] * Walker left the world.
+[14:58:03] [CLIENT cryptHunter2] quit-after reached, exiting

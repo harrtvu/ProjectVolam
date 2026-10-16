@@ -1,0 +1,35 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:12] [CLIENT Bot2] Connecting to 127.0.0.1:7777 as 'Bot2' ...
+[14:55:12] [CLIENT Bot2] Connected to server as peer 71502195, logging in
+[14:55:12] [CLIENT Bot2] Login OK: Welcome back, Bot2!
+[14:55:12] [CLIENT Bot2] [chat] * Bot2 joined the world.
+[14:55:12] [CLIENT Bot2] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:12] [CLIENT Bot2] Entered zone forest (Whisperwood Forest)
+[14:55:12] [CLIENT Bot2] [chat] * Oldie the Stone Guardian joined the world.
+[14:55:13] [CLIENT Bot2] inventory: gold=118 inv={ "health_potion": 7, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:15] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:55:15] [CLIENT Bot2] inventory: gold=122 inv={ "health_potion": 7, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:15] [CLIENT Bot2] [chat] [Meadow] Bot1: Hello from Bot1!
+[14:55:15] [CLIENT Bot2] [chat] [Meadow] Victim: Hello from Victim!
+[14:55:15] [CLIENT Bot2] [chat] [Forest] Bot2: Hello from Bot2!
+[14:55:15] [CLIENT Bot2] [chat] [Meadow] Oldie: Hello from Oldie!
+[14:55:15] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv5 48/50hp)@(368, 609) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:16] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:55:17] [CLIENT Bot2] notice: Healing Rain is on cooldown (6.8s)
+[14:55:18] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:55:18] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv5 23/50hp)@(300, 788), Victim(Lv1 26/26hp)@(152, 671) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:18] [CLIENT Bot2] drinking a health_potion at hp 23/50
+[14:55:18] [CLIENT Bot2] inventory: gold=122 inv={ "health_potion": 6, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:19] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:55:19] [CLIENT Bot2] drinking a health_potion at hp 28/50
+[14:55:19] [CLIENT Bot2] inventory: gold=122 inv={ "health_potion": 5, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:20] [CLIENT Bot2] inventory: gold=127 inv={ "health_potion": 5, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:21] [CLIENT Bot2] notice: Healing Rain is on cooldown (3.5s)
+[14:55:21] [CLIENT Bot2] inventory: gold=137 inv={ "health_potion": 6, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:21] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:55:21] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv5 33/50hp)@(361, 848), Victim(Lv1 26/26hp)@(352, 848) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:21] [CLIENT Bot2] drinking a health_potion at hp 33/50
+[14:55:21] [CLIENT Bot2] inventory: gold=137 inv={ "health_potion": 5, "iron_shield": 2, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:22] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:55:22] [CLIENT Bot2] quit-after reached, exiting

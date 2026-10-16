@@ -1,0 +1,36 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[16:36:37] [SERVER] Dedicated server listening on port 7777 (ENet/UDP). Saves: /workspace/project-volam/test-logs/accounts_p5.json (3 accounts)
+[16:36:37] [SERVER] Zone meadow ready: 10 monsters, 1864 reachable cells
+[16:36:37] [SERVER] [forest] boss Broodmother spawned
+[16:36:37] [SERVER] Zone forest ready: 24 monsters, 1541 reachable cells
+[16:36:37] [SERVER] [crypt] boss The Lich King spawned
+[16:36:37] [SERVER] Zone crypt ready: 18 monsters, 1166 reachable cells
+[16:36:37] [SERVER] [frost] boss Yeti King spawned
+[16:36:37] [SERVER] Zone frost ready: 16 monsters, 1898 reachable cells
+[16:36:39] [SERVER] Peer 139536313 connected, waiting for login
+[16:36:39] [SERVER] Login 'Smith' (peer 139536313): restored save - class water, level 13, xp 0, hp 117/124, mp 121/121, gold 354, items { "enhance_stone": 18, "greater_potion": 5, "health_potion": 7, "orb_alteration": 10, "orb_chaos": 11, "orb_exalt": 9, "orb_regal": 11, "orb_scour": 11, "orb_transmute": 9 }, equip {weapon=apprentice_staff(normal), offhand=frost_aegis(unique), body=chain_mail(rare), ring1=copper_ring(magic)}, bag 13/40 [iron_sword(magic +6), lich_staff(rare), horned_helm(magic), leather_boots(rare)], stash 1 [copper_ring(unique)], zone meadow, pos (820, 596), talent points 0/12 {  }
+[16:36:39] [SERVER] [chat] * Smith joined the world.
+[16:36:40] [SERVER] [meadow] Smith took 1 damage from Slime (hp 116/124) [Water res 39%]
+[16:36:40] [SERVER] status: meadow: players=["Smith(Lv13 116/124hp 121/121mp water)"] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:40] [SERVER] [meadow] Smith equipped [magic] +6 Wise Iron Sword of the Leech (iron_sword ilvl 12 +6, 2 affixes) in weapon (attack 23, defense 13) | hp 124 mp 121 atk 17 def 13 crit 8.4% critx1.75 speed 160 -> hp 124 mp 131 atk 23 def 13 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 14%, water 39%, fire 20%, earth 0%
+[16:36:41] [SERVER] [meadow] Smith equipped [rare] Phoenix Thirst (lich_staff ilvl 13, 3 affixes) in weapon (attack 32, defense 13) | hp 124 mp 131 atk 23 def 13 crit 8.4% critx1.75 speed 160 -> hp 124 mp 121 atk 32 def 13 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 14%, water 39%, fire 20%, earth 0%
+[16:36:41] [SERVER] [meadow] Smith took 1 damage from Slime (hp 115/124) [Water res 39%]
+[16:36:42] [SERVER] [chat] [Meadow] Smith: Hello from Smith!
+[16:36:42] [SERVER] [meadow] Smith equipped [magic] Hale Horned Helm (horned_helm ilvl 13, 1 affixes) in helmet (attack 32, defense 16) | hp 124 mp 121 atk 32 def 13 crit 8.4% critx1.75 speed 160 -> hp 143 mp 121 atk 32 def 16 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 14%, water 39%, fire 20%, earth 0%
+[16:36:42] [SERVER] [meadow] Smith took 1 damage from Slime (hp 114/143) [Water res 39%]
+[16:36:42] [SERVER] [meadow] Smith took 1 damage from Slime (hp 113/143) [Water res 39%]
+[16:36:43] [SERVER] status: meadow: players=["Smith(Lv13 113/143hp 121/121mp water)"] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:43] [SERVER] [meadow] Smith equipped [rare] Iron Track (leather_boots ilvl 13, 5 affixes) in boots (attack 32, defense 17) | hp 143 mp 121 atk 32 def 16 crit 8.4% critx1.75 speed 160 -> hp 143 mp 141 atk 32 def 17 crit 8.4% critx1.75 speed 182 | res metal 0%, wood 14%, water 46%, fire 20%, earth 0%
+[16:36:43] [SERVER] [meadow] Smith took 1 damage from Slime (hp 112/143) [Water res 46%]
+[16:36:43] [SERVER] [meadow] Smith took 1 damage from Slime (hp 111/143) [Water res 46%]
+[16:36:44] [SERVER] [meadow] Smith took 1 damage from Slime (hp 110/143) [Water res 46%]
+[16:36:44] [SERVER] [meadow] Smith took 1 damage from Slime (hp 109/143) [Water res 46%]
+[16:36:46] [SERVER] [meadow] Smith took 1 damage from Slime (hp 108/143) [Water res 46%]
+[16:36:46] [SERVER] [meadow] Smith took 1 damage from Slime (hp 107/143) [Water res 46%]
+[16:36:46] [SERVER] status: meadow: players=["Smith(Lv13 107/143hp 139/141mp water)"] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:47] [SERVER] Peer 139536313 (Smith) disconnected
+[16:36:47] [SERVER] [chat] * Smith left the world.
+[16:36:49] [SERVER] status: meadow: players=[] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:51] [SERVER] quit-after reached, exiting
+[16:36:51] [SERVER] Saved 0 online player(s) to /workspace/project-volam/test-logs/accounts_p5.json (shutdown)

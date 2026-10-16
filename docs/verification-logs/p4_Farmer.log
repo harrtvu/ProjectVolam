@@ -1,0 +1,139 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT Farmer] Connecting to 127.0.0.1:7777 as 'Farmer' ...
+[14:58:10] [CLIENT Farmer] Connected to server as peer 1839534648, logging in
+[14:58:10] [CLIENT Farmer] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT Farmer] Class selection requested (new account)
+[14:58:10] [CLIENT Farmer] bot chooses class metal
+[14:58:10] [CLIENT Farmer] [chat] * FireA the Pyromancer joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * Farmer the Blade Master joined the world.
+[14:58:10] [CLIENT Farmer] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT Farmer] [chat] * Phoenix the Pyromancer joined the world.
+[14:58:10] [CLIENT Farmer] Entered zone forest (Whisperwood Forest)
+[14:58:10] [CLIENT Farmer] [chat] * WoodA the Venom Druid joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT Farmer] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:10] [CLIENT Farmer] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT Farmer] [chat] * FireB the Pyromancer joined the world.
+[14:58:12] [CLIENT Farmer] inventory: gold=260 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT Farmer] inventory: gold=272 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT Farmer] inventory: gold=272 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT Farmer] inventory: gold=286 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:13] [CLIENT Farmer] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT Farmer] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT Farmer] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT Farmer] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 172/172hp)@(253, 346), WoodA(Lv20 158/158hp)@(252, 417), MetalB(Lv20 165/165hp)@(243, 320), WaterB(Lv20 139/139hp)@(255, 407) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT Farmer] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT Farmer] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT Farmer] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT Farmer] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT Farmer] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT Farmer] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT Farmer] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT Farmer] [chat] [Frost] FireB: Hello from FireB!
+[14:58:14] [CLIENT Farmer] inventory: gold=318 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:16] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 172/172hp)@(460, 190), WoodA(Lv20 158/158hp)@(445, 340), MetalB(Lv20 165/165hp)@(557, 276), WaterB(Lv20 152/152hp)@(515, 321) | monsters: rat 6/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=1 | foreign_entities=0
+[14:58:17] [CLIENT Farmer] notice: Thousand Cuts: no target in range
+[14:58:18] [CLIENT Farmer] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT Farmer] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(741, 357), WoodA(Lv20 176/176hp)@(774, 390), MetalB(Lv20 173/173hp)@(819, 402), WaterB(Lv20 152/152hp)@(711, 327) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(783, 560), WoodA(Lv20 176/176hp)@(796, 551), MetalB(Lv20 190/190hp)@(874, 570), WaterB(Lv20 152/152hp)@(751, 496) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:24] [CLIENT Farmer] inventory: gold=338 inv={ "health_potion": 11, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:24] [CLIENT Farmer] notice: Blade Focus is on cooldown (9.1s)
+[14:58:25] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(654, 657), WoodA(Lv20 176/176hp)@(689, 623), MetalB(Lv20 190/190hp)@(716, 627), WaterB(Lv20 152/152hp)@(715, 597) | monsters: rat 8/12, bat 3/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT Farmer] notice: Thousand Cuts: no target in range
+[14:58:26] [CLIENT Farmer] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT Farmer] inventory: gold=338 inv={ "health_potion": 11, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:26] [CLIENT Farmer] [chat] * MetalA reached level 21!
+[14:58:27] [CLIENT Farmer] equipping steel_sword
+[14:58:27] [CLIENT Farmer] inventory: gold=338 inv={ "health_potion": 11, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:28] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(793, 816), WoodA(Lv20 176/176hp)@(798, 816), MetalB(Lv20 190/190hp)@(306, 776), WaterB(Lv20 152/152hp)@(767, 816) | monsters: rat 7/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT Farmer] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(1285, 956), WoodA(Lv20 176/176hp)@(1214, 944), MetalB(Lv20 189/190hp)@(405, 402), WaterB(Lv20 152/152hp)@(1132, 919) | monsters: rat 8/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:31] [CLIENT Farmer] inventory: gold=360 inv={ "health_potion": 11, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:31] [CLIENT Farmer] inventory: gold=360 inv={ "health_potion": 11, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:31] [CLIENT Farmer] inventory: gold=360 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:32] [CLIENT Farmer] inventory: gold=374 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:32] [CLIENT Farmer] notice: Blade Focus is on cooldown (1.9s)
+[14:58:32] [CLIENT Farmer] inventory: gold=374 inv={ "health_potion": 13, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:32] [CLIENT Farmer] inventory: gold=374 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:32] [CLIENT Farmer] inventory: gold=402 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:32] [CLIENT Farmer] equipping iron_shield
+[14:58:32] [CLIENT Farmer] inventory: gold=402 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:32] [CLIENT Farmer] inventory: gold=426 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:32] [CLIENT Farmer] inventory: gold=426 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:33] [CLIENT Farmer] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT Farmer] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT Farmer] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT Farmer] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT Farmer] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(1530, 902), WoodA(Lv20 176/176hp)@(1404, 995), MetalB(Lv20 189/190hp)@(621, 461), WaterB(Lv20 152/152hp)@(1428, 1005) | monsters: rat 4/12, bat 6/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:34] [CLIENT Farmer] notice: Thousand Cuts: no target in range
+[14:58:35] [CLIENT Farmer] inventory: gold=426 inv={ "health_potion": 16, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:35] [CLIENT Farmer] inventory: gold=441 inv={ "health_potion": 16, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:37] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(1746, 592), WoodA(Lv20 176/176hp)@(1328, 717), MetalB(Lv20 189/190hp)@(656, 565), WaterB(Lv20 152/152hp)@(1666, 784) | monsters: rat 4/12, bat 5/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT Farmer] notice: Piercing Strike is on cooldown (0.6s)
+[14:58:39] [CLIENT Farmer] inventory: gold=441 inv={ "health_potion": 17, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:39] [CLIENT Farmer] inventory: gold=468 inv={ "health_potion": 17, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:39] [CLIENT Farmer] notice: Thousand Cuts: no target in range
+[14:58:40] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv20 196/196hp)@(1549, 432), WoodA(Lv20 176/176hp)@(1340, 386), MetalB(Lv20 189/190hp)@(552, 812), WaterB(Lv20 152/152hp)@(1744, 535) | monsters: rat 3/12, bat 2/6, spider 1/5, broodmother 1/1 | loot=4 | foreign_entities=0
+[14:58:40] [CLIENT Farmer] inventory: gold=468 inv={ "health_potion": 18, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:40] [CLIENT Farmer] inventory: gold=479 inv={ "health_potion": 18, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:40] [CLIENT Farmer] inventory: gold=479 inv={ "health_potion": 19, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:40] [CLIENT Farmer] inventory: gold=507 inv={ "health_potion": 19, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:41] [CLIENT Farmer] inventory: gold=507 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:41] [CLIENT Farmer] inventory: gold=507 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:41] [CLIENT Farmer] inventory: gold=532 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:41] [CLIENT Farmer] notice: Blade Focus is on cooldown (14.8s)
+[14:58:41] [CLIENT Farmer] inventory: gold=552 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:42] [CLIENT Farmer] inventory: gold=552 inv={ "health_potion": 21, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:42] [CLIENT Farmer] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT Farmer] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT Farmer] inventory: gold=749 inv={ "health_potion": 24, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "venom_dagger": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:58:42] [CLIENT Farmer] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1539, 317), WoodA(Lv20 176/176hp)@(1530, 326), MetalB(Lv20 189/190hp)@(718, 520), WaterB(Lv20 152/152hp)@(1658, 258) | monsters: rat 7/12, bat 3/6, spider 0/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:43] [CLIENT Farmer] equipping venom_dagger
+[14:58:43] [CLIENT Farmer] inventory: gold=749 inv={ "health_potion": 24, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:58:44] [CLIENT Farmer] notice: Piercing Strike is on cooldown (3.8s)
+[14:58:44] [CLIENT Farmer] inventory: gold=765 inv={ "health_potion": 24, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:58:44] [CLIENT Farmer] [chat] * WoodA reached level 21!
+[14:58:44] [CLIENT Farmer] notice: Blade Focus is on cooldown (11.5s)
+[14:58:45] [CLIENT Farmer] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1680, 259), WoodA(Lv21 184/184hp)@(1680, 251), MetalB(Lv21 198/198hp)@(660, 305), WaterB(Lv20 152/152hp)@(1712, 303) | monsters: rat 4/12, bat 1/6, spider 0/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:46] [CLIENT Farmer] [chat] * MetalA reached level 22!
+[14:58:48] [CLIENT Farmer] notice: Thousand Cuts is on cooldown (8.3s)
+[14:58:49] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1664, 434), WoodA(Lv21 184/184hp)@(1659, 402), MetalB(Lv21 197/198hp)@(916, 497), WaterB(Lv20 152/152hp)@(1730, 451) | monsters: rat 4/12, bat 3/6, spider 1/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1492, 586), WoodA(Lv21 184/184hp)@(1477, 563), MetalB(Lv21 197/198hp)@(1180, 636), WaterB(Lv20 152/152hp)@(1425, 529) | monsters: rat 4/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:53] [CLIENT Farmer] notice: Blade Focus is on cooldown (3.5s)
+[14:58:53] [CLIENT Farmer] notice: Thousand Cuts is on cooldown (2.7s)
+[14:58:54] [CLIENT Farmer] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT Farmer] inventory: gold=765 inv={ "health_potion": 25, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:58:55] [CLIENT Farmer] inventory: gold=782 inv={ "health_potion": 25, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:58:55] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1507, 836), WoodA(Lv21 184/184hp)@(1471, 818), MetalB(Lv21 198/198hp)@(1332, 847), WaterB(Lv20 152/152hp)@(1588, 695) | monsters: rat 7/12, bat 4/6, spider 1/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:55] [CLIENT Farmer] notice: Piercing Strike is on cooldown (2.2s)
+[14:58:55] [CLIENT Farmer] inventory: gold=782 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:58:55] [CLIENT Farmer] [chat] * EarthB reached level 22!
+[14:58:56] [CLIENT Farmer] notice: Blade Focus is on cooldown (0.3s)
+[14:58:57] [CLIENT Farmer] notice: Thousand Cuts: no target in range
+[14:58:58] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1509, 975), WoodA(Lv21 184/184hp)@(1503, 990), MetalB(Lv21 198/198hp)@(1468, 1021), WaterB(Lv20 152/152hp)@(1537, 943) | monsters: rat 7/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:00] [CLIENT Farmer] inventory: gold=782 inv={ "health_potion": 27, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:59:01] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1193, 836), WoodA(Lv21 184/184hp)@(1218, 845), MetalB(Lv21 198/198hp)@(1258, 739), WaterB(Lv20 152/152hp)@(1280, 747) | monsters: rat 6/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:59:02] [CLIENT Farmer] [chat] * EarthA reached level 21!
+[14:59:03] [CLIENT Farmer] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT Farmer] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1265, 527), WoodA(Lv21 184/184hp)@(1293, 498), MetalB(Lv21 198/198hp)@(1398, 461), WaterB(Lv20 152/152hp)@(1377, 452) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:07] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1582, 239), WoodA(Lv21 184/184hp)@(1627, 200), MetalB(Lv21 198/198hp)@(1653, 122), WaterB(Lv20 152/152hp)@(1616, 226) | monsters: rat 7/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1744, 517), WoodA(Lv21 184/184hp)@(1744, 560), MetalB(Lv21 198/198hp)@(1744, 562), WaterB(Lv20 152/152hp)@(1744, 524) | monsters: rat 8/12, bat 3/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT Farmer] notice: Thousand Cuts: no target in range
+[14:59:11] [CLIENT Farmer] inventory: gold=782 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "iron_shield": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:59:13] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1456, 400), WoodA(Lv21 184/184hp)@(1746, 507), MetalB(Lv21 198/198hp)@(1426, 461), WaterB(Lv20 152/152hp)@(1421, 431) | monsters: rat 9/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1431, 715), WoodA(Lv21 184/184hp)@(1629, 867), MetalB(Lv21 198/198hp)@(1294, 879), WaterB(Lv20 152/152hp)@(1388, 733) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=4 | foreign_entities=0
+[14:59:19] [CLIENT Farmer] status: zone=forest players=4 Farmer(Lv21 205/205hp)@(1232, 850), WoodA(Lv21 184/184hp)@(1368, 891), MetalB(Lv21 198/198hp)@(1258, 845), WaterB(Lv20 152/152hp)@(1269, 856) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT Farmer] [chat] * FireA left the world.
+[14:59:20] [CLIENT Farmer] quit-after reached, exiting

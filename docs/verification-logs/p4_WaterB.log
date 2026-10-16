@@ -1,0 +1,103 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT WaterB] Connecting to 127.0.0.1:7777 as 'WaterB' ...
+[14:58:10] [CLIENT WaterB] Connected to server as peer 635007788, logging in
+[14:58:10] [CLIENT WaterB] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT WaterB] Class selection requested (new account)
+[14:58:10] [CLIENT WaterB] bot chooses class water
+[14:58:10] [CLIENT WaterB] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT WaterB] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT WaterB] [chat] * FireB the Pyromancer joined the world.
+[14:58:10] [CLIENT WaterB] Entered zone forest (Whisperwood Forest)
+[14:58:11] [CLIENT WaterB] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:13] [CLIENT WaterB] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT WaterB] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT WaterB] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT WaterB] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT WaterB] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT WaterB] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT WaterB] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT WaterB] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT WaterB] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT WaterB] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT WaterB] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT WaterB] [chat] [Frost] FireB: Hello from FireB!
+[14:58:13] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 139/139hp)@(313, 359), Farmer(Lv20 172/172hp)@(314, 294), WoodA(Lv20 158/158hp)@(308, 365), MetalB(Lv20 165/165hp)@(308, 268) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:16] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(564, 284), Farmer(Lv20 172/172hp)@(472, 162), WoodA(Lv20 164/164hp)@(520, 336), MetalB(Lv20 165/165hp)@(562, 239) | monsters: rat 6/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:17] [CLIENT WaterB] probe 1: basic attack with invalid target { "t": 999999, "k": "m" }
+[14:58:18] [CLIENT WaterB] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT WaterB] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:18] [CLIENT WaterB] probe 2: basic attack with invalid target { "t": 1, "k": "m" }
+[14:58:19] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(724, 340), Farmer(Lv20 196/196hp)@(758, 374), WoodA(Lv20 176/176hp)@(787, 403), MetalB(Lv20 182/182hp)@(883, 467) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:20] [CLIENT WaterB] probe 3: basic attack with invalid target { "t": 11, "k": "m" }
+[14:58:22] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(760, 496), Farmer(Lv20 196/196hp)@(800, 580), WoodA(Lv20 176/176hp)@(751, 561), MetalB(Lv20 190/190hp)@(862, 542) | monsters: rat 5/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:24] [CLIENT WaterB] notice: Frost Nova is on cooldown (3.1s)
+[14:58:24] [CLIENT WaterB] inventory: gold=266 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:25] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(663, 649), Farmer(Lv20 196/196hp)@(626, 721), WoodA(Lv20 176/176hp)@(654, 682), MetalB(Lv20 190/190hp)@(652, 664) | monsters: rat 8/12, bat 3/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT WaterB] notice: Tidal Wave is on cooldown (3.1s)
+[14:58:26] [CLIENT WaterB] probe 4: basic attack with invalid target { "t": 33, "k": "m" }
+[14:58:26] [CLIENT WaterB] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT WaterB] [chat] * MetalA reached level 21!
+[14:58:28] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(840, 816), Farmer(Lv20 196/196hp)@(867, 829), WoodA(Lv20 176/176hp)@(866, 830), MetalB(Lv20 190/190hp)@(304, 688) | monsters: rat 7/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT WaterB] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1188, 947), Farmer(Lv20 196/196hp)@(1331, 949), WoodA(Lv20 176/176hp)@(1260, 985), MetalB(Lv20 189/190hp)@(433, 414) | monsters: rat 3/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=10 | foreign_entities=0
+[14:58:33] [CLIENT WaterB] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT WaterB] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT WaterB] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT WaterB] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT WaterB] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1491, 973), Farmer(Lv20 196/196hp)@(1588, 847), WoodA(Lv20 176/176hp)@(1468, 968), MetalB(Lv20 189/190hp)@(643, 464) | monsters: rat 3/12, bat 5/6, spider 3/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:58:37] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1694, 784), Farmer(Lv20 196/196hp)@(1744, 511), WoodA(Lv20 176/176hp)@(1319, 644), MetalB(Lv20 189/190hp)@(638, 648) | monsters: rat 4/12, bat 5/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:40] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1720, 469), Farmer(Lv20 196/196hp)@(1559, 361), WoodA(Lv20 176/176hp)@(1407, 401), MetalB(Lv20 189/190hp)@(624, 785) | monsters: rat 4/12, bat 2/6, spider 1/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT WaterB] notice: Frost Nova is on cooldown (2.3s)
+[14:58:42] [CLIENT WaterB] inventory: gold=276 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:42] [CLIENT WaterB] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT WaterB] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT WaterB] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT WaterB] notice: Tidal Wave is on cooldown (3.9s)
+[14:58:43] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1681, 238), Farmer(Lv21 205/205hp)@(1602, 268), WoodA(Lv20 176/176hp)@(1587, 272), MetalB(Lv20 188/190hp)@(720, 433) | monsters: rat 6/12, bat 3/6, spider 0/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:43] [CLIENT WaterB] inventory: gold=294 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:44] [CLIENT WaterB] inventory: gold=294 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:44] [CLIENT WaterB] [chat] * WoodA reached level 21!
+[14:58:44] [CLIENT WaterB] notice: Healing Rain is on cooldown (4.4s)
+[14:58:44] [CLIENT WaterB] inventory: gold=307 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:45] [CLIENT WaterB] [chat] * MetalB reached level 21!
+[14:58:45] [CLIENT WaterB] inventory: gold=319 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:46] [CLIENT WaterB] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1712, 380), Farmer(Lv21 205/205hp)@(1680, 340), WoodA(Lv21 184/184hp)@(1680, 328), MetalB(Lv21 198/198hp)@(717, 303) | monsters: rat 4/12, bat 1/6, spider 0/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:49] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1667, 431), Farmer(Lv21 205/205hp)@(1587, 432), WoodA(Lv21 184/184hp)@(1585, 400), MetalB(Lv21 197/198hp)@(1000, 495) | monsters: rat 4/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1469, 561), Farmer(Lv21 205/205hp)@(1461, 654), WoodA(Lv21 184/184hp)@(1487, 614), MetalB(Lv21 197/198hp)@(1271, 701) | monsters: rat 6/12, bat 4/6, spider 2/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:54] [CLIENT WaterB] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT WaterB] notice: Frost Nova is on cooldown (7.2s)
+[14:58:55] [CLIENT WaterB] [chat] * EarthB reached level 22!
+[14:58:55] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1583, 766), Farmer(Lv21 205/205hp)@(1519, 810), WoodA(Lv21 184/184hp)@(1539, 831), MetalB(Lv21 198/198hp)@(1367, 873) | monsters: rat 7/12, bat 4/6, spider 1/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT WaterB] notice: Tidal Wave is on cooldown (8.8s)
+[14:58:58] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1460, 944), Farmer(Lv21 205/205hp)@(1445, 940), WoodA(Lv21 184/184hp)@(1445, 941), MetalB(Lv21 198/198hp)@(1405, 957) | monsters: rat 7/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:59] [CLIENT WaterB] inventory: gold=319 inv={ "health_potion": 11, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:59] [CLIENT WaterB] inventory: gold=330 inv={ "health_potion": 11, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:01] [CLIENT WaterB] notice: Healing Rain is on cooldown (0.3s)
+[14:59:01] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1264, 699), Farmer(Lv21 205/205hp)@(1201, 763), WoodA(Lv21 184/184hp)@(1200, 794), MetalB(Lv21 198/198hp)@(1265, 703) | monsters: rat 5/12, bat 4/6, spider 2/5, broodmother 0/1 | loot=4 | foreign_entities=0
+[14:59:02] [CLIENT WaterB] [chat] * EarthA reached level 21!
+[14:59:02] [CLIENT WaterB] inventory: gold=330 inv={ "health_potion": 12, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:03] [CLIENT WaterB] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT WaterB] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1430, 399), Farmer(Lv21 205/205hp)@(1321, 472), WoodA(Lv21 184/184hp)@(1354, 461), MetalB(Lv21 198/198hp)@(1431, 396) | monsters: rat 8/12, bat 5/6, spider 3/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:05] [CLIENT WaterB] inventory: gold=330 inv={ "health_potion": 13, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:07] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1642, 270), Farmer(Lv21 205/205hp)@(1563, 292), WoodA(Lv21 184/184hp)@(1616, 262), MetalB(Lv21 198/198hp)@(1650, 194) | monsters: rat 7/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1713, 461), Farmer(Lv21 205/205hp)@(1709, 452), WoodA(Lv21 184/184hp)@(1737, 486), MetalB(Lv21 198/198hp)@(1731, 477) | monsters: rat 8/12, bat 3/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:11] [CLIENT WaterB] notice: Frost Nova is on cooldown (4.7s)
+[14:59:12] [CLIENT WaterB] inventory: gold=330 inv={ "health_potion": 14, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:13] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1424, 467), Farmer(Lv21 205/205hp)@(1421, 402), WoodA(Lv21 184/184hp)@(1744, 583), MetalB(Lv21 198/198hp)@(1434, 541) | monsters: rat 9/12, bat 4/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1406, 803), Farmer(Lv21 205/205hp)@(1389, 750), WoodA(Lv21 184/184hp)@(1575, 921), MetalB(Lv21 198/198hp)@(1358, 942) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=4 | foreign_entities=0
+[14:59:19] [CLIENT WaterB] status: zone=forest players=4 WaterB(Lv20 152/152hp)@(1199, 846), Farmer(Lv21 205/205hp)@(1132, 845), WoodA(Lv21 184/184hp)@(1305, 865), MetalB(Lv21 198/198hp)@(1177, 833) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT WaterB] [chat] * FireA left the world.
+[14:59:20] [CLIENT WaterB] [chat] * Farmer left the world.
+[14:59:20] [CLIENT WaterB] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT WaterB] [chat] * WoodA left the world.
+[14:59:20] [CLIENT WaterB] [chat] * WoodB left the world.
+[14:59:20] [CLIENT WaterB] [chat] * EarthA left the world.
+[14:59:20] [CLIENT WaterB] [chat] * MetalB left the world.
+[14:59:20] [CLIENT WaterB] [chat] * WaterA left the world.
+[14:59:20] [CLIENT WaterB] [chat] * EarthB left the world.
+[14:59:20] [CLIENT WaterB] [chat] * MetalA left the world.
+[14:59:20] [CLIENT WaterB] quit-after reached, exiting

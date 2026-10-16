@@ -1,0 +1,175 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT MetalB] Connecting to 127.0.0.1:7777 as 'MetalB' ...
+[14:58:10] [CLIENT MetalB] Connected to server as peer 313568486, logging in
+[14:58:10] [CLIENT MetalB] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT MetalB] Class selection requested (new account)
+[14:58:10] [CLIENT MetalB] bot chooses class metal
+[14:58:10] [CLIENT MetalB] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT MetalB] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT MetalB] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT MetalB] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT MetalB] Entered zone forest (Whisperwood Forest)
+[14:58:10] [CLIENT MetalB] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT MetalB] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT MetalB] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT MetalB] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:10] [CLIENT MetalB] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT MetalB] [chat] * FireB the Pyromancer joined the world.
+[14:58:12] [CLIENT MetalB] inventory: gold=259 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT MetalB] inventory: gold=259 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:13] [CLIENT MetalB] inventory: gold=259 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:13] [CLIENT MetalB] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT MetalB] inventory: gold=276 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:13] [CLIENT MetalB] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT MetalB] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT MetalB] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT MetalB] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT MetalB] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT MetalB] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT MetalB] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT MetalB] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT MetalB] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 165/165hp)@(273, 302), Farmer(Lv20 172/172hp)@(282, 327), WoodA(Lv20 158/158hp)@(276, 395), WaterB(Lv20 139/139hp)@(282, 390) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT MetalB] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT MetalB] [chat] [Frost] FireB: Hello from FireB!
+[14:58:14] [CLIENT MetalB] inventory: gold=276 inv={ "health_potion": 10, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:14] [CLIENT MetalB] inventory: gold=292 inv={ "health_potion": 10, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:14] [CLIENT MetalB] inventory: gold=292 inv={ "health_potion": 11, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:15] [CLIENT MetalB] equipping steel_sword
+[14:58:15] [CLIENT MetalB] inventory: gold=292 inv={ "health_potion": 11, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:16] [CLIENT MetalB] notice: Piercing Strike is on cooldown (3.0s)
+[14:58:16] [CLIENT MetalB] inventory: gold=301 inv={ "health_potion": 11, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:16] [CLIENT MetalB] inventory: gold=301 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:16] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 165/165hp)@(559, 284), Farmer(Lv20 172/172hp)@(464, 200), WoodA(Lv20 164/164hp)@(478, 336), WaterB(Lv20 152/152hp)@(541, 301) | monsters: rat 6/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:17] [CLIENT MetalB] notice: Blade Focus is on cooldown (14.8s)
+[14:58:17] [CLIENT MetalB] notice: Thousand Cuts is on cooldown (10.8s)
+[14:58:17] [CLIENT MetalB] inventory: gold=314 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:17] [CLIENT MetalB] inventory: gold=314 inv={ "health_potion": 13, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:18] [CLIENT MetalB] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT MetalB] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 173/173hp)@(848, 432), Farmer(Lv20 196/196hp)@(767, 383), WoodA(Lv20 176/176hp)@(799, 415), WaterB(Lv20 152/152hp)@(736, 352) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:20] [CLIENT MetalB] inventory: gold=314 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:20] [CLIENT MetalB] inventory: gold=329 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:20] [CLIENT MetalB] inventory: gold=340 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:20] [CLIENT MetalB] inventory: gold=340 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:20] [CLIENT MetalB] inventory: gold=354 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:20] [CLIENT MetalB] inventory: gold=365 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:20] [CLIENT MetalB] inventory: gold=365 inv={ "health_potion": 16, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:22] [CLIENT MetalB] inventory: gold=375 inv={ "health_potion": 17, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:22] [CLIENT MetalB] inventory: gold=375 inv={ "health_potion": 17, "greater_potion": 5, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:58:22] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 190/190hp)@(887, 536), Farmer(Lv20 196/196hp)@(816, 558), WoodA(Lv20 176/176hp)@(787, 557), WaterB(Lv20 152/152hp)@(784, 496) | monsters: rat 5/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT MetalB] equipping war_axe
+[14:58:22] [CLIENT MetalB] inventory: gold=375 inv={ "health_potion": 17, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:23] [CLIENT MetalB] notice: Blade Focus is on cooldown (8.3s)
+[14:58:24] [CLIENT MetalB] notice: Thousand Cuts is on cooldown (4.3s)
+[14:58:25] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 190/190hp)@(678, 629), Farmer(Lv20 196/196hp)@(654, 692), WoodA(Lv20 176/176hp)@(665, 647), WaterB(Lv20 152/152hp)@(691, 621) | monsters: rat 8/12, bat 3/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT MetalB] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT MetalB] inventory: gold=375 inv={ "health_potion": 18, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:26] [CLIENT MetalB] inventory: gold=392 inv={ "health_potion": 19, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:26] [CLIENT MetalB] [chat] * MetalA reached level 21!
+[14:58:28] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 190/190hp)@(304, 739), Farmer(Lv20 196/196hp)@(827, 816), WoodA(Lv20 176/176hp)@(828, 816), WaterB(Lv20 152/152hp)@(796, 816) | monsters: rat 7/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:29] [CLIENT MetalB] notice: Blade Focus is on cooldown (1.9s)
+[14:58:30] [CLIENT MetalB] [chat] * FireA reached level 21!
+[14:58:30] [CLIENT MetalB] inventory: gold=404 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:31] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 189/190hp)@(432, 420), Farmer(Lv20 196/196hp)@(1306, 948), WoodA(Lv20 176/176hp)@(1243, 955), WaterB(Lv20 152/152hp)@(1157, 926) | monsters: rat 8/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT MetalB] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT MetalB] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT MetalB] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT MetalB] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT MetalB] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:33] [CLIENT MetalB] notice: Thousand Cuts: no target in range
+[14:58:34] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 189/190hp)@(639, 465), Farmer(Lv20 196/196hp)@(1556, 876), WoodA(Lv20 176/176hp)@(1431, 974), WaterB(Lv20 152/152hp)@(1453, 979) | monsters: rat 4/12, bat 6/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:36] [CLIENT MetalB] inventory: gold=414 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:36] [CLIENT MetalB] inventory: gold=424 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:37] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 189/190hp)@(656, 606), Farmer(Lv20 196/196hp)@(1743, 556), WoodA(Lv20 176/176hp)@(1328, 683), WaterB(Lv20 152/152hp)@(1655, 784) | monsters: rat 4/12, bat 5/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:38] [CLIENT MetalB] inventory: gold=436 inv={ "health_potion": 21, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:39] [CLIENT MetalB] inventory: gold=436 inv={ "health_potion": 22, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:39] [CLIENT MetalB] inventory: gold=436 inv={ "health_potion": 22, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:40] [CLIENT MetalB] inventory: gold=454 inv={ "health_potion": 22, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:40] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 189/190hp)@(591, 818), Farmer(Lv20 196/196hp)@(1555, 402), WoodA(Lv20 176/176hp)@(1367, 400), WaterB(Lv20 152/152hp)@(1744, 500) | monsters: rat 4/12, bat 2/6, spider 1/5, broodmother 1/1, spiderling 2/2 | loot=2 | foreign_entities=0
+[14:58:42] [CLIENT MetalB] inventory: gold=454 inv={ "health_potion": 23, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:42] [CLIENT MetalB] inventory: gold=468 inv={ "health_potion": 23, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:42] [CLIENT MetalB] notice: Piercing Strike is on cooldown (0.1s)
+[14:58:42] [CLIENT MetalB] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT MetalB] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT MetalB] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv20 189/190hp)@(721, 479), Farmer(Lv21 205/205hp)@(1565, 291), WoodA(Lv20 176/176hp)@(1555, 301), WaterB(Lv20 152/152hp)@(1679, 240) | monsters: rat 7/12, bat 3/6, spider 0/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:43] [CLIENT MetalB] notice: Blade Focus is on cooldown (13.1s)
+[14:58:43] [CLIENT MetalB] inventory: gold=478 inv={ "health_potion": 24, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:44] [CLIENT MetalB] notice: Thousand Cuts is on cooldown (9.1s)
+[14:58:44] [CLIENT MetalB] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT MetalB] [chat] * MetalB reached level 21!
+[14:58:45] [CLIENT MetalB] inventory: gold=478 inv={ "health_potion": 25, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalB] inventory: gold=490 inv={ "health_potion": 25, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:46] [CLIENT MetalB] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(701, 307), Farmer(Lv21 205/205hp)@(1680, 296), WoodA(Lv21 184/184hp)@(1680, 286), WaterB(Lv20 152/152hp)@(1712, 338) | monsters: rat 4/12, bat 1/6, spider 0/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:46] [CLIENT MetalB] inventory: gold=501 inv={ "health_potion": 25, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:46] [CLIENT MetalB] inventory: gold=501 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:46] [CLIENT MetalB] notice: Blade Focus is on cooldown (9.9s)
+[14:58:47] [CLIENT MetalB] inventory: gold=512 inv={ "health_potion": 27, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:49] [CLIENT MetalB] notice: Thousand Cuts is on cooldown (4.3s)
+[14:58:49] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 197/198hp)@(954, 498), Farmer(Lv21 205/205hp)@(1629, 433), WoodA(Lv21 184/184hp)@(1625, 400), WaterB(Lv20 152/152hp)@(1705, 429) | monsters: rat 4/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:50] [CLIENT MetalB] inventory: gold=512 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:50] [CLIENT MetalB] inventory: gold=523 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:52] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 197/198hp)@(1245, 696), Farmer(Lv21 205/205hp)@(1488, 622), WoodA(Lv21 184/184hp)@(1493, 580), WaterB(Lv20 152/152hp)@(1447, 555) | monsters: rat 5/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT MetalB] inventory: gold=523 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:53] [CLIENT MetalB] inventory: gold=523 inv={ "health_potion": 29, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:53] [CLIENT MetalB] inventory: gold=539 inv={ "health_potion": 29, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:53] [CLIENT MetalB] notice: Blade Focus is on cooldown (3.5s)
+[14:58:53] [CLIENT MetalB] inventory: gold=539 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:53] [CLIENT MetalB] inventory: gold=548 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:54] [CLIENT MetalB] notice: Thousand Cuts: no target in range
+[14:58:54] [CLIENT MetalB] inventory: gold=548 inv={ "health_potion": 31, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:54] [CLIENT MetalB] inventory: gold=568 inv={ "health_potion": 31, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:54] [CLIENT MetalB] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT MetalB] inventory: gold=568 inv={ "health_potion": 32, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:55] [CLIENT MetalB] inventory: gold=582 inv={ "health_potion": 32, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:55] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1361, 847), Farmer(Lv21 205/205hp)@(1520, 805), WoodA(Lv21 184/184hp)@(1507, 816), WaterB(Lv20 152/152hp)@(1585, 727) | monsters: rat 7/12, bat 4/6, spider 1/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:58:55] [CLIENT MetalB] notice: Piercing Strike is on cooldown (1.7s)
+[14:58:55] [CLIENT MetalB] [chat] * EarthB reached level 22!
+[14:58:56] [CLIENT MetalB] notice: Blade Focus is on cooldown (0.2s)
+[14:58:56] [CLIENT MetalB] inventory: gold=582 inv={ "health_potion": 33, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:56] [CLIENT MetalB] inventory: gold=590 inv={ "health_potion": 33, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:57] [CLIENT MetalB] notice: Thousand Cuts: no target in range
+[14:58:57] [CLIENT MetalB] inventory: gold=590 inv={ "health_potion": 34, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:57] [CLIENT MetalB] inventory: gold=606 inv={ "health_potion": 34, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:58] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1439, 991), Farmer(Lv21 205/205hp)@(1475, 968), WoodA(Lv21 184/184hp)@(1477, 965), WaterB(Lv20 152/152hp)@(1502, 944) | monsters: rat 7/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:01] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1263, 747), Farmer(Lv21 205/205hp)@(1199, 805), WoodA(Lv21 184/184hp)@(1196, 834), WaterB(Lv20 152/152hp)@(1259, 738) | monsters: rat 6/12, bat 4/6, spider 2/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:59:02] [CLIENT MetalB] [chat] * EarthA reached level 21!
+[14:59:02] [CLIENT MetalB] inventory: gold=619 inv={ "health_potion": 34, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:02] [CLIENT MetalB] inventory: gold=619 inv={ "health_potion": 35, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:02] [CLIENT MetalB] inventory: gold=638 inv={ "health_potion": 35, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:03] [CLIENT MetalB] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT MetalB] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1422, 438), Farmer(Lv21 205/205hp)@(1288, 500), WoodA(Lv21 184/184hp)@(1318, 474), WaterB(Lv20 152/152hp)@(1400, 425) | monsters: rat 7/12, bat 5/6, spider 3/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:05] [CLIENT MetalB] inventory: gold=653 inv={ "health_potion": 35, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:05] [CLIENT MetalB] notice: Thousand Cuts: no target in range
+[14:59:05] [CLIENT MetalB] inventory: gold=653 inv={ "health_potion": 36, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:05] [CLIENT MetalB] inventory: gold=666 inv={ "health_potion": 36, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:06] [CLIENT MetalB] inventory: gold=666 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:06] [CLIENT MetalB] inventory: gold=675 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:07] [CLIENT MetalB] inventory: gold=687 inv={ "health_potion": 38, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:07] [CLIENT MetalB] inventory: gold=701 inv={ "health_potion": 39, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:07] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1641, 147), Farmer(Lv21 205/205hp)@(1564, 259), WoodA(Lv21 184/184hp)@(1612, 219), WaterB(Lv20 152/152hp)@(1607, 248) | monsters: rat 7/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1744, 521), Farmer(Lv21 205/205hp)@(1735, 483), WoodA(Lv21 184/184hp)@(1744, 525), WaterB(Lv20 152/152hp)@(1740, 490) | monsters: rat 8/12, bat 3/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:11] [CLIENT MetalB] notice: Blade Focus is on cooldown (11.5s)
+[14:59:11] [CLIENT MetalB] inventory: gold=712 inv={ "health_potion": 39, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalB] inventory: gold=730 inv={ "health_potion": 39, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:13] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1424, 501), Farmer(Lv21 205/205hp)@(1421, 402), WoodA(Lv21 184/184hp)@(1745, 540), WaterB(Lv20 152/152hp)@(1424, 465) | monsters: rat 9/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:15] [CLIENT MetalB] inventory: gold=730 inv={ "health_potion": 40, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:15] [CLIENT MetalB] inventory: gold=730 inv={ "health_potion": 41, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:15] [CLIENT MetalB] inventory: gold=745 inv={ "health_potion": 41, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:15] [CLIENT MetalB] inventory: gold=758 inv={ "health_potion": 41, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:16] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1324, 908), Farmer(Lv21 205/205hp)@(1398, 723), WoodA(Lv21 184/184hp)@(1604, 892), WaterB(Lv20 152/152hp)@(1392, 766) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=4 | foreign_entities=0
+[14:59:17] [CLIENT MetalB] inventory: gold=769 inv={ "health_potion": 41, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:17] [CLIENT MetalB] inventory: gold=769 inv={ "health_potion": 42, "greater_potion": 5, "iron_sword": 1, "steel_sword": 3, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:19] [CLIENT MetalB] status: zone=forest players=4 MetalB(Lv21 198/198hp)@(1218, 847), Farmer(Lv21 205/205hp)@(1159, 846), WoodA(Lv21 184/184hp)@(1339, 877), WaterB(Lv20 152/152hp)@(1239, 845) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:19] [CLIENT MetalB] notice: Blade Focus is on cooldown (2.7s)
+[14:59:20] [CLIENT MetalB] [chat] * FireA left the world.
+[14:59:20] [CLIENT MetalB] [chat] * Farmer left the world.
+[14:59:20] [CLIENT MetalB] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT MetalB] [chat] * WoodA left the world.
+[14:59:20] [CLIENT MetalB] [chat] * WoodB left the world.
+[14:59:20] [CLIENT MetalB] [chat] * EarthA left the world.
+[14:59:20] [CLIENT MetalB] quit-after reached, exiting

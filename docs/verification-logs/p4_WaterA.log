@@ -1,0 +1,133 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT WaterA] Connecting to 127.0.0.1:7777 as 'WaterA' ...
+[14:58:10] [CLIENT WaterA] Connected to server as peer 41371046, logging in
+[14:58:10] [CLIENT WaterA] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT WaterA] Class selection requested (new account)
+[14:58:10] [CLIENT WaterA] bot chooses class water
+[14:58:10] [CLIENT WaterA] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT WaterA] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT WaterA] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT WaterA] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT WaterA] Entered zone frost (Frostpeak Ruins)
+[14:58:10] [CLIENT WaterA] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT WaterA] [chat] * FireB the Pyromancer joined the world.
+[14:58:10] [CLIENT WaterA] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:13] [CLIENT WaterA] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT WaterA] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT WaterA] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT WaterA] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT WaterA] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT WaterA] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT WaterA] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT WaterA] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT WaterA] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT WaterA] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT WaterA] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT WaterA] [chat] [Frost] FireB: Hello from FireB!
+[14:58:13] [CLIENT WaterA] status: zone=frost players=3 WaterA(Lv20 132/132hp)@(425, 340), EarthB(Lv20 211/211hp)@(328, 472), FireB(Lv20 121/121hp)@(397, 403) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT WaterA] inventory: gold=274 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:14] [CLIENT WaterA] inventory: gold=274 inv={ "health_potion": 7, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:16] [CLIENT WaterA] status: zone=frost players=3 WaterA(Lv20 132/132hp)@(432, 297), EarthB(Lv20 211/211hp)@(441, 342), FireB(Lv20 121/121hp)@(436, 338) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 3/5, yeti_king 1/1 | loot=4 | foreign_entities=0
+[14:58:16] [CLIENT WaterA] inventory: gold=298 inv={ "health_potion": 7, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:17] [CLIENT WaterA] inventory: gold=298 inv={ "health_potion": 7, "greater_potion": 7 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:18] [CLIENT WaterA] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT WaterA] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT WaterA] status: zone=frost players=3 WaterA(Lv20 132/132hp)@(595, 432), EarthB(Lv20 224/224hp)@(650, 432), FireB(Lv20 121/121hp)@(667, 439) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 3/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:58:21] [CLIENT WaterA] notice: Healing Rain is on cooldown (2.0s)
+[14:58:22] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv20 152/152hp)@(926, 642), EarthB(Lv20 249/249hp)@(927, 642), FireB(Lv20 121/121hp)@(959, 667), Phoenix(Lv20 113/121hp)@(1657, 657) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:23] [CLIENT WaterA] notice: Frost Nova is on cooldown (3.1s)
+[14:58:25] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv20 152/152hp)@(1135, 609), EarthB(Lv20 249/249hp)@(1136, 585), FireB(Lv20 121/121hp)@(1179, 677), Phoenix(Lv20 36/121hp)@(1716, 614) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT WaterA] notice: Tidal Wave is on cooldown (1.5s)
+[14:58:26] [CLIENT WaterA] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT WaterA] inventory: gold=327 inv={ "health_potion": 7, "greater_potion": 8 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:26] [CLIENT WaterA] [chat] * MetalA reached level 21!
+[14:58:28] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv20 152/152hp)@(1425, 593), EarthB(Lv20 249/249hp)@(1372, 540), FireB(Lv20 97/121hp)@(1488, 601), Phoenix(Lv20 0/121hp DEAD)@(1716, 614) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:28] [CLIENT WaterA] inventory: gold=327 inv={ "health_potion": 8, "greater_potion": 8 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:30] [CLIENT WaterA] [chat] * FireA reached level 21!
+[14:58:30] [CLIENT WaterA] notice: Healing Rain is on cooldown (4.4s)
+[14:58:31] [CLIENT WaterA] notice: Frost Nova is on cooldown (8.8s)
+[14:58:31] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv20 107/152hp)@(1706, 616), EarthB(Lv20 249/249hp)@(1649, 561), FireB(Lv20 76/121hp)@(1707, 614), Phoenix(Lv20 115/121hp)@(343, 616) | monsters: yeti 3/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:32] [CLIENT WaterA] notice: Tidal Wave is on cooldown (8.8s)
+[14:58:33] [CLIENT WaterA] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT WaterA] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT WaterA] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT WaterA] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT WaterA] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:33] [CLIENT WaterA] inventory: gold=848 inv={ "health_potion": 8, "greater_potion": 8, "frost_aegis": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:33] [CLIENT WaterA] equipping frost_aegis
+[14:58:33] [CLIENT WaterA] inventory: gold=848 inv={ "health_potion": 8, "greater_potion": 8 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:34] [CLIENT WaterA] notice: Healing Rain is on cooldown (1.2s)
+[14:58:34] [CLIENT WaterA] inventory: gold=848 inv={ "health_potion": 8, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:34] [CLIENT WaterA] inventory: gold=864 inv={ "health_potion": 8, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:34] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(1648, 632), EarthB(Lv21 260/260hp)@(1681, 602), FireB(Lv21 126/126hp)@(1680, 582), Phoenix(Lv21 114/126hp)@(338, 634) | monsters: yeti 2/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:35] [CLIENT WaterA] notice: Frost Nova is on cooldown (4.7s)
+[14:58:37] [CLIENT WaterA] notice: Tidal Wave is on cooldown (3.9s)
+[14:58:37] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(1684, 329), EarthB(Lv21 260/260hp)@(1623, 336), FireB(Lv21 126/126hp)@(1589, 335), Phoenix(Lv21 96/126hp)@(299, 615) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:38] [CLIENT WaterA] inventory: gold=892 inv={ "health_potion": 8, "greater_potion": 9, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:39] [CLIENT WaterA] inventory: gold=892 inv={ "health_potion": 8, "greater_potion": 10, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:39] [CLIENT WaterA] inventory: gold=912 inv={ "health_potion": 8, "greater_potion": 10, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:39] [CLIENT WaterA] inventory: gold=935 inv={ "health_potion": 8, "greater_potion": 10, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:40] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(1703, 205), EarthB(Lv21 260/260hp)@(1714, 211), FireB(Lv21 126/126hp)@(1625, 208), Phoenix(Lv21 78/126hp)@(308, 612) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT WaterA] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT WaterA] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT WaterA] [chat] * FireB reached level 22!
+[14:58:42] [CLIENT WaterA] inventory: gold=935 inv={ "health_potion": 8, "greater_potion": 11, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:43] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(1353, 257), EarthB(Lv21 260/260hp)@(1407, 277), FireB(Lv22 131/131hp)@(1360, 258), Phoenix(Lv21 60/126hp)@(304, 651) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT WaterA] inventory: gold=956 inv={ "health_potion": 8, "greater_potion": 11, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:44] [CLIENT WaterA] inventory: gold=956 inv={ "health_potion": 8, "greater_potion": 12, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:44] [CLIENT WaterA] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT WaterA] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT WaterA] notice: Healing Rain is on cooldown (0.4s)
+[14:58:46] [CLIENT WaterA] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(881, 240), EarthB(Lv21 260/260hp)@(1034, 240), FireB(Lv22 131/131hp)@(906, 240), Phoenix(Lv21 42/126hp)@(333, 683) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:46] [CLIENT WaterA] notice: Frost Nova is on cooldown (7.1s)
+[14:58:47] [CLIENT WaterA] inventory: gold=956 inv={ "health_potion": 9, "greater_potion": 12, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:48] [CLIENT WaterA] inventory: gold=985 inv={ "health_potion": 9, "greater_potion": 12, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:48] [CLIENT WaterA] inventory: gold=985 inv={ "health_potion": 9, "greater_potion": 13, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:49] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(720, 454), EarthB(Lv21 260/260hp)@(848, 390), FireB(Lv22 131/131hp)@(719, 471), Phoenix(Lv21 24/126hp)@(336, 688) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 3/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:50] [CLIENT WaterA] notice: Tidal Wave is on cooldown (4.7s)
+[14:58:52] [CLIENT WaterA] inventory: gold=1002 inv={ "health_potion": 9, "greater_potion": 13, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:52] [CLIENT WaterA] inventory: gold=1002 inv={ "health_potion": 9, "greater_potion": 14, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:52] [CLIENT WaterA] notice: Frost Nova is on cooldown (1.5s)
+[14:58:52] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(529, 654), EarthB(Lv21 260/260hp)@(672, 596), FireB(Lv22 131/131hp)@(521, 655), Phoenix(Lv21 6/126hp)@(370, 661) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:53] [CLIENT WaterA] notice: Tidal Wave is on cooldown (1.5s)
+[14:58:54] [CLIENT WaterA] [chat] * Phoenix was defeated by Yeti!
+[14:58:54] [CLIENT WaterA] notice: Healing Rain is on cooldown (4.4s)
+[14:58:55] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(495, 481), EarthB(Lv21 260/260hp)@(513, 464), FireB(Lv22 131/131hp)@(464, 462), Phoenix(Lv21 0/126hp DEAD)@(431, 477) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT WaterA] [chat] * EarthB reached level 22!
+[14:58:55] [CLIENT WaterA] inventory: gold=1025 inv={ "health_potion": 9, "greater_potion": 15, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:58:58] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 130/159hp)@(790, 693), EarthB(Lv22 270/270hp)@(677, 592), FireB(Lv22 131/131hp)@(756, 688), Phoenix(Lv21 0/126hp DEAD)@(431, 477) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:58] [CLIENT WaterA] inventory: gold=1046 inv={ "health_potion": 9, "greater_potion": 16, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:01] [CLIENT WaterA] inventory: gold=1080 inv={ "health_potion": 10, "greater_potion": 16, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:01] [CLIENT WaterA] inventory: gold=1080 inv={ "health_potion": 10, "greater_potion": 17, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:01] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv21 159/159hp)@(685, 691), EarthB(Lv22 270/270hp)@(519, 669), FireB(Lv22 131/131hp)@(643, 699), Phoenix(Lv21 126/126hp)@(432, 647) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT WaterA] [chat] * EarthA reached level 21!
+[14:59:02] [CLIENT WaterA] notice: Frost Nova is on cooldown (5.5s)
+[14:59:03] [CLIENT WaterA] notice: Tidal Wave is on cooldown (7.1s)
+[14:59:03] [CLIENT WaterA] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT WaterA] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT WaterA] notice: Healing Rain is on cooldown (3.6s)
+[14:59:04] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv22 164/164hp)@(426, 886), EarthB(Lv22 269/270hp)@(464, 882), FireB(Lv23 136/136hp)@(408, 927), Phoenix(Lv21 126/126hp)@(461, 883) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:05] [CLIENT WaterA] notice: Frost Nova is on cooldown (2.3s)
+[14:59:05] [CLIENT WaterA] inventory: gold=1111 inv={ "health_potion": 10, "greater_potion": 18, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:06] [CLIENT WaterA] notice: Tidal Wave is on cooldown (3.9s)
+[14:59:07] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv22 164/164hp)@(750, 1008), EarthB(Lv22 269/270hp)@(753, 1008), FireB(Lv23 111/136hp)@(743, 1008), Phoenix(Lv21 126/126hp)@(749, 1008) | monsters: yeti 2/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:09] [CLIENT WaterA] inventory: gold=1111 inv={ "health_potion": 10, "greater_potion": 19, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:10] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv22 164/164hp)@(853, 1043), EarthB(Lv22 270/270hp)@(853, 1043), FireB(Lv23 111/136hp)@(851, 1042), Phoenix(Lv21 126/126hp)@(831, 1039) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:13] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv22 164/164hp)@(1191, 1049), EarthB(Lv22 270/270hp)@(1233, 1167), FireB(Lv23 136/136hp)@(1199, 1073), Phoenix(Lv21 126/126hp)@(1242, 1172) | monsters: yeti 3/6, ice_ogre 0/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv22 164/164hp)@(1326, 707), EarthB(Lv22 270/270hp)@(1557, 1113), FireB(Lv23 136/136hp)@(1361, 670), Phoenix(Lv21 126/126hp)@(1583, 1111) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:59:18] [CLIENT WaterA] inventory: gold=1150 inv={ "health_potion": 10, "greater_potion": 20, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:18] [CLIENT WaterA] inventory: gold=1150 inv={ "health_potion": 10, "greater_potion": 20, "bone_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:18] [CLIENT WaterA] inventory: gold=1150 inv={ "health_potion": 10, "greater_potion": 20, "bone_shield": 2, "frost_aegis": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:18] [CLIENT WaterA] inventory: gold=1150 inv={ "health_potion": 10, "greater_potion": 21, "bone_shield": 2, "frost_aegis": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:18] [CLIENT WaterA] inventory: gold=1183 inv={ "health_potion": 10, "greater_potion": 21, "bone_shield": 2, "frost_aegis": 1 } equip={ "weapon": "apprentice_staff", "armor": "frost_aegis" }
+[14:59:19] [CLIENT WaterA] status: zone=frost players=4 WaterA(Lv22 164/164hp)@(1584, 547), EarthB(Lv22 270/270hp)@(1546, 816), FireB(Lv23 136/136hp)@(1552, 532), Phoenix(Lv21 126/126hp)@(1489, 839) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT WaterA] [chat] * FireA left the world.
+[14:59:20] [CLIENT WaterA] [chat] * Farmer left the world.
+[14:59:20] [CLIENT WaterA] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT WaterA] [chat] * WoodA left the world.
+[14:59:20] [CLIENT WaterA] [chat] * WoodB left the world.
+[14:59:20] [CLIENT WaterA] [chat] * EarthA left the world.
+[14:59:20] [CLIENT WaterA] [chat] * MetalB left the world.
+[14:59:20] [CLIENT WaterA] quit-after reached, exiting

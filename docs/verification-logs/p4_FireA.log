@@ -1,0 +1,93 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT FireA] Connecting to 127.0.0.1:7777 as 'FireA' ...
+[14:58:10] [CLIENT FireA] Connected to server as peer 1655686571, logging in
+[14:58:10] [CLIENT FireA] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT FireA] Class selection requested (new account)
+[14:58:10] [CLIENT FireA] bot chooses class fire
+[14:58:10] [CLIENT FireA] [chat] * FireA the Pyromancer joined the world.
+[14:58:10] [CLIENT FireA] [chat] * Farmer the Blade Master joined the world.
+[14:58:10] [CLIENT FireA] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT FireA] [chat] * Phoenix the Pyromancer joined the world.
+[14:58:10] [CLIENT FireA] Entered zone crypt (Bone Crypt)
+[14:58:10] [CLIENT FireA] [chat] * WoodA the Venom Druid joined the world.
+[14:58:10] [CLIENT FireA] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT FireA] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT FireA] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT FireA] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:10] [CLIENT FireA] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT FireA] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT FireA] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT FireA] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT FireA] [chat] * FireB the Pyromancer joined the world.
+[14:58:12] [CLIENT FireA] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:13] [CLIENT FireA] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT FireA] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT FireA] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT FireA] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv20 116/121hp)@(1028, 772), WoodB(Lv20 176/176hp)@(1001, 745), EarthA(Lv20 211/211hp)@(1000, 777), MetalA(Lv20 165/165hp)@(1006, 718) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT FireA] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT FireA] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT FireA] equipping bone_shield
+[14:58:13] [CLIENT FireA] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:13] [CLIENT FireA] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT FireA] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT FireA] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT FireA] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT FireA] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT FireA] [chat] [Frost] FireB: Hello from FireB!
+[14:58:15] [CLIENT FireA] inventory: gold=250 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:15] [CLIENT FireA] notice: Flame Burst is on cooldown (4.0s)
+[14:58:16] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv20 115/121hp)@(1030, 343), WoodB(Lv20 176/176hp)@(1008, 404), EarthA(Lv20 249/249hp)@(1207, 656), MetalA(Lv20 179/190hp)@(1036, 338) | monsters: archer 3/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:16] [CLIENT FireA] notice: Meteor is on cooldown (10.0s)
+[14:58:17] [CLIENT FireA] notice: Inferno is on cooldown (10.3s)
+[14:58:18] [CLIENT FireA] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT FireA] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:18] [CLIENT FireA] inventory: gold=250 inv={ "health_potion": 9, "greater_potion": 8, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:18] [CLIENT FireA] inventory: gold=250 inv={ "health_potion": 9, "greater_potion": 8, "bone_shield": 1, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:18] [CLIENT FireA] trying to equip great_hammer (not allowed for fire)
+[14:58:18] [CLIENT FireA] notice: Great Hammer: Only: Blade Master, Stone Guardian
+[14:58:19] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv20 115/121hp)@(1114, 329), WoodB(Lv21 184/184hp)@(1119, 325), EarthA(Lv20 249/249hp)@(1390, 721), MetalA(Lv20 178/190hp)@(1109, 334) | monsters: archer 3/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv20 115/121hp)@(1341, 528), WoodB(Lv21 184/184hp)@(1338, 528), EarthA(Lv20 249/249hp)@(1607, 690), MetalA(Lv20 178/190hp)@(1395, 562) | monsters: archer 3/6, ghost 5/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv20 117/121hp)@(1686, 761), WoodB(Lv21 184/184hp)@(1684, 756), EarthA(Lv20 247/249hp)@(1748, 832), MetalA(Lv20 179/190hp)@(1693, 773) | monsters: archer 3/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT FireA] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT FireA] [chat] * MetalA reached level 21!
+[14:58:28] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv20 121/121hp)@(1747, 948), WoodB(Lv21 184/184hp)@(1783, 951), EarthA(Lv20 249/249hp)@(1758, 958), MetalA(Lv21 198/198hp)@(1745, 981) | monsters: archer 4/6, ghost 4/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT FireA] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1689, 592), WoodB(Lv21 184/184hp)@(1665, 691), EarthA(Lv20 249/249hp)@(1656, 720), MetalA(Lv21 198/198hp)@(1717, 581) | monsters: archer 4/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT FireA] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT FireA] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT FireA] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT FireA] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT FireA] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1304, 688), WoodB(Lv21 184/184hp)@(1219, 755), EarthA(Lv20 249/249hp)@(1248, 736), MetalA(Lv21 198/198hp)@(1332, 688) | monsters: archer 4/6, ghost 4/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1057, 793), WoodB(Lv21 184/184hp)@(958, 957), EarthA(Lv20 249/249hp)@(957, 958), MetalA(Lv21 198/198hp)@(957, 954) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:40] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1073, 845), WoodB(Lv21 184/184hp)@(973, 946), EarthA(Lv20 249/249hp)@(935, 989), MetalA(Lv21 191/198hp)@(495, 946) | monsters: archer 5/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT FireA] inventory: gold=264 inv={ "health_potion": 9, "greater_potion": 8, "bone_shield": 1, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:42] [CLIENT FireA] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT FireA] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT FireA] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 125/126hp)@(1025, 656), WoodB(Lv21 184/184hp)@(978, 671), EarthA(Lv20 249/249hp)@(960, 750), MetalA(Lv21 191/198hp)@(368, 490) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT FireA] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT FireA] [chat] * MetalB reached level 21!
+[14:58:45] [CLIENT FireA] inventory: gold=279 inv={ "health_potion": 9, "greater_potion": 8, "bone_shield": 1, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:45] [CLIENT FireA] inventory: gold=279 inv={ "health_potion": 9, "greater_potion": 9, "bone_shield": 1, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "bone_shield" }
+[14:58:46] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 125/126hp)@(881, 560), WoodB(Lv21 184/184hp)@(898, 542), EarthA(Lv20 249/249hp)@(879, 563), MetalA(Lv21 180/198hp)@(383, 261) | monsters: archer 2/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:46] [CLIENT FireA] [chat] * MetalA reached level 22!
+[14:58:49] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(915, 302), WoodB(Lv21 184/184hp)@(896, 292), EarthA(Lv20 249/249hp)@(891, 288), MetalA(Lv22 206/206hp)@(844, 271) | monsters: archer 1/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1030, 518), WoodB(Lv21 184/184hp)@(1060, 616), EarthA(Lv20 249/249hp)@(1041, 565), MetalA(Lv22 206/206hp)@(1104, 594) | monsters: archer 2/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:54] [CLIENT FireA] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1379, 592), WoodB(Lv21 184/184hp)@(1472, 621), EarthA(Lv20 249/249hp)@(1435, 624), MetalA(Lv22 206/206hp)@(1419, 628) | monsters: archer 3/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT FireA] [chat] * EarthB reached level 22!
+[14:58:58] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1680, 726), WoodB(Lv21 184/184hp)@(1744, 714), EarthA(Lv20 249/249hp)@(1571, 625), MetalA(Lv22 206/206hp)@(1808, 625) | monsters: archer 4/6, ghost 3/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:01] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1743, 867), WoodB(Lv21 184/184hp)@(1743, 901), EarthA(Lv20 249/249hp)@(1265, 591), MetalA(Lv22 206/206hp)@(1740, 866) | monsters: archer 3/6, ghost 2/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT FireA] [chat] * EarthA reached level 21!
+[14:59:03] [CLIENT FireA] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT FireA] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1454, 688), WoodB(Lv21 184/184hp)@(1526, 688), EarthA(Lv21 260/260hp)@(933, 624), MetalA(Lv22 206/206hp)@(1371, 688) | monsters: archer 3/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:07] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(1104, 568), WoodB(Lv21 184/184hp)@(1106, 594), EarthA(Lv21 258/260hp)@(816, 590), MetalA(Lv22 200/206hp)@(1007, 538) | monsters: archer 3/6, ghost 0/6, crawler 1/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(978, 337), WoodB(Lv21 184/184hp)@(978, 337), EarthA(Lv21 257/260hp)@(1009, 464), MetalA(Lv22 206/206hp)@(778, 268) | monsters: archer 3/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:59:13] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(778, 338), WoodB(Lv21 184/184hp)@(775, 339), EarthA(Lv21 256/260hp)@(735, 368), MetalA(Lv22 206/206hp)@(360, 242) | monsters: archer 2/6, ghost 2/6, crawler 1/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(441, 333), WoodB(Lv21 184/184hp)@(478, 326), EarthA(Lv21 255/260hp)@(434, 335), MetalA(Lv22 206/206hp)@(384, 363) | monsters: archer 0/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:19] [CLIENT FireA] status: zone=crypt players=4 FireA(Lv21 126/126hp)@(908, 368), WoodB(Lv21 184/184hp)@(892, 368), EarthA(Lv21 260/260hp)@(809, 368), MetalA(Lv22 206/206hp)@(833, 367) | monsters: archer 0/6, ghost 2/6, crawler 3/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:59:20] [CLIENT FireA] quit-after reached, exiting

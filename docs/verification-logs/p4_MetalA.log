@@ -1,0 +1,165 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT MetalA] Connecting to 127.0.0.1:7777 as 'MetalA' ...
+[14:58:10] [CLIENT MetalA] Connected to server as peer 1604138648, logging in
+[14:58:10] [CLIENT MetalA] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT MetalA] Class selection requested (new account)
+[14:58:10] [CLIENT MetalA] bot chooses class metal
+[14:58:10] [CLIENT MetalA] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT MetalA] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT MetalA] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT MetalA] Entered zone crypt (Bone Crypt)
+[14:58:10] [CLIENT MetalA] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT MetalA] [chat] * FireB the Pyromancer joined the world.
+[14:58:10] [CLIENT MetalA] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT MetalA] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 6 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT MetalA] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:12] [CLIENT MetalA] inventory: gold=269 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:13] [CLIENT MetalA] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT MetalA] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT MetalA] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT MetalA] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT MetalA] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT MetalA] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT MetalA] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT MetalA] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT MetalA] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT MetalA] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT MetalA] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT MetalA] [chat] [Frost] FireB: Hello from FireB!
+[14:58:13] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv20 165/165hp)@(959, 685), FireA(Lv20 116/121hp)@(987, 731), WoodB(Lv20 176/176hp)@(972, 701), EarthA(Lv20 224/224hp)@(973, 735) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT MetalA] inventory: gold=283 inv={ "health_potion": 8, "greater_potion": 7 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:13] [CLIENT MetalA] inventory: gold=283 inv={ "health_potion": 9, "greater_potion": 7 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:14] [CLIENT MetalA] notice: Thousand Cuts: no target in range
+[14:58:15] [CLIENT MetalA] inventory: gold=303 inv={ "health_potion": 9, "greater_potion": 7 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:16] [CLIENT MetalA] notice: Piercing Strike is on cooldown (3.0s)
+[14:58:16] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv20 181/190hp)@(1053, 287), FireA(Lv20 115/121hp)@(1050, 295), WoodB(Lv20 176/176hp)@(1020, 351), EarthA(Lv20 249/249hp)@(1240, 656) | monsters: archer 3/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:17] [CLIENT MetalA] notice: Blade Focus is on cooldown (14.0s)
+[14:58:18] [CLIENT MetalA] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT MetalA] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:18] [CLIENT MetalA] inventory: gold=452 inv={ "health_potion": 9, "greater_potion": 7 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:19] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv20 178/190hp)@(1070, 377), FireA(Lv20 115/121hp)@(1073, 368), WoodB(Lv21 184/184hp)@(1077, 363), EarthA(Lv20 249/249hp)@(1428, 684) | monsters: archer 3/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv20 178/190hp)@(1442, 610), FireA(Lv20 116/121hp)@(1387, 553), WoodB(Lv21 184/184hp)@(1385, 549), EarthA(Lv20 249/249hp)@(1617, 697) | monsters: archer 3/6, ghost 5/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv20 179/190hp)@(1697, 767), FireA(Lv20 117/121hp)@(1728, 799), WoodB(Lv21 184/184hp)@(1724, 795), EarthA(Lv20 247/249hp)@(1743, 841) | monsters: archer 3/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT MetalA] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT MetalA] bot selects far target Grave Crawler (153 px; 2 monsters in reach)
+[14:58:26] [CLIENT MetalA] [chat] * MetalA reached level 21!
+[14:58:26] [CLIENT MetalA] inventory: gold=478 inv={ "health_potion": 9, "greater_potion": 7 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:28] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv21 198/198hp)@(1744, 912), FireA(Lv20 121/121hp)@(1743, 893), WoodB(Lv21 184/184hp)@(1743, 909), EarthA(Lv20 249/249hp)@(1743, 910) | monsters: archer 4/6, ghost 4/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT MetalA] notice: Blade Focus is on cooldown (1.0s)
+[14:58:30] [CLIENT MetalA] [chat] * FireA reached level 21!
+[14:58:30] [CLIENT MetalA] inventory: gold=478 inv={ "health_potion": 9, "greater_potion": 8 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:30] [CLIENT MetalA] inventory: gold=478 inv={ "health_potion": 10, "greater_potion": 8 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:30] [CLIENT MetalA] inventory: gold=503 inv={ "health_potion": 10, "greater_potion": 8 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:31] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv21 198/198hp)@(1666, 602), FireA(Lv21 126/126hp)@(1646, 623), WoodB(Lv21 184/184hp)@(1609, 688), EarthA(Lv20 249/249hp)@(1616, 690) | monsters: archer 4/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT MetalA] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT MetalA] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT MetalA] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT MetalA] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT MetalA] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv21 198/198hp)@(1273, 706), FireA(Lv21 126/126hp)@(1286, 688), WoodB(Lv21 184/184hp)@(1172, 771), EarthA(Lv20 249/249hp)@(1209, 771) | monsters: archer 4/6, ghost 4/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv21 198/198hp)@(915, 1007), FireA(Lv21 126/126hp)@(1020, 837), WoodB(Lv21 184/184hp)@(920, 1001), EarthA(Lv20 249/249hp)@(921, 999) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:38] [CLIENT MetalA] notice: Thousand Cuts: no target in range
+[14:58:38] [CLIENT MetalA] bot selects far target Restless Ghost (134 px; 2 monsters in reach)
+[14:58:38] [CLIENT MetalA] inventory: gold=520 inv={ "health_potion": 10, "greater_potion": 8 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:38] [CLIENT MetalA] inventory: gold=520 inv={ "health_potion": 11, "greater_potion": 8 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:38] [CLIENT MetalA] inventory: gold=547 inv={ "health_potion": 12, "greater_potion": 9 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:40] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv21 191/198hp)@(460, 916), FireA(Lv21 126/126hp)@(1072, 787), WoodB(Lv21 184/184hp)@(1020, 929), EarthA(Lv20 249/249hp)@(957, 962) | monsters: archer 5/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT MetalA] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT MetalA] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT MetalA] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT MetalA] bot selects far target Crypt Archer (221 px; 6 monsters in reach)
+[14:58:43] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv21 191/198hp)@(342, 434), FireA(Lv21 125/126hp)@(967, 656), WoodB(Lv21 184/184hp)@(940, 687), EarthA(Lv20 249/249hp)@(948, 752) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:43] [CLIENT MetalA] inventory: gold=565 inv={ "health_potion": 12, "greater_potion": 9 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:43] [CLIENT MetalA] inventory: gold=565 inv={ "health_potion": 12, "greater_potion": 9, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:43] [CLIENT MetalA] bot selects far target Grave Crawler (157 px; 4 monsters in reach)
+[14:58:43] [CLIENT MetalA] inventory: gold=565 inv={ "health_potion": 13, "greater_potion": 9, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] inventory: gold=590 inv={ "health_potion": 13, "greater_potion": 10, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] inventory: gold=590 inv={ "health_potion": 14, "greater_potion": 10, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] inventory: gold=611 inv={ "health_potion": 14, "greater_potion": 10, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] inventory: gold=611 inv={ "health_potion": 14, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] inventory: gold=632 inv={ "health_potion": 14, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] [chat] * WoodA reached level 21!
+[14:58:44] [CLIENT MetalA] inventory: gold=632 inv={ "health_potion": 15, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] inventory: gold=632 inv={ "health_potion": 16, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:58:44] [CLIENT MetalA] equipping war_axe
+[14:58:44] [CLIENT MetalA] inventory: gold=632 inv={ "health_potion": 16, "greater_potion": 11, "iron_sword": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] [chat] * MetalB reached level 21!
+[14:58:45] [CLIENT MetalA] inventory: gold=650 inv={ "health_potion": 16, "greater_potion": 12, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=650 inv={ "health_potion": 16, "greater_potion": 13, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=650 inv={ "health_potion": 17, "greater_potion": 13, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=679 inv={ "health_potion": 17, "greater_potion": 13, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=695 inv={ "health_potion": 17, "greater_potion": 13, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=695 inv={ "health_potion": 17, "greater_potion": 14, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=716 inv={ "health_potion": 17, "greater_potion": 14, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:45] [CLIENT MetalA] inventory: gold=739 inv={ "health_potion": 17, "greater_potion": 14, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:46] [CLIENT MetalA] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT MetalA] inventory: gold=739 inv={ "health_potion": 18, "greater_potion": 14, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:46] [CLIENT MetalA] inventory: gold=761 inv={ "health_potion": 18, "greater_potion": 14, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:46] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(436, 243), FireA(Lv21 125/126hp)@(921, 519), WoodB(Lv21 184/184hp)@(894, 546), EarthA(Lv20 249/249hp)@(915, 524) | monsters: archer 1/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:58:46] [CLIENT MetalA] inventory: gold=761 inv={ "health_potion": 18, "greater_potion": 15, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:48] [CLIENT MetalA] notice: Piercing Strike is on cooldown (0.1s)
+[14:58:49] [CLIENT MetalA] inventory: gold=761 inv={ "health_potion": 18, "greater_potion": 16, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:49] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(891, 315), FireA(Lv21 126/126hp)@(943, 336), WoodB(Lv21 184/184hp)@(933, 324), EarthA(Lv20 249/249hp)@(901, 307) | monsters: archer 1/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:51] [CLIENT MetalA] notice: Blade Focus is on cooldown (10.8s)
+[14:58:52] [CLIENT MetalA] notice: Thousand Cuts is on cooldown (6.7s)
+[14:58:52] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(1104, 662), FireA(Lv21 126/126hp)@(1040, 570), WoodB(Lv21 184/184hp)@(1102, 654), EarthA(Lv20 249/249hp)@(1056, 612) | monsters: archer 2/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT MetalA] inventory: gold=787 inv={ "health_potion": 18, "greater_potion": 16, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:54] [CLIENT MetalA] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT MetalA] [chat] * EarthB reached level 22!
+[14:58:55] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(1482, 624), FireA(Lv21 126/126hp)@(1434, 599), WoodB(Lv21 184/184hp)@(1529, 624), EarthA(Lv20 249/249hp)@(1431, 624) | monsters: archer 5/6, ghost 3/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:56] [CLIENT MetalA] notice: Blade Focus is on cooldown (5.9s)
+[14:58:57] [CLIENT MetalA] inventory: gold=805 inv={ "health_potion": 19, "greater_potion": 17, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:58:57] [CLIENT MetalA] notice: Thousand Cuts is on cooldown (1.9s)
+[14:58:58] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(1808, 698), FireA(Lv21 126/126hp)@(1699, 774), WoodB(Lv21 184/184hp)@(1744, 776), EarthA(Lv20 249/249hp)@(1514, 627) | monsters: archer 5/6, ghost 3/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:59] [CLIENT MetalA] bot selects far target Restless Ghost (222 px; 2 monsters in reach)
+[14:58:59] [CLIENT MetalA] notice: Piercing Strike is on cooldown (0.9s)
+[14:59:01] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(1736, 799), FireA(Lv21 126/126hp)@(1739, 807), WoodB(Lv21 184/184hp)@(1744, 840), EarthA(Lv20 249/249hp)@(1208, 592) | monsters: archer 3/6, ghost 2/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT MetalA] [chat] * EarthA reached level 21!
+[14:59:03] [CLIENT MetalA] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT MetalA] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(1304, 688), FireA(Lv21 126/126hp)@(1397, 688), WoodB(Lv21 184/184hp)@(1469, 688), EarthA(Lv21 260/260hp)@(879, 624) | monsters: archer 3/6, ghost 2/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:05] [CLIENT MetalA] inventory: gold=824 inv={ "health_potion": 19, "greater_potion": 17, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:07] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 200/206hp)@(1008, 467), FireA(Lv21 126/126hp)@(1092, 512), WoodB(Lv21 184/184hp)@(1104, 536), EarthA(Lv21 258/260hp)@(866, 578) | monsters: archer 3/6, ghost 0/6, crawler 1/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:09] [CLIENT MetalA] notice: Thousand Cuts: no target in range
+[14:59:10] [CLIENT MetalA] inventory: gold=839 inv={ "health_potion": 19, "greater_potion": 17, "iron_sword": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:10] [CLIENT MetalA] inventory: gold=839 inv={ "health_potion": 19, "greater_potion": 17, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:10] [CLIENT MetalA] inventory: gold=839 inv={ "health_potion": 19, "greater_potion": 18, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:10] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(731, 244), FireA(Lv21 126/126hp)@(935, 301), WoodB(Lv21 184/184hp)@(935, 302), EarthA(Lv21 257/260hp)@(1008, 412) | monsters: archer 3/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:11] [CLIENT MetalA] trying to equip lich_staff (not allowed for metal)
+[14:59:11] [CLIENT MetalA] notice: Lich Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:59:11] [CLIENT MetalA] inventory: gold=839 inv={ "health_potion": 20, "greater_potion": 19, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalA] inventory: gold=862 inv={ "health_potion": 20, "greater_potion": 19, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalA] bot selects far target Crypt Archer (220 px; 4 monsters in reach)
+[14:59:12] [CLIENT MetalA] inventory: gold=862 inv={ "health_potion": 21, "greater_potion": 19, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalA] inventory: gold=862 inv={ "health_potion": 21, "greater_potion": 20, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalA] inventory: gold=888 inv={ "health_potion": 21, "greater_potion": 20, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalA] bot selects far target Restless Ghost (201 px; 3 monsters in reach)
+[14:59:12] [CLIENT MetalA] notice: Blade Focus is on cooldown (10.7s)
+[14:59:12] [CLIENT MetalA] inventory: gold=916 inv={ "health_potion": 21, "greater_potion": 20, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:12] [CLIENT MetalA] inventory: gold=916 inv={ "health_potion": 22, "greater_potion": 20, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:13] [CLIENT MetalA] inventory: gold=916 inv={ "health_potion": 22, "greater_potion": 21, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:13] [CLIENT MetalA] bot selects far target Crypt Archer (143 px; 2 monsters in reach)
+[14:59:13] [CLIENT MetalA] inventory: gold=944 inv={ "health_potion": 22, "greater_potion": 21, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:13] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(289, 237), FireA(Lv21 126/126hp)@(718, 336), WoodB(Lv21 184/184hp)@(715, 336), EarthA(Lv21 255/260hp)@(690, 341) | monsters: archer 2/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:59:13] [CLIENT MetalA] inventory: gold=944 inv={ "health_potion": 22, "greater_potion": 22, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:13] [CLIENT MetalA] inventory: gold=944 inv={ "health_potion": 23, "greater_potion": 22, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:14] [CLIENT MetalA] inventory: gold=966 inv={ "health_potion": 23, "greater_potion": 22, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:14] [CLIENT MetalA] bot selects far target Grave Crawler (173 px; 2 monsters in reach)
+[14:59:14] [CLIENT MetalA] inventory: gold=966 inv={ "health_potion": 24, "greater_potion": 22, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:15] [CLIENT MetalA] notice: Piercing Strike is on cooldown (1.7s)
+[14:59:15] [CLIENT MetalA] inventory: gold=983 inv={ "health_potion": 24, "greater_potion": 22, "iron_sword": 1, "war_axe": 1, "lich_staff": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:16] [CLIENT MetalA] notice: Blade Focus is on cooldown (7.5s)
+[14:59:16] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(403, 368), FireA(Lv21 126/126hp)@(500, 336), WoodB(Lv21 184/184hp)@(533, 337), EarthA(Lv21 255/260hp)@(490, 336) | monsters: archer 0/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:18] [CLIENT MetalA] notice: Thousand Cuts is on cooldown (9.1s)
+[14:59:19] [CLIENT MetalA] status: zone=crypt players=4 MetalA(Lv22 206/206hp)@(839, 374), FireA(Lv21 126/126hp)@(907, 374), WoodB(Lv21 184/184hp)@(902, 374), EarthA(Lv21 260/260hp)@(811, 374) | monsters: archer 0/6, ghost 2/6, crawler 3/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:59:20] [CLIENT MetalA] [chat] * FireA left the world.
+[14:59:20] [CLIENT MetalA] [chat] * Farmer left the world.
+[14:59:20] [CLIENT MetalA] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT MetalA] [chat] * WoodA left the world.
+[14:59:20] [CLIENT MetalA] [chat] * WoodB left the world.
+[14:59:20] [CLIENT MetalA] [chat] * EarthA left the world.
+[14:59:20] [CLIENT MetalA] [chat] * MetalB left the world.
+[14:59:20] [CLIENT MetalA] [chat] * WaterA left the world.
+[14:59:20] [CLIENT MetalA] [chat] * EarthB left the world.
+[14:59:20] [CLIENT MetalA] quit-after reached, exiting

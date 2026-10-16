@@ -1,0 +1,153 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT FireB] Connecting to 127.0.0.1:7777 as 'FireB' ...
+[14:58:10] [CLIENT FireB] Connected to server as peer 442292342, logging in
+[14:58:10] [CLIENT FireB] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT FireB] Class selection requested (new account)
+[14:58:10] [CLIENT FireB] bot chooses class fire
+[14:58:10] [CLIENT FireB] [chat] * FireB the Pyromancer joined the world.
+[14:58:10] [CLIENT FireB] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT FireB] Entered zone frost (Frostpeak Ruins)
+[14:58:11] [CLIENT FireB] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:13] [CLIENT FireB] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT FireB] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT FireB] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT FireB] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT FireB] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT FireB] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT FireB] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT FireB] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT FireB] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT FireB] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT FireB] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT FireB] [chat] [Frost] FireB: Hello from FireB!
+[14:58:13] [CLIENT FireB] status: zone=frost players=3 FireB(Lv20 121/121hp)@(403, 380), WaterA(Lv20 132/132hp)@(435, 320), EarthB(Lv20 211/211hp)@(345, 455) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:58:16] [CLIENT FireB] status: zone=frost players=3 FireB(Lv20 121/121hp)@(428, 317), WaterA(Lv20 132/132hp)@(432, 280), EarthB(Lv20 211/211hp)@(429, 325) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 3/5, yeti_king 1/1 | loot=3 | foreign_entities=0
+[14:58:18] [CLIENT FireB] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT FireB] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT FireB] status: zone=frost players=3 FireB(Lv20 121/121hp)@(683, 457), WaterA(Lv20 139/139hp)@(620, 432), EarthB(Lv20 236/236hp)@(669, 441) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 3/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:58:19] [CLIENT FireB] inventory: gold=250 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:20] [CLIENT FireB] notice: Flame Burst is on cooldown (1.6s)
+[14:58:20] [CLIENT FireB] inventory: gold=269 inv={ "health_potion": 10, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:21] [CLIENT FireB] notice: Meteor is on cooldown (7.5s)
+[14:58:22] [CLIENT FireB] notice: Inferno is on cooldown (9.5s)
+[14:58:22] [CLIENT FireB] inventory: gold=294 inv={ "health_potion": 10, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:22] [CLIENT FireB] inventory: gold=294 inv={ "health_potion": 10, "greater_potion": 7 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:22] [CLIENT FireB] status: zone=frost players=4 FireB(Lv20 121/121hp)@(975, 685), WaterA(Lv20 152/152hp)@(916, 628), EarthB(Lv20 249/249hp)@(916, 629), Phoenix(Lv20 113/121hp)@(1681, 655) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:24] [CLIENT FireB] inventory: gold=332 inv={ "health_potion": 10, "greater_potion": 7 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:24] [CLIENT FireB] inventory: gold=332 inv={ "health_potion": 10, "greater_potion": 8 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:25] [CLIENT FireB] status: zone=frost players=4 FireB(Lv20 121/121hp)@(1196, 660), WaterA(Lv20 152/152hp)@(1136, 585), EarthB(Lv20 249/249hp)@(1136, 562), Phoenix(Lv20 36/121hp)@(1716, 614) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT FireB] notice: Meteor is on cooldown (2.7s)
+[14:58:26] [CLIENT FireB] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT FireB] [chat] * MetalA reached level 21!
+[14:58:26] [CLIENT FireB] notice: Inferno is on cooldown (4.7s)
+[14:58:27] [CLIENT FireB] bot selects far target Frost Bat (95 px; 2 monsters in reach)
+[14:58:28] [CLIENT FireB] inventory: gold=352 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:28] [CLIENT FireB] notice: Flame Burst is on cooldown (3.2s)
+[14:58:28] [CLIENT FireB] status: zone=frost players=4 FireB(Lv20 97/121hp)@(1488, 603), WaterA(Lv20 152/152hp)@(1445, 613), EarthB(Lv20 249/249hp)@(1389, 557), Phoenix(Lv20 0/121hp DEAD)@(1716, 614) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:28] [CLIENT FireB] inventory: gold=374 inv={ "health_potion": 10, "greater_potion": 10 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:30] [CLIENT FireB] notice: Inferno is on cooldown (1.5s)
+[14:58:30] [CLIENT FireB] [chat] * FireA reached level 21!
+[14:58:30] [CLIENT FireB] drinking a greater_potion at hp 36/121
+[14:58:30] [CLIENT FireB] inventory: gold=374 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:31] [CLIENT FireB] status: zone=frost players=4 FireB(Lv20 76/121hp)@(1707, 614), WaterA(Lv20 107/152hp)@(1706, 616), EarthB(Lv20 249/249hp)@(1667, 574), Phoenix(Lv20 115/121hp)@(346, 623) | monsters: yeti 3/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:31] [CLIENT FireB] bot selects far target Yeti (225 px; 2 monsters in reach)
+[14:58:32] [CLIENT FireB] notice: Meteor is on cooldown (8.0s)
+[14:58:32] [CLIENT FireB] bot selects far target Yeti (203 px; 2 monsters in reach)
+[14:58:33] [CLIENT FireB] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT FireB] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT FireB] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT FireB] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT FireB] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT FireB] status: zone=frost players=4 FireB(Lv21 126/126hp)@(1680, 557), WaterA(Lv21 159/159hp)@(1648, 608), EarthB(Lv21 260/260hp)@(1680, 579), Phoenix(Lv21 114/126hp)@(338, 634) | monsters: yeti 2/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:35] [CLIENT FireB] notice: Flame Burst is on cooldown (4.0s)
+[14:58:37] [CLIENT FireB] notice: Meteor is on cooldown (3.1s)
+[14:58:37] [CLIENT FireB] status: zone=frost players=4 FireB(Lv21 126/126hp)@(1612, 336), WaterA(Lv21 159/159hp)@(1684, 308), EarthB(Lv21 260/260hp)@(1646, 336), Phoenix(Lv21 96/126hp)@(294, 619) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:38] [CLIENT FireB] bot selects far target Yeti (200 px; 2 monsters in reach)
+[14:58:38] [CLIENT FireB] notice: Inferno is on cooldown (11.1s)
+[14:58:38] [CLIENT FireB] requesting passive web reset (cost 230, gold 374)
+[14:58:38] [CLIENT FireB] notice: Passive web reset (-230 gold)
+[14:58:38] [CLIENT FireB] inventory: gold=144 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:40] [CLIENT FireB] status: zone=frost players=4 FireB(Lv21 126/126hp)@(1599, 208), WaterA(Lv21 159/159hp)@(1677, 206), EarthB(Lv21 260/260hp)@(1692, 205), Phoenix(Lv21 78/126hp)@(309, 611) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:41] [CLIENT FireB] requesting passive web reset (cost 230, gold 144)
+[14:58:41] [CLIENT FireB] notice: Passive web reset costs 230 gold (you have 144)
+[14:58:42] [CLIENT FireB] bot selects far target Frost Bat (149 px; 2 monsters in reach)
+[14:58:42] [CLIENT FireB] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT FireB] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT FireB] [chat] * FireB reached level 22!
+[14:58:42] [CLIENT FireB] inventory: gold=181 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:43] [CLIENT FireB] notice: Inferno is on cooldown (6.3s)
+[14:58:43] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(1359, 240), WaterA(Lv21 159/159hp)@(1335, 247), EarthB(Lv21 260/260hp)@(1386, 273), Phoenix(Lv21 60/126hp)@(304, 651) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT FireB] requesting passive web reset (cost 240, gold 181)
+[14:58:44] [CLIENT FireB] notice: Passive web reset costs 240 gold (you have 181)
+[14:58:44] [CLIENT FireB] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT FireB] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT FireB] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(884, 240), WaterA(Lv21 159/159hp)@(860, 240), EarthB(Lv21 260/260hp)@(1014, 240), Phoenix(Lv21 42/126hp)@(334, 682) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:47] [CLIENT FireB] notice: Flame Burst is on cooldown (2.4s)
+[14:58:47] [CLIENT FireB] requesting passive web reset (cost 240, gold 181)
+[14:58:47] [CLIENT FireB] notice: Passive web reset costs 240 gold (you have 181)
+[14:58:49] [CLIENT FireB] notice: Meteor is on cooldown (6.7s)
+[14:58:49] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(704, 487), WaterA(Lv21 159/159hp)@(720, 437), EarthB(Lv21 260/260hp)@(848, 374), Phoenix(Lv21 24/126hp)@(336, 688) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 3/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:50] [CLIENT FireB] requesting passive web reset (cost 240, gold 181)
+[14:58:50] [CLIENT FireB] notice: Passive web reset costs 240 gold (you have 181)
+[14:58:51] [CLIENT FireB] inventory: gold=215 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:51] [CLIENT FireB] inventory: gold=215 inv={ "health_potion": 11, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:52] [CLIENT FireB] inventory: gold=215 inv={ "health_potion": 12, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:52] [CLIENT FireB] notice: Meteor is on cooldown (3.5s)
+[14:58:52] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(494, 656), WaterA(Lv21 159/159hp)@(502, 656), EarthB(Lv21 260/260hp)@(686, 590), Phoenix(Lv21 6/126hp)@(370, 661) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:53] [CLIENT FireB] notice: Inferno is on cooldown (12.8s)
+[14:58:53] [CLIENT FireB] requesting passive web reset (cost 240, gold 215)
+[14:58:53] [CLIENT FireB] notice: Passive web reset costs 240 gold (you have 215)
+[14:58:54] [CLIENT FireB] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT FireB] notice: Flame Burst is on cooldown (4.8s)
+[14:58:55] [CLIENT FireB] [chat] * EarthB reached level 22!
+[14:58:55] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(465, 464), WaterA(Lv21 159/159hp)@(501, 461), EarthB(Lv22 270/270hp)@(500, 464), Phoenix(Lv21 0/126hp DEAD)@(431, 477) | monsters: yeti 3/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:56] [CLIENT FireB] requesting passive web reset (cost 240, gold 215)
+[14:58:56] [CLIENT FireB] notice: Passive web reset costs 240 gold (you have 215)
+[14:58:58] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(780, 688), WaterA(Lv21 130/159hp)@(807, 706), EarthB(Lv22 270/270hp)@(700, 592), Phoenix(Lv21 126/126hp)@(213, 632) | monsters: yeti 4/6, ice_ogre 4/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:59] [CLIENT FireB] notice: Inferno is on cooldown (6.3s)
+[14:59:01] [CLIENT FireB] status: zone=frost players=4 FireB(Lv22 131/131hp)@(626, 717), WaterA(Lv21 159/159hp)@(668, 708), EarthB(Lv22 270/270hp)@(502, 684), Phoenix(Lv21 126/126hp)@(432, 671) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT FireB] [chat] * EarthA reached level 21!
+[14:59:02] [CLIENT FireB] notice: Meteor is on cooldown (7.2s)
+[14:59:03] [CLIENT FireB] [chat] * FireB reached level 23!
+[14:59:03] [CLIENT FireB] notice: Inferno is on cooldown (3.1s)
+[14:59:04] [CLIENT FireB] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT FireB] inventory: gold=215 inv={ "health_potion": 13, "greater_potion": 9 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:04] [CLIENT FireB] inventory: gold=215 inv={ "health_potion": 13, "greater_potion": 10 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:04] [CLIENT FireB] notice: Flame Burst is on cooldown (4.8s)
+[14:59:04] [CLIENT FireB] status: zone=frost players=4 FireB(Lv23 111/136hp)@(426, 941), WaterA(Lv22 164/164hp)@(443, 885), EarthB(Lv22 269/270hp)@(467, 897), Phoenix(Lv21 126/126hp)@(468, 893) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:05] [CLIENT FireB] bot selects far target Ice Ogre (202 px; 2 monsters in reach)
+[14:59:05] [CLIENT FireB] notice: Meteor is on cooldown (3.9s)
+[14:59:07] [CLIENT FireB] status: zone=frost players=4 FireB(Lv23 111/136hp)@(767, 1008), WaterA(Lv22 164/164hp)@(774, 1008), EarthB(Lv22 269/270hp)@(775, 1008), Phoenix(Lv21 126/126hp)@(773, 1008) | monsters: yeti 2/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:09] [CLIENT FireB] inventory: gold=239 inv={ "health_potion": 13, "greater_potion": 10 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:10] [CLIENT FireB] inventory: gold=258 inv={ "health_potion": 13, "greater_potion": 10 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:10] [CLIENT FireB] inventory: gold=258 inv={ "health_potion": 14, "greater_potion": 10 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:10] [CLIENT FireB] status: zone=frost players=4 FireB(Lv23 111/136hp)@(869, 1056), WaterA(Lv22 164/164hp)@(871, 1058), EarthB(Lv22 270/270hp)@(869, 1057), Phoenix(Lv21 126/126hp)@(853, 1043) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:12] [CLIENT FireB] inventory: gold=258 inv={ "health_potion": 14, "greater_potion": 10, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:12] [CLIENT FireB] inventory: gold=278 inv={ "health_potion": 14, "greater_potion": 10, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:12] [CLIENT FireB] inventory: gold=278 inv={ "health_potion": 14, "greater_potion": 11, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:13] [CLIENT FireB] trying to equip great_hammer (not allowed for fire)
+[14:59:13] [CLIENT FireB] notice: Great Hammer: Only: Blade Master, Stone Guardian
+[14:59:13] [CLIENT FireB] status: zone=frost players=4 FireB(Lv23 136/136hp)@(1216, 1056), WaterA(Lv22 164/164hp)@(1208, 1032), EarthB(Lv22 270/270hp)@(1254, 1171), Phoenix(Lv21 126/126hp)@(1264, 1170) | monsters: yeti 3/6, ice_ogre 0/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT FireB] inventory: gold=302 inv={ "health_potion": 14, "greater_potion": 11, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:16] [CLIENT FireB] status: zone=frost players=4 FireB(Lv23 136/136hp)@(1360, 643), WaterA(Lv22 164/164hp)@(1326, 682), EarthB(Lv22 270/270hp)@(1550, 1090), Phoenix(Lv21 126/126hp)@(1584, 1084) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:59:17] [CLIENT FireB] inventory: gold=302 inv={ "health_potion": 15, "greater_potion": 11, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:17] [CLIENT FireB] bot selects far target Yeti (179 px; 3 monsters in reach)
+[14:59:18] [CLIENT FireB] notice: Inferno is on cooldown (6.3s)
+[14:59:18] [CLIENT FireB] inventory: gold=302 inv={ "health_potion": 15, "greater_potion": 12, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:18] [CLIENT FireB] inventory: gold=302 inv={ "health_potion": 16, "greater_potion": 12, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:18] [CLIENT FireB] inventory: gold=330 inv={ "health_potion": 16, "greater_potion": 12, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:19] [CLIENT FireB] status: zone=frost players=4 FireB(Lv23 136/136hp)@(1564, 511), WaterA(Lv22 164/164hp)@(1584, 520), EarthB(Lv22 270/270hp)@(1525, 816), Phoenix(Lv21 126/126hp)@(1477, 862) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT FireB] [chat] * FireA left the world.
+[14:59:20] [CLIENT FireB] [chat] * Farmer left the world.
+[14:59:20] [CLIENT FireB] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT FireB] [chat] * WoodA left the world.
+[14:59:20] [CLIENT FireB] [chat] * WoodB left the world.
+[14:59:20] [CLIENT FireB] [chat] * EarthA left the world.
+[14:59:20] [CLIENT FireB] [chat] * MetalB left the world.
+[14:59:20] [CLIENT FireB] [chat] * WaterA left the world.
+[14:59:20] [CLIENT FireB] [chat] * EarthB left the world.
+[14:59:20] [CLIENT FireB] [chat] * MetalA left the world.
+[14:59:20] [CLIENT FireB] [chat] * WaterB left the world.
+[14:59:20] [CLIENT FireB] quit-after reached, exiting

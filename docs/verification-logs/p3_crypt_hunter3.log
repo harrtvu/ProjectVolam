@@ -1,0 +1,246 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT cryptHunter3] Connecting to 127.0.0.1:7777 as 'cryptHunter3' ...
+[14:55:59] [CLIENT cryptHunter3] Connected to server as peer 899741489, logging in
+[14:55:59] [CLIENT cryptHunter3] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT cryptHunter3] Class selection requested (new account)
+[14:55:59] [CLIENT cryptHunter3] bot chooses class water
+[14:55:59] [CLIENT cryptHunter3] [chat] * cryptHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT cryptHunter3] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT cryptHunter3] [chat] * frostHunter2 the Pyromancer joined the world.
+[14:55:59] [CLIENT cryptHunter3] Entered zone crypt (Bone Crypt)
+[14:55:59] [CLIENT cryptHunter3] [chat] * frostHunter1 the Stone Guardian joined the world.
+[14:55:59] [CLIENT cryptHunter3] [chat] * forestHunter2 the Venom Druid joined the world.
+[14:55:59] [CLIENT cryptHunter3] [chat] * forestHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT cryptHunter3] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT cryptHunter3] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:55:59] [CLIENT cryptHunter3] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT cryptHunter3] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT cryptHunter3] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:02] [CLIENT cryptHunter3] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv20 132/132hp)@(1040, 725), cryptHunter2(Lv20 211/211hp)@(1040, 797), cryptHunter1(Lv20 121/121hp)@(1040, 730) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:02] [CLIENT cryptHunter3] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT cryptHunter3] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:03] [CLIENT cryptHunter3] inventory: gold=267 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:05] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv20 132/132hp)@(1125, 518), cryptHunter2(Lv20 211/211hp)@(1069, 492), cryptHunter1(Lv20 106/121hp)@(1125, 518) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:06] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:56:07] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:56:08] [CLIENT cryptHunter3] inventory: gold=290 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:08] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (8.8s)
+[14:56:08] [CLIENT cryptHunter3] inventory: gold=290 inv={ "health_potion": 7, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:08] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv20 122/132hp)@(1121, 598), cryptHunter2(Lv20 211/211hp)@(1083, 614), cryptHunter1(Lv20 106/121hp)@(1121, 598) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:08] [CLIENT cryptHunter3] trying to equip great_hammer (not allowed for water)
+[14:56:08] [CLIENT cryptHunter3] notice: Great Hammer: Only: Blade Master, Stone Guardian
+[14:56:09] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (3.6s)
+[14:56:10] [CLIENT cryptHunter3] drinking a greater_potion at hp 67/132
+[14:56:10] [CLIENT cryptHunter3] inventory: gold=290 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:10] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (5.6s)
+[14:56:11] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv20 107/132hp)@(1060, 353), cryptHunter2(Lv20 211/211hp)@(1060, 355), cryptHunter1(Lv20 106/121hp)@(1060, 352) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:11] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (5.6s)
+[14:56:12] [CLIENT cryptHunter3] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT cryptHunter3] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT cryptHunter3] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:12] [CLIENT cryptHunter3] inventory: gold=482 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:13] [CLIENT cryptHunter3] inventory: gold=492 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:14] [CLIENT cryptHunter3] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv21 138/138hp)@(1068, 381), cryptHunter2(Lv21 220/220hp)@(1071, 405), cryptHunter1(Lv21 126/126hp)@(1068, 384) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:15] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 21!
+[14:56:17] [CLIENT cryptHunter3] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT cryptHunter3] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT cryptHunter3] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv21 138/138hp)@(1307, 496), cryptHunter2(Lv21 219/220hp)@(1352, 516), cryptHunter1(Lv21 126/126hp)@(1353, 517) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:20] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv21 138/138hp)@(1655, 589), cryptHunter2(Lv21 217/220hp)@(1683, 545), cryptHunter1(Lv21 126/126hp)@(1686, 573) | monsters: archer 5/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:21] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (3.6s)
+[14:56:22] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:56:23] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv21 138/138hp)@(1796, 764), cryptHunter2(Lv21 217/220hp)@(1772, 820), cryptHunter1(Lv21 126/126hp)@(1794, 772), Walker(Lv20 158/158hp)@(1008, 926) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:23] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT cryptHunter3] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT cryptHunter3] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT cryptHunter3] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (8.8s)
+[14:56:23] [CLIENT cryptHunter3] [chat] * cryptHunter3 reached level 22!
+[14:56:24] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 22!
+[14:56:25] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (0.3s)
+[14:56:26] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (5.6s)
+[14:56:26] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv22 143/143hp)@(1776, 816), cryptHunter2(Lv21 217/220hp)@(1776, 870), cryptHunter1(Lv22 131/131hp)@(1776, 849), Walker(Lv20 158/158hp)@(971, 623) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:26] [CLIENT cryptHunter3] inventory: gold=511 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:28] [CLIENT cryptHunter3] [chat] * frostHunter3 reached level 22!
+[14:56:29] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (3.1s)
+[14:56:29] [CLIENT cryptHunter3] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv22 143/143hp)@(1778, 422), cryptHunter2(Lv21 216/220hp)@(1778, 470), cryptHunter1(Lv22 131/131hp)@(1778, 432), Walker(Lv20 158/158hp)@(1453, 624) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:29] [CLIENT cryptHunter3] inventory: gold=525 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:30] [CLIENT cryptHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT cryptHunter3] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv22 135/143hp)@(1538, 623), cryptHunter2(Lv21 216/220hp)@(1562, 624), cryptHunter1(Lv22 131/131hp)@(1541, 623), Walker(Lv20 158/158hp)@(1926, 641) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:35] [CLIENT cryptHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv22 135/143hp)@(1231, 528), cryptHunter2(Lv21 216/220hp)@(1140, 565), cryptHunter1(Lv22 131/131hp)@(1193, 494) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:37] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv22 122/143hp)@(1174, 368), cryptHunter2(Lv21 220/220hp)@(1156, 339), cryptHunter1(Lv22 131/131hp)@(1175, 368) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:56:38] [CLIENT cryptHunter3] inventory: gold=532 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:39] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (6.7s)
+[14:56:40] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:56:40] [CLIENT cryptHunter3] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (8.8s)
+[14:56:41] [CLIENT cryptHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv22 122/143hp)@(1078, 185), cryptHunter2(Lv21 220/220hp)@(1063, 176), cryptHunter1(Lv22 131/131hp)@(1078, 185), Walker(Lv20 158/158hp)@(1905, 632) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:41] [CLIENT cryptHunter3] drinking a greater_potion at hp 57/143
+[14:56:41] [CLIENT cryptHunter3] inventory: gold=532 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:42] [CLIENT cryptHunter3] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT cryptHunter3] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:42] [CLIENT cryptHunter3] inventory: gold=532 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:42] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (3.5s)
+[14:56:43] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (5.6s)
+[14:56:44] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv22 97/143hp)@(779, 244), cryptHunter2(Lv22 229/229hp)@(837, 216), cryptHunter1(Lv23 136/136hp)@(803, 217), Walker(Lv20 158/158hp)@(1741, 1000) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (5.6s)
+[14:56:44] [CLIENT cryptHunter3] [chat] * cryptHunter3 reached level 23!
+[14:56:44] [CLIENT cryptHunter3] inventory: gold=542 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:46] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (0.3s)
+[14:56:46] [CLIENT cryptHunter3] inventory: gold=554 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:46] [CLIENT cryptHunter3] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT cryptHunter3] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT cryptHunter3] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:46] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (2.3s)
+[14:56:47] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv23 137/149hp)@(430, 367), cryptHunter2(Lv22 229/229hp)@(1006, 531), cryptHunter1(Lv23 114/136hp)@(371, 272), Walker(Lv20 149/158hp)@(1677, 724) | monsters: archer 4/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=4 | foreign_entities=0
+[14:56:47] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (2.3s)
+[14:56:48] [CLIENT cryptHunter3] inventory: gold=562 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:48] [CLIENT cryptHunter3] inventory: gold=592 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:48] [CLIENT cryptHunter3] inventory: gold=615 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:50] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT cryptHunter3] inventory: gold=626 inv={ "health_potion": 7, "greater_potion": 3, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:50] [CLIENT cryptHunter3] inventory: gold=626 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:50] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv23 149/149hp)@(258, 342), cryptHunter2(Lv22 227/229hp)@(931, 528), cryptHunter1(Lv24 141/141hp)@(268, 366), Walker(Lv20 149/158hp)@(1229, 688) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:50] [CLIENT cryptHunter3] inventory: gold=634 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:51] [CLIENT cryptHunter3] inventory: gold=645 inv={ "health_potion": 7, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:51] [CLIENT cryptHunter3] inventory: gold=645 inv={ "health_potion": 8, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:52] [CLIENT cryptHunter3] inventory: gold=659 inv={ "health_potion": 8, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:53] [CLIENT cryptHunter3] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT cryptHunter3] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT cryptHunter3] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT cryptHunter3] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT cryptHunter3] status: zone=crypt players=4 cryptHunter3(Lv23 138/149hp)@(437, 284), cryptHunter2(Lv22 224/229hp)@(647, 523), cryptHunter1(Lv24 123/141hp)@(443, 339), Walker(Lv21 165/165hp)@(1072, 893) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=5 | foreign_entities=0
+[14:56:54] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (5.1s)
+[14:56:55] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (7.1s)
+[14:56:55] [CLIENT cryptHunter3] [chat] * cryptHunter2 reached level 23!
+[14:56:55] [CLIENT cryptHunter3] inventory: gold=659 inv={ "health_potion": 9, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:55] [CLIENT cryptHunter3] inventory: gold=675 inv={ "health_potion": 9, "greater_potion": 4, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:55] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (7.2s)
+[14:56:56] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv23 117/149hp)@(272, 287), cryptHunter2(Lv23 238/238hp)@(706, 668), cryptHunter1(Lv24 123/141hp)@(813, 368) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:56:56] [CLIENT cryptHunter3] inventory: gold=692 inv={ "health_potion": 9, "greater_potion": 5, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:57] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (1.9s)
+[14:56:57] [CLIENT cryptHunter3] [chat] * cryptHunter3 reached level 24!
+[14:56:57] [CLIENT cryptHunter3] inventory: gold=692 inv={ "health_potion": 10, "greater_potion": 5, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:57] [CLIENT cryptHunter3] inventory: gold=706 inv={ "health_potion": 10, "greater_potion": 5, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:59] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (3.1s)
+[14:56:59] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 154/154hp)@(351, 255), cryptHunter2(Lv23 238/238hp)@(733, 739), cryptHunter1(Lv24 123/141hp)@(599, 272) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:56:59] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (3.1s)
+[14:57:00] [CLIENT cryptHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:01] [CLIENT cryptHunter3] inventory: gold=729 inv={ "health_potion": 10, "greater_potion": 5, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:02] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 154/154hp)@(655, 272), cryptHunter2(Lv23 238/238hp)@(961, 493), cryptHunter1(Lv24 141/141hp)@(718, 272) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:57:04] [CLIENT cryptHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 130/154hp)@(1042, 208), cryptHunter2(Lv23 237/238hp)@(1279, 575), cryptHunter1(Lv24 132/141hp)@(1043, 208) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:57:06] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (5.1s)
+[14:57:07] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:57:07] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT cryptHunter3] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:07] [CLIENT cryptHunter3] inventory: gold=1041 inv={ "health_potion": 10, "greater_potion": 5, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:08] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 110/154hp)@(1079, 360), cryptHunter2(Lv23 235/238hp)@(1193, 618), cryptHunter1(Lv25 146/146hp)@(1072, 372) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:09] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (7.2s)
+[14:57:11] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (0.3s)
+[14:57:11] [CLIENT cryptHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 110/154hp)@(1268, 622), cryptHunter2(Lv23 233/238hp)@(1450, 624), cryptHunter1(Lv25 146/146hp)@(1298, 623) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:11] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (3.9s)
+[14:57:12] [CLIENT cryptHunter3] inventory: gold=1056 inv={ "health_potion": 10, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:12] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (3.9s)
+[14:57:13] [CLIENT cryptHunter3] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 98/154hp)@(1018, 836), cryptHunter2(Lv24 246/247hp)@(1746, 616), cryptHunter1(Lv25 146/146hp)@(1051, 834) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT cryptHunter3] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT cryptHunter3] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT cryptHunter3] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT cryptHunter3] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:17] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv24 126/154hp)@(761, 1024), cryptHunter2(Lv24 246/247hp)@(1751, 711), cryptHunter1(Lv25 128/146hp)@(1104, 700) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:17] [CLIENT cryptHunter3] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT cryptHunter3] inventory: gold=1078 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:18] [CLIENT cryptHunter3] inventory: gold=1095 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:18] [CLIENT cryptHunter3] inventory: gold=1107 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:18] [CLIENT cryptHunter3] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT cryptHunter3] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT cryptHunter3] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:19] [CLIENT cryptHunter3] inventory: gold=1117 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:20] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:57:20] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 138/160hp)@(492, 1073), cryptHunter2(Lv24 246/247hp)@(1703, 816), cryptHunter1(Lv25 128/146hp)@(1183, 643) | monsters: archer 5/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:20] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:57:21] [CLIENT cryptHunter3] inventory: gold=1127 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:21] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (8.8s)
+[14:57:22] [CLIENT cryptHunter3] inventory: gold=1154 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:22] [CLIENT cryptHunter3] inventory: gold=1154 inv={ "health_potion": 11, "greater_potion": 6, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:23] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (3.5s)
+[14:57:23] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 129/160hp)@(346, 850), cryptHunter2(Lv24 245/247hp)@(1721, 981), cryptHunter1(Lv25 128/146hp)@(990, 363) | monsters: archer 4/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:24] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (5.5s)
+[14:57:24] [CLIENT cryptHunter3] inventory: gold=1154 inv={ "health_potion": 11, "greater_potion": 7, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:24] [CLIENT cryptHunter3] inventory: gold=1154 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:24] [CLIENT cryptHunter3] inventory: gold=1172 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:24] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (5.5s)
+[14:57:25] [CLIENT cryptHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (0.3s)
+[14:57:26] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 121/160hp)@(314, 810), cryptHunter2(Lv24 242/247hp)@(1744, 860), cryptHunter1(Lv25 130/146hp)@(798, 222) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:28] [CLIENT cryptHunter3] inventory: gold=1182 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:29] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 121/160hp)@(368, 836), cryptHunter2(Lv24 241/247hp)@(1451, 623), cryptHunter1(Lv25 89/146hp)@(1049, 274) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT cryptHunter3] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:32] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 123/160hp)@(555, 979), cryptHunter2(Lv24 241/247hp)@(1563, 668), cryptHunter1(Lv26 151/151hp)@(1337, 231) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:34] [CLIENT cryptHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:35] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 124/160hp)@(847, 969), cryptHunter2(Lv24 241/247hp)@(1725, 641), cryptHunter1(Lv26 135/151hp)@(1040, 400) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:36] [CLIENT cryptHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:38] [CLIENT cryptHunter3] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 125/160hp)@(1015, 845), cryptHunter2(Lv25 256/256hp)@(1755, 419), cryptHunter1(Lv27 156/156hp)@(803, 608) | monsters: archer 4/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:57:40] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 26!
+[14:57:40] [CLIENT cryptHunter3] inventory: gold=1190 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:41] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 118/160hp)@(1207, 591), cryptHunter2(Lv25 256/256hp)@(1533, 624), cryptHunter1(Lv27 156/156hp)@(1007, 416) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:44] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 118/160hp)@(1520, 694), cryptHunter2(Lv25 255/256hp)@(1513, 694), cryptHunter1(Lv27 156/156hp)@(613, 297) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT cryptHunter3] [chat] * Walker reached level 22!
+[14:57:47] [CLIENT cryptHunter3] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT cryptHunter3] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT cryptHunter3] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 119/160hp)@(1528, 687), cryptHunter2(Lv25 255/256hp)@(1522, 688), cryptHunter1(Lv27 130/156hp)@(341, 249) | monsters: archer 5/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT cryptHunter3] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT cryptHunter3] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT cryptHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:49] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (2.3s)
+[14:57:50] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 160/160hp)@(1753, 586), cryptHunter2(Lv25 256/256hp)@(1770, 568), cryptHunter1(Lv27 123/156hp)@(502, 290) | monsters: archer 4/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=3 | foreign_entities=0
+[14:57:51] [CLIENT cryptHunter3] inventory: gold=1208 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:52] [CLIENT cryptHunter3] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT cryptHunter3] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT cryptHunter3] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv25 160/160hp)@(1514, 624), cryptHunter2(Lv25 256/256hp)@(1496, 624), cryptHunter1(Lv28 157/161hp)@(491, 205) | monsters: archer 5/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:53] [CLIENT cryptHunter3] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT cryptHunter3] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT cryptHunter3] [chat] * frostHunter3 reached level 26!
+[14:57:56] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (2.7s)
+[14:57:56] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv26 165/165hp)@(1175, 521), cryptHunter2(Lv25 256/256hp)@(1190, 503), cryptHunter1(Lv28 157/161hp)@(635, 336) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:57:57] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (8.0s)
+[14:57:59] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv26 165/165hp)@(968, 232), cryptHunter2(Lv25 256/256hp)@(974, 242), cryptHunter1(Lv28 161/161hp)@(966, 162) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:00] [CLIENT cryptHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:58:01] [CLIENT cryptHunter3] notice: Tidal Wave is on cooldown (4.7s)
+[14:58:02] [CLIENT cryptHunter3] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT cryptHunter3] inventory: gold=1604 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 4 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:02] [CLIENT cryptHunter3] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT cryptHunter3] inventory: gold=1604 inv={ "health_potion": 12, "greater_potion": 7, "great_hammer": 4, "lich_staff": 1, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:02] [CLIENT cryptHunter3] inventory: gold=1604 inv={ "health_potion": 12, "greater_potion": 10, "great_hammer": 4, "lich_staff": 1, "bone_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:02] [CLIENT cryptHunter3] status: zone=crypt players=3 cryptHunter3(Lv26 125/165hp)@(1104, 191), cryptHunter2(Lv25 256/256hp)@(1105, 185), cryptHunter1(Lv28 161/161hp)@(1104, 188) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:02] [CLIENT cryptHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:58:03] [CLIENT cryptHunter3] equipping lich_staff
+[14:58:03] [CLIENT cryptHunter3] inventory: gold=1604 inv={ "health_potion": 12, "greater_potion": 10, "great_hammer": 4, "bone_shield": 1, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:03] [CLIENT cryptHunter3] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT cryptHunter3] quit-after reached, exiting

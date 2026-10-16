@@ -1,0 +1,87 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT Phoenix] Connecting to 127.0.0.1:7777 as 'Phoenix' ...
+[14:58:10] [CLIENT Phoenix] Connected to server as peer 861683226, logging in
+[14:58:10] [CLIENT Phoenix] [chat] * FireA the Pyromancer joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * Farmer the Blade Master joined the world.
+[14:58:10] [CLIENT Phoenix] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT Phoenix] Class selection requested (new account)
+[14:58:10] [CLIENT Phoenix] bot chooses class fire
+[14:58:10] [CLIENT Phoenix] [chat] * Phoenix the Pyromancer joined the world.
+[14:58:10] [CLIENT Phoenix] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT Phoenix] [chat] * WoodA the Venom Druid joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT Phoenix] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:10] [CLIENT Phoenix] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT Phoenix] [chat] * FireB the Pyromancer joined the world.
+[14:58:13] [CLIENT Phoenix] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT Phoenix] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT Phoenix] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT Phoenix] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT Phoenix] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT Phoenix] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT Phoenix] status: zone=meadow players=1 Phoenix(Lv20 120/121hp)@(1040, 297) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT Phoenix] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT Phoenix] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT Phoenix] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT Phoenix] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT Phoenix] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT Phoenix] [chat] [Frost] FireB: Hello from FireB!
+[14:58:16] [CLIENT Phoenix] status: zone=meadow players=1 Phoenix(Lv20 117/121hp)@(1040, 297) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:58:18] [CLIENT Phoenix] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT Phoenix] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT Phoenix] status: zone=meadow players=1 Phoenix(Lv20 115/121hp)@(1040, 297) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT Phoenix] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:22] [CLIENT Phoenix] Entered zone frost (Frostpeak Ruins)
+[14:58:22] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv20 113/121hp)@(1619, 649), WaterA(Lv20 152/152hp)@(916, 605), EarthB(Lv20 249/249hp)@(916, 608), FireB(Lv20 121/121hp)@(924, 630) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT Phoenix] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:25] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv20 36/121hp)@(1716, 614), WaterA(Lv20 152/152hp)@(1142, 656), EarthB(Lv20 249/249hp)@(1139, 631), FireB(Lv20 121/121hp)@(1144, 712) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT Phoenix] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT Phoenix] [chat] * MetalA reached level 21!
+[14:58:28] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv20 0/121hp DEAD)@(1716, 614), WaterA(Lv20 152/152hp)@(1390, 558), EarthB(Lv20 249/249hp)@(1373, 542), FireB(Lv20 97/121hp)@(1472, 566) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT Phoenix] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv20 121/121hp)@(308, 623), WaterA(Lv20 107/152hp)@(1707, 616), EarthB(Lv20 249/249hp)@(1602, 558), FireB(Lv20 76/121hp)@(1707, 615) | monsters: yeti 3/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT Phoenix] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT Phoenix] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT Phoenix] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT Phoenix] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT Phoenix] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 120/126hp)@(338, 634), WaterA(Lv21 159/159hp)@(1646, 680), EarthB(Lv21 260/260hp)@(1675, 647), FireB(Lv21 126/126hp)@(1683, 630) | monsters: yeti 2/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 102/126hp)@(310, 625), WaterA(Lv21 159/159hp)@(1638, 336), EarthB(Lv21 260/260hp)@(1588, 336), FireB(Lv21 126/126hp)@(1552, 345) | monsters: yeti 3/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:40] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 84/126hp)@(319, 619), WaterA(Lv21 159/159hp)@(1740, 236), EarthB(Lv21 260/260hp)@(1749, 240), FireB(Lv21 126/126hp)@(1676, 206) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT Phoenix] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT Phoenix] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT Phoenix] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 66/126hp)@(304, 651), WaterA(Lv21 159/159hp)@(1358, 219), EarthB(Lv21 260/260hp)@(1423, 249), FireB(Lv22 131/131hp)@(1357, 225) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 4/5, yeti_king 0/1 | loot=3 | foreign_entities=0
+[14:58:44] [CLIENT Phoenix] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT Phoenix] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 48/126hp)@(323, 684), WaterA(Lv21 159/159hp)@(932, 240), EarthB(Lv21 260/260hp)@(1082, 240), FireB(Lv22 131/131hp)@(956, 240) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:46] [CLIENT Phoenix] [chat] * MetalA reached level 22!
+[14:58:49] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 30/126hp)@(336, 688), WaterA(Lv21 159/159hp)@(721, 410), EarthB(Lv21 260/260hp)@(848, 350), FireB(Lv22 131/131hp)@(720, 421) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 3/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 12/126hp)@(372, 656), WaterA(Lv21 159/159hp)@(574, 664), EarthB(Lv21 260/260hp)@(689, 570), FireB(Lv22 131/131hp)@(567, 660) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:53] [CLIENT Phoenix] inventory: gold=271 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:54] [CLIENT Phoenix] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 0/126hp DEAD)@(431, 477), WaterA(Lv21 159/159hp)@(499, 527), EarthB(Lv21 260/260hp)@(559, 464), FireB(Lv22 131/131hp)@(496, 475) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 1/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT Phoenix] [chat] * EarthB reached level 22!
+[14:58:58] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 0/126hp DEAD)@(431, 477), WaterA(Lv21 159/159hp)@(749, 682), EarthB(Lv22 270/270hp)@(634, 596), FireB(Lv22 131/131hp)@(708, 688) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:01] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(431, 598), WaterA(Lv21 159/159hp)@(719, 657), EarthB(Lv22 270/270hp)@(527, 629), FireB(Lv22 131/131hp)@(684, 672) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT Phoenix] [chat] * EarthA reached level 21!
+[14:59:03] [CLIENT Phoenix] [chat] * FireB reached level 23!
+[14:59:03] [CLIENT Phoenix] inventory: gold=285 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:03] [CLIENT Phoenix] inventory: gold=285 inv={ "health_potion": 9, "greater_potion": 7 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:04] [CLIENT Phoenix] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(460, 884), WaterA(Lv22 164/164hp)@(424, 888), EarthB(Lv22 269/270hp)@(463, 880), FireB(Lv23 136/136hp)@(421, 890) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:59:04] [CLIENT Phoenix] inventory: gold=306 inv={ "health_potion": 9, "greater_potion": 7 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:07] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(701, 1008), WaterA(Lv22 164/164hp)@(702, 1008), EarthB(Lv22 269/270hp)@(707, 1008), FireB(Lv23 111/136hp)@(695, 1008) | monsters: yeti 2/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(836, 1042), WaterA(Lv22 164/164hp)@(814, 1042), EarthB(Lv22 270/270hp)@(819, 1041), FireB(Lv23 111/136hp)@(811, 1043) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:13] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(1207, 1139), WaterA(Lv22 164/164hp)@(1154, 1084), EarthB(Lv22 270/270hp)@(1200, 1136), FireB(Lv23 136/136hp)@(1163, 1108) | monsters: yeti 3/6, ice_ogre 0/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(1584, 1138), WaterA(Lv22 164/164hp)@(1339, 736), EarthB(Lv22 270/270hp)@(1560, 1137), FireB(Lv23 136/136hp)@(1360, 716) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 3/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:59:19] [CLIENT Phoenix] status: zone=frost players=4 Phoenix(Lv21 126/126hp)@(1513, 812), WaterA(Lv22 164/164hp)@(1584, 595), EarthB(Lv22 270/270hp)@(1535, 816), FireB(Lv23 136/136hp)@(1552, 579) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT Phoenix] [chat] * FireA left the world.
+[14:59:20] [CLIENT Phoenix] [chat] * Farmer left the world.
+[14:59:20] [CLIENT Phoenix] quit-after reached, exiting

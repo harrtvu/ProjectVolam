@@ -1,0 +1,118 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT EarthB] Connecting to 127.0.0.1:7777 as 'EarthB' ...
+[14:58:10] [CLIENT EarthB] Connected to server as peer 1191082767, logging in
+[14:58:10] [CLIENT EarthB] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT EarthB] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT EarthB] Class selection requested (new account)
+[14:58:10] [CLIENT EarthB] bot chooses class earth
+[14:58:10] [CLIENT EarthB] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT EarthB] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT EarthB] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT EarthB] Entered zone frost (Frostpeak Ruins)
+[14:58:10] [CLIENT EarthB] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT EarthB] [chat] * FireB the Pyromancer joined the world.
+[14:58:10] [CLIENT EarthB] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:13] [CLIENT EarthB] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT EarthB] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT EarthB] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT EarthB] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT EarthB] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT EarthB] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT EarthB] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT EarthB] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT EarthB] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT EarthB] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT EarthB] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT EarthB] [chat] [Frost] FireB: Hello from FireB!
+[14:58:13] [CLIENT EarthB] status: zone=frost players=3 EarthB(Lv20 211/211hp)@(330, 470), WaterA(Lv20 132/132hp)@(427, 338), FireB(Lv20 121/121hp)@(399, 401) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:16] [CLIENT EarthB] status: zone=frost players=3 EarthB(Lv20 211/211hp)@(439, 340), WaterA(Lv20 132/132hp)@(432, 297), FireB(Lv20 121/121hp)@(434, 336) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 3/5, yeti_king 1/1 | loot=4 | foreign_entities=0
+[14:58:18] [CLIENT EarthB] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT EarthB] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT EarthB] status: zone=frost players=3 EarthB(Lv20 224/224hp)@(650, 432), WaterA(Lv20 132/132hp)@(595, 432), FireB(Lv20 121/121hp)@(667, 439) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 3/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:58:19] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:21] [CLIENT EarthB] notice: Stone Skin is on cooldown (8.6s)
+[14:58:22] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv20 249/249hp)@(927, 642), WaterA(Lv20 152/152hp)@(926, 642), FireB(Lv20 121/121hp)@(959, 667), Phoenix(Lv20 113/121hp)@(1657, 657) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:23] [CLIENT EarthB] notice: Mountain's Challenge is on cooldown (8.0s)
+[14:58:25] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv20 249/249hp)@(1136, 582), WaterA(Lv20 152/152hp)@(1135, 607), FireB(Lv20 121/121hp)@(1181, 675), Phoenix(Lv20 36/121hp)@(1716, 614) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT EarthB] notice: Earthquake is on cooldown (10.3s)
+[14:58:26] [CLIENT EarthB] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT EarthB] [chat] * MetalA reached level 21!
+[14:58:27] [CLIENT EarthB] notice: Stone Skin is on cooldown (2.9s)
+[14:58:28] [CLIENT EarthB] notice: Mountain's Challenge is on cooldown (3.1s)
+[14:58:28] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv20 249/249hp)@(1373, 541), WaterA(Lv20 152/152hp)@(1427, 595), FireB(Lv20 97/121hp)@(1488, 602), Phoenix(Lv20 0/121hp DEAD)@(1716, 614) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:29] [CLIENT EarthB] notice: Earthquake is on cooldown (6.3s)
+[14:58:30] [CLIENT EarthB] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv20 249/249hp)@(1649, 561), WaterA(Lv20 107/152hp)@(1706, 616), FireB(Lv20 76/121hp)@(1707, 614), Phoenix(Lv20 115/121hp)@(343, 616) | monsters: yeti 3/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT EarthB] notice: Earthquake is on cooldown (3.1s)
+[14:58:33] [CLIENT EarthB] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT EarthB] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT EarthB] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT EarthB] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT EarthB] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:33] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 7, "greater_potion": 5, "frostbrand": 1, "ember_staff": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:33] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 7, "greater_potion": 9, "frostbrand": 1, "ember_staff": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:33] [CLIENT EarthB] equipping frostbrand
+[14:58:33] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 7, "greater_potion": 9, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:34] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(1681, 600), WaterA(Lv21 159/159hp)@(1648, 629), FireB(Lv21 126/126hp)@(1680, 579), Phoenix(Lv21 114/126hp)@(338, 634) | monsters: yeti 2/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:34] [CLIENT EarthB] trying to equip ember_staff (not allowed for earth)
+[14:58:34] [CLIENT EarthB] notice: Ember Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:58:35] [CLIENT EarthB] notice: Stone Skin is on cooldown (11.0s)
+[14:58:37] [CLIENT EarthB] notice: Mountain's Challenge is on cooldown (3.6s)
+[14:58:37] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(1623, 336), WaterA(Lv21 159/159hp)@(1684, 329), FireB(Lv21 126/126hp)@(1589, 335), Phoenix(Lv21 96/126hp)@(299, 615) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:38] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 7, "greater_potion": 10, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:39] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 7, "greater_potion": 11, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:40] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(1714, 211), WaterA(Lv21 159/159hp)@(1703, 205), FireB(Lv21 126/126hp)@(1625, 208), Phoenix(Lv21 78/126hp)@(308, 612) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT EarthB] notice: Stone Skin is on cooldown (4.5s)
+[14:58:42] [CLIENT EarthB] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT EarthB] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT EarthB] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT EarthB] inventory: gold=279 inv={ "health_potion": 8, "greater_potion": 11, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:43] [CLIENT EarthB] inventory: gold=302 inv={ "health_potion": 8, "greater_potion": 12, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:43] [CLIENT EarthB] notice: Earthquake is on cooldown (10.4s)
+[14:58:43] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(1407, 277), WaterA(Lv21 159/159hp)@(1353, 257), FireB(Lv22 131/131hp)@(1360, 258), Phoenix(Lv21 60/126hp)@(304, 651) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT EarthB] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT EarthB] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT EarthB] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(1034, 240), WaterA(Lv21 159/159hp)@(881, 240), FireB(Lv22 131/131hp)@(906, 240), Phoenix(Lv21 42/126hp)@(333, 683) | monsters: yeti 2/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:49] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(848, 390), WaterA(Lv21 159/159hp)@(720, 454), FireB(Lv22 131/131hp)@(719, 471), Phoenix(Lv21 24/126hp)@(336, 688) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 3/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(672, 596), WaterA(Lv21 159/159hp)@(526, 655), FireB(Lv22 131/131hp)@(518, 655), Phoenix(Lv21 6/126hp)@(370, 661) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:54] [CLIENT EarthB] inventory: gold=331 inv={ "health_potion": 8, "greater_potion": 12, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:54] [CLIENT EarthB] inventory: gold=331 inv={ "health_potion": 8, "greater_potion": 13, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:58:54] [CLIENT EarthB] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv21 260/260hp)@(513, 464), WaterA(Lv21 159/159hp)@(495, 481), FireB(Lv22 131/131hp)@(464, 462), Phoenix(Lv21 0/126hp DEAD)@(431, 477) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT EarthB] [chat] * EarthB reached level 22!
+[14:58:58] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 270/270hp)@(677, 592), WaterA(Lv21 130/159hp)@(790, 693), FireB(Lv22 131/131hp)@(756, 688), Phoenix(Lv21 0/126hp DEAD)@(431, 477) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:00] [CLIENT EarthB] inventory: gold=350 inv={ "health_potion": 8, "greater_potion": 13, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:59:00] [CLIENT EarthB] inventory: gold=350 inv={ "health_potion": 8, "greater_potion": 14, "ember_staff": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:59:00] [CLIENT EarthB] inventory: gold=350 inv={ "health_potion": 8, "greater_potion": 14, "ember_staff": 1, "bone_shield": 1 } equip={ "weapon": "frostbrand", "armor": "wooden_shield" }
+[14:59:00] [CLIENT EarthB] equipping bone_shield
+[14:59:00] [CLIENT EarthB] inventory: gold=350 inv={ "health_potion": 8, "greater_potion": 14, "ember_staff": 1, "wooden_shield": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:59:01] [CLIENT EarthB] notice: Stone Skin is on cooldown (6.9s)
+[14:59:01] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 270/270hp)@(517, 671), WaterA(Lv21 159/159hp)@(683, 693), FireB(Lv22 131/131hp)@(641, 701), Phoenix(Lv21 126/126hp)@(432, 650) | monsters: yeti 4/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT EarthB] [chat] * EarthA reached level 21!
+[14:59:02] [CLIENT EarthB] notice: Mountain's Challenge is on cooldown (1.1s)
+[14:59:03] [CLIENT EarthB] notice: Earthquake is on cooldown (12.0s)
+[14:59:03] [CLIENT EarthB] [chat] * FireB reached level 23!
+[14:59:03] [CLIENT EarthB] inventory: gold=388 inv={ "health_potion": 8, "greater_potion": 15, "ember_staff": 1, "wooden_shield": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:59:04] [CLIENT EarthB] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT EarthB] notice: Stone Skin is on cooldown (3.7s)
+[14:59:04] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 269/270hp)@(464, 882), WaterA(Lv22 164/164hp)@(426, 886), FireB(Lv23 136/136hp)@(408, 927), Phoenix(Lv21 126/126hp)@(461, 883) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:06] [CLIENT EarthB] inventory: gold=407 inv={ "health_potion": 8, "greater_potion": 15, "ember_staff": 1, "wooden_shield": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:59:07] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 269/270hp)@(755, 1008), WaterA(Lv22 164/164hp)@(753, 1008), FireB(Lv23 111/136hp)@(746, 1008), Phoenix(Lv21 126/126hp)@(752, 1008) | monsters: yeti 2/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:08] [CLIENT EarthB] notice: Earthquake is on cooldown (6.3s)
+[14:59:10] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 270/270hp)@(853, 1043), WaterA(Lv22 164/164hp)@(853, 1043), FireB(Lv23 111/136hp)@(851, 1042), Phoenix(Lv21 126/126hp)@(831, 1039) | monsters: yeti 3/6, ice_ogre 1/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:13] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 270/270hp)@(1233, 1167), WaterA(Lv22 164/164hp)@(1191, 1049), FireB(Lv23 136/136hp)@(1199, 1073), Phoenix(Lv21 126/126hp)@(1242, 1172) | monsters: yeti 3/6, ice_ogre 0/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:16] [CLIENT EarthB] inventory: gold=430 inv={ "health_potion": 8, "greater_potion": 15, "ember_staff": 1, "wooden_shield": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:59:16] [CLIENT EarthB] inventory: gold=430 inv={ "health_potion": 9, "greater_potion": 15, "ember_staff": 1, "wooden_shield": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:59:16] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 270/270hp)@(1556, 1111), WaterA(Lv22 164/164hp)@(1325, 704), FireB(Lv23 136/136hp)@(1361, 667), Phoenix(Lv21 126/126hp)@(1583, 1108) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:59:19] [CLIENT EarthB] status: zone=frost players=4 EarthB(Lv22 270/270hp)@(1544, 816), WaterA(Lv22 164/164hp)@(1584, 544), FireB(Lv23 136/136hp)@(1552, 529), Phoenix(Lv21 126/126hp)@(1489, 842) | monsters: yeti 3/6, ice_ogre 2/4, frost_bat 2/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT EarthB] [chat] * FireA left the world.
+[14:59:20] [CLIENT EarthB] [chat] * Farmer left the world.
+[14:59:20] [CLIENT EarthB] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT EarthB] [chat] * WoodA left the world.
+[14:59:20] [CLIENT EarthB] [chat] * WoodB left the world.
+[14:59:20] [CLIENT EarthB] [chat] * EarthA left the world.
+[14:59:20] [CLIENT EarthB] [chat] * MetalB left the world.
+[14:59:20] [CLIENT EarthB] [chat] * WaterA left the world.
+[14:59:20] [CLIENT EarthB] quit-after reached, exiting

@@ -1,0 +1,264 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT cryptHunter1] Connecting to 127.0.0.1:7777 as 'cryptHunter1' ...
+[14:55:59] [CLIENT cryptHunter1] Connected to server as peer 972277016, logging in
+[14:55:59] [CLIENT cryptHunter1] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT cryptHunter1] Class selection requested (new account)
+[14:55:59] [CLIENT cryptHunter1] bot chooses class fire
+[14:55:59] [CLIENT cryptHunter1] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:55:59] [CLIENT cryptHunter1] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT cryptHunter1] Entered zone crypt (Bone Crypt)
+[14:56:00] [CLIENT cryptHunter1] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:02] [CLIENT cryptHunter1] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT cryptHunter1] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:02] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv20 121/121hp)@(1040, 659), cryptHunter3(Lv20 132/132hp)@(1040, 654), cryptHunter2(Lv20 211/211hp)@(1040, 731) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:05] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv20 106/121hp)@(1079, 513), cryptHunter3(Lv20 132/132hp)@(1079, 513), cryptHunter2(Lv20 211/211hp)@(1054, 477) | monsters: archer 5/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:56:06] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.8s)
+[14:56:07] [CLIENT cryptHunter1] notice: Meteor is on cooldown (10.8s)
+[14:56:07] [CLIENT cryptHunter1] notice: Inferno is on cooldown (12.8s)
+[14:56:08] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv20 106/121hp)@(1104, 545), cryptHunter3(Lv20 122/132hp)@(1104, 545), cryptHunter2(Lv20 211/211hp)@(1039, 591) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:09] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (1.6s)
+[14:56:10] [CLIENT cryptHunter1] notice: Meteor is on cooldown (7.5s)
+[14:56:11] [CLIENT cryptHunter1] notice: Inferno is on cooldown (9.5s)
+[14:56:11] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv20 107/121hp)@(1057, 332), cryptHunter3(Lv20 107/132hp)@(1058, 336), cryptHunter2(Lv20 211/211hp)@(1058, 339) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:12] [CLIENT cryptHunter1] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT cryptHunter1] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT cryptHunter1] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:13] [CLIENT cryptHunter1] notice: Meteor is on cooldown (4.3s)
+[14:56:14] [CLIENT cryptHunter1] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv21 126/126hp)@(1072, 450), cryptHunter3(Lv21 138/138hp)@(1072, 447), cryptHunter2(Lv21 220/220hp)@(1072, 469) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:15] [CLIENT cryptHunter1] notice: Inferno is on cooldown (5.5s)
+[14:56:15] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 21!
+[14:56:17] [CLIENT cryptHunter1] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT cryptHunter1] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT cryptHunter1] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv21 126/126hp)@(1401, 570), cryptHunter3(Lv21 138/138hp)@(1320, 496), cryptHunter2(Lv21 219/220hp)@(1397, 565) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:18] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (2.4s)
+[14:56:20] [CLIENT cryptHunter1] notice: Inferno is on cooldown (0.7s)
+[14:56:20] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv21 126/126hp)@(1730, 560), cryptHunter3(Lv21 138/138hp)@(1663, 593), cryptHunter2(Lv21 217/220hp)@(1715, 560) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:21] [CLIENT cryptHunter1] inventory: gold=259 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:21] [CLIENT cryptHunter1] inventory: gold=271 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:21] [CLIENT cryptHunter1] inventory: gold=271 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:22] [CLIENT cryptHunter1] inventory: gold=287 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:22] [CLIENT cryptHunter1] inventory: gold=287 inv={ "health_potion": 9, "greater_potion": 6 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:22] [CLIENT cryptHunter1] inventory: gold=287 inv={ "health_potion": 9, "greater_potion": 6, "lich_staff": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:23] [CLIENT cryptHunter1] equipping lich_staff
+[14:56:23] [CLIENT cryptHunter1] inventory: gold=287 inv={ "health_potion": 9, "greater_potion": 6, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:23] [CLIENT cryptHunter1] notice: Meteor is on cooldown (10.0s)
+[14:56:23] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT cryptHunter1] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT cryptHunter1] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT cryptHunter1] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT cryptHunter1] [chat] * cryptHunter3 reached level 22!
+[14:56:23] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv21 126/126hp)@(1775, 832), cryptHunter3(Lv22 143/143hp)@(1775, 825), cryptHunter2(Lv21 217/220hp)@(1746, 873), Walker(Lv20 158/158hp)@(1008, 854) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:24] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 22!
+[14:56:26] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.0s)
+[14:56:26] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv22 131/131hp)@(1768, 782), cryptHunter3(Lv22 143/143hp)@(1762, 752), cryptHunter2(Lv21 217/220hp)@(1777, 803), Walker(Lv20 158/158hp)@(1042, 624) | monsters: archer 5/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:28] [CLIENT cryptHunter1] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT cryptHunter1] notice: Meteor is on cooldown (4.3s)
+[14:56:29] [CLIENT cryptHunter1] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT cryptHunter1] notice: Inferno is on cooldown (10.4s)
+[14:56:29] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv22 131/131hp)@(1776, 396), cryptHunter3(Lv22 135/143hp)@(1776, 395), cryptHunter2(Lv21 216/220hp)@(1777, 407), Walker(Lv20 158/158hp)@(1523, 624) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:30] [CLIENT cryptHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT cryptHunter1] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv22 131/131hp)@(1537, 624), cryptHunter3(Lv22 135/143hp)@(1529, 624), cryptHunter2(Lv21 216/220hp)@(1495, 624) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:35] [CLIENT cryptHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv22 131/131hp)@(1180, 497), cryptHunter3(Lv22 135/143hp)@(1178, 492), cryptHunter2(Lv21 216/220hp)@(1093, 517) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:37] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 23!
+[14:56:37] [CLIENT cryptHunter1] notice: Inferno is on cooldown (2.3s)
+[14:56:38] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv22 131/131hp)@(1178, 342), cryptHunter3(Lv22 122/143hp)@(1177, 342), cryptHunter2(Lv21 220/220hp)@(1155, 320) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:39] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.8s)
+[14:56:40] [CLIENT cryptHunter1] notice: Meteor is on cooldown (10.8s)
+[14:56:40] [CLIENT cryptHunter1] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT cryptHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv22 131/131hp)@(1054, 166), cryptHunter3(Lv22 97/143hp)@(1054, 166), cryptHunter2(Lv21 220/220hp)@(1053, 165), Walker(Lv20 158/158hp)@(1899, 696) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:42] [CLIENT cryptHunter1] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT cryptHunter1] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:42] [CLIENT cryptHunter1] inventory: gold=287 inv={ "health_potion": 9, "greater_potion": 6, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:43] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (0.8s)
+[14:56:44] [CLIENT cryptHunter1] notice: Meteor is on cooldown (6.7s)
+[14:56:44] [CLIENT cryptHunter1] [chat] * cryptHunter3 reached level 23!
+[14:56:44] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv23 136/136hp)@(748, 243), cryptHunter3(Lv23 149/149hp)@(720, 274), cryptHunter2(Lv22 229/229hp)@(834, 263), Walker(Lv20 149/158hp)@(1710, 1045) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:46] [CLIENT cryptHunter1] notice: Inferno is on cooldown (10.3s)
+[14:56:46] [CLIENT cryptHunter1] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT cryptHunter1] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT cryptHunter1] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT cryptHunter1] inventory: gold=298 inv={ "health_potion": 9, "greater_potion": 6, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:47] [CLIENT cryptHunter1] inventory: gold=311 inv={ "health_potion": 9, "greater_potion": 6, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:47] [CLIENT cryptHunter1] inventory: gold=311 inv={ "health_potion": 10, "greater_potion": 6, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:47] [CLIENT cryptHunter1] inventory: gold=326 inv={ "health_potion": 10, "greater_potion": 6, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:48] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv23 114/136hp)@(353, 272), cryptHunter3(Lv23 137/149hp)@(392, 328), cryptHunter2(Lv22 228/229hp)@(974, 584), Walker(Lv20 149/158hp)@(1627, 703) | monsters: archer 4/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:48] [CLIENT cryptHunter1] inventory: gold=326 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:49] [CLIENT cryptHunter1] notice: Meteor is on cooldown (1.9s)
+[14:56:49] [CLIENT cryptHunter1] inventory: gold=342 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:49] [CLIENT cryptHunter1] notice: Inferno is on cooldown (7.1s)
+[14:56:50] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT cryptHunter1] inventory: gold=354 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:51] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv24 141/141hp)@(251, 318), cryptHunter3(Lv23 149/149hp)@(277, 314), cryptHunter2(Lv22 227/229hp)@(868, 528), Walker(Lv20 149/158hp)@(1159, 693) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:51] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.8s)
+[14:56:53] [CLIENT cryptHunter1] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT cryptHunter1] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT cryptHunter1] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT cryptHunter1] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT cryptHunter1] inventory: gold=375 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:53] [CLIENT cryptHunter1] notice: Inferno is on cooldown (3.1s)
+[14:56:54] [CLIENT cryptHunter1] status: zone=crypt players=4 cryptHunter1(Lv24 123/141hp)@(486, 337), cryptHunter3(Lv23 138/149hp)@(445, 284), cryptHunter2(Lv22 224/229hp)@(615, 518), Walker(Lv21 165/165hp)@(1072, 930) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:56:54] [CLIENT cryptHunter1] inventory: gold=394 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:55] [CLIENT cryptHunter1] [chat] * cryptHunter2 reached level 23!
+[14:56:57] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv24 123/141hp)@(833, 368), cryptHunter3(Lv23 117/149hp)@(257, 283), cryptHunter2(Lv23 238/238hp)@(674, 687) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:56:57] [CLIENT cryptHunter1] [chat] * cryptHunter3 reached level 24!
+[14:56:57] [CLIENT cryptHunter1] inventory: gold=415 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:57] [CLIENT cryptHunter1] inventory: gold=415 inv={ "health_potion": 11, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:56:59] [CLIENT cryptHunter1] notice: Meteor is on cooldown (7.5s)
+[14:56:59] [CLIENT cryptHunter1] inventory: gold=434 inv={ "health_potion": 11, "greater_potion": 7, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:00] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv24 123/141hp)@(527, 272), cryptHunter3(Lv24 154/154hp)@(387, 238), cryptHunter2(Lv23 238/238hp)@(751, 753) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:57:00] [CLIENT cryptHunter1] inventory: gold=434 inv={ "health_potion": 11, "greater_potion": 8, "apprentice_staff": 1, "lich_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:00] [CLIENT cryptHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:03] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv24 141/141hp)@(789, 272), cryptHunter3(Lv24 154/154hp)@(727, 272), cryptHunter2(Lv23 238/238hp)@(1021, 501) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:57:04] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (0.8s)
+[14:57:04] [CLIENT cryptHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT cryptHunter1] notice: Meteor is on cooldown (1.9s)
+[14:57:06] [CLIENT cryptHunter1] notice: Inferno is on cooldown (10.3s)
+[14:57:06] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv24 132/141hp)@(1061, 222), cryptHunter3(Lv24 110/154hp)@(1060, 222), cryptHunter2(Lv23 237/238hp)@(1324, 599) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 1/1 | loot=3 | foreign_entities=0
+[14:57:07] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT cryptHunter1] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:07] [CLIENT cryptHunter1] inventory: gold=434 inv={ "health_potion": 11, "greater_potion": 8, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:07] [CLIENT cryptHunter1] inventory: gold=434 inv={ "health_potion": 11, "greater_potion": 11, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:09] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 146/146hp)@(1073, 444), cryptHunter3(Lv24 110/154hp)@(1072, 430), cryptHunter2(Lv23 234/238hp)@(1252, 625) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:11] [CLIENT cryptHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:12] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 146/146hp)@(1247, 673), cryptHunter3(Lv24 110/154hp)@(1217, 671), cryptHunter2(Lv23 233/238hp)@(1517, 624) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:12] [CLIENT cryptHunter1] notice: Inferno is on cooldown (3.9s)
+[14:57:13] [CLIENT cryptHunter1] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT cryptHunter1] inventory: gold=447 inv={ "health_potion": 11, "greater_potion": 11, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:15] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 146/146hp)@(1007, 884), cryptHunter3(Lv24 98/154hp)@(1008, 899), cryptHunter2(Lv24 246/247hp)@(1744, 683) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT cryptHunter1] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT cryptHunter1] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT cryptHunter1] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT cryptHunter1] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:16] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (2.4s)
+[14:57:17] [CLIENT cryptHunter1] notice: Meteor is on cooldown (8.3s)
+[14:57:17] [CLIENT cryptHunter1] [chat] * cryptHunter3 reached level 25!
+[14:57:18] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 128/146hp)@(1103, 695), cryptHunter3(Lv25 149/160hp)@(727, 1019), cryptHunter2(Lv24 246/247hp)@(1741, 723) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:18] [CLIENT cryptHunter1] inventory: gold=463 inv={ "health_potion": 11, "greater_potion": 11, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:18] [CLIENT cryptHunter1] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT cryptHunter1] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT cryptHunter1] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:20] [CLIENT cryptHunter1] inventory: gold=486 inv={ "health_potion": 11, "greater_potion": 11, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:21] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 128/146hp)@(1125, 617), cryptHunter3(Lv25 138/160hp)@(491, 1073), cryptHunter2(Lv24 246/247hp)@(1770, 810) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:57:21] [CLIENT cryptHunter1] notice: Meteor is on cooldown (4.3s)
+[14:57:21] [CLIENT cryptHunter1] inventory: gold=511 inv={ "health_potion": 11, "greater_potion": 11, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:22] [CLIENT cryptHunter1] notice: Inferno is on cooldown (11.1s)
+[14:57:24] [CLIENT cryptHunter1] inventory: gold=511 inv={ "health_potion": 11, "greater_potion": 12, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:24] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 128/146hp)@(916, 368), cryptHunter3(Lv25 121/160hp)@(281, 858), cryptHunter2(Lv24 245/247hp)@(1711, 1011) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:57:24] [CLIENT cryptHunter1] inventory: gold=529 inv={ "health_potion": 11, "greater_potion": 12, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:24] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.0s)
+[14:57:24] [CLIENT cryptHunter1] inventory: gold=549 inv={ "health_potion": 11, "greater_potion": 12, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:24] [CLIENT cryptHunter1] inventory: gold=549 inv={ "health_potion": 11, "greater_potion": 13, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:25] [CLIENT cryptHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT cryptHunter1] inventory: gold=565 inv={ "health_potion": 11, "greater_potion": 13, "apprentice_staff": 1, "lich_staff": 2 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:27] [CLIENT cryptHunter1] notice: Inferno is on cooldown (7.1s)
+[14:57:27] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 130/146hp)@(826, 208), cryptHunter3(Lv25 121/160hp)@(337, 747), cryptHunter2(Lv24 242/247hp)@(1728, 796) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:57:29] [CLIENT cryptHunter1] notice: Meteor is on cooldown (10.8s)
+[14:57:30] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv25 73/146hp)@(1068, 297), cryptHunter3(Lv25 121/160hp)@(368, 812), cryptHunter2(Lv24 241/247hp)@(1399, 590) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT cryptHunter1] notice: Inferno is on cooldown (3.9s)
+[14:57:30] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT cryptHunter1] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:30] [CLIENT cryptHunter1] inventory: gold=757 inv={ "health_potion": 11, "greater_potion": 16, "apprentice_staff": 1, "lich_staff": 3 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:31] [CLIENT cryptHunter1] inventory: gold=774 inv={ "health_potion": 11, "greater_potion": 16, "apprentice_staff": 1, "lich_staff": 3 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:31] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.8s)
+[14:57:32] [CLIENT cryptHunter1] inventory: gold=784 inv={ "health_potion": 11, "greater_potion": 16, "apprentice_staff": 1, "lich_staff": 3 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:32] [CLIENT cryptHunter1] notice: Meteor is on cooldown (7.5s)
+[14:57:33] [CLIENT cryptHunter1] inventory: gold=794 inv={ "health_potion": 12, "greater_potion": 16, "apprentice_staff": 1, "lich_staff": 3 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:33] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv26 135/151hp)@(1323, 183), cryptHunter3(Lv25 123/160hp)@(629, 976), cryptHunter2(Lv24 241/247hp)@(1556, 660) | monsters: archer 6/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:34] [CLIENT cryptHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:36] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv26 135/151hp)@(1017, 460), cryptHunter3(Lv25 124/160hp)@(884, 943), cryptHunter2(Lv24 241/247hp)@(1715, 618) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:36] [CLIENT cryptHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:36] [CLIENT cryptHunter1] inventory: gold=814 inv={ "health_potion": 12, "greater_potion": 16, "apprentice_staff": 1, "lich_staff": 3 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:38] [CLIENT cryptHunter1] inventory: gold=814 inv={ "health_potion": 12, "greater_potion": 16, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:38] [CLIENT cryptHunter1] inventory: gold=814 inv={ "health_potion": 12, "greater_potion": 17, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:38] [CLIENT cryptHunter1] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT cryptHunter1] inventory: gold=834 inv={ "health_potion": 12, "greater_potion": 17, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:38] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT cryptHunter1] trying to equip war_axe (not allowed for fire)
+[14:57:38] [CLIENT cryptHunter1] notice: War Axe: Only: Blade Master, Stone Guardian
+[14:57:39] [CLIENT cryptHunter1] notice: Meteor is on cooldown (1.1s)
+[14:57:39] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv27 156/156hp)@(748, 560), cryptHunter3(Lv25 126/160hp)@(1060, 793), cryptHunter2(Lv25 256/256hp)@(1706, 470) | monsters: archer 4/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:57:39] [CLIENT cryptHunter1] inventory: gold=847 inv={ "health_potion": 12, "greater_potion": 17, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:39] [CLIENT cryptHunter1] notice: Inferno is on cooldown (12.0s)
+[14:57:40] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 26!
+[14:57:42] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv27 156/156hp)@(983, 364), cryptHunter3(Lv25 118/160hp)@(1262, 592), cryptHunter2(Lv25 256/256hp)@(1476, 657) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:43] [CLIENT cryptHunter1] inventory: gold=868 inv={ "health_potion": 12, "greater_potion": 17, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:43] [CLIENT cryptHunter1] inventory: gold=868 inv={ "health_potion": 12, "greater_potion": 18, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:44] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (1.6s)
+[14:57:45] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv27 156/156hp)@(555, 270), cryptHunter3(Lv25 118/160hp)@(1521, 694), cryptHunter2(Lv25 255/256hp)@(1514, 694) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT cryptHunter1] [chat] * Walker reached level 22!
+[14:57:46] [CLIENT cryptHunter1] inventory: gold=884 inv={ "health_potion": 12, "greater_potion": 19, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:46] [CLIENT cryptHunter1] notice: Inferno is on cooldown (5.5s)
+[14:57:46] [CLIENT cryptHunter1] inventory: gold=901 inv={ "health_potion": 12, "greater_potion": 19, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:47] [CLIENT cryptHunter1] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT cryptHunter1] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT cryptHunter1] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT cryptHunter1] inventory: gold=901 inv={ "health_potion": 13, "greater_potion": 19, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:47] [CLIENT cryptHunter1] inventory: gold=912 inv={ "health_potion": 13, "greater_potion": 19, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:47] [CLIENT cryptHunter1] inventory: gold=928 inv={ "health_potion": 13, "greater_potion": 19, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:47] [CLIENT cryptHunter1] inventory: gold=939 inv={ "health_potion": 13, "greater_potion": 19, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:47] [CLIENT cryptHunter1] inventory: gold=939 inv={ "health_potion": 13, "greater_potion": 20, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:48] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv27 130/156hp)@(291, 286), cryptHunter3(Lv25 119/160hp)@(1576, 632), cryptHunter2(Lv25 255/256hp)@(1569, 639) | monsters: archer 4/6, ghost 4/6, crawler 4/5, lich 0/1 | loot=2 | foreign_entities=0
+[14:57:48] [CLIENT cryptHunter1] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT cryptHunter1] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT cryptHunter1] inventory: gold=960 inv={ "health_potion": 13, "greater_potion": 20, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:48] [CLIENT cryptHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:48] [CLIENT cryptHunter1] notice: Meteor is on cooldown (10.8s)
+[14:57:49] [CLIENT cryptHunter1] inventory: gold=975 inv={ "health_potion": 13, "greater_potion": 20, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:49] [CLIENT cryptHunter1] notice: Inferno is on cooldown (2.3s)
+[14:57:50] [CLIENT cryptHunter1] inventory: gold=990 inv={ "health_potion": 13, "greater_potion": 20, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:50] [CLIENT cryptHunter1] inventory: gold=990 inv={ "health_potion": 14, "greater_potion": 20, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:50] [CLIENT cryptHunter1] inventory: gold=1015 inv={ "health_potion": 14, "greater_potion": 20, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:50] [CLIENT cryptHunter1] inventory: gold=1015 inv={ "health_potion": 14, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:51] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv27 123/156hp)@(534, 304), cryptHunter3(Lv25 160/160hp)@(1757, 536), cryptHunter2(Lv25 256/256hp)@(1758, 534) | monsters: archer 4/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:51] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.8s)
+[14:57:52] [CLIENT cryptHunter1] notice: Meteor is on cooldown (7.5s)
+[14:57:52] [CLIENT cryptHunter1] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT cryptHunter1] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:52] [CLIENT cryptHunter1] inventory: gold=1041 inv={ "health_potion": 14, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:52] [CLIENT cryptHunter1] inventory: gold=1055 inv={ "health_potion": 14, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:53] [CLIENT cryptHunter1] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT cryptHunter1] inventory: gold=1055 inv={ "health_potion": 15, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:53] [CLIENT cryptHunter1] inventory: gold=1064 inv={ "health_potion": 15, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:53] [CLIENT cryptHunter1] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv28 157/161hp)@(443, 261), cryptHunter3(Lv26 165/165hp)@(1467, 624), cryptHunter2(Lv25 256/256hp)@(1442, 607) | monsters: archer 5/6, ghost 6/6, crawler 3/5, lich 1/1 | loot=2 | foreign_entities=0
+[14:57:54] [CLIENT cryptHunter1] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT cryptHunter1] [chat] * frostHunter3 reached level 26!
+[14:57:54] [CLIENT cryptHunter1] inventory: gold=1076 inv={ "health_potion": 15, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:57] [CLIENT cryptHunter1] inventory: gold=1101 inv={ "health_potion": 15, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:57] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv28 157/161hp)@(709, 331), cryptHunter3(Lv26 165/165hp)@(1124, 495), cryptHunter2(Lv25 256/256hp)@(1147, 496) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 1/1 | loot=1 | foreign_entities=0
+[14:57:57] [CLIENT cryptHunter1] inventory: gold=1101 inv={ "health_potion": 16, "greater_potion": 21, "apprentice_staff": 1, "lich_staff": 3, "war_axe": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:57:58] [CLIENT cryptHunter1] notice: Meteor is on cooldown (1.1s)
+[14:57:59] [CLIENT cryptHunter1] notice: Inferno is on cooldown (9.6s)
+[14:58:00] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv28 161/161hp)@(1003, 143), cryptHunter3(Lv26 165/165hp)@(991, 190), cryptHunter2(Lv25 256/256hp)@(998, 183) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:00] [CLIENT cryptHunter1] notice: Flame Burst is on cooldown (4.0s)
+[14:58:02] [CLIENT cryptHunter1] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT cryptHunter1] [chat] * frostHunter2 reached level 27!
+[14:58:03] [CLIENT cryptHunter1] status: zone=crypt players=3 cryptHunter1(Lv28 161/161hp)@(1102, 260), cryptHunter3(Lv26 125/165hp)@(1104, 258), cryptHunter2(Lv25 256/256hp)@(1102, 252) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:58:03] [CLIENT cryptHunter1] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * frostHunter1 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * forestHunter2 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * forestHunter3 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * frostHunter3 left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * Walker left the world.
+[14:58:03] [CLIENT cryptHunter1] [chat] * cryptHunter2 left the world.
+[14:58:03] [CLIENT cryptHunter1] quit-after reached, exiting

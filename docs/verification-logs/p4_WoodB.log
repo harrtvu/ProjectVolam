@@ -1,0 +1,96 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT WoodB] Connecting to 127.0.0.1:7777 as 'WoodB' ...
+[14:58:10] [CLIENT WoodB] Connected to server as peer 163875222, logging in
+[14:58:10] [CLIENT WoodB] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT WoodB] Class selection requested (new account)
+[14:58:10] [CLIENT WoodB] bot chooses class wood
+[14:58:10] [CLIENT WoodB] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT WoodB] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT WoodB] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT WoodB] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT WoodB] Entered zone crypt (Bone Crypt)
+[14:58:10] [CLIENT WoodB] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT WoodB] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT WoodB] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT WoodB] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:10] [CLIENT WoodB] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT WoodB] [chat] * FireB the Pyromancer joined the world.
+[14:58:13] [CLIENT WoodB] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT WoodB] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT WoodB] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT WoodB] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT WoodB] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT WoodB] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT WoodB] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT WoodB] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT WoodB] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT WoodB] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv20 176/176hp)@(981, 725), FireA(Lv20 116/121hp)@(1007, 751), EarthA(Lv20 211/211hp)@(981, 757), MetalA(Lv20 165/165hp)@(984, 697) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT WoodB] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT WoodB] [chat] [Frost] FireB: Hello from FireB!
+[14:58:16] [CLIENT WoodB] notice: Regrowth is on cooldown (7.9s)
+[14:58:16] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv20 176/176hp)@(1008, 373), FireA(Lv20 115/121hp)@(1042, 318), EarthA(Lv20 249/249hp)@(1235, 656), MetalA(Lv20 181/190hp)@(1043, 310) | monsters: archer 3/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:16] [CLIENT WoodB] notice: Entangling Roots is on cooldown (8.0s)
+[14:58:17] [CLIENT WoodB] notice: Plague Bloom is on cooldown (12.0s)
+[14:58:18] [CLIENT WoodB] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT WoodB] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:18] [CLIENT WoodB] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5, "lich_staff": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:18] [CLIENT WoodB] equipping lich_staff
+[14:58:18] [CLIENT WoodB] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:19] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1096, 344), FireA(Lv20 115/121hp)@(1091, 349), EarthA(Lv20 249/249hp)@(1411, 701), MetalA(Lv20 178/190hp)@(1085, 355) | monsters: archer 3/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1365, 529), FireA(Lv20 115/121hp)@(1367, 533), EarthA(Lv20 249/249hp)@(1621, 703), MetalA(Lv20 178/190hp)@(1417, 586) | monsters: archer 3/6, ghost 5/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1703, 779), FireA(Lv20 117/121hp)@(1707, 782), EarthA(Lv20 247/249hp)@(1743, 821), MetalA(Lv20 179/190hp)@(1682, 753) | monsters: archer 3/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT WoodB] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT WoodB] [chat] * MetalA reached level 21!
+[14:58:27] [CLIENT WoodB] inventory: gold=273 inv={ "health_potion": 7, "greater_potion": 6, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:27] [CLIENT WoodB] inventory: gold=273 inv={ "health_potion": 8, "greater_potion": 6, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:28] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1762, 930), FireA(Lv20 121/121hp)@(1740, 922), EarthA(Lv20 249/249hp)@(1742, 936), MetalA(Lv21 198/198hp)@(1745, 947) | monsters: archer 4/6, ghost 4/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT WoodB] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1635, 689), FireA(Lv21 126/126hp)@(1663, 604), EarthA(Lv20 249/249hp)@(1632, 707), MetalA(Lv21 198/198hp)@(1690, 597) | monsters: archer 4/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT WoodB] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT WoodB] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT WoodB] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT WoodB] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT WoodB] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1189, 754), FireA(Lv21 126/126hp)@(1274, 688), EarthA(Lv20 249/249hp)@(1226, 754), MetalA(Lv21 198/198hp)@(1296, 689) | monsters: archer 4/6, ghost 4/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(940, 980), FireA(Lv21 126/126hp)@(1039, 815), EarthA(Lv20 249/249hp)@(940, 979), MetalA(Lv21 198/198hp)@(938, 982) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:40] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1002, 941), FireA(Lv21 126/126hp)@(1072, 814), EarthA(Lv20 249/249hp)@(954, 967), MetalA(Lv21 191/198hp)@(463, 939) | monsters: archer 5/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT WoodB] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT WoodB] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT WoodB] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(965, 689), FireA(Lv21 125/126hp)@(996, 656), EarthA(Lv20 249/249hp)@(971, 752), MetalA(Lv21 191/198hp)@(365, 458) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT WoodB] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT WoodB] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT WoodB] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(883, 557), FireA(Lv21 125/126hp)@(903, 537), EarthA(Lv20 249/249hp)@(898, 542), MetalA(Lv22 206/206hp)@(408, 239) | monsters: archer 1/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:58:49] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(914, 306), FireA(Lv21 126/126hp)@(923, 320), EarthA(Lv20 249/249hp)@(881, 304), MetalA(Lv22 206/206hp)@(873, 290) | monsters: archer 1/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1082, 634), FireA(Lv21 126/126hp)@(1042, 541), EarthA(Lv20 249/249hp)@(1040, 591), MetalA(Lv22 206/206hp)@(1104, 627) | monsters: archer 2/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT WoodB] inventory: gold=273 inv={ "health_potion": 9, "greater_potion": 6, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:54] [CLIENT WoodB] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1502, 623), FireA(Lv21 126/126hp)@(1410, 592), EarthA(Lv20 249/249hp)@(1436, 624), MetalA(Lv22 206/206hp)@(1452, 620) | monsters: archer 3/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT WoodB] [chat] * EarthB reached level 22!
+[14:58:55] [CLIENT WoodB] inventory: gold=290 inv={ "health_potion": 9, "greater_potion": 7, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:57] [CLIENT WoodB] inventory: gold=306 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:58:58] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1744, 747), FireA(Lv21 126/126hp)@(1682, 755), EarthA(Lv20 249/249hp)@(1539, 624), MetalA(Lv22 206/206hp)@(1808, 664) | monsters: archer 5/6, ghost 3/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:58] [CLIENT WoodB] notice: Plague Bloom is on cooldown (2.3s)
+[14:59:00] [CLIENT WoodB] inventory: gold=320 inv={ "health_potion": 10, "greater_potion": 7, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:59:00] [CLIENT WoodB] inventory: gold=320 inv={ "health_potion": 11, "greater_potion": 7, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:59:00] [CLIENT WoodB] inventory: gold=340 inv={ "health_potion": 11, "greater_potion": 7, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:59:01] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1745, 867), FireA(Lv21 126/126hp)@(1745, 832), EarthA(Lv20 249/249hp)@(1233, 592), MetalA(Lv22 206/206hp)@(1744, 826) | monsters: archer 3/6, ghost 2/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT WoodB] [chat] * EarthA reached level 21!
+[14:59:03] [CLIENT WoodB] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT WoodB] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1495, 688), FireA(Lv21 126/126hp)@(1423, 688), EarthA(Lv21 260/260hp)@(904, 624), MetalA(Lv22 206/206hp)@(1335, 688) | monsters: archer 3/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:07] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(1102, 565), FireA(Lv21 126/126hp)@(1104, 537), EarthA(Lv21 258/260hp)@(845, 592), MetalA(Lv22 200/206hp)@(1008, 501) | monsters: archer 3/6, ghost 0/6, crawler 1/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(956, 316), FireA(Lv21 126/126hp)@(955, 316), EarthA(Lv21 257/260hp)@(1006, 436), MetalA(Lv22 206/206hp)@(753, 244) | monsters: archer 3/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:59:13] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(744, 337), FireA(Lv21 126/126hp)@(747, 337), EarthA(Lv21 256/260hp)@(708, 361), MetalA(Lv22 206/206hp)@(323, 241) | monsters: archer 2/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:59:16] [CLIENT WoodB] inventory: gold=370 inv={ "health_potion": 11, "greater_potion": 7, "apprentice_staff": 1 } equip={ "weapon": "lich_staff", "armor": "" }
+[14:59:16] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(507, 335), FireA(Lv21 126/126hp)@(474, 335), EarthA(Lv21 255/260hp)@(465, 335), MetalA(Lv22 206/206hp)@(376, 369) | monsters: archer 0/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:19] [CLIENT WoodB] status: zone=crypt players=4 WoodB(Lv21 184/184hp)@(919, 369), FireA(Lv21 126/126hp)@(928, 371), EarthA(Lv21 260/260hp)@(829, 372), MetalA(Lv22 206/206hp)@(861, 371) | monsters: archer 0/6, ghost 2/6, crawler 3/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:59:19] [CLIENT WoodB] notice: Entangling Roots is on cooldown (4.7s)
+[14:59:20] [CLIENT WoodB] [chat] * FireA left the world.
+[14:59:20] [CLIENT WoodB] [chat] * Farmer left the world.
+[14:59:20] [CLIENT WoodB] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT WoodB] [chat] * WoodA left the world.
+[14:59:20] [CLIENT WoodB] quit-after reached, exiting

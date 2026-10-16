@@ -1,0 +1,289 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT forestHunter1] Connecting to 127.0.0.1:7777 as 'forestHunter1' ...
+[14:55:59] [CLIENT forestHunter1] Connected to server as peer 389232145, logging in
+[14:55:59] [CLIENT forestHunter1] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT forestHunter1] Class selection requested (new account)
+[14:55:59] [CLIENT forestHunter1] bot chooses class metal
+[14:55:59] [CLIENT forestHunter1] [chat] * forestHunter1 the Blade Master joined the world.
+[14:55:59] [CLIENT forestHunter1] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT forestHunter1] [chat] * cryptHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT forestHunter1] [chat] * frostHunter2 the Pyromancer joined the world.
+[14:55:59] [CLIENT forestHunter1] Entered zone forest (Whisperwood Forest)
+[14:55:59] [CLIENT forestHunter1] [chat] * frostHunter1 the Stone Guardian joined the world.
+[14:55:59] [CLIENT forestHunter1] [chat] * forestHunter2 the Venom Druid joined the world.
+[14:55:59] [CLIENT forestHunter1] [chat] * forestHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT forestHunter1] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT forestHunter1] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:55:59] [CLIENT forestHunter1] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT forestHunter1] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT forestHunter1] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:01] [CLIENT forestHunter1] inventory: gold=261 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:02] [CLIENT forestHunter1] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT forestHunter1] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT forestHunter1] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT forestHunter1] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT forestHunter1] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT forestHunter1] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv20 165/165hp)@(495, 556), forestHunter2(Lv20 158/158hp)@(525, 618), forestHunter3(Lv20 132/132hp)@(526, 688) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:56:02] [CLIENT forestHunter1] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT forestHunter1] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT forestHunter1] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT forestHunter1] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:03] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:56:04] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:05] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:05] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv20 165/165hp)@(598, 622), forestHunter2(Lv20 158/158hp)@(578, 819), forestHunter3(Lv20 131/132hp)@(470, 780) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:05] [CLIENT forestHunter1] inventory: gold=274 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:08] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (12.4s)
+[14:56:08] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv20 165/165hp)@(870, 575), forestHunter2(Lv20 158/158hp)@(652, 690), forestHunter3(Lv20 131/132hp)@(625, 739) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:09] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:56:09] [CLIENT forestHunter1] inventory: gold=277 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:09] [CLIENT forestHunter1] inventory: gold=288 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:10] [CLIENT forestHunter1] inventory: gold=296 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:10] [CLIENT forestHunter1] inventory: gold=304 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:11] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv20 164/165hp)@(1108, 596), forestHunter2(Lv20 158/158hp)@(940, 566), forestHunter3(Lv20 131/132hp)@(945, 562), Walker(Lv20 158/158hp)@(160, 655) | monsters: rat 11/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=1 | foreign_entities=0
+[14:56:11] [CLIENT forestHunter1] inventory: gold=313 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:11] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (9.2s)
+[14:56:12] [CLIENT forestHunter1] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT forestHunter1] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT forestHunter1] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:13] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:56:14] [CLIENT forestHunter1] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv20 164/165hp)@(1466, 391), forestHunter2(Lv20 158/158hp)@(1353, 430), forestHunter3(Lv20 132/132hp)@(1353, 429), Walker(Lv20 155/158hp)@(307, 330) | monsters: rat 11/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:14] [CLIENT forestHunter1] inventory: gold=318 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:15] [CLIENT forestHunter1] inventory: gold=329 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:15] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (2.2s)
+[14:56:15] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 21!
+[14:56:15] [CLIENT forestHunter1] inventory: gold=343 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:16] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (4.3s)
+[14:56:17] [CLIENT forestHunter1] inventory: gold=348 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:17] [CLIENT forestHunter1] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT forestHunter1] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT forestHunter1] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT forestHunter1] inventory: gold=348 inv={ "health_potion": 9, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:17] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv21 172/172hp)@(1603, 337), forestHunter2(Lv20 158/158hp)@(1603, 340), forestHunter3(Lv21 138/138hp)@(1597, 341), Walker(Lv20 155/158hp)@(576, 235) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:56:17] [CLIENT forestHunter1] inventory: gold=348 inv={ "health_potion": 12, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:17] [CLIENT forestHunter1] equipping steel_sword
+[14:56:17] [CLIENT forestHunter1] inventory: gold=348 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:17] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:17] [CLIENT forestHunter1] inventory: gold=358 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:18] [CLIENT forestHunter1] inventory: gold=363 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:20] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv21 172/172hp)@(1485, 306), forestHunter2(Lv20 158/158hp)@(1694, 272), forestHunter3(Lv21 138/138hp)@(1748, 270), Walker(Lv20 158/158hp)@(1013, 292) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=6 | foreign_entities=0
+[14:56:21] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (9.2s)
+[14:56:22] [CLIENT forestHunter1] inventory: gold=375 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:23] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv21 172/172hp)@(1374, 122), forestHunter2(Lv20 158/158hp)@(1436, 78), forestHunter3(Lv21 138/138hp)@(1488, 157) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:23] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT forestHunter1] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT forestHunter1] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT forestHunter1] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT forestHunter1] [chat] * cryptHunter3 reached level 22!
+[14:56:24] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 22!
+[14:56:26] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv21 172/172hp)@(1424, 522), forestHunter2(Lv20 158/158hp)@(1424, 529), forestHunter3(Lv21 138/138hp)@(1445, 548) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:28] [CLIENT forestHunter1] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT forestHunter1] inventory: gold=384 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:28] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (10.7s)
+[14:56:28] [CLIENT forestHunter1] inventory: gold=394 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:29] [CLIENT forestHunter1] inventory: gold=398 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:29] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (1.9s)
+[14:56:29] [CLIENT forestHunter1] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT forestHunter1] inventory: gold=406 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:29] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv21 172/172hp)@(1391, 848), forestHunter2(Lv21 165/165hp)@(1391, 826), forestHunter3(Lv21 138/138hp)@(1393, 772) | monsters: rat 9/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=4 | foreign_entities=0
+[14:56:29] [CLIENT forestHunter1] inventory: gold=410 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:29] [CLIENT forestHunter1] inventory: gold=416 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:29] [CLIENT forestHunter1] inventory: gold=423 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:30] [CLIENT forestHunter1] inventory: gold=432 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:30] [CLIENT forestHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:30] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:31] [CLIENT forestHunter1] inventory: gold=438 inv={ "health_potion": 12, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:31] [CLIENT forestHunter1] inventory: gold=438 inv={ "health_potion": 13, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:31] [CLIENT forestHunter1] inventory: gold=447 inv={ "health_potion": 13, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:31] [CLIENT forestHunter1] inventory: gold=447 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:31] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (7.5s)
+[14:56:31] [CLIENT forestHunter1] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv21 172/172hp)@(1423, 929), forestHunter2(Lv21 165/165hp)@(1420, 891), forestHunter3(Lv21 137/138hp)@(1453, 948) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:33] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:34] [CLIENT forestHunter1] inventory: gold=453 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:35] [CLIENT forestHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv21 172/172hp)@(1095, 743), forestHunter2(Lv21 165/165hp)@(1094, 742), forestHunter3(Lv21 137/138hp)@(1143, 783) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:35] [CLIENT forestHunter1] inventory: gold=456 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:36] [CLIENT forestHunter1] inventory: gold=462 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:36] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (2.7s)
+[14:56:37] [CLIENT forestHunter1] inventory: gold=466 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:37] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (9.2s)
+[14:56:37] [CLIENT forestHunter1] inventory: gold=471 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:37] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 23!
+[14:56:37] [CLIENT forestHunter1] inventory: gold=474 inv={ "health_potion": 14, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:38] [CLIENT forestHunter1] inventory: gold=480 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:38] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv21 172/172hp)@(780, 453), forestHunter2(Lv21 165/165hp)@(843, 523), forestHunter3(Lv21 137/138hp)@(1271, 516) | monsters: rat 10/12, bat 6/6, spider 4/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:38] [CLIENT forestHunter1] inventory: gold=483 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:38] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:39] [CLIENT forestHunter1] inventory: gold=489 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:40] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (5.9s)
+[14:56:40] [CLIENT forestHunter1] [chat] * forestHunter1 reached level 22!
+[14:56:40] [CLIENT forestHunter1] inventory: gold=496 inv={ "health_potion": 15, "greater_potion": 5, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:41] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:41] [CLIENT forestHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(878, 365), forestHunter2(Lv21 165/165hp)@(1234, 495), forestHunter3(Lv21 138/138hp)@(1381, 412) | monsters: rat 12/12, bat 6/6, spider 3/5, broodmother 1/1 | loot=1 | foreign_entities=0
+[14:56:42] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (0.6s)
+[14:56:42] [CLIENT forestHunter1] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT forestHunter1] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:44] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1233, 495), forestHunter2(Lv21 165/165hp)@(1530, 326), forestHunter3(Lv21 96/138hp)@(1548, 320) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT forestHunter1] [chat] * cryptHunter3 reached level 23!
+[14:56:45] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (12.4s)
+[14:56:46] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (0.3s)
+[14:56:46] [CLIENT forestHunter1] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT forestHunter1] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT forestHunter1] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:46] [CLIENT forestHunter1] inventory: gold=664 inv={ "health_potion": 18, "greater_potion": 5, "iron_sword": 1, "venom_dagger": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:56:47] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1640, 336), forestHunter2(Lv22 171/171hp)@(1621, 336), forestHunter3(Lv22 143/143hp)@(1633, 336) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:47] [CLIENT forestHunter1] equipping venom_dagger
+[14:56:47] [CLIENT forestHunter1] inventory: gold=664 inv={ "health_potion": 18, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:48] [CLIENT forestHunter1] inventory: gold=682 inv={ "health_potion": 18, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:48] [CLIENT forestHunter1] inventory: gold=682 inv={ "health_potion": 19, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:50] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1744, 620), forestHunter2(Lv22 171/171hp)@(1744, 566), forestHunter3(Lv22 143/143hp)@(1744, 575) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:53] [CLIENT forestHunter1] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT forestHunter1] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT forestHunter1] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT forestHunter1] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT forestHunter1] inventory: gold=688 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:53] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1431, 1027), forestHunter2(Lv22 171/171hp)@(1579, 885), forestHunter3(Lv22 143/143hp)@(1537, 895) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:56:54] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (3.5s)
+[14:56:54] [CLIENT forestHunter1] inventory: gold=695 inv={ "health_potion": 20, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:55] [CLIENT forestHunter1] [chat] * cryptHunter2 reached level 23!
+[14:56:55] [CLIENT forestHunter1] inventory: gold=708 inv={ "health_potion": 21, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:55] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:56] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv22 179/179hp)@(1447, 912), forestHunter2(Lv22 169/171hp)@(1484, 912), forestHunter3(Lv22 140/143hp)@(1434, 880), Walker(Lv21 165/165hp)@(1011, 176) | monsters: rat 11/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:56] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:57] [CLIENT forestHunter1] [chat] * cryptHunter3 reached level 24!
+[14:56:59] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv22 179/179hp)@(1712, 748), forestHunter2(Lv22 168/171hp)@(1712, 750), forestHunter3(Lv22 140/143hp)@(1712, 759), Walker(Lv21 163/165hp)@(848, 518) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:00] [CLIENT forestHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:02] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv22 179/179hp)@(1622, 874), forestHunter2(Lv22 171/171hp)@(1595, 901), forestHunter3(Lv22 140/143hp)@(1613, 883), Walker(Lv21 162/165hp)@(498, 592) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:57:04] [CLIENT forestHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (3.5s)
+[14:57:05] [CLIENT forestHunter1] status: zone=forest players=4 forestHunter1(Lv22 179/179hp)@(1328, 784), forestHunter2(Lv22 171/171hp)@(1276, 748), forestHunter3(Lv22 143/143hp)@(1291, 750), Walker(Lv21 162/165hp)@(116, 688) | monsters: rat 11/12, bat 6/6, spider 4/5, broodmother 1/1 | loot=7 | foreign_entities=0
+[14:57:07] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT forestHunter1] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:08] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1151, 784), forestHunter2(Lv22 171/171hp)@(1161, 786), forestHunter3(Lv22 143/143hp)@(1155, 785) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=6 | foreign_entities=0
+[14:57:08] [CLIENT forestHunter1] inventory: gold=713 inv={ "health_potion": 21, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:11] [CLIENT forestHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1280, 509), forestHunter2(Lv22 171/171hp)@(1276, 510), forestHunter3(Lv22 143/143hp)@(1319, 474) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=5 | foreign_entities=0
+[14:57:12] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (5.9s)
+[14:57:13] [CLIENT forestHunter1] [chat] * cryptHunter2 reached level 24!
+[14:57:13] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:57:14] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv22 179/179hp)@(1541, 351), forestHunter2(Lv22 171/171hp)@(1524, 365), forestHunter3(Lv22 143/143hp)@(1524, 365) | monsters: rat 12/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=9 | foreign_entities=0
+[14:57:14] [CLIENT forestHunter1] inventory: gold=718 inv={ "health_potion": 21, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:14] [CLIENT forestHunter1] inventory: gold=718 inv={ "health_potion": 22, "greater_potion": 5, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:14] [CLIENT forestHunter1] inventory: gold=718 inv={ "health_potion": 22, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:14] [CLIENT forestHunter1] inventory: gold=731 inv={ "health_potion": 22, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:15] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (3.8s)
+[14:57:15] [CLIENT forestHunter1] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (2.7s)
+[14:57:16] [CLIENT forestHunter1] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT forestHunter1] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT forestHunter1] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:16] [CLIENT forestHunter1] inventory: gold=995 inv={ "health_potion": 25, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:16] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:57:17] [CLIENT forestHunter1] inventory: gold=995 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:17] [CLIENT forestHunter1] inventory: gold=999 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:17] [CLIENT forestHunter1] inventory: gold=999 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1, "iron_shield": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:17] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 175/186hp)@(1715, 205), forestHunter2(Lv23 178/178hp)@(1718, 222), forestHunter3(Lv23 149/149hp)@(1718, 222) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:17] [CLIENT forestHunter1] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT forestHunter1] equipping iron_shield
+[14:57:17] [CLIENT forestHunter1] inventory: gold=999 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:18] [CLIENT forestHunter1] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT forestHunter1] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT forestHunter1] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:20] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 175/186hp)@(1744, 621), forestHunter2(Lv23 178/178hp)@(1744, 617), forestHunter3(Lv23 149/149hp)@(1744, 617) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:23] [CLIENT forestHunter1] inventory: gold=1002 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:23] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 175/186hp)@(1581, 954), forestHunter2(Lv23 178/178hp)@(1605, 925), forestHunter3(Lv23 149/149hp)@(1566, 925) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=7 | foreign_entities=0
+[14:57:25] [CLIENT forestHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 177/186hp)@(1196, 946), forestHunter2(Lv23 178/178hp)@(1176, 880), forestHunter3(Lv23 149/149hp)@(1166, 916) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:28] [CLIENT forestHunter1] inventory: gold=1012 inv={ "health_potion": 26, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:28] [CLIENT forestHunter1] inventory: gold=1012 inv={ "health_potion": 27, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:29] [CLIENT forestHunter1] inventory: gold=1020 inv={ "health_potion": 27, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:29] [CLIENT forestHunter1] inventory: gold=1020 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:29] [CLIENT forestHunter1] inventory: gold=1026 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:29] [CLIENT forestHunter1] inventory: gold=1029 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:29] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 177/186hp)@(781, 816), forestHunter2(Lv23 178/178hp)@(804, 815), forestHunter3(Lv23 149/149hp)@(809, 815) | monsters: rat 10/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=6 | foreign_entities=0
+[14:57:29] [CLIENT forestHunter1] inventory: gold=1037 inv={ "health_potion": 28, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:30] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT forestHunter1] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:31] [CLIENT forestHunter1] inventory: gold=1037 inv={ "health_potion": 29, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:31] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (3.8s)
+[14:57:32] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (14.8s)
+[14:57:32] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 186/186hp)@(595, 815), forestHunter2(Lv23 178/178hp)@(604, 812), forestHunter3(Lv23 148/149hp)@(530, 814) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:32] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (10.8s)
+[14:57:33] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:57:33] [CLIENT forestHunter1] inventory: gold=1046 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:34] [CLIENT forestHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:34] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (0.5s)
+[14:57:35] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (11.5s)
+[14:57:35] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 186/186hp)@(594, 785), forestHunter2(Lv23 178/178hp)@(596, 804), forestHunter3(Lv23 148/149hp)@(592, 760) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:57:35] [CLIENT forestHunter1] inventory: gold=1050 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:36] [CLIENT forestHunter1] inventory: gold=1055 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:36] [CLIENT forestHunter1] notice: Thousand Cuts is on cooldown (7.5s)
+[14:57:36] [CLIENT forestHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:36] [CLIENT forestHunter1] inventory: gold=1064 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:38] [CLIENT forestHunter1] inventory: gold=1071 inv={ "health_potion": 30, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:38] [CLIENT forestHunter1] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 186/186hp)@(664, 592), forestHunter2(Lv23 178/178hp)@(680, 592), forestHunter3(Lv23 149/149hp)@(681, 592) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:40] [CLIENT forestHunter1] inventory: gold=1071 inv={ "health_potion": 31, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:40] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 26!
+[14:57:41] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 186/186hp)@(872, 351), forestHunter2(Lv23 178/178hp)@(900, 340), forestHunter3(Lv23 149/149hp)@(895, 336) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:42] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (4.3s)
+[14:57:43] [CLIENT forestHunter1] inventory: gold=1076 inv={ "health_potion": 31, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:44] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv23 186/186hp)@(1243, 489), forestHunter2(Lv23 178/178hp)@(1152, 496), forestHunter3(Lv23 149/149hp)@(1186, 496) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:57:45] [CLIENT forestHunter1] [chat] * Walker reached level 22!
+[14:57:46] [CLIENT forestHunter1] inventory: gold=1082 inv={ "health_potion": 31, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:46] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (0.5s)
+[14:57:47] [CLIENT forestHunter1] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT forestHunter1] inventory: gold=1085 inv={ "health_potion": 32, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:47] [CLIENT forestHunter1] inventory: gold=1090 inv={ "health_potion": 32, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 1 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:47] [CLIENT forestHunter1] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT forestHunter1] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv24 193/193hp)@(1435, 388), forestHunter2(Lv23 178/178hp)@(1428, 400), forestHunter3(Lv23 149/149hp)@(1436, 384) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT forestHunter1] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT forestHunter1] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:57:48] [CLIENT forestHunter1] inventory: gold=1282 inv={ "health_potion": 35, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:48] [CLIENT forestHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:49] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:57:49] [CLIENT forestHunter1] inventory: gold=1288 inv={ "health_potion": 35, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:49] [CLIENT forestHunter1] inventory: gold=1292 inv={ "health_potion": 36, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:50] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv24 183/193hp)@(1524, 305), forestHunter2(Lv23 178/178hp)@(1587, 368), forestHunter3(Lv24 154/154hp)@(1654, 338) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:57:50] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (14.8s)
+[14:57:52] [CLIENT forestHunter1] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT forestHunter1] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT forestHunter1] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv24 183/193hp)@(1744, 592), forestHunter2(Lv23 178/178hp)@(1716, 654), forestHunter3(Lv24 154/154hp)@(1709, 687) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:53] [CLIENT forestHunter1] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT forestHunter1] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT forestHunter1] [chat] * frostHunter3 reached level 26!
+[14:57:55] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:57:56] [CLIENT forestHunter1] inventory: gold=1296 inv={ "health_potion": 36, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:56] [CLIENT forestHunter1] inventory: gold=1304 inv={ "health_potion": 36, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:56] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv24 184/193hp)@(1554, 856), forestHunter2(Lv24 184/184hp)@(1549, 790), forestHunter3(Lv24 154/154hp)@(1552, 824) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:57] [CLIENT forestHunter1] inventory: gold=1315 inv={ "health_potion": 36, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:57] [CLIENT forestHunter1] inventory: gold=1315 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:57] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (7.5s)
+[14:57:58] [CLIENT forestHunter1] inventory: gold=1324 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:58] [CLIENT forestHunter1] inventory: gold=1334 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:58] [CLIENT forestHunter1] notice: Thousand Cuts: no target in range
+[14:57:59] [CLIENT forestHunter1] inventory: gold=1342 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:59] [CLIENT forestHunter1] notice: Whirling Blade is on cooldown (0.8s)
+[14:57:59] [CLIENT forestHunter1] inventory: gold=1349 inv={ "health_potion": 37, "greater_potion": 5, "iron_sword": 1, "steel_sword": 2, "venom_dagger": 2 } equip={ "weapon": "venom_dagger", "armor": "iron_shield" }
+[14:57:59] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv24 184/193hp)@(1382, 953), forestHunter2(Lv24 184/184hp)@(1388, 943), forestHunter3(Lv24 154/154hp)@(1388, 922) | monsters: rat 9/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:01] [CLIENT forestHunter1] notice: Piercing Strike is on cooldown (2.2s)
+[14:58:02] [CLIENT forestHunter1] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT forestHunter1] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT forestHunter1] status: zone=forest players=3 forestHunter1(Lv24 184/193hp)@(1329, 666), forestHunter2(Lv24 184/184hp)@(1324, 734), forestHunter3(Lv24 154/154hp)@(1323, 745) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:02] [CLIENT forestHunter1] notice: Blade Focus is on cooldown (2.7s)
+[14:58:03] [CLIENT forestHunter1] quit-after reached, exiting

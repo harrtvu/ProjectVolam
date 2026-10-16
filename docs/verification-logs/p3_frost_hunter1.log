@@ -1,0 +1,247 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT frostHunter1] Connecting to 127.0.0.1:7777 as 'frostHunter1' ...
+[14:55:59] [CLIENT frostHunter1] Connected to server as peer 1698867357, logging in
+[14:55:59] [CLIENT frostHunter1] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT frostHunter1] Class selection requested (new account)
+[14:55:59] [CLIENT frostHunter1] bot chooses class earth
+[14:55:59] [CLIENT frostHunter1] [chat] * frostHunter1 the Stone Guardian joined the world.
+[14:55:59] [CLIENT frostHunter1] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT frostHunter1] Entered zone frost (Frostpeak Ruins)
+[14:55:59] [CLIENT frostHunter1] [chat] * forestHunter2 the Venom Druid joined the world.
+[14:55:59] [CLIENT frostHunter1] [chat] * forestHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT frostHunter1] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT frostHunter1] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:55:59] [CLIENT frostHunter1] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT frostHunter1] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT frostHunter1] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:02] [CLIENT frostHunter1] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT frostHunter1] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT frostHunter1] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT frostHunter1] inventory: gold=271 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:02] [CLIENT frostHunter1] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT frostHunter1] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT frostHunter1] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT frostHunter1] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 211/211hp)@(562, 656), frostHunter2(Lv20 121/121hp)@(602, 685), frostHunter3(Lv20 165/165hp)@(525, 654) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:02] [CLIENT frostHunter1] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT frostHunter1] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT frostHunter1] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:04] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:56:05] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (11.8s)
+[14:56:05] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 211/211hp)@(621, 744), frostHunter2(Lv20 97/121hp)@(685, 740), frostHunter3(Lv20 165/165hp)@(625, 775) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=3 | foreign_entities=0
+[14:56:05] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:06] [CLIENT frostHunter1] notice: Earthquake is on cooldown (12.8s)
+[14:56:08] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 211/211hp)@(850, 880), frostHunter2(Lv20 73/121hp)@(860, 880), frostHunter3(Lv20 142/165hp)@(849, 881) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:56:11] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 211/211hp)@(1085, 752), frostHunter2(Lv20 73/121hp)@(1177, 656), frostHunter3(Lv20 142/165hp)@(1183, 656) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:12] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (4.6s)
+[14:56:12] [CLIENT frostHunter1] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT frostHunter1] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT frostHunter1] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:13] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (1.5s)
+[14:56:13] [CLIENT frostHunter1] notice: Earthquake is on cooldown (5.5s)
+[14:56:14] [CLIENT frostHunter1] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 211/211hp)@(1483, 720), frostHunter2(Lv20 0/121hp DEAD)@(1585, 688), frostHunter3(Lv20 81/165hp)@(1581, 678) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:14] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (0.4s)
+[14:56:15] [CLIENT frostHunter1] inventory: gold=302 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:15] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (1.3s)
+[14:56:15] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 21!
+[14:56:15] [CLIENT frostHunter1] inventory: gold=302 inv={ "health_potion": 7, "greater_potion": 6 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:16] [CLIENT frostHunter1] inventory: gold=318 inv={ "health_potion": 7, "greater_potion": 6 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:17] [CLIENT frostHunter1] notice: Earthquake is on cooldown (2.3s)
+[14:56:17] [CLIENT frostHunter1] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT frostHunter1] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT frostHunter1] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 206/211hp)@(1586, 690), frostHunter2(Lv21 126/126hp DEAD)@(1585, 688), frostHunter3(Lv20 132/165hp)@(1591, 692) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:19] [CLIENT frostHunter1] inventory: gold=335 inv={ "health_potion": 7, "greater_potion": 6 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:19] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:20] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv20 206/211hp)@(1583, 672), frostHunter2(Lv21 126/126hp)@(382, 656), frostHunter3(Lv20 132/165hp)@(1585, 673) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:21] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:56:22] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (11.8s)
+[14:56:22] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (5.5s)
+[14:56:23] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT frostHunter1] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT frostHunter1] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT frostHunter1] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT frostHunter1] inventory: gold=695 inv={ "health_potion": 7, "greater_potion": 10, "frost_aegis": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:56:23] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv21 220/220hp)@(1583, 672), frostHunter2(Lv22 131/131hp)@(729, 656), frostHunter3(Lv21 172/172hp)@(1596, 680) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=3 | foreign_entities=0
+[14:56:23] [CLIENT frostHunter1] equipping frost_aegis
+[14:56:23] [CLIENT frostHunter1] inventory: gold=695 inv={ "health_potion": 7, "greater_potion": 10, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:23] [CLIENT frostHunter1] [chat] * cryptHunter3 reached level 22!
+[14:56:24] [CLIENT frostHunter1] notice: Earthquake is on cooldown (12.0s)
+[14:56:24] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 22!
+[14:56:25] [CLIENT frostHunter1] inventory: gold=708 inv={ "health_potion": 7, "greater_potion": 10, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:25] [CLIENT frostHunter1] inventory: gold=708 inv={ "health_potion": 8, "greater_potion": 10, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:26] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (7.7s)
+[14:56:26] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv21 220/220hp)@(1497, 558), frostHunter2(Lv22 106/131hp)@(649, 430), frostHunter3(Lv21 164/172hp)@(1392, 910) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:26] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (1.5s)
+[14:56:27] [CLIENT frostHunter1] notice: Earthquake is on cooldown (8.7s)
+[14:56:28] [CLIENT frostHunter1] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:56:29] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (4.5s)
+[14:56:29] [CLIENT frostHunter1] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv21 220/220hp)@(1306, 331), frostHunter2(Lv22 80/131hp)@(993, 332), frostHunter3(Lv22 179/179hp)@(1756, 1016) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=3 | foreign_entities=0
+[14:56:30] [CLIENT frostHunter1] inventory: gold=708 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:30] [CLIENT frostHunter1] inventory: gold=718 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:30] [CLIENT frostHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:30] [CLIENT frostHunter1] notice: Earthquake is on cooldown (5.5s)
+[14:56:31] [CLIENT frostHunter1] [chat] * frostHunter1 reached level 22!
+[14:56:31] [CLIENT frostHunter1] inventory: gold=737 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:32] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (1.3s)
+[14:56:32] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv22 228/229hp)@(1246, 238), frostHunter2(Lv22 94/131hp)@(1060, 220), frostHunter3(Lv22 166/179hp)@(1494, 1137) | monsters: yeti 5/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:56:33] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:34] [CLIENT frostHunter1] inventory: gold=758 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:34] [CLIENT frostHunter1] notice: Earthquake is on cooldown (2.3s)
+[14:56:35] [CLIENT frostHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT frostHunter1] status: zone=frost players=4 frostHunter1(Lv22 226/229hp)@(1233, 277), frostHunter2(Lv22 94/131hp)@(1111, 297), frostHunter3(Lv22 151/179hp)@(1259, 1063), Walker(Lv20 147/158hp)@(476, 657) | monsters: yeti 5/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:37] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (0.4s)
+[14:56:37] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT frostHunter1] status: zone=frost players=4 frostHunter1(Lv22 226/229hp)@(988, 434), frostHunter2(Lv23 112/136hp)@(954, 427), frostHunter3(Lv22 151/179hp)@(1142, 1078), Walker(Lv20 158/158hp)@(494, 657) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:56:38] [CLIENT frostHunter1] inventory: gold=780 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:38] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (3.1s)
+[14:56:40] [CLIENT frostHunter1] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT frostHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv22 226/229hp)@(1030, 622), frostHunter2(Lv23 112/136hp)@(853, 688), frostHunter3(Lv22 135/179hp)@(799, 955) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:56:42] [CLIENT frostHunter1] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT frostHunter1] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:43] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (10.1s)
+[14:56:44] [CLIENT frostHunter1] inventory: gold=796 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:44] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv22 228/229hp)@(1366, 625), frostHunter2(Lv23 112/136hp)@(822, 626), frostHunter3(Lv22 135/179hp)@(1137, 722) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT frostHunter1] notice: Earthquake is on cooldown (12.8s)
+[14:56:44] [CLIENT frostHunter1] [chat] * cryptHunter3 reached level 23!
+[14:56:45] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:56:46] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (6.9s)
+[14:56:46] [CLIENT frostHunter1] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT frostHunter1] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT frostHunter1] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:56:47] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv22 224/229hp)@(1646, 632), frostHunter2(Lv23 114/136hp)@(1302, 624), frostHunter3(Lv22 135/179hp)@(1604, 741) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:47] [CLIENT frostHunter1] notice: Earthquake is on cooldown (9.6s)
+[14:56:48] [CLIENT frostHunter1] inventory: gold=809 inv={ "health_potion": 8, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:56:49] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (3.7s)
+[14:56:50] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (5.5s)
+[14:56:50] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv22 217/229hp)@(1667, 651), frostHunter2(Lv23 115/136hp)@(1681, 652), frostHunter3(Lv22 137/179hp)@(1687, 651) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:51] [CLIENT frostHunter1] notice: Earthquake is on cooldown (6.3s)
+[14:56:51] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:56:52] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (0.5s)
+[14:56:53] [CLIENT frostHunter1] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT frostHunter1] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT frostHunter1] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT frostHunter1] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 238/238hp)@(1676, 659), frostHunter2(Lv24 141/141hp)@(1669, 665), frostHunter3(Lv23 186/186hp)@(1673, 664) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:54] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (1.5s)
+[14:56:55] [CLIENT frostHunter1] notice: Earthquake is on cooldown (2.3s)
+[14:56:55] [CLIENT frostHunter1] [chat] * cryptHunter2 reached level 23!
+[14:56:56] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 238/238hp)@(1400, 752), frostHunter2(Lv24 141/141hp)@(1392, 756), frostHunter3(Lv23 174/186hp)@(1391, 758) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:57] [CLIENT frostHunter1] [chat] * cryptHunter3 reached level 24!
+[14:56:59] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 238/238hp)@(1634, 990), frostHunter2(Lv24 141/141hp)@(1588, 922), frostHunter3(Lv23 174/186hp)@(1642, 996) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:00] [CLIENT frostHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:02] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 238/238hp)@(1520, 847), frostHunter2(Lv24 141/141hp)@(1568, 767), frostHunter3(Lv23 175/186hp)@(1520, 831) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:04] [CLIENT frostHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 238/238hp)@(1253, 1019), frostHunter2(Lv24 141/141hp)@(1456, 332), frostHunter3(Lv23 176/186hp)@(1456, 446) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:06] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (5.3s)
+[14:57:07] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (3.1s)
+[14:57:07] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT frostHunter1] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:07] [CLIENT frostHunter1] notice: Earthquake is on cooldown (7.1s)
+[14:57:08] [CLIENT frostHunter1] inventory: gold=809 inv={ "health_potion": 9, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:08] [CLIENT frostHunter1] inventory: gold=819 inv={ "health_potion": 9, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:08] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 237/238hp)@(928, 995), frostHunter2(Lv24 141/141hp)@(1159, 153), frostHunter3(Lv23 178/186hp)@(1167, 215) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:09] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (2.1s)
+[14:57:10] [CLIENT frostHunter1] inventory: gold=829 inv={ "health_potion": 9, "greater_potion": 11, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:10] [CLIENT frostHunter1] inventory: gold=829 inv={ "health_potion": 9, "greater_potion": 12, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:11] [CLIENT frostHunter1] notice: Earthquake is on cooldown (3.9s)
+[14:57:11] [CLIENT frostHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 235/238hp)@(827, 965), frostHunter2(Lv24 141/141hp)@(866, 434), frostHunter3(Lv23 179/186hp)@(840, 432) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:12] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:57:13] [CLIENT frostHunter1] [chat] * cryptHunter2 reached level 24!
+[14:57:13] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:57:14] [CLIENT frostHunter1] notice: Earthquake is on cooldown (0.7s)
+[14:57:14] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 235/238hp)@(1158, 784), frostHunter2(Lv24 141/141hp)@(1311, 497), frostHunter3(Lv23 181/186hp)@(1307, 498) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT frostHunter1] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT frostHunter1] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT frostHunter1] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT frostHunter1] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:17] [CLIENT frostHunter1] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv23 235/238hp)@(1532, 745), frostHunter2(Lv24 141/141hp)@(1647, 687), frostHunter3(Lv23 154/186hp)@(1653, 692) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:18] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (9.4s)
+[14:57:18] [CLIENT frostHunter1] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT frostHunter1] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT frostHunter1] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:20] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(1583, 915), frostHunter2(Lv25 146/146hp)@(1582, 944), frostHunter3(Lv24 193/193hp)@(1584, 962) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:21] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (0.7s)
+[14:57:23] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(1584, 993), frostHunter2(Lv25 146/146hp)@(1589, 981), frostHunter3(Lv24 189/193hp)@(1616, 1008) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:25] [CLIENT frostHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(1458, 658), frostHunter2(Lv25 146/146hp)@(1450, 618), frostHunter3(Lv24 189/193hp)@(1466, 666) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:29] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(1222, 454), frostHunter2(Lv25 146/146hp)@(1108, 464), frostHunter3(Lv24 190/193hp)@(1127, 465) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT frostHunter1] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:32] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(880, 368), frostHunter2(Lv25 146/146hp)@(766, 418), frostHunter3(Lv24 191/193hp)@(728, 358) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:34] [CLIENT frostHunter1] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:35] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(654, 496), frostHunter2(Lv25 146/146hp)@(516, 583), frostHunter3(Lv24 193/193hp)@(628, 496) | monsters: yeti 6/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:36] [CLIENT frostHunter1] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:38] [CLIENT frostHunter1] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(728, 592), frostHunter2(Lv25 146/146hp)@(516, 700), frostHunter3(Lv24 193/193hp)@(775, 592) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:57:39] [CLIENT frostHunter1] notice: Earthquake is on cooldown (1.5s)
+[14:57:40] [CLIENT frostHunter1] inventory: gold=829 inv={ "health_potion": 9, "greater_potion": 13, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:40] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (1.2s)
+[14:57:40] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 26!
+[14:57:41] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(1049, 624), frostHunter2(Lv26 151/151hp)@(538, 880), frostHunter3(Lv24 193/193hp)@(978, 656) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:41] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (11.0s)
+[14:57:42] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.0s)
+[14:57:44] [CLIENT frostHunter1] inventory: gold=840 inv={ "health_potion": 9, "greater_potion": 13, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:44] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv24 247/247hp)@(1375, 624), frostHunter2(Lv26 151/151hp)@(674, 834), frostHunter3(Lv24 193/193hp)@(1390, 656) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT frostHunter1] [chat] * Walker reached level 22!
+[14:57:45] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (6.9s)
+[14:57:46] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (3.9s)
+[14:57:47] [CLIENT frostHunter1] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT frostHunter1] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT frostHunter1] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT frostHunter1] notice: Earthquake is on cooldown (12.0s)
+[14:57:47] [CLIENT frostHunter1] inventory: gold=859 inv={ "health_potion": 9, "greater_potion": 13, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:47] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv25 256/256hp)@(1609, 558), frostHunter2(Lv26 151/151hp)@(788, 940), frostHunter3(Lv25 200/200hp)@(1615, 558) | monsters: yeti 6/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT frostHunter1] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT frostHunter1] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:57:48] [CLIENT frostHunter1] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:48] [CLIENT frostHunter1] inventory: gold=891 inv={ "health_potion": 9, "greater_potion": 13, "wooden_shield": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:49] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (3.7s)
+[14:57:49] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (0.7s)
+[14:57:50] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv25 256/256hp)@(1616, 585), frostHunter2(Lv26 151/151hp)@(848, 814), frostHunter3(Lv25 148/200hp)@(1616, 580) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:50] [CLIENT frostHunter1] notice: Earthquake is on cooldown (8.7s)
+[14:57:52] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (0.5s)
+[14:57:52] [CLIENT frostHunter1] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT frostHunter1] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:52] [CLIENT frostHunter1] inventory: gold=1383 inv={ "health_potion": 9, "greater_potion": 17, "wooden_shield": 1, "frostbrand": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "", "armor": "frost_aegis" }
+[14:57:53] [CLIENT frostHunter1] equipping frostbrand
+[14:57:53] [CLIENT frostHunter1] inventory: gold=1383 inv={ "health_potion": 9, "greater_potion": 17, "wooden_shield": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "frostbrand", "armor": "frost_aegis" }
+[14:57:53] [CLIENT frostHunter1] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv26 265/265hp)@(1447, 592), frostHunter2(Lv26 151/151hp)@(935, 647), frostHunter3(Lv25 124/200hp)@(1429, 593) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:53] [CLIENT frostHunter1] [chat] * cryptHunter3 reached level 26!
+[14:57:53] [CLIENT frostHunter1] notice: Earthquake is on cooldown (5.5s)
+[14:57:54] [CLIENT frostHunter1] trying to equip ember_staff (not allowed for earth)
+[14:57:54] [CLIENT frostHunter1] notice: Ember Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:57:54] [CLIENT frostHunter1] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT frostHunter1] notice: Ground Slam is on cooldown (2.8s)
+[14:57:54] [CLIENT frostHunter1] [chat] * frostHunter3 reached level 26!
+[14:57:56] [CLIENT frostHunter1] inventory: gold=1415 inv={ "health_potion": 9, "greater_potion": 17, "wooden_shield": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "frostbrand", "armor": "frost_aegis" }
+[14:57:56] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:57:56] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv26 265/265hp)@(1328, 455), frostHunter2(Lv26 151/151hp)@(941, 339), frostHunter3(Lv26 207/207hp)@(1332, 483) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:57] [CLIENT frostHunter1] notice: Earthquake is on cooldown (2.3s)
+[14:57:57] [CLIENT frostHunter1] inventory: gold=1449 inv={ "health_potion": 9, "greater_potion": 18, "wooden_shield": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "frostbrand", "armor": "frost_aegis" }
+[14:57:59] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv26 265/265hp)@(1202, 142), frostHunter2(Lv26 151/151hp)@(1180, 122), frostHunter3(Lv26 207/207hp)@(1196, 145) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:58:00] [CLIENT frostHunter1] notice: Stone Skin is on cooldown (10.2s)
+[14:58:02] [CLIENT frostHunter1] notice: Mountain's Challenge is on cooldown (3.1s)
+[14:58:02] [CLIENT frostHunter1] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT frostHunter1] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT frostHunter1] status: zone=frost players=3 frostHunter1(Lv26 265/265hp)@(891, 208), frostHunter2(Lv27 156/156hp)@(864, 208), frostHunter3(Lv26 207/207hp)@(804, 202) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:58:03] [CLIENT frostHunter1] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT frostHunter1] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT frostHunter1] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT frostHunter1] quit-after reached, exiting

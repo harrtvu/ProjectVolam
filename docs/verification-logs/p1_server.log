@@ -1,0 +1,685 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:53:43] [SERVER] Dedicated server listening on port 7777 (ENet/UDP). Saves: /workspace/project-volam/test-logs/accounts.json (0 accounts)
+[14:53:43] [SERVER] Zone meadow ready: 10 monsters, 1864 reachable cells
+[14:53:43] [SERVER] [forest] boss Broodmother spawned
+[14:53:43] [SERVER] Zone forest ready: 24 monsters, 1541 reachable cells
+[14:53:43] [SERVER] [crypt] boss The Lich King spawned
+[14:53:43] [SERVER] Zone crypt ready: 18 monsters, 1166 reachable cells
+[14:53:43] [SERVER] [frost] boss Yeti King spawned
+[14:53:43] [SERVER] Zone frost ready: 16 monsters, 1898 reachable cells
+[14:53:45] [SERVER] Peer 988575762 connected, waiting for login
+[14:53:45] [SERVER] Created account 'Bot2'
+[14:53:45] [SERVER] Account 'Bot2' has no class yet - asking peer 988575762 to choose (new account)
+[14:53:45] [SERVER] Peer 246734308 connected, waiting for login
+[14:53:45] [SERVER] Bot2 chose class water (Frost Sage, Water (Thủy))
+[14:53:45] [SERVER] Login 'Bot2' (peer 988575762): NEW account - class water, level 1, xp 0, hp 28/28, mp 53/53, gold 0, items { "health_potion": 2 }, equip { "weapon": "apprentice_staff", "armor": "" }, zone meadow, pos (1011, 680), talent points 0/0 {  }
+[14:53:45] [SERVER] [chat] * Bot2 the Frost Sage joined the world.
+[14:53:45] [SERVER] Created account 'Bot1'
+[14:53:45] [SERVER] Account 'Bot1' has no class yet - asking peer 246734308 to choose (new account)
+[14:53:45] [SERVER] Bot1 chose class metal (Blade Master, Metal (Kim))
+[14:53:45] [SERVER] Login 'Bot1' (peer 246734308): NEW account - class metal, level 1, xp 0, hp 32/32, mp 30/30, gold 0, items { "health_potion": 2 }, equip { "weapon": "iron_sword", "armor": "" }, zone meadow, pos (1028, 696), talent points 0/0 {  }
+[14:53:45] [SERVER] [chat] * Bot1 the Blade Master joined the world.
+[14:53:46] [SERVER] status: meadow: players=["Bot2(Lv1 28/28hp 53/53mp water)", "Bot1(Lv1 32/32hp 30/30mp metal)"] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:53:47] [SERVER] [meadow] Bot2 cast Ice Shard (mp 45/53, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:53:47] [SERVER] [meadow] Bot1 cast Whirling Blade (mp 18/30, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:53:47] [SERVER] [meadow] Bot2 hit Slime(Lv1) for 4 with Ice Shard -> hp 2/6
+[14:53:47] [SERVER] [meadow] Slime is slowed by 40% (3.0s) by Bot2
+[14:53:47] [SERVER] [meadow] Bot2 hit Slime(Lv1) for 3 with Frost Bolt -> hp 0/6
+[14:53:47] [SERVER] [meadow] Bot2 gained 10 XP (10/20)
+[14:53:47] [SERVER] [meadow] Slime(Lv1) was slain by Bot2 (+10 XP each)
+[14:53:47] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1, steel_sword x1
+[14:53:48] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:53:48] [SERVER] [meadow] Bot1 picked up 7 x gold
+[14:53:48] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:53:48] [SERVER] [meadow] Bot1 picked up 1 x steel_sword
+[14:53:48] [SERVER] [meadow] Bot1 skill 2 rejected: Piercing Strike unlocks at level 3
+[14:53:48] [SERVER] [chat] [Meadow] Bot2: Hello from Bot2!
+[14:53:48] [SERVER] [chat] [Meadow] Bot1: Hello from Bot1!
+[14:53:48] [SERVER] [meadow] Bot1 equipped steel_sword (attack 5, defense 1)
+[14:53:48] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 3 with Frost Bolt -> hp 5/8
+[14:53:49] [SERVER] [meadow] Bot2 skill 2 rejected: Healing Rain unlocks at level 3
+[14:53:49] [SERVER] [meadow] Bot1 skill 3 rejected: Blade Focus unlocks at level 6
+[14:53:49] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 3 with Frost Bolt -> hp 2/8
+[14:53:49] [SERVER] [meadow] Bot1 took 4 damage from Slime (hp 28/32)
+[14:53:49] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 5 -> hp 0/8
+[14:53:49] [SERVER] [meadow] Bot2 gained 14 XP (24/20)
+[14:53:49] [SERVER] [meadow] Bot2 reached level 2 (max hp 33, attack 4)
+[14:53:49] [SERVER] [chat] * Bot2 reached level 2!
+[14:53:49] [SERVER] [meadow] Bot1 gained 14 XP (14/20)
+[14:53:49] [SERVER] [meadow] Slime(Lv2) was slain by Bot2, Bot1 (+14 XP each)
+[14:53:49] [SERVER] [meadow] Slime dropped: gold x9, slime_gel x1, health_potion x1
+[14:53:49] [SERVER] [meadow] Bot2 picked up 9 x gold
+[14:53:49] [SERVER] [meadow] Bot2 picked up 1 x slime_gel
+[14:53:49] [SERVER] [meadow] Bot2 picked up 1 x health_potion
+[14:53:49] [SERVER] status: meadow: players=["Bot2(Lv2 33/33hp 58/58mp water)", "Bot1(Lv1 28/32hp 22/30mp metal)"] monsters=8/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:53:49] [SERVER] [meadow] Bot1 took 3 damage from Slime (hp 25/32)
+[14:53:49] [SERVER] [meadow] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:53:49] [SERVER] [meadow] Bot2 hit Slime(Lv1) for 4 with Frost Bolt -> hp 2/6
+[14:53:49] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 5 -> hp 0/6
+[14:53:49] [SERVER] [meadow] Bot2 gained 10 XP (14/40)
+[14:53:49] [SERVER] [meadow] Bot1 gained 10 XP (24/20)
+[14:53:49] [SERVER] [meadow] Bot1 reached level 2 (max hp 39, attack 6)
+[14:53:49] [SERVER] [chat] * Bot1 reached level 2!
+[14:53:49] [SERVER] [meadow] Slime(Lv1) was slain by Bot2, Bot1 (+10 XP each)
+[14:53:49] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1, wooden_shield x1
+[14:53:49] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:53:49] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:53:49] [SERVER] [meadow] Bot2 picked up 1 x slime_gel
+[14:53:49] [SERVER] [meadow] Bot2 picked up 1 x health_potion
+[14:53:49] [SERVER] [meadow] Bot2 picked up 1 x wooden_shield
+[14:53:50] [SERVER] [meadow] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:53:50] [SERVER] [meadow] Bot1 skill 1 rejected: Whirling Blade is on cooldown (0.8s)
+[14:53:50] [SERVER] [meadow] Bot2 equipped wooden_shield (attack 4, defense 1)
+[14:53:51] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 6 -> hp 0/6
+[14:53:51] [SERVER] [meadow] Bot1 gained 10 XP (14/40)
+[14:53:51] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:53:51] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1
+[14:53:51] [SERVER] [meadow] Bot2 picked up 1 x slime_gel
+[14:53:51] [SERVER] [meadow] Bot2 picked up 7 x gold
+[14:53:51] [SERVER] [meadow] Bot2 picked up 1 x health_potion
+[14:53:51] [SERVER] [meadow] Bot2 cast Ice Shard (mp 50/58, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:53:51] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 6 -> hp 2/8
+[14:53:51] [SERVER] [meadow] Bot1 skill 2 rejected: Piercing Strike unlocks at level 3
+[14:53:51] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 6 with Ice Shard -> hp 0/8
+[14:53:51] [SERVER] [meadow] Bot1 gained 14 XP (28/40)
+[14:53:51] [SERVER] [meadow] Bot2 gained 14 XP (28/40)
+[14:53:51] [SERVER] [meadow] Slime(Lv2) was slain by Bot1, Bot2 (+14 XP each)
+[14:53:51] [SERVER] [meadow] Slime dropped: gold x9, slime_gel x1, wooden_shield x1
+[14:53:51] [SERVER] [meadow] Bot1 picked up 9 x gold
+[14:53:51] [SERVER] [meadow] Bot1 picked up 1 x wooden_shield
+[14:53:51] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:53:51] [SERVER] [meadow] Bot1 equipped wooden_shield (attack 6, defense 2)
+[14:53:52] [SERVER] [meadow] Bot2 skill 2 rejected: Healing Rain unlocks at level 3
+[14:53:52] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 6 -> hp 2/8
+[14:53:52] [SERVER] [meadow] Bot1 skill 3 rejected: Blade Focus unlocks at level 6
+[14:53:52] [SERVER] [meadow] Bot1 took 3 damage from Slime (hp 36/39)
+[14:53:52] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 4 with Frost Bolt -> hp 0/8
+[14:53:52] [SERVER] [meadow] Bot1 gained 14 XP (42/40)
+[14:53:52] [SERVER] [meadow] Bot1 unlocked skill 2: Piercing Strike (level 3)
+[14:53:52] [SERVER] [meadow] Bot1 reached level 3 (max hp 46, attack 8)
+[14:53:52] [SERVER] [chat] * Bot1 reached level 3!
+[14:53:52] [SERVER] [meadow] Bot2 gained 14 XP (42/40)
+[14:53:52] [SERVER] [meadow] Bot2 unlocked skill 2: Healing Rain (level 3)
+[14:53:52] [SERVER] [meadow] Bot2 reached level 3 (max hp 39, attack 5)
+[14:53:52] [SERVER] [chat] * Bot2 reached level 3!
+[14:53:52] [SERVER] [meadow] Slime(Lv2) was slain by Bot1, Bot2 (+14 XP each)
+[14:53:52] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1
+[14:53:52] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:53:52] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:53:52] [SERVER] [meadow] Bot1 picked up 11 x gold
+[14:53:52] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 63/63mp water)", "Bot1(Lv3 46/46hp 36/36mp metal)"] monsters=4/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:53:54] [SERVER] [meadow] Slime(Lv1) respawned at (1680, 976)
+[14:53:54] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 8 -> hp 0/6
+[14:53:54] [SERVER] [meadow] Bot1 gained 10 XP (12/60)
+[14:53:54] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:53:54] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1
+[14:53:54] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:53:54] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:53:54] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:53:55] [SERVER] [meadow] Slime(Lv2) respawned at (1744, 816)
+[14:53:55] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 63/63mp water)", "Bot1(Lv3 46/46hp 36/36mp metal)"] monsters=5/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:53:55] [SERVER] [meadow] Slime(Lv1) respawned at (720, 656)
+[14:53:56] [SERVER] [meadow] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:53:56] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:53:56] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 5 with Frost Bolt -> hp 3/8
+[14:53:57] [SERVER] [meadow] Slime(Lv1) respawned at (752, 592)
+[14:53:57] [SERVER] [meadow] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:53:57] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 13 with Whirling Blade -> hp 0/8
+[14:53:57] [SERVER] [meadow] Bot2 gained 14 XP (16/60)
+[14:53:57] [SERVER] [meadow] Bot1 gained 14 XP (26/60)
+[14:53:57] [SERVER] [meadow] Slime(Lv2) was slain by Bot2, Bot1 (+14 XP each)
+[14:53:57] [SERVER] [meadow] Slime dropped: gold x10, slime_gel x1, health_potion x1, wooden_shield x1
+[14:53:57] [SERVER] [meadow] Bot1 cast Whirling Blade (mp 24/36, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:53:57] [SERVER] [meadow] Bot2 picked up 10 x gold
+[14:53:57] [SERVER] [meadow] Bot2 picked up 1 x slime_gel
+[14:53:57] [SERVER] [meadow] Bot2 picked up 1 x wooden_shield
+[14:53:57] [SERVER] [meadow] Bot2 picked up 1 x health_potion
+[14:53:57] [SERVER] [meadow] Slime(Lv2) respawned at (688, 368)
+[14:53:58] [SERVER] [meadow] Slime(Lv2) respawned at (720, 912)
+[14:53:58] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 63/63mp water)", "Bot1(Lv3 46/46hp 27/36mp metal)"] monsters=8/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:00] [SERVER] [meadow] Slime(Lv1) respawned at (144, 912)
+[14:54:01] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 63/63mp water)", "Bot1(Lv3 46/46hp 33/36mp metal)"] monsters=9/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:03] [SERVER] [meadow] Slime(Lv2) respawned at (1104, 272)
+[14:54:03] [SERVER] [meadow] Bot2 cast Ice Shard (mp 55/63, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:03] [SERVER] [meadow] Bot2 hit Slime(Lv1) for 5 with Frost Bolt -> hp 1/6
+[14:54:04] [SERVER] [meadow] Bot2 hit Slime(Lv1) for 7 with Ice Shard -> hp 0/6
+[14:54:04] [SERVER] [meadow] Bot2 gained 10 XP (26/60)
+[14:54:04] [SERVER] [meadow] Slime(Lv1) was slain by Bot2 (+10 XP each)
+[14:54:04] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1
+[14:54:04] [SERVER] [meadow] Bot2 picked up 1 x health_potion
+[14:54:04] [SERVER] [meadow] Bot2 picked up 1 x slime_gel
+[14:54:04] [SERVER] [meadow] Bot2 picked up 7 x gold
+[14:54:04] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 61/63mp water)", "Bot1(Lv3 46/46hp 36/36mp metal)"] monsters=9/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:05] [SERVER] [meadow] Bot2 cast Healing Rain (mp 38/63, cd 10s) [cost 25, cd 10.0s]
+[14:54:05] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 5 with Frost Bolt -> hp 3/8
+[14:54:06] [SERVER] [meadow] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:06] [SERVER] [meadow] Bot2 hit Slime(Lv2) for 9 with Frost Bolt CRIT -> hp 0/8
+[14:54:06] [SERVER] [meadow] Bot2 gained 14 XP (40/60)
+[14:54:06] [SERVER] [meadow] Slime(Lv2) was slain by Bot2 (+14 XP each)
+[14:54:06] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1
+[14:54:06] [SERVER] Zone transfer: Bot1 meadow -> forest at (149, 650)
+[14:54:07] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 53/63mp water)"] monsters=8/10 loot=3 | forest: players=["Bot1(Lv3 46/46hp 36/36mp metal)"] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:09] [SERVER] [forest] Bot1 cast Piercing Strike (mp 18/36, cd 7s) [cost 18, cd 7.0s, x2.20]
+[14:54:10] [SERVER] [forest] Bot1 skill 3 rejected: Blade Focus unlocks at level 6
+[14:54:10] [SERVER] [meadow] Slime(Lv1) respawned at (336, 464)
+[14:54:10] [SERVER] [forest] Bot1 took 3 damage from Cave Bat (hp 43/46) [Fire>Metal x1.25]
+[14:54:10] [SERVER] [forest] Bot1 hit Cave Bat(Lv3) for 6 [Metal<Fire x0.80] -> hp 7/13
+[14:54:10] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 63/63mp water)"] monsters=9/10 loot=3 | forest: players=["Bot1(Lv3 43/46hp 21/36mp metal)"] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:10] [SERVER] [forest] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:10] [SERVER] [forest] Bot1 hit Cave Bat(Lv3) for 6 [Metal<Fire x0.80] -> hp 1/13
+[14:54:11] [SERVER] [forest] Bot1 hit Cave Bat(Lv3) for 6 [Metal<Fire x0.80] -> hp 0/13
+[14:54:11] [SERVER] [forest] Bot1 gained 18 XP (44/60)
+[14:54:11] [SERVER] [forest] Cave Bat(Lv3) was slain by Bot1 (+18 XP each)
+[14:54:11] [SERVER] [forest] Cave Bat dropped: gold x9, health_potion x1
+[14:54:11] [SERVER] [forest] Bot1 picked up 9 x gold
+[14:54:11] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:11] [SERVER] [forest] Bot1 cast Whirling Blade (mp 11/36, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:54:12] [SERVER] [meadow] Slime(Lv2) respawned at (880, 208)
+[14:54:12] [SERVER] [forest] Bot1 took 2 damage from Dire Rat (hp 41/46)
+[14:54:12] [SERVER] [forest] Bot1 skill 2 rejected: Piercing Strike is on cooldown (3.8s)
+[14:54:12] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 8 -> hp 10/18
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 8 -> hp 2/18
+[14:54:13] [SERVER] [forest] Bot1 skill 3 rejected: Blade Focus unlocks at level 6
+[14:54:13] [SERVER] [forest] Bot1 took 2 damage from Dire Rat (hp 39/46)
+[14:54:13] [SERVER] [forest] Bot1 took 2 damage from Dire Rat (hp 37/46)
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 8 -> hp 18/26
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 8 -> hp 10/18
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 14 CRIT -> hp 0/18
+[14:54:13] [SERVER] [forest] Bot1 gained 18 XP (62/60)
+[14:54:13] [SERVER] [forest] Bot1 reached level 4 (max hp 53, attack 9)
+[14:54:13] [SERVER] [chat] * Bot1 reached level 4!
+[14:54:13] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot1 (+18 XP each)
+[14:54:13] [SERVER] [forest] Dire Rat dropped: gold x9, health_potion x1
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 9 -> hp 9/18
+[14:54:13] [SERVER] [forest] Bot1 picked up 9 x gold
+[14:54:13] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:13] [SERVER] [forest] Bot1 took 2 damage from Dire Rat (hp 51/53)
+[14:54:13] [SERVER] [forest] Bot1 took 5 damage from Dire Rat (hp 46/53)
+[14:54:13] [SERVER] Saved 2 online player(s) to /workspace/project-volam/test-logs/accounts.json (periodic)
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 9/26
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 9 -> hp 1/18
+[14:54:13] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 9 -> hp 0/18
+[14:54:13] [SERVER] [forest] Bot1 gained 18 XP (20/80)
+[14:54:13] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot1 (+18 XP each)
+[14:54:13] [SERVER] [forest] Dire Rat dropped: gold x9, health_potion x1, steel_sword x1
+[14:54:13] [SERVER] [forest] Bot1 picked up 9 x gold
+[14:54:13] [SERVER] [forest] Bot1 picked up 1 x steel_sword
+[14:54:13] [SERVER] status: meadow: players=["Bot2(Lv3 39/39hp 63/63mp water)"] monsters=10/10 loot=3 | forest: players=["Bot1(Lv4 46/53hp 39/39mp metal)"] monsters=21/24 loot=1 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:13] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:14] [SERVER] [forest] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:14] [SERVER] [forest] Bot1 took 5 damage from Dire Rat (hp 41/53)
+[14:54:14] [SERVER] Zone transfer: Bot2 meadow -> forest at (155, 658)
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 16 CRIT -> hp 0/26
+[14:54:14] [SERVER] [forest] Bot1 gained 26 XP (46/80)
+[14:54:14] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:14] [SERVER] [forest] Dire Rat dropped: gold x17, health_potion x1
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 17/26
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 9 -> hp 0/18
+[14:54:14] [SERVER] [forest] Bot1 gained 18 XP (64/80)
+[14:54:14] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot1 (+18 XP each)
+[14:54:14] [SERVER] [forest] Dire Rat dropped: gold x9, health_potion x1
+[14:54:14] [SERVER] [forest] Bot1 picked up 17 x gold
+[14:54:14] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:14] [SERVER] [forest] Bot1 picked up 9 x gold
+[14:54:14] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 17/26
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 9 -> hp 13/22
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 9 -> hp 13/22
+[14:54:14] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 16 CRIT -> hp 1/26
+[14:54:14] [SERVER] [forest] Bot1 took 3 damage from Dire Rat (hp 38/53)
+[14:54:14] [SERVER] [forest] Bot1 took 5 damage from Dire Rat (hp 33/53)
+[14:54:14] [SERVER] [forest] Bot1 skill 1 rejected: Whirling Blade is on cooldown (0.8s)
+[14:54:14] [SERVER] [forest] Bot1 took 3 damage from Dire Rat (hp 30/53)
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 8/26
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 17/26
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 9 -> hp 13/22
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 9 -> hp 4/22
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 9 -> hp 4/22
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 17/26
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 9 -> hp 0/26
+[14:54:15] [SERVER] [forest] Bot1 gained 26 XP (90/80)
+[14:54:15] [SERVER] [forest] Bot1 reached level 5 (max hp 60, attack 10)
+[14:54:15] [SERVER] [chat] * Bot1 reached level 5!
+[14:54:15] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x14
+[14:54:15] [SERVER] [forest] Bot1 picked up 14 x gold
+[14:54:15] [SERVER] [forest] Bot1 took 5 damage from Dire Rat (hp 55/60)
+[14:54:15] [SERVER] [forest] Bot1 took 3 damage from Dire Rat (hp 52/60)
+[14:54:15] [SERVER] [forest] Bot1 took 5 damage from Dire Rat (hp 47/60)
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 10 -> hp 16/26
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 10 -> hp 0/26
+[14:54:15] [SERVER] [forest] Bot1 gained 26 XP (36/100)
+[14:54:15] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x15, health_potion x1
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 10 -> hp 7/26
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 18 CRIT -> hp 0/22
+[14:54:15] [SERVER] [forest] Bot1 gained 22 XP (58/100)
+[14:54:15] [SERVER] [forest] Dire Rat(Lv4) was slain by Bot1 (+22 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x11
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 18 CRIT -> hp 0/22
+[14:54:15] [SERVER] [forest] Bot1 gained 22 XP (80/100)
+[14:54:15] [SERVER] [forest] Dire Rat(Lv4) was slain by Bot1 (+22 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x9, health_potion x1
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv4) for 10 -> hp 0/22
+[14:54:15] [SERVER] [forest] Bot1 gained 22 XP (102/100)
+[14:54:15] [SERVER] [forest] Bot1 unlocked skill 3: Blade Focus (level 6)
+[14:54:15] [SERVER] [forest] Bot1 reached level 6 (max hp 67, attack 12)
+[14:54:15] [SERVER] [chat] * Bot1 reached level 6!
+[14:54:15] [SERVER] [forest] Dire Rat(Lv4) was slain by Bot1 (+22 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x14, health_potion x1
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 12 -> hp 5/26
+[14:54:15] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:15] [SERVER] [forest] Bot1 picked up 9 x gold
+[14:54:15] [SERVER] [forest] Bot1 picked up 14 x gold
+[14:54:15] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:15] [SERVER] [forest] Bot1 picked up 15 x gold
+[14:54:15] [SERVER] [forest] Bot1 picked up 11 x gold
+[14:54:15] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:15] [SERVER] [forest] Bot1 skill 2 rejected: Piercing Strike is on cooldown (0.5s)
+[14:54:15] [SERVER] [forest] Bot1 took 4 damage from Dire Rat (hp 63/67)
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 12 -> hp 4/26
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 12 -> hp 0/26
+[14:54:15] [SERVER] [forest] Bot1 gained 26 XP (28/120)
+[14:54:15] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x11, health_potion x1
+[14:54:15] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 12 -> hp 0/26
+[14:54:15] [SERVER] [forest] Bot1 gained 26 XP (54/120)
+[14:54:15] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:15] [SERVER] [forest] Dire Rat dropped: gold x17, steel_sword x1
+[14:54:15] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:15] [SERVER] [forest] Bot1 picked up 17 x gold
+[14:54:15] [SERVER] [forest] Bot1 picked up 1 x steel_sword
+[14:54:15] [SERVER] [forest] Bot1 picked up 11 x gold
+[14:54:16] [SERVER] [forest] Bot1 hit Dire Rat(Lv5) for 21 CRIT -> hp 0/26
+[14:54:16] [SERVER] [forest] Bot1 gained 26 XP (80/120)
+[14:54:16] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:16] [SERVER] [forest] Dire Rat dropped: gold x20, health_potion x1
+[14:54:16] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:16] [SERVER] [forest] Bot1 picked up 20 x gold
+[14:54:16] [SERVER] [forest] Bot1 gains Blade Focus (+40% crit, +25% attack, 6s)
+[14:54:16] [SERVER] [forest] Bot1 cast Blade Focus (mp 25/45, cd 18s) [cost 20, cd 18.0s]
+[14:54:16] [SERVER] status: meadow: players=[] monsters=10/10 loot=3 | forest: players=["Bot1(Lv6 63/67hp 26/45mp metal)", "Bot2(Lv3 39/39hp 63/63mp water)"] monsters=11/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:17] [SERVER] [forest] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:17] [SERVER] [forest] Bot1 hit Cave Bat(Lv5) for 21 CRIT [Metal<Fire x0.80] -> hp 0/19
+[14:54:17] [SERVER] [forest] Bot1 gained 26 XP (106/120)
+[14:54:17] [SERVER] [forest] Cave Bat(Lv5) was slain by Bot1 (+26 XP each)
+[14:54:17] [SERVER] [forest] Cave Bat dropped: gold x18, health_potion x1
+[14:54:18] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:18] [SERVER] [forest] Bot1 picked up 18 x gold
+[14:54:19] [SERVER] [forest] Cave Bat(Lv3) respawned at (1744, 208)
+[14:54:19] [SERVER] status: meadow: players=[] monsters=10/10 loot=3 | forest: players=["Bot1(Lv6 63/67hp 32/45mp metal)", "Bot2(Lv3 39/39hp 63/63mp water)"] monsters=11/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:22] [SERVER] status: meadow: players=[] monsters=10/10 loot=3 | forest: players=["Bot1(Lv6 63/67hp 44/45mp metal)", "Bot2(Lv3 39/39hp 63/63mp water)"] monsters=11/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:23] [SERVER] [forest] Dire Rat(Lv3) respawned at (624, 656)
+[14:54:23] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:23] [SERVER] [forest] Dire Rat(Lv3) respawned at (944, 464)
+[14:54:23] [SERVER] [forest] Bot2 hit Cave Bat(Lv4) for 6 with Frost Bolt [Water>Fire x1.25] -> hp 10/16
+[14:54:24] [SERVER] [forest] Bot2 hit Cave Bat(Lv4) for 6 with Frost Bolt [Water>Fire x1.25] -> hp 4/16
+[14:54:24] [SERVER] [forest] Dire Rat(Lv5) respawned at (1136, 624)
+[14:54:24] [SERVER] [forest] Dire Rat(Lv3) respawned at (1392, 432)
+[14:54:24] [SERVER] [forest] Bot2 cast Ice Shard (mp 55/63, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:24] [SERVER] [forest] Bot1 cast Whirling Blade (mp 33/45, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:54:24] [SERVER] [forest] Bot2 took 4 damage from Dire Rat (hp 35/39) [Earth>Water x1.25]
+[14:54:24] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 6 with Ice Shard [Water<Earth x0.80] -> hp 12/18
+[14:54:24] [SERVER] [forest] Dire Rat is slowed by 40% (3.0s) by Bot2
+[14:54:24] [SERVER] [forest] Bot2 took 3 damage from Cave Bat (hp 32/39) [Fire<Water x0.80]
+[14:54:24] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 12 -> hp 6/18
+[14:54:24] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 4 with Frost Bolt [Water<Earth x0.80] -> hp 8/18
+[14:54:25] [SERVER] [forest] Dire Rat(Lv5) respawned at (560, 848)
+[14:54:25] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 12 -> hp 0/18
+[14:54:25] [SERVER] [forest] Bot1 gained 18 XP (124/120)
+[14:54:25] [SERVER] [forest] Bot1 reached level 7 (max hp 74, attack 13)
+[14:54:25] [SERVER] [chat] * Bot1 reached level 7!
+[14:54:25] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot1 (+18 XP each)
+[14:54:25] [SERVER] [forest] Dire Rat dropped: gold x12, health_potion x1
+[14:54:25] [SERVER] [forest] Bot1 cast Piercing Strike (mp 30/48, cd 7s) [cost 18, cd 7.0s, x2.20]
+[14:54:25] [SERVER] [forest] Bot2 healed Bot2 for 7 (hp 39/39)
+[14:54:25] [SERVER] [forest] Bot2 cast Healing Rain (mp 31/63, cd 10s) [cost 25, cd 10.0s]
+[14:54:25] [SERVER] [forest] Dire Rat(Lv5) respawned at (880, 336)
+[14:54:25] [SERVER] [forest] Dire Rat(Lv4) respawned at (1168, 624)
+[14:54:25] [SERVER] [forest] Dire Rat(Lv4) respawned at (1296, 1040)
+[14:54:25] [SERVER] [forest] Dire Rat(Lv4) respawned at (1648, 368)
+[14:54:25] [SERVER] [forest] Bot2 took 4 damage from Dire Rat (hp 35/39) [Earth>Water x1.25]
+[14:54:25] [SERVER] [forest] Cave Bat(Lv5) respawned at (1392, 1072)
+[14:54:25] [SERVER] [forest] Bot1 picked up 1 x health_potion
+[14:54:25] [SERVER] [forest] Bot2 took 3 damage from Cave Bat (hp 32/39) [Fire<Water x0.80]
+[14:54:25] [SERVER] [forest] Bot1 picked up 12 x gold
+[14:54:25] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 4 with Frost Bolt [Water<Earth x0.80] -> hp 4/18
+[14:54:25] [SERVER] status: meadow: players=[] monsters=10/10 loot=3 | forest: players=["Bot1(Lv7 74/74hp 32/48mp metal)", "Bot2(Lv3 32/39hp 32/63mp water)"] monsters=20/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:25] [SERVER] [forest] Dire Rat(Lv5) respawned at (912, 464)
+[14:54:25] [SERVER] [forest] Dire Rat(Lv5) respawned at (912, 592)
+[14:54:26] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 13 -> hp 5/18
+[14:54:26] [SERVER] [forest] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:26] [SERVER] [forest] Bot1 skill 3 rejected: Blade Focus is on cooldown (8.3s)
+[14:54:26] [SERVER] [forest] Dire Rat(Lv5) respawned at (1488, 304)
+[14:54:26] [SERVER] [forest] Bot2 took 4 damage from Dire Rat (hp 28/39) [Earth>Water x1.25]
+[14:54:26] [SERVER] [forest] Bot1 hit Dire Rat(Lv3) for 13 -> hp 0/18
+[14:54:26] [SERVER] [forest] Bot1 gained 18 XP (22/140)
+[14:54:26] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot1 (+18 XP each)
+[14:54:26] [SERVER] [forest] Dire Rat dropped: gold x9, health_potion x1
+[14:54:26] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 4 with Frost Bolt [Water<Earth x0.80] -> hp 0/18
+[14:54:26] [SERVER] [forest] Bot2 gained 18 XP (58/60)
+[14:54:26] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot2 (+18 XP each)
+[14:54:26] [SERVER] [forest] Dire Rat dropped: gold x9, health_potion x1
+[14:54:26] [SERVER] [forest] Bot2 picked up 9 x gold
+[14:54:26] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:54:26] [SERVER] [forest] Bot2 took 3 damage from Cave Bat (hp 25/39) [Fire<Water x0.80]
+[14:54:26] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:27] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 39/39)
+[14:54:27] [SERVER] [forest] Bot2 hit Cave Bat(Lv4) for 6 with Frost Bolt [Water>Fire x1.25] -> hp 0/16
+[14:54:27] [SERVER] [forest] Bot2 gained 22 XP (80/60)
+[14:54:27] [SERVER] [forest] Bot2 reached level 4 (max hp 44, attack 6)
+[14:54:27] [SERVER] [chat] * Bot2 reached level 4!
+[14:54:27] [SERVER] [forest] Cave Bat(Lv4) was slain by Bot2 (+22 XP each)
+[14:54:27] [SERVER] [forest] Cave Bat dropped: gold x14, health_potion x1
+[14:54:27] [SERVER] [forest] Bot2 picked up 14 x gold
+[14:54:27] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:54:27] [SERVER] [forest] Bot2 cast Ice Shard (mp 60/68, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:28] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 7 with Ice Shard [Water<Earth x0.80] -> hp 19/26
+[14:54:28] [SERVER] [forest] Dire Rat is slowed by 40% (3.0s) by Bot2
+[14:54:28] [SERVER] [forest] Broodmother is now fighting Bot2
+[14:54:28] [SERVER] [forest] Broodmother summons spiderlings!
+[14:54:28] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 14/26
+[14:54:28] [SERVER] [forest] Bot2 took 8 damage from Dire Rat (hp 36/44) [Earth>Water x1.25]
+[14:54:28] [SERVER] [forest] Bot2 skill 2 rejected: Healing Rain is on cooldown (6.8s)
+[14:54:28] [SERVER] [forest] Bot2 took 8 damage from Wood Spider (hp 28/44)
+[14:54:28] [SERVER] status: meadow: players=[] monsters=10/10 loot=3 | forest: players=["Bot1(Lv7 74/74hp 42/48mp metal)", "Bot2(Lv4 28/44hp 62/68mp water)"] monsters=22/26 loot=2 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:28] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 9/26
+[14:54:29] [SERVER] [forest] Bot2 took 8 damage from Dire Rat (hp 20/44) [Earth>Water x1.25]
+[14:54:29] [SERVER] [forest] Bot2 took 5 damage from Spiderling (hp 15/44)
+[14:54:29] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 30/44)
+[14:54:29] [SERVER] [forest] Bot2 took 5 damage from Spiderling (hp 25/44)
+[14:54:29] [SERVER] [forest] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:29] [SERVER] [forest] Bot2 took 22 damage from Broodmother (hp 3/44)
+[14:54:29] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 4/26
+[14:54:29] [SERVER] [forest] Bot2 took 8 damage from Wood Spider (hp 0/44)
+[14:54:29] [SERVER] [forest] Bot2 died (respawn in 4s)
+[14:54:29] [SERVER] [chat] * Bot2 was defeated by Wood Spider!
+[14:54:30] [SERVER] Zone transfer: Bot1 forest -> meadow at (1921, 656)
+[14:54:31] [SERVER] status: meadow: players=["Bot1(Lv7 74/74hp 48/48mp metal)"] monsters=10/10 loot=3 | forest: players=["Bot2(Lv4 0/44hp 64/68mp water DEAD)"] monsters=22/26 loot=2 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:33] [SERVER] [forest] Bot2 respawned at spawn point (210, 692)
+[14:54:34] [SERVER] status: meadow: players=["Bot1(Lv7 74/74hp 48/48mp metal)"] monsters=10/10 loot=3 | forest: players=["Bot2(Lv4 44/44hp 68/68mp water)"] monsters=22/26 loot=2 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:35] [SERVER] [forest] Dire Rat(Lv3) respawned at (1776, 272)
+[14:54:35] [SERVER] [forest] Cave Bat(Lv4) respawned at (1424, 848)
+[14:54:36] [SERVER] [forest] Dire Rat(Lv3) respawned at (1488, 880)
+[14:54:36] [SERVER] [forest] Dire Rat(Lv3) respawned at (624, 944)
+[14:54:37] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:37] [SERVER] [forest] Bot2 picked up 9 x gold
+[14:54:37] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:54:37] [SERVER] [meadow] Bot1 took 1 damage from Slime (hp 73/74)
+[14:54:37] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 23 CRIT -> hp 0/8
+[14:54:37] [SERVER] [meadow] Bot1 gained 14 XP (36/140)
+[14:54:37] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:54:37] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1
+[14:54:37] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:54:37] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:37] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:37] [SERVER] status: meadow: players=["Bot1(Lv7 73/74hp 48/48mp metal)"] monsters=9/10 loot=3 | forest: players=["Bot2(Lv4 44/44hp 68/68mp water)"] monsters=26/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:38] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 21/26
+[14:54:38] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:38] [SERVER] [meadow] Bot1 cast Whirling Blade (mp 36/48, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:54:38] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 16/26
+[14:54:38] [SERVER] [forest] Bot2 took 8 damage from Dire Rat (hp 36/44) [Earth>Water x1.25]
+[14:54:38] [SERVER] [meadow] Bot1 took 1 damage from Slime (hp 72/74)
+[14:54:38] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 13 -> hp 0/6
+[14:54:38] [SERVER] [meadow] Bot1 gained 10 XP (46/140)
+[14:54:38] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:54:38] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1
+[14:54:38] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 13 -> hp 0/8
+[14:54:38] [SERVER] [meadow] Bot1 gained 14 XP (60/140)
+[14:54:38] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:54:38] [SERVER] [meadow] Slime dropped: gold x9, slime_gel x1, health_potion x1
+[14:54:38] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:54:38] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:38] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:38] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:39] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 11/26
+[14:54:39] [SERVER] [forest] Bot2 cast Ice Shard (mp 60/68, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:39] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 7 with Ice Shard [Water<Earth x0.80] -> hp 4/26
+[14:54:39] [SERVER] [forest] Dire Rat is slowed by 40% (3.0s) by Bot2
+[14:54:39] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:39] [SERVER] [meadow] Bot1 picked up 9 x gold
+[14:54:39] [SERVER] [forest] Bot2 took 8 damage from Dire Rat (hp 28/44) [Earth>Water x1.25]
+[14:54:39] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 0/26
+[14:54:39] [SERVER] [forest] Bot2 gained 26 XP (46/80)
+[14:54:39] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot2 (+26 XP each)
+[14:54:39] [SERVER] [forest] Dire Rat dropped: gold x19, health_potion x1, iron_shield x1
+[14:54:39] [SERVER] [forest] Bot2 picked up 1 x iron_shield
+[14:54:39] [SERVER] [forest] Bot2 healed Bot2 for 11 (hp 39/44)
+[14:54:39] [SERVER] [forest] Bot2 cast Healing Rain (mp 36/68, cd 10s) [cost 25, cd 10.0s]
+[14:54:39] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:54:39] [SERVER] [forest] Bot2 picked up 19 x gold
+[14:54:40] [SERVER] [forest] Bot2 equipped iron_shield (attack 6, defense 3)
+[14:54:40] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 32/44) [Earth>Water x1.25]
+[14:54:40] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 21/26
+[14:54:40] [SERVER] [forest] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:40] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 50 with Piercing Strike CRIT -> hp 0/8
+[14:54:40] [SERVER] [meadow] Bot1 gained 14 XP (74/140)
+[14:54:40] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:54:40] [SERVER] [meadow] Slime dropped: gold x9, slime_gel x1, health_potion x1
+[14:54:40] [SERVER] [meadow] Bot1 cast Piercing Strike (mp 23/48, cd 7s) [cost 18, cd 7.0s, x2.20]
+[14:54:40] [SERVER] [meadow] Bot1 picked up 9 x gold
+[14:54:40] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:40] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:40] [SERVER] status: meadow: players=["Bot1(Lv7 72/74hp 23/48mp metal)"] monsters=6/10 loot=3 | forest: players=["Bot2(Lv4 32/44hp 38/68mp water)"] monsters=25/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:41] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 25/44) [Earth>Water x1.25]
+[14:54:41] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 40/44)
+[14:54:41] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 23 CRIT -> hp 0/8
+[14:54:41] [SERVER] [meadow] Bot1 gained 14 XP (88/140)
+[14:54:41] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:54:41] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1
+[14:54:41] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 16/26
+[14:54:41] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:41] [SERVER] [meadow] Bot1 gains Blade Focus (+40% crit, +25% attack, 6s)
+[14:54:41] [SERVER] [meadow] Bot1 cast Blade Focus (mp 4/48, cd 18s) [cost 20, cd 18.0s]
+[14:54:41] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:54:41] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:41] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:41] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 33/44) [Earth>Water x1.25]
+[14:54:42] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 26/44) [Earth>Water x1.25]
+[14:54:42] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 41/44)
+[14:54:42] [SERVER] [forest] Bot2 cast Ice Shard (mp 33/68, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:42] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 21/26
+[14:54:42] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 12 with Ice Shard CRIT [Water<Earth x0.80] -> hp 9/26
+[14:54:42] [SERVER] [forest] Dire Rat is slowed by 40% (3.0s) by Bot2
+[14:54:42] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:42] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 34/44) [Earth>Water x1.25]
+[14:54:42] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 27/44) [Earth>Water x1.25]
+[14:54:42] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 20/44) [Earth>Water x1.25]
+[14:54:42] [SERVER] [meadow] Bot1 took 1 damage from Slime (hp 71/74)
+[14:54:42] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 13/44) [Earth>Water x1.25]
+[14:54:43] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 16 -> hp 0/6
+[14:54:43] [SERVER] [meadow] Bot1 gained 10 XP (98/140)
+[14:54:43] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:54:43] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1
+[14:54:43] [SERVER] [meadow] Bot1 picked up 7 x gold
+[14:54:43] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:43] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:43] [SERVER] [forest] Bot2 skill 2 rejected: Healing Rain is on cooldown (6.8s)
+[14:54:43] [SERVER] [meadow] Bot1 skill 1 rejected: not enough mana for Whirling Blade (8/12)
+[14:54:43] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 4/26
+[14:54:43] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 28/44)
+[14:54:43] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 21/44) [Earth>Water x1.25]
+[14:54:43] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 14/44) [Earth>Water x1.25]
+[14:54:43] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 7/44) [Earth>Water x1.25]
+[14:54:43] [SERVER] Saved 2 online player(s) to /workspace/project-volam/test-logs/accounts.json (periodic)
+[14:54:43] [SERVER] [meadow] Slime(Lv2) respawned at (752, 720)
+[14:54:43] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 0/44) [Earth>Water x1.25]
+[14:54:43] [SERVER] [forest] Bot2 died (respawn in 4s)
+[14:54:43] [SERVER] [chat] * Bot2 was defeated by Dire Rat!
+[14:54:43] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 28 CRIT -> hp 0/6
+[14:54:43] [SERVER] [meadow] Bot1 gained 10 XP (108/140)
+[14:54:43] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:54:43] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1, health_potion x1
+[14:54:43] [SERVER] status: meadow: players=["Bot1(Lv7 71/74hp 10/48mp metal)"] monsters=4/10 loot=6 | forest: players=["Bot2(Lv4 0/44hp 36/68mp water DEAD)"] monsters=25/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:43] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:43] [SERVER] [meadow] Bot1 skill 2 rejected: Piercing Strike is on cooldown (3.8s)
+[14:54:44] [SERVER] [meadow] Bot1 picked up 6 x gold
+[14:54:44] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:44] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 28 CRIT -> hp 0/8
+[14:54:44] [SERVER] [meadow] Bot1 gained 14 XP (122/140)
+[14:54:44] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:54:44] [SERVER] [meadow] Slime dropped: gold x10, slime_gel x1, health_potion x1
+[14:54:44] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:44] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:44] [SERVER] [meadow] Bot1 picked up 10 x gold
+[14:54:44] [SERVER] [meadow] Slime(Lv1) respawned at (1104, 400)
+[14:54:44] [SERVER] [meadow] Slime(Lv2) respawned at (752, 176)
+[14:54:44] [SERVER] [meadow] Bot1 skill 3 rejected: Blade Focus is on cooldown (14.8s)
+[14:54:46] [SERVER] [meadow] Bot1 picked up 7 x gold
+[14:54:46] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:46] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:46] [SERVER] [meadow] Slime(Lv2) respawned at (1808, 272)
+[14:54:46] [SERVER] status: meadow: players=["Bot1(Lv7 71/74hp 16/48mp metal)"] monsters=6/10 loot=0 | forest: players=["Bot2(Lv4 0/44hp 36/68mp water DEAD)"] monsters=25/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:47] [SERVER] [meadow] Slime(Lv2) respawned at (816, 240)
+[14:54:47] [SERVER] [forest] Bot2 respawned at spawn point (190, 680)
+[14:54:49] [SERVER] [meadow] Slime(Lv1) respawned at (1552, 944)
+[14:54:49] [SERVER] [forest] Dire Rat(Lv5) respawned at (1136, 624)
+[14:54:49] [SERVER] [meadow] Slime(Lv1) respawned at (1744, 848)
+[14:54:49] [SERVER] status: meadow: players=["Bot1(Lv7 71/74hp 28/48mp metal)"] monsters=9/10 loot=0 | forest: players=["Bot2(Lv4 44/44hp 68/68mp water)"] monsters=26/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:50] [SERVER] [meadow] Slime(Lv2) respawned at (1200, 880)
+[14:54:50] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:50] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 13 -> hp 0/6
+[14:54:50] [SERVER] [meadow] Bot1 gained 10 XP (132/140)
+[14:54:50] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:54:50] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1
+[14:54:51] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:54:51] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:51] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:51] [SERVER] [forest] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:51] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 13/18
+[14:54:51] [SERVER] [forest] Bot2 took 3 damage from Dire Rat (hp 41/44) [Earth>Water x1.25]
+[14:54:51] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:51] [SERVER] [meadow] Bot1 cast Whirling Blade (mp 24/48, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:54:52] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 8 with Frost Bolt CRIT [Water<Earth x0.80] -> hp 5/18
+[14:54:52] [SERVER] [forest] Bot2 took 3 damage from Dire Rat (hp 38/44) [Earth>Water x1.25]
+[14:54:52] [SERVER] [forest] Bot2 cast Ice Shard (mp 60/68, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:52] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 7 with Ice Shard [Water<Earth x0.80] -> hp 0/18
+[14:54:52] [SERVER] [forest] Bot2 gained 18 XP (64/80)
+[14:54:52] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot2 (+18 XP each)
+[14:54:52] [SERVER] [forest] Dire Rat dropped: gold x10, health_potion x1
+[14:54:52] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 50 with Piercing Strike CRIT -> hp 0/6
+[14:54:52] [SERVER] [meadow] Bot1 gained 10 XP (142/140)
+[14:54:52] [SERVER] [meadow] Bot1 reached level 8 (max hp 81, attack 14)
+[14:54:52] [SERVER] [chat] * Bot1 reached level 8!
+[14:54:52] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:54:52] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, wooden_shield x1
+[14:54:52] [SERVER] [meadow] Bot1 cast Piercing Strike (mp 33/51, cd 7s) [cost 18, cd 7.0s, x2.20]
+[14:54:52] [SERVER] [forest] Bot2 picked up 10 x gold
+[14:54:52] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:54:52] [SERVER] status: meadow: players=["Bot1(Lv8 81/81hp 33/51mp metal)"] monsters=8/10 loot=3 | forest: players=["Bot2(Lv4 38/44hp 60/68mp water)"] monsters=25/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:53] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:54:53] [SERVER] [meadow] Bot1 picked up 1 x wooden_shield
+[14:54:53] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:53] [SERVER] [forest] Bot2 skill 2 rejected: Healing Rain is on cooldown (0.3s)
+[14:54:54] [SERVER] [forest] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:55] [SERVER] [meadow] Bot1 skill 3 rejected: Blade Focus is on cooldown (4.3s)
+[14:54:55] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:55] [SERVER] [meadow] Bot1 took 1 damage from Slime (hp 80/81)
+[14:54:55] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 14 -> hp 0/6
+[14:54:55] [SERVER] [meadow] Bot1 gained 10 XP (12/160)
+[14:54:55] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:54:55] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1, health_potion x1
+[14:54:55] [SERVER] [meadow] Bot1 picked up 6 x gold
+[14:54:55] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:55] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:54:55] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 31/44) [Earth>Water x1.25]
+[14:54:55] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 24/44) [Earth>Water x1.25]
+[14:54:55] [SERVER] status: meadow: players=["Bot1(Lv8 80/81hp 44/51mp metal)"] monsters=7/10 loot=0 | forest: players=["Bot2(Lv4 24/44hp 66/68mp water)"] monsters=25/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:56] [SERVER] [forest] Bot2 cast Ice Shard (mp 58/68, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:54:56] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 7 with Ice Shard [Water<Earth x0.80] -> hp 9/26
+[14:54:56] [SERVER] [forest] Dire Rat is slowed by 40% (3.0s) by Bot2
+[14:54:56] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 4/26
+[14:54:56] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 39/44)
+[14:54:56] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 32/44) [Earth>Water x1.25]
+[14:54:56] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 25/44) [Earth>Water x1.25]
+[14:54:56] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 18/44) [Earth>Water x1.25]
+[14:54:56] [SERVER] [forest] Bot2 healed Bot2 for 11 (hp 29/44)
+[14:54:56] [SERVER] [forest] Bot2 cast Healing Rain (mp 34/68, cd 10s) [cost 25, cd 10.0s]
+[14:54:56] [SERVER] [meadow] Slime(Lv1) respawned at (1360, 720)
+[14:54:56] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 5 with Frost Bolt [Water<Earth x0.80] -> hp 0/26
+[14:54:56] [SERVER] [forest] Bot2 gained 26 XP (90/80)
+[14:54:56] [SERVER] [forest] Bot2 reached level 5 (max hp 50, attack 8)
+[14:54:56] [SERVER] [chat] * Bot2 reached level 5!
+[14:54:56] [SERVER] [forest] Dire Rat(Lv5) was slain by Bot2 (+26 XP each)
+[14:54:56] [SERVER] [forest] Dire Rat dropped: gold x11, health_potion x1, iron_shield x1
+[14:54:56] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:54:56] [SERVER] [forest] Bot2 picked up 1 x iron_shield
+[14:54:56] [SERVER] [forest] Bot2 picked up 11 x gold
+[14:54:57] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 43/50) [Earth>Water x1.25]
+[14:54:57] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 36/50) [Earth>Water x1.25]
+[14:54:57] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 29/50) [Earth>Water x1.25]
+[14:54:57] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 22/50) [Earth>Water x1.25]
+[14:54:57] [SERVER] [forest] Bot2 skill 3 rejected: Frost Nova unlocks at level 6
+[14:54:57] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 6 with Frost Bolt [Water<Earth x0.80] -> hp 20/26
+[14:54:57] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 15/50) [Earth>Water x1.25]
+[14:54:57] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 8/50) [Earth>Water x1.25]
+[14:54:58] [SERVER] [forest] Bot2 used health_potion (+15 hp -> 23/50)
+[14:54:58] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 16/50) [Earth>Water x1.25]
+[14:54:58] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:54:58] [SERVER] [forest] Bot2 skill 4 rejected: Tidal Wave unlocks at level 10
+[14:54:58] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 9/50) [Earth>Water x1.25]
+[14:54:58] [SERVER] [forest] Bot2 hit Dire Rat(Lv5) for 6 with Frost Bolt [Water<Earth x0.80] -> hp 14/26
+[14:54:58] [SERVER] [meadow] Slime(Lv1) respawned at (688, 944)
+[14:54:58] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 2/50) [Earth>Water x1.25]
+[14:54:58] [SERVER] [forest] Bot2 took 7 damage from Dire Rat (hp 0/50) [Earth>Water x1.25]
+[14:54:58] [SERVER] [forest] Bot2 died (respawn in 4s)
+[14:54:58] [SERVER] [chat] * Bot2 was defeated by Dire Rat!
+[14:54:58] [SERVER] status: meadow: players=["Bot1(Lv8 80/81hp 50/51mp metal)"] monsters=9/10 loot=0 | forest: players=["Bot2(Lv5 0/50hp 74/74mp water DEAD)"] monsters=24/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:54:59] [SERVER] [meadow] Bot1 cast Whirling Blade (mp 39/51, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:54:59] [SERVER] [meadow] Bot1 took 1 damage from Slime (hp 79/81)
+[14:54:59] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 14 -> hp 0/8
+[14:54:59] [SERVER] [meadow] Bot1 gained 14 XP (26/160)
+[14:54:59] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:54:59] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, iron_sword x1
+[14:54:59] [SERVER] [meadow] Bot1 picked up 7 x gold
+[14:54:59] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:54:59] [SERVER] [meadow] Bot1 picked up 1 x iron_sword
+[14:55:00] [SERVER] [meadow] Bot1 hit Slime(Lv2) for 54 with Piercing Strike CRIT -> hp 0/8
+[14:55:00] [SERVER] [meadow] Bot1 gained 14 XP (40/160)
+[14:55:00] [SERVER] [meadow] Slime(Lv2) was slain by Bot1 (+14 XP each)
+[14:55:00] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1
+[14:55:00] [SERVER] [meadow] Bot1 cast Piercing Strike (mp 22/51, cd 7s) [cost 18, cd 7.0s, x2.20]
+[14:55:00] [SERVER] [meadow] Bot1 picked up 8 x gold
+[14:55:00] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:55:00] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:55:00] [SERVER] [meadow] Bot1 gains Blade Focus (+40% crit, +25% attack, 6s)
+[14:55:00] [SERVER] [meadow] Bot1 cast Blade Focus (mp 4/51, cd 18s) [cost 20, cd 18.0s]
+[14:55:01] [SERVER] [meadow] Bot1 skill 4 rejected: Thousand Cuts unlocks at level 10
+[14:55:01] [SERVER] [meadow] Slime(Lv1) respawned at (1392, 752)
+[14:55:01] [SERVER] status: meadow: players=["Bot1(Lv8 79/81hp 6/51mp metal)"] monsters=8/10 loot=0 | forest: players=["Bot2(Lv5 0/50hp 74/74mp water DEAD)"] monsters=24/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:55:02] [SERVER] [meadow] Bot1 hit Slime(Lv1) for 31 CRIT -> hp 0/6
+[14:55:02] [SERVER] [meadow] Bot1 gained 10 XP (50/160)
+[14:55:02] [SERVER] [meadow] Slime(Lv1) was slain by Bot1 (+10 XP each)
+[14:55:02] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1, health_potion x1, iron_shield x1
+[14:55:02] [SERVER] [meadow] Bot1 picked up 1 x slime_gel
+[14:55:02] [SERVER] [meadow] Bot1 picked up 1 x iron_shield
+[14:55:02] [SERVER] [meadow] Bot1 picked up 6 x gold
+[14:55:02] [SERVER] [meadow] Bot1 picked up 1 x health_potion
+[14:55:02] [SERVER] [forest] Dire Rat(Lv3) respawned at (208, 368)
+[14:55:02] [SERVER] [forest] Bot2 respawned at spawn point (185, 653)
+[14:55:03] [SERVER] [meadow] Bot1 equipped iron_shield (attack 14, defense 5)
+[14:55:04] [SERVER] [forest] Bot2 cast Ice Shard (mp 66/74, cd 2s) [cost 8, cd 2.0s, x1.40]
+[14:55:04] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 6 with Frost Bolt [Water<Earth x0.80] -> hp 12/18
+[14:55:04] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 9 with Ice Shard [Water<Earth x0.80] -> hp 3/18
+[14:55:04] [SERVER] [forest] Dire Rat is slowed by 40% (3.0s) by Bot2
+[14:55:04] [SERVER] [forest] Bot2 hit Dire Rat(Lv3) for 6 with Frost Bolt [Water<Earth x0.80] -> hp 0/18
+[14:55:04] [SERVER] [forest] Bot2 gained 18 XP (28/100)
+[14:55:04] [SERVER] [forest] Dire Rat(Lv3) was slain by Bot2 (+18 XP each)
+[14:55:04] [SERVER] [forest] Dire Rat dropped: gold x13, health_potion x1, iron_shield x1
+[14:55:04] [SERVER] [forest] Bot2 picked up 13 x gold
+[14:55:04] [SERVER] [forest] Bot2 picked up 1 x iron_shield
+[14:55:04] [SERVER] [forest] Bot2 picked up 1 x health_potion
+[14:55:04] [SERVER] status: meadow: players=["Bot1(Lv8 79/81hp 15/51mp metal)"] monsters=7/10 loot=0 | forest: players=["Bot2(Lv5 50/50hp 69/74mp water)"] monsters=24/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:55:05] [SERVER] [meadow] Bot1 cast Whirling Blade (mp 5/51, cd 4s) [cost 12, cd 4.0s, x1.60]
+[14:55:05] [SERVER] Peer 988575762 (Bot2) disconnected
+[14:55:05] [SERVER] [chat] * Bot2 left the world.
+[14:55:05] [SERVER] Peer 246734308 (Bot1) disconnected
+[14:55:05] [SERVER] [chat] * Bot1 left the world.
+[14:55:05] [SERVER] [meadow] Slime(Lv2) respawned at (688, 560)
+[14:55:06] [SERVER] [meadow] Slime(Lv2) respawned at (144, 1104)
+[14:55:06] [SERVER] [forest] Dire Rat(Lv5) respawned at (688, 976)
+[14:55:07] [SERVER] status: meadow: players=[] monsters=9/10 loot=0 | forest: players=[] monsters=25/26 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[14:55:08] [SERVER] [meadow] Slime(Lv1) respawned at (1744, 880)
+[14:55:09] [SERVER] quit-after reached, exiting
+[14:55:09] [SERVER] Saved 0 online player(s) to /workspace/project-volam/test-logs/accounts.json (shutdown)

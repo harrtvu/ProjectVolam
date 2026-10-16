@@ -1,0 +1,222 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT forestHunter2] Connecting to 127.0.0.1:7777 as 'forestHunter2' ...
+[14:55:59] [CLIENT forestHunter2] Connected to server as peer 1223439252, logging in
+[14:55:59] [CLIENT forestHunter2] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT forestHunter2] Class selection requested (new account)
+[14:55:59] [CLIENT forestHunter2] bot chooses class wood
+[14:55:59] [CLIENT forestHunter2] [chat] * forestHunter2 the Venom Druid joined the world.
+[14:55:59] [CLIENT forestHunter2] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT forestHunter2] Entered zone forest (Whisperwood Forest)
+[14:55:59] [CLIENT forestHunter2] [chat] * forestHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT forestHunter2] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT forestHunter2] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:55:59] [CLIENT forestHunter2] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT forestHunter2] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT forestHunter2] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:02] [CLIENT forestHunter2] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT forestHunter2] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT forestHunter2] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT forestHunter2] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT forestHunter2] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT forestHunter2] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT forestHunter2] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv20 158/158hp)@(536, 632), forestHunter1(Lv20 165/165hp)@(496, 574), forestHunter3(Lv20 132/132hp)@(543, 688) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:56:02] [CLIENT forestHunter2] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT forestHunter2] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT forestHunter2] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:03] [CLIENT forestHunter2] inventory: gold=254 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:04] [CLIENT forestHunter2] notice: Regrowth is on cooldown (8.8s)
+[14:56:04] [CLIENT forestHunter2] inventory: gold=257 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:05] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (8.8s)
+[14:56:05] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv20 158/158hp)@(561, 818), forestHunter1(Lv20 165/165hp)@(616, 622), forestHunter3(Lv20 131/132hp)@(460, 794) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:05] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (12.8s)
+[14:56:06] [CLIENT forestHunter2] inventory: gold=264 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:08] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv20 158/158hp)@(658, 675), forestHunter1(Lv20 165/165hp)@(880, 581), forestHunter3(Lv20 131/132hp)@(624, 735) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:11] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv20 158/158hp)@(954, 558), forestHunter1(Lv20 164/165hp)@(1101, 584), forestHunter3(Lv20 131/132hp)@(960, 557), Walker(Lv20 158/158hp)@(178, 656) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:12] [CLIENT forestHunter2] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT forestHunter2] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT forestHunter2] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:14] [CLIENT forestHunter2] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv20 158/158hp)@(1368, 425), forestHunter1(Lv20 164/165hp)@(1465, 377), forestHunter3(Lv20 132/132hp)@(1369, 426), Walker(Lv20 155/158hp)@(314, 323) | monsters: rat 11/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:15] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 21!
+[14:56:17] [CLIENT forestHunter2] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT forestHunter2] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT forestHunter2] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT forestHunter2] inventory: gold=264 inv={ "health_potion": 7, "greater_potion": 5, "venom_dagger": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:17] [CLIENT forestHunter2] inventory: gold=432 inv={ "health_potion": 7, "greater_potion": 5, "venom_dagger": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:17] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv20 158/158hp)@(1595, 336), forestHunter1(Lv21 172/172hp)@(1595, 335), forestHunter3(Lv21 138/138hp)@(1595, 338), Walker(Lv20 158/158hp)@(592, 238) | monsters: rat 11/12, bat 4/6, spider 5/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:56:17] [CLIENT forestHunter2] equipping venom_dagger
+[14:56:17] [CLIENT forestHunter2] inventory: gold=432 inv={ "health_potion": 7, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:18] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (0.7s)
+[14:56:20] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv20 158/158hp)@(1712, 272), forestHunter1(Lv21 172/172hp)@(1503, 305), forestHunter3(Lv21 138/138hp)@(1761, 259), Walker(Lv20 158/158hp)@(1011, 276) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=6 | foreign_entities=0
+[14:56:23] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT forestHunter2] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT forestHunter2] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT forestHunter2] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv20 158/158hp)@(1422, 82), forestHunter1(Lv21 172/172hp)@(1386, 135), forestHunter3(Lv21 138/138hp)@(1488, 175) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:23] [CLIENT forestHunter2] [chat] * cryptHunter3 reached level 22!
+[14:56:24] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 22!
+[14:56:26] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv20 158/158hp)@(1434, 543), forestHunter1(Lv21 172/172hp)@(1430, 538), forestHunter3(Lv21 138/138hp)@(1458, 560) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:27] [CLIENT forestHunter2] notice: Regrowth is on cooldown (0.7s)
+[14:56:28] [CLIENT forestHunter2] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (0.7s)
+[14:56:29] [CLIENT forestHunter2] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv21 165/165hp)@(1392, 844), forestHunter1(Lv21 172/172hp)@(1391, 866), forestHunter3(Lv21 138/138hp)@(1392, 786) | monsters: rat 8/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=6 | foreign_entities=0
+[14:56:29] [CLIENT forestHunter2] inventory: gold=432 inv={ "health_potion": 8, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:30] [CLIENT forestHunter2] inventory: gold=446 inv={ "health_potion": 8, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:30] [CLIENT forestHunter2] inventory: gold=455 inv={ "health_potion": 8, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:30] [CLIENT forestHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT forestHunter2] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv21 165/165hp)@(1421, 891), forestHunter1(Lv21 172/172hp)@(1421, 944), forestHunter3(Lv21 137/138hp)@(1442, 950) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:35] [CLIENT forestHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv21 165/165hp)@(1081, 729), forestHunter1(Lv21 172/172hp)@(1081, 729), forestHunter3(Lv21 137/138hp)@(1158, 781) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:35] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (9.5s)
+[14:56:37] [CLIENT forestHunter2] notice: Regrowth is on cooldown (6.4s)
+[14:56:37] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (7.2s)
+[14:56:38] [CLIENT forestHunter2] inventory: gold=455 inv={ "health_potion": 9, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:38] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv21 165/165hp)@(858, 530), forestHunter1(Lv21 172/172hp)@(780, 437), forestHunter3(Lv21 137/138hp)@(1283, 504) | monsters: rat 10/12, bat 6/6, spider 4/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:38] [CLIENT forestHunter2] inventory: gold=459 inv={ "health_potion": 9, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:39] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (6.3s)
+[14:56:40] [CLIENT forestHunter2] inventory: gold=472 inv={ "health_potion": 9, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:40] [CLIENT forestHunter2] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT forestHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv21 165/165hp)@(1248, 485), forestHunter1(Lv22 179/179hp)@(891, 379), forestHunter3(Lv21 138/138hp)@(1394, 400) | monsters: rat 12/12, bat 6/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:42] [CLIENT forestHunter2] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT forestHunter2] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:43] [CLIENT forestHunter2] notice: Regrowth is on cooldown (0.7s)
+[14:56:43] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (1.5s)
+[14:56:44] [CLIENT forestHunter2] inventory: gold=482 inv={ "health_potion": 9, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:44] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv21 165/165hp)@(1530, 326), forestHunter1(Lv22 179/179hp)@(1248, 486), forestHunter3(Lv21 96/138hp)@(1548, 320) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (0.7s)
+[14:56:44] [CLIENT forestHunter2] [chat] * cryptHunter3 reached level 23!
+[14:56:45] [CLIENT forestHunter2] inventory: gold=482 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:45] [CLIENT forestHunter2] inventory: gold=490 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:46] [CLIENT forestHunter2] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT forestHunter2] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT forestHunter2] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv22 171/171hp)@(1639, 336), forestHunter1(Lv22 179/179hp)@(1659, 336), forestHunter3(Lv22 143/143hp)@(1651, 336) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:50] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv22 171/171hp)@(1744, 582), forestHunter1(Lv22 179/179hp)@(1738, 634), forestHunter3(Lv22 143/143hp)@(1744, 590) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:53] [CLIENT forestHunter2] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT forestHunter2] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT forestHunter2] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT forestHunter2] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv22 171/171hp)@(1567, 897), forestHunter1(Lv22 179/179hp)@(1437, 1020), forestHunter3(Lv22 143/143hp)@(1526, 906) | monsters: rat 10/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:55] [CLIENT forestHunter2] inventory: gold=502 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:55] [CLIENT forestHunter2] notice: Regrowth is on cooldown (3.1s)
+[14:56:55] [CLIENT forestHunter2] [chat] * cryptHunter2 reached level 23!
+[14:56:55] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (8.8s)
+[14:56:56] [CLIENT forestHunter2] inventory: gold=511 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:56] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv22 169/171hp)@(1502, 912), forestHunter1(Lv22 179/179hp)@(1465, 912), forestHunter3(Lv22 140/143hp)@(1452, 880), Walker(Lv21 165/165hp)@(1004, 191) | monsters: rat 11/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:56] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (12.8s)
+[14:56:57] [CLIENT forestHunter2] inventory: gold=515 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:57] [CLIENT forestHunter2] inventory: gold=515 inv={ "health_potion": 11, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:56:57] [CLIENT forestHunter2] [chat] * cryptHunter3 reached level 24!
+[14:56:59] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv22 168/171hp)@(1712, 766), forestHunter1(Lv22 179/179hp)@(1712, 765), forestHunter3(Lv22 140/143hp)@(1712, 775), Walker(Lv21 163/165hp)@(847, 533) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:00] [CLIENT forestHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:01] [CLIENT forestHunter2] inventory: gold=521 inv={ "health_potion": 11, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:02] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv22 171/171hp)@(1584, 912), forestHunter1(Lv22 179/179hp)@(1611, 885), forestHunter3(Lv22 140/143hp)@(1604, 892), Walker(Lv21 162/165hp)@(480, 592) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:57:03] [CLIENT forestHunter2] inventory: gold=521 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:03] [CLIENT forestHunter2] inventory: gold=529 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:04] [CLIENT forestHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT forestHunter2] status: zone=forest players=4 forestHunter2(Lv22 171/171hp)@(1262, 747), forestHunter1(Lv22 179/179hp)@(1314, 770), forestHunter3(Lv22 143/143hp)@(1274, 749), Walker(Lv21 162/165hp)@(99, 688) | monsters: rat 11/12, bat 6/6, spider 4/5, broodmother 1/1 | loot=7 | foreign_entities=0
+[14:57:06] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (3.1s)
+[14:57:07] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT forestHunter2] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:08] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv22 171/171hp)@(1143, 784), forestHunter1(Lv22 179/179hp)@(1135, 780), forestHunter3(Lv22 143/143hp)@(1138, 783) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=6 | foreign_entities=0
+[14:57:11] [CLIENT forestHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv22 171/171hp)@(1289, 500), forestHunter1(Lv22 179/179hp)@(1294, 497), forestHunter3(Lv22 143/143hp)@(1331, 462) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=5 | foreign_entities=0
+[14:57:12] [CLIENT forestHunter2] inventory: gold=529 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:12] [CLIENT forestHunter2] inventory: gold=534 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:12] [CLIENT forestHunter2] inventory: gold=539 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:13] [CLIENT forestHunter2] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (2.3s)
+[14:57:14] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv22 171/171hp)@(1537, 356), forestHunter1(Lv22 179/179hp)@(1553, 337), forestHunter3(Lv22 143/143hp)@(1537, 356) | monsters: rat 12/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=9 | foreign_entities=0
+[14:57:14] [CLIENT forestHunter2] inventory: gold=544 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:15] [CLIENT forestHunter2] [chat] * forestHunter1 reached level 23!
+[14:57:15] [CLIENT forestHunter2] inventory: gold=554 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:16] [CLIENT forestHunter2] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT forestHunter2] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT forestHunter2] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:16] [CLIENT forestHunter2] notice: Regrowth is on cooldown (8.8s)
+[14:57:17] [CLIENT forestHunter2] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1713, 238), forestHunter1(Lv23 175/186hp)@(1710, 221), forestHunter3(Lv23 149/149hp)@(1713, 238) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:18] [CLIENT forestHunter2] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT forestHunter2] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT forestHunter2] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:20] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1739, 633), forestHunter1(Lv23 175/186hp)@(1736, 636), forestHunter3(Lv23 149/149hp)@(1739, 633) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:23] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (7.9s)
+[14:57:23] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1614, 913), forestHunter1(Lv23 175/186hp)@(1581, 939), forestHunter3(Lv23 149/149hp)@(1555, 915) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=7 | foreign_entities=0
+[14:57:25] [CLIENT forestHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1165, 889), forestHunter1(Lv23 177/186hp)@(1176, 944), forestHunter3(Lv23 149/149hp)@(1153, 919) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:29] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(796, 817), forestHunter1(Lv23 177/186hp)@(777, 823), forestHunter3(Lv23 149/149hp)@(791, 817) | monsters: rat 10/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:29] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (3.9s)
+[14:57:30] [CLIENT forestHunter2] inventory: gold=558 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:30] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT forestHunter2] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:30] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (0.7s)
+[14:57:31] [CLIENT forestHunter2] inventory: gold=565 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:32] [CLIENT forestHunter2] notice: Regrowth is on cooldown (8.8s)
+[14:57:32] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(587, 815), forestHunter1(Lv23 186/186hp)@(576, 816), forestHunter3(Lv23 148/149hp)@(515, 807) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:32] [CLIENT forestHunter2] inventory: gold=575 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:33] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (0.7s)
+[14:57:34] [CLIENT forestHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:35] [CLIENT forestHunter2] notice: Regrowth is on cooldown (5.5s)
+[14:57:35] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(595, 797), forestHunter1(Lv23 186/186hp)@(595, 768), forestHunter3(Lv23 148/149hp)@(591, 747) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:57:36] [CLIENT forestHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:38] [CLIENT forestHunter2] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (11.2s)
+[14:57:38] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(698, 592), forestHunter1(Lv23 186/186hp)@(683, 592), forestHunter3(Lv23 149/149hp)@(699, 592) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:40] [CLIENT forestHunter2] notice: Regrowth is on cooldown (0.7s)
+[14:57:40] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 26!
+[14:57:40] [CLIENT forestHunter2] inventory: gold=582 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:41] [CLIENT forestHunter2] inventory: gold=591 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:41] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(889, 339), forestHunter1(Lv23 186/186hp)@(882, 361), forestHunter3(Lv23 149/149hp)@(905, 348) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:42] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (5.5s)
+[14:57:44] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1169, 496), forestHunter1(Lv23 186/186hp)@(1255, 476), forestHunter3(Lv23 149/149hp)@(1203, 496) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (4.7s)
+[14:57:45] [CLIENT forestHunter2] [chat] * Walker reached level 22!
+[14:57:47] [CLIENT forestHunter2] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT forestHunter2] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT forestHunter2] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT forestHunter2] inventory: gold=591 inv={ "health_potion": 14, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:47] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (0.7s)
+[14:57:47] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1428, 400), forestHunter1(Lv24 193/193hp)@(1435, 388), forestHunter3(Lv23 149/149hp)@(1436, 384) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT forestHunter2] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT forestHunter2] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT forestHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:48] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (1.5s)
+[14:57:49] [CLIENT forestHunter2] notice: Regrowth is on cooldown (8.8s)
+[14:57:50] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1605, 368), forestHunter1(Lv24 183/193hp)@(1543, 306), forestHunter3(Lv24 154/154hp)@(1668, 349) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:57:51] [CLIENT forestHunter2] inventory: gold=591 inv={ "health_potion": 15, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:52] [CLIENT forestHunter2] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT forestHunter2] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT forestHunter2] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv23 178/178hp)@(1708, 668), forestHunter1(Lv24 183/193hp)@(1744, 611), forestHunter3(Lv24 154/154hp)@(1711, 704) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:53] [CLIENT forestHunter2] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT forestHunter2] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT forestHunter2] [chat] * frostHunter3 reached level 26!
+[14:57:56] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv24 184/184hp)@(1543, 801), forestHunter1(Lv24 184/193hp)@(1555, 872), forestHunter3(Lv24 154/154hp)@(1549, 832) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:57] [CLIENT forestHunter2] notice: Regrowth is on cooldown (1.5s)
+[14:57:58] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (8.0s)
+[14:57:58] [CLIENT forestHunter2] notice: Plague Bloom is on cooldown (12.8s)
+[14:57:59] [CLIENT forestHunter2] inventory: gold=591 inv={ "health_potion": 16, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:57:59] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv24 184/184hp)@(1396, 936), forestHunter1(Lv24 184/193hp)@(1391, 948), forestHunter3(Lv24 154/154hp)@(1395, 916) | monsters: rat 9/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:00] [CLIENT forestHunter2] inventory: gold=606 inv={ "health_potion": 16, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:58:01] [CLIENT forestHunter2] inventory: gold=612 inv={ "health_potion": 16, "greater_potion": 5, "apprentice_staff": 1, "steel_sword": 1 } equip={ "weapon": "venom_dagger", "armor": "" }
+[14:58:02] [CLIENT forestHunter2] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT forestHunter2] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT forestHunter2] status: zone=forest players=3 forestHunter2(Lv24 184/184hp)@(1326, 719), forestHunter1(Lv24 184/193hp)@(1325, 650), forestHunter3(Lv24 154/154hp)@(1323, 732) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:02] [CLIENT forestHunter2] notice: Entangling Roots is on cooldown (3.1s)
+[14:58:03] [CLIENT forestHunter2] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT forestHunter2] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT forestHunter2] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT forestHunter2] [chat] * frostHunter1 left the world.
+[14:58:03] [CLIENT forestHunter2] quit-after reached, exiting

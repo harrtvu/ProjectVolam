@@ -1,0 +1,475 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[16:35:26] [SERVER] Dedicated server listening on port 7777 (ENet/UDP). Saves: /workspace/project-volam/test-logs/accounts_p5.json (0 accounts)
+[16:35:26] [SERVER] Zone meadow ready: 10 monsters, 1864 reachable cells
+[16:35:26] [SERVER] [forest] boss Broodmother spawned
+[16:35:26] [SERVER] Zone forest ready: 24 monsters, 1541 reachable cells
+[16:35:26] [SERVER] [crypt] boss The Lich King spawned
+[16:35:26] [SERVER] Zone crypt ready: 18 monsters, 1166 reachable cells
+[16:35:26] [SERVER] [frost] boss Yeti King spawned
+[16:35:26] [SERVER] Zone frost ready: 16 monsters, 1898 reachable cells
+[16:35:28] [SERVER] Peer 240839100 connected, waiting for login
+[16:35:28] [SERVER] Peer 2061375756 connected, waiting for login
+[16:35:28] [SERVER] Created account 'FullBag'
+[16:35:28] [SERVER] (debug) new account 'FullBag' starts at level 13
+[16:35:28] [SERVER] Account 'FullBag' has no class yet - asking peer 240839100 to choose (new account)
+[16:35:28] [SERVER] Created account 'Smith'
+[16:35:28] [SERVER] (debug) new account 'Smith' starts at level 13
+[16:35:28] [SERVER] Account 'Smith' has no class yet - asking peer 2061375756 to choose (new account)
+[16:35:28] [SERVER] FullBag chose class earth (Stone Guardian, Earth (Thổ))
+[16:35:28] [SERVER] Login 'FullBag' (peer 240839100): NEW account - class earth, level 13, xp 0, hp 148/148, mp 66/66, gold 2500, items { "health_potion": 7, "greater_potion": 5, "orb_transmute": 12, "orb_alteration": 12, "orb_regal": 12, "orb_chaos": 12, "orb_exalt": 12, "orb_scour": 12, "enhance_stone": 30 }, equip {offhand=wooden_shield(normal)}, bag 40/40 [rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal), rope_belt(normal)], stash 0 [], zone meadow, pos (1072, 675), talent points 0/12 {  }
+[16:35:28] [SERVER] [chat] * FullBag the Stone Guardian joined the world.
+[16:35:28] [SERVER] Peer 74349569 connected, waiting for login
+[16:35:28] [SERVER] Smith chose class water (Frost Sage, Water (Thủy))
+[16:35:28] [SERVER] Login 'Smith' (peer 2061375756): NEW account - class water, level 13, xp 0, hp 94/94, mp 116/116, gold 2500, items { "health_potion": 7, "greater_potion": 5, "orb_transmute": 12, "orb_alteration": 12, "orb_regal": 12, "orb_chaos": 12, "orb_exalt": 12, "orb_scour": 12, "enhance_stone": 30 }, equip {weapon=apprentice_staff(normal)}, bag 20/40 [copper_ring(normal), iron_sword(normal), leather_cap(normal), sandals(normal), cloth_wraps(normal), copper_ring(unique), frost_aegis(unique), chain_mail(rare), lich_staff(rare), horned_helm(magic), leather_boots(rare)], stash 0 [], zone meadow, pos (1054, 645), talent points 0/12 {  }
+[16:35:28] [SERVER] [chat] * Smith the Frost Sage joined the world.
+[16:35:28] [SERVER] Created account 'Warden'
+[16:35:28] [SERVER] (debug) new account 'Warden' starts at level 13
+[16:35:28] [SERVER] Account 'Warden' has no class yet - asking peer 74349569 to choose (new account)
+[16:35:28] [SERVER] Warden chose class metal (Blade Master, Metal (Kim))
+[16:35:28] [SERVER] Login 'Warden' (peer 74349569): NEW account - class metal, level 13, xp 0, hp 116/116, mp 66/66, gold 2500, items { "health_potion": 7, "greater_potion": 5, "orb_transmute": 12, "orb_alteration": 12, "orb_regal": 12, "orb_chaos": 12, "orb_exalt": 12, "orb_scour": 12, "enhance_stone": 30 }, equip {weapon=iron_sword(normal)}, bag 20/40 [copper_ring(normal), iron_sword(normal), leather_cap(normal), sandals(normal), cloth_wraps(normal), copper_ring(unique), frost_aegis(unique), chain_mail(rare), lich_staff(rare), horned_helm(magic), leather_boots(rare)], stash 0 [], zone meadow, pos (1012, 664), talent points 0/12 {  }
+[16:35:28] [SERVER] [chat] * Warden the Blade Master joined the world.
+[16:35:29] [SERVER] [meadow] FullBag cast Ground Slam (mp 54/66, cd 6s) [cost 12, cd 6.0s, x1.20]
+[16:35:29] [SERVER] [meadow] Warden cast Whirling Blade (mp 54/66, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:35:29] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 54/66mp earth)", "Smith(Lv13 94/94hp 116/116mp water)", "Warden(Lv13 116/116hp 54/66mp metal)"] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:29] [SERVER] [meadow] FullBag unequip rejected: your bag is full (40/40)
+[16:35:29] [SERVER] [meadow] Warden equipped [normal] Copper Ring (copper_ring ilvl 12) in ring1 (attack 20, defense 5) | hp 116 mp 66 atk 20 def 5 crit 21.8% critx1.75 speed 168 -> hp 116 mp 71 atk 20 def 5 crit 21.8% critx1.75 speed 168 | res metal 0%, wood 0%, water 0%, fire 0%, earth 0%
+[16:35:30] [SERVER] [meadow] Warden took 1 damage from Slime (hp 115/116)
+[16:35:30] [SERVER] [meadow] FullBag raises Stone Skin (shield 44, 8s)
+[16:35:30] [SERVER] [meadow] FullBag cast Stone Skin (mp 40/66, cd 15s) [cost 20, cd 15.0s]
+[16:35:30] [SERVER] [meadow] FullBag hit Slime(Lv2) for 18 [Earth>Water x1.25] -> hp 0/8
+[16:35:30] [SERVER] [meadow] FullBag gained 14 XP (14/260)
+[16:35:30] [SERVER] [meadow] Slime(Lv2) was slain by FullBag (+14 XP each)
+[16:35:30] [SERVER] [meadow] Slime dropped: gold x9, slime_gel x1, health_potion x1 | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:30] [SERVER] [meadow] Warden picked up 9 x gold
+[16:35:30] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:30] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:30] [SERVER] [meadow] Warden cast Piercing Strike (mp 40/71, cd 7s) [cost 18, cd 7.0s, x2.20]
+[16:35:30] [SERVER] [meadow] Warden equipped [normal] Leather Cap (leather_cap ilvl 12) in helmet (attack 20, defense 6) | hp 116 mp 71 atk 20 def 5 crit 21.8% critx1.75 speed 168 -> hp 116 mp 71 atk 20 def 6 crit 21.8% critx1.75 speed 168 | res metal 0%, wood 0%, water 0%, fire 0%, earth 0%
+[16:35:30] [SERVER] [meadow] Slime is taunted by FullBag
+[16:35:30] [SERVER] [meadow] FullBag taunted 1 monster(s) and is fortified (+50% defense)
+[16:35:30] [SERVER] [meadow] FullBag cast Mountain's Challenge (mp 28/66, cd 12s) [cost 15, cd 12.0s]
+[16:35:30] [SERVER] [meadow] Warden gains Blade Focus (+40% crit, +25% attack, 6s)
+[16:35:30] [SERVER] [meadow] Warden cast Blade Focus (mp 21/71, cd 18s) [cost 20, cd 18.0s]
+[16:35:31] [SERVER] [chat] [Meadow] FullBag: Hello from FullBag!
+[16:35:31] [SERVER] [chat] [Meadow] Warden: Hello from Warden!
+[16:35:31] [SERVER] [meadow] Warden equipped [normal] Sandals (sandals ilvl 3) in boots (attack 20, defense 6) | hp 116 mp 71 atk 20 def 6 crit 21.8% critx1.75 speed 168 -> hp 116 mp 71 atk 20 def 6 crit 21.8% critx1.75 speed 173 | res metal 0%, wood 0%, water 0%, fire 0%, earth 0%
+[16:35:31] [SERVER] [meadow] FullBag's Stone Skin shield absorbs 1 (43 left)
+[16:35:31] [SERVER] [meadow] FullBag skill 4 rejected: not enough mana for Earthquake (34/35)
+[16:35:31] [SERVER] [meadow] FullBag hit Slime(Lv2) for 18 [Earth>Water x1.25] -> hp 0/8
+[16:35:31] [SERVER] [meadow] FullBag gained 14 XP (28/260)
+[16:35:31] [SERVER] [meadow] Slime(Lv2) was slain by FullBag (+14 XP each)
+[16:35:31] [SERVER] [meadow] Slime dropped: gold x10, slime_gel x1, health_potion x1 | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:31] [SERVER] [meadow] FullBag picked up 10 x gold
+[16:35:31] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:35:31] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:35:32] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:32] [SERVER] [meadow] Smith used Orb of Transmutation on [normal] Copper Ring (copper_ring ilvl 12) -> [magic] Sharp Copper Ring (copper_ring ilvl 12, 1 affixes) {dmg_flat 5}
+[16:35:32] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 35/66mp earth)", "Smith(Lv13 94/94hp 116/116mp water)", "Warden(Lv13 115/116hp 24/71mp metal)"] monsters=8/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:32] [SERVER] [meadow] Warden equipped [normal] Cloth Wraps (cloth_wraps ilvl 3) in gloves (attack 20, defense 7) | hp 116 mp 71 atk 20 def 6 crit 21.8% critx1.75 speed 173 -> hp 116 mp 71 atk 20 def 7 crit 21.8% critx1.75 speed 173 | res metal 0%, wood 0%, water 0%, fire 0%, earth 0%
+[16:35:32] [SERVER] [meadow] Smith craft rejected: Orb of Transmutation on Sharp Copper Ring: Transmutation needs a Normal item (this is Magic)
+[16:35:33] [SERVER] [meadow] Smith used Orb of Alteration on [magic] Sharp Copper Ring (copper_ring ilvl 12, 1 affixes) -> [magic] Elemental Copper Ring of Greed (copper_ring ilvl 12, 2 affixes) {gold_find 11, ele_dmg_pct 7}
+[16:35:33] [SERVER] [meadow] Warden equipped [unique] Gold Seeker's Ring (copper_ring ilvl 12) in ring2 (attack 18, defense 7) | hp 116 mp 71 atk 20 def 7 crit 21.8% critx1.75 speed 173 -> hp 116 mp 76 atk 18 def 7 crit 21.8% critx1.75 speed 173 | res metal 0%, wood 0%, water 0%, fire 0%, earth 0%
+[16:35:34] [SERVER] [meadow] Smith used Orb of Alteration on [magic] Elemental Copper Ring of Greed (copper_ring ilvl 12, 2 affixes) -> [magic] Water-slaying Copper Ring of Greed (copper_ring ilvl 12, 2 affixes) {gold_find 13, dmg_vs:water 7}
+[16:35:34] [SERVER] [meadow] Warden skill 4 rejected: not enough mana for Thousand Cuts (28/35)
+[16:35:34] [SERVER] [meadow] Warden equipped [unique] Frost Aegis (frost_aegis ilvl 13) in offhand (attack 18, defense 13) | hp 116 mp 76 atk 18 def 7 crit 21.8% critx1.75 speed 173 -> hp 146 mp 76 atk 18 def 13 crit 21.8% critx1.75 speed 173 | res metal 0%, wood 0%, water 30%, fire 20%, earth 0%
+[16:35:34] [SERVER] [meadow] Smith craft rejected: Chaos Orb on Water-slaying Copper Ring of Greed: Chaos needs a Rare item (this is Magic)
+[16:35:34] [SERVER] [meadow] FullBag skill 1 rejected: Ground Slam is on cooldown (0.4s)
+[16:35:34] [SERVER] [meadow] Warden hit Slime(Lv1) for 63 with Whirling Blade CRIT -> hp 0/6
+[16:35:34] [SERVER] [meadow] Warden gained 10 XP (10/260)
+[16:35:34] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:34] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1, [normal] Sandals (sandals ilvl 1) (killer Warden: +12% quantity, +25% rarity, +40% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:34] [SERVER] [meadow] Warden cast Whirling Blade (mp 22/76, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:35:35] [SERVER] [meadow] Warden picked up 8 x gold
+[16:35:35] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:35] [SERVER] [meadow] Smith craft rejected: Exalted Orb on Water-slaying Copper Ring of Greed: Exalted needs a Rare item (this is Magic)
+[16:35:35] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:35] [SERVER] [meadow] Warden picked up [normal] Sandals (sandals ilvl 1)
+[16:35:35] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 41/66mp earth)", "Smith(Lv13 94/94hp 116/116mp water)", "Warden(Lv13 115/146hp 25/76mp metal)"] monsters=7/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:35] [SERVER] [meadow] Warden equipped [rare] Rune Mantle (chain_mail ilvl 12, 6 affixes) in body (attack 18, defense 22) | hp 146 mp 76 atk 18 def 13 crit 21.8% critx1.75 speed 173 -> hp 171 mp 96 atk 18 def 22 crit 21.8% critx1.75 speed 173 | res metal 7%, wood 0%, water 30%, fire 26%, earth 0%
+[16:35:35] [SERVER] [meadow] Smith used Regal Orb on [magic] Water-slaying Copper Ring of Greed (copper_ring ilvl 12, 2 affixes) -> [rare] Jade Band (copper_ring ilvl 12, 3 affixes) {gold_find 13, dmg_vs:water 7, mp_regen_pct 24}
+[16:35:36] [SERVER] [meadow] Slime(Lv2) respawned at (880, 144)
+[16:35:36] [SERVER] [meadow] Smith craft rejected: Regal Orb on Jade Band: Regal needs a Magic item (this is Rare)
+[16:35:36] [SERVER] [meadow] Warden can't equip lich_staff (Only: Venom Druid, Frost Sage, Pyromancer)
+[16:35:36] [SERVER] [meadow] Warden equipped [magic] Sturdy Horned Helm (horned_helm ilvl 13, 1 affixes) in helmet (attack 18, defense 28) | hp 171 mp 96 atk 18 def 22 crit 21.8% critx1.75 speed 173 -> hp 181 mp 96 atk 18 def 28 crit 21.8% critx1.75 speed 173 | res metal 7%, wood 0%, water 30%, fire 26%, earth 0%
+[16:35:37] [SERVER] [meadow] Smith craft rejected: Orb of Alteration on Jade Band: Alteration needs a Magic item (this is Rare)
+[16:35:37] [SERVER] [meadow] FullBag skill 2 rejected: Stone Skin is on cooldown (7.8s)
+[16:35:37] [SERVER] [meadow] Warden hit Slime(Lv1) for 69 with Piercing Strike CRIT -> hp 0/6
+[16:35:37] [SERVER] [meadow] Warden gained 10 XP (20/260)
+[16:35:37] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:37] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +25% rarity, +40% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:37] [SERVER] [meadow] Warden cast Piercing Strike (mp 27/96, cd 7s) [cost 18, cd 7.0s, x2.20]
+[16:35:37] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:37] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:37] [SERVER] [meadow] Warden equipped [rare] Ashen Stride (leather_boots ilvl 13, 4 affixes) in boots (attack 18, defense 29) | hp 181 mp 96 atk 18 def 28 crit 21.8% critx1.75 speed 173 -> hp 191 mp 96 atk 18 def 29 crit 21.8% critx1.75 speed 175 | res metal 7%, wood 13%, water 30%, fire 40%, earth 0%
+[16:35:37] [SERVER] [meadow] Warden picked up 8 x gold
+[16:35:37] [SERVER] [meadow] Slime(Lv2) respawned at (528, 1136)
+[16:35:37] [SERVER] [meadow] Smith used Exalted Orb on [rare] Jade Band (copper_ring ilvl 12, 3 affixes) -> [rare] Jade Band (copper_ring ilvl 12, 4 affixes) {gold_find 13, dmg_vs:water 7, mp_regen_pct 24, ele_dmg_pct 8}
+[16:35:38] [SERVER] [meadow] Warden skill 3 rejected: Blade Focus is on cooldown (10.8s)
+[16:35:38] [SERVER] [meadow] Smith used Exalted Orb on [rare] Jade Band (copper_ring ilvl 12, 4 affixes) -> [rare] Jade Band (copper_ring ilvl 12, 5 affixes) {gold_find 13, dmg_vs:water 7, mp_regen_pct 24, ele_dmg_pct 8, mana_leech 1.5}
+[16:35:38] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 59/66mp earth)", "Smith(Lv13 94/94hp 116/116mp water)", "Warden(Lv13 116/191hp 37/96mp metal)"] monsters=8/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:38] [SERVER] [meadow] Smith used Exalted Orb on [rare] Jade Band (copper_ring ilvl 12, 5 affixes) -> [rare] Jade Band (copper_ring ilvl 12, 6 affixes) {gold_find 13, dmg_vs:water 7, mp_regen_pct 24, ele_dmg_pct 8, mana_leech 1.5, mana_flat 16}
+[16:35:38] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:35:39] [SERVER] [meadow] FullBag skill 3 rejected: Mountain's Challenge is on cooldown (3.2s)
+[16:35:39] [SERVER] [meadow] Warden cast Whirling Blade (mp 35/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:35:40] [SERVER] [meadow] Warden took 1 damage from Slime (hp 116/191) [Water res 30%]
+[16:35:40] [SERVER] [meadow] Smith craft rejected: Exalted Orb on Jade Band: this Rare already has 6 affixes
+[16:35:40] [SERVER] [meadow] Warden hit Slime(Lv1) for 32 CRIT -> hp 0/6
+[16:35:40] [SERVER] [meadow] Warden gained 10 XP (30/260)
+[16:35:40] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:40] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +40% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:40] [SERVER] [meadow] Warden picked up 11 x gold
+[16:35:40] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:40] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:40] [SERVER] [meadow] FullBag cast Earthquake (mp 31/66, cd 16s) [cost 35, cd 16.0s, x1.00]
+[16:35:40] [SERVER] [meadow] Warden skill 2 rejected: Piercing Strike is on cooldown (3.8s)
+[16:35:40] [SERVER] [meadow] Warden hit Slime(Lv1) for 32 CRIT -> hp 0/6
+[16:35:40] [SERVER] [meadow] Warden gained 10 XP (40/260)
+[16:35:40] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:40] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1, [normal] Jade Amulet (jade_amulet ilvl 1) (killer Warden: +12% quantity, +32% rarity, +40% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:40] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:40] [SERVER] [meadow] Warden picked up 8 x gold
+[16:35:40] [SERVER] [meadow] Smith used Chaos Orb on [rare] Jade Band (copper_ring ilvl 12, 6 affixes) -> [rare] Hollow Whorl (copper_ring ilvl 12, 3 affixes) {ele_dmg_pct 9, attack_speed 11, item_rarity 17}
+[16:35:40] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:40] [SERVER] [meadow] Warden picked up [normal] Jade Amulet (jade_amulet ilvl 1)
+[16:35:40] [SERVER] [meadow] Slime(Lv1) respawned at (1392, 784)
+[16:35:41] [SERVER] [meadow] FullBag hit Slime(Lv2) for 18 with Earthquake [Earth>Water x1.25] -> hp 0/8
+[16:35:41] [SERVER] [meadow] FullBag gained 14 XP (42/260)
+[16:35:41] [SERVER] [meadow] Slime(Lv2) was slain by FullBag (+14 XP each)
+[16:35:41] [SERVER] [meadow] Slime dropped: gold x9, slime_gel x1, health_potion x1 | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:41] [SERVER] [meadow] Smith used Orb of Scouring on [rare] Hollow Whorl (copper_ring ilvl 12, 3 affixes) -> [normal] Copper Ring (copper_ring ilvl 12) {}
+[16:35:41] [SERVER] [meadow] Warden skill 3 rejected: Blade Focus is on cooldown (7.6s)
+[16:35:41] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 34/66mp earth)", "Smith(Lv13 94/94hp 116/116mp water)", "Warden(Lv13 116/191hp 44/96mp metal)"] monsters=6/10 loot=3 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:41] [SERVER] [meadow] FullBag picked up 9 x gold
+[16:35:41] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:35:41] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:35:41] [SERVER] [meadow] Warden equipped [normal] Jade Amulet (jade_amulet ilvl 1) in amulet (attack 18, defense 29) | hp 191 mp 96 atk 18 def 29 crit 21.8% critx1.75 speed 175 -> hp 191 mp 96 atk 18 def 29 crit 21.8% critx1.75 speed 175 | res metal 10%, wood 16%, water 33%, fire 43%, earth 3%
+[16:35:41] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:42] [SERVER] [meadow] Smith craft rejected: Orb of Scouring on Copper Ring: the item is already Normal
+[16:35:42] [SERVER] [meadow] Smith craft rejected: Chaos Orb on Gold Seeker's Ring: uniques can't be modified with orbs
+[16:35:43] [SERVER] [meadow] Smith craft rejected: 'gold' is not crafting currency
+[16:35:43] [SERVER] [meadow] Slime(Lv1) respawned at (1232, 912)
+[16:35:43] [SERVER] [meadow] Smith craft rejected: item 123 not found
+[16:35:44] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 52/66mp earth)", "Smith(Lv13 94/94hp 116/116mp water)", "Warden(Lv13 116/191hp 56/96mp metal)"] monsters=7/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:44] [SERVER] [meadow] Smith equipped [unique] Frost Aegis (frost_aegis ilvl 13) in offhand (attack 17, defense 9) | hp 94 mp 116 atk 17 def 3 crit 8.4% critx1.75 speed 160 -> hp 124 mp 116 atk 17 def 9 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 0%, water 30%, fire 20%, earth 0%
+[16:35:45] [SERVER] [meadow] Smith equipped [rare] Shadow Coat (chain_mail ilvl 12, 3 affixes) in body (attack 17, defense 13) | hp 124 mp 116 atk 17 def 9 crit 8.4% critx1.75 speed 160 -> hp 124 mp 116 atk 17 def 13 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 14%, water 39%, fire 20%, earth 0%
+[16:35:45] [SERVER] [meadow] FullBag cast Ground Slam (mp 46/66, cd 6s) [cost 12, cd 6.0s, x1.20]
+[16:35:45] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:35:45] [SERVER] [meadow] Smith equipped [normal] Copper Ring (copper_ring ilvl 12) in ring1 (attack 17, defense 13) | hp 124 mp 116 atk 17 def 13 crit 8.4% critx1.75 speed 160 -> hp 124 mp 121 atk 17 def 13 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 14%, water 39%, fire 20%, earth 0%
+[16:35:46] [SERVER] [meadow] Warden took 1 damage from Slime (hp 115/191) [Water res 33%]
+[16:35:46] [SERVER] [meadow] FullBag raises Stone Skin (shield 44, 8s)
+[16:35:46] [SERVER] [meadow] FullBag cast Stone Skin (mp 32/66, cd 15s) [cost 20, cd 15.0s]
+[16:35:46] [SERVER] [meadow] Slime(Lv1) respawned at (912, 912)
+[16:35:46] [SERVER] [meadow] Warden hit Slime(Lv2) for 29 with Whirling Blade -> hp 0/8
+[16:35:46] [SERVER] [meadow] Warden gained 14 XP (54/260)
+[16:35:46] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:35:46] [SERVER] [meadow] Slime dropped: gold x14, slime_gel x1, health_potion x1, [normal] Sandals (sandals ilvl 2), orb_regal x1 (killer Warden: +12% quantity, +32% rarity, +40% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:46] [SERVER] [meadow] Warden cast Whirling Blade (mp 64/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:35:46] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:35:46] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:46] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:46] [SERVER] [meadow] Smith used Orb of Transmutation on [normal] Copper Ring (copper_ring ilvl 12) -> [magic] Elemental Copper Ring of Haste (copper_ring ilvl 12, 2 affixes) {ele_dmg_pct 15, attack_speed 10} (equipped in ring1) | stats recalculated
+[16:35:46] [SERVER] [meadow] Warden picked up 1 x orb_regal
+[16:35:46] [SERVER] [meadow] Warden picked up 14 x gold
+[16:35:46] [SERVER] [meadow] Warden picked up [normal] Sandals (sandals ilvl 2)
+[16:35:46] [SERVER] [meadow] Warden took 1 damage from Slime (hp 114/191) [Water res 33%]
+[16:35:46] [SERVER] [meadow] Slime(Lv1) respawned at (1776, 528)
+[16:35:46] [SERVER] [meadow] Warden hit Slime(Lv1) for 32 CRIT -> hp 0/6
+[16:35:46] [SERVER] [meadow] Warden gained 10 XP (64/260)
+[16:35:46] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:46] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +40% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:46] [SERVER] [meadow] Warden picked up 11 x gold
+[16:35:46] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:46] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:46] [SERVER] [meadow] Smith unequipped [magic] Elemental Copper Ring of Haste (copper_ring ilvl 12, 2 affixes) | hp 124 mp 121 atk 17 def 13 crit 8.4% critx1.75 speed 160 -> hp 124 mp 116 atk 17 def 13 crit 8.4% critx1.75 speed 160
+[16:35:47] [SERVER] [meadow] Warden cast Piercing Strike (mp 48/96, cd 7s) [cost 18, cd 7.0s, x2.20]
+[16:35:47] [SERVER] [meadow] Slime(Lv2) respawned at (720, 208)
+[16:35:47] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 38/66mp earth)", "Smith(Lv13 95/124hp 116/116mp water)", "Warden(Lv13 114/191hp 50/96mp metal)"] monsters=8/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:47] [SERVER] [meadow] Smith equipped [magic] Elemental Copper Ring of Haste (copper_ring ilvl 12, 2 affixes) in ring1 (attack 17, defense 13) | hp 124 mp 116 atk 17 def 13 crit 8.4% critx1.75 speed 160 -> hp 124 mp 121 atk 17 def 13 crit 8.4% critx1.75 speed 160 | res metal 0%, wood 14%, water 39%, fire 20%, earth 0%
+[16:35:47] [SERVER] [meadow] Warden hit Slime(Lv1) for 18 -> hp 0/6
+[16:35:47] [SERVER] [meadow] Warden gained 10 XP (74/260)
+[16:35:47] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:47] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +40% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:47] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:47] [SERVER] [meadow] Warden picked up 11 x gold
+[16:35:47] [SERVER] [meadow] Warden skill 3 rejected: Blade Focus is on cooldown (1.1s)
+[16:35:48] [SERVER] [meadow] Smith sold [normal] Leather Cap (leather_cap ilvl 12) for 14 gold (gold 2514)
+[16:35:48] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:48] [SERVER] [meadow] Smith stashed [unique] Gold Seeker's Ring (copper_ring ilvl 12) (1/40 in stash)
+[16:35:49] [SERVER] [meadow] Smith dropped [normal] Sandals (sandals ilvl 3) on the ground
+[16:35:49] [SERVER] [meadow] Slime is taunted by FullBag
+[16:35:49] [SERVER] [meadow] FullBag taunted 1 monster(s) and is fortified (+50% defense)
+[16:35:49] [SERVER] [meadow] FullBag cast Mountain's Challenge (mp 35/66, cd 12s) [cost 15, cd 12.0s]
+[16:35:49] [SERVER] [meadow] Smith destroyed [normal] Cloth Wraps (cloth_wraps ilvl 3)
+[16:35:50] [SERVER] [meadow] FullBag skill 4 rejected: Earthquake is on cooldown (6.3s)
+[16:35:50] [SERVER] [meadow] FullBag's Stone Skin shield absorbs 1 (43 left)
+[16:35:50] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 [Earth>Water x1.25] -> hp 0/6
+[16:35:50] [SERVER] [meadow] FullBag gained 10 XP (52/260)
+[16:35:50] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:35:50] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1, health_potion x1, [normal] Leather Cap (leather_cap ilvl 1), enhance_stone x1 | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:50] [SERVER] [meadow] FullBag picked up 6 x gold
+[16:35:50] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:35:50] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:35:50] [SERVER] [meadow] FullBag picked up 1 x enhance_stone
+[16:35:50] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 41/66mp earth)", "Smith(Lv13 96/124hp 121/121mp water)", "Warden(Lv13 114/191hp 62/96mp metal)"] monsters=6/10 loot=3 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:50] [SERVER] [meadow] Smith sell rejected: the blacksmith won't buy that
+[16:35:50] [SERVER] [meadow] Warden picked up [normal] Sandals (sandals ilvl 3)
+[16:35:51] [SERVER] [meadow] Smith enhance [normal] Iron Sword (iron_sword ilvl 12): +0 -> +1 SUCCESS (chance 100%, cost 10 gold, gold left 2504)
+[16:35:52] [SERVER] [meadow] Slime(Lv2) respawned at (1872, 912)
+[16:35:52] [SERVER] [meadow] Smith enhance [normal] +1 Iron Sword (iron_sword ilvl 12 +1): +1 -> +2 SUCCESS (chance 90%, cost 40 gold, gold left 2464)
+[16:35:52] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:35:52] [SERVER] [meadow] Slime(Lv1) respawned at (912, 912)
+[16:35:52] [SERVER] [meadow] Smith enhance [normal] +2 Iron Sword (iron_sword ilvl 12 +2): +2 -> +3 SUCCESS (chance 80%, cost 90 gold, gold left 2374)
+[16:35:53] [SERVER] [meadow] Warden hit Slime(Lv2) for 18 -> hp 0/8
+[16:35:53] [SERVER] [meadow] Warden gained 14 XP (88/260)
+[16:35:53] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:35:53] [SERVER] [meadow] Slime dropped: gold x10, slime_gel x1, health_potion x1, [rare] Golden Talisman (jade_amulet ilvl 2, 3 affixes), orb_transmute x1 (killer Warden: +12% quantity, +32% rarity, +40% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:53] [SERVER] [meadow] Warden picked up 1 x orb_transmute
+[16:35:53] [SERVER] [meadow] Warden picked up [rare] Golden Talisman (jade_amulet ilvl 2, 3 affixes)
+[16:35:53] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 47/66mp earth)", "Smith(Lv13 98/124hp 121/121mp water)", "Warden(Lv13 114/191hp 92/96mp metal)"] monsters=7/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:53] [SERVER] [meadow] Warden picked up 10 x gold
+[16:35:53] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:53] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:53] [SERVER] [meadow] FullBag cast Ground Slam (mp 35/66, cd 6s) [cost 12, cd 6.0s, x1.20]
+[16:35:53] [SERVER] [meadow] Warden cast Whirling Blade (mp 80/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:35:53] [SERVER] [meadow] Smith enhance [normal] +3 Iron Sword (iron_sword ilvl 12 +3): +3 -> +3 FAIL (chance 70%, cost 160 gold, gold left 2214)
+[16:35:53] [SERVER] [meadow] Slime(Lv1) respawned at (656, 1008)
+[16:35:53] [SERVER] [meadow] Warden equipped [rare] Golden Talisman (jade_amulet ilvl 2, 3 affixes) in amulet (attack 18, defense 29) | hp 191 mp 96 atk 18 def 29 crit 21.8% critx1.75 speed 175 -> hp 191 mp 96 atk 18 def 29 crit 21.8% critx1.75 speed 175 | res metal 10%, wood 16%, water 33%, fire 43%, earth 3%
+[16:35:54] [SERVER] [meadow] Smith enhance [normal] +3 Iron Sword (iron_sword ilvl 12 +3): +3 -> +3 FAIL (chance 70%, cost 160 gold, gold left 2054)
+[16:35:54] [SERVER] [meadow] FullBag skill 2 rejected: Stone Skin is on cooldown (6.9s)
+[16:35:54] [SERVER] [meadow] Warden hit Slime(Lv2) for 74 with Piercing Strike CRIT -> hp 0/8
+[16:35:54] [SERVER] [meadow] Warden gained 14 XP (102/260)
+[16:35:54] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:35:54] [SERVER] [meadow] Slime dropped: gold x17, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:54] [SERVER] [meadow] Warden cast Piercing Strike (mp 67/96, cd 7s) [cost 18, cd 7.0s, x2.20]
+[16:35:54] [SERVER] [meadow] Warden picked up 17 x gold
+[16:35:54] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:54] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:54] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 [Earth>Water x1.25] -> hp 0/6
+[16:35:54] [SERVER] [meadow] FullBag gained 10 XP (62/260)
+[16:35:54] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:35:54] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1 | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:54] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:35:54] [SERVER] [meadow] FullBag picked up 6 x gold
+[16:35:54] [SERVER] [meadow] Smith enhance [normal] +3 Iron Sword (iron_sword ilvl 12 +3): +3 -> +3 FAIL (chance 70%, cost 160 gold, gold left 1894)
+[16:35:55] [SERVER] [meadow] Warden took 1 damage from Slime (hp 114/191) [Water res 33%]
+[16:35:55] [SERVER] [meadow] Warden gains Blade Focus (+40% crit, +25% attack, 6s)
+[16:35:55] [SERVER] [meadow] Warden cast Blade Focus (mp 57/96, cd 18s) [cost 20, cd 18.0s]
+[16:35:55] [SERVER] [meadow] Warden hit Slime(Lv2) for 39 CRIT -> hp 0/8
+[16:35:55] [SERVER] [meadow] Warden gained 14 XP (116/260)
+[16:35:55] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:35:55] [SERVER] [meadow] Slime dropped: gold x15, slime_gel x1, health_potion x1, [normal] Cloth Robe (cloth_robe ilvl 2) (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:35:55] [SERVER] [meadow] Warden picked up 15 x gold
+[16:35:55] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:55] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:55] [SERVER] [meadow] Smith enhance [normal] +3 Iron Sword (iron_sword ilvl 12 +3): +3 -> +3 FAIL (chance 70%, cost 160 gold, gold left 1734)
+[16:35:55] [SERVER] [meadow] Warden picked up [normal] Cloth Robe (cloth_robe ilvl 2)
+[16:35:55] [SERVER] [meadow] Smith enhance [normal] +3 Iron Sword (iron_sword ilvl 12 +3): +3 -> +4 SUCCESS (chance 70%, cost 160 gold, gold left 1574)
+[16:35:56] [SERVER] [meadow] Slime(Lv1) respawned at (976, 176)
+[16:35:56] [SERVER] Saved 3 online player(s) to /workspace/project-volam/test-logs/accounts_p5.json (periodic)
+[16:35:56] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 51/66mp earth)", "Smith(Lv13 99/124hp 121/121mp water)", "Warden(Lv13 114/191hp 63/96mp metal)"] monsters=6/10 loot=3 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:56] [SERVER] [meadow] Smith enhance [normal] +4 Iron Sword (iron_sword ilvl 12 +4): +4 -> +5 SUCCESS (chance 60%, cost 250 gold, gold left 1324)
+[16:35:56] [SERVER] [meadow] FullBag skill 3 rejected: Mountain's Challenge is on cooldown (4.7s)
+[16:35:57] [SERVER] [meadow] Smith enhance [normal] +5 Iron Sword (iron_sword ilvl 12 +5): +5 -> +4 DOWNGRADE (chance 50%, cost 360 gold, gold left 964)
+[16:35:57] [SERVER] [meadow] FullBag cast Earthquake (mp 22/66, cd 16s) [cost 35, cd 16.0s, x1.00]
+[16:35:57] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 with Earthquake [Earth>Water x1.25] -> hp 0/6
+[16:35:57] [SERVER] [meadow] FullBag gained 10 XP (72/260)
+[16:35:57] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:35:57] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1, health_potion x1, [magic] Sharp Iron Sword (iron_sword ilvl 1, 1 affixes) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:57] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:35:57] [SERVER] [meadow] Smith enhance [normal] +4 Iron Sword (iron_sword ilvl 12 +4): +4 -> +5 SUCCESS (chance 60%, cost 250 gold, gold left 714)
+[16:35:58] [SERVER] [meadow] Warden hit Slime(Lv1) for 39 CRIT -> hp 0/6
+[16:35:58] [SERVER] [meadow] Warden gained 10 XP (126/260)
+[16:35:58] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:35:58] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:35:58] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:35:58] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:35:58] [SERVER] [meadow] Warden picked up 11 x gold
+[16:35:58] [SERVER] [meadow] Smith enhance [normal] +5 Iron Sword (iron_sword ilvl 12 +5): +5 -> +6 SUCCESS (chance 50%, cost 360 gold, gold left 354)
+[16:35:58] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:35:58] [SERVER] [meadow] FullBag can't pick up [magic] Sharp Iron Sword (iron_sword ilvl 1, 1 affixes): bag full (40/40)
+[16:35:58] [SERVER] [meadow] FullBag picked up 6 x gold
+[16:35:58] [SERVER] [meadow] Smith enhance rejected: not enough gold (354/490)
+[16:35:59] [SERVER] [meadow] Slime(Lv2) respawned at (816, 144)
+[16:35:59] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 31/66mp earth)", "Smith(Lv13 101/124hp 121/121mp water)", "Warden(Lv13 114/191hp 81/96mp metal)"] monsters=5/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:35:59] [SERVER] [meadow] Warden cast Whirling Blade (mp 74/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:36:00] [SERVER] [meadow] Slime(Lv2) respawned at (1808, 272)
+[16:36:00] [SERVER] [meadow] Warden took 1 damage from Slime (hp 113/191) [Water res 33%]
+[16:36:00] [SERVER] [meadow] Slime(Lv1) respawned at (1456, 784)
+[16:36:00] [SERVER] [meadow] Warden hit Slime(Lv2) for 39 CRIT -> hp 0/8
+[16:36:00] [SERVER] [meadow] Warden gained 14 XP (140/260)
+[16:36:00] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:36:00] [SERVER] [meadow] Slime dropped: gold x17, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:36:00] [SERVER] [meadow] Warden picked up 17 x gold
+[16:36:00] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:00] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:36:01] [SERVER] [meadow] Slime(Lv2) respawned at (1456, 976)
+[16:36:02] [SERVER] [meadow] Smith sell rejected: you must be at the blacksmith in Sunny Meadow
+[16:36:02] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 49/66mp earth)", "Smith(Lv13 102/124hp 121/121mp water)", "Warden(Lv13 113/191hp 91/96mp metal)"] monsters=7/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:02] [SERVER] [meadow] FullBag can't pick up [normal] Leather Cap (leather_cap ilvl 1): bag full (40/40)
+[16:36:02] [SERVER] [meadow] Smith enhance rejected: you must be at the blacksmith in Sunny Meadow
+[16:36:02] [SERVER] [meadow] Smith used Orb of Transmutation on [normal] +6 Iron Sword (iron_sword ilvl 12 +6) -> [magic] +6 Wise Iron Sword of the Leech (iron_sword ilvl 12 +6, 2 affixes) {mana_flat 10, life_leech 0.5}
+[16:36:03] [SERVER] [meadow] Slime(Lv1) respawned at (752, 1104)
+[16:36:04] [SERVER] [meadow] Slime(Lv1) respawned at (176, 368)
+[16:36:04] [SERVER] [meadow] FullBag cast Ground Slam (mp 52/66, cd 6s) [cost 12, cd 6.0s, x1.20]
+[16:36:04] [SERVER] [meadow] Warden cast Piercing Strike (mp 78/96, cd 7s) [cost 18, cd 7.0s, x2.20]
+[16:36:05] [SERVER] [meadow] FullBag took 1 damage from Slime (hp 147/148) [Water<Earth x0.80]
+[16:36:05] [SERVER] [meadow] FullBag hit Slime(Lv2) for 18 [Earth>Water x1.25] -> hp 0/8
+[16:36:05] [SERVER] [meadow] FullBag gained 14 XP (86/260)
+[16:36:05] [SERVER] [meadow] Slime(Lv2) was slain by FullBag (+14 XP each)
+[16:36:05] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1 | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:36:05] [SERVER] status: meadow: players=["FullBag(Lv13 147/148hp 55/66mp earth)", "Smith(Lv13 104/124hp 121/121mp water)", "Warden(Lv13 113/191hp 83/96mp metal)"] monsters=8/10 loot=8 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:05] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:36:05] [SERVER] [meadow] FullBag raises Stone Skin (shield 44, 8s)
+[16:36:05] [SERVER] [meadow] FullBag cast Stone Skin (mp 35/66, cd 15s) [cost 20, cd 15.0s]
+[16:36:05] [SERVER] [meadow] Warden skill 3 rejected: Blade Focus is on cooldown (7.5s)
+[16:36:05] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:05] [SERVER] [meadow] FullBag picked up 8 x gold
+[16:36:06] [SERVER] [meadow] Slime is taunted by FullBag
+[16:36:06] [SERVER] [meadow] FullBag taunted 1 monster(s) and is fortified (+50% defense)
+[16:36:06] [SERVER] [meadow] FullBag cast Mountain's Challenge (mp 22/66, cd 12s) [cost 15, cd 12.0s]
+[16:36:06] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:36:06] [SERVER] [meadow] Slime(Lv2) respawned at (1552, 912)
+[16:36:06] [SERVER] [meadow] FullBag's Stone Skin shield absorbs 1 (43 left)
+[16:36:07] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:07] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 [Earth>Water x1.25] -> hp 0/6
+[16:36:07] [SERVER] [meadow] FullBag gained 10 XP (96/260)
+[16:36:07] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:36:07] [SERVER] [meadow] Slime dropped: gold x6, slime_gel x1, health_potion x1, enhance_stone x1 | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:36:07] [SERVER] [meadow] FullBag picked up 6 x gold
+[16:36:07] [SERVER] [meadow] FullBag picked up 1 x enhance_stone
+[16:36:07] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:07] [SERVER] [meadow] FullBag skill 4 rejected: Earthquake is on cooldown (6.3s)
+[16:36:07] [SERVER] [meadow] Warden cast Whirling Blade (mp 84/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:36:08] [SERVER] [meadow] FullBag skill 1 rejected: Ground Slam is on cooldown (2.8s)
+[16:36:08] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:08] [SERVER] status: meadow: players=["FullBag(Lv13 147/148hp 26/66mp earth)", "Smith(Lv13 105/124hp 121/121mp water)", "Warden(Lv13 114/191hp 96/96mp metal)"] monsters=8/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:08] [SERVER] [meadow] FullBag skill 2 rejected: Stone Skin is on cooldown (11.8s)
+[16:36:08] [SERVER] [meadow] Warden skill 2 rejected: Piercing Strike is on cooldown (3.0s)
+[16:36:09] [SERVER] [meadow] FullBag's Stone Skin shield absorbs 1 (42 left)
+[16:36:09] [SERVER] [meadow] FullBag hit Slime(Lv2) for 18 [Earth>Water x1.25] -> hp 0/8
+[16:36:09] [SERVER] [meadow] FullBag gained 14 XP (110/260)
+[16:36:09] [SERVER] [meadow] Slime(Lv2) was slain by FullBag (+14 XP each)
+[16:36:09] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1, orb_regal x1 | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:36:09] [SERVER] [meadow] FullBag picked up 11 x gold
+[16:36:09] [SERVER] [meadow] FullBag picked up 1 x orb_regal
+[16:36:09] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:36:09] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:09] [SERVER] [meadow] Warden skill 3 rejected: Blade Focus is on cooldown (3.5s)
+[16:36:10] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:11] [SERVER] [meadow] Slime(Lv2) respawned at (1136, 176)
+[16:36:11] [SERVER] status: meadow: players=["FullBag(Lv13 147/148hp 32/66mp earth)", "Smith(Lv13 107/124hp 121/121mp water)", "Warden(Lv13 115/191hp 96/96mp metal)"] monsters=8/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:13] [SERVER] [meadow] Slime(Lv1) respawned at (816, 240)
+[16:36:13] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:36:14] [SERVER] [meadow] FullBag skill 3 rejected: Mountain's Challenge is on cooldown (3.9s)
+[16:36:14] [SERVER] [meadow] Warden cast Whirling Blade (mp 84/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:36:14] [SERVER] status: meadow: players=["FullBag(Lv13 147/148hp 39/66mp earth)", "Smith(Lv13 108/124hp 121/121mp water)", "Warden(Lv13 117/191hp 84/96mp metal)"] monsters=9/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:14] [SERVER] [meadow] Warden took 1 damage from Slime (hp 116/191) [Water res 33%]
+[16:36:14] [SERVER] [meadow] Warden hit Slime(Lv1) for 18 -> hp 0/6
+[16:36:14] [SERVER] [meadow] Warden gained 10 XP (150/260)
+[16:36:14] [SERVER] [meadow] Slime(Lv1) was slain by Warden (+10 XP each)
+[16:36:14] [SERVER] [meadow] Slime dropped: gold x12, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:36:14] [SERVER] [meadow] Warden picked up 12 x gold
+[16:36:14] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:36:14] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:15] [SERVER] [meadow] FullBag cast Earthquake (mp 10/66, cd 16s) [cost 35, cd 16.0s, x1.00]
+[16:36:15] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 with Earthquake [Earth>Water x1.25] -> hp 0/6
+[16:36:15] [SERVER] [meadow] FullBag gained 10 XP (120/260)
+[16:36:15] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:36:15] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1, [rare] Spirit Wrath (iron_sword ilvl 1, 3 affixes) | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:36:15] [SERVER] [meadow] Slime(Lv2) respawned at (1520, 1008)
+[16:36:15] [SERVER] [meadow] Warden picked up [rare] Spirit Wrath (iron_sword ilvl 1, 3 affixes)
+[16:36:15] [SERVER] [meadow] Warden picked up 8 x gold
+[16:36:15] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:15] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:36:15] [SERVER] [meadow] Warden equipped [rare] Spirit Wrath (iron_sword ilvl 1, 3 affixes) in weapon (attack 20, defense 29) | hp 191 mp 96 atk 18 def 29 crit 21.8% critx1.75 speed 175 -> hp 191 mp 96 atk 20 def 29 crit 22.8% critx1.75 speed 175 | res metal 10%, wood 16%, water 33%, fire 43%, earth 3%
+[16:36:16] [SERVER] [meadow] FullBag cast Ground Slam (mp 4/66, cd 6s) [cost 12, cd 6.0s, x1.20]
+[16:36:16] [SERVER] [meadow] Warden hit Slime(Lv2) for 82 with Piercing Strike CRIT -> hp 0/8
+[16:36:16] [SERVER] [meadow] Warden gained 14 XP (164/260)
+[16:36:16] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:36:16] [SERVER] [meadow] Slime dropped: gold x12, slime_gel x1, health_potion x1 (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:36:16] [SERVER] [meadow] Warden cast Piercing Strike (mp 77/96, cd 7s) [cost 18, cd 7.0s, x2.20]
+[16:36:16] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:16] [SERVER] [meadow] FullBag skill 2 rejected: Stone Skin is on cooldown (3.7s)
+[16:36:16] [SERVER] [meadow] Warden gains Blade Focus (+40% crit, +25% attack, 6s)
+[16:36:16] [SERVER] [meadow] Warden cast Blade Focus (mp 63/96, cd 18s) [cost 20, cd 18.0s]
+[16:36:17] [SERVER] [meadow] FullBag picked up 12 x gold
+[16:36:17] [SERVER] status: meadow: players=["FullBag(Lv13 147/148hp 10/66mp earth)", "Smith(Lv13 110/124hp 121/121mp water)", "Warden(Lv13 116/191hp 66/96mp metal)"] monsters=7/10 loot=6 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:17] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:20] [SERVER] [meadow] Slime is taunted by FullBag
+[16:36:20] [SERVER] [meadow] FullBag taunted 1 monster(s) and is fortified (+50% defense)
+[16:36:20] [SERVER] [meadow] FullBag cast Mountain's Challenge (mp 10/66, cd 12s) [cost 15, cd 12.0s]
+[16:36:20] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:36:20] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 13/66mp earth)", "Smith(Lv13 111/124hp 121/121mp water)", "Warden(Lv13 116/191hp 90/96mp metal)"] monsters=7/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:20] [SERVER] [meadow] Slime(Lv1) respawned at (592, 1168)
+[16:36:20] [SERVER] [meadow] FullBag skill 4 rejected: Earthquake is on cooldown (10.3s)
+[16:36:20] [SERVER] [meadow] Warden cast Whirling Blade (mp 83/96, cd 4s) [cost 12, cd 4.0s, x1.60]
+[16:36:21] [SERVER] [meadow] Slime(Lv1) respawned at (720, 1168)
+[16:36:21] [SERVER] [meadow] FullBag skill 1 rejected: Ground Slam is on cooldown (0.4s)
+[16:36:21] [SERVER] [meadow] Warden skill 2 rejected: Piercing Strike is on cooldown (1.4s)
+[16:36:22] [SERVER] [meadow] Slime(Lv2) respawned at (176, 1104)
+[16:36:22] [SERVER] [meadow] Warden hit Slime(Lv2) for 44 CRIT -> hp 0/8
+[16:36:22] [SERVER] [meadow] Warden gained 14 XP (178/260)
+[16:36:22] [SERVER] [meadow] Slime(Lv2) was slain by Warden (+14 XP each)
+[16:36:22] [SERVER] [meadow] Slime dropped: gold x11, slime_gel x1, health_potion x1, orb_chaos x1 (killer Warden: +12% quantity, +32% rarity, +50% gold) | monster lv 2 -> ilvl 2, monster iiq 0% iir 0%
+[16:36:22] [SERVER] [meadow] Warden picked up 11 x gold
+[16:36:22] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:22] [SERVER] [meadow] Warden picked up 1 x orb_chaos
+[16:36:22] [SERVER] [meadow] Warden skill 3 rejected: Blade Focus is on cooldown (12.3s)
+[16:36:22] [SERVER] [meadow] Warden picked up 1 x health_potion
+[16:36:23] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 31/66mp earth)", "Smith(Lv13 113/124hp 121/121mp water)", "Warden(Lv13 117/191hp 96/96mp metal)"] monsters=9/10 loot=5 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:25] [SERVER] [meadow] Warden picked up [normal] Leather Cap (leather_cap ilvl 1)
+[16:36:25] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:25] [SERVER] [meadow] FullBag raises Stone Skin (shield 44, 8s)
+[16:36:25] [SERVER] [meadow] FullBag cast Stone Skin (mp 23/66, cd 15s) [cost 20, cd 15.0s]
+[16:36:26] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:26] [SERVER] Saved 3 online player(s) to /workspace/project-volam/test-logs/accounts_p5.json (periodic)
+[16:36:26] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 29/66mp earth)", "Smith(Lv13 114/124hp 121/121mp water)", "Warden(Lv13 119/191hp 96/96mp metal)"] monsters=9/10 loot=2 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:26] [SERVER] [meadow] FullBag skill 3 rejected: Mountain's Challenge is on cooldown (5.5s)
+[16:36:26] [SERVER] [meadow] FullBag's Stone Skin shield absorbs 1 (43 left)
+[16:36:26] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 [Earth>Water x1.25] -> hp 0/6
+[16:36:26] [SERVER] [meadow] FullBag gained 10 XP (130/260)
+[16:36:26] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:36:26] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1 | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:36:26] [SERVER] [meadow] FullBag picked up 7 x gold
+[16:36:26] [SERVER] [meadow] FullBag can't pick up 1 x slime_gel: bag full (40/40)
+[16:36:27] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:27] [SERVER] [meadow] FullBag skill 4 rejected: Earthquake is on cooldown (3.9s)
+[16:36:27] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 [Earth>Water x1.25] -> hp 0/6
+[16:36:27] [SERVER] [meadow] FullBag gained 10 XP (140/260)
+[16:36:27] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:36:27] [SERVER] [meadow] Slime dropped: gold x8, slime_gel x1, health_potion x1 | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:36:27] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:27] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:28] [SERVER] [meadow] FullBag cast Ground Slam (mp 20/66, cd 6s) [cost 12, cd 6.0s, x1.20]
+[16:36:28] [SERVER] [meadow] FullBag picked up 8 x gold
+[16:36:28] [SERVER] [meadow] Slime(Lv2) respawned at (976, 176)
+[16:36:28] [SERVER] [meadow] FullBag hit Slime(Lv1) for 18 [Earth>Water x1.25] -> hp 0/6
+[16:36:28] [SERVER] [meadow] FullBag gained 10 XP (150/260)
+[16:36:28] [SERVER] [meadow] Slime(Lv1) was slain by FullBag (+10 XP each)
+[16:36:28] [SERVER] [meadow] Slime dropped: gold x7, slime_gel x1, health_potion x1 | monster lv 1 -> ilvl 1, monster iiq 0% iir 0%
+[16:36:28] [SERVER] [meadow] FullBag picked up 1 x health_potion
+[16:36:29] [SERVER] [meadow] FullBag picked up 7 x gold
+[16:36:29] [SERVER] status: meadow: players=["FullBag(Lv13 148/148hp 23/66mp earth)", "Smith(Lv13 116/124hp 121/121mp water)", "Warden(Lv13 120/191hp 96/96mp metal)"] monsters=7/10 loot=4 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:29] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:30] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:30] [SERVER] [meadow] Warden picked up 1 x slime_gel
+[16:36:30] [SERVER] [meadow] Warden picked up [magic] Sharp Iron Sword (iron_sword ilvl 1, 1 affixes)
+[16:36:31] [SERVER] [meadow] FullBag skill 2 rejected: Stone Skin is on cooldown (9.3s)
+[16:36:32] [SERVER] [meadow] Slime is taunted by FullBag
+[16:36:32] [SERVER] [meadow] FullBag taunted 1 monster(s) and is fortified (+50% defense)
+[16:36:32] [SERVER] [meadow] FullBag cast Mountain's Challenge (mp 19/66, cd 12s) [cost 15, cd 12.0s]
+[16:36:32] [SERVER] [meadow] Warden skill 4 rejected: Thousand Cuts: no target in range
+[16:36:32] [SERVER] Peer 240839100 (FullBag) disconnected
+[16:36:32] [SERVER] [chat] * FullBag left the world.
+[16:36:32] [SERVER] Peer 2061375756 (Smith) disconnected
+[16:36:32] [SERVER] [chat] * Smith left the world.
+[16:36:32] [SERVER] Peer 74349569 (Warden) disconnected
+[16:36:32] [SERVER] [chat] * Warden left the world.
+[16:36:32] [SERVER] status: meadow: players=[] monsters=7/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:32] [SERVER] [meadow] Slime(Lv1) respawned at (1168, 1168)
+[16:36:33] [SERVER] [meadow] Slime(Lv1) respawned at (1712, 784)
+[16:36:34] [SERVER] [meadow] Slime(Lv1) respawned at (528, 528)
+[16:36:35] [SERVER] status: meadow: players=[] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=18/18 loot=0 | frost: players=[] monsters=16/16 loot=0
+[16:36:36] [SERVER] quit-after reached, exiting
+[16:36:36] [SERVER] Saved 0 online player(s) to /workspace/project-volam/test-logs/accounts_p5.json (shutdown)

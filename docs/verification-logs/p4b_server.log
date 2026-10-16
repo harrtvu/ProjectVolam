@@ -1,0 +1,155 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:59:24] [SERVER] Dedicated server listening on port 7777 (ENet/UDP). Saves: /workspace/project-volam/test-logs/accounts_p4.json (12 accounts)
+[14:59:24] [SERVER] Zone meadow ready: 10 monsters, 1864 reachable cells
+[14:59:24] [SERVER] [forest] boss Broodmother spawned
+[14:59:24] [SERVER] Zone forest ready: 24 monsters, 1541 reachable cells
+[14:59:24] [SERVER] [crypt] boss The Lich King spawned
+[14:59:24] [SERVER] Zone crypt ready: 18 monsters, 1166 reachable cells
+[14:59:24] [SERVER] [frost] boss Yeti King spawned
+[14:59:24] [SERVER] Zone frost ready: 16 monsters, 1898 reachable cells
+[14:59:26] [SERVER] Peer 211617191 connected, waiting for login
+[14:59:26] [SERVER] Login 'FireB' (peer 211617191): restored save - class fire, level 23, xp 380, hp 136/136, mp 178/178, gold 330, items { "great_hammer": 1, "greater_potion": 12, "health_potion": 16 }, equip { "weapon": "apprentice_staff", "armor": "" }, zone frost, pos (1586, 461), talent points 22/22 { "f_cataclysm": 1, "f_combust": 1, "f_conflag": 1, "f_focus_1": 1, "f_focus_2": 1, "f_focus_3": 1, "f_font_1": 1, "f_font_2": 1, "f_font_3": 1, "f_ignite": 1, "f_kindling_1": 1, "f_kindling_2": 1, "f_kindling_3": 1, "f_phoenix": 1, "f_pyro": 1, "f_shower": 1, "f_storm": 1, "f_wildfire_1": 1, "f_wildfire_2": 1, "f_wildfire_3": 1, "spoke_fire_1": 1, "spoke_fire_2": 1 }
+[14:59:26] [SERVER] [chat] * FireB joined the world.
+[14:59:26] [SERVER] Peer 312267333 connected, waiting for login
+[14:59:26] [SERVER] Login 'MetalA' (peer 312267333): restored save - class metal, level 22, xp 376, hp 206/206, mp 88/93, gold 983, items { "greater_potion": 22, "health_potion": 24, "iron_sword": 1, "lich_staff": 1, "war_axe": 1 }, equip { "weapon": "war_axe", "armor": "" }, zone crypt, pos (771, 374), talent points 21/21 { "m_bladestorm": 1, "m_bloodthirst": 1, "m_cyclone": 1, "m_deathmark": 1, "m_fleet_1": 1, "m_fleet_2": 1, "m_fleet_3": 1, "m_honed_1": 1, "m_honed_2": 1, "m_honed_3": 1, "m_keen_1": 1, "m_keen_2": 1, "m_keen_3": 1, "m_lethal": 1, "m_mind": 1, "m_relentless": 1, "m_rhythm": 1, "m_shadow": 1, "m_steel_1": 1, "m_steel_2": 1, "m_steel_3": 1 }
+[14:59:26] [SERVER] [chat] * MetalA joined the world.
+[14:59:26] [SERVER] [frost] FireB cast Fireball (mp 166/178, cd 2s) [cost 12, cd 2.1s, x2.61]
+[14:59:26] [SERVER] [crypt] MetalA cast Whirling Blade (mp 76/93, cd 2s) [cost 12, cd 2.4s, x2.32]
+[14:59:27] [SERVER] [frost] Yeti King is now fighting FireB
+[14:59:27] [SERVER] [crypt] MetalA's Blade Storm spins again (0 hit)
+[14:59:27] [SERVER] [frost] FireB hit Yeti King(Lv15) for 94 with Fireball [Fire<Water x0.80] -> hp 1306/1400
+[14:59:27] [SERVER] [frost] Yeti King is burning (14.0/s for 3s) by FireB
+[14:59:27] [SERVER] [frost] FireB hit Yeti King(Lv15) for 32 with Fire Bolt [Fire<Water x0.80] -> hp 1273/1400
+[14:59:27] [SERVER] [frost] FireB hit Yeti King(Lv15) for 218 with Flame Burst CRIT [Fire<Water x0.80] -> hp 1052/1400
+[14:59:27] [SERVER] [frost] FireB cast Flame Burst (mp 153/178, cd 8s) [cost 20, cd 8.0s, x2.60]
+[14:59:27] [SERVER] [crypt] MetalA hit Crypt Archer(Lv8) for 183 with Piercing Strike CRIT -> hp 0/40
+[14:59:27] [SERVER] [crypt] MetalA gained 38 XP (414/440)
+[14:59:27] [SERVER] [crypt] Crypt Archer(Lv8) was slain by MetalA (+38 XP each)
+[14:59:27] [SERVER] [crypt] MetalA cast Piercing Strike (mp 62/93, cd 5s) [cost 18, cd 4.9s, x2.20]
+[14:59:27] [SERVER] [frost] FireB hit Yeti King(Lv15) for 32 with Fire Bolt [Fire<Water x0.80] -> hp 1020/1400
+[14:59:27] [SERVER] status: meadow: players=[] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=["MetalA(Lv22 206/206hp 62/93mp metal)"] monsters=17/18 loot=3 | frost: players=["FireB(Lv23 136/136hp 153/178mp fire)"] monsters=16/16 loot=0
+[14:59:27] [SERVER] [frost] FireB took 41 damage from Yeti King (hp 95/136) [Water>Fire x1.25]
+[14:59:27] [SERVER] [frost] FireB can't equip great_hammer (Only: Blade Master, Stone Guardian)
+[14:59:27] [SERVER] [crypt] MetalA picked up 11 x gold
+[14:59:27] [SERVER] [crypt] MetalA picked up 1 x health_potion
+[14:59:27] [SERVER] [crypt] MetalA can't equip lich_staff (Only: Venom Druid, Frost Sage, Pyromancer)
+[14:59:28] [SERVER] [crypt] MetalA picked up 1 x war_axe
+[14:59:28] [SERVER] [frost] Yeti King raises its fists... (Quake)
+[14:59:28] [SERVER] [frost] FireB cast Meteor (mp 126/178, cd 11s) [cost 35, cd 11.2s, x3.50]
+[14:59:28] [SERVER] [frost] FireB hit Yeti King(Lv15) for 80 with Fire Bolt CRIT [Fire<Water x0.80] -> hp 925/1400
+[14:59:28] [SERVER] [crypt] MetalA gains Blade Focus (+40% crit, +25% attack, 10s)
+[14:59:28] [SERVER] [crypt] MetalA cast Blade Focus (mp 50/93, cd 18s) [cost 20, cd 18.0s]
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 128 with Meteor [Fire<Water x0.80] -> hp 783/1400
+[14:59:29] [SERVER] [frost] FireB's Meteor Shower calls 2 more meteors
+[14:59:29] [SERVER] [frost] FireB cast Inferno (mp 85/178, cd 16s) [cost 45, cd 16.0s, x1.50]
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 732/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 123 with Inferno CRIT [Fire<Water x0.80] -> hp 609/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 558/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 507/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 456/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 405/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 354/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 303/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 252/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 201/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 123 with Inferno CRIT [Fire<Water x0.80] -> hp 78/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 51 with Inferno [Fire<Water x0.80] -> hp 27/1400
+[14:59:29] [SERVER] [frost] FireB hit Yeti King(Lv15) for 123 with Inferno CRIT [Fire<Water x0.80] -> hp 0/1400
+[14:59:29] [SERVER] [frost] FireB gained 400 XP (780/460)
+[14:59:29] [SERVER] [frost] FireB reached level 24 (max hp 141, attack 45)
+[14:59:29] [SERVER] [chat] * FireB reached level 24!
+[14:59:29] [SERVER] [frost] Yeti King(Lv15) was slain by FireB (+400 XP each)
+[14:59:29] [SERVER] [frost] Yeti King dropped: gold x348, frostbrand x1, ember_staff x1, frost_aegis x1, greater_potion x4
+[14:59:29] [SERVER] [chat] * FireB defeated Yeti King in Frostpeak Ruins!
+[14:59:29] [SERVER] [frost] FireB picked up 348 x gold
+[14:59:29] [SERVER] [frost] FireB picked up 1 x frostbrand
+[14:59:29] [SERVER] [frost] FireB picked up 1 x ember_staff
+[14:59:29] [SERVER] [frost] FireB picked up 1 x frost_aegis
+[14:59:29] [SERVER] [frost] FireB picked up 4 x greater_potion
+[14:59:29] [SERVER] [crypt] MetalA cast Thousand Cuts (mp 19/93, cd 14s) [cost 35, cd 14.0s, x0.90]
+[14:59:29] [SERVER] [crypt] MetalA hit Grave Crawler(Lv9) for 72 with Thousand Cuts CRIT [Metal<Fire x0.80] -> hp 0/68
+[14:59:29] [SERVER] [crypt] MetalA gained 42 XP (456/440)
+[14:59:29] [SERVER] [crypt] MetalA reached level 23 (max hp 214, attack 40)
+[14:59:29] [SERVER] [chat] * MetalA reached level 23!
+[14:59:29] [SERVER] [crypt] Grave Crawler(Lv9) was slain by MetalA (+42 XP each)
+[14:59:29] [SERVER] [crypt] MetalA picked up 9 x gold
+[14:59:29] [SERVER] [crypt] MetalA picked up 1 x greater_potion
+[14:59:29] [SERVER] [chat] [Frost] FireB: Hello from FireB!
+[14:59:29] [SERVER] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:59:29] [SERVER] [frost] FireB can't equip frostbrand (Only: Blade Master, Stone Guardian)
+[14:59:29] [SERVER] [frost] FireB equipped ember_staff (attack 54, defense 5)
+[14:59:30] [SERVER] [crypt] MetalA took 7 damage from Crypt Archer (hp 207/214)
+[14:59:30] [SERVER] [crypt] MetalA leeches 7 life (3.0% of 255 damage)
+[14:59:30] [SERVER] [crypt] MetalA hit Crypt Archer(Lv6) for 254 with Whirling Blade CRIT -> hp 0/32
+[14:59:30] [SERVER] [crypt] MetalA gained 30 XP (46/460)
+[14:59:30] [SERVER] [crypt] Crypt Archer(Lv6) was slain by MetalA (+30 XP each)
+[14:59:30] [SERVER] [crypt] MetalA hit Grave Crawler(Lv9) for 201 with Whirling Blade CRIT [Metal<Fire x0.80] -> hp 0/68
+[14:59:30] [SERVER] [crypt] MetalA gained 42 XP (88/460)
+[14:59:30] [SERVER] [crypt] Grave Crawler(Lv9) was slain by MetalA (+42 XP each)
+[14:59:30] [SERVER] [crypt] MetalA cast Whirling Blade (mp 84/96, cd 2s) [cost 12, cd 2.4s, x2.32]
+[14:59:30] [SERVER] [crypt] MetalA picked up 9 x gold
+[14:59:30] [SERVER] [crypt] MetalA picked up 18 x gold
+[14:59:30] [SERVER] [crypt] MetalA's Blade Storm spins again (0 hit)
+[14:59:30] [SERVER] status: meadow: players=[] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=["MetalA(Lv23 214/214hp 86/96mp metal)"] monsters=14/18 loot=0 | frost: players=["FireB(Lv24 141/141hp 184/184mp fire)"] monsters=15/16 loot=0
+[14:59:30] [SERVER] [frost] FireB cast Fireball (mp 172/184, cd 2s) [cost 12, cd 1.9s, x2.61]
+[14:59:30] [SERVER] [frost] FireB equipped frost_aegis (attack 54, defense 11)
+[14:59:30] [SERVER] [crypt] MetalA skill 2 rejected: Piercing Strike is on cooldown (1.7s)
+[14:59:31] [SERVER] [crypt] MetalA hit Crypt Archer(Lv9) for 109 CRIT -> hp 0/44
+[14:59:31] [SERVER] [crypt] MetalA gained 42 XP (130/460)
+[14:59:31] [SERVER] [crypt] Crypt Archer(Lv9) was slain by MetalA (+42 XP each)
+[14:59:31] [SERVER] [crypt] MetalA hit Grave Crawler(Lv10) for 37 [Metal<Fire x0.80] -> hp 37/74
+[14:59:31] [SERVER] [crypt] MetalA took 7 damage from Crypt Archer (hp 207/214)
+[14:59:31] [SERVER] [crypt] MetalA picked up 1 x health_potion
+[14:59:31] [SERVER] [crypt] MetalA picked up 24 x gold
+[14:59:31] [SERVER] [frost] FireB skill 2 rejected: Flame Burst is on cooldown (4.0s)
+[14:59:31] [SERVER] [crypt] MetalA skill 3 rejected: Blade Focus is on cooldown (14.8s)
+[14:59:31] [SERVER] [crypt] MetalA hit Grave Crawler(Lv10) for 85 CRIT [Metal<Fire x0.80] -> hp 0/74
+[14:59:31] [SERVER] [crypt] MetalA gained 46 XP (176/460)
+[14:59:31] [SERVER] [crypt] Grave Crawler(Lv10) was slain by MetalA (+46 XP each)
+[14:59:31] [SERVER] [crypt] MetalA picked up 20 x gold
+[14:59:31] [SERVER] [frost] FireB hit Frost Bat(Lv11) for 67 with Fire Bolt [Fire>Metal x1.25] -> hp 0/37
+[14:59:31] [SERVER] [frost] FireB gained 50 XP (370/480)
+[14:59:31] [SERVER] [frost] Frost Bat(Lv11) was slain by FireB (+50 XP each)
+[14:59:31] [SERVER] [frost] FireB picked up 27 x gold
+[14:59:32] [SERVER] [crypt] MetalA took 3 damage from Crypt Archer (hp 207/214)
+[14:59:32] [SERVER] [crypt] MetalA hit Restless Ghost(Lv9) for 48 -> hp 7/55
+[14:59:32] [SERVER] [crypt] MetalA took 9 damage from Restless Ghost (hp 199/214)
+[14:59:32] [SERVER] [frost] FireB skill 3 rejected: Meteor is on cooldown (7.2s)
+[14:59:32] [SERVER] [crypt] MetalA skill 4 rejected: Thousand Cuts is on cooldown (10.8s)
+[14:59:32] [SERVER] [crypt] MetalA's Death Mark executes Restless Ghost (double damage below 30% HP)
+[14:59:32] [SERVER] [crypt] MetalA hit Restless Ghost(Lv9) for 218 CRIT -> hp 0/55
+[14:59:32] [SERVER] [crypt] MetalA gained 42 XP (218/460)
+[14:59:32] [SERVER] [crypt] Restless Ghost(Lv9) was slain by MetalA (+42 XP each)
+[14:59:32] [SERVER] [crypt] MetalA picked up 19 x gold
+[14:59:32] [SERVER] [crypt] MetalA took 6 damage from Crypt Archer (hp 200/214)
+[14:59:32] [SERVER] [frost] FireB hit Ice Ogre(Lv12) for 48 with Fire Bolt -> hp 78/126
+[14:59:33] [SERVER] [frost] FireB skill 4 rejected: Inferno is on cooldown (12.0s)
+[14:59:33] [SERVER] [crypt] MetalA leeches 8 life (3.0% of 255 damage)
+[14:59:33] [SERVER] [crypt] MetalA hit Crypt Archer(Lv6) for 254 with Whirling Blade CRIT -> hp 0/32
+[14:59:33] [SERVER] [crypt] MetalA gained 30 XP (248/460)
+[14:59:33] [SERVER] [crypt] Crypt Archer(Lv6) was slain by MetalA (+30 XP each)
+[14:59:33] [SERVER] [crypt] MetalA hit Crypt Archer(Lv8) for 115 with Whirling Blade -> hp 0/40
+[14:59:33] [SERVER] [crypt] MetalA gained 38 XP (286/460)
+[14:59:33] [SERVER] [crypt] Crypt Archer(Lv8) was slain by MetalA (+38 XP each)
+[14:59:33] [SERVER] [crypt] MetalA cast Whirling Blade (mp 84/96, cd 2s) [cost 12, cd 2.4s, x2.32]
+[14:59:33] [SERVER] [crypt] MetalA picked up 21 x gold
+[14:59:33] [SERVER] [crypt] MetalA picked up 1 x health_potion
+[14:59:33] [SERVER] [frost] FireB hit Ice Ogre(Lv12) for 48 with Fire Bolt -> hp 30/126
+[14:59:33] [SERVER] [frost] FireB took 21 damage from Ice Ogre (hp 120/141)
+[14:59:33] [SERVER] [crypt] MetalA picked up 18 x gold
+[14:59:33] [SERVER] [crypt] MetalA's Blade Storm spins again (0 hit)
+[14:59:33] [SERVER] status: meadow: players=[] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=["MetalA(Lv23 211/214hp 86/96mp metal)"] monsters=9/18 loot=0 | frost: players=["FireB(Lv24 120/141hp 184/184mp fire)"] monsters=14/16 loot=0
+[14:59:34] [SERVER] [frost] FireB cast Fireball (mp 172/184, cd 2s) [cost 12, cd 1.9s, x2.61]
+[14:59:34] [SERVER] [frost] FireB hit Ice Ogre(Lv12) for 135 with Fireball -> hp 0/126
+[14:59:34] [SERVER] [frost] FireB gained 54 XP (424/480)
+[14:59:34] [SERVER] [frost] Ice Ogre(Lv12) was slain by FireB (+54 XP each)
+[14:59:34] [SERVER] [frost] FireB picked up 19 x gold
+[14:59:34] [SERVER] [frost] FireB took 19 damage from Ice Ogre (hp 101/141)
+[14:59:34] [SERVER] Peer 211617191 (FireB) disconnected
+[14:59:34] [SERVER] [chat] * FireB left the world.
+[14:59:34] [SERVER] Peer 312267333 (MetalA) disconnected
+[14:59:34] [SERVER] [chat] * MetalA left the world.
+[14:59:36] [SERVER] status: meadow: players=[] monsters=10/10 loot=0 | forest: players=[] monsters=24/24 loot=0 | crypt: players=[] monsters=9/18 loot=0 | frost: players=[] monsters=13/16 loot=0
+[14:59:38] [SERVER] quit-after reached, exiting
+[14:59:38] [SERVER] Saved 0 online player(s) to /workspace/project-volam/test-logs/accounts_p4.json (shutdown)

@@ -1,0 +1,242 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT forestHunter3] Connecting to 127.0.0.1:7777 as 'forestHunter3' ...
+[14:55:59] [CLIENT forestHunter3] Connected to server as peer 978439674, logging in
+[14:55:59] [CLIENT forestHunter3] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT forestHunter3] Class selection requested (new account)
+[14:55:59] [CLIENT forestHunter3] bot chooses class water
+[14:55:59] [CLIENT forestHunter3] [chat] * forestHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT forestHunter3] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT forestHunter3] Entered zone forest (Whisperwood Forest)
+[14:55:59] [CLIENT forestHunter3] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT forestHunter3] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT forestHunter3] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT forestHunter3] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:55:59] [CLIENT forestHunter3] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:02] [CLIENT forestHunter3] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT forestHunter3] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT forestHunter3] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT forestHunter3] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT forestHunter3] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT forestHunter3] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT forestHunter3] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv20 132/132hp)@(551, 688), forestHunter1(Lv20 165/165hp)@(496, 582), forestHunter2(Lv20 158/158hp)@(541, 637) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:56:02] [CLIENT forestHunter3] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT forestHunter3] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT forestHunter3] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:03] [CLIENT forestHunter3] inventory: gold=256 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:03] [CLIENT forestHunter3] inventory: gold=265 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:04] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:56:04] [CLIENT forestHunter3] inventory: gold=273 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:04] [CLIENT forestHunter3] inventory: gold=278 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:05] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:56:05] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv20 131/132hp)@(460, 804), forestHunter1(Lv20 165/165hp)@(627, 622), forestHunter2(Lv20 158/158hp)@(551, 817) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:06] [CLIENT forestHunter3] inventory: gold=278 inv={ "health_potion": 7, "greater_potion": 5, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:06] [CLIENT forestHunter3] inventory: gold=281 inv={ "health_potion": 7, "greater_potion": 5, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:06] [CLIENT forestHunter3] equipping iron_shield
+[14:56:06] [CLIENT forestHunter3] inventory: gold=281 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:08] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv20 131/132hp)@(624, 743), forestHunter1(Lv20 165/165hp)@(884, 589), forestHunter2(Lv20 158/158hp)@(659, 665) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:11] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv20 131/132hp)@(970, 557), forestHunter1(Lv20 164/165hp)@(1107, 578), forestHunter2(Lv20 158/158hp)@(964, 557), Walker(Lv20 158/158hp)@(188, 656) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:11] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (3.1s)
+[14:56:12] [CLIENT forestHunter3] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT forestHunter3] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT forestHunter3] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:14] [CLIENT forestHunter3] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv20 132/132hp)@(1376, 424), forestHunter1(Lv20 164/165hp)@(1461, 370), forestHunter2(Lv20 158/158hp)@(1375, 424), Walker(Lv20 155/158hp)@(317, 327) | monsters: rat 11/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:15] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 21!
+[14:56:16] [CLIENT forestHunter3] inventory: gold=288 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:16] [CLIENT forestHunter3] inventory: gold=297 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:16] [CLIENT forestHunter3] inventory: gold=302 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:16] [CLIENT forestHunter3] inventory: gold=302 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:16] [CLIENT forestHunter3] inventory: gold=302 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:17] [CLIENT forestHunter3] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT forestHunter3] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT forestHunter3] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv21 138/138hp)@(1590, 338), forestHunter1(Lv21 172/172hp)@(1589, 336), forestHunter2(Lv20 158/158hp)@(1590, 336), Walker(Lv20 158/158hp)@(599, 239) | monsters: rat 11/12, bat 4/6, spider 5/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:56:18] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:56:18] [CLIENT forestHunter3] inventory: gold=309 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:19] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (8.0s)
+[14:56:20] [CLIENT forestHunter3] inventory: gold=309 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:20] [CLIENT forestHunter3] inventory: gold=309 inv={ "health_potion": 10, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:20] [CLIENT forestHunter3] inventory: gold=320 inv={ "health_potion": 10, "greater_potion": 5, "steel_sword": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:56:20] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv21 138/138hp)@(1768, 251), forestHunter1(Lv21 172/172hp)@(1514, 304), forestHunter2(Lv20 158/158hp)@(1723, 272), Walker(Lv20 158/158hp)@(1009, 265) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:20] [CLIENT forestHunter3] equipping steel_sword
+[14:56:20] [CLIENT forestHunter3] inventory: gold=320 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:23] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT forestHunter3] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT forestHunter3] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT forestHunter3] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 138/138hp)@(1488, 182), forestHunter1(Lv21 172/172hp)@(1393, 143), forestHunter2(Lv20 158/158hp)@(1418, 88) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:23] [CLIENT forestHunter3] [chat] * cryptHunter3 reached level 22!
+[14:56:24] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 22!
+[14:56:26] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 138/138hp)@(1462, 562), forestHunter1(Lv21 172/172hp)@(1434, 543), forestHunter2(Lv20 158/158hp)@(1437, 547) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:27] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (0.7s)
+[14:56:28] [CLIENT forestHunter3] [chat] * frostHunter3 reached level 22!
+[14:56:29] [CLIENT forestHunter3] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 138/138hp)@(1392, 795), forestHunter1(Lv21 172/172hp)@(1391, 876), forestHunter2(Lv21 165/165hp)@(1392, 854) | monsters: rat 8/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:56:30] [CLIENT forestHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT forestHunter3] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT forestHunter3] inventory: gold=324 inv={ "health_potion": 10, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:32] [CLIENT forestHunter3] inventory: gold=331 inv={ "health_potion": 11, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:32] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 137/138hp)@(1438, 945), forestHunter1(Lv21 172/172hp)@(1418, 943), forestHunter2(Lv21 165/165hp)@(1422, 886) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:35] [CLIENT forestHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 137/138hp)@(1168, 782), forestHunter1(Lv21 172/172hp)@(1074, 721), forestHunter2(Lv21 165/165hp)@(1074, 722) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:56:37] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (1.1s)
+[14:56:38] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 137/138hp)@(1289, 499), forestHunter1(Lv21 172/172hp)@(782, 429), forestHunter2(Lv21 165/165hp)@(864, 531) | monsters: rat 10/12, bat 6/6, spider 4/5, broodmother 1/1 | loot=1 | foreign_entities=0
+[14:56:39] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (3.9s)
+[14:56:39] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (3.9s)
+[14:56:40] [CLIENT forestHunter3] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT forestHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT forestHunter3] inventory: gold=337 inv={ "health_potion": 11, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:41] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 138/138hp)@(1401, 398), forestHunter1(Lv22 179/179hp)@(897, 385), forestHunter2(Lv21 165/165hp)@(1253, 479) | monsters: rat 12/12, bat 6/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:42] [CLIENT forestHunter3] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT forestHunter3] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:42] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (0.7s)
+[14:56:42] [CLIENT forestHunter3] inventory: gold=346 inv={ "health_potion": 11, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:43] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (0.7s)
+[14:56:43] [CLIENT forestHunter3] inventory: gold=346 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:44] [CLIENT forestHunter3] inventory: gold=355 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:44] [CLIENT forestHunter3] inventory: gold=358 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:44] [CLIENT forestHunter3] inventory: gold=365 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:44] [CLIENT forestHunter3] inventory: gold=372 inv={ "health_potion": 12, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:44] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv21 96/138hp)@(1548, 320), forestHunter1(Lv22 179/179hp)@(1255, 478), forestHunter2(Lv21 165/165hp)@(1530, 326) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT forestHunter3] [chat] * cryptHunter3 reached level 23!
+[14:56:44] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:56:45] [CLIENT forestHunter3] inventory: gold=378 inv={ "health_potion": 13, "greater_potion": 5, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:45] [CLIENT forestHunter3] drinking a greater_potion at hp 78/138
+[14:56:45] [CLIENT forestHunter3] inventory: gold=378 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:46] [CLIENT forestHunter3] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT forestHunter3] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT forestHunter3] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv22 143/143hp)@(1659, 336), forestHunter1(Lv22 179/179hp)@(1668, 336), forestHunter2(Lv22 171/171hp)@(1647, 336) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:50] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv22 143/143hp)@(1744, 601), forestHunter1(Lv22 179/179hp)@(1731, 642), forestHunter2(Lv22 171/171hp)@(1744, 592) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:53] [CLIENT forestHunter3] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT forestHunter3] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT forestHunter3] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT forestHunter3] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv22 143/143hp)@(1518, 914), forestHunter1(Lv22 179/179hp)@(1444, 1012), forestHunter2(Lv22 171/171hp)@(1559, 905) | monsters: rat 10/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:53] [CLIENT forestHunter3] inventory: gold=393 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:53] [CLIENT forestHunter3] inventory: gold=401 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:54] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (3.1s)
+[14:56:54] [CLIENT forestHunter3] inventory: gold=408 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:56:55] [CLIENT forestHunter3] [chat] * cryptHunter2 reached level 23!
+[14:56:55] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (3.1s)
+[14:56:56] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv22 140/143hp)@(1460, 880), forestHunter1(Lv22 179/179hp)@(1474, 912), forestHunter2(Lv22 169/171hp)@(1510, 912), Walker(Lv21 165/165hp)@(1004, 198) | monsters: rat 11/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:56] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (6.0s)
+[14:56:57] [CLIENT forestHunter3] [chat] * cryptHunter3 reached level 24!
+[14:56:59] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv22 140/143hp)@(1709, 783), forestHunter1(Lv22 179/179hp)@(1712, 775), forestHunter2(Lv22 168/171hp)@(1712, 777), Walker(Lv21 163/165hp)@(847, 535) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:00] [CLIENT forestHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:00] [CLIENT forestHunter3] inventory: gold=417 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:02] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv22 140/143hp)@(1601, 896), forestHunter1(Lv22 179/179hp)@(1607, 889), forestHunter2(Lv22 171/171hp)@(1580, 916), Walker(Lv21 162/165hp)@(475, 592) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:57:04] [CLIENT forestHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT forestHunter3] status: zone=forest players=4 forestHunter3(Lv22 143/143hp)@(1266, 748), forestHunter1(Lv22 179/179hp)@(1307, 763), forestHunter2(Lv22 171/171hp)@(1259, 741), Walker(Lv21 162/165hp)@(89, 688) | monsters: rat 11/12, bat 6/6, spider 4/5, broodmother 1/1 | loot=7 | foreign_entities=0
+[14:57:06] [CLIENT forestHunter3] inventory: gold=428 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:06] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (5.6s)
+[14:57:06] [CLIENT forestHunter3] inventory: gold=434 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:07] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT forestHunter3] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:08] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv22 143/143hp)@(1133, 777), forestHunter1(Lv22 179/179hp)@(1132, 771), forestHunter2(Lv22 171/171hp)@(1136, 779) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=5 | foreign_entities=0
+[14:57:11] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (1.5s)
+[14:57:11] [CLIENT forestHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv22 143/143hp)@(1336, 456), forestHunter1(Lv22 179/179hp)@(1300, 491), forestHunter2(Lv22 171/171hp)@(1296, 495) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=5 | foreign_entities=0
+[14:57:13] [CLIENT forestHunter3] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv22 143/143hp)@(1544, 349), forestHunter1(Lv22 179/179hp)@(1561, 335), forestHunter2(Lv22 171/171hp)@(1544, 349) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=8 | foreign_entities=0
+[14:57:15] [CLIENT forestHunter3] inventory: gold=439 inv={ "health_potion": 13, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:15] [CLIENT forestHunter3] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT forestHunter3] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT forestHunter3] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT forestHunter3] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:17] [CLIENT forestHunter3] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(1712, 245), forestHunter1(Lv23 175/186hp)@(1709, 228), forestHunter2(Lv23 178/178hp)@(1712, 245) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:18] [CLIENT forestHunter3] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT forestHunter3] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT forestHunter3] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:20] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(1735, 639), forestHunter1(Lv23 175/186hp)@(1731, 642), forestHunter2(Lv23 178/178hp)@(1735, 639) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:21] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (1.9s)
+[14:57:23] [CLIENT forestHunter3] inventory: gold=439 inv={ "health_potion": 14, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:23] [CLIENT forestHunter3] inventory: gold=447 inv={ "health_potion": 14, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:23] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(1550, 910), forestHunter1(Lv23 175/186hp)@(1578, 933), forestHunter2(Lv23 178/178hp)@(1614, 908) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=7 | foreign_entities=0
+[14:57:24] [CLIENT forestHunter3] inventory: gold=455 inv={ "health_potion": 14, "greater_potion": 4, "apprentice_staff": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:24] [CLIENT forestHunter3] inventory: gold=455 inv={ "health_potion": 14, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:24] [CLIENT forestHunter3] trying to equip war_axe (not allowed for water)
+[14:57:24] [CLIENT forestHunter3] notice: War Axe: Only: Blade Master, Stone Guardian
+[14:57:25] [CLIENT forestHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(1148, 918), forestHunter1(Lv23 177/186hp)@(1171, 944), forestHunter2(Lv23 178/178hp)@(1164, 893) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=5 | foreign_entities=0
+[14:57:29] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(783, 817), forestHunter1(Lv23 177/186hp)@(771, 823), forestHunter2(Lv23 178/178hp)@(800, 817) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=6 | foreign_entities=0
+[14:57:29] [CLIENT forestHunter3] inventory: gold=455 inv={ "health_potion": 15, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:30] [CLIENT forestHunter3] inventory: gold=463 inv={ "health_potion": 15, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:30] [CLIENT forestHunter3] inventory: gold=469 inv={ "health_potion": 15, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:30] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT forestHunter3] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:31] [CLIENT forestHunter3] inventory: gold=469 inv={ "health_potion": 16, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:31] [CLIENT forestHunter3] inventory: gold=475 inv={ "health_potion": 16, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:31] [CLIENT forestHunter3] inventory: gold=478 inv={ "health_potion": 16, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:31] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (8.8s)
+[14:57:31] [CLIENT forestHunter3] inventory: gold=478 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:32] [CLIENT forestHunter3] inventory: gold=483 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:32] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (8.8s)
+[14:57:32] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 148/149hp)@(511, 804), forestHunter1(Lv23 186/186hp)@(571, 816), forestHunter2(Lv23 178/178hp)@(582, 815) | monsters: rat 11/12, bat 5/6, spider 5/5, broodmother 0/1 | loot=6 | foreign_entities=0
+[14:57:33] [CLIENT forestHunter3] inventory: gold=486 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:33] [CLIENT forestHunter3] inventory: gold=493 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:33] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:57:34] [CLIENT forestHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:34] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (5.5s)
+[14:57:35] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (5.6s)
+[14:57:35] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 148/149hp)@(594, 746), forestHunter1(Lv23 186/186hp)@(598, 764), forestHunter2(Lv23 178/178hp)@(594, 800) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:57:35] [CLIENT forestHunter3] inventory: gold=503 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:36] [CLIENT forestHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:38] [CLIENT forestHunter3] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(705, 592), forestHunter1(Lv23 186/186hp)@(689, 592), forestHunter2(Lv23 178/178hp)@(704, 592) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:39] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (1.1s)
+[14:57:40] [CLIENT forestHunter3] inventory: gold=516 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:40] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 26!
+[14:57:41] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(907, 352), forestHunter1(Lv23 186/186hp)@(883, 364), forestHunter2(Lv23 178/178hp)@(886, 338) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:44] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(1208, 496), forestHunter1(Lv23 186/186hp)@(1259, 472), forestHunter2(Lv23 178/178hp)@(1174, 496) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT forestHunter3] [chat] * Walker reached level 22!
+[14:57:46] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (5.5s)
+[14:57:47] [CLIENT forestHunter3] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT forestHunter3] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT forestHunter3] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (7.2s)
+[14:57:47] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv23 149/149hp)@(1436, 384), forestHunter1(Lv24 193/193hp)@(1435, 388), forestHunter2(Lv23 178/178hp)@(1428, 400) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT forestHunter3] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT forestHunter3] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT forestHunter3] inventory: gold=524 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:48] [CLIENT forestHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:49] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (6.8s)
+[14:57:50] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (2.3s)
+[14:57:50] [CLIENT forestHunter3] inventory: gold=527 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:50] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv24 154/154hp)@(1670, 351), forestHunter1(Lv24 183/193hp)@(1546, 306), forestHunter2(Lv23 178/178hp)@(1608, 368) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:57:51] [CLIENT forestHunter3] inventory: gold=534 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:52] [CLIENT forestHunter3] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT forestHunter3] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT forestHunter3] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv24 154/154hp)@(1712, 711), forestHunter1(Lv24 183/193hp)@(1744, 619), forestHunter2(Lv23 178/178hp)@(1708, 674) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:53] [CLIENT forestHunter3] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT forestHunter3] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT forestHunter3] [chat] * frostHunter3 reached level 26!
+[14:57:56] [CLIENT forestHunter3] inventory: gold=541 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:56] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv24 154/154hp)@(1548, 828), forestHunter1(Lv24 184/193hp)@(1554, 879), forestHunter2(Lv24 184/184hp)@(1538, 806) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:58] [CLIENT forestHunter3] inventory: gold=549 inv={ "health_potion": 17, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:58] [CLIENT forestHunter3] notice: Tidal Wave is on cooldown (8.8s)
+[14:57:59] [CLIENT forestHunter3] inventory: gold=549 inv={ "health_potion": 18, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:59] [CLIENT forestHunter3] inventory: gold=553 inv={ "health_potion": 18, "greater_potion": 4, "apprentice_staff": 1, "war_axe": 1 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:57:59] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv24 154/154hp)@(1398, 913), forestHunter1(Lv24 184/193hp)@(1395, 944), forestHunter2(Lv24 184/184hp)@(1400, 933) | monsters: rat 9/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:02] [CLIENT forestHunter3] notice: Healing Rain is on cooldown (5.2s)
+[14:58:02] [CLIENT forestHunter3] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT forestHunter3] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT forestHunter3] status: zone=forest players=3 forestHunter3(Lv24 154/154hp)@(1324, 726), forestHunter1(Lv24 184/193hp)@(1322, 646), forestHunter2(Lv24 184/184hp)@(1327, 713) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:02] [CLIENT forestHunter3] notice: Frost Nova is on cooldown (7.2s)
+[14:58:03] [CLIENT forestHunter3] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT forestHunter3] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT forestHunter3] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT forestHunter3] [chat] * frostHunter1 left the world.
+[14:58:03] [CLIENT forestHunter3] [chat] * forestHunter2 left the world.
+[14:58:03] [CLIENT forestHunter3] quit-after reached, exiting

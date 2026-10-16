@@ -1,0 +1,250 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT frostHunter2] Connecting to 127.0.0.1:7777 as 'frostHunter2' ...
+[14:55:59] [CLIENT frostHunter2] Connected to server as peer 2087361788, logging in
+[14:55:59] [CLIENT frostHunter2] [chat] * cryptHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT frostHunter2] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT frostHunter2] Class selection requested (new account)
+[14:55:59] [CLIENT frostHunter2] bot chooses class fire
+[14:55:59] [CLIENT frostHunter2] [chat] * frostHunter2 the Pyromancer joined the world.
+[14:55:59] [CLIENT frostHunter2] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT frostHunter2] [chat] * frostHunter1 the Stone Guardian joined the world.
+[14:55:59] [CLIENT frostHunter2] Entered zone frost (Frostpeak Ruins)
+[14:55:59] [CLIENT frostHunter2] [chat] * forestHunter2 the Venom Druid joined the world.
+[14:55:59] [CLIENT frostHunter2] [chat] * forestHunter3 the Frost Sage joined the world.
+[14:55:59] [CLIENT frostHunter2] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT frostHunter2] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:55:59] [CLIENT frostHunter2] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT frostHunter2] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT frostHunter2] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:02] [CLIENT frostHunter2] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT frostHunter2] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT frostHunter2] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT frostHunter2] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT frostHunter2] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT frostHunter2] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT frostHunter2] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv20 121/121hp)@(599, 685), frostHunter1(Lv20 211/211hp)@(560, 656), frostHunter3(Lv20 165/165hp)@(522, 654) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:02] [CLIENT frostHunter2] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT frostHunter2] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT frostHunter2] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:03] [CLIENT frostHunter2] inventory: gold=278 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:03] [CLIENT frostHunter2] inventory: gold=278 inv={ "health_potion": 8, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:04] [CLIENT frostHunter2] trying to equip great_hammer (not allowed for fire)
+[14:56:04] [CLIENT frostHunter2] notice: Great Hammer: Only: Blade Master, Stone Guardian
+[14:56:05] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (4.8s)
+[14:56:05] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv20 97/121hp)@(685, 738), frostHunter1(Lv20 211/211hp)@(620, 742), frostHunter3(Lv20 165/165hp)@(625, 773) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=3 | foreign_entities=0
+[14:56:05] [CLIENT frostHunter2] notice: Meteor is on cooldown (10.8s)
+[14:56:06] [CLIENT frostHunter2] notice: Inferno is on cooldown (12.8s)
+[14:56:06] [CLIENT frostHunter2] inventory: gold=295 inv={ "health_potion": 8, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:08] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv20 73/121hp)@(857, 880), frostHunter1(Lv20 211/211hp)@(846, 880), frostHunter3(Lv20 142/165hp)@(845, 881) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:56:08] [CLIENT frostHunter2] inventory: gold=295 inv={ "health_potion": 9, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:08] [CLIENT frostHunter2] inventory: gold=307 inv={ "health_potion": 9, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:09] [CLIENT frostHunter2] inventory: gold=335 inv={ "health_potion": 9, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:10] [CLIENT frostHunter2] notice: Meteor is on cooldown (6.0s)
+[14:56:11] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv20 73/121hp)@(1173, 656), frostHunter1(Lv20 211/211hp)@(1088, 752), frostHunter3(Lv20 142/165hp)@(1179, 656) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:11] [CLIENT frostHunter2] notice: Inferno is on cooldown (8.0s)
+[14:56:12] [CLIENT frostHunter2] inventory: gold=368 inv={ "health_potion": 9, "greater_potion": 5, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:12] [CLIENT frostHunter2] inventory: gold=368 inv={ "health_potion": 9, "greater_potion": 6, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:12] [CLIENT frostHunter2] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT frostHunter2] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT frostHunter2] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:13] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (4.8s)
+[14:56:13] [CLIENT frostHunter2] notice: Meteor is on cooldown (2.7s)
+[14:56:14] [CLIENT frostHunter2] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv20 0/121hp DEAD)@(1585, 688), frostHunter1(Lv20 211/211hp)@(1480, 720), frostHunter3(Lv20 81/165hp)@(1579, 677) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:15] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 21!
+[14:56:17] [CLIENT frostHunter2] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT frostHunter2] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT frostHunter2] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv21 126/126hp DEAD)@(1585, 688), frostHunter1(Lv20 206/211hp)@(1586, 690), frostHunter3(Lv20 132/165hp)@(1591, 692) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:20] [CLIENT frostHunter2] notice: Inferno is on cooldown (3.1s)
+[14:56:20] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv21 126/126hp)@(379, 656), frostHunter1(Lv20 206/211hp)@(1583, 672), frostHunter3(Lv20 132/165hp)@(1585, 673) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:23] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT frostHunter2] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT frostHunter2] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv21 126/126hp)@(729, 656), frostHunter1(Lv20 206/211hp)@(1583, 672), frostHunter3(Lv20 129/165hp)@(1596, 680) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=4 | foreign_entities=0
+[14:56:23] [CLIENT frostHunter2] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT frostHunter2] [chat] * cryptHunter3 reached level 22!
+[14:56:23] [CLIENT frostHunter2] inventory: gold=381 inv={ "health_potion": 9, "greater_potion": 6, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:24] [CLIENT frostHunter2] inventory: gold=381 inv={ "health_potion": 10, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:24] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 22!
+[14:56:25] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (4.8s)
+[14:56:25] [CLIENT frostHunter2] inventory: gold=413 inv={ "health_potion": 10, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:26] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv22 106/131hp)@(646, 430), frostHunter1(Lv21 220/220hp)@(1500, 558), frostHunter3(Lv21 164/172hp)@(1392, 906) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:26] [CLIENT frostHunter2] notice: Meteor is on cooldown (10.0s)
+[14:56:27] [CLIENT frostHunter2] notice: Inferno is on cooldown (12.0s)
+[14:56:28] [CLIENT frostHunter2] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT frostHunter2] inventory: gold=441 inv={ "health_potion": 10, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:29] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (0.7s)
+[14:56:29] [CLIENT frostHunter2] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT frostHunter2] inventory: gold=441 inv={ "health_potion": 10, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:29] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv22 80/131hp)@(990, 333), frostHunter1(Lv21 220/220hp)@(1309, 331), frostHunter3(Lv22 179/179hp)@(1758, 1016) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=4 | foreign_entities=0
+[14:56:29] [CLIENT frostHunter2] inventory: gold=463 inv={ "health_potion": 10, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:29] [CLIENT frostHunter2] inventory: gold=463 inv={ "health_potion": 11, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:30] [CLIENT frostHunter2] notice: Meteor is on cooldown (6.7s)
+[14:56:30] [CLIENT frostHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:30] [CLIENT frostHunter2] notice: Inferno is on cooldown (8.7s)
+[14:56:31] [CLIENT frostHunter2] drinking a greater_potion at hp 54/131
+[14:56:31] [CLIENT frostHunter2] inventory: gold=463 inv={ "health_potion": 11, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:31] [CLIENT frostHunter2] [chat] * frostHunter1 reached level 22!
+[14:56:31] [CLIENT frostHunter2] inventory: gold=490 inv={ "health_potion": 11, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:32] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv22 94/131hp)@(1058, 222), frostHunter1(Lv22 228/229hp)@(1249, 238), frostHunter3(Lv22 166/179hp)@(1498, 1137) | monsters: yeti 5/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:56:33] [CLIENT frostHunter2] inventory: gold=513 inv={ "health_potion": 11, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:33] [CLIENT frostHunter2] notice: Meteor is on cooldown (3.5s)
+[14:56:34] [CLIENT frostHunter2] notice: Inferno is on cooldown (5.5s)
+[14:56:34] [CLIENT frostHunter2] inventory: gold=539 inv={ "health_potion": 11, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:35] [CLIENT frostHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT frostHunter2] status: zone=frost players=4 frostHunter2(Lv22 94/131hp)@(1114, 294), frostHunter1(Lv22 226/229hp)@(1234, 274), frostHunter3(Lv22 151/179hp)@(1260, 1066), Walker(Lv20 147/158hp)@(473, 657) | monsters: yeti 5/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:37] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (3.2s)
+[14:56:37] [CLIENT frostHunter2] drinking a greater_potion at hp 70/131
+[14:56:37] [CLIENT frostHunter2] inventory: gold=539 inv={ "health_potion": 11, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:37] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 23!
+[14:56:37] [CLIENT frostHunter2] inventory: gold=558 inv={ "health_potion": 11, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:38] [CLIENT frostHunter2] status: zone=frost players=4 frostHunter2(Lv23 112/136hp)@(954, 427), frostHunter1(Lv22 226/229hp)@(991, 434), frostHunter3(Lv22 151/179hp)@(1144, 1080), Walker(Lv20 158/158hp)@(497, 655) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:56:38] [CLIENT frostHunter2] notice: Inferno is on cooldown (0.7s)
+[14:56:39] [CLIENT frostHunter2] inventory: gold=586 inv={ "health_potion": 11, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:40] [CLIENT frostHunter2] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT frostHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv23 112/136hp)@(856, 688), frostHunter1(Lv22 226/229hp)@(1028, 622), frostHunter3(Lv22 135/179hp)@(799, 955) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:56:42] [CLIENT frostHunter2] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT frostHunter2] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:42] [CLIENT frostHunter2] notice: Meteor is on cooldown (9.2s)
+[14:56:43] [CLIENT frostHunter2] inventory: gold=616 inv={ "health_potion": 11, "greater_potion": 7, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:43] [CLIENT frostHunter2] inventory: gold=616 inv={ "health_potion": 11, "greater_potion": 8, "great_hammer": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:44] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv23 112/136hp)@(819, 625), frostHunter1(Lv22 228/229hp)@(1363, 626), frostHunter3(Lv22 135/179hp)@(1135, 725) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT frostHunter2] [chat] * cryptHunter3 reached level 23!
+[14:56:46] [CLIENT frostHunter2] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT frostHunter2] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT frostHunter2] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv23 114/136hp)@(1298, 624), frostHunter1(Lv22 224/229hp)@(1647, 630), frostHunter3(Lv22 135/179hp)@(1606, 738) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:48] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (1.6s)
+[14:56:49] [CLIENT frostHunter2] notice: Meteor is on cooldown (2.7s)
+[14:56:50] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT frostHunter2] notice: Inferno is on cooldown (9.5s)
+[14:56:50] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv23 115/136hp)@(1681, 652), frostHunter1(Lv22 217/229hp)@(1667, 651), frostHunter3(Lv22 137/179hp)@(1687, 651) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:53] [CLIENT frostHunter2] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT frostHunter2] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT frostHunter2] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT frostHunter2] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT frostHunter2] inventory: gold=1108 inv={ "health_potion": 11, "greater_potion": 12, "great_hammer": 1, "frostbrand": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:53] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1671, 663), frostHunter1(Lv23 238/238hp)@(1676, 658), frostHunter3(Lv23 186/186hp)@(1675, 662) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:53] [CLIENT frostHunter2] trying to equip frostbrand (not allowed for fire)
+[14:56:53] [CLIENT frostHunter2] equipping ember_staff
+[14:56:53] [CLIENT frostHunter2] notice: Frostbrand: Only: Blade Master, Stone Guardian
+[14:56:53] [CLIENT frostHunter2] inventory: gold=1108 inv={ "health_potion": 11, "greater_potion": 12, "great_hammer": 1, "frostbrand": 1, "frost_aegis": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "" }
+[14:56:54] [CLIENT frostHunter2] notice: Inferno is on cooldown (5.5s)
+[14:56:54] [CLIENT frostHunter2] equipping frost_aegis
+[14:56:54] [CLIENT frostHunter2] inventory: gold=1108 inv={ "health_potion": 11, "greater_potion": 12, "great_hammer": 1, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:56:55] [CLIENT frostHunter2] inventory: gold=1123 inv={ "health_potion": 11, "greater_potion": 12, "great_hammer": 2, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:56:55] [CLIENT frostHunter2] [chat] * cryptHunter2 reached level 23!
+[14:56:55] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (4.0s)
+[14:56:56] [CLIENT frostHunter2] inventory: gold=1148 inv={ "health_potion": 11, "greater_potion": 12, "great_hammer": 2, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:56:56] [CLIENT frostHunter2] inventory: gold=1148 inv={ "health_potion": 12, "greater_potion": 12, "great_hammer": 2, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:56:56] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1388, 759), frostHunter1(Lv23 238/238hp)@(1404, 752), frostHunter3(Lv23 174/186hp)@(1388, 762) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:57] [CLIENT frostHunter2] [chat] * cryptHunter3 reached level 24!
+[14:56:59] [CLIENT frostHunter2] notice: Meteor is on cooldown (7.6s)
+[14:56:59] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1587, 920), frostHunter1(Lv23 238/238hp)@(1632, 988), frostHunter3(Lv23 174/186hp)@(1640, 993) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:00] [CLIENT frostHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:02] [CLIENT frostHunter2] inventory: gold=1148 inv={ "health_potion": 12, "greater_potion": 13, "great_hammer": 2, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:02] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1564, 771), frostHunter1(Lv23 238/238hp)@(1520, 853), frostHunter3(Lv23 175/186hp)@(1520, 837) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:02] [CLIENT frostHunter2] inventory: gold=1169 inv={ "health_potion": 12, "greater_potion": 13, "great_hammer": 2, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:04] [CLIENT frostHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1456, 334), frostHunter1(Lv23 238/238hp)@(1255, 1017), frostHunter3(Lv23 176/186hp)@(1456, 448) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:07] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT frostHunter2] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:08] [CLIENT frostHunter2] inventory: gold=1193 inv={ "health_potion": 12, "greater_potion": 13, "great_hammer": 2, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:08] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1161, 150), frostHunter1(Lv23 237/238hp)@(928, 994), frostHunter3(Lv23 178/186hp)@(1169, 217) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:11] [CLIENT frostHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(858, 435), frostHunter1(Lv23 235/238hp)@(823, 970), frostHunter3(Lv23 179/186hp)@(832, 432) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:13] [CLIENT frostHunter2] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1308, 497), frostHunter1(Lv23 235/238hp)@(1154, 784), frostHunter3(Lv23 181/186hp)@(1303, 498) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT frostHunter2] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT frostHunter2] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT frostHunter2] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT frostHunter2] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:17] [CLIENT frostHunter2] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv24 141/141hp)@(1647, 687), frostHunter1(Lv23 235/238hp)@(1527, 748), frostHunter3(Lv23 154/186hp)@(1653, 692) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:18] [CLIENT frostHunter2] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT frostHunter2] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT frostHunter2] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:18] [CLIENT frostHunter2] inventory: gold=1589 inv={ "health_potion": 12, "greater_potion": 17, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:20] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(1581, 939), frostHunter1(Lv24 247/247hp)@(1582, 910), frostHunter3(Lv24 193/193hp)@(1583, 956) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:21] [CLIENT frostHunter2] notice: Meteor is on cooldown (7.3s)
+[14:57:23] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(1592, 985), frostHunter1(Lv24 247/247hp)@(1584, 998), frostHunter3(Lv24 189/193hp)@(1620, 1012) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:24] [CLIENT frostHunter2] notice: Inferno is on cooldown (6.8s)
+[14:57:25] [CLIENT frostHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:25] [CLIENT frostHunter2] inventory: gold=1589 inv={ "health_potion": 13, "greater_potion": 17, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:25] [CLIENT frostHunter2] inventory: gold=1615 inv={ "health_potion": 13, "greater_potion": 17, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:26] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(1454, 622), frostHunter1(Lv24 247/247hp)@(1462, 662), frostHunter3(Lv24 189/193hp)@(1469, 669) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:29] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(1112, 464), frostHunter1(Lv24 247/247hp)@(1225, 457), frostHunter3(Lv24 190/193hp)@(1131, 465) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT frostHunter2] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:32] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(768, 416), frostHunter1(Lv24 247/247hp)@(883, 368), frostHunter3(Lv24 191/193hp)@(725, 358) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:33] [CLIENT frostHunter2] inventory: gold=1627 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:34] [CLIENT frostHunter2] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:35] [CLIENT frostHunter2] inventory: gold=1655 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:35] [CLIENT frostHunter2] inventory: gold=1655 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:35] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(519, 585), frostHunter1(Lv24 247/247hp)@(658, 496), frostHunter3(Lv24 193/193hp)@(632, 495) | monsters: yeti 6/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:36] [CLIENT frostHunter2] inventory: gold=1674 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:36] [CLIENT frostHunter2] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:36] [CLIENT frostHunter2] inventory: gold=1697 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:36] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (4.2s)
+[14:57:38] [CLIENT frostHunter2] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT frostHunter2] notice: Meteor is on cooldown (8.9s)
+[14:57:38] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv25 146/146hp)@(520, 696), frostHunter1(Lv24 247/247hp)@(723, 592), frostHunter3(Lv24 193/193hp)@(770, 592) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:57:39] [CLIENT frostHunter2] notice: Inferno is on cooldown (10.8s)
+[14:57:40] [CLIENT frostHunter2] inventory: gold=1724 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:40] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 26!
+[14:57:40] [CLIENT frostHunter2] inventory: gold=1735 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:40] [CLIENT frostHunter2] inventory: gold=1748 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:40] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (0.2s)
+[14:57:41] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(533, 880), frostHunter1(Lv24 247/247hp)@(1044, 624), frostHunter3(Lv24 193/193hp)@(980, 656) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:41] [CLIENT frostHunter2] notice: Meteor is on cooldown (5.7s)
+[14:57:42] [CLIENT frostHunter2] notice: Inferno is on cooldown (7.6s)
+[14:57:43] [CLIENT frostHunter2] inventory: gold=1760 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:44] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(674, 834), frostHunter1(Lv24 247/247hp)@(1374, 624), frostHunter3(Lv24 193/193hp)@(1389, 656) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT frostHunter2] [chat] * Walker reached level 22!
+[14:57:46] [CLIENT frostHunter2] inventory: gold=1774 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:46] [CLIENT frostHunter2] notice: Meteor is on cooldown (0.9s)
+[14:57:47] [CLIENT frostHunter2] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT frostHunter2] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT frostHunter2] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT frostHunter2] notice: Inferno is on cooldown (2.7s)
+[14:57:47] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(788, 941), frostHunter1(Lv25 256/256hp)@(1610, 560), frostHunter3(Lv25 200/200hp)@(1615, 560) | monsters: yeti 6/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:57:48] [CLIENT frostHunter2] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT frostHunter2] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT frostHunter2] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:49] [CLIENT frostHunter2] inventory: gold=1787 inv={ "health_potion": 13, "greater_potion": 18, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:49] [CLIENT frostHunter2] inventory: gold=1787 inv={ "health_potion": 13, "greater_potion": 19, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:49] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (2.6s)
+[14:57:50] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(845, 814), frostHunter1(Lv25 256/256hp)@(1616, 585), frostHunter3(Lv25 148/200hp)@(1616, 580) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:52] [CLIENT frostHunter2] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT frostHunter2] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:52] [CLIENT frostHunter2] inventory: gold=1820 inv={ "health_potion": 13, "greater_potion": 20, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:53] [CLIENT frostHunter2] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(937, 648), frostHunter1(Lv26 265/265hp)@(1449, 592), frostHunter3(Lv25 124/200hp)@(1431, 593) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:53] [CLIENT frostHunter2] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT frostHunter2] inventory: gold=1850 inv={ "health_potion": 13, "greater_potion": 20, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:54] [CLIENT frostHunter2] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT frostHunter2] [chat] * frostHunter3 reached level 26!
+[14:57:55] [CLIENT frostHunter2] inventory: gold=1869 inv={ "health_potion": 13, "greater_potion": 21, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:56] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(940, 339), frostHunter1(Lv26 265/265hp)@(1328, 456), frostHunter3(Lv26 207/207hp)@(1332, 483) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:57] [CLIENT frostHunter2] inventory: gold=1899 inv={ "health_potion": 13, "greater_potion": 21, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:57] [CLIENT frostHunter2] notice: Meteor is on cooldown (5.7s)
+[14:57:58] [CLIENT frostHunter2] notice: Inferno is on cooldown (10.0s)
+[14:57:59] [CLIENT frostHunter2] inventory: gold=1918 inv={ "health_potion": 13, "greater_potion": 21, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:57:59] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv26 151/151hp)@(1181, 120), frostHunter1(Lv26 265/265hp)@(1204, 142), frostHunter3(Lv26 207/207hp)@(1196, 143) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:58:01] [CLIENT frostHunter2] inventory: gold=1938 inv={ "health_potion": 13, "greater_potion": 21, "great_hammer": 2, "frostbrand": 2, "apprentice_staff": 1, "ember_staff": 1, "frost_aegis": 2 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:58:01] [CLIENT frostHunter2] notice: Flame Burst is on cooldown (2.6s)
+[14:58:02] [CLIENT frostHunter2] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT frostHunter2] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT frostHunter2] status: zone=frost players=3 frostHunter2(Lv27 156/156hp)@(867, 208), frostHunter1(Lv26 265/265hp)@(894, 208), frostHunter3(Lv26 207/207hp)@(806, 203) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:58:03] [CLIENT frostHunter2] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT frostHunter2] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT frostHunter2] quit-after reached, exiting

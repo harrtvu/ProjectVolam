@@ -1,0 +1,251 @@
+Phase 1 (~86s)...
+Phase 2 (~45s)...
+Phase 3 (~130s)...
+Phase 4 (~75s): targeting + talents...
+Phase 4b (~14s): talents restored after restart...
+Phase 5 (~70s): gear, crafting, blacksmith...
+Phase 5b (~14s): gear restored after restart...
+
+== Core features
+PASS  accounts created
+PASS  slime damages player
+PASS  kill gives XP
+PASS  level up + chat message
+PASS  loot dropped
+PASS  loot picked up
+PASS  gear equipped
+PASS  periodic save
+PASS  shutdown save
+PASS  save restored after restart
+PASS  wrong password rejected
+PASS  duplicate login rejected
+PASS  player death
+PASS  respawn at zone entrance
+PASS  potion used
+
+== Zones
+PASS  meadow -> forest (Bot1)
+PASS  forest -> meadow (Bot1)
+PASS  client sees zone banner
+PASS  zone saved + restored
+PASS  walker meadow -> forest
+PASS  walker forest -> crypt
+PASS  walker crypt -> frost
+PASS  walker frost -> crypt
+PASS  walker crypt -> forest
+PASS  walker forest -> meadow
+PASS  visibility isolation (no client ever received another zone's entities)
+PASS  Bot1 back in meadow sees only itself
+PASS  Bot2 in forest sees only itself
+
+== Monsters (attack / die / respawn)
+PASS  Slime           attacks=52   kills=103  respawns=100
+PASS  Dire Rat        attacks=101  kills=209  respawns=206
+PASS  Cave Bat        attacks=24   kills=69   respawns=68
+PASS  Wood Spider     attacks=48   kills=89   respawns=89
+PASS  Crypt Archer    attacks=34   kills=67   respawns=65
+PASS  Restless Ghost  attacks=13   kills=57   respawns=55
+PASS  Grave Crawler   attacks=18   kills=53   respawns=52
+PASS  Yeti            attacks=56   kills=56   respawns=53
+PASS  Ice Ogre        attacks=25   kills=39   respawns=37
+PASS  Frost Bat       attacks=38   kills=48   respawns=47
+
+== Bosses
+PASS  Broodmother killed
+PASS  Broodmother loot dropped
+PASS  Broodmother kill announced in chat
+PASS  Broodmother respawned
+PASS  The Lich King killed
+PASS  The Lich King loot dropped
+PASS  The Lich King kill announced in chat
+PASS  The Lich King respawned
+PASS  Yeti King killed
+PASS  Yeti King loot dropped
+PASS  Yeti King kill announced in chat
+PASS  Yeti King respawned
+PASS  Broodmother summons
+PASS  Lich volley
+PASS  Yeti King quake
+PASS  boss loot picked up
+
+== Classes & character creation
+PASS  a character chose class metal
+PASS  a character chose class wood
+PASS  a character chose class water
+PASS  a character chose class fire
+PASS  a character chose class earth
+PASS  new account asked to pick a class
+PASS  starting gear: Metal gets a sword
+PASS  starting gear: Water gets a staff
+PASS  old account prompted (server)
+PASS  old account prompted (client)
+PASS  old account keeps its progress
+PASS  class persists (Bot1 metal)
+PASS  class persists (Bot2 water)
+PASS  restored players not re-prompted
+PASS  Bot1 not prompted again
+PASS  class-restricted weapon refused
+
+== Skills (server-authoritative)
+PASS  Whirling Blade         casts=108  hits=56
+PASS  Piercing Strike        casts=68   hits=54
+PASS  Blade Focus            casts=31   hits=0
+PASS  Thousand Cuts          casts=21   hits=39
+PASS  Poison Thorn           casts=80   hits=48
+PASS  Regrowth               casts=31   hits=0
+PASS  Entangling Roots       casts=27   hits=37
+PASS  Plague Bloom           casts=22   hits=14
+PASS  Ice Shard              casts=87   hits=49
+PASS  Healing Rain           casts=39   hits=0
+PASS  Frost Nova             casts=29   hits=17
+PASS  Tidal Wave             casts=25   hits=21
+PASS  Fireball               casts=72   hits=48
+PASS  Flame Burst            casts=37   hits=22
+PASS  Meteor                 casts=26   hits=32
+PASS  Inferno                casts=22   hits=12
+PASS  Ground Slam            casts=63   hits=17
+PASS  Stone Skin             casts=28   hits=0
+PASS  Mountain's Challenge   casts=34   hits=0
+PASS  Earthquake             casts=22   hits=30
+PASS  locked skill rejected (level)
+PASS  skill unlocked on level-up
+PASS  cooldown enforced
+PASS  mana cost enforced
+PASS  mana regenerates
+PASS  ranged basic attack (Water)
+PASS  ranged basic attack (Fire)
+
+== Status effects & element cycle
+PASS  is poisoned
+PASS  is burning
+PASS  is slowed
+PASS  is stunned
+PASS  Stone Skin shield absorbs
+PASS  is taunted by
+PASS  gains Blade Focus
+PASS  Healing Rain heals an ally
+PASS  +25% vs overcome element (player -> monster)
+PASS  -20% vs overcoming element (player -> monster)
+PASS  element bonus applies to monster -> player
+
+== Mouse targeting (server-validated)
+PASS  skills use selected target over nearer
+PASS  projectile aimed at cursor (Ice Shard)
+PASS  basic bolt aimed at cursor
+PASS  ground AoE at cursor (Entangling Roots)
+PASS  ground AoE at cursor (Meteor)
+PASS  cursor clamped to max range
+PASS  invalid target id rejected
+PASS  target in another zone rejected
+PASS  out-of-range target rejected
+PASS  no line of sight rejected
+
+== Passive web
+PASS  offline web self-test (graph + maths)
+PASS  web: every node reachable, 15 keystones
+PASS  refund that would disconnect rejected
+PASS  single node refunded for gold
+PASS  centre keystone allocated (Farmer)
+PASS  points granted (level 20 = 19 points)
+PASS  adjacency enforced (unconnected node)
+PASS  unknown node rejected
+PASS  already-allocated node rejected
+PASS  no points left rejected
+PASS  full reset with gold cost
+PASS  respec without enough gold rejected
+PASS  passives persist across restart (MetalA)
+PASS  passives persist across restart (FireB)
+PASS  retroactive points (old save Oldie, Lv4)
+PASS  retroactive points (pre-talent Bot1)
+PASS  stat talent: Honed Edge raises attack
+PASS  stat talent: Steel Body raises max life
+PASS  stat talent: Keen Eye raises crit
+PASS  stat talent: Mana Font raises mana
+PASS  stat talent: Granite raises defense
+PASS  stat talent: Fleet Foot raises speed
+PASS  passives change MetalA's Whirling Blade
+PASS  passives change MetalB's Piercing Strike
+PASS  passives change WoodA's Plague Bloom
+PASS  passives change WoodB's Regrowth
+PASS  passives change WaterA's Ice Shard
+PASS  passives change WaterB's Healing Rain
+PASS  passives change FireA's Meteor
+PASS  passives change FireB's Fireball
+PASS  passives change EarthA's Mountain's Challenge
+PASS  passives change EarthB's Ground Slam
+PASS  keystone Blade Storm (Metal)
+PASS  keystone Death Mark (Metal)
+PASS  keystone Pandemic (Wood)
+PASS  keystone Heart of the Forest (Wood)
+PASS  keystone Absolute Zero (Water)
+PASS  keystone Wellspring (Water)
+PASS  keystone Meteor Shower (Fire)
+PASS  keystone Phoenix Heart (Fire)
+PASS  keystone Unbreakable (Earth)
+PASS  keystone Tectonic Fury (Earth)
+PASS  farming stats boost loot (quantity/rarity/gold)
+PASS  life leech
+PASS  mana leech
+PASS  Shatter: bonus vs slowed
+
+== Gear, rarity & loot
+PASS  offline gear self-test passes
+PASS  IIQ: more drops (offline, 4000 kills)
+PASS  IIR: rarer drops (offline, 4000 kills)
+PASS  item level gates bases + affix tiers
+PASS  magic 1-2 / rare 3-6 affixes + rare names
+PASS  live drop of a normal item
+PASS  live drop of a magic item
+PASS  live drop of a rare item
+PASS  live drop of a unique item
+PASS  bosses drop their uniques
+PASS  boss drop table: magic+ guaranteed, monster IIQ/IIR
+PASS  item level from monster level
+PASS  monsters drop crafting currency
+PASS  currency stacks in the bag
+PASS  old saved items migrated to instances
+
+== Crafting currency & enhancement (server-validated)
+PASS  Transmutation: normal -> magic
+PASS  Transmutation on magic rejected
+PASS  Alteration rerolls magic
+PASS  Alteration on rare rejected
+PASS  Regal: magic -> rare
+PASS  Regal on rare rejected
+PASS  Exalted adds an affix
+PASS  Exalted on a full rare rejected
+PASS  Chaos rerolls rare
+PASS  Chaos on magic rejected
+PASS  Scouring: -> normal
+PASS  Scouring on normal rejected
+PASS  orbs on uniques rejected
+PASS  non-currency rejected
+PASS  unknown item rejected
+PASS  orbs work away from the blacksmith
+PASS  enhancement success (+gold cost)
+PASS  enhancement failure / downgrade happens
+PASS  enhancement limited by gold or +10 max
+PASS  enhancement only at the blacksmith
+PASS  enhancement odds + never destroys (offline)
+
+== Equipment, vendor, stash, bag
+PASS  equip changes resistances (Frost Aegis)
+PASS  equip rare armour raises defense
+PASS  resistance reduces live incoming damage
+PASS  resistances measurably cut damage (offline)
+PASS  unequip restores stats (offline)
+PASS  crafting an equipped item
+PASS  sell to the blacksmith
+PASS  selling away from the blacksmith rejected
+PASS  shared stash
+PASS  drop item on the ground
+PASS  destroy item
+PASS  bag full: pickup refused
+PASS  bag full: unequip refused
+PASS  gear persists across restart (upgrade, rares, stash)
+PASS  equipment persists across restart
+PASS  stash is stored account-wide (not per character)
+
+== Errors/warnings (should be none):
+none
+FINISHED

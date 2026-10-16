@@ -1,0 +1,37 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:59:26] [CLIENT MetalA] Connecting to 127.0.0.1:7777 as 'MetalA' ...
+[14:59:26] [CLIENT MetalA] Connected to server as peer 312267333, logging in
+[14:59:26] [CLIENT MetalA] Login OK: Welcome back, MetalA!
+[14:59:26] [CLIENT MetalA] [chat] * MetalA joined the world.
+[14:59:26] [CLIENT MetalA] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:59:26] [CLIENT MetalA] Entered zone crypt (Bone Crypt)
+[14:59:27] [CLIENT MetalA] inventory: gold=983 inv={ "greater_potion": 22, "health_potion": 24, "iron_sword": 1, "lich_staff": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:27] [CLIENT MetalA] inventory: gold=994 inv={ "greater_potion": 22, "health_potion": 24, "iron_sword": 1, "lich_staff": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:27] [CLIENT MetalA] trying to equip lich_staff (not allowed for metal)
+[14:59:27] [CLIENT MetalA] notice: Lich Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:59:27] [CLIENT MetalA] inventory: gold=994 inv={ "greater_potion": 22, "health_potion": 25, "iron_sword": 1, "lich_staff": 1, "war_axe": 1 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:28] [CLIENT MetalA] inventory: gold=994 inv={ "greater_potion": 22, "health_potion": 25, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:29] [CLIENT MetalA] [chat] * FireB reached level 24!
+[14:59:29] [CLIENT MetalA] [chat] * FireB defeated Yeti King in Frostpeak Ruins!
+[14:59:29] [CLIENT MetalA] [chat] * MetalA reached level 23!
+[14:59:29] [CLIENT MetalA] inventory: gold=1003 inv={ "greater_potion": 22, "health_potion": 25, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:29] [CLIENT MetalA] inventory: gold=1003 inv={ "greater_potion": 23, "health_potion": 25, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:29] [CLIENT MetalA] [chat] [Frost] FireB: Hello from FireB!
+[14:59:29] [CLIENT MetalA] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:59:29] [CLIENT MetalA] status: zone=crypt players=1 MetalA(Lv23 214/214hp)@(522, 303) | monsters: archer 5/6, ghost 6/6, crawler 4/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:59:30] [CLIENT MetalA] inventory: gold=1012 inv={ "greater_potion": 23, "health_potion": 25, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:30] [CLIENT MetalA] inventory: gold=1030 inv={ "greater_potion": 23, "health_potion": 25, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:30] [CLIENT MetalA] notice: Piercing Strike is on cooldown (1.7s)
+[14:59:31] [CLIENT MetalA] inventory: gold=1030 inv={ "greater_potion": 23, "health_potion": 26, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:31] [CLIENT MetalA] inventory: gold=1054 inv={ "greater_potion": 23, "health_potion": 26, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:31] [CLIENT MetalA] notice: Blade Focus is on cooldown (14.8s)
+[14:59:31] [CLIENT MetalA] inventory: gold=1074 inv={ "greater_potion": 23, "health_potion": 26, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:32] [CLIENT MetalA] notice: Thousand Cuts is on cooldown (10.8s)
+[14:59:32] [CLIENT MetalA] inventory: gold=1093 inv={ "greater_potion": 23, "health_potion": 26, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:32] [CLIENT MetalA] status: zone=crypt players=1 MetalA(Lv23 200/214hp)@(238, 306) | monsters: archer 3/6, ghost 5/6, crawler 2/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:59:33] [CLIENT MetalA] inventory: gold=1114 inv={ "greater_potion": 23, "health_potion": 26, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:33] [CLIENT MetalA] inventory: gold=1114 inv={ "greater_potion": 23, "health_potion": 27, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:33] [CLIENT MetalA] inventory: gold=1132 inv={ "greater_potion": 23, "health_potion": 27, "iron_sword": 1, "lich_staff": 1, "war_axe": 2 } equip={ "weapon": "war_axe", "armor": "" }
+[14:59:34] [CLIENT MetalA] [chat] * FireB left the world.
+[14:59:34] [CLIENT MetalA] quit-after reached, exiting

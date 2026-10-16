@@ -1,0 +1,5 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:25] [CLIENT bot2] Connecting to 127.0.0.1:7777 as 'bot2' ...
+[14:55:25] [CLIENT bot2] Connected to server as peer 2019750246, logging in
+[14:55:25] [CLIENT bot2] Login rejected: Wrong password for account 'bot2'.

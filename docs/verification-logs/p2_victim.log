@@ -1,0 +1,42 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:12] [CLIENT Victim] Connecting to 127.0.0.1:7777 as 'Victim' ...
+[14:55:12] [CLIENT Victim] Connected to server as peer 824958970, logging in
+[14:55:12] [CLIENT Victim] [chat] * Bot1 joined the world.
+[14:55:12] [CLIENT Victim] Login OK: Account created. Welcome to Volam!
+[14:55:12] [CLIENT Victim] Class selection requested (new account)
+[14:55:12] [CLIENT Victim] bot chooses class fire
+[14:55:12] [CLIENT Victim] [chat] * Victim the Pyromancer joined the world.
+[14:55:12] [CLIENT Victim] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:12] [CLIENT Victim] inventory: gold=0 inv={ "health_potion": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:55:12] [CLIENT Victim] [chat] * Bot2 joined the world.
+[14:55:12] [CLIENT Victim] [chat] * Oldie the Stone Guardian joined the world.
+[14:55:15] [CLIENT Victim] [chat] [Meadow] Bot1: Hello from Bot1!
+[14:55:15] [CLIENT Victim] [chat] [Meadow] Victim: Hello from Victim!
+[14:55:15] [CLIENT Victim] status: zone=meadow players=3 Victim(Lv1 26/26hp)@(1521, 656), Bot1(Lv8 79/81hp)@(1346, 816), Oldie(Lv4 55/67hp)@(870, 857) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:55:15] [CLIENT Victim] [chat] [Forest] Bot2: Hello from Bot2!
+[14:55:15] [CLIENT Victim] [chat] [Meadow] Oldie: Hello from Oldie!
+[14:55:18] [CLIENT Victim] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:18] [CLIENT Victim] bot route finished in forest
+[14:55:18] [CLIENT Victim] Entered zone forest (Whisperwood Forest)
+[14:55:18] [CLIENT Victim] status: zone=forest players=2 Victim(Lv1 26/26hp)@(158, 653), Bot2(Lv5 28/50hp)@(300, 788) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:18] [CLIENT Victim] inventory: gold=0 inv={ "health_potion": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:55:21] [CLIENT Victim] status: zone=forest players=2 Victim(Lv1 26/26hp)@(317, 853), Bot2(Lv5 38/50hp)@(325, 853) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:22] [CLIENT Victim] [chat] * Bot2 left the world.
+[14:55:24] [CLIENT Victim] [chat] * Oldie reached level 5!
+[14:55:24] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 14/26hp)@(401, 848) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:27] [CLIENT Victim] [chat] * Victim was defeated by Dire Rat!
+[14:55:27] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 0/26hp DEAD)@(401, 848) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:30] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 0/26hp DEAD)@(401, 848) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:33] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 26/26hp)@(315, 864) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:36] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 8/26hp)@(342, 879) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:36] [CLIENT Victim] [chat] * Bot1 reached level 9!
+[14:55:37] [CLIENT Victim] [chat] * Victim was defeated by Dire Rat!
+[14:55:39] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 0/26hp DEAD)@(342, 879) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:42] [CLIENT Victim] [chat] * Oldie left the world.
+[14:55:42] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 26/26hp)@(256, 733) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:45] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 14/26hp)@(343, 848) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:47] [CLIENT Victim] [chat] * Victim was defeated by Dire Rat!
+[14:55:48] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 0/26hp DEAD)@(343, 848) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:51] [CLIENT Victim] status: zone=forest players=1 Victim(Lv1 0/26hp DEAD)@(343, 848) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:55:52] [CLIENT Victim] quit-after reached, exiting

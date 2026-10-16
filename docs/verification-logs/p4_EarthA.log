@@ -1,0 +1,141 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT EarthA] Connecting to 127.0.0.1:7777 as 'EarthA' ...
+[14:58:10] [CLIENT EarthA] Connected to server as peer 368727386, logging in
+[14:58:10] [CLIENT EarthA] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT EarthA] Class selection requested (new account)
+[14:58:10] [CLIENT EarthA] bot chooses class earth
+[14:58:10] [CLIENT EarthA] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT EarthA] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT EarthA] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT EarthA] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT EarthA] passive probe: unknown node, unconnected keystone, own start
+[14:58:10] [CLIENT EarthA] Entered zone crypt (Bone Crypt)
+[14:58:10] [CLIENT EarthA] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT EarthA] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT EarthA] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT EarthA] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:10] [CLIENT EarthA] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT EarthA] [chat] * FireB the Pyromancer joined the world.
+[14:58:13] [CLIENT EarthA] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT EarthA] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT EarthA] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT EarthA] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT EarthA] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT EarthA] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT EarthA] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT EarthA] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT EarthA] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT EarthA] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 211/211hp)@(980, 756), FireA(Lv20 116/121hp)@(1006, 750), WoodB(Lv20 176/176hp)@(980, 724), MetalA(Lv20 165/165hp)@(983, 695) | monsters: archer 5/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT EarthA] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT EarthA] [chat] [Frost] FireB: Hello from FireB!
+[14:58:14] [CLIENT EarthA] notice: Ground Slam is on cooldown (2.8s)
+[14:58:15] [CLIENT EarthA] notice: Stone Skin is on cooldown (11.8s)
+[14:58:16] [CLIENT EarthA] notice: Mountain's Challenge is on cooldown (8.8s)
+[14:58:16] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1236, 656), FireA(Lv20 115/121hp)@(1042, 316), WoodB(Lv20 176/176hp)@(1008, 371), MetalA(Lv20 181/190hp)@(1043, 308) | monsters: archer 3/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:58:17] [CLIENT EarthA] notice: Earthquake is on cooldown (12.8s)
+[14:58:17] [CLIENT EarthA] inventory: gold=270 inv={ "health_potion": 8, "greater_potion": 6 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:18] [CLIENT EarthA] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT EarthA] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:18] [CLIENT EarthA] notice: Stone Skin is on cooldown (8.5s)
+[14:58:18] [CLIENT EarthA] inventory: gold=270 inv={ "health_potion": 8, "greater_potion": 7, "war_axe": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:18] [CLIENT EarthA] inventory: gold=294 inv={ "health_potion": 8, "greater_potion": 7, "war_axe": 1 } equip={ "weapon": "", "armor": "wooden_shield" }
+[14:58:19] [CLIENT EarthA] notice: Mountain's Challenge is on cooldown (5.5s)
+[14:58:19] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1412, 700), FireA(Lv20 115/121hp)@(1090, 351), WoodB(Lv21 184/184hp)@(1094, 346), MetalA(Lv20 178/190hp)@(1083, 357) | monsters: archer 3/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:19] [CLIENT EarthA] equipping war_axe
+[14:58:19] [CLIENT EarthA] inventory: gold=294 inv={ "health_potion": 8, "greater_potion": 7 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:20] [CLIENT EarthA] notice: Earthquake is on cooldown (9.5s)
+[14:58:21] [CLIENT EarthA] notice: Ground Slam is on cooldown (2.8s)
+[14:58:21] [CLIENT EarthA] inventory: gold=317 inv={ "health_potion": 8, "greater_potion": 7 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:21] [CLIENT EarthA] notice: Stone Skin is on cooldown (5.3s)
+[14:58:22] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1621, 704), FireA(Lv20 115/121hp)@(1369, 534), WoodB(Lv21 184/184hp)@(1367, 530), MetalA(Lv20 178/190hp)@(1419, 588) | monsters: archer 3/6, ghost 5/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT EarthA] notice: Mountain's Challenge is on cooldown (2.3s)
+[14:58:22] [CLIENT EarthA] passive probe: allocate with no points left (e_tectonic)
+[14:58:22] [CLIENT EarthA] passive probe: refund a connecting node (e_granite_1)
+[14:58:22] [CLIENT EarthA] passive probe: refund a leaf node (e_rolling)
+[14:58:22] [CLIENT EarthA] notice: Passive: no passive points left
+[14:58:22] [CLIENT EarthA] notice: Refund: refunding Granite I would disconnect Granite II
+[14:58:22] [CLIENT EarthA] notice: Refunded Rolling Thunder (-45 gold)
+[14:58:22] [CLIENT EarthA] inventory: gold=272 inv={ "health_potion": 8, "greater_potion": 7 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:23] [CLIENT EarthA] notice: Earthquake is on cooldown (6.3s)
+[14:58:24] [CLIENT EarthA] inventory: gold=272 inv={ "health_potion": 8, "greater_potion": 8 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:24] [CLIENT EarthA] inventory: gold=272 inv={ "health_potion": 9, "greater_potion": 8 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:24] [CLIENT EarthA] inventory: gold=285 inv={ "health_potion": 9, "greater_potion": 8 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:24] [CLIENT EarthA] inventory: gold=299 inv={ "health_potion": 9, "greater_potion": 9 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:25] [CLIENT EarthA] notice: Stone Skin is on cooldown (2.1s)
+[14:58:25] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 247/249hp)@(1743, 822), FireA(Lv20 117/121hp)@(1710, 784), WoodB(Lv21 184/184hp)@(1705, 780), MetalA(Lv20 179/190hp)@(1682, 753) | monsters: archer 3/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:26] [CLIENT EarthA] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT EarthA] [chat] * MetalA reached level 21!
+[14:58:27] [CLIENT EarthA] notice: Earthquake is on cooldown (2.3s)
+[14:58:28] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1742, 934), FireA(Lv20 121/121hp)@(1741, 919), WoodB(Lv21 184/184hp)@(1760, 928), MetalA(Lv21 198/198hp)@(1744, 944) | monsters: archer 4/6, ghost 4/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT EarthA] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1631, 706), FireA(Lv21 126/126hp)@(1662, 605), WoodB(Lv21 184/184hp)@(1633, 689), MetalA(Lv21 198/198hp)@(1688, 597) | monsters: archer 4/6, ghost 4/6, crawler 3/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:33] [CLIENT EarthA] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT EarthA] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT EarthA] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT EarthA] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT EarthA] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1225, 755), FireA(Lv21 126/126hp)@(1273, 688), WoodB(Lv21 184/184hp)@(1187, 755), MetalA(Lv21 198/198hp)@(1294, 690) | monsters: archer 4/6, ghost 4/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(939, 981), FireA(Lv21 126/126hp)@(1038, 817), WoodB(Lv21 184/184hp)@(938, 982), MetalA(Lv21 198/198hp)@(936, 984) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:40] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(955, 966), FireA(Lv21 126/126hp)@(1072, 812), WoodB(Lv21 184/184hp)@(1004, 941), MetalA(Lv21 191/198hp)@(462, 939) | monsters: archer 5/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:42] [CLIENT EarthA] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT EarthA] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT EarthA] [chat] * FireB reached level 22!
+[14:58:43] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(970, 753), FireA(Lv21 125/126hp)@(994, 656), WoodB(Lv21 184/184hp)@(964, 689), MetalA(Lv21 191/198hp)@(364, 456) | monsters: archer 4/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT EarthA] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT EarthA] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT EarthA] [chat] * MetalA reached level 22!
+[14:58:46] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(900, 540), FireA(Lv21 125/126hp)@(904, 536), WoodB(Lv21 184/184hp)@(883, 557), MetalA(Lv22 206/206hp)@(410, 239) | monsters: archer 1/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:58:49] [CLIENT EarthA] inventory: gold=320 inv={ "health_potion": 9, "greater_potion": 9 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:49] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(882, 305), FireA(Lv21 126/126hp)@(925, 322), WoodB(Lv21 184/184hp)@(916, 307), MetalA(Lv22 206/206hp)@(875, 292) | monsters: archer 1/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:52] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1041, 593), FireA(Lv21 126/126hp)@(1042, 543), WoodB(Lv21 184/184hp)@(1083, 635), MetalA(Lv22 206/206hp)@(1104, 630) | monsters: archer 2/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:54] [CLIENT EarthA] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1434, 624), FireA(Lv21 126/126hp)@(1411, 592), WoodB(Lv21 184/184hp)@(1504, 623), MetalA(Lv22 206/206hp)@(1454, 621) | monsters: archer 3/6, ghost 1/6, crawler 0/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:55] [CLIENT EarthA] [chat] * EarthB reached level 22!
+[14:58:58] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1538, 624), FireA(Lv21 126/126hp)@(1682, 756), WoodB(Lv21 184/184hp)@(1744, 749), MetalA(Lv22 206/206hp)@(1808, 666) | monsters: archer 5/6, ghost 3/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:58:59] [CLIENT EarthA] inventory: gold=320 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:58:59] [CLIENT EarthA] notice: Earthquake is on cooldown (4.7s)
+[14:58:59] [CLIENT EarthA] inventory: gold=343 inv={ "health_potion": 10, "greater_potion": 9 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:59:00] [CLIENT EarthA] inventory: gold=343 inv={ "health_potion": 10, "greater_potion": 9, "great_hammer": 1 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:59:00] [CLIENT EarthA] inventory: gold=364 inv={ "health_potion": 10, "greater_potion": 9, "great_hammer": 1 } equip={ "weapon": "war_axe", "armor": "wooden_shield" }
+[14:59:00] [CLIENT EarthA] equipping great_hammer
+[14:59:00] [CLIENT EarthA] inventory: gold=364 inv={ "health_potion": 10, "greater_potion": 10, "war_axe": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:01] [CLIENT EarthA] notice: Stone Skin is on cooldown (11.0s)
+[14:59:01] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv20 249/249hp)@(1231, 592), FireA(Lv21 126/126hp)@(1744, 830), WoodB(Lv21 184/184hp)@(1745, 865), MetalA(Lv22 206/206hp)@(1744, 824) | monsters: archer 3/6, ghost 2/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:02] [CLIENT EarthA] [chat] * EarthA reached level 21!
+[14:59:02] [CLIENT EarthA] inventory: gold=396 inv={ "health_potion": 10, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:02] [CLIENT EarthA] notice: Mountain's Challenge is on cooldown (5.2s)
+[14:59:02] [CLIENT EarthA] notice: Earthquake is on cooldown (1.5s)
+[14:59:03] [CLIENT EarthA] [chat] * FireB reached level 23!
+[14:59:03] [CLIENT EarthA] inventory: gold=396 inv={ "health_potion": 11, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:03] [CLIENT EarthA] inventory: gold=428 inv={ "health_potion": 11, "greater_potion": 11, "war_axe": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:03] [CLIENT EarthA] inventory: gold=428 inv={ "health_potion": 11, "greater_potion": 12, "war_axe": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:04] [CLIENT EarthA] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT EarthA] notice: Ground Slam is on cooldown (2.0s)
+[14:59:04] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv21 260/260hp)@(902, 624), FireA(Lv21 126/126hp)@(1421, 688), WoodB(Lv21 184/184hp)@(1493, 688), MetalA(Lv22 206/206hp)@(1333, 688) | monsters: archer 3/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:05] [CLIENT EarthA] notice: Stone Skin is on cooldown (6.9s)
+[14:59:06] [CLIENT EarthA] notice: Mountain's Challenge is on cooldown (1.2s)
+[14:59:06] [CLIENT EarthA] inventory: gold=450 inv={ "health_potion": 11, "greater_potion": 12, "war_axe": 1, "bone_shield": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:06] [CLIENT EarthA] inventory: gold=473 inv={ "health_potion": 11, "greater_potion": 12, "war_axe": 1, "bone_shield": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:06] [CLIENT EarthA] inventory: gold=473 inv={ "health_potion": 12, "greater_potion": 12, "war_axe": 1, "bone_shield": 1 } equip={ "weapon": "great_hammer", "armor": "wooden_shield" }
+[14:59:06] [CLIENT EarthA] equipping bone_shield
+[14:59:06] [CLIENT EarthA] inventory: gold=473 inv={ "health_potion": 12, "greater_potion": 12, "war_axe": 1, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:07] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv21 258/260hp)@(847, 592), FireA(Lv21 126/126hp)@(1104, 535), WoodB(Lv21 184/184hp)@(1102, 563), MetalA(Lv22 200/206hp)@(1008, 499) | monsters: archer 3/6, ghost 0/6, crawler 1/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:09] [CLIENT EarthA] inventory: gold=498 inv={ "health_potion": 12, "greater_potion": 12, "war_axe": 1, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:09] [CLIENT EarthA] inventory: gold=498 inv={ "health_potion": 12, "greater_potion": 13, "war_axe": 2, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:09] [CLIENT EarthA] inventory: gold=498 inv={ "health_potion": 13, "greater_potion": 13, "war_axe": 2, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:10] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv21 257/260hp)@(1006, 435), FireA(Lv21 126/126hp)@(954, 315), WoodB(Lv21 184/184hp)@(954, 314), MetalA(Lv22 206/206hp)@(752, 243) | monsters: archer 3/6, ghost 2/6, crawler 0/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:59:12] [CLIENT EarthA] inventory: gold=498 inv={ "health_potion": 14, "greater_potion": 13, "war_axe": 2, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:12] [CLIENT EarthA] inventory: gold=513 inv={ "health_potion": 14, "greater_potion": 14, "war_axe": 2, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:13] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv21 256/260hp)@(706, 359), FireA(Lv21 126/126hp)@(744, 337), WoodB(Lv21 184/184hp)@(742, 337), MetalA(Lv22 206/206hp)@(320, 241) | monsters: archer 2/6, ghost 1/6, crawler 1/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:59:15] [CLIENT EarthA] inventory: gold=535 inv={ "health_potion": 14, "greater_potion": 14, "war_axe": 2, "wooden_shield": 1 } equip={ "weapon": "great_hammer", "armor": "bone_shield" }
+[14:59:16] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv21 255/260hp)@(467, 335), FireA(Lv21 126/126hp)@(476, 335), WoodB(Lv21 184/184hp)@(509, 336), MetalA(Lv22 206/206hp)@(378, 369) | monsters: archer 0/6, ghost 1/6, crawler 2/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:59:18] [CLIENT EarthA] notice: Earthquake is on cooldown (10.3s)
+[14:59:19] [CLIENT EarthA] status: zone=crypt players=4 EarthA(Lv21 260/260hp)@(829, 372), FireA(Lv21 126/126hp)@(927, 372), WoodB(Lv21 184/184hp)@(918, 370), MetalA(Lv22 206/206hp)@(860, 372) | monsters: archer 0/6, ghost 2/6, crawler 3/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:59:20] [CLIENT EarthA] [chat] * FireA left the world.
+[14:59:20] [CLIENT EarthA] [chat] * Farmer left the world.
+[14:59:20] [CLIENT EarthA] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT EarthA] [chat] * WoodA left the world.
+[14:59:20] [CLIENT EarthA] [chat] * WoodB left the world.
+[14:59:20] [CLIENT EarthA] quit-after reached, exiting

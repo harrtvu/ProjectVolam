@@ -1,0 +1,113 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:58:10] [CLIENT WoodA] Connecting to 127.0.0.1:7777 as 'WoodA' ...
+[14:58:10] [CLIENT WoodA] Connected to server as peer 1399842591, logging in
+[14:58:10] [CLIENT WoodA] Login OK: Account created. Welcome to Volam!
+[14:58:10] [CLIENT WoodA] Class selection requested (new account)
+[14:58:10] [CLIENT WoodA] bot chooses class wood
+[14:58:10] [CLIENT WoodA] [chat] * WoodA the Venom Druid joined the world.
+[14:58:10] [CLIENT WoodA] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:58:10] [CLIENT WoodA] Entered zone forest (Whisperwood Forest)
+[14:58:10] [CLIENT WoodA] [chat] * WoodB the Venom Druid joined the world.
+[14:58:10] [CLIENT WoodA] [chat] * MetalB the Blade Master joined the world.
+[14:58:10] [CLIENT WoodA] [chat] * EarthA the Stone Guardian joined the world.
+[14:58:10] [CLIENT WoodA] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:10] [CLIENT WoodA] [chat] * WaterA the Frost Sage joined the world.
+[14:58:10] [CLIENT WoodA] [chat] * EarthB the Stone Guardian joined the world.
+[14:58:10] [CLIENT WoodA] [chat] * MetalA the Blade Master joined the world.
+[14:58:10] [CLIENT WoodA] [chat] * WaterB the Frost Sage joined the world.
+[14:58:10] [CLIENT WoodA] [chat] * FireB the Pyromancer joined the world.
+[14:58:13] [CLIENT WoodA] [chat] [Crypt] FireA: Hello from FireA!
+[14:58:13] [CLIENT WoodA] [chat] [Forest] Farmer: Hello from Farmer!
+[14:58:13] [CLIENT WoodA] [chat] [Meadow] Phoenix: Hello from Phoenix!
+[14:58:13] [CLIENT WoodA] [chat] [Forest] WoodA: Hello from WoodA!
+[14:58:13] [CLIENT WoodA] [chat] [Crypt] WoodB: Hello from WoodB!
+[14:58:13] [CLIENT WoodA] [chat] [Crypt] EarthA: Hello from EarthA!
+[14:58:13] [CLIENT WoodA] [chat] [Forest] MetalB: Hello from MetalB!
+[14:58:13] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 158/158hp)@(261, 409), Farmer(Lv20 172/172hp)@(264, 339), MetalB(Lv20 165/165hp)@(254, 313), WaterB(Lv20 139/139hp)@(266, 401) | monsters: rat 9/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:13] [CLIENT WoodA] [chat] [Frost] WaterA: Hello from WaterA!
+[14:58:13] [CLIENT WoodA] [chat] [Frost] EarthB: Hello from EarthB!
+[14:58:13] [CLIENT WoodA] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:58:13] [CLIENT WoodA] [chat] [Forest] WaterB: Hello from WaterB!
+[14:58:13] [CLIENT WoodA] [chat] [Frost] FireB: Hello from FireB!
+[14:58:16] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 158/158hp)@(457, 339), Farmer(Lv20 172/172hp)@(462, 202), MetalB(Lv20 165/165hp)@(556, 291), WaterB(Lv20 152/152hp)@(524, 311) | monsters: rat 6/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:18] [CLIENT WoodA] [chat] * WoodB reached level 21!
+[14:58:18] [CLIENT WoodA] [chat] * FireA & MetalA & WoodB defeated The Lich King in Bone Crypt!
+[14:58:19] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(783, 399), Farmer(Lv20 196/196hp)@(750, 366), MetalB(Lv20 173/173hp)@(829, 413), WaterB(Lv20 152/152hp)@(720, 336) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:22] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(799, 548), Farmer(Lv20 196/196hp)@(794, 558), MetalB(Lv20 190/190hp)@(881, 559), WaterB(Lv20 152/152hp)@(762, 496) | monsters: rat 5/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=3 | foreign_entities=0
+[14:58:23] [CLIENT WoodA] notice: Regrowth is on cooldown (0.8s)
+[14:58:24] [CLIENT WoodA] notice: Entangling Roots is on cooldown (3.1s)
+[14:58:25] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(681, 631), Farmer(Lv20 196/196hp)@(656, 669), MetalB(Lv20 190/190hp)@(702, 629), WaterB(Lv20 152/152hp)@(707, 604) | monsters: rat 8/12, bat 3/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:25] [CLIENT WoodA] notice: Plague Bloom is on cooldown (4.7s)
+[14:58:26] [CLIENT WoodA] [chat] * Phoenix was defeated by Yeti King!
+[14:58:26] [CLIENT WoodA] inventory: gold=270 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:26] [CLIENT WoodA] [chat] * MetalA reached level 21!
+[14:58:28] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(806, 816), Farmer(Lv20 196/196hp)@(803, 816), MetalB(Lv20 190/190hp)@(305, 766), WaterB(Lv20 152/152hp)@(774, 816) | monsters: rat 7/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:30] [CLIENT WoodA] [chat] * FireA reached level 21!
+[14:58:31] [CLIENT WoodA] inventory: gold=290 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:31] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(1226, 944), Farmer(Lv20 196/196hp)@(1290, 948), MetalB(Lv20 189/190hp)@(417, 410), WaterB(Lv20 152/152hp)@(1141, 915) | monsters: rat 8/12, bat 4/6, spider 4/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:31] [CLIENT WoodA] inventory: gold=307 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:32] [CLIENT WoodA] inventory: gold=317 inv={ "health_potion": 9, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:32] [CLIENT WoodA] inventory: gold=317 inv={ "health_potion": 10, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:33] [CLIENT WoodA] [chat] * Phoenix reached level 21!
+[14:58:33] [CLIENT WoodA] [chat] * FireB reached level 21!
+[14:58:33] [CLIENT WoodA] [chat] * WaterA reached level 21!
+[14:58:33] [CLIENT WoodA] [chat] * EarthB reached level 21!
+[14:58:33] [CLIENT WoodA] [chat] * Phoenix & FireB & WaterA & EarthB defeated Yeti King in Frostpeak Ruins!
+[14:58:34] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(1412, 986), Farmer(Lv20 196/196hp)@(1538, 892), MetalB(Lv20 189/190hp)@(635, 463), WaterB(Lv20 152/152hp)@(1436, 996) | monsters: rat 4/12, bat 6/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:37] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(1328, 705), Farmer(Lv20 196/196hp)@(1745, 580), MetalB(Lv20 189/190hp)@(656, 579), WaterB(Lv20 152/152hp)@(1658, 784) | monsters: rat 4/12, bat 5/6, spider 3/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:58:40] [CLIENT WoodA] inventory: gold=317 inv={ "health_potion": 11, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:40] [CLIENT WoodA] inventory: gold=327 inv={ "health_potion": 11, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:40] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(1351, 388), Farmer(Lv20 196/196hp)@(1555, 424), MetalB(Lv20 189/190hp)@(566, 818), WaterB(Lv20 152/152hp)@(1744, 522) | monsters: rat 3/12, bat 2/6, spider 1/5, broodmother 1/1 | loot=4 | foreign_entities=0
+[14:58:41] [CLIENT WoodA] notice: Entangling Roots is on cooldown (2.3s)
+[14:58:41] [CLIENT WoodA] notice: Plague Bloom is on cooldown (3.1s)
+[14:58:42] [CLIENT WoodA] [chat] * Farmer reached level 21!
+[14:58:42] [CLIENT WoodA] [chat] * Farmer & WoodA defeated Broodmother in Whisperwood Forest!
+[14:58:42] [CLIENT WoodA] inventory: gold=351 inv={ "health_potion": 11, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:42] [CLIENT WoodA] [chat] * FireB reached level 22!
+[14:58:42] [CLIENT WoodA] inventory: gold=351 inv={ "health_potion": 12, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:43] [CLIENT WoodA] notice: Regrowth is on cooldown (5.2s)
+[14:58:43] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv20 176/176hp)@(1538, 318), Farmer(Lv21 205/205hp)@(1548, 309), MetalB(Lv20 189/190hp)@(720, 507), WaterB(Lv20 152/152hp)@(1667, 250) | monsters: rat 7/12, bat 3/6, spider 0/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:44] [CLIENT WoodA] [chat] * WoodA reached level 21!
+[14:58:45] [CLIENT WoodA] [chat] * MetalB reached level 21!
+[14:58:46] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1680, 260), Farmer(Lv21 205/205hp)@(1680, 268), MetalB(Lv21 198/198hp)@(671, 305), WaterB(Lv20 152/152hp)@(1712, 312) | monsters: rat 4/12, bat 1/6, spider 0/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:46] [CLIENT WoodA] [chat] * MetalA reached level 22!
+[14:58:48] [CLIENT WoodA] inventory: gold=351 inv={ "health_potion": 13, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:49] [CLIENT WoodA] inventory: gold=362 inv={ "health_potion": 13, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:49] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1647, 402), Farmer(Lv21 205/205hp)@(1652, 434), MetalB(Lv21 197/198hp)@(929, 501), WaterB(Lv20 152/152hp)@(1722, 442) | monsters: rat 4/12, bat 3/6, spider 1/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:50] [CLIENT WoodA] inventory: gold=375 inv={ "health_potion": 13, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:50] [CLIENT WoodA] inventory: gold=375 inv={ "health_potion": 14, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:52] [CLIENT WoodA] notice: Entangling Roots is on cooldown (3.9s)
+[14:58:52] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1489, 563), Farmer(Lv21 205/205hp)@(1490, 599), MetalB(Lv21 197/198hp)@(1190, 646), WaterB(Lv20 152/152hp)@(1431, 540) | monsters: rat 4/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:58:53] [CLIENT WoodA] notice: Plague Bloom is on cooldown (4.7s)
+[14:58:54] [CLIENT WoodA] notice: Regrowth is on cooldown (3.5s)
+[14:58:54] [CLIENT WoodA] [chat] * Phoenix was defeated by Yeti!
+[14:58:55] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1483, 818), Farmer(Lv21 205/205hp)@(1515, 827), MetalB(Lv21 198/198hp)@(1337, 845), WaterB(Lv20 152/152hp)@(1590, 705) | monsters: rat 7/12, bat 4/6, spider 1/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:58:55] [CLIENT WoodA] notice: Entangling Roots is on cooldown (0.7s)
+[14:58:55] [CLIENT WoodA] inventory: gold=392 inv={ "health_potion": 14, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:55] [CLIENT WoodA] [chat] * EarthB reached level 22!
+[14:58:56] [CLIENT WoodA] notice: Plague Bloom is on cooldown (1.5s)
+[14:58:56] [CLIENT WoodA] inventory: gold=405 inv={ "health_potion": 14, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:56] [CLIENT WoodA] inventory: gold=405 inv={ "health_potion": 15, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:58:58] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1494, 982), Farmer(Lv21 205/205hp)@(1497, 976), MetalB(Lv21 198/198hp)@(1458, 1011), WaterB(Lv20 152/152hp)@(1526, 944) | monsters: rat 7/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:00] [CLIENT WoodA] inventory: gold=405 inv={ "health_potion": 15, "greater_potion": 5, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:00] [CLIENT WoodA] inventory: gold=430 inv={ "health_potion": 15, "greater_potion": 5, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:00] [CLIENT WoodA] equipping iron_shield
+[14:59:00] [CLIENT WoodA] inventory: gold=430 inv={ "health_potion": 15, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:59:01] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1209, 845), Farmer(Lv21 205/205hp)@(1194, 829), MetalB(Lv21 198/198hp)@(1255, 744), WaterB(Lv20 152/152hp)@(1271, 748) | monsters: rat 6/12, bat 3/6, spider 2/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:59:02] [CLIENT WoodA] [chat] * EarthA reached level 21!
+[14:59:03] [CLIENT WoodA] [chat] * FireB reached level 23!
+[14:59:04] [CLIENT WoodA] [chat] * WaterA reached level 22!
+[14:59:04] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1302, 490), Farmer(Lv21 205/205hp)@(1271, 517), MetalB(Lv21 198/198hp)@(1406, 457), WaterB(Lv20 152/152hp)@(1385, 443) | monsters: rat 6/12, bat 4/6, spider 3/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:07] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1622, 202), Farmer(Lv21 205/205hp)@(1579, 243), MetalB(Lv21 198/198hp)@(1646, 131), WaterB(Lv20 152/152hp)@(1612, 231) | monsters: rat 7/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:10] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1744, 549), Farmer(Lv21 205/205hp)@(1744, 505), MetalB(Lv21 198/198hp)@(1744, 549), WaterB(Lv20 152/152hp)@(1744, 513) | monsters: rat 8/12, bat 3/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:13] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1747, 518), Farmer(Lv21 205/205hp)@(1444, 400), MetalB(Lv21 198/198hp)@(1426, 474), WaterB(Lv20 152/152hp)@(1423, 442) | monsters: rat 9/12, bat 3/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:15] [CLIENT WoodA] inventory: gold=443 inv={ "health_potion": 16, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:59:16] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1622, 874), Farmer(Lv21 205/205hp)@(1423, 721), MetalB(Lv21 198/198hp)@(1303, 887), WaterB(Lv20 152/152hp)@(1388, 743) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=4 | foreign_entities=0
+[14:59:17] [CLIENT WoodA] inventory: gold=459 inv={ "health_potion": 16, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:59:17] [CLIENT WoodA] inventory: gold=459 inv={ "health_potion": 17, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:59:19] [CLIENT WoodA] status: zone=forest players=4 WoodA(Lv21 184/184hp)@(1360, 883), Farmer(Lv21 205/205hp)@(1220, 849), MetalB(Lv21 198/198hp)@(1245, 843), WaterB(Lv20 152/152hp)@(1261, 848) | monsters: rat 7/12, bat 5/6, spider 4/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:59:20] [CLIENT WoodA] [chat] * FireA left the world.
+[14:59:20] [CLIENT WoodA] [chat] * Farmer left the world.
+[14:59:20] [CLIENT WoodA] [chat] * Phoenix left the world.
+[14:59:20] [CLIENT WoodA] quit-after reached, exiting

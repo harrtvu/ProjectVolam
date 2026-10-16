@@ -1,0 +1,256 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT Walker] Connecting to 127.0.0.1:7777 as 'Walker' ...
+[14:55:59] [CLIENT Walker] Connected to server as peer 162912894, logging in
+[14:55:59] [CLIENT Walker] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT Walker] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT Walker] Class selection requested (new account)
+[14:55:59] [CLIENT Walker] bot chooses class wood
+[14:55:59] [CLIENT Walker] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT Walker] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:00] [CLIENT Walker] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:02] [CLIENT Walker] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:02] [CLIENT Walker] inventory: gold=250 inv={ "health_potion": 8, "greater_potion": 5, "slime_gel": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:02] [CLIENT Walker] inventory: gold=256 inv={ "health_potion": 8, "greater_potion": 5, "slime_gel": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:02] [CLIENT Walker] inventory: gold=261 inv={ "health_potion": 8, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:02] [CLIENT Walker] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT Walker] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT Walker] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT Walker] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT Walker] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT Walker] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT Walker] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT Walker] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT Walker] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT Walker] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:02] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv20 158/158hp)@(1141, 943) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:56:05] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv20 158/158hp)@(1191, 845) | monsters: slime 10/10 | loot=1 | foreign_entities=0
+[14:56:08] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv20 158/158hp)@(1654, 816) | monsters: slime 10/10 | loot=1 | foreign_entities=0
+[14:56:11] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:56:11] [CLIENT Walker] Entered zone forest (Whisperwood Forest)
+[14:56:11] [CLIENT Walker] inventory: gold=261 inv={ "health_potion": 8, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:11] [CLIENT Walker] status: zone=forest players=4 Walker(Lv20 158/158hp)@(212, 647), forestHunter1(Lv20 164/165hp)@(1134, 560), forestHunter2(Lv20 158/158hp)@(996, 559), forestHunter3(Lv20 132/132hp)@(1002, 560) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:56:12] [CLIENT Walker] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT Walker] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT Walker] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT Walker] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:12] [CLIENT Walker] notice: Regrowth is on cooldown (1.5s)
+[14:56:12] [CLIENT Walker] inventory: gold=270 inv={ "health_potion": 8, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:13] [CLIENT Walker] notice: Entangling Roots is on cooldown (1.5s)
+[14:56:13] [CLIENT Walker] inventory: gold=278 inv={ "health_potion": 9, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:14] [CLIENT Walker] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT Walker] notice: Plague Bloom is on cooldown (10.4s)
+[14:56:14] [CLIENT Walker] inventory: gold=284 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:14] [CLIENT Walker] status: zone=forest players=4 Walker(Lv20 155/158hp)@(336, 342), forestHunter1(Lv20 164/165hp)@(1474, 365), forestHunter2(Lv20 158/158hp)@(1405, 421), forestHunter3(Lv20 132/132hp)@(1405, 423) | monsters: rat 11/12, bat 5/6, spider 4/5, broodmother 1/1 | loot=1 | foreign_entities=0
+[14:56:15] [CLIENT Walker] [chat] * frostHunter2 reached level 21!
+[14:56:17] [CLIENT Walker] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT Walker] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT Walker] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT Walker] status: zone=forest players=4 Walker(Lv20 158/158hp)@(635, 241), forestHunter1(Lv21 172/172hp)@(1561, 317), forestHunter2(Lv20 158/158hp)@(1562, 318), forestHunter3(Lv21 138/138hp)@(1564, 318) | monsters: rat 10/12, bat 5/6, spider 5/5, broodmother 0/1 | loot=2 | foreign_entities=0
+[14:56:19] [CLIENT Walker] notice: Plague Bloom is on cooldown (5.5s)
+[14:56:20] [CLIENT Walker] status: zone=forest players=4 Walker(Lv20 158/158hp)@(1008, 232), forestHunter1(Lv21 172/172hp)@(1509, 287), forestHunter2(Lv20 158/158hp)@(1712, 271), forestHunter3(Lv21 138/138hp)@(1761, 237) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=3 | foreign_entities=0
+[14:56:21] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:56:21] [CLIENT Walker] Entered zone crypt (Bone Crypt)
+[14:56:22] [CLIENT Walker] inventory: gold=284 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:23] [CLIENT Walker] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT Walker] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT Walker] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT Walker] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT Walker] [chat] * cryptHunter3 reached level 22!
+[14:56:23] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 158/158hp)@(1008, 867), cryptHunter3(Lv22 143/143hp)@(1773, 812), cryptHunter2(Lv21 217/220hp)@(1747, 861), cryptHunter1(Lv21 126/126hp)@(1774, 818) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:24] [CLIENT Walker] [chat] * cryptHunter1 reached level 22!
+[14:56:24] [CLIENT Walker] notice: Regrowth is on cooldown (4.7s)
+[14:56:25] [CLIENT Walker] notice: Entangling Roots is on cooldown (4.7s)
+[14:56:25] [CLIENT Walker] inventory: gold=299 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:26] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 158/158hp)@(1029, 624), cryptHunter3(Lv22 143/143hp)@(1763, 764), cryptHunter2(Lv21 217/220hp)@(1776, 815), cryptHunter1(Lv22 131/131hp)@(1769, 795) | monsters: archer 5/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:28] [CLIENT Walker] [chat] * frostHunter3 reached level 22!
+[14:56:29] [CLIENT Walker] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 158/158hp)@(1509, 624), cryptHunter3(Lv22 135/143hp)@(1777, 394), cryptHunter2(Lv21 216/220hp)@(1777, 417), cryptHunter1(Lv22 131/131hp)@(1777, 395) | monsters: archer 6/6, ghost 5/6, crawler 5/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:30] [CLIENT Walker] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT Walker] [chat] * frostHunter1 reached level 22!
+[14:56:32] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 158/158hp)@(1975, 661), cryptHunter3(Lv22 135/143hp)@(1540, 624), cryptHunter2(Lv21 216/220hp)@(1506, 624), cryptHunter1(Lv22 131/131hp)@(1546, 624) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:32] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:56:32] [CLIENT Walker] Entered zone frost (Frostpeak Ruins)
+[14:56:33] [CLIENT Walker] inventory: gold=299 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:35] [CLIENT Walker] inventory: gold=312 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:35] [CLIENT Walker] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT Walker] status: zone=frost players=4 Walker(Lv20 147/158hp)@(519, 638), frostHunter2(Lv22 94/131hp)@(1079, 329), frostHunter1(Lv22 226/229hp)@(1232, 276), frostHunter3(Lv22 151/179hp)@(1265, 1013) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:37] [CLIENT Walker] notice: Plague Bloom is on cooldown (12.8s)
+[14:56:37] [CLIENT Walker] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT Walker] status: zone=frost players=4 Walker(Lv20 158/158hp)@(443, 656), frostHunter2(Lv23 112/136hp)@(944, 432), frostHunter1(Lv22 226/229hp)@(977, 427), frostHunter3(Lv22 151/179hp)@(1092, 1071) | monsters: yeti 4/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:56:39] [CLIENT Walker] notice: Regrowth is on cooldown (8.8s)
+[14:56:40] [CLIENT Walker] notice: Entangling Roots is on cooldown (8.8s)
+[14:56:40] [CLIENT Walker] [chat] * forestHunter1 reached level 22!
+[14:56:41] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:56:41] [CLIENT Walker] Entered zone crypt (Bone Crypt)
+[14:56:41] [CLIENT Walker] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT Walker] inventory: gold=312 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:41] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 158/158hp)@(1904, 685), cryptHunter3(Lv22 97/143hp)@(1054, 166), cryptHunter2(Lv21 220/220hp)@(1053, 166), cryptHunter1(Lv22 131/131hp)@(1054, 166) | monsters: archer 6/6, ghost 6/6, crawler 5/5, lich 1/1 | loot=0 | foreign_entities=0
+[14:56:42] [CLIENT Walker] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT Walker] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT Walker] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:44] [CLIENT Walker] notice: Plague Bloom is on cooldown (6.3s)
+[14:56:44] [CLIENT Walker] [chat] * cryptHunter3 reached level 23!
+[14:56:44] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 149/158hp)@(1712, 1043), cryptHunter3(Lv23 149/149hp)@(733, 275), cryptHunter2(Lv22 229/229hp)@(825, 256), cryptHunter1(Lv23 136/136hp)@(760, 246) | monsters: archer 6/6, ghost 6/6, crawler 4/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:45] [CLIENT Walker] inventory: gold=327 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:45] [CLIENT Walker] notice: Regrowth is on cooldown (2.3s)
+[14:56:46] [CLIENT Walker] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT Walker] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT Walker] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 149/158hp)@(1636, 712), cryptHunter3(Lv23 137/149hp)@(390, 326), cryptHunter2(Lv22 229/229hp)@(974, 572), cryptHunter1(Lv23 114/136hp)@(349, 265) | monsters: archer 4/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=1 | foreign_entities=0
+[14:56:49] [CLIENT Walker] notice: Plague Bloom is on cooldown (0.7s)
+[14:56:50] [CLIENT Walker] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv20 149/158hp)@(1171, 688), cryptHunter3(Lv23 149/149hp)@(266, 320), cryptHunter2(Lv22 227/229hp)@(881, 528), cryptHunter1(Lv24 141/141hp)@(243, 327) | monsters: archer 6/6, ghost 4/6, crawler 5/5, lich 0/1 | loot=0 | foreign_entities=0
+[14:56:53] [CLIENT Walker] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT Walker] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT Walker] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT Walker] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT Walker] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT Walker] status: zone=crypt players=4 Walker(Lv21 165/165hp)@(1072, 918), cryptHunter3(Lv23 138/149hp)@(438, 277), cryptHunter2(Lv22 224/229hp)@(620, 524), cryptHunter1(Lv24 123/141hp)@(474, 338) | monsters: archer 5/6, ghost 5/6, crawler 4/5, lich 0/1 | loot=3 | foreign_entities=0
+[14:56:55] [CLIENT Walker] [chat] * cryptHunter2 reached level 23!
+[14:56:56] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:56:56] [CLIENT Walker] Entered zone forest (Whisperwood Forest)
+[14:56:56] [CLIENT Walker] inventory: gold=327 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:56] [CLIENT Walker] status: zone=forest players=4 Walker(Lv21 165/165hp)@(1008, 232), forestHunter1(Lv22 179/179hp)@(1506, 912), forestHunter2(Lv22 169/171hp)@(1545, 912), forestHunter3(Lv22 140/143hp)@(1487, 882) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:56:57] [CLIENT Walker] notice: Entangling Roots is on cooldown (3.9s)
+[14:56:57] [CLIENT Walker] [chat] * cryptHunter3 reached level 24!
+[14:56:58] [CLIENT Walker] inventory: gold=331 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:58] [CLIENT Walker] inventory: gold=339 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:59] [CLIENT Walker] inventory: gold=344 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:56:59] [CLIENT Walker] notice: Regrowth is on cooldown (3.9s)
+[14:56:59] [CLIENT Walker] status: zone=forest players=4 Walker(Lv21 163/165hp)@(848, 513), forestHunter1(Lv22 179/179hp)@(1693, 790), forestHunter2(Lv22 168/171hp)@(1694, 789), forestHunter3(Lv22 140/143hp)@(1681, 786) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 0/1 | loot=0 | foreign_entities=0
+[14:57:00] [CLIENT Walker] inventory: gold=349 inv={ "health_potion": 10, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:00] [CLIENT Walker] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:00] [CLIENT Walker] notice: Entangling Roots is on cooldown (0.7s)
+[14:57:00] [CLIENT Walker] inventory: gold=356 inv={ "health_potion": 11, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:01] [CLIENT Walker] notice: Plague Bloom is on cooldown (12.8s)
+[14:57:02] [CLIENT Walker] inventory: gold=364 inv={ "health_potion": 11, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:02] [CLIENT Walker] notice: Regrowth is on cooldown (0.7s)
+[14:57:02] [CLIENT Walker] status: zone=forest players=4 Walker(Lv21 162/165hp)@(437, 592), forestHunter1(Lv22 179/179hp)@(1579, 917), forestHunter2(Lv22 171/171hp)@(1554, 942), forestHunter3(Lv22 140/143hp)@(1575, 921) | monsters: rat 12/12, bat 6/6, spider 4/5, broodmother 0/1 | loot=1 | foreign_entities=0
+[14:57:04] [CLIENT Walker] notice: Plague Bloom is on cooldown (9.5s)
+[14:57:04] [CLIENT Walker] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT Walker] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:57:05] [CLIENT Walker] bot route finished in meadow
+[14:57:05] [CLIENT Walker] Entered zone meadow (Sunny Meadow)
+[14:57:05] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 162/165hp)@(1897, 660) | monsters: slime 10/10 | loot=2 | foreign_entities=0
+[14:57:06] [CLIENT Walker] inventory: gold=364 inv={ "health_potion": 11, "greater_potion": 5, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:07] [CLIENT Walker] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT Walker] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:07] [CLIENT Walker] inventory: gold=364 inv={ "health_potion": 11, "greater_potion": 5, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:07] [CLIENT Walker] inventory: gold=370 inv={ "health_potion": 11, "greater_potion": 5, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:08] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 163/165hp)@(1697, 991) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:11] [CLIENT Walker] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(1449, 1141) | monsters: slime 10/10 | loot=2 | foreign_entities=0
+[14:57:12] [CLIENT Walker] inventory: gold=370 inv={ "health_potion": 12, "greater_potion": 5, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:12] [CLIENT Walker] inventory: gold=372 inv={ "health_potion": 12, "greater_potion": 5, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:13] [CLIENT Walker] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT Walker] notice: Entangling Roots is on cooldown (0.7s)
+[14:57:14] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(1043, 1168) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT Walker] inventory: gold=372 inv={ "health_potion": 12, "greater_potion": 5, "slime_gel": 4 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:15] [CLIENT Walker] inventory: gold=377 inv={ "health_potion": 12, "greater_potion": 5, "slime_gel": 4 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:15] [CLIENT Walker] inventory: gold=377 inv={ "health_potion": 13, "greater_potion": 5, "slime_gel": 4 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:15] [CLIENT Walker] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT Walker] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT Walker] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT Walker] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:17] [CLIENT Walker] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT Walker] inventory: gold=377 inv={ "health_potion": 13, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:17] [CLIENT Walker] inventory: gold=379 inv={ "health_potion": 13, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:17] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(850, 934) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:57:18] [CLIENT Walker] notice: Regrowth is on cooldown (5.6s)
+[14:57:18] [CLIENT Walker] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT Walker] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT Walker] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT Walker] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:19] [CLIENT Walker] notice: Plague Bloom is on cooldown (12.8s)
+[14:57:20] [CLIENT Walker] inventory: gold=385 inv={ "health_potion": 13, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:20] [CLIENT Walker] inventory: gold=388 inv={ "health_potion": 13, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:20] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(607, 787) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:22] [CLIENT Walker] inventory: gold=390 inv={ "health_potion": 13, "greater_potion": 5, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:22] [CLIENT Walker] inventory: gold=390 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:57:22] [CLIENT Walker] equipping wooden_shield
+[14:57:22] [CLIENT Walker] inventory: gold=390 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:23] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(519, 843) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:25] [CLIENT Walker] inventory: gold=394 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:25] [CLIENT Walker] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(336, 546) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:27] [CLIENT Walker] notice: Entangling Roots is on cooldown (3.1s)
+[14:57:28] [CLIENT Walker] inventory: gold=400 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:28] [CLIENT Walker] notice: Plague Bloom is on cooldown (3.9s)
+[14:57:29] [CLIENT Walker] inventory: gold=401 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 5 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:29] [CLIENT Walker] inventory: gold=401 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 6 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:30] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(461, 288) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT Walker] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT Walker] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:32] [CLIENT Walker] notice: Regrowth is on cooldown (3.9s)
+[14:57:33] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(588, 492) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:33] [CLIENT Walker] inventory: gold=401 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:33] [CLIENT Walker] inventory: gold=401 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7, "iron_sword": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:33] [CLIENT Walker] inventory: gold=404 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7, "iron_sword": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:34] [CLIENT Walker] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:35] [CLIENT Walker] inventory: gold=405 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7, "iron_sword": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:36] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(839, 368) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:36] [CLIENT Walker] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:36] [CLIENT Walker] inventory: gold=410 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7, "iron_sword": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:37] [CLIENT Walker] inventory: gold=410 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7, "iron_sword": 2 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:37] [CLIENT Walker] inventory: gold=412 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 7, "iron_sword": 2 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:37] [CLIENT Walker] inventory: gold=412 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 8, "iron_sword": 2 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:37] [CLIENT Walker] inventory: gold=412 inv={ "health_potion": 14, "greater_potion": 5, "slime_gel": 8, "iron_sword": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:37] [CLIENT Walker] inventory: gold=412 inv={ "health_potion": 15, "greater_potion": 5, "slime_gel": 8, "iron_sword": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:37] [CLIENT Walker] inventory: gold=417 inv={ "health_potion": 15, "greater_potion": 5, "slime_gel": 8, "iron_sword": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:57:38] [CLIENT Walker] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT Walker] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT Walker] equipping iron_shield
+[14:57:38] [CLIENT Walker] inventory: gold=417 inv={ "health_potion": 15, "greater_potion": 5, "slime_gel": 8, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:39] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(1107, 307) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:40] [CLIENT Walker] [chat] * frostHunter2 reached level 26!
+[14:57:42] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(1241, 537) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:43] [CLIENT Walker] notice: Entangling Roots is on cooldown (2.3s)
+[14:57:43] [CLIENT Walker] inventory: gold=418 inv={ "health_potion": 15, "greater_potion": 5, "slime_gel": 9, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:44] [CLIENT Walker] notice: Plague Bloom is on cooldown (7.1s)
+[14:57:45] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv21 165/165hp)@(1195, 881) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:45] [CLIENT Walker] [chat] * Walker reached level 22!
+[14:57:46] [CLIENT Walker] inventory: gold=418 inv={ "health_potion": 15, "greater_potion": 5, "slime_gel": 10, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:46] [CLIENT Walker] inventory: gold=423 inv={ "health_potion": 15, "greater_potion": 5, "slime_gel": 10, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:46] [CLIENT Walker] inventory: gold=423 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 10, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:46] [CLIENT Walker] notice: Regrowth is on cooldown (3.1s)
+[14:57:47] [CLIENT Walker] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT Walker] inventory: gold=427 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 10, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:47] [CLIENT Walker] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT Walker] [chat] * frostHunter3 reached level 25!
+[14:57:48] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv22 170/171hp)@(1101, 818) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT Walker] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT Walker] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT Walker] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:48] [CLIENT Walker] notice: Plague Bloom is on cooldown (3.1s)
+[14:57:50] [CLIENT Walker] inventory: gold=431 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 10, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:50] [CLIENT Walker] inventory: gold=431 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 11, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:51] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv22 171/171hp)@(1390, 590) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:52] [CLIENT Walker] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT Walker] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT Walker] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT Walker] notice: Entangling Roots is on cooldown (5.5s)
+[14:57:53] [CLIENT Walker] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv22 171/171hp)@(1135, 298) | monsters: slime 9/10 | loot=2 | foreign_entities=0
+[14:57:54] [CLIENT Walker] inventory: gold=436 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 11, "iron_sword": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:54] [CLIENT Walker] inventory: gold=436 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 11, "iron_sword": 2, "wooden_shield": 1, "apprentice_staff": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:54] [CLIENT Walker] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT Walker] [chat] * frostHunter3 reached level 26!
+[14:57:57] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv22 171/171hp)@(828, 350) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:57:57] [CLIENT Walker] inventory: gold=438 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 11, "iron_sword": 2, "wooden_shield": 1, "apprentice_staff": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:57:59] [CLIENT Walker] notice: Regrowth is on cooldown (3.1s)
+[14:57:59] [CLIENT Walker] inventory: gold=440 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 12, "iron_sword": 2, "wooden_shield": 1, "apprentice_staff": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:58:00] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv22 171/171hp)@(774, 677) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:58:01] [CLIENT Walker] inventory: gold=442 inv={ "health_potion": 16, "greater_potion": 5, "slime_gel": 12, "iron_sword": 2, "wooden_shield": 1, "apprentice_staff": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:58:02] [CLIENT Walker] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT Walker] [chat] * frostHunter2 reached level 27!
+[14:58:03] [CLIENT Walker] status: zone=meadow players=1 Walker(Lv22 171/171hp)@(822, 826) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:58:03] [CLIENT Walker] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT Walker] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT Walker] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT Walker] [chat] * frostHunter1 left the world.
+[14:58:03] [CLIENT Walker] [chat] * forestHunter2 left the world.
+[14:58:03] [CLIENT Walker] [chat] * forestHunter3 left the world.
+[14:58:03] [CLIENT Walker] [chat] * frostHunter3 left the world.
+[14:58:03] [CLIENT Walker] quit-after reached, exiting

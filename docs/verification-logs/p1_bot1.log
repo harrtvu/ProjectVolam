@@ -1,0 +1,158 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:53:45] [CLIENT Bot1] Connecting to 127.0.0.1:7777 as 'Bot1' ...
+[14:53:45] [CLIENT Bot1] Connected to server as peer 246734308, logging in
+[14:53:45] [CLIENT Bot1] [chat] * Bot2 the Frost Sage joined the world.
+[14:53:45] [CLIENT Bot1] Login OK: Account created. Welcome to Volam!
+[14:53:45] [CLIENT Bot1] Class selection requested (new account)
+[14:53:45] [CLIENT Bot1] bot chooses class metal
+[14:53:45] [CLIENT Bot1] [chat] * Bot1 the Blade Master joined the world.
+[14:53:45] [CLIENT Bot1] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:53:46] [CLIENT Bot1] inventory: gold=0 inv={ "health_potion": 2 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:53:48] [CLIENT Bot1] inventory: gold=0 inv={ "health_potion": 2, "slime_gel": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:53:48] [CLIENT Bot1] inventory: gold=7 inv={ "health_potion": 2, "slime_gel": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:53:48] [CLIENT Bot1] inventory: gold=7 inv={ "health_potion": 3, "slime_gel": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:53:48] [CLIENT Bot1] notice: Piercing Strike unlocks at level 3
+[14:53:48] [CLIENT Bot1] inventory: gold=7 inv={ "health_potion": 3, "slime_gel": 1, "steel_sword": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:53:48] [CLIENT Bot1] [chat] [Meadow] Bot2: Hello from Bot2!
+[14:53:48] [CLIENT Bot1] [chat] [Meadow] Bot1: Hello from Bot1!
+[14:53:48] [CLIENT Bot1] status: zone=meadow players=2 Bot1(Lv1 32/32hp)@(1443, 710), Bot2(Lv1 28/28hp)@(1418, 716) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:53:48] [CLIENT Bot1] equipping steel_sword
+[14:53:48] [CLIENT Bot1] inventory: gold=7 inv={ "health_potion": 3, "slime_gel": 1, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:53:49] [CLIENT Bot1] notice: Blade Focus unlocks at level 6
+[14:53:49] [CLIENT Bot1] [chat] * Bot2 reached level 2!
+[14:53:49] [CLIENT Bot1] drinking a health_potion at hp 25/32
+[14:53:49] [CLIENT Bot1] [chat] * Bot1 reached level 2!
+[14:53:49] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:53:49] [CLIENT Bot1] inventory: gold=15 inv={ "health_potion": 3, "slime_gel": 1, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:53:50] [CLIENT Bot1] notice: Whirling Blade is on cooldown (0.8s)
+[14:53:51] [CLIENT Bot1] notice: Piercing Strike unlocks at level 3
+[14:53:51] [CLIENT Bot1] inventory: gold=24 inv={ "health_potion": 3, "slime_gel": 1, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:53:51] [CLIENT Bot1] inventory: gold=24 inv={ "health_potion": 3, "slime_gel": 1, "iron_sword": 1, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:53:51] [CLIENT Bot1] inventory: gold=24 inv={ "health_potion": 3, "slime_gel": 2, "iron_sword": 1, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "" }
+[14:53:51] [CLIENT Bot1] status: zone=meadow players=2 Bot1(Lv2 39/39hp)@(1740, 800), Bot2(Lv2 33/33hp)@(1726, 808) | monsters: slime 5/10 | loot=0 | foreign_entities=0
+[14:53:51] [CLIENT Bot1] equipping wooden_shield
+[14:53:51] [CLIENT Bot1] inventory: gold=24 inv={ "health_potion": 3, "slime_gel": 2, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:53:52] [CLIENT Bot1] notice: Blade Focus unlocks at level 6
+[14:53:52] [CLIENT Bot1] notice: New skill unlocked: [2] Piercing Strike
+[14:53:52] [CLIENT Bot1] [chat] * Bot1 reached level 3!
+[14:53:52] [CLIENT Bot1] [chat] * Bot2 reached level 3!
+[14:53:52] [CLIENT Bot1] inventory: gold=24 inv={ "health_potion": 4, "slime_gel": 3, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:53:52] [CLIENT Bot1] inventory: gold=35 inv={ "health_potion": 4, "slime_gel": 3, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:53:54] [CLIENT Bot1] inventory: gold=43 inv={ "health_potion": 5, "slime_gel": 3, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:53:54] [CLIENT Bot1] inventory: gold=43 inv={ "health_potion": 5, "slime_gel": 4, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:53:54] [CLIENT Bot1] status: zone=meadow players=2 Bot1(Lv3 46/46hp)@(1645, 1047), Bot2(Lv3 39/39hp)@(1648, 1042) | monsters: slime 4/10 | loot=0 | foreign_entities=0
+[14:53:56] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:53:57] [CLIENT Bot1] status: zone=meadow players=2 Bot1(Lv3 46/46hp)@(1677, 915), Bot2(Lv3 39/39hp)@(1693, 931) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:54:00] [CLIENT Bot1] status: zone=meadow players=2 Bot1(Lv3 46/46hp)@(1373, 1104), Bot2(Lv3 39/39hp)@(1468, 1104) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:54:03] [CLIENT Bot1] status: zone=meadow players=2 Bot1(Lv3 46/46hp)@(1738, 1014), Bot2(Lv3 39/39hp)@(1066, 1136) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:54:06] [CLIENT Bot1] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:54:06] [CLIENT Bot1] Entered zone forest (Whisperwood Forest)
+[14:54:06] [CLIENT Bot1] status: zone=forest players=1 Bot1(Lv3 46/46hp)@(167, 652) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:06] [CLIENT Bot1] inventory: gold=43 inv={ "health_potion": 5, "slime_gel": 4, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:09] [CLIENT Bot1] status: zone=forest players=1 Bot1(Lv3 46/46hp)@(435, 593) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:10] [CLIENT Bot1] notice: Blade Focus unlocks at level 6
+[14:54:10] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:11] [CLIENT Bot1] inventory: gold=52 inv={ "health_potion": 6, "slime_gel": 4, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:12] [CLIENT Bot1] notice: Piercing Strike is on cooldown (3.8s)
+[14:54:12] [CLIENT Bot1] status: zone=forest players=1 Bot1(Lv3 41/46hp)@(725, 589) | monsters: rat 12/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:13] [CLIENT Bot1] notice: Blade Focus unlocks at level 6
+[14:54:13] [CLIENT Bot1] [chat] * Bot1 reached level 4!
+[14:54:13] [CLIENT Bot1] inventory: gold=61 inv={ "health_potion": 7, "slime_gel": 4, "iron_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:13] [CLIENT Bot1] inventory: gold=70 inv={ "health_potion": 7, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:13] [CLIENT Bot1] inventory: gold=70 inv={ "health_potion": 8, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:14] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:14] [CLIENT Bot1] inventory: gold=96 inv={ "health_potion": 10, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:14] [CLIENT Bot1] notice: Whirling Blade is on cooldown (0.8s)
+[14:54:15] [CLIENT Bot1] drinking a health_potion at hp 30/53
+[14:54:15] [CLIENT Bot1] [chat] * Bot1 reached level 5!
+[14:54:15] [CLIENT Bot1] inventory: gold=110 inv={ "health_potion": 10, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] notice: New skill unlocked: [3] Blade Focus
+[14:54:15] [CLIENT Bot1] [chat] * Bot1 reached level 6!
+[14:54:15] [CLIENT Bot1] inventory: gold=133 inv={ "health_potion": 12, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] inventory: gold=148 inv={ "health_potion": 12, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] inventory: gold=159 inv={ "health_potion": 12, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] inventory: gold=159 inv={ "health_potion": 13, "slime_gel": 4, "iron_sword": 1, "steel_sword": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] notice: Piercing Strike is on cooldown (0.5s)
+[14:54:15] [CLIENT Bot1] inventory: gold=176 inv={ "health_potion": 14, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] inventory: gold=187 inv={ "health_potion": 14, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot1] status: zone=forest players=2 Bot1(Lv6 63/67hp)@(770, 586), Bot2(Lv3 39/39hp)@(257, 624) | monsters: rat 1/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:16] [CLIENT Bot1] inventory: gold=187 inv={ "health_potion": 15, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:16] [CLIENT Bot1] inventory: gold=207 inv={ "health_potion": 15, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:17] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:18] [CLIENT Bot1] inventory: gold=207 inv={ "health_potion": 16, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:18] [CLIENT Bot1] inventory: gold=225 inv={ "health_potion": 16, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:18] [CLIENT Bot1] status: zone=forest players=2 Bot1(Lv6 63/67hp)@(788, 464), Bot2(Lv3 39/39hp)@(652, 592) | monsters: rat 0/12, bat 4/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:21] [CLIENT Bot1] status: zone=forest players=2 Bot1(Lv6 63/67hp)@(1170, 496), Bot2(Lv3 39/39hp)@(1040, 560) | monsters: rat 0/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:24] [CLIENT Bot1] status: zone=forest players=2 Bot1(Lv6 64/67hp)@(707, 560), Bot2(Lv3 32/39hp)@(1357, 459) | monsters: rat 4/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:25] [CLIENT Bot1] [chat] * Bot1 reached level 7!
+[14:54:25] [CLIENT Bot1] inventory: gold=225 inv={ "health_potion": 17, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:25] [CLIENT Bot1] inventory: gold=237 inv={ "health_potion": 17, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:26] [CLIENT Bot1] notice: Blade Focus is on cooldown (8.3s)
+[14:54:27] [CLIENT Bot1] [chat] * Bot2 reached level 4!
+[14:54:27] [CLIENT Bot1] status: zone=forest players=2 Bot1(Lv7 74/74hp)@(441, 592), Bot2(Lv4 44/44hp)@(1417, 406) | monsters: rat 9/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:54:29] [CLIENT Bot1] [chat] * Bot2 was defeated by Wood Spider!
+[14:54:30] [CLIENT Bot1] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:54:30] [CLIENT Bot1] bot route finished in meadow
+[14:54:30] [CLIENT Bot1] Entered zone meadow (Sunny Meadow)
+[14:54:30] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 74/74hp)@(1932, 656) | monsters: slime 10/10 | loot=3 | foreign_entities=0
+[14:54:31] [CLIENT Bot1] inventory: gold=237 inv={ "health_potion": 17, "slime_gel": 4, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:33] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 74/74hp)@(1571, 528) | monsters: slime 10/10 | loot=3 | foreign_entities=0
+[14:54:36] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 74/74hp)@(1184, 416) | monsters: slime 10/10 | loot=3 | foreign_entities=0
+[14:54:37] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:37] [CLIENT Bot1] inventory: gold=245 inv={ "health_potion": 17, "slime_gel": 5, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:37] [CLIENT Bot1] inventory: gold=245 inv={ "health_potion": 18, "slime_gel": 5, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:38] [CLIENT Bot1] inventory: gold=253 inv={ "health_potion": 19, "slime_gel": 6, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:38] [CLIENT Bot1] inventory: gold=253 inv={ "health_potion": 19, "slime_gel": 7, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:39] [CLIENT Bot1] inventory: gold=253 inv={ "health_potion": 20, "slime_gel": 7, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:39] [CLIENT Bot1] inventory: gold=262 inv={ "health_potion": 20, "slime_gel": 7, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:39] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 72/74hp)@(1036, 207) | monsters: slime 7/10 | loot=3 | foreign_entities=0
+[14:54:40] [CLIENT Bot1] inventory: gold=271 inv={ "health_potion": 21, "slime_gel": 8, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:41] [CLIENT Bot1] inventory: gold=279 inv={ "health_potion": 21, "slime_gel": 8, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:41] [CLIENT Bot1] inventory: gold=279 inv={ "health_potion": 21, "slime_gel": 9, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:41] [CLIENT Bot1] inventory: gold=279 inv={ "health_potion": 22, "slime_gel": 9, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:42] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:43] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 71/74hp)@(720, 520) | monsters: slime 5/10 | loot=3 | foreign_entities=0
+[14:54:43] [CLIENT Bot1] inventory: gold=286 inv={ "health_potion": 22, "slime_gel": 9, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:43] [CLIENT Bot1] inventory: gold=286 inv={ "health_potion": 23, "slime_gel": 10, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:43] [CLIENT Bot1] notice: not enough mana for Whirling Blade (8/12)
+[14:54:43] [CLIENT Bot1] [chat] * Bot2 was defeated by Dire Rat!
+[14:54:43] [CLIENT Bot1] inventory: gold=286 inv={ "health_potion": 23, "slime_gel": 11, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:43] [CLIENT Bot1] notice: Piercing Strike is on cooldown (3.8s)
+[14:54:44] [CLIENT Bot1] inventory: gold=292 inv={ "health_potion": 24, "slime_gel": 11, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:44] [CLIENT Bot1] inventory: gold=292 inv={ "health_potion": 25, "slime_gel": 12, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:44] [CLIENT Bot1] inventory: gold=302 inv={ "health_potion": 25, "slime_gel": 12, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:44] [CLIENT Bot1] notice: Blade Focus is on cooldown (14.8s)
+[14:54:46] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 71/74hp)@(784, 872) | monsters: slime 5/10 | loot=3 | foreign_entities=0
+[14:54:46] [CLIENT Bot1] inventory: gold=309 inv={ "health_potion": 25, "slime_gel": 12, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:46] [CLIENT Bot1] inventory: gold=309 inv={ "health_potion": 25, "slime_gel": 13, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:46] [CLIENT Bot1] inventory: gold=309 inv={ "health_potion": 26, "slime_gel": 13, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:49] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 71/74hp)@(522, 1077) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:54:50] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:51] [CLIENT Bot1] inventory: gold=317 inv={ "health_potion": 26, "slime_gel": 13, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:51] [CLIENT Bot1] inventory: gold=317 inv={ "health_potion": 27, "slime_gel": 13, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:51] [CLIENT Bot1] inventory: gold=317 inv={ "health_potion": 27, "slime_gel": 14, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:52] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv7 72/74hp)@(219, 1088) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:54:52] [CLIENT Bot1] [chat] * Bot1 reached level 8!
+[14:54:53] [CLIENT Bot1] inventory: gold=325 inv={ "health_potion": 27, "slime_gel": 14, "iron_sword": 1, "steel_sword": 2 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:53] [CLIENT Bot1] inventory: gold=325 inv={ "health_potion": 27, "slime_gel": 14, "iron_sword": 1, "steel_sword": 2, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:53] [CLIENT Bot1] inventory: gold=325 inv={ "health_potion": 27, "slime_gel": 15, "iron_sword": 1, "steel_sword": 2, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:55] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv8 81/81hp)@(375, 643) | monsters: slime 8/10 | loot=0 | foreign_entities=0
+[14:54:55] [CLIENT Bot1] notice: Blade Focus is on cooldown (4.3s)
+[14:54:55] [CLIENT Bot1] inventory: gold=331 inv={ "health_potion": 28, "slime_gel": 16, "iron_sword": 1, "steel_sword": 2, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:54:56] [CLIENT Bot1] [chat] * Bot2 reached level 5!
+[14:54:58] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv8 80/81hp)@(655, 401) | monsters: slime 8/10 | loot=0 | foreign_entities=0
+[14:54:58] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:54:58] [CLIENT Bot1] [chat] * Bot2 was defeated by Dire Rat!
+[14:54:59] [CLIENT Bot1] inventory: gold=338 inv={ "health_potion": 28, "slime_gel": 17, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:55:00] [CLIENT Bot1] inventory: gold=346 inv={ "health_potion": 29, "slime_gel": 18, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:55:01] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv8 79/81hp)@(850, 210) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:55:01] [CLIENT Bot1] notice: Thousand Cuts unlocks at level 10
+[14:55:02] [CLIENT Bot1] inventory: gold=346 inv={ "health_potion": 29, "slime_gel": 19, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:55:02] [CLIENT Bot1] inventory: gold=346 inv={ "health_potion": 29, "slime_gel": 19, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:55:02] [CLIENT Bot1] inventory: gold=352 inv={ "health_potion": 29, "slime_gel": 19, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:55:02] [CLIENT Bot1] inventory: gold=352 inv={ "health_potion": 30, "slime_gel": 19, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 1, "iron_shield": 1 } equip={ "weapon": "steel_sword", "armor": "wooden_shield" }
+[14:55:03] [CLIENT Bot1] equipping iron_shield
+[14:55:03] [CLIENT Bot1] inventory: gold=352 inv={ "health_potion": 30, "slime_gel": 19, "iron_sword": 2, "steel_sword": 2, "wooden_shield": 2 } equip={ "weapon": "steel_sword", "armor": "iron_shield" }
+[14:55:04] [CLIENT Bot1] status: zone=meadow players=1 Bot1(Lv8 79/81hp)@(1136, 435) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:55:05] [CLIENT Bot1] quit-after reached, exiting

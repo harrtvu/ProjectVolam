@@ -1,0 +1,190 @@
+Phase 1 (~86s)...
+Phase 2 (~45s)...
+Phase 3 (~130s)...
+Phase 4 (~75s): targeting + talents...
+Phase 4b (~14s): talents restored after restart...
+
+== Core features
+PASS  accounts created
+PASS  slime damages player
+PASS  kill gives XP
+PASS  level up + chat message
+PASS  loot dropped
+PASS  loot picked up
+PASS  gear equipped
+PASS  periodic save
+PASS  shutdown save
+PASS  save restored after restart
+PASS  wrong password rejected
+PASS  duplicate login rejected
+PASS  player death
+PASS  respawn at zone entrance
+PASS  potion used
+
+== Zones
+PASS  meadow -> forest (Bot1)
+PASS  forest -> meadow (Bot1)
+PASS  client sees zone banner
+PASS  zone saved + restored
+PASS  walker meadow -> forest
+PASS  walker forest -> crypt
+PASS  walker crypt -> frost
+PASS  walker frost -> crypt
+PASS  walker crypt -> forest
+PASS  walker forest -> meadow
+PASS  visibility isolation (no client ever received another zone's entities)
+PASS  Bot1 back in meadow sees only itself
+PASS  Bot2 in forest sees only itself
+
+== Monsters (attack / die / respawn)
+PASS  Slime           attacks=30   kills=75   respawns=75
+PASS  Dire Rat        attacks=96   kills=146  respawns=141
+PASS  Cave Bat        attacks=7    kills=49   respawns=49
+PASS  Wood Spider     attacks=10   kills=50   respawns=50
+PASS  Crypt Archer    attacks=36   kills=69   respawns=61
+PASS  Restless Ghost  attacks=21   kills=62   respawns=57
+PASS  Grave Crawler   attacks=19   kills=56   respawns=52
+PASS  Yeti            attacks=42   kills=43   respawns=41
+PASS  Ice Ogre        attacks=17   kills=28   respawns=26
+PASS  Frost Bat       attacks=27   kills=46   respawns=42
+
+== Bosses
+PASS  Broodmother killed
+PASS  Broodmother loot dropped
+PASS  Broodmother kill announced in chat
+PASS  Broodmother respawned
+PASS  The Lich King killed
+PASS  The Lich King loot dropped
+PASS  The Lich King kill announced in chat
+PASS  The Lich King respawned
+PASS  Yeti King killed
+PASS  Yeti King loot dropped
+PASS  Yeti King kill announced in chat
+PASS  Yeti King respawned
+PASS  Broodmother summons
+PASS  Lich volley
+PASS  Yeti King quake
+PASS  boss loot picked up
+
+== Classes & character creation
+PASS  a character chose class metal
+PASS  a character chose class wood
+PASS  a character chose class water
+PASS  a character chose class fire
+PASS  a character chose class earth
+PASS  new account asked to pick a class
+PASS  starting gear: Metal gets a sword
+PASS  starting gear: Water gets a staff
+PASS  old account prompted (server)
+PASS  old account prompted (client)
+PASS  old account keeps its progress
+PASS  class persists (Bot1 metal)
+PASS  class persists (Bot2 water)
+PASS  restored players not re-prompted
+PASS  Bot1 not prompted again
+PASS  class-restricted weapon refused
+
+== Skills (server-authoritative)
+PASS  Whirling Blade         casts=77   hits=31
+PASS  Piercing Strike        casts=52   hits=47
+PASS  Blade Focus            casts=26   hits=0
+PASS  Thousand Cuts          casts=17   hits=32
+PASS  Poison Thorn           casts=54   hits=35
+PASS  Regrowth               casts=29   hits=0
+PASS  Entangling Roots       casts=27   hits=40
+PASS  Plague Bloom           casts=20   hits=11
+PASS  Ice Shard              casts=78   hits=47
+PASS  Healing Rain           casts=35   hits=0
+PASS  Frost Nova             casts=26   hits=15
+PASS  Tidal Wave             casts=27   hits=21
+PASS  Fireball               casts=70   hits=49
+PASS  Flame Burst            casts=36   hits=15
+PASS  Meteor                 casts=26   hits=19
+PASS  Inferno                casts=24   hits=35
+PASS  Ground Slam            casts=50   hits=18
+PASS  Stone Skin             casts=24   hits=0
+PASS  Mountain's Challenge   casts=27   hits=0
+PASS  Earthquake             casts=20   hits=41
+PASS  locked skill rejected (level)
+PASS  skill unlocked on level-up
+PASS  cooldown enforced
+PASS  mana cost enforced
+PASS  mana regenerates
+PASS  ranged basic attack (Water)
+PASS  ranged basic attack (Fire)
+
+== Status effects & element cycle
+PASS  is poisoned
+PASS  is burning
+PASS  is slowed
+PASS  is stunned
+PASS  Stone Skin shield absorbs
+PASS  is taunted by
+PASS  gains Blade Focus
+PASS  Healing Rain heals an ally
+PASS  +25% vs overcome element (player -> monster)
+PASS  -20% vs overcoming element (player -> monster)
+PASS  element bonus applies to monster -> player
+
+== Mouse targeting (server-validated)
+PASS  skills use selected target over nearer
+PASS  projectile aimed at cursor (Ice Shard)
+PASS  basic bolt aimed at cursor
+PASS  ground AoE at cursor (Entangling Roots)
+PASS  ground AoE at cursor (Meteor)
+PASS  cursor clamped to max range
+PASS  invalid target id rejected
+PASS  target in another zone rejected
+PASS  out-of-range target rejected
+PASS  no line of sight rejected
+
+== Passive web
+PASS  offline web self-test (graph + maths)
+PASS  web: every node reachable, 15 keystones
+PASS  refund that would disconnect rejected
+PASS  single node refunded for gold
+PASS  centre keystone allocated (Farmer)
+PASS  points granted (level 20 = 19 points)
+PASS  adjacency enforced (unconnected node)
+PASS  unknown node rejected
+PASS  already-allocated node rejected
+PASS  no points left rejected
+PASS  full reset with gold cost
+PASS  respec without enough gold rejected
+PASS  passives persist across restart (MetalA)
+PASS  passives persist across restart (FireB)
+PASS  retroactive points (old save Oldie, Lv4)
+PASS  retroactive points (pre-talent Bot1)
+PASS  stat talent: Honed Edge raises attack
+PASS  stat talent: Steel Body raises max life
+PASS  stat talent: Keen Eye raises crit
+PASS  stat talent: Mana Font raises mana
+PASS  stat talent: Granite raises defense
+PASS  stat talent: Fleet Foot raises speed
+PASS  passives change MetalA's Whirling Blade
+PASS  passives change MetalB's Piercing Strike
+PASS  passives change WoodA's Plague Bloom
+PASS  passives change WoodB's Regrowth
+PASS  passives change WaterA's Ice Shard
+PASS  passives change WaterB's Healing Rain
+PASS  passives change FireA's Meteor
+PASS  passives change FireB's Fireball
+PASS  passives change EarthA's Mountain's Challenge
+PASS  passives change EarthB's Ground Slam
+PASS  keystone Blade Storm (Metal)
+PASS  keystone Death Mark (Metal)
+PASS  keystone Pandemic (Wood)
+PASS  keystone Heart of the Forest (Wood)
+PASS  keystone Absolute Zero (Water)
+PASS  keystone Wellspring (Water)
+PASS  keystone Meteor Shower (Fire)
+PASS  keystone Phoenix Heart (Fire)
+PASS  keystone Unbreakable (Earth)
+PASS  keystone Tectonic Fury (Earth)
+PASS  farming stats boost loot (quantity/rarity/gold)
+PASS  life leech
+PASS  mana leech
+PASS  Shatter: bonus vs slowed
+
+== Errors/warnings (should be none):
+none

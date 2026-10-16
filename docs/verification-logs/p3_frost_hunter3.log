@@ -1,0 +1,241 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:55:59] [CLIENT frostHunter3] Connecting to 127.0.0.1:7777 as 'frostHunter3' ...
+[14:55:59] [CLIENT frostHunter3] Connected to server as peer 91365956, logging in
+[14:55:59] [CLIENT frostHunter3] Login OK: Account created. Welcome to Volam!
+[14:55:59] [CLIENT frostHunter3] Class selection requested (new account)
+[14:55:59] [CLIENT frostHunter3] bot chooses class metal
+[14:55:59] [CLIENT frostHunter3] [chat] * frostHunter3 the Blade Master joined the world.
+[14:55:59] [CLIENT frostHunter3] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:55:59] [CLIENT frostHunter3] Entered zone frost (Frostpeak Ruins)
+[14:55:59] [CLIENT frostHunter3] [chat] * cryptHunter2 the Stone Guardian joined the world.
+[14:55:59] [CLIENT frostHunter3] [chat] * Walker the Venom Druid joined the world.
+[14:55:59] [CLIENT frostHunter3] inventory: gold=250 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:55:59] [CLIENT frostHunter3] [chat] * cryptHunter1 the Pyromancer joined the world.
+[14:56:02] [CLIENT frostHunter3] [chat] [Forest] forestHunter1: Hello from forestHunter1!
+[14:56:02] [CLIENT frostHunter3] [chat] [Crypt] cryptHunter3: Hello from cryptHunter3!
+[14:56:02] [CLIENT frostHunter3] [chat] [Frost] frostHunter2: Hello from frostHunter2!
+[14:56:02] [CLIENT frostHunter3] [chat] [Frost] frostHunter1: Hello from frostHunter1!
+[14:56:02] [CLIENT frostHunter3] [chat] [Forest] forestHunter2: Hello from forestHunter2!
+[14:56:02] [CLIENT frostHunter3] [chat] [Forest] forestHunter3: Hello from forestHunter3!
+[14:56:02] [CLIENT frostHunter3] [chat] [Frost] frostHunter3: Hello from frostHunter3!
+[14:56:02] [CLIENT frostHunter3] [chat] [Meadow] Walker: Hello from Walker!
+[14:56:02] [CLIENT frostHunter3] [chat] [Crypt] cryptHunter2: Hello from cryptHunter2!
+[14:56:02] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 165/165hp)@(529, 655), frostHunter2(Lv20 121/121hp)@(605, 685), frostHunter1(Lv20 211/211hp)@(566, 656) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:02] [CLIENT frostHunter3] [chat] [Crypt] cryptHunter1: Hello from cryptHunter1!
+[14:56:03] [CLIENT frostHunter3] notice: Thousand Cuts: no target in range
+[14:56:04] [CLIENT frostHunter3] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:05] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:05] [CLIENT frostHunter3] inventory: gold=273 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:05] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 165/165hp)@(625, 799), frostHunter2(Lv20 97/121hp)@(687, 763), frostHunter1(Lv20 211/211hp)@(624, 765) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=3 | foreign_entities=0
+[14:56:06] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (14.8s)
+[14:56:06] [CLIENT frostHunter3] inventory: gold=305 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:07] [CLIENT frostHunter3] inventory: gold=337 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:08] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 142/165hp)@(872, 881), frostHunter2(Lv20 73/121hp)@(882, 878), frostHunter1(Lv20 211/211hp)@(870, 880) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:56:10] [CLIENT frostHunter3] inventory: gold=370 inv={ "health_potion": 7, "greater_potion": 5 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:11] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 142/165hp)@(1203, 656), frostHunter2(Lv20 73/121hp)@(1196, 656), frostHunter1(Lv20 211/211hp)@(1075, 752) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:12] [CLIENT frostHunter3] [chat] * cryptHunter2 reached level 21!
+[14:56:12] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 21!
+[14:56:12] [CLIENT frostHunter3] [chat] * cryptHunter3 reached level 21!
+[14:56:12] [CLIENT frostHunter3] [chat] * cryptHunter2 & cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:56:12] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (8.4s)
+[14:56:13] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (7.6s)
+[14:56:14] [CLIENT frostHunter3] [chat] * frostHunter2 was defeated by Yeti King!
+[14:56:14] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 81/165hp)@(1588, 664), frostHunter2(Lv20 0/121hp DEAD)@(1585, 688), frostHunter1(Lv20 211/211hp)@(1504, 720) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:14] [CLIENT frostHunter3] drinking a greater_potion at hp 81/165
+[14:56:14] [CLIENT frostHunter3] inventory: gold=370 inv={ "health_potion": 7, "greater_potion": 4 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:14] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:15] [CLIENT frostHunter3] drinking a greater_potion at hp 92/165
+[14:56:15] [CLIENT frostHunter3] inventory: gold=370 inv={ "health_potion": 7, "greater_potion": 3 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:15] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (5.1s)
+[14:56:15] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 21!
+[14:56:16] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (4.3s)
+[14:56:17] [CLIENT frostHunter3] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:17] [CLIENT frostHunter3] [chat] * forestHunter3 reached level 21!
+[14:56:17] [CLIENT frostHunter3] [chat] * forestHunter1 reached level 21!
+[14:56:17] [CLIENT frostHunter3] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:17] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 132/165hp)@(1591, 692), frostHunter2(Lv21 126/126hp DEAD)@(1585, 688), frostHunter1(Lv20 206/211hp)@(1586, 690) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:18] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (0.5s)
+[14:56:18] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (1.9s)
+[14:56:19] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (1.1s)
+[14:56:20] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv20 132/165hp)@(1585, 673), frostHunter2(Lv21 126/126hp)@(403, 656), frostHunter1(Lv20 206/211hp)@(1583, 672) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:21] [CLIENT frostHunter3] drinking a greater_potion at hp 89/165
+[14:56:21] [CLIENT frostHunter3] inventory: gold=370 inv={ "health_potion": 7, "greater_potion": 2 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:22] [CLIENT frostHunter3] notice: not enough mana for Thousand Cuts (12/35)
+[14:56:23] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 22!
+[14:56:23] [CLIENT frostHunter3] [chat] * frostHunter3 reached level 21!
+[14:56:23] [CLIENT frostHunter3] [chat] * frostHunter1 reached level 21!
+[14:56:23] [CLIENT frostHunter3] [chat] * frostHunter2 & frostHunter3 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:56:23] [CLIENT frostHunter3] inventory: gold=370 inv={ "health_potion": 7, "greater_potion": 2, "frostbrand": 1, "ember_staff": 1 } equip={ "weapon": "iron_sword", "armor": "" }
+[14:56:23] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv21 172/172hp)@(1589, 685), frostHunter2(Lv22 131/131hp)@(716, 656), frostHunter1(Lv21 220/220hp)@(1584, 682) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=3 | foreign_entities=0
+[14:56:23] [CLIENT frostHunter3] [chat] * cryptHunter3 reached level 22!
+[14:56:23] [CLIENT frostHunter3] equipping frostbrand
+[14:56:23] [CLIENT frostHunter3] inventory: gold=370 inv={ "health_potion": 7, "greater_potion": 2, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:24] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 22!
+[14:56:24] [CLIENT frostHunter3] trying to equip ember_staff (not allowed for metal)
+[14:56:24] [CLIENT frostHunter3] notice: Ember Staff: Only: Venom Druid, Frost Sage, Pyromancer
+[14:56:25] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (3.0s)
+[14:56:25] [CLIENT frostHunter3] inventory: gold=387 inv={ "health_potion": 7, "greater_potion": 2, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:26] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (14.0s)
+[14:56:26] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv21 164/172hp)@(1402, 926), frostHunter2(Lv22 106/131hp)@(668, 431), frostHunter1(Lv21 220/220hp)@(1479, 560) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:27] [CLIENT frostHunter3] inventory: gold=407 inv={ "health_potion": 7, "greater_potion": 2, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:27] [CLIENT frostHunter3] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:28] [CLIENT frostHunter3] [chat] * frostHunter3 reached level 22!
+[14:56:28] [CLIENT frostHunter3] inventory: gold=420 inv={ "health_potion": 7, "greater_potion": 3, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:29] [CLIENT frostHunter3] [chat] * forestHunter2 reached level 21!
+[14:56:29] [CLIENT frostHunter3] inventory: gold=420 inv={ "health_potion": 7, "greater_potion": 4, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:29] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv22 179/179hp)@(1741, 1020), frostHunter2(Lv22 80/131hp)@(1009, 328), frostHunter1(Lv21 214/220hp)@(1295, 330) | monsters: yeti 4/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:56:29] [CLIENT frostHunter3] inventory: gold=442 inv={ "health_potion": 7, "greater_potion": 4, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:30] [CLIENT frostHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:56:31] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (9.1s)
+[14:56:31] [CLIENT frostHunter3] [chat] * frostHunter1 reached level 22!
+[14:56:31] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (9.2s)
+[14:56:32] [CLIENT frostHunter3] inventory: gold=460 inv={ "health_potion": 7, "greater_potion": 4, "ember_staff": 1, "iron_sword": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:32] [CLIENT frostHunter3] inventory: gold=460 inv={ "health_potion": 7, "greater_potion": 4, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:32] [CLIENT frostHunter3] inventory: gold=460 inv={ "health_potion": 7, "greater_potion": 5, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:32] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv22 166/179hp)@(1474, 1137), frostHunter2(Lv22 94/131hp)@(1068, 206), frostHunter1(Lv22 228/229hp)@(1228, 240) | monsters: yeti 5/6, ice_ogre 2/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:56:34] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (2.2s)
+[14:56:35] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (5.1s)
+[14:56:35] [CLIENT frostHunter3] inventory: gold=481 inv={ "health_potion": 7, "greater_potion": 5, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:35] [CLIENT frostHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:56:35] [CLIENT frostHunter3] status: zone=frost players=4 frostHunter3(Lv22 151/179hp)@(1260, 1044), frostHunter2(Lv22 94/131hp)@(1099, 309), frostHunter1(Lv22 226/229hp)@(1232, 291), Walker(Lv20 147/158hp)@(496, 656) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:36] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (4.3s)
+[14:56:37] [CLIENT frostHunter3] inventory: gold=511 inv={ "health_potion": 7, "greater_potion": 5, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:37] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 23!
+[14:56:38] [CLIENT frostHunter3] status: zone=frost players=4 frostHunter3(Lv22 151/179hp)@(1123, 1067), frostHunter2(Lv23 112/136hp)@(954, 427), frostHunter1(Lv22 226/229hp)@(974, 432), Walker(Lv20 158/158hp)@(473, 660) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:56:40] [CLIENT frostHunter3] [chat] * forestHunter1 reached level 22!
+[14:56:40] [CLIENT frostHunter3] inventory: gold=543 inv={ "health_potion": 7, "greater_potion": 5, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:41] [CLIENT frostHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:56:41] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv22 135/179hp)@(810, 949), frostHunter2(Lv23 112/136hp)@(835, 680), frostHunter1(Lv22 226/229hp)@(1047, 624) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=2 | foreign_entities=0
+[14:56:42] [CLIENT frostHunter3] [chat] * cryptHunter2 reached level 22!
+[14:56:42] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 23!
+[14:56:42] [CLIENT frostHunter3] [chat] * cryptHunter2 & cryptHunter3 & cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:56:42] [CLIENT frostHunter3] notice: Thousand Cuts: no target in range
+[14:56:43] [CLIENT frostHunter3] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:44] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv22 135/179hp)@(1153, 714), frostHunter2(Lv23 113/136hp)@(839, 628), frostHunter1(Lv22 228/229hp)@(1384, 624) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:44] [CLIENT frostHunter3] [chat] * cryptHunter3 reached level 23!
+[14:56:45] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (2.2s)
+[14:56:46] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (13.2s)
+[14:56:46] [CLIENT frostHunter3] [chat] * forestHunter3 reached level 22!
+[14:56:46] [CLIENT frostHunter3] [chat] * forestHunter2 reached level 22!
+[14:56:46] [CLIENT frostHunter3] [chat] * forestHunter3 & forestHunter2 & forestHunter1 defeated Broodmother in Whisperwood Forest!
+[14:56:47] [CLIENT frostHunter3] inventory: gold=570 inv={ "health_potion": 7, "greater_potion": 5, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:47] [CLIENT frostHunter3] inventory: gold=570 inv={ "health_potion": 7, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:56:47] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv22 135/179hp)@(1605, 754), frostHunter2(Lv23 114/136hp)@(1318, 624), frostHunter1(Lv22 223/229hp)@(1653, 640) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:49] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (9.9s)
+[14:56:50] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 24!
+[14:56:50] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (10.8s)
+[14:56:50] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv22 137/179hp)@(1687, 651), frostHunter2(Lv23 116/136hp)@(1681, 652), frostHunter1(Lv22 217/229hp)@(1667, 651) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:56:51] [CLIENT frostHunter3] notice: Whirling Blade is on cooldown (0.8s)
+[14:56:52] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (3.8s)
+[14:56:52] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (6.7s)
+[14:56:53] [CLIENT frostHunter3] [chat] * Walker reached level 21!
+[14:56:53] [CLIENT frostHunter3] [chat] * frostHunter1 reached level 23!
+[14:56:53] [CLIENT frostHunter3] [chat] * frostHunter3 reached level 23!
+[14:56:53] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 24!
+[14:56:53] [CLIENT frostHunter3] [chat] * frostHunter1 & frostHunter3 & frostHunter2 defeated Yeti King in Frostpeak Ruins!
+[14:56:53] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 186/186hp)@(1658, 678), frostHunter2(Lv24 141/141hp)@(1656, 680), frostHunter1(Lv23 238/238hp)@(1667, 672) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:54] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (6.7s)
+[14:56:55] [CLIENT frostHunter3] [chat] * cryptHunter2 reached level 23!
+[14:56:56] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 174/186hp)@(1403, 750), frostHunter2(Lv24 141/141hp)@(1406, 751), frostHunter1(Lv23 238/238hp)@(1396, 752) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:56:57] [CLIENT frostHunter3] [chat] * cryptHunter3 reached level 24!
+[14:56:59] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (0.3s)
+[14:56:59] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 174/186hp)@(1651, 1010), frostHunter2(Lv24 141/141hp)@(1587, 939), frostHunter1(Lv23 238/238hp)@(1646, 1004) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:56:59] [CLIENT frostHunter3] inventory: gold=587 inv={ "health_potion": 7, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:00] [CLIENT frostHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:02] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 175/186hp)@(1520, 814), frostHunter2(Lv24 141/141hp)@(1577, 755), frostHunter1(Lv23 238/238hp)@(1518, 837) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:04] [CLIENT frostHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:05] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 177/186hp)@(1453, 429), frostHunter2(Lv24 141/141hp)@(1456, 313), frostHunter1(Lv23 238/238hp)@(1241, 1031) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:07] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 25!
+[14:57:07] [CLIENT frostHunter3] [chat] * cryptHunter1 & cryptHunter3 defeated The Lich King in Bone Crypt!
+[14:57:07] [CLIENT frostHunter3] notice: Thousand Cuts: no target in range
+[14:57:08] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 178/186hp)@(1154, 217), frostHunter2(Lv24 141/141hp)@(1145, 167), frostHunter1(Lv23 237/238hp)@(938, 1004) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:11] [CLIENT frostHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:11] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 180/186hp)@(858, 432), frostHunter2(Lv24 141/141hp)@(883, 432), frostHunter1(Lv23 235/238hp)@(838, 954) | monsters: yeti 5/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:13] [CLIENT frostHunter3] [chat] * cryptHunter2 reached level 24!
+[14:57:14] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 181/186hp)@(1326, 496), frostHunter2(Lv24 141/141hp)@(1329, 498), frostHunter1(Lv23 235/238hp)@(1175, 784) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:15] [CLIENT frostHunter3] [chat] * forestHunter1 reached level 23!
+[14:57:16] [CLIENT frostHunter3] [chat] * forestHunter3 reached level 23!
+[14:57:16] [CLIENT frostHunter3] [chat] * forestHunter2 reached level 23!
+[14:57:16] [CLIENT frostHunter3] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:17] [CLIENT frostHunter3] [chat] * cryptHunter3 reached level 25!
+[14:57:17] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv23 126/186hp)@(1653, 692), frostHunter2(Lv24 141/141hp)@(1647, 687), frostHunter1(Lv23 235/238hp)@(1543, 733) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:18] [CLIENT frostHunter3] [chat] * frostHunter3 reached level 24!
+[14:57:18] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 25!
+[14:57:18] [CLIENT frostHunter3] [chat] * frostHunter1 reached level 24!
+[14:57:18] [CLIENT frostHunter3] [chat] * frostHunter3 & frostHunter2 & frostHunter1 defeated Yeti King in Frostpeak Ruins!
+[14:57:20] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 193/193hp)@(1585, 980), frostHunter2(Lv25 146/146hp)@(1584, 961), frostHunter1(Lv24 247/247hp)@(1584, 931) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:21] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (2.2s)
+[14:57:21] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (13.2s)
+[14:57:22] [CLIENT frostHunter3] inventory: gold=587 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:22] [CLIENT frostHunter3] inventory: gold=607 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:23] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 189/193hp)@(1604, 996), frostHunter2(Lv25 146/146hp)@(1581, 967), frostHunter1(Lv24 247/247hp)@(1584, 978) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:25] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (6.7s)
+[14:57:25] [CLIENT frostHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:26] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 189/193hp)@(1454, 654), frostHunter2(Lv25 146/146hp)@(1439, 607), frostHunter1(Lv24 247/247hp)@(1448, 648) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:29] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 190/193hp)@(1107, 464), frostHunter2(Lv25 146/146hp)@(1090, 464), frostHunter1(Lv24 247/247hp)@(1210, 442) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:30] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 26!
+[14:57:30] [CLIENT frostHunter3] [chat] * cryptHunter1 defeated The Lich King in Bone Crypt!
+[14:57:31] [CLIENT frostHunter3] inventory: gold=631 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:32] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 191/193hp)@(746, 360), frostHunter2(Lv25 146/146hp)@(754, 430), frostHunter1(Lv24 247/247hp)@(865, 368) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:57:33] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (1.9s)
+[14:57:34] [CLIENT frostHunter3] [chat] * Broodmother has returned to Whisperwood Forest!
+[14:57:35] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 193/193hp)@(611, 496), frostHunter2(Lv25 146/146hp)@(505, 572), frostHunter1(Lv24 247/247hp)@(639, 496) | monsters: yeti 6/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:36] [CLIENT frostHunter3] notice: Thousand Cuts: no target in range
+[14:57:36] [CLIENT frostHunter3] [chat] * Yeti King has returned to Frostpeak Ruins!
+[14:57:38] [CLIENT frostHunter3] [chat] * cryptHunter2 reached level 25!
+[14:57:38] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 27!
+[14:57:38] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (0.6s)
+[14:57:38] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 193/193hp)@(791, 594), frostHunter2(Lv25 146/146hp)@(504, 711), frostHunter1(Lv24 247/247hp)@(743, 592) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:57:40] [CLIENT frostHunter3] inventory: gold=647 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:40] [CLIENT frostHunter3] inventory: gold=664 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:40] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 26!
+[14:57:41] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 193/193hp)@(986, 656), frostHunter2(Lv26 151/151hp)@(552, 880), frostHunter1(Lv24 247/247hp)@(1065, 624) | monsters: yeti 6/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:42] [CLIENT frostHunter3] notice: Thousand Cuts: no target in range
+[14:57:44] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv24 193/193hp)@(1410, 655), frostHunter2(Lv26 151/151hp)@(686, 820), frostHunter1(Lv24 247/247hp)@(1393, 624) | monsters: yeti 5/6, ice_ogre 3/4, frost_bat 5/5, yeti_king 1/1 | loot=1 | foreign_entities=0
+[14:57:45] [CLIENT frostHunter3] [chat] * Walker reached level 22!
+[14:57:46] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (11.6s)
+[14:57:47] [CLIENT frostHunter3] [chat] * forestHunter1 reached level 24!
+[14:57:47] [CLIENT frostHunter3] [chat] * frostHunter1 reached level 25!
+[14:57:47] [CLIENT frostHunter3] [chat] * frostHunter3 reached level 25!
+[14:57:47] [CLIENT frostHunter3] inventory: gold=696 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:47] [CLIENT frostHunter3] inventory: gold=696 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1, "bone_shield": 1 } equip={ "weapon": "frostbrand", "armor": "" }
+[14:57:47] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv25 200/200hp)@(1616, 551), frostHunter2(Lv26 151/151hp)@(795, 933), frostHunter1(Lv25 256/256hp)@(1606, 552) | monsters: yeti 6/6, ice_ogre 2/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:48] [CLIENT frostHunter3] [chat] * forestHunter3 reached level 24!
+[14:57:48] [CLIENT frostHunter3] [chat] * forestHunter3 & forestHunter1 & forestHunter2 defeated Broodmother in Whisperwood Forest!
+[14:57:48] [CLIENT frostHunter3] equipping bone_shield
+[14:57:48] [CLIENT frostHunter3] inventory: gold=696 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:57:48] [CLIENT frostHunter3] [chat] * The Lich King has returned to Bone Crypt!
+[14:57:48] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (3.8s)
+[14:57:49] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (8.3s)
+[14:57:50] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (10.8s)
+[14:57:50] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv25 148/200hp)@(1616, 580), frostHunter2(Lv26 151/151hp)@(866, 816), frostHunter1(Lv25 256/256hp)@(1616, 585) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 1/1 | loot=0 | foreign_entities=0
+[14:57:50] [CLIENT frostHunter3] notice: Whirling Blade is on cooldown (0.8s)
+[14:57:51] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (0.6s)
+[14:57:52] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (5.1s)
+[14:57:52] [CLIENT frostHunter3] [chat] * frostHunter1 reached level 26!
+[14:57:52] [CLIENT frostHunter3] [chat] * frostHunter1 & frostHunter3 defeated Yeti King in Frostpeak Ruins!
+[14:57:53] [CLIENT frostHunter3] [chat] * cryptHunter1 reached level 28!
+[14:57:53] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (7.5s)
+[14:57:53] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv25 124/200hp)@(1410, 600), frostHunter2(Lv26 151/151hp)@(921, 633), frostHunter1(Lv26 265/265hp)@(1428, 592) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:53] [CLIENT frostHunter3] [chat] * cryptHunter3 reached level 26!
+[14:57:54] [CLIENT frostHunter3] [chat] * forestHunter2 reached level 24!
+[14:57:54] [CLIENT frostHunter3] [chat] * frostHunter3 reached level 26!
+[14:57:54] [CLIENT frostHunter3] inventory: gold=723 inv={ "health_potion": 8, "greater_potion": 6, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:57:54] [CLIENT frostHunter3] inventory: gold=723 inv={ "health_potion": 8, "greater_potion": 7, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:57:55] [CLIENT frostHunter3] notice: Blade Focus is on cooldown (1.9s)
+[14:57:56] [CLIENT frostHunter3] notice: Thousand Cuts is on cooldown (4.3s)
+[14:57:56] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv26 207/207hp)@(1331, 464), frostHunter2(Lv26 151/151hp)@(955, 326), frostHunter1(Lv26 265/265hp)@(1328, 437) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:57:59] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv26 207/207hp)@(1182, 151), frostHunter2(Lv26 151/151hp)@(1171, 138), frostHunter1(Lv26 265/265hp)@(1184, 144) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=1 | foreign_entities=0
+[14:58:00] [CLIENT frostHunter3] notice: Piercing Strike is on cooldown (1.4s)
+[14:58:02] [CLIENT frostHunter3] [chat] * cryptHunter1 & cryptHunter3 & cryptHunter2 defeated The Lich King in Bone Crypt!
+[14:58:02] [CLIENT frostHunter3] [chat] * frostHunter2 reached level 27!
+[14:58:02] [CLIENT frostHunter3] status: zone=frost players=3 frostHunter3(Lv26 207/207hp)@(790, 189), frostHunter2(Lv27 156/156hp)@(845, 208), frostHunter1(Lv26 265/265hp)@(873, 208) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=2 | foreign_entities=0
+[14:58:02] [CLIENT frostHunter3] inventory: gold=736 inv={ "health_potion": 8, "greater_potion": 7, "ember_staff": 1, "iron_sword": 1, "great_hammer": 1 } equip={ "weapon": "frostbrand", "armor": "bone_shield" }
+[14:58:03] [CLIENT frostHunter3] [chat] * forestHunter1 left the world.
+[14:58:03] [CLIENT frostHunter3] [chat] * cryptHunter3 left the world.
+[14:58:03] [CLIENT frostHunter3] [chat] * frostHunter2 left the world.
+[14:58:03] [CLIENT frostHunter3] [chat] * frostHunter1 left the world.
+[14:58:03] [CLIENT frostHunter3] [chat] * forestHunter2 left the world.
+[14:58:03] [CLIENT frostHunter3] [chat] * forestHunter3 left the world.
+[14:58:03] [CLIENT frostHunter3] quit-after reached, exiting

@@ -1,0 +1,32 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:59:26] [CLIENT FireB] Connecting to 127.0.0.1:7777 as 'FireB' ...
+[14:59:26] [CLIENT FireB] Connected to server as peer 211617191, logging in
+[14:59:26] [CLIENT FireB] Login OK: Welcome back, FireB!
+[14:59:26] [CLIENT FireB] [chat] * FireB joined the world.
+[14:59:26] [CLIENT FireB] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:59:26] [CLIENT FireB] Entered zone frost (Frostpeak Ruins)
+[14:59:26] [CLIENT FireB] [chat] * MetalA joined the world.
+[14:59:27] [CLIENT FireB] inventory: gold=330 inv={ "great_hammer": 1, "greater_potion": 12, "health_potion": 16 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:27] [CLIENT FireB] trying to equip great_hammer (not allowed for fire)
+[14:59:27] [CLIENT FireB] notice: Great Hammer: Only: Blade Master, Stone Guardian
+[14:59:29] [CLIENT FireB] [chat] * FireB reached level 24!
+[14:59:29] [CLIENT FireB] [chat] * FireB defeated Yeti King in Frostpeak Ruins!
+[14:59:29] [CLIENT FireB] inventory: gold=678 inv={ "great_hammer": 1, "greater_potion": 16, "health_potion": 16, "frostbrand": 1, "ember_staff": 1, "frost_aegis": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:59:29] [CLIENT FireB] [chat] * MetalA reached level 23!
+[14:59:29] [CLIENT FireB] [chat] [Frost] FireB: Hello from FireB!
+[14:59:29] [CLIENT FireB] [chat] [Crypt] MetalA: Hello from MetalA!
+[14:59:29] [CLIENT FireB] status: zone=frost players=1 FireB(Lv24 141/141hp)@(1672, 632) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 5/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:29] [CLIENT FireB] trying to equip frostbrand (not allowed for fire)
+[14:59:29] [CLIENT FireB] equipping ember_staff
+[14:59:29] [CLIENT FireB] notice: Frostbrand: Only: Blade Master, Stone Guardian
+[14:59:29] [CLIENT FireB] inventory: gold=678 inv={ "great_hammer": 1, "greater_potion": 16, "health_potion": 16, "frostbrand": 1, "frost_aegis": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "" }
+[14:59:30] [CLIENT FireB] equipping frost_aegis
+[14:59:30] [CLIENT FireB] inventory: gold=678 inv={ "great_hammer": 1, "greater_potion": 16, "health_potion": 16, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:59:31] [CLIENT FireB] notice: Flame Burst is on cooldown (4.0s)
+[14:59:31] [CLIENT FireB] inventory: gold=705 inv={ "great_hammer": 1, "greater_potion": 16, "health_potion": 16, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:59:32] [CLIENT FireB] notice: Meteor is on cooldown (7.2s)
+[14:59:32] [CLIENT FireB] status: zone=frost players=1 FireB(Lv24 141/141hp)@(1341, 674) | monsters: yeti 6/6, ice_ogre 4/4, frost_bat 4/5, yeti_king 0/1 | loot=0 | foreign_entities=0
+[14:59:33] [CLIENT FireB] notice: Inferno is on cooldown (12.0s)
+[14:59:34] [CLIENT FireB] inventory: gold=724 inv={ "great_hammer": 1, "greater_potion": 16, "health_potion": 16, "frostbrand": 1, "apprentice_staff": 1 } equip={ "weapon": "ember_staff", "armor": "frost_aegis" }
+[14:59:34] [CLIENT FireB] quit-after reached, exiting

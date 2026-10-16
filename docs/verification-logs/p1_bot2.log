@@ -1,0 +1,125 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+[14:53:45] [CLIENT Bot2] Connecting to 127.0.0.1:7777 as 'Bot2' ...
+[14:53:45] [CLIENT Bot2] Connected to server as peer 988575762, logging in
+[14:53:45] [CLIENT Bot2] Login OK: Account created. Welcome to Volam!
+[14:53:45] [CLIENT Bot2] Class selection requested (new account)
+[14:53:45] [CLIENT Bot2] bot chooses class water
+[14:53:45] [CLIENT Bot2] [chat] * Bot2 the Frost Sage joined the world.
+[14:53:45] [CLIENT Bot2] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:53:45] [CLIENT Bot2] [chat] * Bot1 the Blade Master joined the world.
+[14:53:46] [CLIENT Bot2] inventory: gold=0 inv={ "health_potion": 2 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:53:48] [CLIENT Bot2] [chat] [Meadow] Bot2: Hello from Bot2!
+[14:53:48] [CLIENT Bot2] [chat] [Meadow] Bot1: Hello from Bot1!
+[14:53:48] [CLIENT Bot2] status: zone=meadow players=2 Bot2(Lv1 28/28hp)@(1418, 716), Bot1(Lv1 32/32hp)@(1443, 710) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:53:49] [CLIENT Bot2] notice: Healing Rain unlocks at level 3
+[14:53:49] [CLIENT Bot2] [chat] * Bot2 reached level 2!
+[14:53:49] [CLIENT Bot2] inventory: gold=9 inv={ "health_potion": 2, "slime_gel": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:53:49] [CLIENT Bot2] inventory: gold=9 inv={ "health_potion": 3, "slime_gel": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:53:49] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:53:49] [CLIENT Bot2] [chat] * Bot1 reached level 2!
+[14:53:49] [CLIENT Bot2] inventory: gold=9 inv={ "health_potion": 4, "slime_gel": 2, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "" }
+[14:53:50] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:53:50] [CLIENT Bot2] equipping wooden_shield
+[14:53:50] [CLIENT Bot2] inventory: gold=9 inv={ "health_potion": 4, "slime_gel": 2 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:51] [CLIENT Bot2] inventory: gold=9 inv={ "health_potion": 4, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:51] [CLIENT Bot2] inventory: gold=16 inv={ "health_potion": 4, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:51] [CLIENT Bot2] inventory: gold=16 inv={ "health_potion": 5, "slime_gel": 3 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:51] [CLIENT Bot2] status: zone=meadow players=2 Bot2(Lv2 33/33hp)@(1726, 808), Bot1(Lv2 39/39hp)@(1740, 800) | monsters: slime 5/10 | loot=0 | foreign_entities=0
+[14:53:52] [CLIENT Bot2] notice: Healing Rain unlocks at level 3
+[14:53:52] [CLIENT Bot2] [chat] * Bot1 reached level 3!
+[14:53:52] [CLIENT Bot2] notice: New skill unlocked: [2] Healing Rain
+[14:53:52] [CLIENT Bot2] [chat] * Bot2 reached level 3!
+[14:53:54] [CLIENT Bot2] status: zone=meadow players=2 Bot2(Lv3 39/39hp)@(1649, 1040), Bot1(Lv3 46/46hp)@(1646, 1045) | monsters: slime 4/10 | loot=0 | foreign_entities=0
+[14:53:56] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:53:57] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:53:57] [CLIENT Bot2] inventory: gold=26 inv={ "health_potion": 5, "slime_gel": 4 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:57] [CLIENT Bot2] inventory: gold=26 inv={ "health_potion": 5, "slime_gel": 4, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:57] [CLIENT Bot2] inventory: gold=26 inv={ "health_potion": 6, "slime_gel": 4, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:53:57] [CLIENT Bot2] status: zone=meadow players=2 Bot2(Lv3 39/39hp)@(1693, 931), Bot1(Lv3 46/46hp)@(1677, 915) | monsters: slime 7/10 | loot=0 | foreign_entities=0
+[14:54:00] [CLIENT Bot2] status: zone=meadow players=2 Bot2(Lv3 39/39hp)@(1468, 1104), Bot1(Lv3 46/46hp)@(1373, 1104) | monsters: slime 9/10 | loot=0 | foreign_entities=0
+[14:54:03] [CLIENT Bot2] status: zone=meadow players=2 Bot2(Lv3 39/39hp)@(1067, 1136), Bot1(Lv3 46/46hp)@(1738, 1014) | monsters: slime 10/10 | loot=0 | foreign_entities=0
+[14:54:04] [CLIENT Bot2] inventory: gold=26 inv={ "health_potion": 7, "slime_gel": 4, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:04] [CLIENT Bot2] inventory: gold=26 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:04] [CLIENT Bot2] inventory: gold=33 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:06] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:06] [CLIENT Bot2] status: zone=meadow players=1 Bot2(Lv3 39/39hp)@(945, 1008) | monsters: slime 8/10 | loot=3 | foreign_entities=0
+[14:54:09] [CLIENT Bot2] status: zone=meadow players=1 Bot2(Lv3 39/39hp)@(1335, 816) | monsters: slime 8/10 | loot=3 | foreign_entities=0
+[14:54:12] [CLIENT Bot2] status: zone=meadow players=1 Bot2(Lv3 39/39hp)@(1805, 788) | monsters: slime 10/10 | loot=3 | foreign_entities=0
+[14:54:13] [CLIENT Bot2] [chat] * Bot1 reached level 4!
+[14:54:14] [CLIENT Bot2] inventory: gold=0 inv={  } equip={ "weapon": "", "armor": "" }
+[14:54:14] [CLIENT Bot2] bot route finished in forest
+[14:54:14] [CLIENT Bot2] Entered zone forest (Whisperwood Forest)
+[14:54:14] [CLIENT Bot2] inventory: gold=33 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:15] [CLIENT Bot2] [chat] * Bot1 reached level 5!
+[14:54:15] [CLIENT Bot2] [chat] * Bot1 reached level 6!
+[14:54:15] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv3 39/39hp)@(254, 624), Bot1(Lv6 63/67hp)@(771, 586) | monsters: rat 1/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=1 | foreign_entities=0
+[14:54:18] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv3 39/39hp)@(650, 592), Bot1(Lv6 63/67hp)@(787, 464) | monsters: rat 0/12, bat 4/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:21] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv3 39/39hp)@(1040, 560), Bot1(Lv6 63/67hp)@(1170, 496) | monsters: rat 0/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:23] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:24] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv3 32/39hp)@(1357, 459), Bot1(Lv6 64/67hp)@(709, 560) | monsters: rat 4/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=0 | foreign_entities=0
+[14:54:25] [CLIENT Bot2] [chat] * Bot1 reached level 7!
+[14:54:26] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:26] [CLIENT Bot2] inventory: gold=42 inv={ "health_potion": 8, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:26] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:27] [CLIENT Bot2] drinking a health_potion at hp 25/39
+[14:54:27] [CLIENT Bot2] inventory: gold=42 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:27] [CLIENT Bot2] [chat] * Bot2 reached level 4!
+[14:54:27] [CLIENT Bot2] inventory: gold=56 inv={ "health_potion": 8, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:27] [CLIENT Bot2] status: zone=forest players=2 Bot2(Lv4 44/44hp)@(1415, 409), Bot1(Lv7 74/74hp)@(445, 592) | monsters: rat 9/12, bat 5/6, spider 5/5, broodmother 1/1 | loot=2 | foreign_entities=0
+[14:54:28] [CLIENT Bot2] notice: Healing Rain is on cooldown (6.8s)
+[14:54:29] [CLIENT Bot2] drinking a health_potion at hp 15/44
+[14:54:29] [CLIENT Bot2] inventory: gold=56 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:29] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:29] [CLIENT Bot2] [chat] * Bot2 was defeated by Wood Spider!
+[14:54:30] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 0/44hp DEAD)@(1462, 359) | monsters: rat 9/12, bat 5/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=2 | foreign_entities=0
+[14:54:33] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 0/44hp DEAD)@(1462, 359) | monsters: rat 9/12, bat 5/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=2 | foreign_entities=0
+[14:54:36] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 44/44hp)@(556, 596) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=2 | foreign_entities=0
+[14:54:37] [CLIENT Bot2] inventory: gold=65 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:37] [CLIENT Bot2] inventory: gold=65 inv={ "health_potion": 8, "slime_gel": 5, "wooden_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:38] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:39] [CLIENT Bot2] inventory: gold=65 inv={ "health_potion": 8, "slime_gel": 5, "wooden_shield": 1, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:39] [CLIENT Bot2] inventory: gold=65 inv={ "health_potion": 9, "slime_gel": 5, "wooden_shield": 1, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:39] [CLIENT Bot2] inventory: gold=84 inv={ "health_potion": 9, "slime_gel": 5, "wooden_shield": 1, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "wooden_shield" }
+[14:54:39] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 39/44hp)@(793, 559) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:40] [CLIENT Bot2] equipping iron_shield
+[14:54:40] [CLIENT Bot2] inventory: gold=84 inv={ "health_potion": 9, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:40] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:41] [CLIENT Bot2] drinking a health_potion at hp 25/44
+[14:54:41] [CLIENT Bot2] inventory: gold=84 inv={ "health_potion": 8, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:41] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:42] [CLIENT Bot2] drinking a health_potion at hp 26/44
+[14:54:42] [CLIENT Bot2] inventory: gold=84 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:42] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 13/44hp)@(880, 560) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:43] [CLIENT Bot2] notice: Healing Rain is on cooldown (6.8s)
+[14:54:43] [CLIENT Bot2] drinking a health_potion at hp 13/44
+[14:54:43] [CLIENT Bot2] inventory: gold=84 inv={ "health_potion": 6, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:43] [CLIENT Bot2] [chat] * Bot2 was defeated by Dire Rat!
+[14:54:45] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 0/44hp DEAD)@(880, 560) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:48] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 44/44hp)@(294, 720) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:51] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:51] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:52] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 41/44hp)@(535, 845) | monsters: rat 12/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:52] [CLIENT Bot2] [chat] * Bot1 reached level 8!
+[14:54:52] [CLIENT Bot2] inventory: gold=94 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:53] [CLIENT Bot2] notice: Healing Rain is on cooldown (0.3s)
+[14:54:54] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:55] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv4 38/44hp)@(714, 622) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:55] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:56] [CLIENT Bot2] drinking a health_potion at hp 24/44
+[14:54:56] [CLIENT Bot2] inventory: gold=94 inv={ "health_potion": 6, "slime_gel": 5, "wooden_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:56] [CLIENT Bot2] [chat] * Bot2 reached level 5!
+[14:54:56] [CLIENT Bot2] inventory: gold=94 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:56] [CLIENT Bot2] inventory: gold=105 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:57] [CLIENT Bot2] notice: Frost Nova unlocks at level 6
+[14:54:58] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv5 8/50hp)@(823, 586) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:54:58] [CLIENT Bot2] drinking a health_potion at hp 8/50
+[14:54:58] [CLIENT Bot2] inventory: gold=105 inv={ "health_potion": 6, "slime_gel": 5, "wooden_shield": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:54:58] [CLIENT Bot2] notice: Tidal Wave unlocks at level 10
+[14:54:58] [CLIENT Bot2] [chat] * Bot2 was defeated by Dire Rat!
+[14:55:01] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv5 0/50hp DEAD)@(823, 586) | monsters: rat 10/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:55:04] [CLIENT Bot2] status: zone=forest players=1 Bot2(Lv5 50/50hp)@(240, 533) | monsters: rat 11/12, bat 6/6, spider 5/5, broodmother 1/1, spiderling 2/2 | loot=0 | foreign_entities=0
+[14:55:04] [CLIENT Bot2] inventory: gold=118 inv={ "health_potion": 6, "slime_gel": 5, "wooden_shield": 2, "iron_shield": 1 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:04] [CLIENT Bot2] inventory: gold=118 inv={ "health_potion": 6, "slime_gel": 5, "wooden_shield": 2, "iron_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:04] [CLIENT Bot2] inventory: gold=118 inv={ "health_potion": 7, "slime_gel": 5, "wooden_shield": 2, "iron_shield": 2 } equip={ "weapon": "apprentice_staff", "armor": "iron_shield" }
+[14:55:05] [CLIENT Bot2] quit-after reached, exiting

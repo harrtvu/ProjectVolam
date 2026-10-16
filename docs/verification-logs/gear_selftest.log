@@ -1,0 +1,31 @@
+Godot Engine v4.2.1.stable.official.b09f793f5 - https://godotengine.org
+ 
+GEAR SELFTEST drops (no bonus, 4000 yeti kills lv14): gear 579 { "normal": 354, "magic": 166, "rare": 53, "unique": 6, "currency": 368 } | rare+unique share 10.2%
+GEAR SELFTEST drops (+100% IIQ +200% IIR, 4000 yeti kills lv14): gear 1176 { "normal": 32, "magic": 810, "rare": 295, "unique": 39, "currency": 737 } | rare+unique share 28.4%
+GEAR SELFTEST IIQ effect: 579 -> 1176 gear drops (x2.03) OK | IIR effect: rare+unique share x2.79 OK
+GEAR SELFTEST item level gating: ilvl 2 drops use bases/affix tiers up to level 1 (bases ["rope_belt", "apprentice_staff", "jade_amulet", "cloth_robe", "wooden_shield", "iron_sword", "sandals", "leather_cap", "cloth_wraps", "copper_ring"]) | ilvl 15 drops reach affix tier level 14 OK
+GEAR SELFTEST orb_transmute   [normal] Silver Ring (silver_ring ilvl 15) -> [magic] Elemental Silver Ring of the Spring (silver_ring ilvl 15, 2 affixes) 
+GEAR SELFTEST orb_transmute   [magic] Elemental Silver Ring of the Spring (silver_ring ilvl 15, 2 affixes) -> REJECTED: Transmutation needs a Normal item (this is Magic) 
+GEAR SELFTEST orb_alteration  [magic] Elemental Silver Ring of the Spring (silver_ring ilvl 15, 2 affixes) -> [magic] Wood-slaying Silver Ring (silver_ring ilvl 15, 1 affixes) 
+GEAR SELFTEST orb_chaos       [magic] Wood-slaying Silver Ring (silver_ring ilvl 15, 1 affixes) -> REJECTED: Chaos needs a Rare item (this is Magic) 
+GEAR SELFTEST orb_exalt       [magic] Wood-slaying Silver Ring (silver_ring ilvl 15, 1 affixes) -> REJECTED: Exalted needs a Rare item (this is Magic) 
+GEAR SELFTEST orb_regal       [magic] Wood-slaying Silver Ring (silver_ring ilvl 15, 1 affixes) -> [rare] Ashen Band (silver_ring ilvl 15, 3 affixes) 
+GEAR SELFTEST orb_regal       [rare] Ashen Band (silver_ring ilvl 15, 3 affixes) -> REJECTED: Regal needs a Magic item (this is Rare) 
+GEAR SELFTEST orb_alteration  [rare] Ashen Band (silver_ring ilvl 15, 3 affixes) -> REJECTED: Alteration needs a Magic item (this is Rare) 
+GEAR SELFTEST orb_exalt       [rare] Ashen Band (silver_ring ilvl 15, 3 affixes) -> [rare] Ashen Band (silver_ring ilvl 15, 4 affixes) 
+GEAR SELFTEST orb_chaos       [rare] Ashen Band (silver_ring ilvl 15, 4 affixes) -> [rare] Thunder Whorl (silver_ring ilvl 15, 3 affixes) 
+GEAR SELFTEST orb_scour       [rare] Thunder Whorl (silver_ring ilvl 15, 3 affixes) -> [normal] Silver Ring (silver_ring ilvl 15) 
+GEAR SELFTEST orb_scour       [normal] Silver Ring (silver_ring ilvl 15) -> REJECTED: the item is already Normal 
+GEAR SELFTEST orb_alteration  [normal] Silver Ring (silver_ring ilvl 15) -> REJECTED: Alteration needs a Magic item (this is Normal) 
+GEAR SELFTEST orb_regal       [normal] Silver Ring (silver_ring ilvl 15) -> REJECTED: Regal needs a Magic item (this is Normal) 
+GEAR SELFTEST orb_exalt       [normal] Silver Ring (silver_ring ilvl 15) -> REJECTED: Exalted needs a Rare item (this is Normal) 
+GEAR SELFTEST affix counts (magic 1-2, rare 3-6 with a generated name): OK
+GEAR SELFTEST orb_chaos       [normal] Silver Ring (silver_ring ilvl 15) -> REJECTED: Chaos needs a Rare item (this is Normal) 
+GEAR SELFTEST orb_scour       [normal] Silver Ring (silver_ring ilvl 15) -> REJECTED: the item is already Normal 
+GEAR SELFTEST enhancement: +0->+1 100% (exp 100%, down 0, gold 10) | +1->+2 89% (exp 90%, down 0, gold 40) | +2->+3 80% (exp 80%, down 0, gold 90) | +3->+4 69% (exp 70%, down 0, gold 160) | +4->+5 59% (exp 60%, down 0, gold 250) | +5->+6 50% (exp 50%, down 476, gold 360) | +6->+7 41% (exp 40%, down 601, gold 490) | +7->+8 29% (exp 30%, down 735, gold 640) | +8->+9 20% (exp 20%, down 779, gold 810) | +9->+10 9% (exp 10%, down 916, gold 1000)
+GEAR SELFTEST enhancement rules: destroyed 0, downgrades below +5 0, at +10 -> already at +10 (max), damage +0/+5/+10 = 6/14/22
+GEAR SELFTEST equip (Fire L15: River Heart + Frost Aegis + Lich Staff +6 + rare belt + Five Phases ring): max hp 96->178, attack 25->42, defense 3->11, water res 0%->75% (raw 81, cap 75), 40 water damage taken 47->2, 40 metal damage taken 29->14
+GEAR SELFTEST unequip all: max hp 96, attack 25, water damage taken 47 (back to 96/25/47)
+GEAR SELFTEST legacy ids -> instances: [normal] Iron Sword (iron_sword ilvl 1), [unique] Soulbinder (Lich Staff) (lich_staff ilvl 10), [normal] Wooden Shield (wooden_shield ilvl 1), [unique] Frostbrand (frostbrand ilvl 13)
+GEAR SELFTEST tooltip 9 lines, compare 8 lines: ["+5 damage", "+14% attack", "+10% cast speed (cooldown recovery)", "-1% critical chance", "+13% critical damage", "+8 damage", "+15% elemental (skill) damage", "+0.9% damage leeched as mana"]
+GEAR SELFTEST RESULT: PASS
