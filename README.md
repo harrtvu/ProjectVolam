@@ -19,7 +19,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Host / Join / Dedicated server | One project. The main menu has *Account name*, *Password*, *Server address* (default `127.0.0.1`), **Host (listen server)** and **Join**. Run with `--server` for a headless dedicated server. ENet (UDP) on port **7777**. |
 | World & zones | Four zones, each its own 64×40 tile map (32 px tiles) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Glowing portals at map edges/doorways link them. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
 | Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on keys **1-4**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
-| Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, **Esc**/empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
+| Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, clicking empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
 | Passive web | One shared Path-of-Exile-style web of 175 nodes. Class starts sit on the five-element pentagon, with small/notable/keystone nodes, an adjacency rule, 1 point per level (retroactive), per-node refund and full reset for gold, and farming stats (item quantity/rarity, gold, leech, attack/cast speed, damage vs element). All bonuses flow through one stat aggregator that gear affixes can plug into. See [Passive web](#passive-web-shared-path-of-exile-style). |
 | Players | WASD / arrows to move. The camera follows you, and the sprite flips and waddles while walking. A name + level label and an HP bar float over each head. **Server-authoritative**: clients send only input; the server moves everyone and replicates the results with `MultiplayerSynchronizer`/`MultiplayerSpawner`. |
 | Monsters & bosses | 10 regular monster types plus 3 zone bosses, with different behaviours (packs, erratic flyers, lunges, ranged archers, wall-phasing ghosts, armored brutes). Stats and XP scale with monster level, and the name + level float over each head. Every non-starter zone has a boss with a special attack, a big HP bar, chat announcements and guaranteed loot. See [Monsters](#monsters). |
@@ -134,7 +134,7 @@ saves that had a now-forbidden weapon equipped get it moved back into the bag.
   **target frame** at the top of the HUD shows its name, level, element, HP bar and active status effects:
   poisoned / burning / slowed / stunned / taunted). Left-click another player to select them as the target for
   ally heals (Healing Rain centres on them). **Right-click** selects a monster and attacks it straight away.
-* **Tab** cycles through the nearest monsters, **Esc** or clicking empty ground clears the target.
+* **Tab** cycles through the nearest monsters, clicking empty ground clears the target.
 * **Basic attacks and skills** use the selected target if it's valid and in range. If not, they fall back to
   the nearest monster, which is the old behaviour.
 * **Directional skills** (Ice Shard, Fireball, Tidal Wave, Piercing Strike dash, Water/Fire basic bolts) fly toward
@@ -882,6 +882,7 @@ godot --headless --path project-volam -- --server --ws
 | `--debug-fresh=PREFIX` | server: new accounts whose name starts with PREFIX ignore `--debug-start-level` (start at Lv 1) |
 | `--bot-dungeon=full\|die\|enter\|intrude` | test bot runs a dungeon scenario (buy/craft/open/clear, die until the portals run out, enter and leave, try someone else's portal); `--bot-dungeon-theme=fire`, `--bot-dungeon-tier=N`, `--bot-dungeon-unique` |
 | `--open-map-ui=merchant\|device` / `--open-atlas[=map\|tree][@node]` | open the dungeon panel / atlas once in game (screenshots; `@node` forces that node's tooltip) |
+| `--menu-test` / `--menu-test-leave=menu\|quit` / `--open-menu=SECS` / `--settings-test` / `--settings-file=PATH` | Esc menu + pause test driver / open the menu after N s / settings round-trip test |
 | `--bot-atlas` (with `--bot-dungeon=full`) / `--debug-atlas-kit` | atlas test bot script / server hands the bot a locked-node ticket |
 | `--market-duration=S` / `--market-max-listings=N` | server: listing lifetime in seconds (default 48 h) / active listings per account (default 20) |
 | `--market-short=PREFIX` | server (test): listings of accounts starting with PREFIX expire after 15 s |
@@ -898,7 +899,7 @@ loot/pickup/potion/equip, account create/login/wrong-password/duplicate rejectio
 isolation, every monster type attacking/dying/respawning, and all three bosses (special attacks,
 kill, loot, chat announcement, respawn), classes/skills/status effects, targeting, the passive web, the trade market (listing fee + escrow, every search filter, buy with tax, self-buy / no gold / full bag / max listings / bound item rejected, two buyers racing one listing, cancel, expiry, claim box, offline seller paid on next login, persistence across restart, a kill -9 crash test, a crash exactly between the market.json and accounts.json writes, the free daily ticket refused, and a no-duplication / gold-conservation audit), the dungeon endgame (merchant, free ticket, ticket crafting, Map Device, private instances and their isolation, portals, death, boss completion, next-tier drops, map mods, IIQ/IIR on drops, atlas persistence, cleanup), and the gear system (drops of every rarity, IIQ/IIR, item-level gating, every orb plus its invalid uses, enhancement success/failure/downgrade/gold, equip/unequip stats and resistances, selling, stash, drop/destroy, full bag, migration of old saves, persistence):
 ```bash
-GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~21 min, 301 checks (needs python3)
+GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~25 min, 339 checks (needs python3)
 ```
 
 ## Controls
@@ -913,7 +914,7 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~21 min,
 | Left-click | Select monster/player (empty ground clears) |
 | Right-click | Select monster and attack |
 | Tab | Cycle nearest enemies |
-| Esc | Clear target |
+| Esc | Close the topmost open panel (market, Map Device/merchant, atlas, blacksmith, passive web, character sheet, inventory); with nothing open, open/close the in-game menu |
 | Hold 1-4 | Ground skills: aim preview at the cursor, cast on release |
 | E | Pick up the nearest item (walking over items also picks them up). Next to the blacksmith anvil: open the blacksmith panel. Next to the Map Device / Ticket Merchant: open the dungeon panel |
 | M | Atlas (map of dungeon nodes + atlas passive tree) |
@@ -925,6 +926,37 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~21 min,
 | Q | Drink a health potion |
 | Enter | Open chat / send message |
 | Esc (while typing) | Cancel chat |
+
+## In-game menu (Esc) and pausing
+
+![Esc menu](docs/pause_menu.png)
+
+Press **Esc** with no panel open to get the in-game menu: a darkened overlay with a centred panel.
+
+* **Resume** closes the menu (so does Esc).
+* **Settings:**
+  * master volume slider
+  * fullscreen / windowed toggle
+  * show damage numbers / floating text toggle
+
+  Settings are saved on the client in `user://settings.cfg` and applied at start-up. The key list is read-only.
+* **Controls / Help** lists every key.
+* **Return to Main Menu** disconnects cleanly. A host saves everyone first. Then it reloads the title screen.
+* **Quit Game** does the same clean save/disconnect, then quits.
+
+Esc priority:
+
+1. Typing in chat: Esc cancels the chat.
+2. Otherwise Esc closes the topmost open panel.
+3. Otherwise it toggles the menu.
+
+Esc no longer clears the target; click empty ground for that.
+
+**Pausing (multiplayer-aware):**
+
+* **Solo host** (you started with Host and nobody else is connected): the world really pauses (`get_tree().paused`). Monsters, projectiles and timers stop. The menu runs with `PROCESS_MODE_ALWAYS`, and the network peer keeps polling.
+  If someone connects while you're paused, the world unpauses for them automatically.
+* **Anything else** (other players online, or you are a client of a dedicated server): the menu says *"Game continues online"*. Your movement and skill input stop, but the world goes on. There is no invulnerability.
 
 ## Accounts & where saves are stored
 

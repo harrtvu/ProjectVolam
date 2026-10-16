@@ -248,6 +248,7 @@ var _rejected := false
 
 
 func _ready() -> void:
+	get_tree().paused = false    # (after "Return to Main Menu" the old scene was reloaded while paused)
 	rng.randomize()
 	_setup_input()
 	_build_world()
@@ -1229,7 +1230,11 @@ func leave_game(to_menu: bool) -> void:
 		multiplayer.multiplayer_peer.close()
 	_log("left the game, back to the main menu")
 	PauseMenuScript.returned_to_menu = true
-	_return_to_menu()
+	# reload while still paused (no entity may touch the closed peer); the new Main unpauses
+	get_tree().paused = true
+	class_select.visible = false
+	multiplayer.multiplayer_peer = null
+	get_tree().reload_current_scene()
 
 
 func _load_client_settings() -> void:
@@ -1376,7 +1381,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc clear  E pick up\nQ potion  I inventory  C character\nT passive web  Enter chat" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc menu  E pick up\nQ potion  I inventory  C character\nT passive web  Enter chat" % here
 	if me == null:
 		target_frame.visible = false
 		return

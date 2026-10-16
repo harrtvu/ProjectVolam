@@ -59,7 +59,8 @@ static func apply_settings() -> void:
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	_fit()
+	get_viewport().size_changed.connect(_fit)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var dim := ColorRect.new()
 	dim.color = Color(0, 0, 0, 0.6)
@@ -147,6 +148,11 @@ func _ready() -> void:
 	visible = false
 
 
+func _fit() -> void:
+	position = Vector2.ZERO
+	size = get_viewport_rect().size
+
+
 func _btn(text: String, cb: Callable) -> Button:
 	var b := Button.new()
 	b.text = text
@@ -216,7 +222,8 @@ func _leave(to_menu: bool) -> void:
 	main._log("menu: %s" % ("return to main menu" if to_menu else "quit game"))
 	visible = false
 	paused_world = false
-	get_tree().paused = false
+	if not to_menu:
+		get_tree().paused = false
 	main.leave_game(to_menu)
 
 
@@ -267,7 +274,7 @@ func _moved(before: Dictionary) -> float:
 
 
 func _process(delta: float) -> void:
-	if main == null or not main.menu_test or not main.in_game or main._local_player() == null:
+	if main == null or not main.menu_test or main._shutting_down or not main.in_game or main._local_player() == null:
 		return
 	_tt += delta
 	var at := [6.0, 7.0, 8.0, 9.0, 13.0, 14.0, 18.0, 19.0, 20.0]

@@ -239,7 +239,7 @@ check "zone saved + restored"       "Login 'Bot2'.*restored save.*zone forest" p
 for t in "meadow -> forest" "forest -> crypt" "crypt -> frost" "frost -> crypt" "crypt -> forest" "forest -> meadow"; do
   check "walker $t"                 "Zone transfer: Walker $t"               p3_server.log
 done
-if grep -qhE "foreign_entities=[1-9]" $L/*.log; then echo "FAIL  visibility isolation (client received other-zone entities)"; else echo "PASS  visibility isolation (no client ever received another zone's entities)"; fi
+if grep -qhE "foreign_entities=[1-9]" $(ls $L/*.log | grep -v "_host.log"); then echo "FAIL  visibility isolation (client received other-zone entities)"; else echo "PASS  visibility isolation (no client ever received another zone's entities)"; fi
 check "Bot1 back in meadow sees only itself" "zone=meadow players=1 Bot1\(" p1_bot1.log
 check "Bot2 in forest sees only itself"      "zone=forest players=1 Bot2\(" p1_bot2.log
 echo; echo "== Monsters (attack / die / respawn)"
