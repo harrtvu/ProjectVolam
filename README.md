@@ -27,6 +27,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Gear & loot (PoE × Vo Lam) | Ten equipment slots (weapon, off-hand, helmet, body, gloves, boots, belt, amulet, 2 rings). Every piece of gear is an **item instance** with a rarity (Normal / Magic / Rare / Unique), rolled prefixes/suffixes gated by item level, and an enhancement level +0..+10. 12 uniques (5 boss uniques + 7 element-themed world uniques). Monster and player **item quantity / rarity** feed the drop rolls. Six crafting orbs and Vo Lam enhancement stones drop from monsters. Ground loot has rarity-coloured labels and beams, with a flash + chime for rares/uniques. See [Gear, loot & crafting](#gear-loot--crafting). |
 | Inventory & blacksmith | **I** opens a 40-slot bag with a paper-doll equipment panel. You can click or drag to equip, shift-click or drag onto *Drop* to drop, and ctrl-click twice or drag onto *Destroy* to destroy. Currency stacks. Tooltips compare with what you're wearing. The **blacksmith** (anvil in Sunny Meadow, press **E** next to it) has the crafting/enhancement panel, a vendor, and a 40-slot **account-wide stash**. Potions: click to drink, or **Q**. |
 | Trade market | The **Trade Broker** in Sunny Meadow runs an asynchronous auction house. List bag items or currency stacks for gold (2% listing fee, the item goes into server escrow, 20 listings, 48 h). Search with filters (text, slot, rarity, level, class, ticket theme/tier, affix ≥ X, price), sort and page through results, then buy out instantly (5% sales tax). Sellers collect from a claim box, even if they were offline when the item sold. Starting gear and free tickets are account-bound. See [Trade market](#trade-market-trade-broker-asynchronous-auction-house). |
+| Hideout | A private, per-account hideout (Path of Exile style) with its own **Map Device, Ticket Merchant, Trade Broker and blacksmith + stash**. Enter it through the **Hideout Master** in Sunny Meadow, the `/hideout` chat command or **Esc > Hideout**; leave through the door. Buy Kenney CC0 decorations with gold (or find them in dungeons), place / move / rotate / flip / remove them on a grid in **decoration mode (H)**, move the stations, and pick one of six themes unlocked by Atlas Guardians. See [Hideout](#hideout-path-of-exile-style). |
 | Accounts & saving | The first login with a name creates the account. The password is stored as SHA-256(random salt + password) using `HashingContext`. Later logins need the same password, and an account can't be logged in twice at once. The server saves level, XP, HP, **zone**, position, currency stacks, gold, every item instance (equipped, bag, and the account-wide stash) to JSON on disconnect, on every zone change, every 30 s, and on shutdown, then restores it on the next login (you come back in the zone you left). |
 | Chat | Global. **Enter** to type, Enter to send, **Esc** to cancel. The server stamps the sender's zone and name (`[Forest] Harry: hi`). Join/leave/level-up/defeat/boss messages show up in yellow. |
 | Web support | Browsers can't use ENet, so the server can also run in WebSocket mode (`--ws`), and the web build uses WebSockets automatically. |
@@ -696,6 +697,38 @@ Press **M** anywhere (or look at the Ticket Merchant's "M: atlas" hint) to open 
   * Player side: resistances, life and mana regeneration, in `player.gd`.
 * Drop bonuses are added in `zone.drop_loot` (map IIQ/IIR, the atlas bonus and the elite bonus). The server log shows them on every dungeon drop.
 
+## Hideout (Path of Exile style)
+
+Every account has a private hideout. It is a dynamic zone (`ho<N>`) built by the same instance system as dungeons: the server creates it on every peer from the account's layout, and the normal per-zone visibility keeps it private. It closes 20 s after it becomes empty (it stays open while a dungeon you opened from it is still running).
+
+* **Getting there:** talk to the **Hideout Master** in Sunny Meadow (E, east of the spawn), type `/hideout` in chat, or press **Esc > Hideout**. You can't go there from inside a dungeon. The **door** at the bottom of the hideout takes you back to Sunny Meadow. If you log out in your hideout, you log back in there, even after a server restart.
+* **Stations:** a Map Device, Ticket Merchant, Trade Broker and blacksmith (crafting, enhancement, vendor and the account-wide stash) stand in a default layout. They use the same code as their town versions. A map opened at the hideout's Map Device puts its portal under that device, and the dungeon's exit portal (and dying or the dungeon collapsing) brings you back to the hideout.
+* **Decorations:** 18 decorations made from Kenney CC0 tiles (trees, bamboo, statues, shrines, lanterns, banners, rugs, ponds, a snowman and more), bought with gold from the Hideout Master (or from the panel inside your hideout). Dungeon bosses rarely drop one (8%). Owned decorations form an inventory, and a hideout holds at most **200** placed decorations.
+* **Decoration mode (H in your hideout):** opens the panel and shows the grid. Choose one of your decorations, then:
+  * **left-click** a cell to place it;
+  * left-click a placed decoration and then another cell to **move** it;
+  * left-click a station and then a cell to move the **station**;
+  * **right-click** to remove a decoration (it goes back to your inventory);
+  * **R** rotates and **F** flips the decoration under the cursor.
+* **Placement rules:** the server checks every placement. A decoration must be inside the room, can't be in the door lane, can't be on or next to a station, and can't share a cell. You also need to own one that isn't placed yet, and the 200 limit applies. Rejections show in chat.
+* **Themes:**
+  * **Meadow Retreat** (default);
+  * **Bamboo Courtyard** (Wood);
+  * **Ember Forge** (Fire);
+  * **Stone Temple** (Earth);
+  * **Golden Pavilion** (Metal);
+  * **Lotus Lake** (Water).
+
+  Killing an element's Atlas Guardian unlocks its theme, and you can switch at any time. Switching keeps every decoration that is still valid. The room shape is the same in every theme, so in practice all of them are kept.
+* **Saving:** the layout (theme, unlocked themes, station positions, decorations, owned decorations) is stored on the character in the accounts JSON, so it survives restarts. Old saves get the default layout.
+* **Visiting:** not implemented yet. `/visit <name>` answers that hideouts are private for now. Entry goes through one `_may_enter()` check in `hideout_server.gd`, so a party or visit system only needs to widen that check. The zone itself is already a normal shared zone.
+
+| Decorated hideout | Decoration mode | Ember Forge theme |
+|---|---|---|
+| ![hideout](docs/hideout_decorated.png) | ![decoration mode](docs/hideout_decoration_mode.png) | ![theme](docs/hideout_theme.png) |
+
+Code: `scripts/hideout.gd` (catalog, themes, layout data and the pure validation used by both server and client), `scripts/hideout_server.gd` (the zones, requests and RPCs), `scripts/hideout_ui.gd` (the panel and decoration mode), plus small hooks in `zone.gd`, `zone_map.gd`, `instances.gd`, `player.gd` and `main.gd`. Screenshots: `tools/hideout_screenshots.sh`.
+
 ## Trade market (Trade Broker, asynchronous auction house)
 
 Players trade items for gold through the **Trade Broker** NPC in Sunny Meadow (south-west of the
@@ -762,6 +795,9 @@ scenes/main.tscn       The only scene (root node "Main")
 scripts/main.gd        Menu, HUD, chat, networking, login/accounts, zone transfers, saving, test bot
 scripts/market.gd      Trade market rules: fee / tax, tradeability, search filters, sort + paging, save validation
 scripts/market_server.gd Trade Broker server: listings in escrow, buy / cancel / claim box / expiry, atomic commits
+scripts/hideout.gd     Hideout data: decoration catalog, themes, layout + placement validation
+scripts/hideout_server.gd  Hideout zones (one private instance per account), requests, RPCs
+scripts/hideout_ui.gd  Hideout panel + decoration mode (grid overlay)
 scripts/market_ui.gd   Trade Broker panel: Browse / Sell / My Listings + claim box
 scripts/zones.gd       Zone definitions: names, levels, portals, monster spawns, bosses
 scripts/zone.gd        One zone: map + entity containers + spawners + visibility filter, loot drops
@@ -882,6 +918,7 @@ godot --headless --path project-volam -- --server --ws
 | `--debug-fresh=PREFIX` | server: new accounts whose name starts with PREFIX ignore `--debug-start-level` (start at Lv 1) |
 | `--bot-dungeon=full\|die\|enter\|intrude` | test bot runs a dungeon scenario (buy/craft/open/clear, die until the portals run out, enter and leave, try someone else's portal); `--bot-dungeon-theme=fire`, `--bot-dungeon-tier=N`, `--bot-dungeon-unique` |
 | `--open-map-ui=merchant\|device` / `--open-atlas[=map\|tree][@node]` | open the dungeon panel / atlas once in game (screenshots; `@node` forces that node's tooltip) |
+| `--hideout-debug` (server) / `--bot-hideout=1\|2` / `--hideout-shot=mode` | Hideout tests: every theme except Lotus Lake unlocked, bosses always drop a decoration, and a `debug_gold` request is allowed / hideout test bot (first session, after a restart) / screenshot setup |
 | `--menu-test` / `--menu-test-leave=menu\|quit` / `--open-menu=SECS` / `--settings-test` / `--settings-file=PATH` | Esc menu + pause test driver / open the menu after N s / settings round-trip test |
 | `--bot-atlas` (with `--bot-dungeon=full`) / `--debug-atlas-kit` | atlas test bot script / server hands the bot a locked-node ticket |
 | `--market-duration=S` / `--market-max-listings=N` | server: listing lifetime in seconds (default 48 h) / active listings per account (default 20) |
@@ -918,6 +955,8 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~25 min,
 | Hold 1-4 | Ground skills: aim preview at the cursor, cast on release |
 | E | Pick up the nearest item (walking over items also picks them up). Next to the blacksmith anvil: open the blacksmith panel. Next to the Map Device / Ticket Merchant: open the dungeon panel |
 | M | Atlas (map of dungeon nodes + atlas passive tree) |
+| H | In your hideout: open the hideout panel and toggle decoration mode (left-click place / move, right-click remove, R rotate, F flip) |
+| `/hideout` (chat) | Go to your hideout (also **Esc > Hideout** or the Hideout Master in town) |
 | I | Open / close inventory |
 | Click / drag (inventory) | Click gear to equip / unequip, click a potion to drink. Drag between bag, paper doll, Drop, Destroy, blacksmith slot and stash |
 | Shift-click / Ctrl-click ×2 | Drop an item on the ground / destroy it |
@@ -934,6 +973,7 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~25 min,
 Press **Esc** with no panel open to get the in-game menu: a darkened overlay with a centred panel.
 
 * **Resume** closes the menu (so does Esc).
+* **Hideout** takes you to your hideout (not from inside a dungeon). See [Hideout](#hideout-path-of-exile-style).
 * **Settings:**
   * master volume slider
   * fullscreen / windowed toggle

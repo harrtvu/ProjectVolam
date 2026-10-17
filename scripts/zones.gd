@@ -25,6 +25,7 @@ const DB := {
 		"map_device": Vector2i(29, 15),   # opens dungeon tickets; portals appear in a row above it
 		"merchant": Vector2i(24, 18),     # Ticket Merchant: sells low-tier tickets, daily free ticket
 		"broker": Vector2i(20, 22),       # Trade Broker: player market (list / buy / claim box)
+		"hideout_master": Vector2i(40, 22), # Hideout Master: enter your hideout, buy decorations
 		"map_portal_row": 12,
 		"portals": [
 			{"rect": Rect2i(62, 19, 2, 4), "to": "forest", "arrive": Vector2i(4, 20)},
@@ -89,11 +90,22 @@ static func info(id: String) -> Dictionary:
 
 
 static func is_dungeon(id: String) -> bool:
-	return DYN.has(id)
+	return DYN.has(id) and DYN[id].has("dungeon")
+
+
+## A player hideout instance ("ho<N>", see hideout_server.gd).
+static func is_hideout(id: String) -> bool:
+	return DYN.has(id) and DYN[id].has("hideout")
+
+
+## World slot of a dynamic zone (dungeons and hideouts share the slots).
+static func dyn_slot(id: String) -> int:
+	var d: Dictionary = DYN[id]
+	return int(d["dungeon"]["slot"]) if d.has("dungeon") else int(d.get("slot", 0))
 
 
 ## World-space slot of a zone (static zones first, then one slot per instance).
 static func index_of(id: String) -> int:
 	if DYN.has(id):
-		return ORDER.size() + int(DYN[id]["dungeon"]["slot"])
+		return ORDER.size() + dyn_slot(id)
 	return ORDER.find(id)

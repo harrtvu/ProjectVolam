@@ -214,6 +214,17 @@ run --join=127.0.0.1 --name=Joiner --password=j --class=earth --bot-idle --quit-
 wait
 "$GODOT" --headless --path . -- --settings-test --settings-file="$(pwd)/$L/settings_test.cfg" > $L/settings_test.log 2>&1
 
+echo "Phase 10 (~110s): hideout (enter/leave, decorations, limits, themes, stations, restart)..."
+SAVE10="$(pwd)/$L/accounts_p10.json"; rm -f "$SAVE10"
+run --server --hideout-debug --debug-start-level=20 --save-file="$SAVE10" --quit-after=66 > $L/p10_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Decor --password=d --class=wood --bot --bot-hideout=1 --quit-after=58 > $L/p10_bot.log 2>&1 &
+wait
+run --server --save-file="$SAVE10" --quit-after=30 > $L/p10b_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Decor --password=d --bot --bot-hideout=2 --quit-after=24 > $L/p10b_bot.log 2>&1 &
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
@@ -550,6 +561,39 @@ check "server saw the clean disconnect + saved"        "Peer [0-9]+ \(Online\) d
 check "player joining a paused host unpauses it"       "menu: a player joined, world unpaused"                  p9c_host.log
 check "joiner logged in while host menu open"          "Login 'Joiner'"                                         p9c_host.log
 check "settings persist (user://settings.cfg)"         "SETTINGS TEST OK"                                       settings_test.log
+echo; echo "== Hideout"
+check "Hideout Master in town opens the panel"          "hideout bot: at the Hideout Master, panel open"         p10_bot.log
+check "buy decorations with gold"                       "Decor bought 2 x Pine Tree for 240 gold"                p10_server.log
+check "buy rejected without gold"                       "buy decoration rejected: not enough gold"               p10_server.log
+check "unknown decoration rejected"                     "rejected: unknown decoration 'bogus'"                   p10_server.log
+check "editing outside the hideout rejected"            "Decor hideout place rejected: you must be in your hideout" p10_server.log
+check "/hideout creates + enters a private instance"    "created ho[0-9]+ for Decor .*Decor enters ho|Decor enters ho[0-9]+ \(from meadow\)" p10_server.log
+check "client is in its hideout zone"                   "hideout bot: entered my hideout via /hideout \| zone ho[0-9]+" p10_bot.log
+check "place decorations (decoration mode clicks)"      "Decor placed Ancestor Statue at \(28, 14\)"           p10_server.log
+check "placement blocking the door rejected"            "place rejected: \(31, 27\) would block the door"      p10_server.log
+check "placement outside the room rejected"             "place rejected: \(5, 5\) is outside the hideout"      p10_server.log
+check "placement on a station rejected"                 "place rejected: .*too close to the Map Device"          p10_server.log
+check "placing unowned decorations rejected"            "you have no unplaced Snow Guardian"                     p10_server.log
+check "pick up + move a decoration"                     "moved Ancestor Statue #[0-9]+ \(28, 14\) -> \(27, 13\)" p10_server.log
+check "move onto the door rejected"                     "move rejected: \(32, 26\) would block the door"       p10_server.log
+check "rotate + flip"                                   "rotated .* to 90 deg"                                   p10_server.log
+check "flip"                                            "flipped .*flip true"                                    p10_server.log
+check "remove (back to inventory)"                      "removed Pine Tree #[0-9]+ \(back to the decoration inventory\)" p10_server.log
+check "move a station"                                  "moved the Trade Broker to \(21, 26\)"                 p10_server.log
+check "station on the door rejected"                    "station rejected: \(31, 26\) would block the door"   p10_server.log
+check "theme switch keeps decorations"                  "switched the theme to Ember Forge \(kept [0-9]+ decorations" p10_server.log
+check "locked theme rejected"                           "Lotus Lake is locked"                                   p10_server.log
+check "client rebuilt the themed hideout"               "client zone theme fire, [1-9][0-9]* decoration sprites" p10_bot.log
+check "200-decoration limit enforced"                   "placed Frost Boulder at .* 200/200 decorations"         p10_server.log
+check "201st decoration rejected"                       "the hideout is full \(200/200 decorations\)"          p10_server.log
+check "hideout Ticket Merchant works"                   "\[ho[0-9]+\] Decor took the daily free ticket"         p10_server.log
+check "Map Device in the hideout opens a map"           "Decor opened a map from ho[0-9]+"                       p10_server.log
+check "dungeon exit portal leads to the hideout"        "inside the dungeon opened from the hideout \(zone dun[0-9]+, exit portal -> ho" p10_bot.log
+check "dungeon portal returns to the hideout"           "Zone transfer: Decor dun[0-9]+ -> ho[0-9]+"             p10_server.log
+check "logout in the hideout restores there"            "Login 'Decor': restoring into the hideout"              p10b_server.log
+check "layout survives a server restart"                "logged back in \(restart\) \| zone ho[0-9]+, theme fire, .*5/200 decorations" p10b_bot.log
+check "door back to Sunny Meadow"                       "left the hideout through the door \| zone meadow"      p10b_bot.log
+check "/hideout from town after restart"                "back via /hideout \| zone ho[0-9]+, theme fire"        p10b_bot.log
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

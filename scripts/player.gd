@@ -26,6 +26,7 @@ const ST_FORTIFY := 8
 var peer_id: int = 1
 var display_name: String = "Player"
 var account_key: String = ""     # server only
+var hideout: Dictionary = Hideouts.default_layout()   # hideout layout (server-authoritative, mirrored to the owner)
 var zone: Node = null            # the zone node this player lives in (set by the spawn function)
 
 # ---- replicated to everyone (server -> clients)
@@ -287,6 +288,8 @@ func _handle_local_input() -> void:
 				_main.toggle_map_ui("merchant")
 			elif near_broker() and not _loot_nearby() and _main:
 				_main.toggle_market_ui()
+			elif near_hideout_master() and not _loot_nearby() and _main:
+				_main.toggle_hideout_ui()
 			else:
 				request_pickup()
 		if Input.is_action_just_pressed("use_potion"):
@@ -389,6 +392,17 @@ func request_market(op: String, args := {}) -> void:
 	_send("market", d)
 
 
+func request_hideout(op: String, args := {}) -> void:
+	var d: Dictionary = args.duplicate()
+	d["op"] = op
+	_send("hideout", d)
+
+
+func near_hideout_master() -> bool:
+	return zone != null and zone.has_method("hideout_master_pos") and zone.hideout_master_pos() != Vector2.INF \
+		and position.distance_to(zone.hideout_master_pos()) <= BLACKSMITH_RANGE
+
+
 func request_dungeon(op: String, args := {}) -> void:
 	var d: Dictionary = args.duplicate()
 	d["op"] = op
@@ -483,6 +497,7 @@ func apply_character(c: Dictionary) -> void:
 		_srv_log("[atlas] %s: migrated old atlas grid %s -> atlas map nodes %s (remapped %s), %d atlas points granted for past completions" % [
 			display_name, c["atlas"].get("done", {}), atlas["done"], atlas["migrated"], Atlas.points_earned(atlas)])
 	free_day = str(c.get("free_day", ""))
+	hideout = Hideouts.sanitize(c.get("hideout", {}))
 	talents = {}
 	var tl = c.get("talents", {})
 	if typeof(tl) == TYPE_DICTIONARY:
@@ -580,10 +595,20 @@ func equip_summary() -> String:
 
 
 func _save_pos() -> Array:
+	if zone and Zones.is_hideout(zone.zone_id):
+		return [position.x, position.y]
 	if zone and zone.is_dungeon() and _main:
 		var p: Vector2 = _main.zones["meadow"].map.cell_pos(Zones.TOWN_ARRIVE)
 		return [p.x, p.y]
 	return [position.x, position.y]
+
+
+func _save_zone() -> String:
+	if zone == null or zone.is_dungeon():
+		return "meadow"
+	if Zones.is_hideout(zone.zone_id):
+		return "hideout"
+	return zone.zone_id
 
 
 func to_character() -> Dictionary:
@@ -593,7 +618,8 @@ func to_character() -> Dictionary:
 		"hp": max_hp if dead else hp,
 		"mp": mp,
 		"pos": _save_pos(),
-		"zone": "meadow" if zone == null or zone.is_dungeon() else zone.zone_id,   # never log back in inside an instance
+		"zone": _save_zone(),   # never log back in inside a dungeon; "hideout" reopens your hideout
+		"hideout": hideout.duplicate(true),
 		"gold": gold, "inventory": inventory.duplicate(),
 		"equipment": equipment.duplicate(true), "bag": bag.duplicate(true), "stash": stash.duplicate(true), "items_v": 2,
 		"talents": talents.duplicate(),
@@ -760,6 +786,18 @@ func push_inventory() -> void:
 		client_set_inventory.rpc_id(peer_id, inventory, gold, equipment, bag, stash)
 		client_set_talents.rpc_id(peer_id, talents)
 		push_atlas()
+		push_hideout()
+
+
+func push_hideout() -> void:
+	if multiplayer.is_server() and Time.get_ticks_msec() - _born_ms >= 150 and _owner_connected():
+		client_set_hideout.rpc_id(peer_id, hideout)
+
+
+@rpc("authority", "call_local", "reliable")
+func client_set_hideout(h: Dictionary) -> void:
+	hideout = h
+	inventory_changed.emit()
 
 
 ## Server -> owner: atlas progress, daily ticket and the open run (for the merchant / device / atlas panels).
@@ -875,6 +913,9 @@ func handle_request(action: String, arg: Variant) -> void:
 		"dungeon":
 			if _main and _main.instances and typeof(arg) == TYPE_DICTIONARY:
 				_main.instances.handle_request(self, arg)
+		"hideout":
+			if _main and _main.hideouts and typeof(arg) == TYPE_DICTIONARY:
+				_main.hideouts.handle_request(self, arg)
 		"market":
 			if _main and _main.market and typeof(arg) == TYPE_DICTIONARY:
 				_main.market.handle_request(self, arg)

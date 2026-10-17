@@ -53,6 +53,7 @@ const MapUIScript := preload("res://scripts/map_ui.gd")
 const AtlasUIScript := preload("res://scripts/atlas_ui.gd")
 const PauseMenuScript := preload("res://scripts/pause_menu.gd")
 const MarketUIScript := preload("res://scripts/market_ui.gd")
+const HideoutUIScript := preload("res://scripts/hideout_ui.gd")
 const ItemTooltipScript := preload("res://scripts/item_tooltip.gd")
 const ClassSelectScript := preload("res://scripts/class_select_ui.gd")
 const CharacterSheetScript := preload("res://scripts/character_sheet.gd")
@@ -111,8 +112,13 @@ var is_dedicated := false
 var use_ws := false
 var bot_mode := false
 var instances: Node                # dungeon instance manager (instances.gd), on every peer
+var hideout_debug := false         # server (tests): every hideout theme unlocked, boss always drops a decoration
+var hideouts: Node                 # player hideouts (hideout_server.gd), on every peer
 var market: Node                   # trade market (market_server.gd), on every peer
 var market_ui: PanelContainer
+var hideout_ui: PanelContainer
+var bot_hideout := ""              # client (tests): run the hideout bot ("1" = first session, "2" = after a restart)
+var _hideout_shot := ""            # client (screenshots): "decor" | "mode" | "theme"
 var market_duration := 0           # server: listing lifetime in seconds (0 = default 48h)
 var market_max_listings := 0       # server: active listings per account (0 = default 20)
 var _class_from_cli := false       # client: --class=X given -> pick it automatically (screenshots)
@@ -316,6 +322,9 @@ func _build_world() -> void:
 	instances = preload("res://scripts/instances.gd").new()
 	instances.name = "Instances"
 	add_child(instances)
+	hideouts = preload("res://scripts/hideout_server.gd").new()
+	hideouts.name = "Hideouts"
+	add_child(hideouts)
 	market = preload("res://scripts/market_server.gd").new()
 	market.name = "Market"
 	add_child(market)
@@ -411,6 +420,9 @@ func _parse_args() -> void:
 	if opts.has("market-tip"):
 		market_tip = true
 	_open_atlas = opts.has("open-atlas")
+	hideout_debug = opts.has("hideout-debug")
+	bot_hideout = str(opts.get("bot-hideout", ""))
+	_hideout_shot = str(opts.get("hideout-shot", ""))
 	menu_test = opts.has("menu-test")
 	menu_test_leave = str(opts.get("menu-test-leave", ""))
 	if opts.has("settings-file"):
@@ -795,9 +807,13 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	var display: String = str(acc.get("name", pname))
 	var character: Dictionary = acc.get("character", {})
 	var zone_id := str(character.get("zone", "meadow"))
-	if not Zones.exists(zone_id) or Zones.is_dungeon(zone_id):   # never log back in inside an instance
-		zone_id = "meadow"
 	instances.sync_peer(id)   # open dungeon zones must exist on this peer before anyone could see them
+	hideouts.sync_peer(id)
+	if zone_id == "hideout":   # logged out in the hideout: reopen it and restore there
+		zone_id = hideouts.ensure(peer_accounts[id], display, Hideouts.sanitize(character.get("hideout", {})))
+		_log("Login '%s': restoring into the hideout %s" % [display, zone_id])
+	elif not Zones.exists(zone_id) or Zones.is_dungeon(zone_id) or Zones.is_hideout(zone_id):   # never log back in inside an instance
+		zone_id = "meadow"
 	var z: Node = zones[zone_id]
 	var pos: Vector2 = z.map.spot_near(z.info["respawn"], rng)
 	var saved_pos = character.get("pos", null)
@@ -1029,6 +1045,12 @@ func submit_chat(text: String) -> void:
 	if text.is_empty():
 		return
 	var node := _player_node(id)
+	if node and text.to_lower() == "/hideout":
+		hideouts.enter(node)
+		return
+	if node and text.to_lower().begins_with("/visit"):
+		node.notify("Visiting other hideouts isn't available yet (hideouts are private for now).", true)
+		return
 	var tag: String = Zones.info(node.zone.zone_id)["short"] if node else "?"
 	receive_chat.rpc("[%s] %s" % [tag, player_names[id]], text)
 
@@ -1071,6 +1093,9 @@ func _on_chat_gui_input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not in_game or is_dedicated:
 		return
+	if hideout_ui and hideout_ui.handle_world_input(event):
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and not chat_edit.has_focus():
 			chat_edit.grab_focus()
@@ -1090,6 +1115,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action("atlas") and not chat_edit.has_focus():
 			atlas_ui.visible = not atlas_ui.visible
 			atlas_ui.set_player(_local_player())
+			get_viewport().set_input_as_handled()
+		elif event.keycode == KEY_H and not chat_edit.has_focus():
+			toggle_hideout_ui(true)
 			get_viewport().set_input_as_handled()
 		elif event.keycode == KEY_ESCAPE and not chat_edit.has_focus():
 			handle_escape()
@@ -1188,7 +1216,7 @@ func handle_escape() -> void:
 	if pause_menu.visible:
 		pause_menu.close_menu()
 		return
-	for pn in [["market", market_ui], ["map device / merchant", map_ui], ["atlas", atlas_ui], ["blacksmith", smith_ui],
+	for pn in [["hideout", hideout_ui], ["market", market_ui], ["map device / merchant", map_ui], ["atlas", atlas_ui], ["blacksmith", smith_ui],
 			["passive web", talent_ui], ["character sheet", char_sheet], ["inventory", inventory_ui]]:
 		if pn[1].visible:
 			pn[1].visible = false
@@ -1283,6 +1311,29 @@ func toggle_map_ui(mode: String) -> void:
 	map_ui.visible = true
 	if mode == "device" and not inventory_ui.visible:
 		toggle_inventory()
+
+
+## E at the Hideout Master / H: open/close the hideout panel; H in your hideout also toggles decoration mode.
+func toggle_hideout_ui(from_key := false) -> void:
+	var me := _local_player()
+	if me == null:
+		return
+	hideout_ui.set_player(me, self)
+	if not me.inventory_changed.is_connected(hideout_ui.refresh):
+		me.inventory_changed.connect(hideout_ui.refresh)
+	if from_key and hideout_ui.in_hideout():
+		if not hideout_ui.visible:
+			hideout_ui.visible = true
+		hideout_ui.toggle_mode()
+		if not hideout_ui.deco_mode:
+			hideout_ui.visible = false
+		return
+	if from_key and not hideout_ui.visible:
+		return   # H does nothing outside your hideout (the Hideout Master opens the panel there)
+	hideout_ui.visible = not hideout_ui.visible
+	if not hideout_ui.visible and hideout_ui.deco_mode:
+		hideout_ui.toggle_mode()
+	hideout_ui.refresh()
 
 
 ## E next to the Trade Broker: open/close the market panel (with the inventory beside it).
@@ -1438,6 +1489,14 @@ func _update_hud(delta: float) -> void:
 	if _open_menu_at >= 0.0 and _elapsed > _open_menu_at:
 		_open_menu_at = -1.0
 		pause_menu.open_menu()
+	if _hideout_shot != "" and _elapsed > 5.0 and me.zone and me.zone.has_method("is_hideout") and me.zone.is_hideout():
+		var shot := _hideout_shot
+		_hideout_shot = ""
+		if shot == "mode":
+			toggle_hideout_ui(true)
+			hideout_ui.selected = "pine"
+			hideout_ui.refresh()
+		_log("hideout screenshot setup: %s (theme %s, %d decorations)" % [shot, me.zone.info["hideout"]["theme"], me.zone.info["hideout"]["decor"].size()])
 	if _open_atlas and _elapsed > 5.0:
 		_open_atlas = false
 		atlas_ui.visible = true
@@ -1836,6 +1895,190 @@ func _ticket_list(me: Node) -> String:
 	return "[%s]" % ", ".join(out)
 
 
+var _bh_step := 0
+var _bh_t := 0.0
+var _bh_ticket := -1
+
+
+func _bh_log(me: Node, what: String) -> void:
+	_log("hideout bot: %s | zone %s, %s" % [what, me.zone.zone_id, Hideouts.summary(me.hideout)])
+
+
+## Test bot for hideouts (--bot-hideout=1: first session, 2: after a server restart).
+func _bot_hideout(me: Node, zone: Node, delta: float) -> void:
+	bot_dir = Vector2.ZERO
+	_bh_t -= delta
+	if _elapsed < 3.0 or _bh_t > 0.0:
+		return
+	var hu: Node = hideout_ui
+	hu.set_player(me, self)
+	if bot_hideout == "2":
+		match _bh_step:
+			0:
+				_bh_log(me, "logged back in (restart)")
+				_bh_step = 1
+			1:   # leave through the door
+				if zone.is_hideout():
+					bot_dir = _bot_steer(zone, me.position, zone.map.cell_pos(Hideouts.DOOR.get_center()) + Vector2(0, 8), delta)
+				else:
+					_bh_log(me, "left the hideout through the door")
+					_bh_step = 2
+			2:
+				me.request_hideout("theme", {"id": "earth"})   # rejected: not in the hideout
+				send_chat("/hideout")
+				_bh_step = 3
+				_bh_t = 3.0
+			3:
+				_bh_log(me, "back via /hideout")
+				_bh_step = 99
+		return
+	match _bh_step:
+		0:   # walk to the Hideout Master
+			if not me.near_hideout_master():
+				bot_dir = _bot_steer(zone, me.position, zone.hideout_master_pos() + Vector2(0, 28), delta)
+				return
+			toggle_hideout_ui()
+			_bh_log(me, "at the Hideout Master, panel %s" % ("open" if hideout_ui.visible else "closed"))
+			me.request_hideout("place", {"id": "flowers", "x": 22, "y": 13})   # rejected: not in the hideout
+			me.request_hideout("buy", {"id": "pond", "count": 50})              # rejected: not enough gold (13000)
+			me.request_hideout("debug_gold")
+			_bh_step = 1
+			_bh_t = 1.5
+		1:
+			me.request_hideout("buy", {"id": "pine", "count": 2})
+			me.request_hideout("buy", {"id": "statue"})
+			me.request_hideout("buy", {"id": "pond"})
+			me.request_hideout("buy", {"id": "bogus"})            # rejected
+			_bh_step = 2
+			_bh_t = 1.5
+		2:
+			_bh_log(me, "bought decorations")
+			toggle_hideout_ui()
+			send_chat("/hideout")
+			_bh_step = 3
+			_bh_t = 3.0
+		3:
+			if not zone.is_hideout():
+				_bh_log(me, "NOT in the hideout yet")
+				_bh_t = 2.0
+				return
+			_bh_log(me, "entered my hideout via /hideout")
+			send_chat("/hideout")     # rejected: already there
+			toggle_hideout_ui(true)   # H: panel + decoration mode
+			hu.selected = "pine"
+			hu.click(Vector2i(19, 13))
+			hu.click(Vector2i(20, 13))
+			hu.selected = "statue"
+			hu.click(Vector2i(28, 14))
+			hu.selected = "pond"
+			hu.click(Vector2i(31, 27))      # rejected: door lane
+			hu.click(Vector2i(5, 5))        # rejected: outside
+			me.request_hideout("place", {"id": "pond", "x": 24, "y": 16})   # rejected: next to the map device
+			hu.click(Vector2i(36, 20))
+			me.request_hideout("place", {"id": "snowman", "x": 37, "y": 20})   # rejected: not owned
+			me.request_hideout("place", {"id": "pine", "x": 38, "y": 20})      # rejected: both pines placed
+			_bh_step = 4
+			_bh_t = 1.5
+		4:
+			_bh_log(me, "placed decorations")
+			var i: int = hu._decor_at(Vector2i(28, 14))
+			hu.click(Vector2i(28, 14))        # pick the statue up...
+			hu.click(Vector2i(27, 13))        # ...and move it
+			me.request_hideout("move", {"index": i, "x": 32, "y": 26})   # rejected: door lane
+			me.request_hideout("rotate", {"index": 0})
+			me.request_hideout("flip", {"index": 0})
+			me.request_hideout("remove", {"index": 99})                  # rejected
+			_bh_step = 5
+			_bh_t = 1.5
+		5:
+			_bh_log(me, "moved / rotated / flipped")
+			hu.click(Vector2i(20, 13), true)  # right click: remove the second pine
+			me.request_hideout("station", {"station": "broker", "x": 31, "y": 26})   # rejected: door
+			me.request_hideout("station", {"station": "broker", "x": 21, "y": 26})
+			me.request_hideout("theme", {"id": "fire"})
+			me.request_hideout("theme", {"id": "water"})   # rejected: locked
+			me.request_hideout("theme", {"id": "nope"})    # rejected
+			_bh_step = 6
+			_bh_t = 2.0
+		6:
+			_bh_log(me, "removed one, moved the broker, theme switched")
+			_log("hideout bot: client zone theme %s, %d decoration sprites" % [zone.info["hideout"]["theme"],
+				zone.get_node("HideoutDeco").get_children().filter(func(n): return n is Sprite2D).size() if zone.has_node("HideoutDeco") else -1])
+			# limit: own plenty of rocks, then fill the room past 200
+			me.request_hideout("buy", {"id": "rock", "count": 50})
+			me.request_hideout("buy", {"id": "rock", "count": 50})
+			me.request_hideout("buy", {"id": "rock", "count": 50})
+			me.request_hideout("buy", {"id": "rock", "count": 50})
+			me.request_hideout("buy", {"id": "rock", "count": 10})
+			_bh_step = 7
+			_bh_t = 2.0
+		7:
+			var n := 0
+			for y in range(Hideouts.ROOM.position.y, Hideouts.ROOM.end.y):
+				for x in range(Hideouts.ROOM.position.x, Hideouts.ROOM.end.x):
+					if Hideouts.blocked_reason(me.hideout, Vector2i(x, y)) == "" and n < 205:
+						me.request_hideout("place", {"id": "rock", "x": x, "y": y})
+						n += 1
+			_log("hideout bot: sent %d rock placements" % n)
+			_bh_step = 8
+			_bh_t = 4.0
+		8:
+			_bh_log(me, "after filling")
+			# clear the rocks again (keep the room usable): remove from the end
+			var idx: Array = []
+			for i in me.hideout["decor"].size():
+				if me.hideout["decor"][i]["id"] == "rock":
+					idx.append(i)
+			idx.reverse()
+			for i in idx:
+				me.request_hideout("remove", {"index": i})
+			_bh_step = 9
+			_bh_t = 4.0
+		9:
+			_bh_log(me, "rocks removed")
+			hu.toggle_mode()
+			me.request_dungeon("free", {"theme": "wood"})   # the hideout's Ticket Merchant (must be near it)
+			_bh_step = 10
+		10:   # Ticket Merchant in the hideout
+			if not me.near_merchant():
+				bot_dir = _bot_steer(zone, me.position, zone.merchant_pos() + Vector2(24, 0), delta)
+				return
+			me.request_dungeon("free", {"theme": "wood"})
+			_bh_step = 11
+			_bh_t = 2.0
+		11:   # Map Device in the hideout
+			for inst in me.bag:
+				if Dungeons.is_ticket(inst):
+					_bh_ticket = int(inst["uid"])
+			if not me.near_map_device():
+				bot_dir = _bot_steer(zone, me.position, zone.map_device_pos() + Vector2(28, 0), delta)
+				return
+			_bh_log(me, "opening ticket %d at the hideout Map Device" % _bh_ticket)
+			me.request_dungeon("open", {"uid": _bh_ticket})
+			_bh_step = 12
+			_bh_t = 2.0
+		12:   # walk into the portal below the device
+			if zone.is_dungeon():
+				_log("hideout bot: inside the dungeon opened from the hideout (zone %s, exit portal -> %s)" % [zone.zone_id, zone.info["portals"][0]["to"]])
+				_bh_step = 13
+				_bh_t = 2.0
+				return
+			if zone.map_portals.is_empty():
+				return
+			bot_dir = _bot_steer(zone, me.position, zone.map_portals[0]["pos"], delta)
+		13:   # take the exit portal back
+			if zone.is_hideout():
+				_log("hideout bot: the dungeon exit portal returned me to the hideout (zone %s)" % zone.zone_id)
+				_bh_step = 14
+				_bh_t = 1.5
+				return
+			var pr: Dictionary = zone.info["portals"][0]
+			bot_dir = _bot_steer(zone, me.position, zone.map.cell_pos(pr["rect"].get_center()), delta)
+		14:
+			_bh_log(me, "done - staying in the hideout until logout")
+			_bh_step = 99
+
+
 ## Test bot for the trade market (--bot-market=ROLE): walks to the Trade Broker, then
 ## runs a timed script of market requests (the server validates / logs everything).
 func _bot_market(me: Node, zone: Node, delta: float) -> void:
@@ -2126,6 +2369,9 @@ func _bot_update(delta: float) -> void:
 				_log("bot route finished in %s" % zone.zone_id)
 	_bot_zone_t += delta
 
+	if bot_hideout != "":
+		_bot_hideout(me, zone, delta)
+		return
 	if bot_craft:
 		_bot_craft(me, delta)
 		return
@@ -3182,6 +3428,10 @@ func _build_ui() -> void:
 	atlas_ui.position = Vector2(50, 22)
 	atlas_ui.visible = false
 	hud.add_child(atlas_ui)
+	hideout_ui = HideoutUIScript.new()
+	hideout_ui.position = Vector2(10, 70)
+	hideout_ui.visible = false
+	hud.add_child(hideout_ui)
 	market_ui = MarketUIScript.new()
 	market_ui.position = Vector2(10, 70)
 	market_ui.visible = false

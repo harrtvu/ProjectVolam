@@ -24,6 +24,9 @@ func build(id: String) -> void:
 	if zi.has("dungeon"):
 		_r.seed = int(zi["dungeon"]["seed"])
 		_gen_dungeon(zi["dungeon"])
+	elif zi.has("hideout"):
+		_r.seed = 4242
+		_gen_hideout(zi["hideout"])
 	else:
 		match id:
 			"forest": _gen_forest()
@@ -215,7 +218,26 @@ func _carve_path(points: Array, t: Vector2i, width := 2) -> void:
 		_carve(points[i], points[i + 1], t, width)
 
 
+func _gen_hideout(h: Dictionary) -> void:
+	var th: Dictionary = Hideouts.THEMES.get(str(h.get("theme", "meadow")), Hideouts.THEMES["meadow"])
+	var wall := Hideouts.tile(th["wall"])
+	var outer := Tiles.WALL if th["wall"] != "TREE" else Tiles.TREE
+	for x in W:
+		for y in H:
+			_put(Vector2i(x, y), outer)
+	var floors: Array = []
+	for n in th["floor"]:
+		floors.append(Hideouts.tile(n))
+	var room: Rect2i = Hideouts.ROOM
+	for x in range(room.position.x - 1, room.end.x + 1):
+		for y in range(room.position.y - 1, room.end.y + 1):
+			var c := Vector2i(x, y)
+			_put(c, floors[_r.randi() % floors.size()] if room.has_point(c) else wall)
+
+
 func _portal_floor() -> Vector2i:
+	if Zones.is_hideout(zone_id):
+		return Hideouts.tile(Hideouts.THEMES.get(str(Zones.info(zone_id)["hideout"].get("theme", "meadow")), Hideouts.THEMES["meadow"])["floor"][0])
 	if Zones.is_dungeon(zone_id):
 		return Dungeons.tile(Dungeons.THEMES[Zones.info(zone_id)["dungeon"]["theme"]]["floor"][0])
 	match zone_id:

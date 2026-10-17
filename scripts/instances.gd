@@ -153,7 +153,7 @@ func run_info_for(account_key: String) -> Dictionary:
 
 func open_run(p: Node, uid: int) -> void:
 	if not p.near_map_device():
-		_reject(p, "open dungeon", "you must be at the Map Device in Sunny Meadow")
+		_reject(p, "open dungeon", "you must be at a Map Device (Sunny Meadow or your hideout)")
 		return
 	if not run_of(p.account_key).is_empty():
 		_reject(p, "open dungeon", "you already have an open dungeon (%s)" % run_of(p.account_key)["id"])
@@ -185,7 +185,8 @@ func open_run(p: Node, uid: int) -> void:
 	var afx := Atlas.run_effects(p.atlas, theme)
 	var portals := Dungeons.PORTALS + int(afx["portals"])
 	var data := {"theme": theme, "tier": Dungeons.tier_of(t), "seed": seed, "slot": slot, "mods": ri["mods"],
-		"owner": p.display_name, "iiq": ri["iiq"], "iir": ri["iir"], "node": "" if unique else nid, "afx": afx}
+		"owner": p.display_name, "iiq": ri["iiq"], "iir": ri["iir"], "node": "" if unique else nid, "afx": afx,
+		"origin": p.zone.zone_id}   # the dungeon's exit portal / death return lead back here (town or hideout)
 	create_instance.rpc(id, data)    # (call_local: the server builds it too)
 	var z: Node = main.zones[id]
 	z.spawn_dungeon()
@@ -193,7 +194,8 @@ func open_run(p: Node, uid: int) -> void:
 		"portals": portals, "node": data["node"], "rarity": str(t.get("rarity", "normal")), "deaths": 0, "afx": afx,
 		"elites_total": int(z.elite_total), "elites_killed": 0, "inside": {}, "completed": false, "completed_at": 0.0, "created": _now(),
 		"empty_since": _now(), "iiq": ri["iiq"], "iir": ri["iir"], "mods": ri["mods"], "ticket": Gear.summary(t),
-		"pslot": _free_portal_slot(), "closing": false}
+		"pslot": _free_portal_slot(), "closing": false, "origin": p.zone.zone_id}
+	_log("%s opened a map from %s (portal there, the exit portal returns there)" % [p.display_name, p.zone.zone_id])
 	_log("%s opened %s with %s -> instance %s (seed %d, slot %d): %d portals, iiq +%d%% iir +%d%%, mods %s | atlas node %s, atlas passives %s" % [p.display_name,
 		Dungeons.theme_name(data["theme"]), Gear.summary(t), id, seed, slot, portals, roundi(ri["iiq"]), roundi(ri["iir"]), ri["mods"],
 		Atlas.display(nid) if not unique else "(unique ticket: any node)", _fx_str(afx)])
@@ -205,7 +207,7 @@ func open_run(p: Node, uid: int) -> void:
 func _free_slot() -> int:
 	var used := {}
 	for id in Zones.DYN:
-		used[int(Zones.DYN[id]["dungeon"]["slot"])] = true
+		used[Zones.dyn_slot(id)] = true
 	var s := 0
 	while used.has(s):
 		s += 1
@@ -257,9 +259,10 @@ func player_died(p: Node) -> void:
 	var left := int(runs[id]["portals"]) if runs.has(id) else 0
 	if runs.has(id):
 		runs[id]["deaths"] = int(runs[id]["deaths"]) + 1
-	_log("%s died in %s - back to town (portals left %d)" % [p.display_name, id, left])
-	p.notify("You died - back in town. Re-entering uses a portal (%d left)." % left, true)
-	main.transfer_player(p, "meadow", Zones.TOWN_ARRIVE)
+	_log("%s died in %s - back to %s (portals left %d)" % [p.display_name, id, "the hideout" if Zones.is_hideout(return_of(id)[0]) else "town", left])
+	var back := return_of(id)
+	p.notify("You died - back %s. Re-entering uses a portal (%d left)." % ["in your hideout" if Zones.is_hideout(back[0]) else "in town", left], true)
+	main.transfer_player(p, back[0], back[1])
 
 
 ## Called by Main.transfer_player for every zone change (keeps "who is inside" exact).
@@ -354,6 +357,13 @@ func on_monster_died(zone: Node, m: Node, killer: Node) -> void:
 		_log("atlas node %s completed by %s: bonus objective '%s' %s (rarity %s, deaths %d, elites %d/%d); points %s -> %d earned, %d free; boss tickets for nodes %s" % [
 			nid, r["owner"], Atlas.node(nid)["bonus"], "MET" if bonus_ok else "missed", r["rarity"], int(r["deaths"]), int(r["elites_killed"]), int(r["elites_total"]),
 			gained if not gained.is_empty() else "none (already earned)", Atlas.points_earned(a), Atlas.points_free(a), tn_txt])
+	# hideout rewards: a Guardian unlocks its element's hideout theme; rare decoration drop
+	if owner and main.hideouts:
+		if str(r["node"]) != "" and bool(Atlas.node(nid).get("guardian", false)) and Hideouts.THEMES.has(str(r["theme"])):
+			main.hideouts.unlock_theme(owner, str(r["theme"]), "slew the %s" % Atlas.node(nid)["name"])
+		if main.rng.randf() < (1.0 if main.hideout_debug else 0.08):
+			var dk: Array = Hideouts.CATALOG.keys()
+			main.hideouts.grant_decoration(owner, str(dk[main.rng.randi() % dk.size()]), "dungeon boss drop")
 	main.broadcast_system("%s completed %s!" % [r["owner"], Zones.info(id)["name"]])
 	_announce(id, "Dungeon Complete!", "%s cleared  -  the instance closes in %ds" % [Zones.info(id)["name"], roundi(complete_timeout())])
 	_broadcast_portals()
@@ -458,8 +468,9 @@ func _close(id: String, why: String) -> void:
 	var kicked := 0
 	for p in z.players_root.get_children():
 		if not p.is_queued_for_deletion():
-			p.notify("The dungeon collapses - back to town", true)
-			main.transfer_player(p, "meadow", Zones.TOWN_ARRIVE)
+			p.notify("The dungeon collapses - back to where you opened it", true)
+			var back := return_of(id)
+			main.transfer_player(p, back[0], back[1])
 			kicked += 1
 	_log("closing %s (%s, %s T%d, owner %s): %s, %d player(s) sent to town, %d monsters left" % [id, Zones.info(id)["name"],
 		Dungeons.theme_name(r["theme"]), int(r["tier"]), r["owner"], why, kicked, z.monsters_root.get_child_count()])
@@ -475,16 +486,30 @@ func _close(id: String, why: String) -> void:
 
 # ================================================================ town portals
 
+## [zone id, arrive cell] a run's players return to: where it was opened (town or a hideout).
+func return_of(id: String) -> Array:
+	var o := str(runs[id].get("origin", "meadow")) if runs.has(id) else "meadow"
+	if Zones.is_hideout(o) and main.zones.has(o):
+		return [o, Hideouts.ARRIVE]
+	return ["meadow", Zones.TOWN_ARRIVE]
+
+
 func _portal_list() -> Array:
 	var out: Array = []
-	var town: Node = main.zones["meadow"]
-	var row := int(town.info["map_portal_row"])
-	var base: Vector2i = town.info["map_device"]
 	for id in runs:
 		var r: Dictionary = runs[id]
+		var oz := str(r.get("origin", "meadow"))
+		if not main.zones.has(oz):
+			oz = "meadow"
+		var town: Node = main.zones[oz]
+		var base: Vector2i = town.info["map_device"]
 		var k := int(r["pslot"])
-		var cell := Vector2i(base.x - 4 + (k % 5) * 2, row - (k / 5) * 2)
-		out.append({"id": id, "pos": town.map.cell_pos(cell), "owner": r["owner"],
+		var cell: Vector2i
+		if Zones.is_hideout(oz):   # one run per account: right below its hideout's device
+			cell = base + Vector2i(0, 2)
+		else:
+			cell = Vector2i(base.x - 4 + (k % 5) * 2, int(town.info["map_portal_row"]) - (k / 5) * 2)
+		out.append({"id": id, "zone": oz, "pos": town.map.cell_pos(cell), "owner": r["owner"],
 			"text": "%s\n%s - %d portal%s%s" % [Zones.info(id)["name"], r["owner"], r["portals"], "" if int(r["portals"]) == 1 else "s", "  (done)" if r["completed"] else ""]})
 	return out
 
@@ -499,7 +524,8 @@ func sync_peer(pid: int) -> void:
 	for id in runs:
 		var d: Dictionary = Zones.info(id)["dungeon"]
 		create_instance.rpc_id(pid, id, {"theme": d["theme"], "tier": d["tier"], "seed": d["seed"], "slot": d["slot"],
-			"mods": d["mods"], "owner": d["owner"], "iiq": d["iiq"], "iir": d["iir"], "node": d.get("node", ""), "afx": d.get("afx", {})})
+			"mods": d["mods"], "owner": d["owner"], "iiq": d["iiq"], "iir": d["iir"], "node": d.get("node", ""), "afx": d.get("afx", {}),
+			"origin": str(runs[id].get("origin", "meadow"))})
 	set_portals.rpc_id(pid, _portals_cache)
 
 
@@ -514,6 +540,11 @@ func create_instance(id: String, data: Dictionary) -> void:
 	def["dungeon"]["iir"] = float(data["iir"])
 	def["dungeon"]["node"] = str(data.get("node", ""))
 	def["dungeon"]["afx"] = data.get("afx", {})
+	var origin := str(data.get("origin", "meadow"))
+	if Zones.is_hideout(origin):
+		def["dungeon"]["origin"] = origin
+		def["portals"][0]["to"] = origin
+		def["portals"][0]["arrive"] = Hideouts.ARRIVE
 	Zones.DYN[id] = def
 	var z: Node = main.ZoneScript.new()
 	z.setup(id, main)
@@ -539,8 +570,15 @@ func destroy_instance(id: String) -> void:
 @rpc("authority", "call_local", "reliable")
 func set_portals(list: Array) -> void:
 	_portals_cache = list
-	if main.zones.has("meadow"):
-		main.zones["meadow"].set_map_portals(list)
+	for zid in main.zones:
+		var z: Node = main.zones[zid]
+		if z.map_portal_root != null:
+			z.set_map_portals(list.filter(func(e): return str(e.get("zone", "meadow")) == zid))
+
+
+func refresh_portals() -> void:
+	if is_server():
+		_broadcast_portals()
 
 
 @rpc("authority", "call_local", "reliable")

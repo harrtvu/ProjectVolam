@@ -52,14 +52,22 @@ func setup(id: String, main_ref: Node) -> void:
 		var to := Zones.info(p["to"])
 		vis.text = "%s\n(Lv %s)" % [to["name"], to["levels"]]
 		if not dun.is_empty():
-			vis.text = "Portal back to\nSunny Meadow"
+			vis.text = "Portal back to\n%s" % ("your Hideout" if Zones.is_hideout(str(p["to"])) else "Sunny Meadow")
+		elif info.has("hideout"):
+			vis.text = "Door to\nSunny Meadow"
 		add_child(vis)
 
-	if info.has("blacksmith"):
+	var ho := info.has("hideout")
+	if info.has("hideout_master"):
+		var hm := NpcVisual.new()
+		hm.kind = "master"
+		hm.position = map.cell_pos(info["hideout_master"])
+		add_child(hm)
+	if info.has("blacksmith") and not ho:
 		var bs := BlacksmithVisual.new()
 		bs.position = map.cell_pos(info["blacksmith"])
 		add_child(bs)
-	if info.has("map_device"):
+	if info.has("map_device") and not ho:
 		var md := NpcVisual.new()
 		md.kind = "device"
 		md.position = map.cell_pos(info["map_device"])
@@ -68,7 +76,7 @@ func setup(id: String, main_ref: Node) -> void:
 		mc.kind = "merchant"
 		mc.position = map.cell_pos(info["merchant"])
 		add_child(mc)
-	if info.has("broker"):
+	if info.has("broker") and not ho:
 		var br := NpcVisual.new()
 		br.kind = "broker"
 		br.position = map.cell_pos(info["broker"])
@@ -77,6 +85,9 @@ func setup(id: String, main_ref: Node) -> void:
 		map_portal_root = Node2D.new()
 		map_portal_root.name = "MapPortals"
 		add_child(map_portal_root)
+
+	if ho:
+		refresh_hideout()
 
 	entities = Node2D.new()
 	entities.name = "Entities"
@@ -189,6 +200,8 @@ func avoid_cells() -> Array:
 		a.append(info["merchant"])
 	if info.has("broker"):
 		a.append(info["broker"])
+	if info.has("hideout_master"):
+		a.append(info["hideout_master"])
 	for p in info["portals"]:
 		a.append(p["rect"].get_center())
 		a.append(p["arrive"])
@@ -557,6 +570,68 @@ func map_portal_at(local_pos: Vector2) -> Dictionary:
 	return {}
 
 
+func hideout_master_pos() -> Vector2:
+	return map.cell_pos(info["hideout_master"]) if info.has("hideout_master") else Vector2.INF
+
+
+func is_hideout() -> bool:
+	return info.has("hideout")
+
+
+## (all peers) Rebuilds the station + decoration visuals of a hideout from info["hideout"];
+## also points the station keys (map_device, blacksmith, ...) at the stations' cells.
+func refresh_hideout() -> void:
+	var h: Dictionary = info["hideout"]
+	for s in Hideouts.STATIONS:
+		info[s] = Hideouts.cell_of(h["stations"][s])
+	var tn: Array = Hideouts.THEMES.get(str(h["theme"]), Hideouts.THEMES["meadow"])["tint"]
+	map.modulate = Color(tn[0], tn[1], tn[2])
+	var old := get_node_or_null("HideoutDeco")
+	if old:
+		old.name = "HideoutDecoOld"
+		old.queue_free()
+	var root := Node2D.new()
+	root.name = "HideoutDeco"
+	add_child(root)
+	move_child(root, map.get_index() + 1)
+	var tex: Texture2D = load("res://assets/tiles.png")
+	for i in h["decor"].size():
+		var d: Dictionary = h["decor"][i]
+		var cat: Dictionary = Hideouts.CATALOG.get(str(d["id"]), {})
+		if cat.is_empty():
+			continue
+		var at := AtlasTexture.new()
+		at.atlas = tex
+		at.region = Rect2(Vector2(Hideouts.tile(cat["tile"]) * Zones.TILE), Vector2(Zones.TILE, Zones.TILE))
+		var sp := Sprite2D.new()
+		sp.texture = at
+		sp.position = map.cell_pos(Vector2i(int(d["x"]), int(d["y"])))
+		sp.rotation = int(d["rot"]) * PI / 2.0
+		sp.flip_h = bool(d["flip"])
+		sp.name = "D%d" % i
+		root.add_child(sp)
+	var bs := BlacksmithVisual.new()
+	bs.position = map.cell_pos(info["blacksmith"])
+	root.add_child(bs)
+	for k in [["device", "map_device"], ["merchant", "merchant"], ["broker", "broker"]]:
+		var v := NpcVisual.new()
+		v.kind = k[0]
+		v.position = map.cell_pos(info[k[1]])
+		root.add_child(v)
+	if map_portal_root:
+		move_child(map_portal_root, get_child_count() - 1)
+
+
+## (all peers) New layout from the server: rebuild tiles if the theme changed, then visuals.
+func apply_hideout(layout: Dictionary) -> void:
+	var theme_changed: bool = str(info["hideout"].get("theme", "")) != str(layout.get("theme", ""))
+	info["hideout"] = layout
+	if theme_changed:
+		map.clear()
+		map.build(zone_id)
+	refresh_hideout()
+
+
 func map_device_pos() -> Vector2:
 	return map.cell_pos(info["map_device"]) if info.has("map_device") else Vector2.INF
 
@@ -600,6 +675,13 @@ class NpcVisual extends Node2D:
 			gi.position = Vector2(-20, 2)
 			add_child(gi)
 			l.text = "Trade Broker\n(E: player market)"
+		elif kind == "master":
+			var s := Sprite2D.new()
+			s.texture = load("res://assets/merchant.png")
+			s.modulate = Color(1.0, 0.8, 1.0)
+			s.position = Vector2(0, -6)
+			add_child(s)
+			l.text = "Hideout Master\n(E: hideout + decorations)"
 		else:
 			l.text = "Map Device\n(E: open a dungeon ticket)"
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

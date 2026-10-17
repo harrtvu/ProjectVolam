@@ -1,5 +1,5 @@
 extends Control
-## In-game menu (Esc): Resume, Settings, Controls, Return to Main Menu, Quit Game.
+## In-game menu (Esc): Resume, Hideout, Settings, Controls, Return to Main Menu, Quit Game.
 ## Runs with PROCESS_MODE_ALWAYS so it keeps working while the tree is paused.
 ## Solo host (listen server, nobody else connected) -> the world really pauses
 ## (get_tree().paused); otherwise the game continues online and only local input stops.
@@ -12,7 +12,7 @@ const CONTROLS := [
 	["Left-click", "Select target (empty ground clears it)"], ["Right-click", "Select monster and attack"],
 	["Tab", "Cycle nearest enemies"], ["E", "Pick up / blacksmith / Map Device / merchant / broker"],
 	["Q", "Drink a health potion"], ["I", "Inventory"], ["C", "Character sheet"], ["T", "Passive web"],
-	["M", "Atlas"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
+	["M", "Atlas"], ["H", "Hideout panel / decoration mode (in your hideout)"], ["/hideout", "Chat command: go to your hideout"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
 ]
 
 static var settings_path := "user://settings.cfg"
@@ -95,7 +95,7 @@ func _ready() -> void:
 	# main page
 	var mp := VBoxContainer.new()
 	mp.add_theme_constant_override("separation", 6)
-	for b in [["Resume", close_menu], ["Settings", func(): _show("settings")], ["Controls / Help", func(): _show("controls")],
+	for b in [["Resume", close_menu], ["Hideout", _go_hideout], ["Settings", func(): _show("settings")], ["Controls / Help", func(): _show("controls")],
 			["Return to Main Menu", func(): _leave(true)], ["Quit Game", func(): _leave(false)]]:
 		mp.add_child(_btn(b[0], b[1]))
 	vb.add_child(mp)
@@ -309,3 +309,12 @@ func _process(delta: float) -> void:
 			if main.menu_test_leave != "":
 				_leave(main.menu_test_leave == "menu")
 	_tstep += 1
+
+
+## "Hideout": ask the server to take us to our hideout (it refuses from inside a dungeon).
+func _go_hideout() -> void:
+	close_menu()
+	var me: Node = main._local_player() if main else null
+	if me:
+		main._log("[menu] Hideout pressed")
+		me.request_hideout("enter")
