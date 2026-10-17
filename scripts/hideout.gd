@@ -9,6 +9,8 @@ class_name Hideouts
 ## "blacksmith" - the blacksmith includes the stash), so every near_*() check and
 ## every station feature works unchanged inside a hideout.
 
+const BOSS_DECOR_CHANCE := 0.08   # a completed dungeon (boss down) drops a random decoration
+
 const ROOM := Rect2i(17, 11, 30, 18)       # walkable interior (walls around it)
 const DOOR := Rect2i(31, 29, 2, 1)         # exit portal in the bottom wall
 const DOOR_LANE := Rect2i(29, 25, 6, 4)    # kept free in front of the door

@@ -122,6 +122,13 @@ var is_dedicated := false
 var use_ws := false
 var bot_mode := false
 var instances: Node                # dungeon instance manager (instances.gd), on every peer
+var decor_drop_chance := -1.0     # server (tests): --decor-drop-chance=0..1 overrides the boss decoration drop chance
+var bot_guardian := ""           # dungeon bot: --bot-guardian=fire:10 asks for a debug Guardian ticket (server needs --debug-atlas-kit)
+var bot_watch_patrol := false     # bot: --bot-watch-patrol stands within activation range of a meadow patrol route (out of aggro range)
+var _watch_sent := false
+var menu_hideout_test := false    # client: --menu-hideout-test opens the Esc menu and clicks its Hideout button
+var _mht_step := 0
+var _mht_t := 0.0
 var hideout_debug := false         # server (tests): every hideout theme unlocked, boss always drops a decoration
 var hideouts: Node                 # player hideouts (hideout_server.gd), on every peer
 var market: Node                   # trade market (market_server.gd), on every peer
@@ -148,6 +155,7 @@ var debug_next_tier := -1.0        # server: chance a boss ticket is tier+1 (-1 
 var bot_dungeon := ""              # bot: "full" | "die" | "enter" - dungeon test scenarios
 var bot_dungeon_theme := "wood"
 var bot_dungeon_tier := 1
+var _bd_walk_t := 0.0
 var bot_dungeon_unique := false
 var _bd_step := 0
 var _bd_t := 0.0
@@ -437,6 +445,10 @@ func _parse_args() -> void:
 	if fps_label:
 		fps_label.visible = _show_fps
 	hideout_debug = opts.has("hideout-debug")
+	decor_drop_chance = clampf(float(opts.get("decor-drop-chance", "-1")), -1.0, 1.0)
+	bot_guardian = str(opts.get("bot-guardian", ""))
+	bot_watch_patrol = opts.has("bot-watch-patrol")
+	menu_hideout_test = opts.has("menu-hideout-test")
 	bot_hideout = str(opts.get("bot-hideout", ""))
 	_hideout_shot = str(opts.get("hideout-shot", ""))
 	menu_test = opts.has("menu-test")
@@ -1548,6 +1560,11 @@ func _update_hud(delta: float) -> void:
 		_open_talents = false
 		talent_ui.visible = true
 	talent_ui.set_player(me)
+	if bot_watch_patrol and not _watch_sent and _elapsed > 3.0 and me.zone.zone_id == "meadow":
+		_watch_sent = true
+		_watch_patrol(me)
+	if menu_hideout_test:
+		_menu_hideout_step(me, get_process_delta_time())
 	if _warp_pending and _elapsed >= _warp_delay:
 		_warp_pending = false
 		request_warp.rpc_id(1, _warp_to, _warp_cell)
@@ -1771,6 +1788,8 @@ func _bot_gear(me: Node) -> void:
 
 ## Test bot for dungeon runs (--bot-dungeon=full|die|enter|intrude). Returns true when it drove this frame.
 func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
+	if not (_bd_step == 3 and zone.zone_id == "meadow"):
+		_bd_walk_t = 0.0
 	_bd_t -= delta
 	var town: bool = zone.zone_id == "meadow"
 	if _elapsed < 3.0:
@@ -1783,6 +1802,15 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			_bd_step = 3
 			_bd_t = 3.0
 			_log("dungeon bot: back in town (entries %d), run %s, atlas %s" % [_bd_entries, me.run_info, me.atlas.get("done", {})])
+		if _bd_step == 0 and bot_guardian != "":   # Guardian test: a debug ticket for that node, no merchant
+			bot_dir = Vector2.ZERO
+			_log("dungeon bot: asking for a debug %s ticket, hideout themes %s, owned decorations %s" % [bot_guardian, me.hideout.get("unlocked", []), me.hideout.get("owned", {})])
+			me.request_dungeon("debug_kit", {"node": bot_guardian})
+			bot_dungeon_theme = Atlas.node(bot_guardian).get("theme", bot_dungeon_theme)
+			bot_dungeon_tier = int(Atlas.node(bot_guardian).get("tier", bot_dungeon_tier))
+			_bd_step = 1
+			_bd_t = 1.5
+			return true
 		if _bd_step == 0:     # walk to the merchant, take the free ticket, buy one
 			if not me.near_merchant():
 				bot_dir = _bot_steer(zone, me.position, zone.merchant_pos() + Vector2(0, 24), delta)
@@ -1855,6 +1883,12 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 				var mine: bool = str(mp_["owner"]) == me.display_name
 				if mine != (bot_dungeon == "intrude"):
 					bot_dir = _bot_steer(zone, me.position, mp_["pos"], delta)
+					_bd_walk_t += delta if me.position.distance_to(mp_["pos"]) > 24.0 else 0.0   # (the intruder waits on the portal on purpose)
+					if _bd_walk_t > 15.0:   # diagnostics: a walk to a portal next to the arrival point takes ~3s
+						_bd_walk_t = 5.0
+						_log("dungeon bot: STILL walking to portal %s at %s (cell %s, walkable %s) from %s (cell %s), dir %s, path %s" % [
+							mp_["owner"], mp_["pos"], zone.map.local_to_map(mp_["pos"]), zone.map.is_walkable(zone.map.local_to_map(mp_["pos"])),
+							me.position, zone.map.local_to_map(me.position), bot_dir, _bot_path.slice(0, 6)])
 					return true
 			bot_dir = Vector2.ZERO
 			return true
@@ -1874,6 +1908,9 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			var n: Node2D = _nearest(zone.monsters_root, me.position, 3000.0)
 			if n:
 				bot_dir = _bot_steer(zone, me.position, n.position, delta)
+			elif _bd_t < -4.0:   # no pack synced to us yet (interest radius): head into the map until one shows up
+				var mid: Vector2 = zone.map.nearest_reachable_pos(zone.map.cell_pos(Vector2i(zone.map.w / 2, zone.map.h / 2)), Zones.info(zone.zone_id)["respawn"])
+				bot_dir = _bot_steer(zone, me.position, mid, delta)
 		return true
 	if bot_dungeon == "enter":
 		bot_dir = Vector2.ZERO
@@ -2500,6 +2537,12 @@ func _bot_update(delta: float) -> void:
 			if d < best_d and me.can_take_pickup(p):
 				best_d = d
 				target = p
+		if target == null and bot_dungeon == "full" and zone.is_dungeon():   # elites first: the run's elite drop is under test
+			var ed := 4000.0
+			for m in zone.monsters_root.get_children():
+				if m.alive and str(m.elite) != "" and m.position.distance_to(me.position) < ed:
+					ed = m.position.distance_to(me.position)
+					target = m
 		if target == null and bot_hunt_boss:
 			for m in zone.monsters_root.get_children():
 				if m.is_boss and m.alive:
@@ -3784,3 +3827,88 @@ func _log(msg: String) -> void:
 	elif multiplayer.is_server():
 		role = "SERVER"
 	print("[%s] [%s] %s" % [Time.get_time_string_from_system(), role, msg])
+
+
+## --bot-watch-patrol: pick a meadow patrol site, work out its route (the site + the 2 nearest other sites, as the
+## server does) and warp to a walkable cell that keeps every waypoint within monster activation range but stays well
+## outside aggro range of the whole route; then just stand there (the patrol test in run_local_test.sh phase 12).
+func _watch_patrol(me: Node) -> void:
+	var map = me.zone.map
+	var aggro_px := 300.0
+	for st in map.sites:
+		if st["kind"] != "patrol":
+			continue
+		var c: Vector2i = st["cell"]
+		var others: Array = []
+		for o in map.sites:
+			if o["cell"] != c:
+				others.append(o["cell"])
+		others.sort_custom(func(a, b): return Vector2(a).distance_squared_to(Vector2(c)) < Vector2(b).distance_squared_to(Vector2(c)))
+		var route: Array = [c, others[0], others[1]]
+		var pts: Array = route.map(func(x): return map.cell_pos(x))
+		var mean: Vector2 = (pts[1] + pts[2]) * 0.5
+		var away: Vector2 = (pts[0] - mean).normalized()
+		for ang in [0.0, 0.4, -0.4, 0.8, -0.8, 1.2, -1.2, 1.6, -1.6]:
+			for d in range(10, 22):
+				var pos: Vector2 = pts[0] + away.rotated(ang) * d * 32.0
+				var cell: Vector2i = map.local_to_map(pos)
+				if not map.is_walkable(cell) or not map.is_reachable(cell):
+					continue
+				var ok := true
+				for i in 3:
+					var a: Vector2 = pts[i]
+					var b: Vector2 = pts[(i + 1) % 3]
+					if a.distance_to(map.cell_pos(cell)) > me.zone.ACTIVE_RADIUS - 150.0 \
+							or Geometry2D.get_closest_point_to_segment(map.cell_pos(cell), a, b).distance_to(map.cell_pos(cell)) < aggro_px:
+						ok = false
+						break
+				if ok:
+					_log("patrol watch: standing at cell %s, %.0f px from patrol site %s, route %s (max waypoint distance %.0f px)" % [
+						cell, map.cell_pos(cell).distance_to(pts[0]), c, route,
+						maxf(maxf(pts[0].distance_to(map.cell_pos(cell)), pts[1].distance_to(map.cell_pos(cell))), pts[2].distance_to(map.cell_pos(cell)))])
+					request_warp.rpc_id(1, "meadow", cell)
+					return
+	_log("patrol watch: no suitable spot found near any patrol route")
+
+
+## --menu-hideout-test: open the Esc menu and click its "Hideout" button with real mouse events, then confirm the
+## client ends up in its hideout (and the menu closed).
+func _menu_hideout_step(me: Node, delta: float) -> void:
+	_mht_t -= delta
+	if _mht_t > 0.0:
+		return
+	match _mht_step:
+		0:
+			if _elapsed < 4.0:
+				return
+			pause_menu.open_menu()
+			_mht_step = 1
+			_mht_t = 0.5
+		1:
+			var btn: Button = null
+			for b in pause_menu.find_children("*", "Button", true, false):
+				if b.text == "Hideout" and b.is_visible_in_tree():
+					btn = b
+			if btn == null:
+				_log("menu hideout test: FAILED - no visible Hideout button in the Esc menu")
+				_mht_step = 9
+				return
+			var at := btn.get_global_rect().get_center()
+			_log("menu hideout test: clicking the Esc menu's Hideout button at %s (zone %s)" % [at, me.zone.zone_id])
+			var mv := InputEventMouseMotion.new()
+			mv.position = at
+			mv.global_position = at
+			get_viewport().push_input(mv, true)
+			for pressed in [true, false]:
+				var ev := InputEventMouseButton.new()
+				ev.button_index = MOUSE_BUTTON_LEFT
+				ev.button_mask = MOUSE_BUTTON_MASK_LEFT if pressed else 0
+				ev.pressed = pressed
+				ev.position = at
+				ev.global_position = at
+				get_viewport().push_input(ev, true)
+			_mht_step = 2
+			_mht_t = 6.0
+		2:
+			_log("menu hideout test: %s - zone %s, Esc menu %s" % ["ENTERED the hideout" if Zones.is_hideout(me.zone.zone_id) else "still outside", me.zone.zone_id, "open" if pause_menu.visible else "closed"])
+			_mht_step = 9

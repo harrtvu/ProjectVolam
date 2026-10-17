@@ -59,7 +59,17 @@ func handle_request(p: Node, arg: Dictionary) -> void:
 			atlas_respec(p)
 		"debug_kit":
 			if main.debug_atlas_kit and not p.bag_full():
-				var kt := Atlas.make_node_ticket("fire:3", "normal", main.rng)
+				var kn := str(arg.get("node", "fire:3"))
+				if Atlas.node(kn).is_empty():
+					_reject(p, "debug_kit", "unknown atlas node %s" % kn)
+					return
+				if kn != "fire:3":   # e.g. a Guardian ticket: also complete the node before it so it's available
+					for a in Atlas.node(kn)["adj"]:
+						if a != Atlas.PINNACLE and int(Atlas.node(a)["tier"]) < int(Atlas.node(kn)["tier"]) and not Atlas.is_done(p.atlas, a):
+							p.atlas["done"][a] = 1
+							main.log_server("[debug] %s: atlas node %s marked completed for the test" % [p.display_name, a])
+							break
+				var kt := Atlas.make_node_ticket(kn, "normal", main.rng)
 				p.bag.append(kt)
 				main.log_server("[debug] %s got %s for the atlas test" % [p.display_name, Gear.summary(kt)])
 				p.push_inventory()
@@ -361,7 +371,8 @@ func on_monster_died(zone: Node, m: Node, killer: Node) -> void:
 	if owner and main.hideouts:
 		if str(r["node"]) != "" and bool(Atlas.node(nid).get("guardian", false)) and Hideouts.THEMES.has(str(r["theme"])):
 			main.hideouts.unlock_theme(owner, str(r["theme"]), "slew the %s" % Atlas.node(nid)["name"])
-		if main.rng.randf() < (1.0 if main.hideout_debug else 0.08):
+		var dchance: float = main.decor_drop_chance if main.decor_drop_chance >= 0.0 else (1.0 if main.hideout_debug else Hideouts.BOSS_DECOR_CHANCE)
+		if main.rng.randf() < dchance:
 			var dk: Array = Hideouts.CATALOG.keys()
 			main.hideouts.grant_decoration(owner, str(dk[main.rng.randi() % dk.size()]), "dungeon boss drop")
 	main.broadcast_system("%s completed %s!" % [r["owner"], Zones.info(id)["name"]])

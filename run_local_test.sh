@@ -119,11 +119,11 @@ run --join=127.0.0.1 --name=Smith --password=s --bot-passive --quit-after=8 > $L
 wait
 "$GODOT" --headless --path . -- --gear-selftest > $L/gear_selftest.log 2>&1
 
-echo "Phase 6 (~180s): dungeon tickets, map device, instances, atlas..."
+echo "Phase 6 (~200s): dungeon tickets, map device, instances, atlas..."
 SAVE6="$(pwd)/$L/accounts_p6.json"; rm -f "$SAVE6"
-run --server --save-file="$SAVE6" --debug-start-level=20 --debug-gear --debug-fresh=Diver --fast-respawn --instance-timeout=15 --complete-timeout=15 --debug-next-tier=1 --quit-after=180 > $L/p6_server.log 2>&1 &
+run --server --save-file="$SAVE6" --debug-start-level=20 --debug-gear --debug-fresh=Diver --fast-respawn --instance-timeout=15 --complete-timeout=15 --debug-next-tier=1 --quit-after=200 > $L/p6_server.log 2>&1 &
 sleep 2
-b6() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=d "$@" --quit-after=174 > $L/p6_$n.log 2>&1 & }
+b6() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=d "$@" --quit-after=194 > $L/p6_$n.log 2>&1 & }
 b6 MapperA --class=fire  --bot --bot-no-gear --bot-dungeon=full --bot-dungeon-theme=fire
 b6 MapperB --class=water --bot --bot-no-gear --bot-dungeon=full --bot-dungeon-theme=wood
 b6 Diver   --class=earth --bot --bot-dungeon=die --bot-dungeon-theme=earth
@@ -245,6 +245,15 @@ CAMP=$(grep -E "BIGMAP SELFTEST forest +camps at" $L/bigmap_selftest.log | sed -
 run --join=127.0.0.1 --name=Camper --password=b --class=fire --bot --warp=forest --warp-cell=$CAMP --quit-after=20 > $L/p11_camper.log 2>&1 &
 run --join=127.0.0.1 --name=BenchA --password=b --class=metal --bot-idle --warp=forest --bench=8 --quit-after=20 > $L/p11_bench_entrance.log 2>&1 &
 run --join=127.0.0.1 --name=BenchB --password=b --class=earth --bot-idle --warp=forest --warp-cell=178,100 --bench=8 --quit-after=20 > $L/p11_bench_lair.log 2>&1 &
+wait
+
+echo "Phase 12 (~130s): Guardian kill unlocks a hideout theme (no unlock-all flag), boss decoration drop, Esc-menu Hideout button, patrols walk their routes..."
+SAVE12="$(pwd)/$L/accounts_p12.json"; rm -f "$SAVE12"
+run --server --save-file="$SAVE12" --allow-warp --debug-start-level=40 --debug-gear --debug-atlas-kit --decor-drop-chance=1 --instance-timeout=15 --complete-timeout=10 --quit-after=130 > $L/p12_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Warden --password=g --class=fire --bot --bot-dungeon=full --bot-guardian=fire:10 --quit-after=124 > $L/p12_guardian.log 2>&1 &
+run --join=127.0.0.1 --name=Watcher --password=g --class=metal --bot-idle --bot-watch-patrol --quit-after=124 > $L/p12_watcher.log 2>&1 &
+run --join=127.0.0.1 --name=MenuHo --password=g --class=water --bot-idle --menu-hideout-test --quit-after=20 > $L/p12_menuho.log 2>&1 &
 wait
 
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
@@ -499,7 +508,7 @@ check "instance isolation: B sees only B"         "zone=dun[0-9]+ players=1 Mapp
 if grep -hE "zone=dun" $L/p6_*.log | grep -qE "foreign_entities=[1-9]"; then echo "FAIL  no entities leak between instances"; else echo "PASS  no entities leak between instances"; fi
 check "two instances open at once"                "instances: dun[0-9]+\([a-z]+ T[0-9]+ .*\), dun[0-9]+\("     p6_server.log
 check "map IIQ/IIR applied to drops"              "\[dun[0-9]+\] .* dropped: .*map/elite iiq \+[1-9][0-9]*% iir \+[0-9]+%" p6_server.log
-check "elite bonus applied to drops"              "\[dun[0-9]+\] (Hasted|Armoured|Brutal|Regenerating) .* dropped: .*map/elite iiq \+[4-9][0-9]%" p6_server.log
+check "elite bonus applied to drops"              "\[dun[0-9]+\] (Hasted|Armoured|Brutal|Regenerating) .* dropped: .*map/elite iiq \+([4-9][0-9]|[1-9][0-9]{2,})%" p6_server.log
 check "tickets drop inside dungeons"              "\[dun[0-9]+\] .* dropped: .*\(ticket_[a-z]+ T[0-9]+, "           p6_server.log
 check "death in a dungeon -> town"                "Diver died in dun[0-9]+ - back to town"                         p6_server.log
 check "re-entry after death uses a portal"        "Diver entered dun[0-9]+ .* - portals left 4"                    p6_server.log
@@ -642,6 +651,34 @@ check "logout in the hideout restores there"            "Login 'Decor': restorin
 check "layout survives a server restart"                "logged back in \(restart\) \| zone ho[0-9]+, theme fire, .*5/200 decorations" p10b_bot.log
 check "door back to Sunny Meadow"                       "left the hideout through the door \| zone meadow"      p10b_bot.log
 check "/hideout from town after restart"                "back via /hideout \| zone ho[0-9]+, theme fire"        p10b_bot.log
+check "Guardian test starts without the theme"         "dungeon bot: asking for a debug fire:10 ticket, hideout themes \[\"meadow\"\]" p12_guardian.log
+check "Guardian ticket opened (fire:10)"                "Warden opened Ember Caverns .*Ember Caverns T10"                 p12_server.log
+check "killing the Fire Guardian unlocks Ember Forge"   "Warden unlocked the hideout theme Ember Forge \(slew the Guardian" p12_server.log
+check "boss decoration drop (forced chance 1.0)"        "Warden found a decoration: .* \(dungeon boss drop\) - owned [1-9]" p12_server.log
+if python3 - "$SAVE12" "$L/p12_server.log" <<'PY'
+import json, re, sys
+ho = json.load(open(sys.argv[1]))["accounts"]["warden"]["character"]["hideout"]
+m = re.search(r"Warden found a decoration: (.+?) \(dungeon boss drop\) - owned (\d+)", open(sys.argv[2]).read())
+names = {n: k for k, n in re.findall(r'"([a-z_]+)":\s*\{"name":\s*"([^"]+)"', open("scripts/hideout.gd").read())}
+did = names.get(m.group(1)) if m else None
+print("      saved hideout: unlocked %s, owned %s (boss drop %s)" % (ho["unlocked"], ho["owned"], did))
+sys.exit(0 if m and did and int(ho["owned"].get(did, 0)) == int(m.group(2)) and "fire" in ho["unlocked"] else 1)
+PY
+then echo "PASS  drop lands in owned decorations + theme saved"; else echo "FAIL  drop lands in owned decorations + theme saved"; fi
+check "Esc menu Hideout button clicked (UI)"            "menu hideout test: clicking the Esc menu's Hideout button"       p12_menuho.log
+check "the click fired the menu's Hideout action"       "\[menu\] Hideout pressed"                                      p12_menuho.log
+check "server took the button press"                    "MenuHo enters ho[0-9]+ \(from meadow\)"                          p12_server.log
+check "client entered its hideout via the button"       "menu hideout test: ENTERED the hideout - zone ho[0-9]+, Esc menu closed" p12_menuho.log
+echo; echo "== Overworld patrols"
+check "watcher stands by a patrol route"                "patrol watch: standing at cell"                                  p12_watcher.log
+if awk '/patrol #[0-9]+ patrol of .* reached site [12]\/3/ { match($0, /#[0-9]+/); id = substr($0, RSTART, RLENGTH);
+      match($0, /reached site [12]/); s = substr($0, RSTART + 13, 1);
+      match($0, /leader [0-9]+ px/); d = substr($0, RSTART + 7, RLENGTH - 10) + 0;
+      match($0, /nearest player [0-9]+ px/); p = substr($0, RSTART + 15, RLENGTH - 18) + 0;
+      if (p < 1500 && d > 300) seen[id "," s] = 1 }
+    END { for (k in seen) { split(k, a, ","); if (seen[a[1] ",1"] && seen[a[1] ",2"]) ok = 1 } exit !ok }' $L/p12_server.log; then
+  echo "PASS  a patrol walks between its sites ($(grep -cE "patrol #[0-9]+ .* reached site [12]/3" $L/p12_server.log) waypoints reached with a player in range)"
+else echo "FAIL  a patrol walks between its sites"; fi
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

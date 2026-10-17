@@ -388,10 +388,21 @@ func _physics_process(delta: float) -> void:
 					break
 			var goal := map.cell_pos(grp["wps"][grp["wp"]])
 			if lead.target == null and lead.position.distance_to(goal) < 56.0:
-				grp["wp"] = (int(grp["wp"]) + 1) % grp["wps"].size()
+				var from_site := int(grp["wp"])
+				grp["wp"] = (from_site + 1) % grp["wps"].size()
 				goal = map.cell_pos(grp["wps"][grp["wp"]])
+				main.log_server("[%s] patrol %s reached site %d/%d at %s (leader %.0f px from its home site, nearest player %.0f px) -> heading to site %d at %s" % [
+					zone_id, group_label(grp), from_site, grp["wps"].size(), grp["wps"][from_site],
+					lead.position.distance_to(map.cell_pos(grp["cell"])), _nearest_peer_dist(lead.position), int(grp["wp"]), grp["wps"][grp["wp"]]])
 			for i in grp["members"].size():
 				grp["members"][i].home = goal + Vector2.from_angle(TAU * i / grp["members"].size()) * 26.0
+
+
+func _nearest_peer_dist(pos: Vector2) -> float:
+	var best := INF
+	for pid in _peer_pos:
+		best = minf(best, (_peer_pos[pid] as Vector2).distance_to(pos))
+	return best
 
 
 ## (server) Is any player of this zone within `r` of `pos`?
