@@ -2559,6 +2559,12 @@ func _bot_update(delta: float) -> void:
 		if _bot_move_timer <= 0.0:
 			_bot_move_timer = rng.randf_range(0.6, 1.4)
 			bot_dir = Vector2.from_angle(rng.randf() * TAU)
+			# never wander back through a portal by accident: on the big maps the arrival
+			# spot can have no monster in reach, and a random step west re-entered the old zone
+			for p in Zones.info(zone.zone_id).get("portals", []):
+				var pc: Vector2 = zone.map.cell_pos(p["rect"].get_center())
+				if pc.distance_to(me.position) < 220.0:
+					bot_dir = (me.position - pc).normalized().rotated(rng.randf_range(-0.6, 0.6))
 	else:
 		bot_dir = _bot_steer(zone, me.position, goal_pos, delta)
 
