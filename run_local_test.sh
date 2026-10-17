@@ -109,7 +109,7 @@ wait
 
 echo "Phase 5 (~70s): gear, crafting, blacksmith..."
 SAVE5="$(pwd)/$L/accounts_p5.json"; rm -f "$SAVE5"
-run --server --save-file="$SAVE5" --debug-start-level=13 --debug-gear --debug-full-bag=Full --debug-loot --allow-warp --quit-after=70 > $L/p5_server.log 2>&1 &
+run --server --save-file="$SAVE5" --debug-start-level=13 --debug-gear --debug-full-bag=Full --debug-loot --allow-warp --craft-seed=7 --quit-after=70 > $L/p5_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Smith --password=s --class=water --bot --bot-craft --warp=meadow --warp-cell=173,62 --quit-after=64 > $L/p5_smith.log 2>&1 &
 run --join=127.0.0.1 --name=Warden --password=s --class=metal --bot --quit-after=64 > $L/p5_warden.log 2>&1 &

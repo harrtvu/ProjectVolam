@@ -158,6 +158,8 @@ func is_local() -> bool:
 func _ready() -> void:
 	_main = get_node_or_null("/root/Main")
 	_rng.randomize()
+	if _main and int(_main.craft_seed) >= 0:   # tests: deterministic crafting / enhancement rolls
+		_rng.seed = int(_main.craft_seed)
 	if is_local():
 		var cam := Camera2D.new()
 		cam.name = "Camera"

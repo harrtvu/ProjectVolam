@@ -122,6 +122,7 @@ var is_dedicated := false
 var use_ws := false
 var bot_mode := false
 var instances: Node                # dungeon instance manager (instances.gd), on every peer
+var craft_seed := -1               # server (tests): --craft-seed=N seeds every player's crafting / enhancement RNG
 var ticket_drop_chance := -1.0    # server (tests): --ticket-drop-chance=0..1 overrides the base Dungeon Ticket chance of normal dungeon monsters (3%)
 var decor_drop_chance := -1.0     # server (tests): --decor-drop-chance=0..1 overrides the boss decoration drop chance
 var bot_guardian := ""           # dungeon bot: --bot-guardian=fire:10 asks for a debug Guardian ticket (server needs --debug-atlas-kit)
@@ -243,6 +244,7 @@ var debug_start_level := 0
 var allow_warp := false
 var _warp_to := ""
 var _warp_cell := Vector2i(-1, -1)
+var _bot_probe_goal := Vector2.INF   # --bot-probe: walk toward a monster behind a wall until the line-of-sight probe can fire
 var _save_timer := 0.0
 
 var _elapsed := 0.0
@@ -447,6 +449,7 @@ func _parse_args() -> void:
 		fps_label.visible = _show_fps
 	hideout_debug = opts.has("hideout-debug")
 	decor_drop_chance = clampf(float(opts.get("decor-drop-chance", "-1")), -1.0, 1.0)
+	craft_seed = int(opts.get("craft-seed", "-1"))
 	ticket_drop_chance = clampf(float(opts.get("ticket-drop-chance", "-1")), -1.0, 1.0)
 	bot_guardian = str(opts.get("bot-guardian", ""))
 	bot_watch_patrol = opts.has("bot-watch-patrol")
@@ -2553,6 +2556,8 @@ func _bot_update(delta: float) -> void:
 			target = _nearest(zone.monsters_root, me.position, 2500.0)
 		if target:
 			goal_pos = target.position
+		if bot_probe and _bot_probe_goal != Vector2.INF:
+			goal_pos = _bot_probe_goal
 
 	_bot_move_timer -= delta
 	if goal_pos == Vector2.INF:
@@ -2652,8 +2657,19 @@ func _bot_targeting(me: Node, zone: Node, delta: float) -> void:
 						if m.alive and d < 250.0 and not zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)):
 							req = {"t": m.monster_id, "k": "m"}
 							break
+			if _bot_probe_step >= 3:
+				_bot_probe_goal = Vector2.INF
 			if req.is_empty() and _bot_probe_step >= 3:
-				return   # no monster behind a wall right now; try again later
+				# no monster behind a wall within reach right now (big maps: often none nearby);
+				# head for the nearest one that is out of sight, so the probe gets its chance
+				var bd := 1500.0
+				for m in zone.monsters_root.get_children():
+					var d2: float = m.position.distance_to(me.position)
+					if m.alive and d2 < bd and not zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)):
+						bd = d2
+						_bot_probe_goal = m.position
+				_bot_probe_t = 0.5
+				return   # try again shortly
 			_bot_probe_step += 1
 			if not req.is_empty():
 				# basic attack (short cooldown): hold the bot's own attacks so it's ready
