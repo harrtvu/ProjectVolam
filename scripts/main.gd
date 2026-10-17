@@ -32,6 +32,8 @@ extends Node2D
 ##   --loot-showcase     server: drops one item of each rarity + some currency in the meadow (for screenshots)
 ##   --debug-gear        server: debug-level accounts get a crafting kit (orbs, 2500 gold, items)
 ##   --debug-full-bag=P  server: debug-level accounts whose name starts with P get a full bag
+##   --no-interest       server (benchmarks only): no interest radius, every monster synced + simulated
+##   --bench=SECS        client: measure frame time / nodes / physics for SECS seconds, print a BENCH line, quit
 ##   --bigmap-selftest   offline checks of the big overworld maps (size, reachability, groups, old-save positions)
 ##   --gear-selftest     offline gear checks (drop statistics, orbs, enhancement, resistances)
 ##   --open-smith        open the blacksmith panel when standing next to it (screenshots)
@@ -40,6 +42,7 @@ extends Node2D
 ##   --quit-after=SECS   quit automatically after SECS seconds (for tests)
 ##   --screenshot=PATH   save a screenshot after --screenshot-delay=SECS (default 6; needs a display)
 ##   --open-inventory    open the inventory panel once in game (for screenshots)
+##   --show-fps          show the F3 FPS overlay from the start (screenshots / reports)
 ##   --open-zone-map     open the full zone map (N) once in game (for screenshots)
 
 const GAME_TITLE := "Project Volam"
@@ -79,6 +82,8 @@ var chat_log: RichTextLabel
 var chat_edit: LineEdit
 var info_label: Label
 var minimap: Control            # minimap / N zone map (scripts/minimap.gd)
+var fps_label: Label            # F3: FPS / frame ms / monsters on this client (off by default)
+var _fps_t := 0.0
 var stats_name: Label
 var hp_bar: ProgressBar
 var hp_text: Label
@@ -99,6 +104,7 @@ var menu_test_leave := ""         # --menu-test-leave=menu|quit: finish the menu
 var menu_test := false             # client/host bot: drive the Esc menu (panel priority, pause, resume) and log
 var _open_atlas := false
 var _open_menu_at := -1.0          # client (screenshots): open the Esc menu after N seconds in game
+var _show_fps := false
 var _open_zone_map := false       # client (screenshots): open the N zone map once in game
 var _open_atlas_arg := ""          # client (screenshots): "map" | "tree" | "map@<node>" (forced tooltip) | "tree@<passive>"
 var item_tip: PanelContainer
@@ -303,6 +309,7 @@ func _setup_input() -> void:
 	_add_action("target_cycle", [KEY_TAB])
 	_add_action("atlas", [KEY_M])
 	_add_action("zone_map", [KEY_N])
+	_add_action("fps_overlay", [KEY_F3])
 
 
 func _add_action(action: String, keys: Array) -> void:
@@ -426,6 +433,9 @@ func _parse_args() -> void:
 		market_tip = true
 	_open_atlas = opts.has("open-atlas")
 	_open_zone_map = opts.has("open-zone-map")
+	_show_fps = opts.has("show-fps")
+	if fps_label:
+		fps_label.visible = _show_fps
 	hideout_debug = opts.has("hideout-debug")
 	bot_hideout = str(opts.get("bot-hideout", ""))
 	_hideout_shot = str(opts.get("hideout-shot", ""))
@@ -498,6 +508,9 @@ func _parse_args() -> void:
 		save_file = str(opts["save-file"])
 	if opts.has("quit-after"):
 		_quit_after = float(opts["quit-after"])
+	_bench_secs = float(opts.get("bench", 0.0))
+	if opts.has("no-interest"):
+		ZoneScript.interest = false
 	if opts.has("screenshot"):
 		_screenshot_path = str(opts["screenshot"])
 	_screenshot_when = str(opts.get("screenshot-when", ""))
@@ -1135,6 +1148,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action("target_cycle") and not chat_edit.has_focus():
 			cycle_target()
 			get_viewport().set_input_as_handled()
+		elif event.is_action("fps_overlay"):
+			fps_label.visible = not fps_label.visible
+			get_viewport().set_input_as_handled()
 		elif event.is_action("zone_map") and not chat_edit.has_focus():
 			minimap.toggle_big()
 			get_viewport().set_input_as_handled()
@@ -1397,15 +1413,72 @@ func toggle_smith() -> void:
 	item_tip.hide_tip()
 
 
+# ================================================================ client benchmark (--bench=SECS)
+
+var _bench_secs := 0.0
+var _bench_t := -3.0                # warm-up before sampling
+var _bench := {}
+
+## Client: samples frame time and the engine monitors while standing in the zone, then prints one
+## "BENCH" line and quits (tools/bench_zones.sh compares zones / versions).
+func _bench_tick(delta: float) -> void:
+	var me := _local_player()
+	if me == null or me.zone == null or (_warp_to != "" and me.zone.zone_id != _warp_to):
+		return
+	_bench_t += delta
+	if _bench_t < 0.0:
+		return
+	var keys := {"frame_ms": delta * 1000.0, "process_ms": Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0,
+		"physics_ms": Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS) * 1000.0,
+		"nodes": Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
+		"draw_calls": Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),
+		"objects_drawn": Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME),
+		"phys_active": Performance.get_monitor(Performance.PHYSICS_2D_ACTIVE_OBJECTS),
+		"phys_pairs": Performance.get_monitor(Performance.PHYSICS_2D_COLLISION_PAIRS)}
+	for k in keys:
+		_bench[k] = float(_bench.get(k, 0.0)) + float(keys[k])
+	_bench["frames"] = int(_bench.get("frames", 0)) + 1
+	_bench["worst_ms"] = maxf(float(_bench.get("worst_ms", 0.0)), delta * 1000.0)
+	if _bench_t >= _bench_secs:
+		var n := float(_bench["frames"])
+		var z: Node = me.zone
+		var cells := 0
+		var animated := 0   # nodes that animate + redraw every frame: decor visuals (all zones) + monsters
+		for zid in zones:
+			cells += zones[zid].map.get_used_cells(0).size()
+			for c in zones[zid].get_children():
+				if c is Node2D and c.has_method("_draw") and c.can_process():
+					animated += 1
+			for m in zones[zid].monsters_root.get_children():
+				if not ("_onscreen" in m) or (m._onscreen != null and m._onscreen.is_on_screen()):
+					animated += 1
+		print("BENCH zone=%s map=%dx%d fps=%.1f frame_ms=%.2f worst_ms=%.1f process_ms=%.2f physics_ms=%.2f nodes=%d draw_calls=%.0f objects_drawn=%.0f phys_active=%.0f phys_pairs=%.0f monsters_here=%d animated_nodes=%d tiles_all_zones=%d frames=%d" % [
+			z.zone_id, z.map.get_used_rect().size.x, z.map.get_used_rect().size.y, 1000.0 * n / maxf(1.0, _bench["frame_ms"]), _bench["frame_ms"] / n, _bench["worst_ms"],
+			_bench["process_ms"] / n, _bench["physics_ms"] / n, roundi(_bench["nodes"] / n), _bench["draw_calls"] / n, _bench["objects_drawn"] / n,
+			_bench["phys_active"] / n, _bench["phys_pairs"] / n, z.monsters_root.get_child_count(), animated, cells, int(n)])
+		_bench_secs = 0.0
+		get_tree().quit()
+
+
 # ================================================================ per-frame
 
 func _process(delta: float) -> void:
 	_elapsed += delta
+	if _bench_secs > 0.0:
+		_bench_tick(delta)
 	if _quit_after > 0.0 and _elapsed >= _quit_after:
 		_log("quit-after reached, exiting")
 		_quit_after = -1.0
 		shutdown()
 		return
+	if fps_label and fps_label.visible:
+		_fps_t -= delta
+		if _fps_t <= 0.0:
+			_fps_t = 0.25
+			var me := _local_player()
+			var mons: int = me.zone.monsters_root.get_child_count() if me and me.zone else 0
+			fps_label.text = "FPS %d  (%.1f ms)\nmonsters on client: %d\nnodes: %d" % [Engine.get_frames_per_second(), delta * 1000.0, mons,
+				Performance.get_monitor(Performance.OBJECT_NODE_COUNT)]
 	if _open_zone_map and _local_player() != null:
 		_open_zone_map = false
 		minimap.toggle_big()
@@ -2693,6 +2766,14 @@ func _bigmap_selftest() -> void:
 		var mig_ok := m.is_reachable(m.local_to_map(moved)) and Zones.migrate_pos(id, moved, Zones.MAP_VERSION) == moved and m.is_reachable(m.local_to_map(near))
 		ok = ok and mig_ok
 		print("BIGMAP SELFTEST %-6s old-save position %s -> %s (reachable %s), out-of-bounds (99999,-500) -> %s %s" % [id, old_spawn, moved, m.is_reachable(m.local_to_map(moved)), near, "" if mig_ok else "<-- FAIL"])
+		var camps: Array = []
+		var elites: Array = []
+		for st in m.sites:
+			if st["kind"] == "camp":
+				camps.append("%d,%d" % [st["cell"].x, st["cell"].y])
+			elif st["kind"] == "elite":
+				elites.append("%d,%d" % [st["cell"].x, st["cell"].y])
+		print("BIGMAP SELFTEST %-6s camps at %s elites at %s" % [id, " ".join(camps), " ".join(elites)])
 		m.free()
 		m2.free()
 	print("BIGMAP SELFTEST OK" if ok else "BIGMAP SELFTEST FAILED")
@@ -3459,8 +3540,22 @@ func _build_ui() -> void:
 	info_label.add_theme_color_override("font_outline_color", Color.BLACK)
 	info_label.add_theme_constant_override("outline_size", 4)
 	hud.add_child(info_label)
+	fps_label = Label.new()
+	fps_label.anchor_left = 1.0
+	fps_label.anchor_right = 1.0
+	fps_label.offset_left = -300
+	fps_label.offset_right = -10
+	fps_label.offset_top = 262
+	fps_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	fps_label.add_theme_font_size_override("font_size", 13)
+	fps_label.add_theme_color_override("font_color", Color(0.6, 1.0, 0.6))
+	fps_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	fps_label.add_theme_constant_override("outline_size", 4)
+	fps_label.visible = false
+	hud.add_child(fps_label)
 	minimap = preload("res://scripts/minimap.gd").new()
 	minimap.main = self
+	fps_label.visible = _show_fps
 	hud.add_child(minimap)
 
 	dead_label = Label.new()

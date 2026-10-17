@@ -237,6 +237,16 @@ sleep 2
 run --join=127.0.0.1 --name=Decor --password=d --bot --bot-hideout=2 --quit-after=24 > $L/p10b_bot.log 2>&1 &
 wait
 
+echo "Phase 11 (~25s): client performance in Whisperwood (entrance + boss lair, 200x128 map)..."
+SAVE11="$(pwd)/$L/accounts_p11.json"; rm -f "$SAVE11"
+run --server --save-file="$SAVE11" --debug-start-level=20 --allow-warp --fast-respawn --quit-after=24 > $L/p11_server.log 2>&1 &
+sleep 2
+CAMP=$(grep -E "BIGMAP SELFTEST forest +camps at" $L/bigmap_selftest.log | sed -E 's/.*camps at ([0-9]+),([0-9]+).*/\1,\2/' | awk -F, '{print $1 "," $2+3}')
+run --join=127.0.0.1 --name=Camper --password=b --class=fire --bot --warp=forest --warp-cell=$CAMP --quit-after=20 > $L/p11_camper.log 2>&1 &
+run --join=127.0.0.1 --name=BenchA --password=b --class=metal --bot-idle --warp=forest --bench=8 --quit-after=20 > $L/p11_bench_entrance.log 2>&1 &
+run --join=127.0.0.1 --name=BenchB --password=b --class=earth --bot-idle --warp=forest --warp-cell=178,100 --bench=8 --quit-after=20 > $L/p11_bench_lair.log 2>&1 &
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
@@ -285,6 +295,12 @@ check "old save: position shifted into the big map" "Login 'Oldtown': old-map po
 check "old save: restored at the shifted spot"      "Login 'Oldtown' .*zone meadow, pos \(5488, 2000\)"                               p2_server.log
 check "invalid saved position relocated"            "Login 'Lost': saved position \(99999, -320\) is not a valid spot in crypt - relocated" p2_server.log
 if grep -hE "\] perf: " $L/p3_server.log $L/p4_server.log | awk '{for(i=1;i<=NF;i++){if($i=="monsters,"){t=$(i-1)} if($i=="awake"){a=$(i-1)}} if(a<t) ok=1} END{exit !ok}'; then echo "PASS  interest management: far monsters sleep ($(grep -hE "\] perf: " $L/p3_server.log | tail -1 | sed -E 's/.*perf: //'))"; else echo "FAIL  interest management"; fi
+for f in p11_bench_entrance p11_bench_lair; do
+  l=$(grep -h "^BENCH zone=forest" $L/$f.log | head -1)
+  if [ -n "$l" ] && echo "$l" | awk '{for(i=1;i<=NF;i++){split($i,kv,"="); v[kv[1]]=kv[2]} exit !(v["frame_ms"]<16.7 && v["physics_ms"]<4 && v["nodes"]<1500 && v["monsters_here"]<40)}'; then
+    echo "PASS  Whisperwood client perf ${f#p11_bench_}: $(echo "$l" | grep -oE " (frame_ms|physics_ms|nodes|monsters_here)=[0-9.]+" | paste -sd' ')"
+  else echo "FAIL  Whisperwood client perf ${f#p11_bench_} (frame_ms<16.7 physics_ms<4 nodes<1500 monsters_here<40): $l"; fi
+done
 echo; echo "== Monsters (attack / die / respawn)"
 for m in "Slime" "Dire Rat" "Cave Bat" "Wood Spider" "Crypt Archer" "Restless Ghost" "Grave Crawler" "Yeti" "Ice Ogre" "Frost Bat"; do
   a=$(cat $L/*server.log | grep -c "damage from $m")

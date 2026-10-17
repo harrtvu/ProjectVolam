@@ -6,7 +6,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 
 ![in game](docs/screenshot_game.png)
 
-| Whisperwood Forest (Lv 3-6) | Bone Crypt (Lv 6-10) | Frostpeak Ruins (Lv 9-12) |
+| Whisperwood Forest (Lv 3-7) | Bone Crypt (Lv 6-11) | Frostpeak Ruins (Lv 9-13) |
 |---|---|---|
 | ![forest](docs/screenshot_forest.png) | ![crypt](docs/screenshot_crypt.png) | ![frost](docs/screenshot_frost.png) |
 
@@ -17,12 +17,12 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Feature | How it works |
 |---|---|
 | Host / Join / Dedicated server | One project. The main menu has *Account name*, *Password*, *Server address* (default `127.0.0.1`), **Host (listen server)** and **Join**. Run with `--server` for a headless dedicated server. ENet (UDP) on port **7777**. |
-| World & zones | Four zones, each its own 64×40 tile map (32 px tiles) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Glowing portals at map edges/doorways link them. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
+| World & zones | Four big open-world zones, each a **200×128** tile map (32 px tiles, 10× the area of the original 64×40 maps) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter town + wilds), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Monsters live in **groups** (packs, camps, elite packs, patrols, boss guards) that get tougher the farther you go from the zone entrance; a **minimap** and a full zone map (**N**) keep you oriented. Glowing portals at map edges link the zones. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
 | Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on keys **1-4**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
 | Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, clicking empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
 | Passive web | One shared Path-of-Exile-style web of 175 nodes. Class starts sit on the five-element pentagon, with small/notable/keystone nodes, an adjacency rule, 1 point per level (retroactive), per-node refund and full reset for gold, and farming stats (item quantity/rarity, gold, leech, attack/cast speed, damage vs element). All bonuses flow through one stat aggregator that gear affixes can plug into. See [Passive web](#passive-web-shared-path-of-exile-style). |
 | Players | WASD / arrows to move. The camera follows you, and the sprite flips and waddles while walking. A name + level label and an HP bar float over each head. **Server-authoritative**: clients send only input; the server moves everyone and replicates the results with `MultiplayerSynchronizer`/`MultiplayerSpawner`. |
-| Monsters & bosses | 10 regular monster types plus 3 zone bosses, with different behaviours (packs, erratic flyers, lunges, ranged archers, wall-phasing ghosts, armored brutes). Stats and XP scale with monster level, and the name + level float over each head. Every non-starter zone has a boss with a special attack, a big HP bar, chat announcements and guaranteed loot. See [Monsters](#monsters). |
+| Monsters & bosses | 13 regular monster types plus 3 zone bosses in walled lairs at the far end of their zones, with different behaviours (packs, erratic flyers, lunges, ranged archers, wall-phasing ghosts, armored brutes). Stats and XP scale with monster level, and the name + level float over each head. Every non-starter zone has a boss with a special attack, a big HP bar, chat announcements and guaranteed loot. See [Monsters](#monsters). |
 | Health, death, XP, levels | Monsters chase nearby players and hit them (damage reduced by armor). At 0 HP you become a tombstone and respawn at the current zone's entrance after 4 s with full HP. You slowly regenerate when out of combat. XP per kill = 6 + 4 × monster level (bosses 100 + 20 × level), shared by everyone who hit it. Levelling (20 × level XP per level) raises your stats by your class's growth rates, refills HP and mana, unlocks skills at levels 3/6/10, and announces it in chat. The HUD shows HP/mana/XP bars, class, ATK/DEF, gold, zone and the skill bar. |
 | Gear & loot (PoE × Vo Lam) | Ten equipment slots (weapon, off-hand, helmet, body, gloves, boots, belt, amulet, 2 rings). Every piece of gear is an **item instance** with a rarity (Normal / Magic / Rare / Unique), rolled prefixes/suffixes gated by item level, and an enhancement level +0..+10. 12 uniques (5 boss uniques + 7 element-themed world uniques). Monster and player **item quantity / rarity** feed the drop rolls. Six crafting orbs and Vo Lam enhancement stones drop from monsters. Ground loot has rarity-coloured labels and beams, with a flash + chime for rares/uniques. See [Gear, loot & crafting](#gear-loot--crafting). |
 | Inventory & blacksmith | **I** opens a 40-slot bag with a paper-doll equipment panel. You can click or drag to equip, shift-click or drag onto *Drop* to drop, and ctrl-click twice or drag onto *Destroy* to destroy. Currency stacks. Tooltips compare with what you're wearing. The **blacksmith** (anvil in Sunny Meadow, press **E** next to it) has the crafting/enhancement panel, a vendor, and a 40-slot **account-wide stash**. Potions: click to drink, or **Q**. |
@@ -37,6 +37,108 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | ![loot](docs/screenshot_loot.png) | ![tooltip](docs/screenshot_tooltip.png) |
 | **Paper-doll inventory** | **Blacksmith: crafting / enhancement / vendor / stash** |
 | ![paper doll](docs/screenshot_paperdoll.png) | ![blacksmith](docs/screenshot_blacksmith.png) |
+
+## Zones
+
+![the full zone map (N) of Sunny Meadow](docs/bigmap_overview.png)
+
+| Monster camp (camp fire, leader + mixed members) | Minimap while exploring |
+|---|---|
+| ![a monster camp](docs/bigmap_groups.png) | ![minimap](docs/bigmap_minimap.png) |
+
+Every overworld zone is **200×128 tiles** (6400×4096 px). The old 64×40 maps were 2560 tiles, the new ones
+25,600, so each zone has **10× the area** (3.1× wider, 3.2× taller).
+
+| Zone | Levels | Entrance area (the old map) | The new wilds | Boss |
+|---|---|---|---|---|
+| Sunny Meadow | 1-4 | the town (all NPCs) on the east side, gate to the forest on the east edge | groves, ponds, stone ruins and roads to the west, north and south | - |
+| Whisperwood Forest | 3-7 | north-west corner (gates to the meadow and the crypt) | dense woods with clearings and ponds to the east and south | Broodmother, lair in the far south-east |
+| Bone Crypt | 6-11 | south-east corner (gates to the forest and Frostpeak) | catacomb halls, 3-wide corridors and sandy caverns to the north and west | The Lich King, lair in the far north-west |
+| Frostpeak Ruins | 9-13 | west side (gate to the crypt) | pine forests, frozen lakes and rocks to the north, east and south | Yeti King, walled fortress in the far north-east |
+
+**How a big map is built** (`scripts/zone_map.gd`, `_gen_overworld`, all from the zone's fixed seed):
+1. themed outer terrain from two `FastNoiseLite` layers (tree groves / dense woods / pine forests, lakes, crypt caverns);
+2. the original 64×40 layout is painted into the zone's **core** (the entrance area), so the town and every
+   old landmark is still there, just moved by the core offset (`Zones.DB[zone]["core"]`);
+3. about 25 **monster sites** are spread over the rest of the map (at least 15 tiles apart, away from the
+   portals and the core) and carved as clearings, camps (trampled ground, barrels, a camp fire), elite stone
+   circles or crypt halls, plus a walled **boss lair** with four gates;
+4. roads (crypt: corridors) join every site to the nearest already-connected point, starting from anchors in
+   the core, so everything is reachable; a solid border closes the map. The server checks at start-up that
+   every portal, NPC, site and lair is reachable and logs `UNREACHABLE` otherwise.
+
+### Monster groups
+
+Monsters are spawned as **groups** (`Zones.DB[zone]["groups"]`, spawned by `zone.gd`):
+
+| Group type | What it is | Where |
+|---|---|---|
+| `pack` | 2-6 of one type: slime clutches, Dire Rat (wolf-style) packs, bat swarms, spider nests, ghost hosts, yeti packs, ogre pairs | the entrance area ("core" groups, so new players always find something) and everywhere else |
+| `camp` | a **leader** (+2 levels: Meadow Bandit, Wood Spider, Grave Crawler, Ice Ogre) with mixed members around a camp fire, e.g. bandit archers + boars, crawler + crypt archers + ghosts, ogre + yetis + frost bats | middle to far sites (depth 0.4-1.0) |
+| `elite` | an **elite** (Hasted / Armoured / Brutal / Regenerating, ×2.5 life, +1 level, +40% item quantity / +100% rarity on its drops) leading 2-3 minions inside a stone circle | the far sites (depth 0.6-1.0) |
+| `patrol` | 3-4 monsters that walk a loop between their site and the two nearest sites | anywhere (depth 0.2-0.9) |
+| `guard` | the boss's bodyguards, just inside the lair gate | the boss lair |
+
+* **Difficulty rises away from the entrance**: a site's depth is its distance from the zone entrance divided by the
+  farthest site; group level = zone min level + (max - min) × depth. Core groups are min level (+0/1).
+* **Pull one, the group comes**: when any member gets a target, every idle member of its group takes the same target.
+  The server logs `group aggro: <monster> pulled by <player> - N groupmates join (group #id kind of types)`.
+* **Groups respawn together**: dead members stay down until the *whole* group is dead, then after 1.5× the leader's
+  respawn time all members come back around their site (`group #id ... respawned at (x, y): N members`).
+  Patrols restart their loop.
+* Elements (Metal > Wood > Earth > Water > Fire > Metal) and level scaling work as before. Sunny Meadow got three new
+  low-level types for variety (Kenney sprites, tinted): **Mossling** (Wood), **Hill Boar** (Fire, lunges) and
+  **Meadow Bandit** (Metal, ranged).
+* Monster counts: about 80 per zone (meadow 79, forest 84, crypt 78, frost 81 incl. bosses), about 320 in total,
+  versus about 65 on the old maps. That's 5× the monsters for 10× the area, so the wilds aren't wall-to-wall.
+* Private dungeon instances and hideouts are unchanged (still 64×40, same generator and spawning).
+
+### Performance: interest management inside a zone
+
+* **Activation radius (server CPU)**: an overworld monster only runs its AI when a player of its zone is within
+  **1500 px** (re-checked every ~0.5 s), or while it has a target / walks home. Zones nobody is in cost almost
+  nothing. Respawn timers keep running.
+* **Sync radius (bandwidth)**: each overworld monster's `MultiplayerSynchronizer` has a second visibility filter, so
+  it is only spawned on and replicated to peers whose player is within **1300 px** (more than a screen). Bosses stay
+  visible zone-wide. Moving around spawns and despawns monsters on the client as they come into range.
+* The server logs, every 10 s per occupied zone, e.g.
+  `[forest] perf: 84 monsters, 9 awake (AI running), 12 monster syncs to 1 player(s) (14% of a full-zone sync)`.
+
+### Client frame rate ("fps drops in Whisperwood")
+
+What the client spent per-frame work on before this change, and why Whisperwood was the worst zone:
+* the server replicated **every monster of the zone** to the client, and every monster animated (bob/squish,
+  tint) and called `queue_redraw()` every physics frame, on screen or not. Whisperwood had the most monsters
+  of any zone (24 + the Broodmother's spiderlings, vs 10 / 17 / 15), so it had the most per-frame work. With
+  10× maps and no change this would have grown to about 80 monsters per zone;
+* every portal / NPC / anvil visual of **every zone** animated and redrew every frame, because every peer builds
+  every zone (and every open dungeon / hideout instance).
+
+Fixes: the server-side sync radius above (a client typically gets 5-15 monsters instead of the whole zone);
+monsters skip animation + redraw while off-screen (`VisibleOnScreenNotifier2D` in `monster.gd`, AI still runs on
+the server); decor visuals stop processing while off-screen (`VisibleOnScreenEnabler2D`, `NetUtil.cull_offscreen`).
+The ground and all decor are still one `TileMap` per zone (no per-tile nodes), so a 10× map adds no nodes.
+
+Measure it with `tools/bench_zones.sh` (a rendering client under `xvfb-run`, `--bench=SECS` prints frame time,
+node count, physics time, monsters received; `SRV_ARGS=--no-interest` turns the interest radius off for
+comparison). Phase 11 of `run_local_test.sh` runs headless bench clients at the Whisperwood entrance and boss lair
+and fails if frame time ≥ 16.7 ms, physics time ≥ 4 ms, nodes ≥ 1500 or monsters received ≥ 40. Note that Godot
+4.2's draw-call monitors read 0 with the `gl_compatibility` renderer, so draw calls aren't measured.
+
+### Minimap and zone map
+
+The HUD has a minimap of the whole zone (top right) and **N** opens a big zone map. Both show you (white), other
+players (cyan), portals (purple), town NPCs (yellow), camps (orange), elite circles (gold), the boss lair (red ring)
+and the monsters you can see (red dots). The terrain is a 1-pixel-per-tile image of the zone's TileMap, so it
+always matches the map size. The camera limits come from the map size too.
+
+### Old saves
+
+Characters saved before the big maps have no `map_v` in their save, so their position is in old 64×40 coordinates.
+On login it's shifted by the zone's core offset, which puts them on the same spot of the same landmark (the log says
+`old-map position ... shifted to ...`). Any saved position that isn't on a reachable tile (outside the map, inside a
+wall, stuck in an unreachable pocket) is moved to the nearest reachable tile (`saved position ... relocated to ...`).
+New saves store `"map_v": 2`.
 
 ## Classes & the five elements
 
@@ -690,7 +792,7 @@ Press **M** anywhere (or look at the Ticket Merchant's "M: atlas" hint) to open 
   * It handles buying and the free ticket, opening a run, portals, entry rules, death, completion, the atlas update, timeouts and cleanup.
   * Through RPCs it makes every peer build or free the instance zone from the same seed.
 * An instance is a **dynamic zone** (`dun<N>`) under `Main/Zones`.
-  * It is placed next to the overworld zones, 4096 px per slot.
+  * It is placed next to the overworld zones, 8192 px per slot.
   * It has its own spawners and visibility filters, so all the isolation and replication code is shared with the overworld.
 * Map mods hook in at two points:
   * Monster side: life, damage, speed, defense and elites, in `monster.gd`.
@@ -799,9 +901,10 @@ scripts/hideout.gd     Hideout data: decoration catalog, themes, layout + placem
 scripts/hideout_server.gd  Hideout zones (one private instance per account), requests, RPCs
 scripts/hideout_ui.gd  Hideout panel + decoration mode (grid overlay)
 scripts/market_ui.gd   Trade Broker panel: Browse / Sell / My Listings + claim box
-scripts/zones.gd       Zone definitions: names, levels, portals, monster spawns, bosses
-scripts/zone.gd        One zone: map + entity containers + spawners + visibility filter, loot drops
-scripts/zone_map.gd    Tile map (TileMap) generation for each zone, collision, reachability, A*
+scripts/zones.gd       Zone definitions: sizes, core offsets, names, levels, portals, NPC cells, monster groups, boss lairs
+scripts/zone.gd        One zone: map + entity containers + spawners + visibility filters, monster groups (spawn/respawn/patrol), loot drops
+scripts/minimap.gd     HUD minimap + N full zone map
+scripts/zone_map.gd    Tile map (TileMap) generation for each zone (big overworld: terrain, core, sites, roads, lairs), collision, reachability, A*
 scripts/tiles.gd       GENERATED tile atlas constants (by tools/build_assets.py)
 scripts/player.gd      Player: input -> server, movement, combat, HP/mana/XP/levels, buffs, inventory, portals
 scripts/classes.gd     The 5 classes (stats, growth, skills) and the element cycle / multipliers
@@ -899,6 +1002,9 @@ godot --headless --path project-volam -- --server --ws
 | `--bot-route=forest,crypt,...` | test bot walks (A* pathfinding) through portals to each zone in turn |
 | `--bot-dwell=SECS` | how long the bot fights in each zone of its route (default 12) |
 | `--bot-hunt=boss` | test bot goes after the zone boss first |
+| `--show-fps` | start with the F3 FPS overlay on |
+| `--open-zone-map` | open the full zone map (N) once in game (screenshots) |
+| `--bigmap-selftest` | offline checks of the big overworld maps: size, reachability, group placement, determinism, old-save positions |
 | `--bot-passive` | test bot that never attacks (to test death) |
 | `--open-inventory` | open the inventory once in game (screenshots) |
 | `--screenshot-delay=SECS` | when to take the `--screenshot` (default 6) |
@@ -936,7 +1042,7 @@ loot/pickup/potion/equip, account create/login/wrong-password/duplicate rejectio
 isolation, every monster type attacking/dying/respawning, and all three bosses (special attacks,
 kill, loot, chat announcement, respawn), classes/skills/status effects, targeting, the passive web, the trade market (listing fee + escrow, every search filter, buy with tax, self-buy / no gold / full bag / max listings / bound item rejected, two buyers racing one listing, cancel, expiry, claim box, offline seller paid on next login, persistence across restart, a kill -9 crash test, a crash exactly between the market.json and accounts.json writes, the free daily ticket refused, and a no-duplication / gold-conservation audit), the dungeon endgame (merchant, free ticket, ticket crafting, Map Device, private instances and their isolation, portals, death, boss completion, next-tier drops, map mods, IIQ/IIR on drops, atlas persistence, cleanup), and the gear system (drops of every rarity, IIQ/IIR, item-level gating, every orb plus its invalid uses, enhancement success/failure/downgrade/gold, equip/unequip stats and resistances, selling, stash, drop/destroy, full bag, migration of old saves, persistence):
 ```bash
-GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~25 min, 339 checks (needs python3)
+GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~27 min, 400+ checks (needs python3)
 ```
 
 ## Controls
@@ -955,6 +1061,8 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~25 min,
 | Hold 1-4 | Ground skills: aim preview at the cursor, cast on release |
 | E | Pick up the nearest item (walking over items also picks them up). Next to the blacksmith anvil: open the blacksmith panel. Next to the Map Device / Ticket Merchant: open the dungeon panel |
 | M | Atlas (map of dungeon nodes + atlas passive tree) |
+| N | Zone map (big map of the current zone; the minimap is always in the top-right corner) |
+| F3 | FPS overlay (FPS, frame ms, monsters received by this client, node count); off by default |
 | H | In your hideout: open the hideout panel and toggle decoration mode (left-click place / move, right-click remove, R rotate, F flip) |
 | `/hideout` (chat) | Go to your hideout (also **Esc > Hideout** or the Hideout Master in town) |
 | I | Open / close inventory |
@@ -1054,7 +1162,7 @@ To re-export: install the 4.2.1 export templates (Editor → Manage Export Templ
 ## Next steps toward a real MMO
 
 Done so far: player HP/levels, loot & inventory, simple accounts with saving, real pixel art,
-four zones with per-zone interest management, 10 monster types and 3 bosses, five elemental
+four big 200x128 zones with monster groups and per-zone + distance interest management, 13 monster types and 3 bosses, five elemental
 classes with skills, mana, status effects and the element cycle.
 
 1. **Real accounts & database**: move login to a separate auth service (REST API, Argon2
@@ -1063,7 +1171,7 @@ classes with skills, mana, status effects and the element cycle.
 2. **More gameplay**: NPC shops (sell Slime Gel!), quests, skill trees / skill levels, PvP using the element cycle, item rarity,
    stackable item limits, trading between players, parties (shared boss credit already works).
 3. **Better netcode**: client-side prediction and reconciliation (movement feels instant at
-   high ping), distance-based interest management *inside* a zone (today it's per zone),
+   high ping), finer interest management (today: per zone, plus a distance filter for overworld monsters),
    rate limiting, and more input validation.
 4. **Zone servers / sharding**: today one server process runs every zone. Next is one process
    per zone (or per group of zones) behind a gateway that hands characters (with their saved data)

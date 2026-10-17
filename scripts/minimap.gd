@@ -29,7 +29,7 @@ func _layout() -> void:
 		position = (vp - size) / 2.0
 	else:
 		size = SMALL
-		position = Vector2(vp.x - SMALL.x - 10.0, 100.0)
+		position = Vector2(vp.x - SMALL.x - 10.0, 112.0)
 
 
 func _process(_delta: float) -> void:

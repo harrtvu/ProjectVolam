@@ -33,6 +33,7 @@ var _peer_pos := {}             # (server) peer id -> player position in this zo
 ## and are only replicated to peers within SYNC_RADIUS (bosses: whole zone). Instances skip both.
 const ACTIVE_RADIUS := 1500.0
 const SYNC_RADIUS := 1300.0
+static var interest := true     # --no-interest (benchmarks only): sync + simulate every monster
 var awake_count := 0            # monsters that ran their AI this frame (for the perf log)
 var awake_last := 0
 var _perf_t := 0.0
@@ -178,7 +179,7 @@ func _spawn_monster(data: Variant) -> Node:
 	if Zones.DB.has(zone_id) and not m.is_boss:
 		var sync := m.get_node("Sync") as MultiplayerSynchronizer
 		sync.add_visibility_filter(func(peer: int) -> bool:
-			return _peer_pos.has(peer) and (_peer_pos[peer] as Vector2).distance_squared_to(m.position) < SYNC_RADIUS * SYNC_RADIUS)
+			return not interest or _peer_pos.has(peer) and (_peer_pos[peer] as Vector2).distance_squared_to(m.position) < SYNC_RADIUS * SYNC_RADIUS)
 	return m
 
 
@@ -364,6 +365,8 @@ func _physics_process(delta: float) -> void:
 	for grp in groups:
 		var alive := 0
 		for m in grp["members"]:
+			if not is_instance_valid(m) or m.is_queued_for_deletion():
+				return   # shutting down
 			if m.alive:
 				alive += 1
 		if alive == 0:   # the whole group is down: it comes back together after a while
@@ -393,6 +396,8 @@ func _physics_process(delta: float) -> void:
 
 ## (server) Is any player of this zone within `r` of `pos`?
 func players_near(pos: Vector2, r: float) -> bool:
+	if not interest:
+		return true
 	for pid in _peer_pos:
 		if (_peer_pos[pid] as Vector2).distance_squared_to(pos) < r * r:
 			return true
@@ -649,6 +654,7 @@ class PortalVisual extends Node2D:
 	var _label: Label
 
 	func _ready() -> void:
+		NetUtil.cull_offscreen(self, 160.0)
 		z_index = -1
 		_label = Label.new()
 		_label.text = text
@@ -686,6 +692,7 @@ class CampfireVisual extends Node2D:
 	var _t := 0.0
 
 	func _ready() -> void:
+		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0
 
 	func _process(delta: float) -> void:
@@ -706,6 +713,7 @@ class BlacksmithVisual extends Node2D:
 	var _t := 0.0
 
 	func _ready() -> void:
+		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0
 		for spec in [["res://assets/anvil.png", Vector2(0, 6)], ["res://assets/blacksmith.png", Vector2(-26, -4)], ["res://assets/chest.png", Vector2(28, 4)]]:
 			var s := Sprite2D.new()
@@ -845,6 +853,7 @@ class NpcVisual extends Node2D:
 	var _t := 0.0
 
 	func _ready() -> void:
+		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0
 		var l := Label.new()
 		if kind == "merchant":

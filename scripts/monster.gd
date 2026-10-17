@@ -71,6 +71,7 @@ var group = null
 var patrol := false
 var _wake_t := 0.0
 var _awake := true
+var _onscreen: VisibleOnScreenNotifier2D   # off-screen monsters skip their animation + redraw
 
 
 func setup(id: int, t: String, lv: int, pos: Vector2, pack: int, temp: bool, opts: Dictionary = {}) -> void:
@@ -126,6 +127,9 @@ func setup(id: int, t: String, lv: int, pos: Vector2, pack: int, temp: bool, opt
 	_label.add_theme_constant_override("outline_size", 4)
 	add_child(_label)
 	_update_label()
+	_onscreen = VisibleOnScreenNotifier2D.new()
+	_onscreen.rect = Rect2(-48 * sc, -90 * sc, 96 * sc, 110 * sc)
+	add_child(_onscreen)
 	add_child(NetUtil.make_synchronizer(["sync_pos"], ["hp", "max_hp", "level", "alive", "casting", "flip", "status_flags"]))
 
 
@@ -391,6 +395,8 @@ func _physics_process(delta: float) -> void:
 			position = sync_pos
 		NetUtil.smooth_follow(self, sync_pos, delta)
 	visible = alive
+	if not _onscreen.is_on_screen():
+		return   # nothing to animate or draw (the server-side AI above already ran)
 	_bob += delta * 6.0
 	if _flash > 0.0:
 		_flash -= delta

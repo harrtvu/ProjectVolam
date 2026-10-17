@@ -73,3 +73,13 @@ static func popup(parent: Node2D, text: String, color: Color, y := -40.0) -> voi
 		tw.tween_property(l, "modulate:a", 0.0, 0.8).set_delay(0.3)
 		tw.chain().tween_callback(l.queue_free))
 	parent.add_child.call_deferred(l)
+
+
+## Stops `n` (a purely decorative node: portal, NPC, camp fire, anvil) from processing, i.e. animating
+## and redrawing, while it is off-screen. Every peer builds every zone, so without this all of them
+## would animate + redraw every frame.
+static func cull_offscreen(n: Node2D, half: float) -> void:
+	var e := VisibleOnScreenEnabler2D.new()
+	e.rect = Rect2(-half, -half, half * 2.0, half * 2.0)
+	e.enable_node_path = NodePath("..")
+	n.add_child(e)
