@@ -586,7 +586,8 @@ func drop_loot(pos: Vector2, type: String, level: int, killer: Node = null, src:
 	var ttier := 1
 	if is_dungeon() and not boss:
 		ttier = int(info["dungeon"]["tier"])
-		tchance = Atlas.ticket_chance(0.15 if is_elite else 0.03, quantity, afx) * (3.0 if main.debug_loot else 1.0)
+		var tbase: float = 0.15 if is_elite else (main.ticket_drop_chance if main.ticket_drop_chance >= 0.0 else 0.03)
+		tchance = Atlas.ticket_chance(tbase, quantity, afx) * (3.0 if main.debug_loot else 1.0)
 	elif not is_dungeon() and level >= 6 and not boss:
 		tchance = 0.01 * (1.0 + quantity / 100.0) * (3.0 if main.debug_loot else 1.0)
 	if tchance > 0.0 and _rng.randf() < tchance:

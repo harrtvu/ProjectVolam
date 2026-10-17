@@ -122,6 +122,7 @@ var is_dedicated := false
 var use_ws := false
 var bot_mode := false
 var instances: Node                # dungeon instance manager (instances.gd), on every peer
+var ticket_drop_chance := -1.0    # server (tests): --ticket-drop-chance=0..1 overrides the base Dungeon Ticket chance of normal dungeon monsters (3%)
 var decor_drop_chance := -1.0     # server (tests): --decor-drop-chance=0..1 overrides the boss decoration drop chance
 var bot_guardian := ""           # dungeon bot: --bot-guardian=fire:10 asks for a debug Guardian ticket (server needs --debug-atlas-kit)
 var bot_watch_patrol := false     # bot: --bot-watch-patrol stands within activation range of a meadow patrol route (out of aggro range)
@@ -446,6 +447,7 @@ func _parse_args() -> void:
 		fps_label.visible = _show_fps
 	hideout_debug = opts.has("hideout-debug")
 	decor_drop_chance = clampf(float(opts.get("decor-drop-chance", "-1")), -1.0, 1.0)
+	ticket_drop_chance = clampf(float(opts.get("ticket-drop-chance", "-1")), -1.0, 1.0)
 	bot_guardian = str(opts.get("bot-guardian", ""))
 	bot_watch_patrol = opts.has("bot-watch-patrol")
 	menu_hideout_test = opts.has("menu-hideout-test")

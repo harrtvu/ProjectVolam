@@ -124,7 +124,7 @@ wait
 
 echo "Phase 6 (~200s): dungeon tickets, map device, instances, atlas..."
 SAVE6="$(pwd)/$L/accounts_p6.json"; rm -f "$SAVE6"
-run --server --save-file="$SAVE6" --debug-start-level=20 --debug-gear --debug-fresh=Diver --fast-respawn --instance-timeout=15 --complete-timeout=15 --debug-next-tier=1 --quit-after=200 > $L/p6_server.log 2>&1 &
+run --server --save-file="$SAVE6" --debug-start-level=20 --debug-gear --debug-fresh=Diver --fast-respawn --instance-timeout=15 --complete-timeout=15 --debug-next-tier=1 --ticket-drop-chance=0.12 --quit-after=200 > $L/p6_server.log 2>&1 &
 sleep 2
 b6() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=d "$@" --quit-after=194 > $L/p6_$n.log 2>&1 & }
 b6 MapperA --class=fire  --bot --bot-no-gear --bot-dungeon=full --bot-dungeon-theme=fire
