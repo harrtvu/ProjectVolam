@@ -222,6 +222,7 @@ var save_file := DEFAULT_SAVE_FILE
 var debug_loot := false
 var loot_showcase := false         # server: drop a rarity showcase in the meadow (screenshots)
 var debug_gear := false            # server: debug accounts get a crafting kit (orbs, gold, items)
+var debug_level_for := {}          # server (tests): --debug-level-for=MetalA:22,... start level per new account (overrides --debug-start-level)
 var debug_fresh := ""              # server: accounts whose name starts with this skip --debug-start-level (fresh Lv1)
 var debug_full_bag := ""           # server: accounts whose name starts with this get a full bag
 var bot_craft := false
@@ -470,6 +471,10 @@ func _parse_args() -> void:
 	loot_showcase = opts.has("loot-showcase")
 	debug_full_bag = str(opts.get("debug-full-bag", ""))
 	debug_fresh = str(opts.get("debug-fresh", ""))
+	for kv in str(opts.get("debug-level-for", "")).split(",", false):
+		var kvp: PackedStringArray = kv.split(":")
+		if kvp.size() == 2:
+			debug_level_for[kvp[0].to_lower()] = int(kvp[1])
 	bot_craft = opts.has("bot-craft")
 	_gear_selftest_flag = opts.has("gear-selftest")
 	if opts.has("debug-tooltip"):
@@ -760,7 +765,8 @@ func _login_ok(id: int, pname: String, password: String) -> void:
 	var display: String = str(acc.get("name", pname))
 	var character: Dictionary = acc.get("character", {})
 	if is_new and debug_start_level > 1 and not (debug_fresh != "" and pname.to_lower().begins_with(debug_fresh.to_lower())):
-		character = {"level": debug_start_level, "gold": 250, "inventory": {"health_potion": 5, "greater_potion": 5}, "items_v": 2}
+		var lv0: int = int(debug_level_for.get(pname.to_lower(), debug_start_level))   # --debug-level-for=name:lv,...
+		character = {"level": lv0, "gold": 250, "inventory": {"health_potion": 5, "greater_potion": 5}, "items_v": 2}
 		if debug_gear:   # crafting test kit
 			character["gold"] = 2500
 			for orb in Items.ORBS:
@@ -776,7 +782,7 @@ func _login_ok(id: int, pname: String, password: String) -> void:
 				junk.append(Gear.make("rope_belt", "normal", 1, rng))
 			character["bag"] = junk
 		acc["character"] = character
-		_log("(debug) new account '%s' starts at level %d" % [pname, debug_start_level])
+		_log("(debug) new account '%s' starts at level %d" % [pname, lv0])
 	player_names[id] = display
 	peer_accounts[id] = AccountStore.key_for(pname)
 	if not Classes.exists(str(character.get("class", ""))):

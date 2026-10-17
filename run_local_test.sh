@@ -89,7 +89,7 @@ wait
 
 echo "Phase 4 (~75s): targeting + talents..."
 SAVE4="$(pwd)/$L/accounts_p4.json"; rm -f "$SAVE4"
-run --server --save-file="$SAVE4" --debug-start-level=20 --debug-loot --fast-respawn --allow-warp --quit-after=76 > $L/p4_server.log 2>&1 &
+run --server --save-file="$SAVE4" --debug-start-level=20 --debug-level-for=MetalA:22 --debug-loot --fast-respawn --allow-warp --quit-after=76 > $L/p4_server.log 2>&1 &
 sleep 2
 b4() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=t --bot --bot-no-gear "$@" --quit-after=70 > $L/p4_$n.log 2>&1 & }
 b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-target=far --warp=crypt
