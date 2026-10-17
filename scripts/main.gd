@@ -2835,12 +2835,16 @@ func _bigmap_selftest() -> void:
 		print("BIGMAP SELFTEST %-6s old-save position %s -> %s (reachable %s), out-of-bounds (99999,-500) -> %s %s" % [id, old_spawn, moved, m.is_reachable(m.local_to_map(moved)), near, "" if mig_ok else "<-- FAIL"])
 		var camps: Array = []
 		var elites: Array = []
+		var packs: Array = []
 		for st in m.sites:
 			if st["kind"] == "camp":
 				camps.append("%d,%d" % [st["cell"].x, st["cell"].y])
 			elif st["kind"] == "elite":
 				elites.append("%d,%d" % [st["cell"].x, st["cell"].y])
+			elif st["kind"] == "pack" and int(st["spec"]) >= 0:
+				packs.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
 		print("BIGMAP SELFTEST %-6s camps at %s elites at %s" % [id, " ".join(camps), " ".join(elites)])
+		print("BIGMAP SELFTEST %-6s packs %s" % [id, " ".join(packs)])
 		m.free()
 		m2.free()
 	print("BIGMAP SELFTEST OK" if ok else "BIGMAP SELFTEST FAILED")

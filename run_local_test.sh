@@ -71,6 +71,9 @@ run --join=127.0.0.1 --name=Walker --password=w --class=wood --bot --bot-route=f
 # a crypt camp (crawler + archers + ghost): wiped and respawned as a group, so every overworld crypt type is seen respawning
 CCAMP=$(grep -E "BIGMAP SELFTEST crypt +camps at" $L/bigmap_selftest.log | sed -E 's/.*camps at ([0-9]+),([0-9]+).*/\1,\2/' | awk -F, '{print $1 "," $2+3}')
 run --join=127.0.0.1 --name=CryptCamper --password=w --class=fire --bot --warp=crypt --warp-cell=$CCAMP --quit-after=124 > $L/p3_crypt_camper.log 2>&1 &
+# a frost bat pack: wiped and respawned as a group (the hunters only pass by frost bats, so their respawn was chance-based)
+FBAT=$(grep -E "BIGMAP SELFTEST frost +packs " $L/bigmap_selftest.log | grep -oE "frost_bat@[0-9]+,[0-9]+" | head -1 | sed -E 's/frost_bat@//' | awk -F, '{print $1 "," $2+3}')
+run --join=127.0.0.1 --name=FrostCamper --password=w --class=fire --bot --warp=frost --warp-cell=$FBAT --quit-after=124 > $L/p3_frost_camper.log 2>&1 &
 declare -A LAIR=([forest]=180,110 [crypt]=26,18 [frost]=186,26)   # inside each boss lair (big maps)
 declare -A HC=([forest1]=metal [forest2]=wood [forest3]=water [crypt1]=fire [crypt2]=earth [crypt3]=water
                [frost1]=earth [frost2]=fire [frost3]=metal)
