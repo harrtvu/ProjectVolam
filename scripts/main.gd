@@ -148,6 +148,7 @@ var bot_market := ""               # bot: market test role (seller|buyer|race|pa
 var _open_market := ""             # client: open the market panel on this tab (screenshots)
 var _open_market_at := 7.0
 var _bm_done := {}
+var _bm_qbought := false   # market bot qbuyer: a buy was sent
 var market_tip := false            # client (screenshots): show the first result's tooltip
 var _bm_ids := {}
 var instance_timeout := 0.0        # server: seconds an empty dungeon stays open (0 = default)
@@ -2365,12 +2366,18 @@ func _bot_market(me: Node, zone: Node, delta: float) -> void:
 						me.request_market("buy", {"id": int(l["id"]), "price": int(l["price"])})
 						break
 		"qbuyer":     # crash test: buy whatever is listed, quickly
-			steps = [
-				[3.0, func(): me.request_market("browse", {"filters": {"sort": "newest"}})],
-				[4.0, func():
-					for l in market.page["rows"]:
-						me.request_market("buy", {"id": int(l["id"]), "price": int(l["price"])})],
-			]
+			# browse + buy, retried: the seller reaches the broker at about the same time and its
+			# listings can land just after the first search (race seen: search 0 hits, then 5 listed)
+			var qbuy := func():
+				if _bm_qbought:
+					return
+				for l in market.page["rows"]:
+					_bm_qbought = true
+					me.request_market("buy", {"id": int(l["id"]), "price": int(l["price"])})
+			var qbrowse := func():
+				if not _bm_qbought:
+					me.request_market("browse", {"filters": {"sort": "newest"}})
+			steps = [[3.0, qbrowse], [4.0, qbuy], [5.0, qbrowse], [6.0, qbuy], [7.0, qbrowse], [8.0, qbuy]]
 		"collector":
 			steps = [
 				[1.0, func(): me.request_market("mine")],
