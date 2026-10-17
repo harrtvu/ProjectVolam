@@ -64,7 +64,6 @@ T = {19: grass, 20: X2(cell16(floor, 12, 12)), 21: on_grass(cell16(nature, 2, 11
      25: on_grass(cell32(nature, 4, 0), True), 26: X2(cell16(water, 1, 1)), 27: on_grass(cell16(nature, 4, 8))}
 for i, (x, y) in enumerate([(11, 7), (12, 7), (13, 7), (11, 8), (12, 8), (13, 8), (11, 9), (12, 9), (13, 9)]):
     T[28 + i] = X2(cell16(floor, x, y))
-T[49] = X2(cell16(floor, 12, 8))   # C_SAND (forest camp ground) -> Ninja Adventure dirt
 for idx, im in T.items():
     atlas.paste(im, (idx * 32, 0))
 atlas.save(os.path.join(OUT, "tiles.png"))

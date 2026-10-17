@@ -29,16 +29,16 @@ if [ "$WHAT" != combat ]; then
   done
 fi
 if [ "$WHAT" != views ]; then
-  # one bot per element fighting the same camp; the rendered client (metal) films it
-  "$GODOT" --headless --path . -- --server --port=$PORT --save-file="$T/combat.json" --debug-start-level=12 --allow-warp --quit-after=60 > $T/server_combat.log 2>&1 &
+  # one bot per element (headless) fighting the same camp; an idle rendered client (Harry) films it from the camp
+  "$GODOT" --headless --path . -- --server --port=$PORT --save-file="$T/combat.json" --debug-start-level=${LV:-10} --allow-warp --fast-respawn --quit-after=60 > $T/server_combat.log 2>&1 &
   sleep 2
-  i=0
-  for c in wood water fire earth; do
+  i=-3
+  for c in metal wood water fire earth; do
     i=$((i+1))
     "$GODOT" --headless --path . -- --join=127.0.0.1 --port=$PORT --name=Art$c --password=s --class=$c --bot --warp=forest --warp-cell=$(shift_cell $CAMP $i 3) --quit-after=50 > $T/bot_$c.log 2>&1 &
   done
-  "$GODOT" --path . --resolution 1152x648 -- --join=127.0.0.1 --port=$PORT --name=Harry --password=s --class=metal --bot --warp=forest --warp-cell=$(shift_cell $CAMP 0 3) \
-    --art-test --screenshot=$OUT/combat/combat.png --screenshot-delay=6 --screenshot-seq=${SEQ:-60} --screenshot-interval=${INTERVAL:-0.2} --quit-after=40 > $T/client_combat.log 2>&1
+  "$GODOT" --path . --resolution 1152x648 -- --join=127.0.0.1 --port=$PORT --name=Harry --password=s --class=metal --bot-idle --warp=forest --warp-cell=$(shift_cell $CAMP 0 2) \
+    --art-test --screenshot=$OUT/combat/combat.png --screenshot-delay=${DELAY:-5} --screenshot-seq=${SEQ:-60} --screenshot-interval=${INTERVAL:-0.2} --quit-after=40 > $T/client_combat.log 2>&1
   wait
   command -v ffmpeg > /dev/null && ffmpeg -y -loglevel error -framerate 5 -i $OUT/combat/combat_%02d.png -vf "scale=1152:648:flags=neighbor,format=yuv420p" -c:v libx264 $OUT/combat.mp4
 fi

@@ -542,6 +542,8 @@ func _carve_site(id: String, c: Vector2i, kind: String) -> void:
 	match kind:
 		"camp":   # trampled ground, supply barrels around the camp fire (fire drawn by zone.gd)
 			var fl := Tiles.C_SAND if id == "crypt" else (Tiles.S_FLOOR if id == "frost" else Tiles.FLOOR)
+			if ArtTest.enabled and id == "forest":
+				fl = Tiles.F_PATH_C   # art test: Ninja Adventure dirt instead of the Kenney meadow floor
 			_disc(c, 2.6, func(p): _put(p, fl))
 			for d in [Vector2i(-3, -2), Vector2i(3, -2), Vector2i(-3, 2), Vector2i(3, 2)]:
 				_put(c + d, Tiles.C_BARREL)
