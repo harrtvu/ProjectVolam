@@ -32,6 +32,7 @@ extends Node2D
 ##   --loot-showcase     server: drops one item of each rarity + some currency in the meadow (for screenshots)
 ##   --debug-gear        server: debug-level accounts get a crafting kit (orbs, 2500 gold, items)
 ##   --debug-full-bag=P  server: debug-level accounts whose name starts with P get a full bag
+##   --bigmap-selftest   offline checks of the big overworld maps (size, reachability, groups, old-save positions)
 ##   --gear-selftest     offline gear checks (drop statistics, orbs, enhancement, resistances)
 ##   --open-smith        open the blacksmith panel when standing next to it (screenshots)
 ##   --debug-tooltip=N   show the tooltip of the N-th gear item in the bag (screenshots)
@@ -39,6 +40,7 @@ extends Node2D
 ##   --quit-after=SECS   quit automatically after SECS seconds (for tests)
 ##   --screenshot=PATH   save a screenshot after --screenshot-delay=SECS (default 6; needs a display)
 ##   --open-inventory    open the inventory panel once in game (for screenshots)
+##   --open-zone-map     open the full zone map (N) once in game (for screenshots)
 
 const GAME_TITLE := "Project Volam"
 const DEFAULT_PORT := 7777
@@ -76,6 +78,7 @@ var hud: Control
 var chat_log: RichTextLabel
 var chat_edit: LineEdit
 var info_label: Label
+var minimap: Control            # minimap / N zone map (scripts/minimap.gd)
 var stats_name: Label
 var hp_bar: ProgressBar
 var hp_text: Label
@@ -96,6 +99,7 @@ var menu_test_leave := ""         # --menu-test-leave=menu|quit: finish the menu
 var menu_test := false             # client/host bot: drive the Esc menu (panel priority, pause, resume) and log
 var _open_atlas := false
 var _open_menu_at := -1.0          # client (screenshots): open the Esc menu after N seconds in game
+var _open_zone_map := false       # client (screenshots): open the N zone map once in game
 var _open_atlas_arg := ""          # client (screenshots): "map" | "tree" | "map@<node>" (forced tooltip) | "tree@<passive>"
 var item_tip: PanelContainer
 var mp_bar: ProgressBar
@@ -298,6 +302,7 @@ func _setup_input() -> void:
 	_add_action("talents", [KEY_T])
 	_add_action("target_cycle", [KEY_TAB])
 	_add_action("atlas", [KEY_M])
+	_add_action("zone_map", [KEY_N])
 
 
 func _add_action(action: String, keys: Array) -> void:
@@ -420,6 +425,7 @@ func _parse_args() -> void:
 	if opts.has("market-tip"):
 		market_tip = true
 	_open_atlas = opts.has("open-atlas")
+	_open_zone_map = opts.has("open-zone-map")
 	hideout_debug = opts.has("hideout-debug")
 	bot_hideout = str(opts.get("bot-hideout", ""))
 	_hideout_shot = str(opts.get("hideout-shot", ""))
@@ -479,6 +485,9 @@ func _parse_args() -> void:
 		return
 	if _gear_selftest_flag:
 		_gear_selftest()
+		return
+	if opts.has("bigmap-selftest"):
+		_bigmap_selftest()
 		return
 	if opts.has("class") and Classes.exists(str(opts["class"])):
 		bot_class = str(opts["class"])
@@ -574,6 +583,12 @@ func start_server(port: int, dedicated: bool) -> bool:
 		var boss: Dictionary = z.info["boss"]
 		if not boss.is_empty() and not z.map.is_reachable(boss["cell"]):
 			bad.append("boss")
+		for k in ["blacksmith", "map_device", "merchant", "broker", "hideout_master", "respawn"]:
+			if z.info.has(k) and not z.map.is_reachable(z.info[k]):
+				bad.append(k)
+		for st in z.map.sites:
+			if int(st["spec"]) >= 0 and not z.map.is_reachable(st["cell"]):
+				bad.append("site %s" % st["cell"])
 		_log("Zone %s ready: %d monsters, %d reachable cells%s" % [id, z.monsters_root.get_child_count(),
 			z.map.reachable.size(), "" if bad.is_empty() else " UNREACHABLE: %s" % [bad]])
 	if not dedicated:
@@ -819,8 +834,16 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	var saved_pos = character.get("pos", null)
 	if typeof(saved_pos) == TYPE_ARRAY and saved_pos.size() == 2:
 		var p := Vector2(float(saved_pos[0]), float(saved_pos[1]))
-		if z.map.is_walkable_pos(p) and z.portal_at(p).is_empty():
+		var mv := int(character.get("map_v", 1))
+		if Zones.DB.has(zone_id) and mv < Zones.MAP_VERSION:   # saved before the 10x bigger maps
+			var moved := Zones.migrate_pos(zone_id, p, mv)
+			_log("Login '%s': old-map position %s in %s shifted to %s (map v%d -> v%d)" % [display, p.round(), zone_id, moved.round(), mv, Zones.MAP_VERSION])
+			p = moved
+		if z.map.is_reachable(z.map.local_to_map(p)) and z.portal_at(p).is_empty():
 			pos = p
+		else:
+			pos = z.map.nearest_reachable_pos(p, z.info["respawn"])
+			_log("Login '%s': saved position %s is not a valid spot in %s - relocated to %s" % [display, p.round(), zone_id, pos.round()])
 	if acc.has("stash"):   # account-wide shared stash (older saves kept it on the character)
 		character = character.duplicate()
 		character["stash"] = acc["stash"]
@@ -1112,6 +1135,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action("target_cycle") and not chat_edit.has_focus():
 			cycle_target()
 			get_viewport().set_input_as_handled()
+		elif event.is_action("zone_map") and not chat_edit.has_focus():
+			minimap.toggle_big()
+			get_viewport().set_input_as_handled()
 		elif event.is_action("atlas") and not chat_edit.has_focus():
 			atlas_ui.visible = not atlas_ui.visible
 			atlas_ui.set_player(_local_player())
@@ -1380,6 +1406,9 @@ func _process(delta: float) -> void:
 		_quit_after = -1.0
 		shutdown()
 		return
+	if _open_zone_map and _local_player() != null:
+		_open_zone_map = false
+		minimap.toggle_big()
 	if _screenshot_path != "" and _elapsed > _screenshot_delay and _screenshot_ready():
 		var img := get_viewport().get_texture().get_image()
 		var err := img.save_png(_screenshot_path)
@@ -1432,7 +1461,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc menu  E pick up\nQ potion  I inventory  C character\nT passive web  Enter chat" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc menu  E pick up\nQ potion  I inventory  C character\nT passive web  N zone map  Enter chat" % here
 	if me == null:
 		target_frame.visible = false
 		return
@@ -2609,6 +2638,67 @@ func _bot_talent_logic(me: Node, delta: float) -> void:
 ## before/after pathing to each class keystone (and the centre keystones) for every class, then quits.
 ## Offline gear checks (no network): rarity / item-level gating / IIQ+IIR statistics,
 ## every orb + invalid uses, enhancement rules, equip -> Stats.gather -> damage taken, migration.
+func _bigmap_selftest() -> void:
+	var ok := true
+	var old_area := 64 * 40
+	for id in Zones.ORDER:
+		var m := ZoneMap.new()
+		m.build(id)
+		var zi: Dictionary = Zones.info(id)
+		var area := m.w * m.h
+		var bad: Array = []
+		for p in zi["portals"]:
+			if not m.is_reachable(p["rect"].position):
+				bad.append("portal->" + str(p["to"]))
+		for k in ["respawn", "blacksmith", "map_device", "merchant", "broker", "hideout_master"]:
+			if zi.has(k) and not m.is_reachable(zi[k]):
+				bad.append(k)
+		if not zi["boss"].is_empty() and not m.is_reachable(zi["boss"]["cell"]):
+			bad.append("boss lair")
+		var kinds := {}
+		var depth := {}
+		var placed := 0
+		for st in m.sites:
+			if int(st["spec"]) < 0:
+				continue
+			placed += 1
+			if not m.is_reachable(st["cell"]):
+				bad.append("site %s" % st["cell"])
+			kinds[st["kind"]] = int(kinds.get(st["kind"], 0)) + 1
+			depth[st["kind"]] = float(depth.get(st["kind"], 0.0)) + float(st["depth"])
+		var planned := 0
+		for g in zi["groups"]:
+			if g.get("core", false):
+				kinds["pack"] = int(kinds.get("pack", 0)) + int(g["n"])
+			elif g["kind"] == "guard":
+				kinds["guard"] = int(g["n"])
+			else:
+				planned += int(g["n"])
+		var pack_d := float(depth.get("pack", 0.0)) / maxf(1.0, float(kinds.get("pack", 1)))
+		var elite_d := float(depth.get("elite", 0.0)) / maxf(1.0, float(kinds.get("elite", 1)))
+		var m2 := ZoneMap.new()
+		m2.build(id)
+		var same := m2.sites.size() == m.sites.size() and m2.get_used_cells(0).size() == m.get_used_cells(0).size()
+		for i in mini(m.sites.size(), m2.sites.size()):
+			same = same and m.sites[i]["cell"] == m2.sites[i]["cell"] and m.sites[i]["kind"] == m2.sites[i]["kind"]
+		var good: bool = area >= old_area * 9.5 and bad.is_empty() and kinds.size() >= 4 and placed == planned and elite_d > pack_d and same
+		ok = ok and good
+		print("BIGMAP SELFTEST %-6s size %dx%d (%.1fx the old 64x40 area) | %d reachable cells | %d sites, %d groups placed of %d | group kinds %s | avg depth pack %.2f elite %.2f | deterministic %s | unreachable %s %s" % [
+			id, m.w, m.h, float(area) / old_area, m.reachable.size(), m.sites.size(), placed, planned, kinds, pack_d, elite_d, same, bad, "" if good else "<-- FAIL"])
+		# old saves: a position on the old 64x40 map lands on the same spot of the core
+		var old_cell: Vector2i = zi["respawn"] - Zones.core_of(id)   # the zone entrance on the old 64x40 map
+		var old_spawn := Vector2(old_cell * 32) + Vector2(16, 16)
+		var moved := Zones.migrate_pos(id, old_spawn, 1)
+		var near := m.nearest_reachable_pos(Vector2(99999, -500), zi["respawn"])
+		var mig_ok := m.is_reachable(m.local_to_map(moved)) and Zones.migrate_pos(id, moved, Zones.MAP_VERSION) == moved and m.is_reachable(m.local_to_map(near))
+		ok = ok and mig_ok
+		print("BIGMAP SELFTEST %-6s old-save position %s -> %s (reachable %s), out-of-bounds (99999,-500) -> %s %s" % [id, old_spawn, moved, m.is_reachable(m.local_to_map(moved)), near, "" if mig_ok else "<-- FAIL"])
+		m.free()
+		m2.free()
+	print("BIGMAP SELFTEST OK" if ok else "BIGMAP SELFTEST FAILED")
+	get_tree().quit()
+
+
 func _gear_selftest() -> void:
 	var g := RandomNumberGenerator.new()
 	g.seed = 12345
@@ -3369,6 +3459,9 @@ func _build_ui() -> void:
 	info_label.add_theme_color_override("font_outline_color", Color.BLACK)
 	info_label.add_theme_constant_override("outline_size", 4)
 	hud.add_child(info_label)
+	minimap = preload("res://scripts/minimap.gd").new()
+	minimap.main = self
+	hud.add_child(minimap)
 
 	dead_label = Label.new()
 	dead_label.text = "You were defeated...\nrespawning at the zone entrance"

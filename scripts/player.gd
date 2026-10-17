@@ -617,7 +617,7 @@ func to_character() -> Dictionary:
 		"class": class_id,
 		"hp": max_hp if dead else hp,
 		"mp": mp,
-		"pos": _save_pos(),
+		"pos": _save_pos(), "map_v": Zones.MAP_VERSION,   # positions are in big-map coordinates
 		"zone": _save_zone(),   # never log back in inside a dungeon; "hideout" reopens your hideout
 		"hideout": hideout.duplicate(true),
 		"gold": gold, "inventory": inventory.duplicate(),

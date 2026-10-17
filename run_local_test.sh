@@ -37,6 +37,14 @@ p = sys.argv[1]; d = json.load(open(p)); salt = "0123456789abcdef"
 d["accounts"]["oldie"] = {"name": "Oldie", "salt": salt, "hash": hashlib.sha256((salt + "old").encode()).hexdigest(),
   "created": "2026-10-11T12:00:00", "character": {"level": 4, "xp": 5, "hp": 40, "gold": 12, "zone": "meadow",
   "inventory": {"health_potion": 2, "steel_sword": 1}, "equipment": {"weapon": "lich_staff", "armor": "wooden_shield"}}}
+# saved before the 10x bigger maps (no "map_v"): standing next to the old town blacksmith (cell 35,18 of the 64x40 meadow)
+d["accounts"]["oldtown"] = {"name": "Oldtown", "salt": salt, "hash": hashlib.sha256((salt + "old").encode()).hexdigest(),
+  "created": "2026-10-12T12:00:00", "class": "metal", "character": {"class": "metal", "level": 3, "xp": 0, "hp": 40, "gold": 5,
+  "zone": "meadow", "pos": [35 * 32 + 16, 18 * 32 + 16]}}
+# a position that is outside the map / inside a wall: must be relocated to the nearest valid spot
+d["accounts"]["lost"] = {"name": "Lost", "salt": salt, "hash": hashlib.sha256((salt + "old").encode()).hexdigest(),
+  "created": "2026-10-12T12:00:00", "class": "fire", "character": {"class": "fire", "level": 8, "xp": 0, "hp": 60, "gold": 5,
+  "zone": "crypt", "pos": [99999.0, -320.0], "map_v": 2}}
 json.dump(d, open(p, "w"), indent="\t")
 PY
 
@@ -46,6 +54,8 @@ sleep 2
 run --join=127.0.0.1 --name=Bot1 --password=pw1 --bot --quit-after=40 > $L/p2_bot1_restore.log 2>&1 &
 run --join=127.0.0.1 --name=Bot2 --password=pw2 --bot --quit-after=10 > $L/p2_bot2_restore.log 2>&1 &
 run --join=127.0.0.1 --name=Oldie --password=old --class=earth --bot --quit-after=30 > $L/p2_oldie.log 2>&1 &
+run --join=127.0.0.1 --name=Oldtown --password=old --bot-idle --quit-after=12 > $L/p2_oldtown.log 2>&1 &
+run --join=127.0.0.1 --name=Lost --password=old --bot-idle --quit-after=12 > $L/p2_lost.log 2>&1 &
 run --join=127.0.0.1 --name=Victim --password=v --class=fire --bot-passive --bot-route=forest --bot-dwell=0 --quit-after=40 > $L/p2_victim.log 2>&1 &
 sleep 3
 run --join=127.0.0.1 --name=BOT1 --password=pw1 --bot --quit-after=10 > $L/p2_bot1_duplicate.log 2>&1 &
@@ -57,11 +67,12 @@ echo "Phase 3 (~130s)..."
 run --server --save-file="$SAVE3" --debug-start-level=20 --fast-respawn --allow-warp --quit-after=130 > $L/p3_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Walker --password=w --class=wood --bot --bot-route=forest,crypt,frost,crypt,forest,meadow --bot-dwell=4 --quit-after=124 > $L/p3_walker.log 2>&1 &
+declare -A LAIR=([forest]=180,110 [crypt]=26,18 [frost]=186,26)   # inside each boss lair (big maps)
 declare -A HC=([forest1]=metal [forest2]=wood [forest3]=water [crypt1]=fire [crypt2]=earth [crypt3]=water
                [frost1]=earth [frost2]=fire [frost3]=metal)
 for z in forest crypt frost; do
   for n in 1 2 3; do
-    run --join=127.0.0.1 --name=${z}Hunter$n --password=h --class=${HC[$z$n]} --bot --bot-hunt=boss --warp=$z --quit-after=124 > $L/p3_${z}_hunter$n.log 2>&1 &
+    run --join=127.0.0.1 --name=${z}Hunter$n --password=h --class=${HC[$z$n]} --bot --bot-hunt=boss --warp=$z --warp-cell=${LAIR[$z]} --quit-after=124 > $L/p3_${z}_hunter$n.log 2>&1 &
   done
 done
 wait
@@ -82,7 +93,7 @@ b4 FireB  --class=fire  --bot-talents=auto:1 --bot-target=far --bot-respec-at=28
 b4 EarthA --class=earth --bot-talents=auto:0 --bot-talent-probe --warp=crypt
 b4 EarthB --class=earth --bot-talents=auto:1 --warp=frost
 b4 Farmer --class=metal --bot-talents=farm --warp=forest
-run --join=127.0.0.1 --name=Phoenix --password=t --bot-passive --class=fire --bot-talents=goals:f_phoenix --warp=frost --warp-cell=50,20 --warp-delay=12 --quit-after=70 > $L/p4_Phoenix.log 2>&1 &
+run --join=127.0.0.1 --name=Phoenix --password=t --bot-passive --class=fire --bot-talents=goals:f_phoenix --warp=frost --warp-cell=50,64 --warp-delay=12 --quit-after=70 > $L/p4_Phoenix.log 2>&1 &
 wait
 echo "Phase 4b (~14s): talents restored after restart..."
 run --server --save-file="$SAVE4" --quit-after=14 > $L/p4b_server.log 2>&1 &
@@ -91,12 +102,13 @@ run --join=127.0.0.1 --name=MetalA --password=t --bot --quit-after=8 > $L/p4b_me
 run --join=127.0.0.1 --name=FireB --password=t --bot --quit-after=8 > $L/p4b_fire.log 2>&1 &
 wait
 "$GODOT" --headless --path . -- --talent-selftest > $L/talent_selftest.log 2>&1
+"$GODOT" --headless --path . -- --bigmap-selftest > $L/bigmap_selftest.log 2>&1
 
 echo "Phase 5 (~70s): gear, crafting, blacksmith..."
 SAVE5="$(pwd)/$L/accounts_p5.json"; rm -f "$SAVE5"
 run --server --save-file="$SAVE5" --debug-start-level=13 --debug-gear --debug-full-bag=Full --debug-loot --allow-warp --quit-after=70 > $L/p5_server.log 2>&1 &
 sleep 2
-run --join=127.0.0.1 --name=Smith --password=s --class=water --bot --bot-craft --warp=meadow --warp-cell=37,18 --quit-after=64 > $L/p5_smith.log 2>&1 &
+run --join=127.0.0.1 --name=Smith --password=s --class=water --bot --bot-craft --warp=meadow --warp-cell=173,62 --quit-after=64 > $L/p5_smith.log 2>&1 &
 run --join=127.0.0.1 --name=Warden --password=s --class=metal --bot --quit-after=64 > $L/p5_warden.log 2>&1 &
 run --join=127.0.0.1 --name=FullBag --password=s --class=earth --bot --bot-no-gear --quit-after=64 > $L/p5_fullbag.log 2>&1 &
 wait
@@ -253,6 +265,26 @@ done
 if grep -qhE "foreign_entities=[1-9]" $(ls $L/*.log | grep -v "_host.log"); then echo "FAIL  visibility isolation (client received other-zone entities)"; else echo "PASS  visibility isolation (no client ever received another zone's entities)"; fi
 check "Bot1 back in meadow sees only itself" "zone=meadow players=1 Bot1\(" p1_bot1.log
 check "Bot2 in forest sees only itself"      "zone=forest players=1 Bot2\(" p1_bot2.log
+echo; echo "== Big maps & monster groups"
+check "offline big-map self-test passes"   "BIGMAP SELFTEST OK"                                bigmap_selftest.log
+for z in meadow forest crypt frost; do
+  check "$z is ~10x bigger (200x128 vs 64x40)" "BIGMAP SELFTEST $z +size 200x128 \(10.0x the old 64x40 area\)" bigmap_selftest.log
+  l=$(grep -hE "\[$z\] [0-9]+ monster groups" $L/p3_server.log | head -1)
+  k=0; for kind in pack camp elite patrol guard; do echo "$l" | grep -q "\"$kind\"" && k=$((k+1)); done
+  if [ "$k" -ge 4 ]; then echo "PASS  $z has $k distinct group types ($(echo "$l" | sed -E 's/.*map: //'))"; else echo "FAIL  $z distinct group types ($l)"; fi
+done
+if grep -hE "Zone [a-z]+ ready" $L/p3_server.log | grep -q UNREACHABLE; then echo "FAIL  portals, NPCs, boss lairs and monster sites reachable"; else echo "PASS  portals, NPCs, boss lairs and monster sites reachable"; fi
+check "bosses wait in their lairs deep in the zone" "boss Yeti King spawned in its lair"          p3_server.log
+if grep -qhE "group aggro: .* pulled by .* - [1-9][0-9]* groupmates join" $L/*server.log; then echo "PASS  group aggro (pull one, the group comes): $(cat $L/*server.log | grep -cE "group aggro:") pulls"; else echo "FAIL  group aggro"; fi
+for kind in camp elite; do
+  if grep -qhE "group aggro: .*\(group #[0-9]+ $kind of" $L/*server.log; then echo "PASS  a $kind group aggroed together"; else echo "FAIL  a $kind group aggroed together"; fi
+done
+if grep -qhE "group #[0-9]+ [a-z]+ of .* respawned at .*: [2-9][0-9]* members" $L/*server.log; then echo "PASS  groups respawn together ($(cat $L/*server.log | grep -cE "group #[0-9]+ .* respawned at") group respawns)"; else echo "FAIL  groups respawn together"; fi
+check "elite group leader in the overworld"  "◆ |(Hasted|Armoured|Brutal|Regenerating) [A-Za-z ]+\(Lv[0-9]+\) was slain"   p3_server.log
+check "old save: position shifted into the big map" "Login 'Oldtown': old-map position \(1136, 592\) in meadow shifted to \(5488, 2000\)" p2_server.log
+check "old save: restored at the shifted spot"      "Login 'Oldtown' .*zone meadow, pos \(5488, 2000\)"                               p2_server.log
+check "invalid saved position relocated"            "Login 'Lost': saved position \(99999, -320\) is not a valid spot in crypt - relocated" p2_server.log
+if grep -hE "\] perf: " $L/p3_server.log $L/p4_server.log | awk '{for(i=1;i<=NF;i++){if($i=="monsters,"){t=$(i-1)} if($i=="awake"){a=$(i-1)}} if(a<t) ok=1} END{exit !ok}'; then echo "PASS  interest management: far monsters sleep ($(grep -hE "\] perf: " $L/p3_server.log | tail -1 | sed -E 's/.*perf: //'))"; else echo "FAIL  interest management"; fi
 echo; echo "== Monsters (attack / die / respawn)"
 for m in "Slime" "Dire Rat" "Cave Bat" "Wood Spider" "Crypt Archer" "Restless Ghost" "Grave Crawler" "Yeti" "Ice Ogre" "Frost Bat"; do
   a=$(cat $L/*server.log | grep -c "damage from $m")

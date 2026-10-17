@@ -66,6 +66,11 @@ var elite := ""               # "" or an elite modifier (hasted / armoured / bru
 var _dmg_mult := 1.0
 var _spd_mult := 1.0
 var _regen_acc := 0.0
+# overworld groups (server): the group dict from zone.gd (respawns as a whole), patrols walk to `home`
+var group = null
+var patrol := false
+var _wake_t := 0.0
+var _awake := true
 
 
 func setup(id: int, t: String, lv: int, pos: Vector2, pack: int, temp: bool, opts: Dictionary = {}) -> void:
@@ -335,6 +340,19 @@ func _respawn() -> void:
 		zone.main.broadcast_system("%s has returned to %s!" % [display_name, zone.info["name"]])
 
 
+## (server) A group respawn: back at full life near the group's site.
+func respawn_at(pos: Vector2) -> void:
+	position = pos
+	home = pos
+	sync_pos = pos
+	target = null
+	_evading = false
+	hp = max_hp
+	alive = true
+	_shape.set_deferred("disabled", false)
+	_srv_log("%s(Lv%d) respawned at %s" % [display_name, level, position.round()])
+
+
 func _set_target(p: Node2D) -> void:
 	if p == target:
 		return
@@ -343,10 +361,20 @@ func _set_target(p: Node2D) -> void:
 	if p and not had:
 		if is_boss:
 			_srv_log("%s is now fighting %s" % [display_name, p.display_name])
-		if def["behavior"] == "pack":
+		if def["behavior"] == "pack" and group == null:
 			for m in zone.monsters_root.get_children():
 				if m != self and m.pack_id == pack_id and m.alive and m.target == null:
 					m.target = p
+		elif group != null:   # overworld group: pull one, the whole group comes
+			var joined := 0
+			for m in group["members"]:
+				if m != self and m.alive and m.target == null:
+					m.target = p
+					m._evading = false
+					m._awake = true
+					joined += 1
+			if joined > 0:
+				_srv_log("group aggro: %s pulled by %s - %d groupmates join (group %s)" % [display_name, p.display_name, joined, zone.group_label(group)])
 
 
 func _target_valid(p) -> bool:
@@ -385,6 +413,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _server_tick(delta: float) -> void:
+	if not alive and group != null:   # the zone respawns the whole group together
+		sync_pos = position
+		return
 	if not alive:
 		_respawn_t -= delta
 		if _respawn_t <= 0.0 and not temporary:
@@ -394,6 +425,16 @@ func _server_tick(delta: float) -> void:
 	_status_tick(delta)
 	if not alive:
 		return
+	# interest management: overworld monsters with nobody around don't think (see zone.gd)
+	if Zones.DB.has(zone.zone_id):
+		_wake_t -= delta
+		if _wake_t <= 0.0:
+			_wake_t = 0.4 + _rng.randf() * 0.2
+			_awake = target != null or _evading or zone.players_near(position, zone.ACTIVE_RADIUS)
+		if not _awake:
+			velocity = Vector2.ZERO
+			return
+		zone.awake_count += 1
 	if elite == "regenerating" and hp < max_hp:
 		_regen_acc += max_hp * 0.015 * delta
 		if _regen_acc >= 1.0:
@@ -456,7 +497,9 @@ func _server_tick(delta: float) -> void:
 		_dir = position.direction_to(home)
 		speed = float(def["chase"])
 	elif target == null:
-		if _no_target_t > 4.0 and position.distance_to(home) > 120.0:
+		if patrol:
+			_dir = position.direction_to(home) if position.distance_to(home) > 20.0 else Vector2.ZERO
+		elif _no_target_t > 4.0 and position.distance_to(home) > 120.0:
 			_dir = position.direction_to(home)   # wander back home
 		else:
 			_think -= delta
@@ -505,7 +548,7 @@ func _server_tick(delta: float) -> void:
 	if def.get("flying", false):
 		position += velocity * delta
 		var m := 2.5 * Zones.TILE
-		position = position.clamp(Vector2(m, m), Vector2(Zones.W * Zones.TILE - m, Zones.H * Zones.TILE - m))
+		position = position.clamp(Vector2(m, m), Vector2(zone.map.w * Zones.TILE - m, zone.map.h * Zones.TILE - m))
 	else:
 		move_and_slide()
 		if get_slide_collision_count() > 0 and target == null:

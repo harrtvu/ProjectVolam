@@ -25,6 +25,17 @@ var elite_total := 0          # (dungeon) elite packs spawned - for the "slay ev
 var _rng := RandomNumberGenerator.new()
 var map_portal_root: Node2D     # (town) visuals of open dungeon portals
 var map_portals: Array = []     # (town) [{id, pos, owner, text}] - kept in sync by Instances
+## (server, overworld) monster groups: {id, kind, spec, cell, lv, members: [monster nodes], dead_t, wps, wp}
+var groups: Array = []
+var _group_t := 0.0
+var _peer_pos := {}             # (server) peer id -> player position in this zone, refreshed every frame
+## Overworld interest management (server): monsters only think when a player is within ACTIVE_RADIUS
+## and are only replicated to peers within SYNC_RADIUS (bosses: whole zone). Instances skip both.
+const ACTIVE_RADIUS := 1500.0
+const SYNC_RADIUS := 1300.0
+var awake_count := 0            # monsters that ran their AI this frame (for the perf log)
+var awake_last := 0
+var _perf_t := 0.0
 
 
 func setup(id: String, main_ref: Node) -> void:
@@ -44,6 +55,11 @@ func setup(id: String, main_ref: Node) -> void:
 		var tn: Array = Dungeons.THEMES[dun["theme"]]["tint"]
 		map.modulate = Color(tn[0], tn[1], tn[2])
 
+	for st in map.sites:   # camp fires of the monster camps (all peers: sites are deterministic)
+		if st["kind"] == "camp":
+			var cf := CampfireVisual.new()
+			cf.position = map.cell_pos(st["cell"])
+			add_child(cf)
 	for p in info["portals"]:
 		var vis := PortalVisual.new()
 		var r: Rect2i = p["rect"]
@@ -159,6 +175,10 @@ func _spawn_monster(data: Variant) -> Node:
 	m.setup(int(data["id"]), str(data["type"]), int(data["level"]), data["pos"], int(data.get("pack", -1)), bool(data.get("temp", false)),
 		{"el": str(data.get("el", "")), "elite": str(data.get("elite", ""))})
 	_attach_filter(m)
+	if Zones.DB.has(zone_id) and not m.is_boss:
+		var sync := m.get_node("Sync") as MultiplayerSynchronizer
+		sync.add_visibility_filter(func(peer: int) -> bool:
+			return _peer_pos.has(peer) and (_peer_pos[peer] as Vector2).distance_squared_to(m.position) < SYNC_RADIUS * SYNC_RADIUS)
 	return m
 
 
@@ -209,7 +229,10 @@ func avoid_cells() -> Array:
 
 
 func spawn_initial_monsters() -> void:
-	for g in info["monsters"]:
+	if info.has("groups"):
+		_spawn_groups()
+		return
+	for g in info.get("monsters", []):
 		var pack_size := int(g.get("pack", 1))
 		var groups := int(g["count"])
 		for i in groups:
@@ -225,6 +248,155 @@ func spawn_initial_monsters() -> void:
 	if not boss.is_empty():
 		spawn_monster(str(boss["type"]), int(boss["level"]), map.cell_pos(boss["cell"]), -1, false)
 		main.log_server("[%s] boss %s spawned" % [zone_id, Monsters.info(boss["type"])["name"]])
+
+
+# ---------------------------------------------------------------- overworld monster groups (server)
+
+## Every group of the zone: core groups in the old entrance area, the rest on the map's sites,
+## the guards around the boss lair. Levels rise with the site's distance from the entrance.
+func _spawn_groups() -> void:
+	var specs: Array = info["groups"]
+	var lv0 := int(info["lv"][0])
+	var lv1 := int(info["lv"][1])
+	var core := Rect2i(Zones.core_of(zone_id), Vector2i(Zones.W, Zones.H))
+	for i in specs.size():
+		var g: Dictionary = specs[i]
+		if g.get("core", false):
+			for k in int(g["n"]):
+				var cell := Vector2i(-1, -1)
+				for tries in 60:
+					var c := map.local_to_map(map.random_open_position(_rng, avoid_cells()))
+					if core.has_point(c):
+						cell = c
+						break
+				if cell.x >= 0:
+					_make_group(i, cell, lv0 + _rng.randi_range(0, 1))
+		elif g["kind"] == "guard" and not info["boss"].is_empty():
+			var bc: Vector2i = info["boss"]["cell"]
+			_make_group(i, bc + Vector2i(0, 4), int(info["boss"]["level"]) - 2)
+	for st in map.sites:
+		if int(st["spec"]) >= 0:
+			_make_group(int(st["spec"]), st["cell"], lv0 + roundi((lv1 - lv0) * float(st["depth"])))
+	var kinds := {}
+	var n := 0
+	for g in groups:
+		kinds[g["kind"]] = int(kinds.get(g["kind"], 0)) + 1
+		n += g["members"].size()
+	main.log_server("[%s] %d monster groups (%d monsters) on a %dx%d map: %s" % [zone_id, groups.size(), n, map.w, map.h, kinds])
+	var boss: Dictionary = info.get("boss", {})
+	if not boss.is_empty():
+		spawn_monster(str(boss["type"]), int(boss["level"]), map.cell_pos(boss["cell"]), -1, false)
+		main.log_server("[%s] boss %s spawned in its lair at %s" % [zone_id, Monsters.info(boss["type"])["name"], boss["cell"]])
+
+
+func _make_group(spec_i: int, cell: Vector2i, lv: int) -> void:
+	var g: Dictionary = info["groups"][spec_i]
+	var kind: String = g["kind"]
+	var types: Array = g["types"]
+	var size := _rng.randi_range(int(g["size"][0]), int(g["size"][1]))
+	_pack_counter += 1
+	var grp := {"id": _pack_counter, "kind": kind, "spec": spec_i, "cell": cell, "lv": lv, "members": [], "dead_t": -1.0, "wps": [cell], "wp": 0}
+	var etype: String = types[_rng.randi() % types.size()]
+	for k in size:
+		var t: String = types[k % types.size()]
+		var mlv := lv
+		var opts := {}
+		match kind:
+			"pack": t = types[0]
+			"camp":
+				if k == 0:
+					mlv = lv + 2   # the camp leader
+				else:
+					t = types[1 + _rng.randi() % maxi(1, types.size() - 1)] if types.size() > 1 else types[0]
+			"elite":
+				t = etype
+				if k == 0:
+					opts["elite"] = Dungeons.ELITE_MODS[_rng.randi() % Dungeons.ELITE_MODS.size()]
+					mlv = lv + 1
+		var m: Node = spawn_monster(t, mlv, map.spot_near(cell, _rng, 44.0), grp["id"], false, opts)
+		m.group = grp
+		m.patrol = kind == "patrol"
+		grp["members"].append(m)
+	if kind == "patrol":   # walk between this site and the two nearest other sites
+		var others: Array = []
+		for st in map.sites:
+			if st["cell"] != cell:
+				others.append(st["cell"])
+		others.sort_custom(func(a, b): return Vector2(a).distance_squared_to(Vector2(cell)) < Vector2(b).distance_squared_to(Vector2(cell)))
+		for k in mini(2, others.size()):
+			grp["wps"].append(others[k])
+	groups.append(grp)
+
+
+func group_label(grp: Dictionary) -> String:
+	var names := {}
+	for m in grp["members"]:
+		names[Monsters.info(m.type)["name"]] = true
+	return "#%d %s of %s" % [grp["id"], grp["kind"], "+".join(names.keys())]
+
+
+func _physics_process(delta: float) -> void:
+	if not multiplayer.has_multiplayer_peer() or not multiplayer.is_server():
+		return
+	_peer_pos.clear()
+	for p in players_root.get_children():
+		_peer_pos[p.peer_id] = p.position
+	awake_last = awake_count
+	awake_count = 0
+	if groups.is_empty():
+		return
+	_perf_t += delta
+	if _perf_t >= 10.0 and not _peer_pos.is_empty():
+		_perf_t = 0.0
+		var total := monsters_root.get_child_count()
+		var seen := 0
+		for m in monsters_root.get_children():
+			for pid in _peer_pos:
+				if m.is_boss or (_peer_pos[pid] as Vector2).distance_squared_to(m.position) < SYNC_RADIUS * SYNC_RADIUS:
+					seen += 1
+		main.log_server("[%s] perf: %d monsters, %d awake (AI running), %d monster syncs to %d player(s) (%.0f%% of a full-zone sync)" % [
+			zone_id, total, awake_last, seen, _peer_pos.size(), 100.0 * seen / maxf(1.0, total * _peer_pos.size())])
+	_group_t += delta
+	if _group_t < 0.5:
+		return
+	var dt := _group_t
+	_group_t = 0.0
+	for grp in groups:
+		var alive := 0
+		for m in grp["members"]:
+			if m.alive:
+				alive += 1
+		if alive == 0:   # the whole group is down: it comes back together after a while
+			if grp["dead_t"] < 0.0:
+				grp["dead_t"] = float(Monsters.info(grp["members"][0].type)["respawn"]) * 1.5 * main.respawn_scale
+			grp["dead_t"] -= dt
+			if grp["dead_t"] <= 0.0:
+				grp["dead_t"] = -1.0
+				grp["wp"] = 0
+				for m in grp["members"]:
+					m.respawn_at(map.spot_near(grp["cell"], _rng, 44.0))
+				main.log_server("[%s] group %s respawned at %s: %d members" % [zone_id, group_label(grp), grp["cell"], grp["members"].size()])
+			continue
+		if grp["kind"] == "patrol" and _peer_pos.size() > 0:
+			var lead: Node = null
+			for m in grp["members"]:
+				if m.alive:
+					lead = m
+					break
+			var goal := map.cell_pos(grp["wps"][grp["wp"]])
+			if lead.target == null and lead.position.distance_to(goal) < 56.0:
+				grp["wp"] = (int(grp["wp"]) + 1) % grp["wps"].size()
+				goal = map.cell_pos(grp["wps"][grp["wp"]])
+			for i in grp["members"].size():
+				grp["members"][i].home = goal + Vector2.from_angle(TAU * i / grp["members"].size()) * 26.0
+
+
+## (server) Is any player of this zone within `r` of `pos`?
+func players_near(pos: Vector2, r: float) -> bool:
+	for pid in _peer_pos:
+		if (_peer_pos[pid] as Vector2).distance_squared_to(pos) < r * r:
+			return true
+	return false
 
 
 func spawn_monster(type: String, level: int, pos: Vector2, pack: int, temp: bool, opts: Dictionary = {}) -> Node:
@@ -507,6 +679,28 @@ class PortalVisual extends Node2D:
 
 
 # ---------------------------------------------------------------- blacksmith station (Sunny Meadow)
+
+# ---------------------------------------------------------------- camp fire of a monster camp
+
+class CampfireVisual extends Node2D:
+	var _t := 0.0
+
+	func _ready() -> void:
+		z_index = 0
+
+	func _process(delta: float) -> void:
+		_t += delta
+		queue_redraw()
+
+	func _draw() -> void:
+		draw_circle(Vector2(0, 4), 18.0, Color(1.0, 0.55, 0.15, 0.12 + 0.05 * sin(_t * 7.0)))
+		for i in 4:   # logs
+			var a := TAU * i / 4.0 + 0.3
+			draw_line(Vector2.from_angle(a) * 9.0, Vector2.from_angle(a + PI) * 9.0, Color(0.35, 0.2, 0.1), 3.0)
+		for i in 3:   # flames
+			var f := 0.7 + 0.3 * sin(_t * 9.0 + i * 2.0)
+			draw_circle(Vector2((i - 1) * 4.0, -3.0 - 4.0 * f), 4.5 * f, Color(1.0, 0.45 + 0.25 * i / 2.0, 0.1, 0.9))
+
 
 class BlacksmithVisual extends Node2D:
 	var _t := 0.0
