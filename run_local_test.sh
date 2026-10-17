@@ -92,7 +92,7 @@ SAVE4="$(pwd)/$L/accounts_p4.json"; rm -f "$SAVE4"
 run --server --save-file="$SAVE4" --debug-start-level=20 --debug-level-for=MetalA:22 --debug-loot --fast-respawn --allow-warp --quit-after=76 > $L/p4_server.log 2>&1 &
 sleep 2
 b4() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=t --bot --bot-no-gear "$@" --quit-after=70 > $L/p4_$n.log 2>&1 & }
-b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-target=far --warp=crypt
+b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-target=far --bot-hunt=boss --warp=crypt --warp-cell=26,18
 b4 MetalB --class=metal --bot-talents=auto:1 --warp=forest
 b4 WoodA  --class=wood  --bot-talents=auto:0 --bot-aim --warp=forest
 b4 WoodB  --class=wood  --bot-talents=auto:1 --warp=crypt
