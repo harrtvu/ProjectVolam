@@ -202,7 +202,8 @@ func _get_tileset() -> TileSet:
 	ts.set_physics_layer_collision_layer(0, 1)
 	ts.set_physics_layer_collision_mask(0, 0)
 	var src := TileSetAtlasSource.new()
-	src.texture = load("res://assets/tiles.png")
+	# art test: same atlas layout, Whisperwood (F_*) cells redrawn from Ninja Adventure -> collision unchanged
+	src.texture = ArtTest.tex("tiles.png") if ArtTest.tex("tiles.png") else load("res://assets/tiles.png")
 	src.texture_region_size = Vector2i(TILE, TILE)
 	ts.add_source(src, 0)
 	for i in Tiles.COUNT:

@@ -1,0 +1,42 @@
+{
+ "metal": {
+  "frames": 14,
+  "pivot": [
+   48,
+   54
+  ],
+  "effect": "electric-impact"
+ },
+ "wood": {
+  "frames": 14,
+  "pivot": [
+   48,
+   62
+  ],
+  "effect": "leaf-gust"
+ },
+ "water": {
+  "frames": 13,
+  "pivot": [
+   48,
+   61
+  ],
+  "effect": "frost-nova"
+ },
+ "fire": {
+  "frames": 15,
+  "pivot": [
+   48,
+   58
+  ],
+  "effect": "warm-explosion"
+ },
+ "earth": {
+  "frames": 20,
+  "pivot": [
+   48,
+   71
+  ],
+  "effect": "earth-rupture"
+ }
+}

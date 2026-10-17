@@ -25,14 +25,42 @@ func setup(k: String, pos: Vector2, r: float, c: Color, e: Vector2) -> void:
 			_life = 0.9
 		"burst", "roots":
 			_life = 0.6
+	_art_vfx()
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	for i in 18:
 		_dots.append([Vector2.from_angle(rng.randf() * TAU), rng.randf_range(0.4, 1.0), rng.randf_range(2.0, 4.5)])
 
 
+## Art test: overlay the element's PVFX Foundry (nerijs, CC0) animation on top of the procedural effect.
+var _vfx: Sprite2D
+var _vfx_n := 0
+func _art_vfx() -> void:
+	if not ArtTest.enabled or kind == "telegraph" or kind == "line":
+		return
+	var el := ArtTest.element_of(color)
+	var t := ArtTest.tex("vfx_%s.png" % el)
+	var meta: Dictionary = ArtTest.vfx_meta().get(el, {})
+	if t == null or meta.is_empty():
+		return
+	_vfx_n = int(meta["frames"])
+	_vfx = Sprite2D.new()
+	_vfx.texture = t
+	_vfx.hframes = 5
+	_vfx.vframes = int(ceil(_vfx_n / 5.0))
+	var pv: Array = meta["pivot"]
+	_vfx.offset = Vector2(48 - float(pv[0]), 48 - float(pv[1]))
+	var s := clampf(radius * 2.2 / 96.0, 0.6, 3.0)
+	_vfx.scale = Vector2(s, s)
+	_vfx.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	add_child(_vfx)
+	_life = maxf(_life, _vfx_n / 20.0)
+
+
 func _process(delta: float) -> void:
 	_t += delta
+	if _vfx:
+		_vfx.frame = mini(int(_t * 20.0), _vfx_n - 1)
 	if _t >= _life:
 		queue_free()
 		return

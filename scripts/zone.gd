@@ -708,6 +708,8 @@ class CampfireVisual extends Node2D:
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0
+		if ArtTest.enabled and ArtTest.mood:   # art test: the camp fire lights its surroundings
+			add_child(ArtTest.make_light(Color(1.0, 0.55, 0.2), 0.9, 1.2))
 
 	func _process(delta: float) -> void:
 		_t += delta

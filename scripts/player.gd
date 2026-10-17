@@ -76,6 +76,8 @@ var _last_pos := Vector2.ZERO
 var _portal_cd := 1.0
 var _main: Node
 var _sprite: Sprite2D
+var _art_tex: Texture2D        # art test sheet (null = classic Kenney sprite)
+var _cast_t := 0.0             # art test: show the cast ("item") pose for a moment
 var _label: Label
 var _char_tex: Texture2D
 var _tomb_tex: Texture2D
@@ -132,6 +134,11 @@ func setup(id: int, pname: String, pos: Vector2, stats: Dictionary) -> void:
 	_sprite.texture = _char_tex
 	_sprite.offset = Vector2(0, -12)
 	add_child(_sprite)
+	_art_tex = ArtTest.tex("class_%s_%d.png" % [class_id, absi(pname.to_lower().hash()) % 2])
+	if _art_tex:   # art test: Ninja Adventure 4-dir sheet (idle / walk x4 / attack / item-as-cast)
+		_sprite.texture = _art_tex
+		_sprite.hframes = 4
+		_sprite.vframes = 7
 
 	_label = Label.new()
 	_label.name = "NameLabel"
@@ -160,6 +167,10 @@ func _ready() -> void:
 	_rng.randomize()
 	if _main and int(_main.craft_seed) >= 0:   # tests: deterministic crafting / enhancement rolls
 		_rng.seed = int(_main.craft_seed)
+	if is_local() and ArtTest.enabled and ArtTest.mood:   # art test: lantern light around your own hero
+		var pl := ArtTest.make_light(Color(1.0, 0.88, 0.7), 0.45, 1.8)
+		pl.name = "ArtTestLight"
+		add_child(pl)
 	if is_local():
 		var cam := Camera2D.new()
 		cam.name = "Camera"
@@ -216,7 +227,23 @@ func _physics_process(delta: float) -> void:
 	var moving := position.distance_to(_last_pos) > 0.3
 	_last_pos = position
 	_anim_t = _anim_t + delta * 12.0 if moving else 0.0
-	if _sprite:
+	if _sprite and _art_tex:
+		_cast_t = maxf(0.0, _cast_t - delta)
+		_sprite.texture = _tomb_tex if dead else _art_tex
+		_sprite.hframes = 1 if dead else 4
+		_sprite.vframes = 1 if dead else 7
+		if not dead:
+			var col := ArtTest.dir_col(facing)
+			var row := 0
+			if _cast_t > 0.0:
+				row = 6
+			elif _swing_t > 0.0:
+				row = 5
+			elif moving:
+				row = 1 + int(_anim_t / 2.5) % 4
+			_sprite.frame = row * 4 + col
+		_sprite.modulate = Color(1, 0.45, 0.45) if _flash > 0.0 else Color.WHITE
+	elif _sprite:
 		_sprite.texture = _tomb_tex if dead else _char_tex
 		_sprite.position.y = -absf(sin(_anim_t)) * 3.0
 		_sprite.rotation = sin(_anim_t) * 0.08
@@ -1269,6 +1296,7 @@ func client_set_inventory(inv: Dictionary, g: int, eq: Dictionary, b: Array, st:
 @rpc("authority", "call_local", "reliable")
 func client_skill_cast(slot: int, cd: float) -> void:
 	cd_client[slot] = [Time.get_ticks_msec() + int(cd * 1000.0), cd]
+	_cast_t = 0.45
 
 
 @rpc("authority", "call_local", "reliable")

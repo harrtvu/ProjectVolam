@@ -58,6 +58,10 @@ var _damagers := {}           # peer_id -> player node (for XP/credit)
 var _adds: Array = []
 var _shape: CollisionShape2D
 var _sprite: Sprite2D
+var _art_tex: Texture2D     # art test sheet (null = classic Kenney sprite)
+var _art_boss := false
+var _art_last := Vector2.ZERO
+var _art_dir := Vector2.DOWN
 var _label: Label
 var _tint := Color.WHITE
 var _born_ms := Time.get_ticks_msec()
@@ -115,10 +119,21 @@ func setup(id: int, t: String, lv: int, pos: Vector2, pack: int, temp: bool, opt
 	_sprite.scale = Vector2(sc, sc)
 	_sprite.modulate = _tint
 	add_child(_sprite)
+	_art_boss = is_boss and ArtTest.tex("boss_%s.png" % def["sprite"]) != null
+	_art_tex = ArtTest.tex(("boss_%s.png" if _art_boss else "mon_%s.png") % def["sprite"])
+	if _art_tex:   # art test: Ninja Adventure sheet (monsters 4 dirs x 4 walk frames; boss idle/walk/attack rows)
+		_sprite.texture = _art_tex
+		_sprite.hframes = 15 if _art_boss else 4
+		_sprite.vframes = 3 if _art_boss else 4
+		if _art_boss:
+			_sprite.offset = Vector2(0, -30)
+			_sprite.scale = Vector2.ONE
 	_label = Label.new()
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_label.size = Vector2(180, 16)
 	_label.position = Vector2(-90, -34 * sc - 28)
+	if _art_boss:
+		_label.position.y = -100.0   # art test boss sprite is 82 px at 1x
 	_label.z_index = 10
 	_label.add_theme_font_size_override("font_size", 13 if is_boss else 10)
 	var ec := Classes.color(element)
@@ -400,11 +415,27 @@ func _physics_process(delta: float) -> void:
 	_bob += delta * 6.0
 	if _flash > 0.0:
 		_flash -= delta
-	if _sprite:
+	if _sprite and _art_tex:
+		var mv := position - _art_last
+		_art_last = position
+		var moving := mv.length() > 0.2
+		if moving:
+			_art_dir = mv
+		var sc := float(def.get("scale", 1.0)) * (1.25 if elite != "" else 1.0)
+		if _art_boss:   # TenguRed frames are 82 px already (~2.5 tiles): don't scale them again
+			var row := 2 if casting else (1 if moving else 0)
+			var n: int = [6, 10, 15][row]
+			_sprite.frame = row * 15 + int(_bob * 1.5) % n
+			_sprite.flip_h = flip
+		else:
+			_sprite.scale = Vector2(sc, sc)
+			_sprite.frame = (int(_bob * 1.2) % 4 if moving or def.get("flying", false) else 0) * 4 + ArtTest.dir_col(_art_dir)
+	elif _sprite:
 		var squish := 1.0 + 0.06 * sin(_bob)
 		var sc := float(def.get("scale", 1.0))
 		_sprite.scale = Vector2(sc * squish, sc / squish)
 		_sprite.flip_h = flip
+	if _sprite:
 		if def.get("flying", false):
 			_sprite.position.y = -4.0 + sin(_bob * 1.3) * 3.0
 		var m := _tint

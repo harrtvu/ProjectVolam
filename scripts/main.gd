@@ -40,6 +40,8 @@ extends Node2D
 ##   --debug-tooltip=N   show the tooltip of the N-th gear item in the bag (screenshots)
 ##   --open-sheet        open the character sheet (C) on login (screenshots)
 ##   --quit-after=SECS   quit automatically after SECS seconds (for tests)
+##   --art-test          ART STYLE TEST: Ninja Adventure reskin (Whisperwood) + dark mood pass (--art-test-nomood: no grade)
+##   --screenshot-seq=N  with --screenshot: save N frames PATH_00..  every --screenshot-interval=SECS (default 0.4)
 ##   --screenshot=PATH   save a screenshot after --screenshot-delay=SECS (default 6; needs a display)
 ##   --open-inventory    open the inventory panel once in game (for screenshots)
 ##   --show-fps          show the F3 FPS overlay from the start (screenshots / reports)
@@ -269,6 +271,9 @@ var _bot_goal := Vector2i(-1, -1)
 var _bot_route_done := false
 var _screenshot_path := ""
 var _screenshot_delay := 6.0
+var _shot_seq := 0                 # --screenshot-seq=N (art test combat sequence)
+var _shot_idx := 0
+var _shot_interval := 0.4          # --screenshot-interval=SECS
 var _screenshot_when := ""         # "" | "dungeon" (inside an instance) | "boss" (next to a live dungeon boss)
 var _shot_since := -1.0
 var _open_inventory := false
@@ -279,9 +284,11 @@ var _rejected := false
 func _ready() -> void:
 	get_tree().paused = false    # (after "Return to Main Menu" the old scene was reloaded while paused)
 	rng.randomize()
+	ArtTest.init_from_args()
 	_setup_input()
 	_build_world()
 	_build_ui()
+	ArtTest.add_mood(self)
 	pause_menu = PauseMenuScript.new()
 	pause_menu.main = self
 	hud.get_parent().add_child(pause_menu)
@@ -539,6 +546,8 @@ func _parse_args() -> void:
 	_screenshot_when = str(opts.get("screenshot-when", ""))
 	if opts.has("screenshot-delay"):
 		_screenshot_delay = float(opts["screenshot-delay"])
+	_shot_seq = int(opts.get("screenshot-seq", "0"))
+	_shot_interval = float(opts.get("screenshot-interval", "0.4"))
 	if opts.has("name"):
 		name_edit.text = str(opts["name"])
 	if opts.has("password"):
@@ -1508,9 +1517,16 @@ func _process(delta: float) -> void:
 		minimap.toggle_big()
 	if _screenshot_path != "" and _elapsed > _screenshot_delay and _screenshot_ready():
 		var img := get_viewport().get_texture().get_image()
-		var err := img.save_png(_screenshot_path)
-		_log("screenshot saved to %s (err %d)" % [_screenshot_path, err])
-		_screenshot_path = ""
+		var out_path := _screenshot_path
+		if _shot_seq > 0:   # --screenshot-seq=N: N frames, PATH_00.png ... every --screenshot-interval secs
+			out_path = _screenshot_path.get_basename() + "_%02d.png" % _shot_idx
+		var err := img.save_png(out_path)
+		_log("screenshot saved to %s (err %d)" % [out_path, err])
+		_shot_idx += 1
+		if _shot_seq > 0 and _shot_idx < _shot_seq:
+			_screenshot_delay = _elapsed + _shot_interval
+		else:
+			_screenshot_path = ""
 	chat_active = chat_edit != null and chat_edit.has_focus()
 	if not in_game:
 		return
@@ -3488,6 +3504,8 @@ func _enter_game() -> void:
 func _build_ui() -> void:
 	var ui := CanvasLayer.new()
 	ui.name = "UI"
+	if ArtTest.enabled:
+		ui.layer = 2   # above the art-test colour grade
 	add_child(ui)
 
 	# ---- main menu
@@ -3570,6 +3588,12 @@ func _build_ui() -> void:
 	var stats_panel := PanelContainer.new()
 	stats_panel.position = Vector2(10, 10)
 	stats_panel.add_theme_stylebox_override("panel", _panel_style())
+	if ArtTest.tex("ui_panel.png"):
+		var psb := StyleBoxTexture.new()
+		psb.texture = ArtTest.tex("ui_panel.png")
+		psb.set_texture_margin_all(10)
+		psb.set_content_margin_all(12)
+		stats_panel.add_theme_stylebox_override("panel", psb)
 	hud.add_child(stats_panel)
 	var svb := VBoxContainer.new()
 	svb.custom_minimum_size = Vector2(230, 0)
@@ -3817,6 +3841,15 @@ func _mk_bar(color: Color) -> Array:
 	fill.set_corner_radius_all(3)
 	bar.add_theme_stylebox_override("background", bg)
 	bar.add_theme_stylebox_override("fill", fill)
+	if ArtTest.tex("ui_bar_back.png"):   # Kenney UI Pack RPG Expansion bars (9-sliced)
+		var tn := "red" if color.r > 0.6 and color.g < 0.4 else ("blue" if color.b > 0.6 else "yellow")
+		for pair in [["background", "ui_bar_back.png"], ["fill", "ui_bar_%s.png" % tn]]:
+			var st := StyleBoxTexture.new()
+			st.texture = ArtTest.tex(pair[1])
+			st.texture_margin_left = 9
+			st.texture_margin_right = 9
+			st.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_STRETCH
+			bar.add_theme_stylebox_override(pair[0], st)
 	var l := Label.new()
 	l.set_anchors_preset(Control.PRESET_FULL_RECT)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
