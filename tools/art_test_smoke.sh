@@ -8,7 +8,7 @@ cd "$(dirname "$0")/.."
 S=run_local_test.sh
 T=$(mktemp)
 {
-  sed -n '15,23p' $S                                   # setup + run()
+  sed -n '15,23p' $S | grep -v '^cd '                  # setup + run() (we are already in the repo)
   sed -n '/^echo "Phase 1 /,/^wait$/p' $S              # phase 1
   sed -n '/^"\$GODOT" --headless --path . -- --bigmap-selftest/p' $S
   sed -n '/^echo "Phase 3 /,/^echo "Phase 4 /p' $S | sed '$d'

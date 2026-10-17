@@ -22,10 +22,11 @@ shot() {  # name out.png delay [client options]
 if [ "$WHAT" != combat ]; then
   for mode in before after; do
     A=""; [ $mode = after ] && A="--art-test"
-    shot town_$mode $OUT/${mode}_town.png 5 --warp=meadow --warp-cell=166,66 $A
-    shot wilds_$mode $OUT/${mode}_wilds.png 5 --warp=forest --warp-cell=12,22 $A
-    shot group_$mode $OUT/${mode}_group.png 5 --warp=forest --warp-cell=$(shift_cell $CAMP 0 3) $A
-    shot boss_$mode $OUT/${mode}_boss.png 5 --warp=forest --warp-cell=178,119 $A
+    case " ${VIEWS:-town wilds group boss} " in *" town "*) shot town_$mode $OUT/${mode}_town.png 5 --warp=meadow --warp-cell=166,66 $A;; esac
+    case " ${VIEWS:-town wilds group boss} " in *" wilds "*) shot wilds_$mode $OUT/${mode}_wilds.png 5 --warp=forest --warp-cell=12,22 $A;; esac
+    case " ${VIEWS:-town wilds group boss} " in *" group "*) shot group_$mode $OUT/${mode}_group.png 5 --warp=forest --warp-cell=$(shift_cell $CAMP 0 3) $A;; esac
+    # boss lair: stand 6 tiles from the Broodmother and shoot after 3 s, before it closes in
+    case " ${VIEWS:-town wilds group boss} " in *" boss "*) shot boss_$mode $OUT/${mode}_boss.png 3 --warp=forest --warp-cell=178,113 $A;; esac
   done
 fi
 if [ "$WHAT" != views ]; then
