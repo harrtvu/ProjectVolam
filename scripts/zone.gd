@@ -520,6 +520,8 @@ func spawn_pickup(item: String, count: int, pos: Vector2, inst: Dictionary = {})
 	var p := pos + off
 	if not map.is_walkable_pos(p):
 		p = pos
+	if not map.reachable.has(map.local_to_map(p)):   # e.g. a flying bat killed over a wall / water: drop it where players can walk
+		p = map.nearest_reachable_pos(p, map.local_to_map(p))
 	loot_spawner.spawn({"id": next_id(), "item": item, "count": count, "pos": p, "inst": inst})
 
 
