@@ -62,29 +62,29 @@ PASS  frost is ~10x bigger (200x128 vs 64x40)
 PASS  frost has 5 distinct group types ({ "pack": 13, "guard": 1, "elite": 3, "patrol": 2, "camp": 3 })
 PASS  portals, NPCs, boss lairs and monster sites reachable
 PASS  bosses wait in their lairs deep in the zone
-PASS  group aggro (pull one, the group comes): 638 pulls
+PASS  group aggro (pull one, the group comes): 623 pulls
 PASS  a camp group aggroed together
 PASS  a elite group aggroed together
-PASS  groups respawn together (597 group respawns)
+PASS  groups respawn together (590 group respawns)
 PASS  elite group leader in the overworld
 PASS  old save: position shifted into the big map
 PASS  old save: restored at the shifted spot
 PASS  invalid saved position relocated
-PASS  interest management: far monsters sleep (81 monsters, 12 awake (AI running), 9 monster syncs to 1 player(s) (11% of a full-zone sync))
-PASS  Whisperwood client perf entrance:  frame_ms=6.90  physics_ms=0.42  nodes=772  monsters_here=5
-PASS  Whisperwood client perf lair:  frame_ms=6.90  physics_ms=0.84  nodes=797  monsters_here=12
+PASS  interest management: far monsters sleep (76 monsters, 5 awake (AI running), 6 monster syncs to 1 player(s) (8% of a full-zone sync))
+PASS  Whisperwood client perf entrance:  frame_ms=6.90  physics_ms=3.06  nodes=762  monsters_here=4
+PASS  Whisperwood client perf lair:  frame_ms=6.90  physics_ms=1.89  nodes=803  monsters_here=11
 
 == Monsters (attack / die / respawn)
-PASS  Slime           attacks=273  kills=260  respawns=250
-PASS  Dire Rat        attacks=187  kills=340  respawns=310
-PASS  Cave Bat        attacks=114  kills=229  respawns=170
-PASS  Wood Spider     attacks=117  kills=304  respawns=251
-PASS  Crypt Archer    attacks=112  kills=201  respawns=199
-PASS  Restless Ghost  attacks=107  kills=230  respawns=225
-PASS  Grave Crawler   attacks=80   kills=118  respawns=57
-PASS  Yeti            attacks=88   kills=124  respawns=122
-PASS  Ice Ogre        attacks=32   kills=72   respawns=72
-PASS  Frost Bat       attacks=132  kills=204  respawns=197
+PASS  Slime           attacks=94   kills=229  respawns=212
+PASS  Dire Rat        attacks=111  kills=357  respawns=349
+PASS  Cave Bat        attacks=118  kills=254  respawns=188
+PASS  Wood Spider     attacks=125  kills=294  respawns=197
+PASS  Crypt Archer    attacks=138  kills=216  respawns=212
+PASS  Restless Ghost  attacks=78   kills=239  respawns=233
+PASS  Grave Crawler   attacks=64   kills=75   respawns=29
+PASS  Yeti            attacks=75   kills=108  respawns=100
+PASS  Ice Ogre        attacks=39   kills=80   respawns=80
+PASS  Frost Bat       attacks=142  kills=293  respawns=287
 
 == Bosses
 PASS  Broodmother killed
@@ -123,26 +123,26 @@ PASS  Bot1 not prompted again
 PASS  class-restricted weapon refused
 
 == Skills (server-authoritative)
-PASS  Whirling Blade         casts=88   hits=103
-PASS  Piercing Strike        casts=64   hits=106
-PASS  Blade Focus            casts=29   hits=0
-PASS  Thousand Cuts          casts=24   hits=38
-PASS  Poison Thorn           casts=60   hits=45
-PASS  Regrowth               casts=29   hits=0
-PASS  Entangling Roots       casts=25   hits=49
-PASS  Plague Bloom           casts=21   hits=26
-PASS  Ice Shard              casts=144  hits=114
-PASS  Healing Rain           casts=62   hits=0
-PASS  Frost Nova             casts=48   hits=63
-PASS  Tidal Wave             casts=42   hits=51
-PASS  Fireball               casts=158  hits=225
-PASS  Flame Burst            casts=83   hits=94
-PASS  Meteor                 casts=58   hits=77
-PASS  Inferno                casts=47   hits=105
-PASS  Ground Slam            casts=63   hits=43
-PASS  Stone Skin             casts=26   hits=0
-PASS  Mountain's Challenge   casts=32   hits=0
-PASS  Earthquake             casts=22   hits=76
+PASS  Whirling Blade         casts=84   hits=105
+PASS  Piercing Strike        casts=61   hits=82
+PASS  Blade Focus            casts=30   hits=0
+PASS  Thousand Cuts          casts=24   hits=45
+PASS  Poison Thorn           casts=53   hits=36
+PASS  Regrowth               casts=26   hits=0
+PASS  Entangling Roots       casts=26   hits=51
+PASS  Plague Bloom           casts=23   hits=45
+PASS  Ice Shard              casts=131  hits=107
+PASS  Healing Rain           casts=58   hits=0
+PASS  Frost Nova             casts=44   hits=48
+PASS  Tidal Wave             casts=40   hits=60
+PASS  Fireball               casts=168  hits=227
+PASS  Flame Burst            casts=87   hits=104
+PASS  Meteor                 casts=60   hits=114
+PASS  Inferno                casts=50   hits=89
+PASS  Ground Slam            casts=63   hits=51
+PASS  Stone Skin             casts=29   hits=0
+PASS  Mountain's Challenge   casts=30   hits=0
+PASS  Earthquake             casts=24   hits=65
 PASS  locked skill rejected (level)
 PASS  skill unlocked on level-up
 PASS  cooldown enforced
@@ -395,6 +395,7 @@ PASS  hideout Ticket Merchant works
 PASS  Map Device in the hideout opens a map
 PASS  dungeon exit portal leads to the hideout
 PASS  dungeon portal returns to the hideout
+PASS  hideout door works with E
 PASS  logout in the hideout restores there
 PASS  layout survives a server restart
 PASS  door back to Sunny Meadow
@@ -403,7 +404,7 @@ PASS  Guardian test starts without the theme
 PASS  Guardian ticket opened (fire:10)
 PASS  killing the Fire Guardian unlocks Ember Forge
 PASS  boss decoration drop (forced chance 1.0)
-      saved hideout: unlocked ['meadow', 'fire'], owned {'flowers': 2, 'lantern': 1, 'statue': 1} (boss drop statue)
+      saved hideout: unlocked ['meadow', 'fire'], owned {'banner': 1, 'flowers': 2, 'lantern': 1} (boss drop banner)
 PASS  drop lands in owned decorations + theme saved
 PASS  Esc menu Hideout button clicked (UI)
 PASS  the click fired the menu's Hideout action
@@ -429,12 +430,13 @@ PASS  party invite sent
 PASS  invite to an offline name rejected
 PASS  accept without an invite rejected
 PASS  party formed
+PASS  party panel follows members into the dungeon
 PASS  member's HUD gets the party
 PASS  leader opens the dungeon
 PASS  party member enters the leader's instance
 PASS  non-member still refused
 PASS  both players in the same instance
-PASS  both party members kill monsters in the instance (26 by Member, 27 by Leader)
+PASS  both party members kill monsters in the instance (24 by Member, 24 by Leader)
 PASS  dungeon cleared by the party
 PASS  boss kill completes the party run
 PASS  version handshake accepted (same build)
@@ -456,10 +458,13 @@ PASS  unknown stock id rejected
 PASS  sell loot to the vendor for gold
 PASS  selling away from the vendor rejected
 PASS  buying without gold rejected
+PASS  unaffordable buy explained in the panel
+PASS  selling never drops the item on the ground
+PASS  health potions sell for a little gold
 PASS  buying with a full bag rejected
 PASS  stock persists across restart (same rotation)
-saved: ['#1 x14 @10', '#10 x1 @140', '#11 x1 @156', '#12 x1 @88', '#2 x10 @30', '#3 x1 @250', '#4 x3 @40', '#5 x0 @28', '#6 x1 @52', '#7 x1 @32', '#8 x1 @92', '#9 x1 @56']
-seen:  ['#1 x14 @10', '#10 x1 @140', '#11 x1 @156', '#12 x1 @88', '#2 x10 @30', '#3 x1 @250', '#4 x3 @40', '#5 x0 @28', '#6 x1 @52', '#7 x1 @32', '#8 x1 @92', '#9 x1 @56']
+saved: ['#1 x14 @10', '#10 x1 @140', '#11 x1 @252', '#12 x1 @88', '#2 x10 @30', '#3 x2 @120', '#4 x3 @250', '#5 x0 @60', '#6 x1 @52', '#7 x1 @32', '#8 x1 @92', '#9 x1 @116']
+seen:  ['#1 x14 @10', '#10 x1 @140', '#11 x1 @252', '#12 x1 @88', '#2 x10 @30', '#3 x2 @120', '#4 x3 @250', '#5 x0 @60', '#6 x1 @52', '#7 x1 @32', '#8 x1 @92', '#9 x1 @116']
 PASS  stock, prices and sold-out entries identical after restart
 PASS  bought item kept after restart
 PASS  stock rotates on the timer
@@ -467,6 +472,11 @@ PASS  vendor offline checks
 PASS  player market code removed (no market scripts or requests left)
 
 == First-time tutorial (M2)
+PASS  big windows exclusive incl. N map (I/N x40, C/T/atlas)
+PASS  N zone map draws above chat/skill bar/help/stats
+PASS  fast typing after Enter goes into chat (no hotkeys)
+PASS  skills back to back run out of mana (UiTest)
+PASS  tutorial box never covers the inventory (step 4)
 PASS  tutorial starts for a new character
 PASS  step 1: movement
 PASS  step 2: skills (keys 1-4)
@@ -481,5 +491,9 @@ PASS  shown once (not again after a restart + re-login)
 PASS  tutorial flag stored per character
 PASS  old characters don't get the tutorial
 
+== Fresh pull onto an old .godot cache
+PASS  starts with a stale .godot class cache from 86382b3 (no editor rescan)
+
 == Errors/warnings (should be none):
 none
+PASS  no engine/script errors or warnings in any log
