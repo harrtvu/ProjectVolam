@@ -1,0 +1,233 @@
+{
+	"day": "2026-10-18",
+	"rotation": 248936,
+	"stock": [
+		{
+			"id": 1,
+			"price": 10,
+			"qty": 20,
+			"stack": "health_potion"
+		},
+		{
+			"id": 2,
+			"price": 30,
+			"qty": 10,
+			"stack": "greater_potion"
+		},
+		{
+			"id": 3,
+			"price": 120,
+			"qty": 2,
+			"stack": "enhance_stone"
+		},
+		{
+			"id": 4,
+			"price": 250,
+			"qty": 3,
+			"stack": "orb_regal"
+		},
+		{
+			"id": 5,
+			"item": {
+				"base": "jade_amulet",
+				"ilvl": 1,
+				"mods": [
+					[
+						"flat_dmg",
+						"dmg_flat",
+						2,
+						0,
+						"p"
+					],
+					[
+						"slay_water",
+						"dmg_vs:water",
+						7,
+						0,
+						"p"
+					],
+					[
+						"rarity_p",
+						"item_rarity",
+						4,
+						0,
+						"p"
+					]
+				],
+				"name": "Frost Charm",
+				"rarity": "rare",
+				"uid": 373820093,
+				"upg": 0
+			},
+			"price": 60,
+			"qty": 1
+		},
+		{
+			"id": 6,
+			"item": {
+				"base": "apprentice_staff",
+				"ilvl": 4,
+				"mods": [
+					[
+						"pct_dmg",
+						"atk_pct",
+						5,
+						0,
+						"p"
+					]
+				],
+				"rarity": "magic",
+				"uid": 328447192,
+				"upg": 0
+			},
+			"price": 52,
+			"qty": 1
+		},
+		{
+			"id": 7,
+			"item": {
+				"base": "iron_shield",
+				"ilvl": 6,
+				"mods": [],
+				"rarity": "normal",
+				"uid": 133172033,
+				"upg": 0
+			},
+			"price": 32,
+			"qty": 1
+		},
+		{
+			"id": 8,
+			"item": {
+				"base": "wooden_shield",
+				"ilvl": 9,
+				"mods": [
+					[
+						"mregen",
+						"mp_regen_pct",
+						16,
+						1,
+						"s"
+					],
+					[
+						"life",
+						"life_flat",
+						17,
+						1,
+						"p"
+					]
+				],
+				"rarity": "magic",
+				"uid": 846856919,
+				"upg": 0
+			},
+			"price": 92,
+			"qty": 1
+		},
+		{
+			"id": 9,
+			"item": {
+				"base": "iron_helm",
+				"ilvl": 12,
+				"mods": [
+					[
+						"res_metal",
+						"res:metal",
+						7,
+						0,
+						"s"
+					]
+				],
+				"rarity": "magic",
+				"uid": 1027283731,
+				"upg": 0
+			},
+			"price": 116,
+			"qty": 1
+		},
+		{
+			"id": 10,
+			"item": {
+				"base": "chain_mail",
+				"ilvl": 15,
+				"mods": [
+					[
+						"res_water",
+						"res:water",
+						29,
+						3,
+						"s"
+					]
+				],
+				"rarity": "magic",
+				"uid": 1015714290,
+				"upg": 0
+			},
+			"price": 140,
+			"qty": 1
+		},
+		{
+			"id": 11,
+			"item": {
+				"base": "iron_shield",
+				"ilvl": 17,
+				"mods": [
+					[
+						"res_wood",
+						"res:wood",
+						12,
+						1,
+						"s"
+					],
+					[
+						"mregen",
+						"mp_regen_pct",
+						13,
+						0,
+						"s"
+					],
+					[
+						"life",
+						"life_flat",
+						40,
+						3,
+						"p"
+					],
+					[
+						"armour",
+						"def_flat",
+						6,
+						2,
+						"p"
+					],
+					[
+						"res_fire",
+						"res:fire",
+						28,
+						3,
+						"s"
+					]
+				],
+				"name": "Dragon Ward",
+				"rarity": "rare",
+				"uid": 404853935,
+				"upg": 0
+			},
+			"price": 252,
+			"qty": 1
+		},
+		{
+			"id": 12,
+			"item": {
+				"base": "horned_helm",
+				"ilvl": 20,
+				"mods": [],
+				"rarity": "normal",
+				"uid": 821321478,
+				"upg": 0
+			},
+			"price": 88,
+			"qty": 1
+		}
+	]
+}

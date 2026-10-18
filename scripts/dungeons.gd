@@ -60,6 +60,12 @@ static func theme_name(t: String) -> String:
 
 
 ## Monster level inside a tier-N dungeon.
+## T1 tuning (a fresh Lv6 must survive the first pull): monsters hit for x0.8 (not the boss),
+## and every pack within T1_FIRST_PULL_RADIUS px of the entrance is a pair.
+const T1_DMG_MULT := 0.8
+const T1_FIRST_PULL_RADIUS := 800.0
+
+
 static func level(tier: int) -> int:
 	return 4 + 2 * tier
 

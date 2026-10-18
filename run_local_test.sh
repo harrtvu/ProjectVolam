@@ -283,6 +283,18 @@ run --join=127.0.0.1 --name=XpNear --password=p --class=water --bot --bot-follow
 run --join=127.0.0.1 --name=XpFar --password=p --class=earth --bot --bot-idle --bot-party=accept --warp=meadow --warp-cell=20,64 --quit-after=46 > $L/p17_XpFar.log 2>&1 &
 wait
 
+echo "Phase 18 (~80s): Forest Den T1 with fresh Lv6 Pyromancers (solo + party of 2): entrance safe area, first pull, death goes straight to town..."
+SAVE18="$(pwd)/$L/accounts_p18.json"; rm -f "$SAVE18"
+run --server --save-file="$SAVE18" --no-xp --debug-level-for=FreshSolo:6,FreshLead:6,FreshMate:6,SafeBot:6,Doomed:6 --quit-after=80 > $L/p18_server.log 2>&1 &
+sleep 2
+b18() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=p --class=fire --bot --bot-no-gear "$@" --quit-after=76 > $L/p18_$n.log 2>&1 & }
+b18 FreshSolo --bot-dungeon=first --bot-dungeon-theme=wood --bot-dungeon-tier=1
+b18 FreshLead --bot-dungeon=first --bot-dungeon-theme=wood --bot-dungeon-tier=1 --bot-party=invite:FreshMate
+b18 FreshMate --bot-dungeon=party --bot-party=accept
+b18 SafeBot --bot-dungeon=safe --bot-dungeon-theme=wood --bot-dungeon-tier=1
+b18 Doomed --bot-dungeon=die --bot-dungeon-theme=wood --bot-dungeon-tier=1
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
@@ -737,6 +749,23 @@ check "member's own client sees its XP rise"           "follow bot: [0-9]+ px fr
 check "far member logged as out of range"              "party share: XpFar too far from XpLead's kill \([0-9]+ > 1000 px\), no XP" p17_server.log
 if grep -q "XpFar gained" $L/p17_server.log; then echo "FAIL  far member gets no XP"; else echo "PASS  far member gets no XP"; fi
 if grep -q "was slain by XpNear" $L/p17_server.log; then echo "FAIL  near member never attacked (XP came from the share)"; else echo "PASS  near member never attacked (XP came from the share)"; fi
+echo; echo "== Dungeon entrance safe area + T1 first pull (fresh Lv6 Pyromancer, no gear, --no-xp)"
+check "safe area: no pack spawns near the entrance"    "entrance safe area: radius 224 px .* no pack within 480 px .* nearest monster ([4-9][0-9]{2}|[0-9]{4}) px" p18_server.log
+check "T1 warm-up packs near the entrance are pairs"   "T1: [0-9]+ warm-up pack\(s\) of 2 within 800 px, monster damage x0\.80"   p18_server.log
+check "safe area: nothing attacks a player idling in it" "safe bot: idled 6s in the safe area, hp 51/51, in safe area true"      p18_SafeBot.log
+check "safe area: bot pulled a monster"                "safe bot: hit \(hp [0-9]+/51\) - retreating into the safe area"     p18_SafeBot.log
+check "safe area: chasers stop at its edge"            "stops chasing SafeBot at the entrance safe area"                     p18_server.log
+check "safe area: no damage while back inside"         "safe bot: 8s in the safe area after the pull, hp [0-9]+ -> [0-9]+/51 \(no damage: true\)"   p18_SafeBot.log
+for n in FreshSolo FreshLead FreshMate; do
+  check "$n (fresh Lv6 fire) survives its first pack"  "FIRST PACK $n Lv6 fire cleared pack"                                 p18_server.log
+  check "$n survives its first 20 s in Forest Den T1"  "FIRST PULL $n Lv6 fire \(party of [12]\) in Forest Den \(T1\): survived" p18_server.log
+done
+check "party runs share one instance"                  "FIRST PULL FreshMate Lv6 fire \(party of 2\)"                       p18_server.log
+check "party panel shows the dungeon zone (not Sunny Meadow)" "party panel: .*FreshLead .*\[Forest Den \(T1\)\] \|   FreshMate .*\[Forest Den \(T1\)\]" p18_FreshMate.log
+check "party panel back in town after the run"         "party panel: .*FreshLead .*\[Sunny Meadow\]"                       p18_FreshMate.log
+check "dungeon death goes back to town"                "\[dungeon\] Doomed died in dun[0-9]+ - back to town"                 p18_server.log
+if awk '/\[dun[0-9]+\] Doomed died/{d=1; next} d && /\[dun[0-9]+\] Doomed took/{bad=1} /Zone transfer: Doomed dun[0-9]+ -> meadow/{d=0} END{exit bad?0:1}' $L/p18_server.log; then echo "FAIL  no damage between a dungeon death and the town transfer"; else echo "PASS  no damage between a dungeon death and the town transfer"; fi
+if grep -qE "\[dun[0-9]+\] Doomed respawned" $L/p18_server.log; then echo "FAIL  dead player never revives inside the dungeon"; else echo "PASS  dead player never revives inside the dungeon"; fi
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

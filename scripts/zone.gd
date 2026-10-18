@@ -32,6 +32,12 @@ var _peer_pos := {}             # (server) peer id -> player position in this zo
 ## Overworld interest management (server): monsters only think when a player is within ACTIVE_RADIUS
 ## and are only replicated to peers within SYNC_RADIUS (bosses: whole zone). Instances skip both.
 const ACTIVE_RADIUS := 1500.0
+## Dungeon ENTRANCE SAFE AREA: a circle around the arrival point. No pack spawns within
+## SAFE_RADIUS + SAFE_SPAWN_GAP of it; monsters never aggro on a player standing inside and
+## drop the chase (walk home) when their target steps in, so a party landing gets time to get
+## ready. A player who hits a monster from inside loses the protection for 3 s (no sniping).
+const SAFE_RADIUS := 224.0
+const SAFE_SPAWN_GAP := 256.0
 const SYNC_RADIUS := 1300.0
 static var interest := true     # --no-interest (benchmarks only): sync + simulate every monster
 var awake_count := 0            # monsters that ran their AI this frame (for the perf log)
@@ -61,6 +67,11 @@ func setup(id: String, main_ref: Node) -> void:
 			var cf := CampfireVisual.new()
 			cf.position = map.cell_pos(st["cell"])
 			add_child(cf)
+	if not dun.is_empty():
+		var ring := SafeAreaVisual.new()
+		ring.position = safe_center()
+		ring.radius = SAFE_RADIUS
+		add_child(ring)
 	for p in info["portals"]:
 		var vis := PortalVisual.new()
 		var r: Rect2i = p["rect"]
@@ -427,6 +438,20 @@ func spawn_monster(type: String, level: int, pos: Vector2, pack: int, temp: bool
 	return monster_spawner.spawn(data)
 
 
+func safe_center() -> Vector2:
+	return map.cell_pos(info["respawn"])
+
+
+## Is `pos` inside the dungeon entrance safe area? (always false outside dungeons)
+func in_safe_area(pos: Vector2) -> bool:
+	return info.has("dungeon") and pos.distance_to(safe_center()) <= SAFE_RADIUS
+
+
+## Server: may monsters not attack this player right now? (in the safe area, not sniping from it)
+func is_protected(p: Node) -> bool:
+	return in_safe_area(p.position) and float(p.get("safe_hit_t")) <= 0.0
+
+
 func is_dungeon() -> bool:
 	return info.has("dungeon")
 
@@ -457,16 +482,28 @@ func spawn_dungeon() -> void:
 	for k in mini(elites, placed.size()):
 		placed[_rng.randi() % placed.size()][1] = 1
 	var n_elite := 0
+	var skipped := 0
+	var first_pull := 0
+	var elite_carry := 0
 	for pk in placed:
 		var rect: Rect2i = pk[0]
 		var cell := _room_cell(rect)
 		if cell == Vector2i(-1, -1):
+			skipped += 1
 			continue
 		var type: String = th["pool"][_rng.randi() % th["pool"].size()]
 		var size := _rng.randi_range(2, 4)
 		_pack_counter += 1
 		packs += 1
-		var is_elite: bool = pk[1] == 1
+		var is_elite: bool = pk[1] == 1 or (elite_carry > 0 and tier == 1)
+		if tier == 1 and map.cell_pos(cell).distance_to(safe_center()) < Dungeons.T1_FIRST_PULL_RADIUS:
+			size = 2   # T1 warm-up: the packs nearest the entrance are pairs, and never elite
+			first_pull += 1
+			if is_elite:
+				is_elite = false
+				elite_carry = 1 if pk[1] == 1 else elite_carry   # the elite moves to the next pack farther in
+		elif is_elite and pk[1] != 1:
+			elite_carry = 0
 		for m in size:
 			var opts := {}
 			if is_elite and m == 0:
@@ -487,14 +524,20 @@ func spawn_dungeon() -> void:
 	main.log_server("[%s] dungeon %s T%d (lv %d, seed %d) populated: %d packs (%d elite), %d monsters, boss %s hp %d (base %d) dmg x%.2f speed x%.2f def %d | mods %s" % [zone_id,
 		Dungeons.theme_name(d["theme"]), tier, lv, int(d["seed"]), packs, n_elite, monsters_root.get_child_count(), Monsters.info(bt)["name"],
 		boss.max_hp, Monsters.max_hp(bt, lv + 2), boss._dmg_mult, boss._spd_mult, boss.defense, d["mods"]])
+	var nearest := INF
+	for m in monsters_root.get_children():
+		nearest = minf(nearest, m.position.distance_to(safe_center()))
+	main.log_server("[%s] entrance safe area: radius %.0f px at %s, no pack within %.0f px (%d pack(s) dropped), nearest monster %.0f px%s" % [
+		zone_id, SAFE_RADIUS, safe_center().round(), SAFE_RADIUS + SAFE_SPAWN_GAP, skipped, nearest,
+		(" | T1: %d warm-up pack(s) of 2 within %.0f px, monster damage x%.2f" % [first_pull, Dungeons.T1_FIRST_PULL_RADIUS, Dungeons.T1_DMG_MULT]) if tier == 1 else ""])
 
 
 func _room_cell(rect: Rect2i) -> Vector2i:
 	for i in 30:
 		var c := Vector2i(_rng.randi_range(rect.position.x + 1, rect.end.x - 2), _rng.randi_range(rect.position.y + 1, rect.end.y - 2))
-		if map.is_reachable(c):
+		if map.is_reachable(c) and map.cell_pos(c).distance_to(safe_center()) >= SAFE_RADIUS + SAFE_SPAWN_GAP:
 			return c
-	return Vector2i(-1, -1)
+	return Vector2i(-1, -1)   # (room too close to the entrance safe area: no pack here)
 
 
 ## Server: every monster death (after its loot) - dungeons track their boss.
@@ -628,11 +671,11 @@ func drop_loot(pos: Vector2, type: String, level: int, killer: Node = null, src:
 			level, ilvl, int(d.get("iiq", 0)), int(d.get("iir", 0)), mapnote])
 
 
-func nearest_player(pos: Vector2, max_dist: float) -> Node2D:
+func nearest_player(pos: Vector2, max_dist: float, skip_protected := false) -> Node2D:
 	var best: Node2D = null
 	var best_d := max_dist
 	for p in players_root.get_children():
-		if p.dead or p.is_queued_for_deletion():
+		if p.dead or p.is_queued_for_deletion() or (skip_protected and is_protected(p)):
 			continue
 		var d: float = p.position.distance_to(pos)
 		if d < best_d:
@@ -706,6 +749,34 @@ class PortalVisual extends Node2D:
 
 
 # ---------------------------------------------------------------- blacksmith station (Sunny Meadow)
+
+# ---------------------------------------------------------------- dungeon entrance safe area
+
+class SafeAreaVisual extends Node2D:
+	var radius := 224.0
+	var _t := 0.0
+
+	func _ready() -> void:
+		z_index = -1
+		var l := Label.new()
+		l.text = "Safe area"
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.size = Vector2(120, 18)
+		l.position = Vector2(-60, -radius - 20.0)
+		l.add_theme_font_size_override("font_size", 11)
+		l.add_theme_color_override("font_color", Color(0.7, 1.0, 0.75, 0.8))
+		l.add_theme_color_override("font_outline_color", Color.BLACK)
+		l.add_theme_constant_override("outline_size", 3)
+		add_child(l)
+
+	func _process(delta: float) -> void:
+		_t += delta
+		queue_redraw()
+
+	func _draw() -> void:
+		draw_circle(Vector2.ZERO, radius, Color(0.4, 1.0, 0.5, 0.05))
+		draw_arc(Vector2.ZERO, radius, 0.0, TAU, 72, Color(0.55, 1.0, 0.6, 0.35 + 0.1 * sin(_t * 2.0)), 2.0)
+
 
 # ---------------------------------------------------------------- camp fire of a monster camp
 

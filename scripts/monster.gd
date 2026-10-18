@@ -146,6 +146,8 @@ func _apply_dungeon_mods() -> void:
 	_dmg_mult = 1.0 + (float(dm.get("map_mon_dmg", 0.0)) + float(dm.get("map_extra_ele", 0.0))) / 100.0
 	_spd_mult = 1.0 + float(dm.get("map_mon_speed", 0.0)) / 100.0
 	defense += int(dm.get("map_mon_def", 0.0))
+	if zone and int(zone.info.get("dungeon", {}).get("tier", 0)) == 1 and not is_boss:
+		_dmg_mult *= Dungeons.T1_DMG_MULT   # T1 = the first dungeon a fresh Lv6 enters
 	if elite != "":
 		max_hp = roundi(max_hp * 2.5)
 		_dmg_mult *= 1.3
@@ -508,6 +510,12 @@ func _server_tick(delta: float) -> void:
 	# --- targeting / leash
 	if not _target_valid(target):
 		target = null   # (also clears references to freed players)
+	if target and zone.is_protected(target):   # dungeon entrance safe area: stop at its edge, go home
+		_srv_log("%s stops chasing %s at the entrance safe area (%.0f px from its centre)" % [display_name, target.display_name, target.position.distance_to(zone.safe_center())])
+		target = null
+		_evading = true
+		_evade_t = 0.0
+		casting = false
 	var leash := BOSS_LEASH if is_boss else LEASH
 	if _evading:
 		_evade_t += delta
@@ -516,7 +524,7 @@ func _server_tick(delta: float) -> void:
 		if position.distance_to(home) < 40.0:
 			_evading = false
 	if target == null and not _evading:
-		var p: Node2D = zone.nearest_player(position, float(def["aggro"]))
+		var p: Node2D = zone.nearest_player(position, float(def["aggro"]), true)
 		if p:
 			_set_target(p)
 	if target and (position.distance_to(home) > leash or target.position.distance_to(home) > leash + 150.0):

@@ -60,6 +60,16 @@ var tutorial := "legacy"               # server: "pending" (new character) | "do
 var _tutorial_loot := false
 var stat_dmg_taken := 0                # server: totals since login (boss fight reports)
 var stat_deaths := 0
+var safe_hit_t := 0.0                  # server: >0 = hit a monster from the dungeon safe area recently (no protection)
+const FIRST_PULL_S := 20.0             # server: report of the first seconds in a dungeon (balance + tests)
+var _fp_t := -1.0
+var _fp_min := 0
+var _fp_taken0 := 0
+var _fp_done := false
+var _fp_pack := -2                     # pack id of the first pack this player fought in the dungeon
+var _fp_pack_t := 0.0
+var _fp_pack_done := false
+var _fp_pack_check := 0.0
 var run_info: Dictionary = {}          # (owner client) the open dungeon run, for the UI
 var _drop_block_t := 0.0
 var _bagfull_ms := -99999
@@ -236,7 +246,26 @@ func _physics_process(delta: float) -> void:
 
 func _server_tick(delta: float) -> void:
 	_attack_cd = maxf(0.0, _attack_cd - delta)
+	safe_hit_t = maxf(0.0, safe_hit_t - delta)
 	_since_hit += delta
+	if zone and zone.is_dungeon() and not _fp_done:
+		if _fp_t < 0.0:
+			_fp_t = 0.0
+			_fp_min = hp
+			_fp_taken0 = stat_dmg_taken
+		_fp_t += delta
+		_fp_min = mini(_fp_min, hp)
+		_fp_pack_check -= delta
+		if _fp_pack >= 0 and not _fp_pack_done and _fp_pack_check <= 0.0:
+			_fp_pack_check = 0.25
+			var left := 0
+			for m in zone.monsters_root.get_children():
+				if m.alive and m.pack_id == _fp_pack:
+					left += 1
+			if left == 0:
+				_first_pack_report("cleared")
+		if _fp_t >= FIRST_PULL_S:
+			_first_pull_report("survived")
 	if dead:
 		_respawn_t -= delta
 		if _respawn_t <= 0.0:
@@ -688,6 +717,8 @@ func incoming_damage(amount: int, src_element: String) -> int:
 func server_take_damage(amount: int, source: String, src_element: String = "", attacker: Node = null) -> void:
 	if dead:
 		return
+	if attacker and is_instance_valid(attacker):
+		_first_pack_engaged(attacker)
 	var emult := Classes.multiplier(src_element, element)
 	var res := resistance(src_element)
 	var dmg := incoming_damage(amount, src_element)
@@ -733,17 +764,52 @@ func server_take_damage(amount: int, source: String, src_element: String = "", a
 		_pending.clear()
 		_hot_t = 0.0
 		_srv_log("%s died (respawn in %.0fs)" % [display_name, RESPAWN_TIME])
+		if zone and zone.is_dungeon() and not _fp_done and _fp_t >= 0.0:
+			_fp_min = 0
+			if _fp_pack >= 0 and not _fp_pack_done:
+				_first_pack_report("DIED fighting")
+			_first_pull_report("DIED after")
 		if _main:
 			_main.broadcast_system("%s was defeated by %s!" % [display_name, source])
 
 
+## Server: the first pack this player engaged in a dungeon (first monster hit or hitting it).
+func _first_pack_engaged(m: Node) -> void:
+	if _fp_pack == -2 and not _fp_done and m and int(m.pack_id) >= 0 and zone and zone.is_dungeon():
+		_fp_pack = int(m.pack_id)
+		_fp_pack_t = _fp_t
+		var n := 0
+		for o in zone.monsters_root.get_children():
+			if o.alive and o.pack_id == _fp_pack:
+				n += 1
+		_srv_log("FIRST PACK %s engages pack #%d (%d x %s) %.1fs after landing, hp %d/%d" % [display_name, _fp_pack, n, m.display_name, _fp_t, hp, max_hp])
+
+
+func _first_pack_report(how: String) -> void:
+	_fp_pack_done = true
+	_srv_log("FIRST PACK %s Lv%d %s %s pack #%d in %.1fs | hp min %d/%d, now %d, damage taken %d" % [display_name, level, class_id, how, _fp_pack,
+		_fp_t - _fp_pack_t, _fp_min, max_hp, hp, stat_dmg_taken - _fp_taken0])
+
+
+## Server: one line about the first FIRST_PULL_S seconds after landing in a dungeon.
+func _first_pull_report(how: String) -> void:
+	_fp_done = true
+	var party := 1
+	if _main and _main.get("parties"):
+		party = _main.parties.members_of(account_key).size()
+	_srv_log("FIRST PULL %s Lv%d %s (party of %d) in %s: %s %.1fs | hp min %d/%d, now %d, damage taken %d" % [display_name, level, class_id, party,
+		zone.info["name"], how, _fp_t, _fp_min, max_hp, hp, stat_dmg_taken - _fp_taken0])
+
+
 func _server_respawn() -> void:
 	if zone and zone.is_dungeon() and _main and _main.instances:
-		dead = false
+		# back to town; re-entering costs a portal. The node stays `dead` (no damage, no targeting)
+		# until the transfer replaces it - it used to revive here for a frame and could be hit (12:50:27).
 		hp = max_hp
 		mp = max_mp
 		_since_hit = 99.0
-		_main.instances.player_died.call_deferred(self)   # back to town; re-entering costs a portal
+		_respawn_t = 99.0
+		_main.instances.player_died.call_deferred(self)
 		return
 	if zone:
 		position = zone.map.spot_near(zone.info["respawn"], _main.rng if _main else RandomNumberGenerator.new())
@@ -1432,6 +1498,9 @@ func attack_mult() -> float:
 func hit_monster(m: Node, mult: float, sk: Dictionary) -> void:
 	if not is_instance_valid(m) or not m.alive or m.is_queued_for_deletion():
 		return
+	if zone and zone.in_safe_area(position):
+		safe_hit_t = 3.0   # attacking from the entrance safe area: monsters may fight back
+	_first_pack_engaged(m)
 	var is_crit: bool = sk.get("crit", false) or randf() < crit_chance()
 	var emult := Classes.multiplier(element, m.element)
 	var bonus := 1.0 + tm("dmg_vs:" + m.element) / 100.0

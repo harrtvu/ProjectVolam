@@ -865,6 +865,19 @@ too (no split), provided they are alive, in the same zone and within **1000 px**
 under one screen width) of the monster (`Monster.XP_SHARE_RANGE`). Members farther away get nothing; the
 server logs `party share: NAME too far ...`. Tested in suite phase 17.
 
+**Dungeon entrance safe area:** every dungeon has a safe circle (radius 224 px, drawn as a faint green
+ring labelled "Safe area") around the arrival point (`Zone.SAFE_RADIUS`). No pack spawns within 480 px of
+it, monsters never aggro on a player standing inside, and a monster whose target steps in stops at the
+edge and walks home. Hitting a monster from inside removes your protection for 3 s, so the ring can't
+be used for sniping. Dying in a dungeon keeps you dead (no damage, nobody targets you) until you are
+moved back to town.
+
+**Forest Den / T1 first pull:** a fresh Lv6 character must survive its first dungeon. At T1, monsters
+hit for x0.8 (bosses unchanged) and every pack within 800 px of the entrance is a pair, never an elite
+(`Dungeons.T1_DMG_MULT`, `T1_FIRST_PULL_RADIUS`). Portal cost is unchanged. `tools/first_pull_trial.sh`
+runs fresh Lv6 characters solo and as a party of 2 and prints the server's `FIRST PACK` / `FIRST PULL`
+lines (HP low point and damage taken). Suite phase 18 checks the same.
+
 **Version handshake:** on joining, the first thing a client sends is its build version (`BUILD_VERSION`
 in `main.gd`). A server running a different build replies with a clear message ("server runs X, you run
 Y") and disconnects the client. A client that skips the handshake is never logged in.

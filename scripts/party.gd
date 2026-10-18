@@ -241,7 +241,8 @@ func _push(pt: Dictionary) -> void:
 	for k in pt["members"]:
 		var m := _player_by_key(k)
 		list.append({"name": _name_of(k), "class": m.class_id if m else "", "level": m.level if m else 0,
-			"zone": m.zone.zone_id if m and m.zone else ""})
+			"zone": m.zone.zone_id if m and m.zone else "",
+			"zone_name": str(m.zone.info["name"]) if m and m.zone else "offline"})   # (clients may not know a dungeon id)
 	for k in pt["members"]:
 		var m := _player_by_key(k)
 		if m and m._owner_connected():

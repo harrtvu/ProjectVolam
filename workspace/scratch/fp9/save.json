@@ -1,0 +1,586 @@
+{
+	"accounts": {
+		"lead": {
+			"character": {
+				"atlas": {
+					"bonus": {
+
+					},
+					"done": {
+
+					},
+					"migrated": [],
+					"passives": [],
+					"v": 2
+				},
+				"bag": [
+					{
+						"base": "ticket_wood",
+						"bound": true,
+						"ilvl": 2,
+						"mods": [
+							[
+								"m_res",
+								"map_less_res",
+								8,
+								0,
+								"s"
+							],
+							[
+								"m_ele",
+								"map_extra_ele",
+								15,
+								0,
+								"p"
+							]
+						],
+						"q": 0,
+						"rarity": "magic",
+						"tier": 1,
+						"uid": 108261154,
+						"upg": 0
+					},
+					{
+						"base": "ticket_wood",
+						"ilvl": 2,
+						"mods": [
+							[
+								"m_ele",
+								"map_extra_ele",
+								10,
+								0,
+								"p"
+							],
+							[
+								"m_speed",
+								"map_mon_speed",
+								13,
+								0,
+								"p"
+							],
+							[
+								"m_dmg",
+								"map_mon_dmg",
+								19,
+								0,
+								"p"
+							],
+							[
+								"m_mana",
+								"map_less_mana_regen",
+								23,
+								0,
+								"s"
+							]
+						],
+						"name": "Jade Lair",
+						"q": 0,
+						"rarity": "rare",
+						"tier": 1,
+						"uid": 374899523,
+						"upg": 0
+					},
+					{
+						"base": "iron_sword",
+						"ilvl": 6,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 389988818,
+						"upg": 0
+					}
+				],
+				"class": "fire",
+				"equipment": {
+					"amulet": {
+
+					},
+					"belt": {
+
+					},
+					"body": {
+
+					},
+					"boots": {
+
+					},
+					"gloves": {
+
+					},
+					"helmet": {
+
+					},
+					"offhand": {
+
+					},
+					"ring1": {
+
+					},
+					"ring2": {
+
+					},
+					"weapon": {
+						"base": "apprentice_staff",
+						"bound": true,
+						"ilvl": 1,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 1006527217,
+						"upg": 0
+					}
+				},
+				"free_day": "2026-10-18",
+				"gold": 336,
+				"hideout": {
+					"decor": [
+						{
+							"flip": false,
+							"id": "lantern",
+							"rot": 0,
+							"x": 30,
+							"y": 13
+						},
+						{
+							"flip": false,
+							"id": "flowers",
+							"rot": 0,
+							"x": 34,
+							"y": 13
+						}
+					],
+					"owned": {
+						"flowers": 2,
+						"lantern": 1
+					},
+					"stations": {
+						"blacksmith": [
+							40,
+							15
+						],
+						"map_device": [
+							24,
+							15
+						],
+						"merchant": [
+							20,
+							19
+						],
+						"vendor": [
+							20,
+							24
+						]
+					},
+					"theme": "meadow",
+					"unlocked": [
+						"meadow"
+					]
+				},
+				"hp": 51,
+				"inventory": {
+					"greater_potion": 5,
+					"health_potion": 13
+				},
+				"items_v": 2,
+				"level": 6,
+				"map_v": 2,
+				"mp": 70,
+				"pos": [
+					5296,
+					2032
+				],
+				"talents": {
+
+				},
+				"tutorial": "pending",
+				"xp": 0,
+				"zone": "meadow"
+			},
+			"created": "2026-10-18T17:43:51",
+			"hash": "1f7815334e023a9de45e1e67fcf0fe0d75f3b4f941e9a6155924ad7fab56d7c3",
+			"last_saved": "2026-10-18T17:45:00",
+			"name": "Lead",
+			"salt": "b2eb9481ea99bbe2f68045e89e7e7079",
+			"stash": []
+		},
+		"mate": {
+			"character": {
+				"atlas": {
+					"bonus": {
+
+					},
+					"done": {
+
+					},
+					"migrated": [],
+					"passives": [],
+					"v": 2
+				},
+				"bag": [
+					{
+						"base": "jade_amulet",
+						"ilvl": 6,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 930381126,
+						"upg": 0
+					},
+					{
+						"base": "iron_shield",
+						"ilvl": 6,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 1015155941,
+						"upg": 0
+					},
+					{
+						"base": "wooden_shield",
+						"ilvl": 6,
+						"mods": [
+							[
+								"life",
+								"life_flat",
+								13,
+								1,
+								"p"
+							]
+						],
+						"rarity": "magic",
+						"uid": 371746003,
+						"upg": 0
+					},
+					{
+						"base": "wooden_shield",
+						"ilvl": 6,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 737450838,
+						"upg": 0
+					},
+					{
+						"base": "copper_ring",
+						"ilvl": 7,
+						"mods": [
+							[
+								"ele_dmg",
+								"ele_dmg_pct",
+								14,
+								1,
+								"p"
+							]
+						],
+						"rarity": "magic",
+						"uid": 98348805,
+						"upg": 0
+					}
+				],
+				"class": "fire",
+				"equipment": {
+					"amulet": {
+
+					},
+					"belt": {
+
+					},
+					"body": {
+
+					},
+					"boots": {
+
+					},
+					"gloves": {
+
+					},
+					"helmet": {
+
+					},
+					"offhand": {
+
+					},
+					"ring1": {
+
+					},
+					"ring2": {
+
+					},
+					"weapon": {
+						"base": "apprentice_staff",
+						"bound": true,
+						"ilvl": 1,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 264148482,
+						"upg": 0
+					}
+				},
+				"free_day": "",
+				"gold": 461,
+				"hideout": {
+					"decor": [
+						{
+							"flip": false,
+							"id": "lantern",
+							"rot": 0,
+							"x": 30,
+							"y": 13
+						},
+						{
+							"flip": false,
+							"id": "flowers",
+							"rot": 0,
+							"x": 34,
+							"y": 13
+						}
+					],
+					"owned": {
+						"flowers": 2,
+						"lantern": 1
+					},
+					"stations": {
+						"blacksmith": [
+							40,
+							15
+						],
+						"map_device": [
+							24,
+							15
+						],
+						"merchant": [
+							20,
+							19
+						],
+						"vendor": [
+							20,
+							24
+						]
+					},
+					"theme": "meadow",
+					"unlocked": [
+						"meadow"
+					]
+				},
+				"hp": 20,
+				"inventory": {
+					"enhance_stone": 1,
+					"greater_potion": 5,
+					"health_potion": 13,
+					"orb_alteration": 1
+				},
+				"items_v": 2,
+				"level": 6,
+				"map_v": 2,
+				"mp": 15,
+				"pos": [
+					5296,
+					2032
+				],
+				"talents": {
+
+				},
+				"tutorial": "pending",
+				"xp": 0,
+				"zone": "meadow"
+			},
+			"created": "2026-10-18T17:43:51",
+			"hash": "e97fb1fb7c34721702ee4e28bda3794fe103b36af4c29aadc9ce649fce34462f",
+			"last_saved": "2026-10-18T17:45:01",
+			"name": "Mate",
+			"salt": "663808c81fd45364e992bb29fe0e2bcd",
+			"stash": []
+		},
+		"solo": {
+			"character": {
+				"atlas": {
+					"bonus": {
+
+					},
+					"done": {
+
+					},
+					"migrated": [],
+					"passives": [],
+					"v": 2
+				},
+				"bag": [
+					{
+						"base": "ticket_wood",
+						"bound": true,
+						"ilvl": 2,
+						"mods": [
+							[
+								"m_dmg",
+								"map_mon_dmg",
+								17,
+								0,
+								"p"
+							],
+							[
+								"m_res",
+								"map_less_res",
+								8,
+								0,
+								"s"
+							]
+						],
+						"q": 0,
+						"rarity": "magic",
+						"tier": 1,
+						"uid": 470830720,
+						"upg": 0
+					},
+					{
+						"base": "ticket_wood",
+						"ilvl": 2,
+						"mods": [
+							[
+								"m_res",
+								"map_less_res",
+								12,
+								0,
+								"s"
+							],
+							[
+								"m_speed",
+								"map_mon_speed",
+								11,
+								0,
+								"p"
+							]
+						],
+						"q": 0,
+						"rarity": "magic",
+						"tier": 1,
+						"uid": 821412496,
+						"upg": 0
+					},
+					{
+						"base": "jade_ring",
+						"ilvl": 6,
+						"mods": [
+							[
+								"ele_dmg",
+								"ele_dmg_pct",
+								9,
+								0,
+								"p"
+							]
+						],
+						"rarity": "magic",
+						"uid": 455792640,
+						"upg": 0
+					}
+				],
+				"class": "fire",
+				"equipment": {
+					"amulet": {
+
+					},
+					"belt": {
+
+					},
+					"body": {
+
+					},
+					"boots": {
+
+					},
+					"gloves": {
+
+					},
+					"helmet": {
+
+					},
+					"offhand": {
+
+					},
+					"ring1": {
+
+					},
+					"ring2": {
+
+					},
+					"weapon": {
+						"base": "apprentice_staff",
+						"bound": true,
+						"ilvl": 1,
+						"mods": [],
+						"rarity": "normal",
+						"uid": 102753735,
+						"upg": 0
+					}
+				},
+				"free_day": "2026-10-18",
+				"gold": 364,
+				"hideout": {
+					"decor": [
+						{
+							"flip": false,
+							"id": "lantern",
+							"rot": 0,
+							"x": 30,
+							"y": 13
+						},
+						{
+							"flip": false,
+							"id": "flowers",
+							"rot": 0,
+							"x": 34,
+							"y": 13
+						}
+					],
+					"owned": {
+						"flowers": 2,
+						"lantern": 1
+					},
+					"stations": {
+						"blacksmith": [
+							40,
+							15
+						],
+						"map_device": [
+							24,
+							15
+						],
+						"merchant": [
+							20,
+							19
+						],
+						"vendor": [
+							20,
+							24
+						]
+					},
+					"theme": "meadow",
+					"unlocked": [
+						"meadow"
+					]
+				},
+				"hp": 51,
+				"inventory": {
+					"greater_potion": 5,
+					"health_potion": 15,
+					"orb_transmute": 1
+				},
+				"items_v": 2,
+				"level": 6,
+				"map_v": 2,
+				"mp": 70,
+				"pos": [
+					5296,
+					2032
+				],
+				"talents": {
+
+				},
+				"tutorial": "pending",
+				"xp": 0,
+				"zone": "meadow"
+			},
+			"created": "2026-10-18T17:43:51",
+			"hash": "7b3638f57797989447f6e23a79da4ff6abc1b0cfe00f26c8b37df91cd21f58a0",
+			"last_saved": "2026-10-18T17:45:00",
+			"name": "Solo",
+			"salt": "93450519e07662486927b43a2f5eb180",
+			"stash": []
+		}
+	},
+	"version": 1
+}

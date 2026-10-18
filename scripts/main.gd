@@ -157,7 +157,7 @@ var instance_timeout := 0.0        # server: seconds an empty dungeon stays open
 var complete_timeout := 0.0        # server: seconds a completed dungeon stays open (0 = default)
 var debug_atlas_kit := false      # server: honour the bots' "debug_kit" request (a locked fire:3 ticket)
 var debug_next_tier := -1.0        # server: chance a boss ticket is tier+1 (-1 = default 50%)
-var bot_dungeon := ""              # bot: "full" | "die" | "enter" - dungeon test scenarios
+var bot_dungeon := ""              # bot: "full" | "die" | "enter" | "first" (free normal ticket, no crafting, fight) - dungeon test scenarios
 var bot_dungeon_theme := "wood"
 var bot_dungeon_tier := 1
 var _bd_walk_t := 0.0
@@ -283,11 +283,15 @@ var party_members: Array = []      # client: [{name, class, level, zone}] of my 
 var party_leader := ""
 var invite_box: PanelContainer
 var _invite_from := ""
+var bot_no_potions := false        # bot: never drinks (first-pull trial without potions)
 var bot_follow := ""               # bot: walk after this player and never attack (--bot-follow=NAME, party XP-share test)
 var bot_party := ""                # bot: "invite:<Name>" (leader) | "accept" (member)
 var _bp_t := 0.0
 var _bp_probed := false
 var _bf_log_t := 0.0
+var _bd_safe := 0
+var _bd_safe_t := 0.0
+var _bd_safe_hp := 0
 var _dungeon_complete_seen := false
 var handshake: Node                # version handshake (handshake.gd), first RPC exchange on join
 var _fake_version := ""            # client (tests): --fake-version=X claims another build
@@ -479,6 +483,7 @@ func _parse_args() -> void:
 	_open_vendor = opts.has("open-vendor")
 	bot_party = str(opts.get("bot-party", ""))
 	bot_follow = str(opts.get("bot-follow", ""))
+	bot_no_potions = opts.has("bot-no-potions")
 	no_xp = opts.has("no-xp")
 	bot_smart = opts.has("bot-smart")
 	_fake_version = str(opts.get("fake-version", ""))
@@ -1258,9 +1263,14 @@ func _update_party_label() -> void:
 	var lines: Array = ["Party"]
 	for m in party_members:
 		var cls := str(m.get("class", ""))
+		var zname := str(m.get("zone_name", ""))
+		if zname == "" and Zones.exists(str(m.get("zone", ""))):
+			zname = str(Zones.info(str(m["zone"]))["name"])
 		lines.append("%s%s  Lv%d %s%s" % ["* " if str(m["name"]) == party_leader else "  ", m["name"], int(m.get("level", 0)),
-			Classes.info(cls)["name"] if Classes.exists(cls) else "", ("  [%s]" % Zones.info(str(m["zone"]))["name"]) if Zones.exists(str(m.get("zone", ""))) else ""])
+			Classes.info(cls)["name"] if Classes.exists(cls) else "", ("  [%s]" % zname) if zname != "" else ""])
 	party_label.text = "\n".join(lines)
+	if party_label.visible:
+		_log("party panel: %s" % " | ".join(lines.slice(1)))
 
 
 func show_banner(title: String, sub: String) -> void:
@@ -2225,7 +2235,7 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			if _bd_t > 0.0 or me.dead:
 				bot_dir = Vector2.ZERO
 				return true
-			if bot_dungeon == "enter" and _bd_entries >= 1 or bot_dungeon == "die" and _bd_entries >= Dungeons.PORTALS or bot_dungeon in ["full", "party"] and _bd_done_t >= 0.0:
+			if bot_dungeon in ["enter", "safe"] and _bd_entries >= 1 or bot_dungeon == "die" and _bd_entries >= Dungeons.PORTALS or bot_dungeon in ["full", "party", "first"] and _bd_done_t >= 0.0:
 				if _bd_step != 9:
 					_log("dungeon bot: finished - back in town, atlas %s, run %s, bag tickets %s" % [me.atlas.get("done", {}), me.run_info, _ticket_list(me)])
 				_bd_step = 9
@@ -2263,6 +2273,39 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			elif _bd_t < -4.0:   # no pack synced to us yet (interest radius): head into the map until one shows up
 				var mid: Vector2 = zone.map.nearest_reachable_pos(zone.map.cell_pos(Vector2i(zone.map.w / 2, zone.map.h / 2)), Zones.info(zone.zone_id)["respawn"])
 				bot_dir = _bot_steer(zone, me.position, mid, delta)
+		return true
+	if bot_dungeon == "safe":   # entrance safe area test: idle in it, pull a monster, retreat into it
+		var sc: Vector2 = zone.safe_center()
+		if _bd_t > -6.0:
+			bot_dir = Vector2.ZERO
+			return true
+		if _bd_safe == 0:
+			_bd_safe = 1
+			_log("safe bot: idled 6s in the safe area, hp %d/%d, in safe area %s" % [me.hp, me.max_hp, zone.in_safe_area(me.position)])
+		if _bd_safe == 1:   # walk at the nearest monster (no attacks) until one hits us
+			var n: Node2D = _nearest(zone.monsters_root, me.position, 3000.0)
+			if me.hp < me.max_hp or _bd_t < -40.0:
+				_bd_safe = 2
+				_bd_safe_t = _bd_t
+				_log("safe bot: hit (hp %d/%d) - retreating into the safe area" % [me.hp, me.max_hp])
+			elif n:
+				bot_dir = _bot_steer(zone, me.position, n.position, delta)
+			return true
+		if _bd_safe == 2:
+			if me.position.distance_to(sc) > 40.0:
+				bot_dir = _bot_steer(zone, me.position, sc, delta)
+			else:
+				bot_dir = Vector2.ZERO
+				_bd_safe = 3
+				_bd_safe_hp = me.hp
+				_bd_safe_t = _bd_t
+				_log("safe bot: back in the safe area, hp %d/%d" % [me.hp, me.max_hp])
+			return true
+		bot_dir = Vector2.ZERO
+		if _bd_safe == 3 and _bd_safe_t - _bd_t > 8.0:
+			_bd_safe = 4
+			_log("safe bot: 8s in the safe area after the pull, hp %d -> %d/%d (no damage: %s), nearest monster %.0f px" % [_bd_safe_hp, me.hp, me.max_hp, me.hp >= _bd_safe_hp,
+				me.position.distance_to(_nearest(zone.monsters_root, me.position, 5000.0).position) if _nearest(zone.monsters_root, me.position, 5000.0) else -1.0])
 		return true
 	if bot_dungeon == "enter":
 		bot_dir = Vector2.ZERO
@@ -2954,7 +2997,7 @@ func _bot_update(delta: float) -> void:
 		_bot_misc_timer = 1.0
 		me.request_pickup()
 		var potion: String = me.best_potion()
-		if not bot_passive and me.hp <= me.max_hp - 4 and me.hp * 2 < me.max_hp + 20 and int(me.inventory.get(potion, 0)) > 0:
+		if not bot_passive and not bot_no_potions and me.hp <= me.max_hp - 4 and me.hp * 2 < me.max_hp + 20 and int(me.inventory.get(potion, 0)) > 0:
 			_log("drinking a %s at hp %d/%d" % [potion, me.hp, me.max_hp])
 			me.request_use(potion)
 		_bot_gear(me)
