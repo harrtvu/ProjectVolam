@@ -5,8 +5,7 @@ extends Node
 ## Ticket at the Map Device. Every peer builds the instance's map from the same
 ## seed (create_instance RPC); the server populates it, and the usual per-zone
 ## visibility filters keep each run's entities visible only to the players inside.
-## Runs are SOLO for now: only the opener may enter (see _may_enter - a party
-## system would only have to widen that check).
+## The opener and the members of the opener's party (party.gd) may enter.
 
 const EMPTY_TIMEOUT_DEFAULT := 90.0      # an empty run closes after this long
 const COMPLETE_TIMEOUT_DEFAULT := 60.0   # a finished run closes this long after the boss dies
@@ -234,9 +233,9 @@ func _free_portal_slot() -> int:
 	return s
 
 
-## Solo runs: only the opener. (A party system would add its members here.)
+## The opener, or anyone in the opener's party.
 func _may_enter(p: Node, r: Dictionary) -> bool:
-	return p.account_key == r["owner_key"]
+	return p.account_key == r["owner_key"] or (main.parties != null and main.parties.same_party(p.account_key, str(r["owner_key"])))
 
 
 func try_enter(p: Node, id: String) -> void:
@@ -246,8 +245,8 @@ func try_enter(p: Node, id: String) -> void:
 	if r["closing"]:
 		return
 	if not _may_enter(p, r):
-		p.notify("That portal belongs to %s (dungeon runs are solo)" % r["owner"], false)
-		main.log_server("[meadow] %s can't enter %s: owned by %s" % [p.display_name, id, r["owner"]])
+		p.notify("That portal belongs to %s (join their party to enter)" % r["owner"], false)
+		main.log_server("[meadow] %s can't enter %s: owned by %s (not in their party)" % [p.display_name, id, r["owner"]])
 		return
 	if int(r["portals"]) <= 0:
 		p.notify("No portals left in this dungeon", true)
@@ -329,6 +328,11 @@ func on_monster_died(zone: Node, m: Node, killer: Node) -> void:
 		for k in 2:
 			var u := Gear.make_unique(str(ukeys[main.rng.randi() % ukeys.size()]), 40, main.rng)
 			tickets.append(u)
+	var inside: Array = []
+	for pid in r["inside"]:
+		inside.append(str(main.player_names.get(pid, pid)))
+	if inside.size() > 1:
+		_log("%s cleared by a party of %d: %s" % [id, inside.size(), ", ".join(inside)])
 	var names: Array = []
 	for t in tickets:
 		zone.spawn_pickup(str(t["base"]), 1, m.position, t)

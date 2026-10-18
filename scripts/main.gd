@@ -274,6 +274,22 @@ var _shot_since := -1.0
 var _open_inventory := false
 var _shutting_down := false
 var _rejected := false
+var parties: Node                  # parties (party.gd), server state; party_state RPCs update the HUD
+var party_label: Label
+var party_members: Array = []      # client: [{name, class, level, zone}] of my party ([] = no party)
+var party_leader := ""
+var invite_box: PanelContainer
+var _invite_from := ""
+var bot_party := ""                # bot: "invite:<Name>" (leader) | "accept" (member)
+var _bp_t := 0.0
+var _bp_probed := false
+var _dungeon_complete_seen := false
+var solo_mode := false             # "Play Solo": in-process local server bound to 127.0.0.1, no login, local profile slots
+var solo_slot := 1
+var solo_btn: Button
+var solo_slot_pick: OptionButton
+const SOLO_SAVE_FILE := "user://volam_save/solo_profile.json"
+const SOLO_SLOTS := 3
 
 
 func _ready() -> void:
@@ -350,6 +366,9 @@ func _build_world() -> void:
 	hideouts = preload("res://scripts/hideout_server.gd").new()
 	hideouts.name = "Hideouts"
 	add_child(hideouts)
+	parties = preload("res://scripts/party.gd").new()
+	parties.name = "Parties"
+	add_child(parties)
 	market = preload("res://scripts/market_server.gd").new()
 	market.name = "Market"
 	add_child(market)
@@ -440,6 +459,7 @@ func _parse_args() -> void:
 	market_file = str(opts.get("market-file", ""))
 	market_crash_test = str(opts.get("market-crash-test", ""))
 	bot_market = str(opts.get("bot-market", ""))
+	bot_party = str(opts.get("bot-party", ""))
 	_open_market = str(opts.get("open-market", ""))
 	_open_market_at = float(opts.get("open-market-at", "7"))
 	if opts.has("market-tip"):
@@ -549,6 +569,14 @@ func _parse_args() -> void:
 	if opts.has("server") or OS.has_feature("dedicated_server"):
 		is_dedicated = true
 		start_server(port, true)
+	elif opts.has("solo"):
+		start_solo(int(opts.get("solo-slot", "1")))
+	elif opts.has("click-solo"):
+		# test: press the main menu's Play Solo button like a user would (one click)
+		_refresh_solo_slots()
+		solo_slot_pick.select(clampi(int(opts.get("solo-slot", "1")) - 1, 0, SOLO_SLOTS - 1))
+		_log("menu test: clicking Play Solo (%s)" % solo_slot_pick.get_item_text(solo_slot_pick.selected))
+		solo_btn.pressed.emit()
 	elif opts.has("host"):
 		start_server(port, false)
 	elif opts.has("join"):
@@ -581,7 +609,9 @@ func start_server(port: int, dedicated: bool) -> bool:
 	accounts = AccountStore.new(save_file)
 	accounts.load_file()
 	market.load_from(accounts)
-	if not dedicated:
+	if solo_mode:
+		local_name = _solo_account()
+	elif not dedicated:
 		# the host logs in to its own server like everyone else
 		var why := _check_login(local_name, local_password, 1)
 		if why != "":
@@ -596,6 +626,16 @@ func start_server(port: int, dedicated: bool) -> bool:
 		var ws := WebSocketMultiplayerPeer.new()
 		err = ws.create_server(port)
 		peer = ws
+	elif solo_mode:
+		# local only: bound to the loopback, try a few ports in case 7777 is taken by another server
+		for p in range(port, port + 10):
+			var enet := ENetMultiplayerPeer.new()
+			enet.set_bind_ip("127.0.0.1")
+			err = enet.create_server(p, 1)
+			if err == OK:
+				peer = enet
+				port = p
+				break
 	else:
 		var enet := ENetMultiplayerPeer.new()
 		err = enet.create_server(port, MAX_PLAYERS)
@@ -606,7 +646,7 @@ func start_server(port: int, dedicated: bool) -> bool:
 		return false
 	multiplayer.multiplayer_peer = peer
 	_log("%s server listening on port %d (%s). Saves: %s (%d accounts)" % [
-		"Dedicated" if dedicated else "Listen", port, "WebSocket" if use_ws else "ENet/UDP",
+		"Dedicated" if dedicated else ("Solo (local, in-process)" if solo_mode else "Listen"), port, "WebSocket" if use_ws else "ENet/UDP",
 		ProjectSettings.globalize_path(save_file), accounts.data["accounts"].size()])
 	_enter_game()
 	for id in Zones.ORDER:
@@ -667,6 +707,10 @@ func start_client(address: String, port: int) -> bool:
 
 
 func _on_peer_connected(id: int) -> void:
+	if multiplayer.is_server() and solo_mode:
+		_log("Solo game: refusing peer %d" % id)
+		(multiplayer.multiplayer_peer as ENetMultiplayerPeer).disconnect_peer(id)
+		return
 	if multiplayer.is_server():
 		_log("Peer %d connected, waiting for login" % id)
 		if pause_menu:
@@ -692,6 +736,7 @@ func _handle_peer_left(id: int) -> void:
 	peer_zone.erase(id)
 	_zone_since.erase(id)
 	_awaiting_class.erase(id)
+	parties.on_peer_left(str(peer_accounts.get(id, "")))
 	instances.on_peer_left(id)
 	var pname: String = player_names.get(id, "")
 	player_names.erase(id)
@@ -756,8 +801,8 @@ func _check_login(pname: String, password: String, peer_id: int) -> String:
 
 
 func _login_ok(id: int, pname: String, password: String) -> void:
-	var is_new := not accounts.has_account(pname)
-	if is_new:
+	var is_new: bool = not accounts.has_account(pname) or (solo_mode and accounts.get_account(pname).get("character", {}).is_empty())
+	if not accounts.has_account(pname):
 		accounts.create_account(pname, password)
 		accounts.save_file()
 		_log("Created account '%s'" % pname)
@@ -1069,7 +1114,51 @@ func save_player_now(node: Node) -> void:
 	accounts.save_file()
 
 
+## Client: my party changed (members [] = not in a party).
+@rpc("authority", "call_local", "reliable")
+func party_state(members: Array, leader: String) -> void:
+	party_members = members
+	party_leader = leader
+	var names: Array = []
+	for m in members:
+		names.append(str(m["name"]))
+	_log("party state: %d member(s) [%s], leader %s" % [members.size(), ", ".join(names), leader if leader != "" else "-"])
+	_update_party_label()
+
+
+## Client: someone invited me to their party.
+@rpc("authority", "call_local", "reliable")
+func party_invite(from: String) -> void:
+	_invite_from = from
+	_log("party invite from %s" % from)
+	if bot_party == "accept":
+		send_chat("/accept")
+		return
+	if invite_box:
+		(invite_box.get_node("V/L") as Label).text = "%s invites you to a party." % from
+		invite_box.visible = true
+
+
+func _answer_invite(yes: bool) -> void:
+	invite_box.visible = false
+	send_chat("/accept" if yes else "/decline")
+
+
+func _update_party_label() -> void:
+	if party_label == null:
+		return
+	party_label.visible = party_members.size() > 1
+	var lines: Array = ["Party"]
+	for m in party_members:
+		var cls := str(m.get("class", ""))
+		lines.append("%s%s  Lv%d %s%s" % ["* " if str(m["name"]) == party_leader else "  ", m["name"], int(m.get("level", 0)),
+			Classes.info(cls)["name"] if Classes.exists(cls) else "", ("  [%s]" % Zones.info(str(m["zone"]))["name"]) if Zones.exists(str(m.get("zone", ""))) else ""])
+	party_label.text = "\n".join(lines)
+
+
 func show_banner(title: String, sub: String) -> void:
+	if title == "Dungeon Complete!":
+		_dungeon_complete_seen = true
 	if banner_label:
 		banner_label.text = "%s\n%s" % [title, sub]
 		_banner_t = 4.5
@@ -1105,6 +1194,8 @@ func submit_chat(text: String) -> void:
 	if text.is_empty():
 		return
 	var node := _player_node(id)
+	if node and text.begins_with("/") and parties.chat_command(node, text):
+		return
 	if node and text.to_lower() == "/hideout":
 		hideouts.enter(node)
 		return
@@ -1809,7 +1900,23 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 		return true
 	if town and bot_atlas and (_ba == 0 or _bd_step == 9) and _ba != 99:
 		return _bot_atlas(me, zone, delta)
+	if town and bot_party.begins_with("invite:") and party_members.size() < 2:   # party leader: form the party first
+		bot_dir = Vector2.ZERO
+		_bp_t -= delta
+		if _bp_t <= 0.0:
+			_bp_t = 4.0
+			_log("party bot: inviting %s" % bot_party.substr(7))
+			if not _bp_probed:
+				_bp_probed = true
+				send_chat("/invite Nobody")    # invalid: not online
+				send_chat("/accept")           # invalid: no pending invite
+			send_chat("/invite " + bot_party.substr(7))
+		return true
 	if town:
+		if _bd_step == 0 and bot_dungeon == "party":   # party member: no ticket, wait for the leader's portal
+			_bd_step = 3
+			_log("dungeon bot: party member, waiting for %s's portal" % party_leader)
+			return true
 		if _bd_step in [4, 5]:   # back from a dungeon (left, died or kicked out)
 			_bd_step = 3
 			_bd_t = 3.0
@@ -1886,13 +1993,13 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			if _bd_t > 0.0 or me.dead:
 				bot_dir = Vector2.ZERO
 				return true
-			if bot_dungeon == "enter" and _bd_entries >= 1 or bot_dungeon == "die" and _bd_entries >= Dungeons.PORTALS or bot_dungeon == "full" and _bd_done_t >= 0.0:
+			if bot_dungeon == "enter" and _bd_entries >= 1 or bot_dungeon == "die" and _bd_entries >= Dungeons.PORTALS or bot_dungeon in ["full", "party"] and _bd_done_t >= 0.0:
 				if _bd_step != 9:
 					_log("dungeon bot: finished - back in town, atlas %s, run %s, bag tickets %s" % [me.atlas.get("done", {}), me.run_info, _ticket_list(me)])
 				_bd_step = 9
 				return true
 			for mp_ in zone.map_portals:
-				var mine: bool = str(mp_["owner"]) == me.display_name
+				var mine: bool = str(mp_["owner"]) == me.display_name or (bot_dungeon == "party" and party_leader != "" and str(mp_["owner"]) == party_leader)
 				if mine != (bot_dungeon == "intrude"):
 					bot_dir = _bot_steer(zone, me.position, mp_["pos"], delta)
 					_bd_walk_t += delta if me.position.distance_to(mp_["pos"]) > 24.0 else 0.0   # (the intruder waits on the portal on purpose)
@@ -1911,6 +2018,7 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 		_bd_step = 4
 		_bd_entries += 1
 		_bd_t = 0.0
+		_dungeon_complete_seen = false
 		_log("dungeon bot: inside %s (entry %d), run %s" % [zone.zone_id, _bd_entries, me.run_info])
 	if bot_dungeon == "die":
 		bot_dir = Vector2.ZERO      # stand still and let the monsters win
@@ -1936,7 +2044,7 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 	if me.dead:
 		_bd_step = 5
 		return false
-	if me.run_info.get("completed", false) and _bd_done_t < 0.0:
+	if (me.run_info.get("completed", false) or _dungeon_complete_seen) and _bd_done_t < 0.0:
 		_bd_done_t = _elapsed
 		_log("dungeon bot: run completed, looting")
 	if _bd_done_t >= 0.0 and _elapsed - _bd_done_t > 10.0:
@@ -3524,6 +3632,24 @@ func _build_ui() -> void:
 	sub.modulate = Color(1, 1, 1, 0.7)
 	vb.add_child(sub)
 
+	solo_btn = Button.new()
+	solo_btn.text = "Play Solo"
+	solo_btn.add_theme_font_size_override("font_size", 22)
+	solo_btn.custom_minimum_size = Vector2(0, 44)
+	solo_btn.tooltip_text = "Start right away with a local server - no login, progress is saved to your local profile."
+	solo_btn.pressed.connect(_on_solo_pressed)
+	vb.add_child(solo_btn)
+	var shb := HBoxContainer.new()
+	shb.add_theme_constant_override("separation", 8)
+	vb.add_child(shb)
+	shb.add_child(_mk_label("Local profile:"))
+	solo_slot_pick = OptionButton.new()
+	solo_slot_pick.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	shb.add_child(solo_slot_pick)
+	_refresh_solo_slots()
+	var sep := HSeparator.new()
+	vb.add_child(sep)
+	vb.add_child(_mk_label("Online play"))
 	vb.add_child(_mk_label("Account name"))
 	name_edit = LineEdit.new()
 	name_edit.text = "Hero%d" % rng.randi_range(100, 999)
@@ -3599,6 +3725,29 @@ func _build_ui() -> void:
 	zone_label.add_theme_font_size_override("font_size", 13)
 	zone_label.add_theme_color_override("font_color", Color(0.75, 0.85, 1.0))
 	svb.add_child(zone_label)
+	party_label = Label.new()
+	party_label.add_theme_font_size_override("font_size", 13)
+	party_label.add_theme_color_override("font_color", Color(0.6, 1.0, 0.7))
+	party_label.visible = false
+	svb.add_child(party_label)
+	invite_box = PanelContainer.new()
+	invite_box.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	invite_box.position = Vector2(-150, 160)
+	invite_box.visible = false
+	hud.add_child(invite_box)
+	var ivb := VBoxContainer.new()
+	ivb.name = "V"
+	invite_box.add_child(ivb)
+	var il := Label.new()
+	il.name = "L"
+	ivb.add_child(il)
+	var ihb := HBoxContainer.new()
+	ivb.add_child(ihb)
+	for yes in [true, false]:
+		var b := Button.new()
+		b.text = "Accept" if yes else "Decline"
+		b.pressed.connect(_answer_invite.bind(yes))
+		ihb.add_child(b)
 
 	banner_label = Label.new()
 	banner_label.anchor_left = 0.0
@@ -3786,6 +3935,49 @@ func _build_ui() -> void:
 	class_select.visible = false
 	class_select.chosen.connect(_on_class_chosen)
 	ui.add_child(class_select)
+
+
+## Main menu: label each local profile slot with the saved hero (class + level) or "empty".
+func _refresh_solo_slots() -> void:
+	var store := AccountStore.new(save_file if save_file != DEFAULT_SAVE_FILE else SOLO_SAVE_FILE)
+	store.load_file()
+	solo_slot_pick.clear()
+	for i in range(1, SOLO_SLOTS + 1):
+		var acc := store.get_account("slot%d" % i)
+		var ch: Dictionary = acc.get("character", {})
+		var txt := "Slot %d - empty (new hero)" % i
+		if not acc.is_empty():
+			txt = "Slot %d - %s, %s Lv%d" % [i, acc.get("name", "?"), Classes.info(str(ch["class"]))["name"] if Classes.exists(str(ch.get("class", ""))) else "no class", int(ch.get("level", 1))]
+		solo_slot_pick.add_item(txt, i)
+	solo_slot_pick.select(clampi(solo_slot - 1, 0, SOLO_SLOTS - 1))
+
+
+func _on_solo_pressed() -> void:
+	start_solo(solo_slot_pick.get_selected_id() if solo_slot_pick.selected >= 0 else 1)
+
+
+## "Play Solo": one click. Runs the normal authoritative server in-process (ENet bound to
+## 127.0.0.1, nobody else can join) and logs the local profile slot in without a password.
+func start_solo(slot: int) -> bool:
+	solo_mode = true
+	solo_slot = clampi(slot, 1, SOLO_SLOTS)
+	if save_file == DEFAULT_SAVE_FILE:
+		save_file = SOLO_SAVE_FILE
+	_log("Play Solo: local profile slot %d (%s)" % [solo_slot, ProjectSettings.globalize_path(save_file)])
+	return start_server(DEFAULT_PORT, false)
+
+
+## Solo: the account key of the local profile slot, created on first use (display name from the name box).
+func _solo_account() -> String:
+	var key := "slot%d" % solo_slot
+	if not accounts.has_account(key):
+		var acc := accounts.create_account(key, Crypto.new().generate_random_bytes(16).hex_encode())
+		var nm := _sanitize_name(name_edit.text)
+		acc["name"] = nm if nm != "" else "Hero"
+		acc["solo"] = true
+		accounts.save_file()
+		_log("Created local profile slot %d for '%s'" % [solo_slot, acc["name"]])
+	return key
 
 
 func _on_host_pressed() -> void:

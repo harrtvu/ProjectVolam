@@ -240,7 +240,7 @@ func refresh() -> void:
 		_info.text = "\n".join(lines)
 	_open_btn.disabled = inst.is_empty() or not ri.is_empty()
 	_close_btn.disabled = ri.is_empty() or int(ri.get("inside", 0)) > 0
-	_status.text = run_txt if run_txt != "" else "[color=#888888]Runs are solo: only you can enter your portals. Dying sends you to town; each entry uses a portal.[/color]"
+	_status.text = run_txt if run_txt != "" else "[color=#888888]Only you and your party can enter your portals. Dying sends you to town; each entry uses a portal.[/color]"
 
 
 func _process(_delta: float) -> void:

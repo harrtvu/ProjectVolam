@@ -265,6 +265,28 @@ run --join=127.0.0.1 --name=Watcher --password=g --class=metal --bot-idle --bot-
 run --join=127.0.0.1 --name=MenuHo --password=g --class=water --bot-idle --menu-hideout-test --quit-after=20 > $L/p12_menuho.log 2>&1 &
 wait
 
+echo "Phase 13 (~40s): Play Solo (one click, in-process local server, no login, profile slot saved)..."
+SAVE13="$(pwd)/$L/solo_profile.json"; rm -f "$SAVE13"
+# 13a: click the menu's Play Solo button once (headless): a new hero in profile slot 2
+"$GODOT" --headless --path . -- --click-solo --solo-slot=2 --name=Soloist --class=wood --bot --save-file="$SAVE13" --quit-after=16 > $L/p13_solo.log 2>&1 &
+sleep 8
+# nobody can join a solo game (bound to 127.0.0.1, peers refused)
+run --join=127.0.0.1 --name=Crasher --password=x --bot-idle --quit-after=5 > $L/p13_joiner.log 2>&1
+wait
+# 13b: Play Solo again: the same slot is restored (level, class), no password asked
+"$GODOT" --headless --path . -- --click-solo --solo-slot=2 --bot-idle --save-file="$SAVE13" --quit-after=8 > $L/p13_solo_again.log 2>&1
+
+echo "Phase 14 (~120s): online co-op party: invite/accept, both enter the leader's dungeon and clear it together..."
+SAVE14="$(pwd)/$L/accounts_p14.json"; rm -f "$SAVE14"
+run --server --save-file="$SAVE14" --debug-start-level=20 --debug-gear --instance-timeout=15 --complete-timeout=12 --quit-after=120 > $L/p14_server.log 2>&1 &
+sleep 2
+b14() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=p --bot --bot-no-gear "$@" --quit-after=114 > $L/p14_$n.log 2>&1 & }
+b14 Leader --class=fire --bot-dungeon=full --bot-dungeon-theme=fire --bot-party=invite:Member
+b14 Member --class=water --bot-dungeon=party --bot-party=accept
+sleep 20
+b14 Outsider --class=metal --bot-dungeon=intrude
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
@@ -688,6 +710,29 @@ if awk '/patrol #[0-9]+ patrol of .* reached site [12]\/3/ { match($0, /#[0-9]+/
     END { for (k in seen) { split(k, a, ","); if (seen[a[1] ",1"] && seen[a[1] ",2"]) ok = 1 } exit !ok }' $L/p12_server.log; then
   echo "PASS  a patrol walks between its sites ($(grep -cE "patrol #[0-9]+ .* reached site [12]/3" $L/p12_server.log) waypoints reached with a player in range)"
 else echo "FAIL  a patrol walks between its sites"; fi
+echo; echo "== Play Solo (M2)"
+check "Play Solo clicked once on the main menu"        "menu test: clicking Play Solo \(Slot 2 - empty"                 p13_solo.log
+check "in-process local server, no login step"         "Solo \(local, in-process\) server listening on port [0-9]+"      p13_solo.log
+check "new local profile slot created (no password)"   "Created local profile slot 2 for 'Soloist'"                       p13_solo.log
+check "solo hero spawned in the world"                 "Login 'Soloist' \(peer 1\): NEW account - class wood"           p13_solo.log
+check "solo game saved to the local profile"           "Saved .*solo_profile.json \(shutdown\)"                         p13_solo.log
+check "other players can't join a solo game"           "Solo game: refusing peer [0-9]+"                                  p13_solo.log
+check "solo slot restored on the next Play Solo"       "menu test: clicking Play Solo \(Slot 2 - Soloist, Venom Druid Lv[0-9]+\)" p13_solo_again.log
+check "solo progress restored (class, level)"          "Login 'Soloist' \(peer 1\): restored save - class wood"         p13_solo_again.log
+echo; echo "== Party co-op dungeons (M2)"
+check "party invite sent"                              "\[party\] Leader invited Member"                                  p14_server.log
+check "invite to an offline name rejected"             "\[party\] Leader invite rejected: 'Nobody' is not online"        p14_server.log
+check "accept without an invite rejected"              "\[party\] Leader accept rejected: you have no pending party invite" p14_server.log
+check "party formed"                                   "\[party\] Member joined Leader's party #[0-9]+: Leader \(leader\), Member" p14_server.log
+check "member's HUD gets the party"                    "party state: 2 member\(s\) \[Leader, Member\], leader Leader"   p14_Member.log
+check "leader opens the dungeon"                       "\[dungeon\] Leader opened Ember Caverns"                          p14_server.log
+check "party member enters the leader's instance"      "\[dungeon\] Member entered (dun[0-9]+)"                           p14_server.log
+check "non-member still refused"                       "Outsider can't enter dun[0-9]+: owned by Leader \(not in their party\)" p14_server.log
+check "both players in the same instance"              "zone=dun[0-9]+ players=2 .*(Leader|Member)\(.*(Leader|Member)\("  p14_Member.log
+if grep -qE "\[dun[0-9]+\] .* was slain by Member" $L/p14_server.log && grep -qE "\[dun[0-9]+\] .* was slain by Leader" $L/p14_server.log; then echo "PASS  both party members kill monsters in the instance ($(grep -cE "\[dun[0-9]+\] .* was slain by Member" $L/p14_server.log) by Member, $(grep -cE "\[dun[0-9]+\] .* was slain by Leader" $L/p14_server.log) by Leader)"; else echo "FAIL  both party members kill monsters in the instance"; fi
+check "dungeon cleared by the party"                   "dun[0-9]+ cleared by a party of 2: "                                 p14_server.log
+check "boss kill completes the party run"              "dun[0-9]+ COMPLETED Ember Caverns T1"                               p14_server.log
+check "member sees the completion banner"              "banner: Dungeon Complete!"                                          p14_Member.log
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

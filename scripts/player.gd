@@ -918,6 +918,9 @@ func handle_request(action: String, arg: Variant) -> void:
 		"hideout":
 			if _main and _main.hideouts and typeof(arg) == TYPE_DICTIONARY:
 				_main.hideouts.handle_request(self, arg)
+		"party":
+			if _main and _main.parties and typeof(arg) == TYPE_DICTIONARY:
+				_main.parties.handle_request(self, arg)
 		"market":
 			if _main and _main.market and typeof(arg) == TYPE_DICTIONARY:
 				_main.market.handle_request(self, arg)
