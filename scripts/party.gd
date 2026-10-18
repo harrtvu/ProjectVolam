@@ -190,7 +190,7 @@ func leave(key: String, why: String) -> void:
 	pt["members"].erase(key)
 	_log("%s %s #%d" % [_name_of(key), why, pt["id"]])
 	var gone := _player_by_key(key)
-	if gone:
+	if gone and gone._owner_connected():   # a disconnected peer gets no RPC
 		main.party_state.rpc_id(gone.peer_id, [], "")
 		gone.notify("You %s." % why.replace("was ", "were "), true)
 	_tell(pt, "%s %s." % [_name_of(key), why])
@@ -198,7 +198,7 @@ func leave(key: String, why: String) -> void:
 		for k in pt["members"]:
 			member_of.erase(k)
 			var m := _player_by_key(k)
-			if m:
+			if m and m._owner_connected():
 				main.party_state.rpc_id(m.peer_id, [], "")
 		parties.erase(pt["id"])
 		_log("party #%d disbanded" % pt["id"])
@@ -237,5 +237,5 @@ func _push(pt: Dictionary) -> void:
 			"zone": m.zone.zone_id if m and m.zone else ""})
 	for k in pt["members"]:
 		var m := _player_by_key(k)
-		if m:
+		if m and m._owner_connected():
 			main.party_state.rpc_id(m.peer_id, list, _name_of(pt["leader"]))

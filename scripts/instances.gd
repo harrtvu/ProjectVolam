@@ -137,7 +137,7 @@ func free_ticket(p: Node, theme: String) -> void:
 		theme = Dungeons.ORDER[main.rng.randi() % Dungeons.ORDER.size()]
 	# Vo Lam style daily gift: a Magic ticket of your best unlocked merchant tier
 	var t := Atlas.make_node_ticket("%s:%d" % [theme, Atlas.merchant_max(p.atlas, theme)], "magic", main.rng)
-	t["bound"] = true     # free gifts are account-bound (can't be sold on the market)
+	t["bound"] = true     # free gifts are account-bound
 	p.free_day = today()
 	p.bag.append(t)
 	main.log_server("[%s] %s took the daily free ticket: %s" % [p.zone.zone_id, p.display_name, Gear.summary(t)])
