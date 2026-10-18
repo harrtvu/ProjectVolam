@@ -630,8 +630,7 @@ func _drop_showcase() -> void:
 
 func start_server(port: int, dedicated: bool) -> bool:
 	local_name = _sanitize_name(name_edit.text)
-	if not solo_mode:
-		_last_name = local_name
+	_last_name = local_name   # (solo too: the name box keeps what you typed after Return to Main Menu)
 	local_password = pass_edit.text
 	accounts = AccountStore.new(save_file)
 	accounts.load_file()
@@ -1601,6 +1600,46 @@ func _settings_test() -> void:
 
 ## Big windows are exclusive: opening one closes every other one, except its companions
 ## (vendor / blacksmith / Map Device open the inventory beside them). The N zone map is one of them.
+## Screen rects (HUD coordinates) of the town / hideout NPCs and stations on screen, name labels included.
+func npc_screen_rects() -> Array:
+	var out: Array = []
+	var me := _local_player()
+	if me == null or me.zone == null:
+		return out
+	var vp := get_viewport().get_visible_rect()
+	for n in get_tree().get_nodes_in_group("npc_visual"):
+		if not (n as Node2D).is_visible_in_tree() or not me.zone.is_ancestor_of(n):
+			continue
+		var o: Vector2 = (n as Node2D).get_global_transform_with_canvas().origin
+		var box = n.get("screen_box")
+		var r := Rect2(o + box.position, box.size) if box is Rect2 else Rect2(o + Vector2(-55, -34), Vector2(110, 62))
+		if vp.intersects(r):
+			out.append(r)
+	return out
+
+
+## HUD vs world: fade the top-left stats panel and the help text while an NPC (and its label) is
+## under them; hide the corner minimap while a right-side window (inventory, vendor, smith) is open.
+func _hud_declutter() -> void:
+	var rects := npc_screen_rects()
+	for c in [hud.get_node("StatsPanel"), info_label]:
+		var under := false
+		var cr: Rect2 = (c as Control).get_global_rect()
+		for r in rects:
+			if cr.intersects(r):
+				under = true
+		var base := 0.6 if c == info_label else 1.0
+		(c as Control).modulate.a = move_toward((c as Control).modulate.a, base * (0.3 if under else 1.0), 0.15)
+	minimap.top_y = maxf(106.0, info_label.get_global_rect().end.y + 6.0)
+	fps_label.offset_top = minimap.top_y + 120.0
+	var cover := false
+	var corner := Rect2(Vector2(get_viewport().get_visible_rect().size.x - 190.0, minimap.top_y), Vector2(180, 115))
+	for w in [inventory_ui, vendor_ui, smith_ui, map_ui, hideout_ui]:
+		if w.visible and w.get_global_rect().intersects(corner):
+			cover = true
+	minimap.covered = cover
+
+
 func _big_windows() -> Array:
 	return [inventory_ui, char_sheet, talent_ui, atlas_ui, map_ui, hideout_ui, smith_ui, vendor_ui]
 
@@ -1861,7 +1900,8 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc menu  E pick up\nQ potion  I inventory  C character\nT passive web  N zone map  Enter chat\n/invite NAME  /leave  party" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  N map\nEnter chat   /invite NAME = party" % here
+	_hud_declutter()
 	if me == null:
 		target_frame.visible = false
 		return
@@ -2776,6 +2816,55 @@ func _run_ui_selftest() -> void:
 	_log("UI SELFTEST fast typing after Enter goes to chat: %s (chat '%s', open %s)" % ["PASS" if chat_ok else "FAIL", chat_edit.text, open_windows()])
 	chat_edit.text = ""
 	chat_edit.release_focus()
+	# 6. HUD/world declutter: the tutorial box keeps clear of NPC labels, help text ends above the
+	#    minimap, resistance lines never wrap (inventory + C panel)
+	tutorial_ui.begin()
+	tutorial_ui.step = 0
+	tutorial_ui._enter_step()
+	for f in 4:
+		await get_tree().process_frame
+	var npc_hit := []
+	for r in npc_screen_rects():
+		if tutorial_ui.get_global_rect().intersects(r):
+			npc_hit.append(r)
+	var fewest := 999
+	var vp_sz := get_viewport().get_visible_rect().size
+	for c in [Vector2((vp_sz.x - tutorial_ui.size.x) / 2.0, 64.0), Vector2((vp_sz.x - tutorial_ui.size.x) / 2.0, vp_sz.y - 80.0 - tutorial_ui.size.y),
+			Vector2(vp_sz.x - tutorial_ui.size.x - 10.0, vp_sz.y - 80.0 - tutorial_ui.size.y), Vector2(10.0, 176.0), Vector2(vp_sz.x - tutorial_ui.size.x - 10.0, 250.0)]:
+		var k := 0
+		for r in npc_screen_rects():
+			if Rect2(c, tutorial_ui.size).intersects(r):
+				k += 1
+		fewest = mini(fewest, k)
+	_log("UI SELFTEST tutorial box clear of NPC labels: %s (box %s, %d NPC labels on screen, %d covered, fewest possible %d; %s)" % [
+		"PASS" if not npc_screen_rects().is_empty() and npc_hit.size() == fewest else "FAIL",
+		tutorial_ui.get_global_rect(), npc_screen_rects().size(), npc_hit.size(), fewest, tutorial_ui.place_info])
+	tutorial_ui.visible = false
+	var help_bottom: float = info_label.get_global_rect().end.y
+	_log("UI SELFTEST help text ends above the minimap: %s (%d lines, bottom %.0f, minimap top %.0f)" % ["PASS" if help_bottom <= minimap.get_global_rect().position.y else "FAIL",
+		info_label.get_line_count(), help_bottom, minimap.get_global_rect().position.y])
+	toggle_inventory()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var inv_lines: int = inventory_ui._stats_label.get_line_count()
+	var inv_w: float = inventory_ui._stats_label.get_combined_minimum_size().x
+	var inv_col: float = inventory_ui._left.size.x
+	await get_tree().process_frame
+	var mm_hidden: bool = not minimap.visible
+	var _mm_dbg := "inv %s vis %s, minimap %s big %s" % [inventory_ui.get_global_rect(), inventory_ui.visible, minimap.get_global_rect(), minimap.big]
+	toggle_inventory()
+	_open_exclusive(char_sheet, not char_sheet.visible)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var sheet_ok: bool = char_sheet.get_global_rect().end.y <= get_viewport().get_visible_rect().size.y
+	var res_wrapped := false
+	for ln in char_sheet._stats.text.split("\n"):
+		if ln.begins_with("Metal") and ln.count("%") != 3 or ln.begins_with("Fire") and ln.count("%") != 2:
+			res_wrapped = true
+	_open_exclusive(char_sheet, not char_sheet.visible)
+	_log("UI SELFTEST resistance lines don't wrap: %s (inventory stats %d lines, expected 5, width %.0f of column %.0f)" % ["PASS" if inv_lines == 5 and not res_wrapped and inv_w <= inv_col else "FAIL", inv_lines, inv_w, inv_col])
+	_log("UI SELFTEST minimap hidden under the inventory: %s (%s)" % ["PASS" if mm_hidden else "FAIL", _mm_dbg])
+	_log("UI SELFTEST C panel fits the window: %s (bottom %.0f of %.0f)" % ["PASS" if sheet_ok else "FAIL", char_sheet.get_global_rect().end.y, get_viewport().get_visible_rect().size.y])
 	# 5. mana: casting all four skills back to back runs out of mana (Lv10 Earth: 57 mp < 12+20+taunt+35)
 	var me := _local_player()
 	for slot in 4:
@@ -4095,7 +4184,7 @@ func _build_ui() -> void:
 	fps_label.anchor_right = 1.0
 	fps_label.offset_left = -300
 	fps_label.offset_right = -10
-	fps_label.offset_top = 216   # right under the (smaller) minimap
+	fps_label.offset_top = 226   # right under the (smaller) minimap
 	fps_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	fps_label.add_theme_font_size_override("font_size", 11)
 	fps_label.add_theme_color_override("font_color", Color(0.6, 1.0, 0.6))

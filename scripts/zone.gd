@@ -803,10 +803,12 @@ class CampfireVisual extends Node2D:
 
 class BlacksmithVisual extends Node2D:
 	var _t := 0.0
+	var screen_box := Rect2(-100, -54, 200, 76)   # sprites + the label above (HUD declutter / tutorial placement)
 
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0
+		add_to_group("npc_visual")
 		for spec in [["res://assets/anvil.png", Vector2(0, 6)], ["res://assets/blacksmith.png", Vector2(-26, -4)], ["res://assets/chest.png", Vector2(28, 4)]]:
 			var s := Sprite2D.new()
 			s.texture = load(spec[0])
@@ -951,6 +953,7 @@ class NpcVisual extends Node2D:
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0
+		add_to_group("npc_visual")
 		var l := Label.new()
 		if kind == "merchant":
 			var s := Sprite2D.new()

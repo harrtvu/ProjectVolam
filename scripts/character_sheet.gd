@@ -10,6 +10,8 @@ var _icon: TextureRect
 var _stats: Label
 var _vs: Label
 var _wheel: Control
+var _scroll: ScrollContainer
+var _left: VBoxContainer
 
 
 func _ready() -> void:
@@ -23,9 +25,13 @@ func _ready() -> void:
 	var hb := HBoxContainer.new()
 	hb.add_theme_constant_override("separation", 12)
 	add_child(hb)
+	_scroll = ScrollContainer.new()   # the text column scrolls when the window is too short for it
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	hb.add_child(_scroll)
 	var left := VBoxContainer.new()
 	left.custom_minimum_size = Vector2(250, 0)
-	hb.add_child(left)
+	_scroll.add_child(left)
+	_left = left
 	var t := Label.new()
 	t.text = "Character  (C to close)"
 	t.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
@@ -90,7 +96,8 @@ func _process(_delta: float) -> void:
 		"HP %d / %d     Mana %d / %d" % [player.hp, player.max_hp, player.mp, player.max_mp],
 		"Attack %d     Defense %d" % [player.attack, player.defense],
 		"Crit %.1f%% (x%.2f)     Speed %d" % [player.crit * 100.0, player.crit_mult(), roundi(player.move_speed)],
-		"Resistances (cap %d%%): %s" % [roundi(Gear.RES_CAP), _res_text()],
+		"Resistances (cap %d%%):" % roundi(Gear.RES_CAP),
+		_res_text(),
 		"Weapon: %s     Gear pieces: %d/10" % [Gear.display_name(player.equipment.get("weapon", {})) if not player.equipment.get("weapon", {}).is_empty() else "-", _worn()],
 		"",
 		"Skills:",
@@ -130,13 +137,18 @@ func _process(_delta: float) -> void:
 		Classes.element_name(strong), Classes.element_name(weak)]
 	_wheel.highlight = e
 	_wheel.queue_redraw()
+	# fit the screen: the column is as tall as its text, but never past the bottom of the window
+	var need := _left.get_combined_minimum_size()
+	var avail := get_viewport_rect().size.y - global_position.y - 34.0
+	_scroll.custom_minimum_size = Vector2(need.x + 10.0, clampf(need.y, 120.0, maxf(120.0, avail)))
+	reset_size()
 
 
 func _res_text() -> String:
 	var parts: Array = []
 	for e in Gear.ELEMENTS:
-		parts.append("%s %d%%" % [Classes.ELEMENT_INFO[e]["name"], roundi(player.resistance(e))])
-	return "  ".join(parts)
+		parts.append("%s\u00a0%d%%" % [Classes.ELEMENT_INFO[e]["name"], roundi(player.resistance(e))])
+	return "   ".join(parts.slice(0, 3)) + "\n" + "   ".join(parts.slice(3))   # no-break space: "Wood" never splits from "0%"
 
 
 func _worn() -> int:

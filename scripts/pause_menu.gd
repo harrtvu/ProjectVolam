@@ -12,7 +12,9 @@ const CONTROLS := [
 	["Left-click", "Select target (empty ground clears it)"], ["Right-click", "Select monster and attack"],
 	["Tab", "Cycle nearest enemies"], ["E", "Pick up / blacksmith / Map Device / merchant / vendor"],
 	["Q", "Drink a health potion"], ["I", "Inventory"], ["C", "Character sheet"], ["T", "Passive web"],
-	["M", "Atlas"], ["H", "Hideout panel / decoration mode (in your hideout)"], ["/hideout", "Chat command: go to your hideout"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
+	["N", "Zone map"], ["M", "Atlas"], ["H", "Hideout panel / decoration mode (in your hideout)"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
+	["/invite NAME", "Chat: invite a player to your party (or the target frame's button)"], ["/accept  /decline", "Chat: answer a party invite"],
+	["/leave", "Chat: leave your party"], ["/p TEXT", "Chat: party chat"], ["/hideout", "Chat: go to your hideout"],
 ]
 
 static var settings_path := "user://settings.cfg"
@@ -158,6 +160,7 @@ func _btn(text: String, cb: Callable) -> Button:
 	b.text = text
 	b.custom_minimum_size = Vector2(0, 34)
 	b.focus_mode = Control.FOCUS_NONE
+	b.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS   # fires on mouse-down: a click that drifts off the button still counts
 	b.pressed.connect(cb)
 	return b
 

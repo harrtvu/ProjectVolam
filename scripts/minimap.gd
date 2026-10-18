@@ -6,6 +6,8 @@ extends Control
 
 var main: Node = null
 var big := false           # N: full zone map in the middle of the screen
+var top_y := 106.0         # corner map's top edge (Main keeps it below the help text)
+var covered := false       # Main: a right-side window (inventory, vendor ...) is open over the corner
 var _zone_id := ""
 var _tex: ImageTexture
 var _map_size := Vector2i(1, 1)
@@ -33,12 +35,12 @@ func _layout() -> void:
 		position = (vp - size) / 2.0
 	else:
 		size = SMALL
-		position = Vector2(vp.x - SMALL.x - 10.0, 96.0)
+		position = Vector2(vp.x - SMALL.x - 10.0, top_y)   # below the help text
 
 
 func _process(_delta: float) -> void:
 	var me: Node = main._local_player() if main else null
-	visible = me != null and me.zone != null and Zones.DB.has(me.zone.zone_id) and main.hud.visible
+	visible = me != null and me.zone != null and Zones.DB.has(me.zone.zone_id) and main.hud.visible and (big or not covered)
 	if not visible:
 		return
 	if me.zone.zone_id != _zone_id:

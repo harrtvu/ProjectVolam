@@ -201,9 +201,10 @@ func _process(_delta: float) -> void:
 	_gold_label.text = "%d gold" % player.gold
 	var res: Array = []
 	for e in Gear.ELEMENTS:
-		res.append("%s %d%%" % [Classes.ELEMENT_INFO[e]["name"], roundi(player.resistance(e))])
-	# full element names (2-letter "Fi"/"Me" read as garbage), on two fixed lines so they never wrap mid-entry
-	_stats_label.text = "Lv %d  HP %d  MP %d\nAttack %d  Defense %d\nResist: %s\n%s" % [player.level, player.max_hp, player.max_mp,
+		res.append("%s\u00a0%d%%" % [Classes.ELEMENT_INFO[e]["name"], roundi(player.resistance(e))])
+	# full element names (2-letter "Fi"/"Me" read as garbage); "Resistances" gets its own line so
+	# 3 + 2 entries always fit the column, and name/value are joined by a no-break space
+	_stats_label.text = "Lv %d  HP %d  MP %d\nAttack %d  Defense %d\nResistances:\n%s\n%s" % [player.level, player.max_hp, player.max_mp,
 		player.attack, player.defense, "  ".join(res.slice(0, 3)), "  ".join(res.slice(3))]
 	for sl in _doll:
 		_doll[sl].highlight = Color(0.5, 1, 0.5, 0.12) if apply_orb == "" and _hover and is_instance_valid(_hover) and not _hover.inst.is_empty() \

@@ -112,23 +112,45 @@ func _process(_delta: float) -> void:
 
 ## Dock the box where it covers none of the open windows (the step may have just asked
 ## for one, e.g. the inventory): top-centre, else left under the stats, else bottom-right, else above the skill bar.
+var place_info := ""
+var _spot := -1   # (self-test) how the last placement went
+
+
+## Where the box sits: never over an open big window, and over as few NPC / station labels
+## (Map Device, Blacksmith ...) as possible; ties keep the earlier (preferred) spot.
 func _place() -> void:
 	var vp := get_viewport_rect().size
-	var cands := [Vector2((vp.x - size.x) / 2.0, 64.0), Vector2(10.0, 176.0), Vector2(vp.x - size.x - 10.0, vp.y - 80.0 - size.y), Vector2((vp.x - size.x) / 2.0, vp.y - 80.0 - size.y)]
+	var cands := [Vector2((vp.x - size.x) / 2.0, 64.0), Vector2((vp.x - size.x) / 2.0, vp.y - 80.0 - size.y),
+		Vector2(vp.x - size.x - 10.0, vp.y - 80.0 - size.y), Vector2(10.0, 176.0), Vector2(vp.x - size.x - 10.0, 250.0)]
 	var busy: Array = []
 	for w in main._big_windows() + [main.minimap]:
 		if w.visible and (w != main.minimap or main.minimap.big):
 			busy.append(w.get_global_rect())
-	for c in cands:
-		var r := Rect2(c, size)
+	var npcs: Array = main.npc_screen_rects()
+	var best := -1
+	var best_n := 999
+	var counts := {}
+	for i in cands.size():
+		var r := Rect2(cands[i], size)
 		var ok := true
 		for b in busy:
 			if r.intersects(b):
 				ok = false
-		if ok:
-			position = c
-			return
-	position = cands[3]
+		if not ok:
+			continue
+		var n := 0
+		for b in npcs:
+			if r.intersects(b):
+				n += 1
+		counts[i] = n
+		if n < best_n:
+			best_n = n
+			best = i
+	if counts.get(_spot, 999) == best_n:   # equally good: stay put (no jumping around while walking)
+		best = _spot
+	_spot = best
+	position = cands[best] if best >= 0 else cands[1]
+	place_info = "spot %d, covers %d of %d NPC labels (best possible %d)" % [best, best_n if best >= 0 else -1, npcs.size(), best_n]
 
 
 ## For the UI self-test: does the box overlap any open big window?

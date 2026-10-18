@@ -266,7 +266,7 @@ SAVE16="$(pwd)/$L/accounts_p16.json"; rm -f "$SAVE16"
 run --server --save-file="$SAVE16" --debug-level-for=UiTest:10 --quit-after=36 > $L/p16_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Newbie --password=t --class=earth --bot --bot-no-gear --bot-tutorial=full --quit-after=32 > $L/p16_Newbie.log 2>&1 &
-run --join=127.0.0.1 --name=UiTest --password=t --class=earth --bot --bot-idle --ui-selftest --quit-after=16 > $L/p16_UiTest.log 2>&1 &
+run --join=127.0.0.1 --name=UiTest --password=t --class=earth --bot --bot-idle --ui-selftest --quit-after=20 > $L/p16_UiTest.log 2>&1 &
 run --join=127.0.0.1 --name=Skipper --password=t --class=water --bot --bot-tutorial=skip --quit-after=32 > $L/p16_Skipper.log 2>&1 &
 wait
 run --server --save-file="$SAVE16" --quit-after=14 > $L/p16b_server.log 2>&1 &
@@ -734,6 +734,11 @@ check "N zone map draws above chat/skill bar/help/stats"   "UI SELFTEST N map ab
 check "fast typing after Enter goes into chat (no hotkeys)" "UI SELFTEST fast typing after Enter goes to chat: PASS"    p16_UiTest.log
 check "skills back to back run out of mana (UiTest)"    "UiTest skill 4 rejected: not enough mana"                  p16_server.log
 check "tutorial box never covers the inventory (step 4)"   "UI SELFTEST tutorial box clear of the inventory: PASS"     p16_UiTest.log
+check "tutorial box keeps clear of NPC labels (Map Device...)" "UI SELFTEST tutorial box clear of NPC labels: PASS"   p16_UiTest.log
+check "HUD help text (5 lines, /invite) ends above the minimap" "UI SELFTEST help text ends above the minimap: PASS"   p16_UiTest.log
+check "resistance lines don't wrap (inventory + C panel)"    "UI SELFTEST resistance lines don't wrap: PASS"         p16_UiTest.log
+check "corner minimap hidden under the inventory"            "UI SELFTEST minimap hidden under the inventory: PASS"  p16_UiTest.log
+check "C panel fits the window"                              "UI SELFTEST C panel fits the window: PASS"             p16_UiTest.log
 check "tutorial starts for a new character"            "\[tutorial\] Newbie: starting the tutorial \(new character\)"   p16_server.log
 check "step 1: movement"                               "tutorial step 1 done: Move"                                   p16_Newbie.log
 check "step 2: skills (keys 1-4)"                      "tutorial step 2 done: Skills"                                 p16_Newbie.log
