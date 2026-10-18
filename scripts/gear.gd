@@ -519,7 +519,7 @@ static func sanitize(v: Variant) -> Dictionary:
 	if v.has("uniq"):
 		inst["uniq"] = str(v["uniq"])
 	if bool(v.get("bound", false)):
-		inst["bound"] = true      # account-bound: can't be listed on the market
+		inst["bound"] = true      # account-bound (starting gear, free gifts)
 	if Dungeons.is_ticket(inst):
 		inst["tier"] = clampi(int(v.get("tier", 1)), 1, Dungeons.MAX_TIER)
 		inst["q"] = clampi(int(v.get("q", 0)), 0, Dungeons.MAX_QUALITY)

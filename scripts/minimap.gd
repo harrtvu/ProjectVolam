@@ -69,7 +69,7 @@ func _draw() -> void:
 	for p in z.info["portals"]:
 		var r: Rect2i = p["rect"]
 		draw_rect(Rect2(Vector2(r.position) * k, Vector2(r.size) * k).grow(1.5), Color(0.7, 0.4, 1.0))
-	for key in ["map_device", "merchant", "broker", "blacksmith", "hideout_master"]:
+	for key in ["map_device", "merchant", "vendor", "blacksmith", "hideout_master"]:
 		if z.info.has(key):
 			draw_circle(tp.call(z.map.cell_pos(z.info[key])), dot, Color(1.0, 0.95, 0.4))
 	for p in z.players_root.get_children():

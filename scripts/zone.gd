@@ -93,10 +93,10 @@ func setup(id: String, main_ref: Node) -> void:
 		mc.kind = "merchant"
 		mc.position = map.cell_pos(info["merchant"])
 		add_child(mc)
-	if info.has("broker") and not ho:
+	if info.has("vendor") and not ho:
 		var br := NpcVisual.new()
-		br.kind = "broker"
-		br.position = map.cell_pos(info["broker"])
+		br.kind = "vendor"
+		br.position = map.cell_pos(info["vendor"])
 		add_child(br)
 	if info.has("map_device"):
 		map_portal_root = Node2D.new()
@@ -219,8 +219,8 @@ func avoid_cells() -> Array:
 	if info.has("map_device"):
 		a.append(info["map_device"])
 		a.append(info["merchant"])
-	if info.has("broker"):
-		a.append(info["broker"])
+	if info.has("vendor"):
+		a.append(info["vendor"])
 	if info.has("hideout_master"):
 		a.append(info["hideout_master"])
 	for p in info["portals"]:
@@ -829,7 +829,7 @@ func refresh_hideout() -> void:
 	var bs := BlacksmithVisual.new()
 	bs.position = map.cell_pos(info["blacksmith"])
 	root.add_child(bs)
-	for k in [["device", "map_device"], ["merchant", "merchant"], ["broker", "broker"]]:
+	for k in [["device", "map_device"], ["merchant", "merchant"], ["vendor", "vendor"]]:
 		var v := NpcVisual.new()
 		v.kind = k[0]
 		v.position = map.cell_pos(info[k[1]])
@@ -852,8 +852,8 @@ func map_device_pos() -> Vector2:
 	return map.cell_pos(info["map_device"]) if info.has("map_device") else Vector2.INF
 
 
-func broker_pos() -> Vector2:
-	return map.cell_pos(info["broker"]) if info.has("broker") else Vector2.INF
+func vendor_pos() -> Vector2:
+	return map.cell_pos(info["vendor"]) if info.has("vendor") else Vector2.INF
 
 
 func merchant_pos() -> Vector2:
@@ -880,7 +880,7 @@ class NpcVisual extends Node2D:
 			st.position = Vector2(20, 2)
 			add_child(st)
 			l.text = "Ticket Merchant\n(E: buy tickets  -  M: atlas)"
-		elif kind == "broker":
+		elif kind == "vendor":
 			var s := Sprite2D.new()
 			s.texture = load("res://assets/merchant.png")
 			s.modulate = Color(0.75, 1.0, 0.8)
@@ -891,7 +891,7 @@ class NpcVisual extends Node2D:
 			gi.texture = load("res://assets/items/gold.png") if ResourceLoader.exists("res://assets/items/gold.png") else null
 			gi.position = Vector2(-20, 2)
 			add_child(gi)
-			l.text = "Trade Broker\n(E: player market)"
+			l.text = "Vendor\n(E: buy & sell)"
 		elif kind == "master":
 			var s := Sprite2D.new()
 			s.texture = load("res://assets/merchant.png")
@@ -906,7 +906,7 @@ class NpcVisual extends Node2D:
 		l.position = Vector2(-110, -56)
 		l.z_index = 30
 		l.add_theme_font_size_override("font_size", 11)
-		l.add_theme_color_override("font_color", Color(0.75, 0.9, 1.0) if kind == "device" else (Color(0.6, 1.0, 0.7) if kind == "broker" else Color(1.0, 0.85, 0.55)))
+		l.add_theme_color_override("font_color", Color(0.75, 0.9, 1.0) if kind == "device" else (Color(0.6, 1.0, 0.7) if kind == "vendor" else Color(1.0, 0.85, 0.55)))
 		l.add_theme_color_override("font_outline_color", Color.BLACK)
 		l.add_theme_constant_override("outline_size", 4)
 		add_child(l)

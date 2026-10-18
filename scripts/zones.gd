@@ -36,7 +36,7 @@ const DB := {
 		"blacksmith": Vector2i(172, 61),   # anvil + stash; enhancement / selling / stash work within 100px
 		"map_device": Vector2i(165, 59),   # opens dungeon tickets; portals appear in a row above it
 		"merchant": Vector2i(160, 62),     # Ticket Merchant: sells low-tier tickets, daily free ticket
-		"broker": Vector2i(156, 66),       # Trade Broker: player market (list / buy / claim box)
+		"vendor": Vector2i(156, 66),       # Vendor: buys loot, sells a rotating stock
 		"hideout_master": Vector2i(176, 66), # Hideout Master: enter your hideout, buy decorations
 		"map_portal_row": 56,
 		"portals": [

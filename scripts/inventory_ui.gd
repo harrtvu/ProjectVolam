@@ -16,7 +16,7 @@ var player: Node = null
 var tooltip: Control = null      # item_tooltip.gd (owned by Main's HUD)
 var smith: Control = null        # blacksmith panel (owned by Main's HUD)
 var map_ui: Control = null       # Map Device panel (click a ticket to load it)
-var market_ui: Control = null    # Trade Broker panel (click an item / stack to sell it)
+var vendor_ui: Control = null    # Vendor panel (click an item / stack to select it for selling)
 var apply_orb := ""              # orb picked up with right-click
 var _gold_label: Label
 var _stats_label: Label
@@ -276,8 +276,8 @@ func _on_click(s: Control, button: int, shift: bool, ctrl: bool) -> void:
 			else:
 				player.request_unequip(s.key)
 		return
-	if s.stack_id != "" and market_ui and market_ui.visible and market_ui.tab == "sell":
-		market_ui.select_stack(s.stack_id)
+	if s.stack_id != "" and vendor_ui and vendor_ui.visible:
+		vendor_ui.select_stack(s.stack_id)
 		return
 	if s.stack_id != "":
 		match Items.type_of(s.stack_id):
@@ -304,8 +304,8 @@ func _on_click(s: Control, button: int, shift: bool, ctrl: bool) -> void:
 			_destroy_armed_ms = Time.get_ticks_msec()
 			_status.text = "Ctrl+click again to DESTROY %s" % Gear.display_name(s.inst)
 			_status.add_theme_color_override("font_color", Color(1, 0.5, 0.4))
-	elif market_ui and market_ui.visible and market_ui.tab == "sell":
-		market_ui.select_uid(uid)
+	elif vendor_ui and vendor_ui.visible:
+		vendor_ui.select_uid(uid)
 	elif map_ui and map_ui.visible and map_ui.mode == "device" and Dungeons.is_ticket(s.inst):
 		map_ui.select(s.inst)
 	elif smith and smith.visible:
@@ -350,7 +350,7 @@ class DollFigure extends Control:
 		draw_rect(Rect2(100, 142, 16, 50), c)
 
 
-## Compact mode (bag only, no paper doll): used beside the wide market panel so the
+## Compact mode (bag only, no paper doll): used beside the wide vendor panel so the
 ## two panels don't overlap. The panel is anchored to the right edge of the screen.
 func set_compact(on: bool) -> void:
 	if _left == null or _left.visible == not on:

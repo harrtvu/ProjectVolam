@@ -63,7 +63,7 @@ func _notification(what: int) -> void:
 
 
 func _get_drag_data(_at: Vector2) -> Variant:
-	if inst.is_empty() or kind == "zone" or kind == "market" or kind == "listing":
+	if inst.is_empty() or kind == "zone" or kind == "vendor" or kind == "stock":
 		return null
 	var prev := TextureRect.new()
 	prev.texture = Items.icon(str(inst["base"]))
@@ -84,7 +84,7 @@ func _can_drop_data(_at: Vector2, data: Variant) -> bool:
 			return data["from"] == "equip" or data["from"] == "stash"
 		"zone", "smith":
 			return data["from"] == "bag" or (kind == "smith" and data["from"] == "equip")
-		"stash", "market":
+		"stash", "vendor":
 			return data["from"] == "bag"
 	return false
 

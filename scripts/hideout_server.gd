@@ -5,7 +5,7 @@ extends Node
 ## account's layout (create_hideout RPC) like a dungeon instance; the usual zone
 ## visibility keeps it private. Solo for now: only the owner may enter
 ## (_may_enter - a party / "/visit" system only has to widen that check).
-## Stations (Map Device, Ticket Merchant, Trade Broker, Blacksmith + stash) reuse
+## Stations (Map Device, Ticket Merchant, Vendor, Blacksmith + stash) reuse
 ## the town station code; dungeon portals opened here return here.
 
 const EMPTY_TIMEOUT := 20.0

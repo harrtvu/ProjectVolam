@@ -10,7 +10,7 @@ signal closed
 const CONTROLS := [
 	["W A S D / Arrows", "Move"], ["Space", "Basic attack"], ["1 2 3 4 (hold = aim ground skills)", "Skills"],
 	["Left-click", "Select target (empty ground clears it)"], ["Right-click", "Select monster and attack"],
-	["Tab", "Cycle nearest enemies"], ["E", "Pick up / blacksmith / Map Device / merchant / broker"],
+	["Tab", "Cycle nearest enemies"], ["E", "Pick up / blacksmith / Map Device / merchant / vendor"],
 	["Q", "Drink a health potion"], ["I", "Inventory"], ["C", "Character sheet"], ["T", "Passive web"],
 	["M", "Atlas"], ["H", "Hideout panel / decoration mode (in your hideout)"], ["/hideout", "Chat command: go to your hideout"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
 ]

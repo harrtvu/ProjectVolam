@@ -5,7 +5,7 @@ class_name Hideouts
 ## built from the account's layout:
 ##   {"theme": id, "unlocked": [ids], "stations": {station: [x, y]},
 ##    "decor": [{"id": catalog id, "x", "y", "rot": 0-3, "flip": bool}], "owned": {catalog id: count}}
-## Stations reuse the town station keys ("map_device", "merchant", "broker",
+## Stations reuse the town station keys ("map_device", "merchant", "vendor",
 ## "blacksmith" - the blacksmith includes the stash), so every near_*() check and
 ## every station feature works unchanged inside a hideout.
 
@@ -18,9 +18,9 @@ const ARRIVE := Vector2i(32, 26)           # where you appear inside
 const TOWN_NPC := Vector2i(40, 22)         # Hideout Master in Sunny Meadow
 const TOWN_ARRIVE := Vector2i(176, 68)     # where the door drops you in town (next to the Hideout Master)
 const MAX_DECOR := 200
-const STATIONS := ["map_device", "merchant", "broker", "blacksmith"]
-const STATION_NAMES := {"map_device": "Map Device", "merchant": "Ticket Merchant", "broker": "Trade Broker", "blacksmith": "Blacksmith & Stash"}
-const DEFAULT_STATIONS := {"map_device": [24, 15], "merchant": [20, 19], "broker": [20, 24], "blacksmith": [40, 15]}
+const STATIONS := ["map_device", "merchant", "vendor", "blacksmith"]
+const STATION_NAMES := {"map_device": "Map Device", "merchant": "Ticket Merchant", "vendor": "Vendor", "blacksmith": "Blacksmith & Stash"}
+const DEFAULT_STATIONS := {"map_device": [24, 15], "merchant": [20, 19], "vendor": [20, 24], "blacksmith": [40, 15]}
 
 const THEMES := {
 	"meadow": {"name": "Meadow Retreat", "element": "", "floor": ["GRASS", "GRASS", "GRASS2", "FLOWER"], "wall": "TREE", "tint": [1.0, 1.0, 1.0]},
@@ -161,7 +161,7 @@ static func sanitize(v: Variant) -> Dictionary:
 		out["stations"] = st
 		out["decor"] = []
 		for s in STATIONS:
-			var c := cell_of(v["stations"].get(s, DEFAULT_STATIONS[s]))
+			var c := cell_of(v["stations"].get(s, v["stations"].get("broker", DEFAULT_STATIONS[s]) if s == "vendor" else DEFAULT_STATIONS[s]))   # (old saves: the Trade Broker spot)
 			if station_reason(out, s, c) != "":
 				c = cell_of(DEFAULT_STATIONS[s])
 			st[s] = [c.x, c.y]

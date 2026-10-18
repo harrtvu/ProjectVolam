@@ -51,15 +51,6 @@ func show_gear(inst: Dictionary, player: Node, at: Vector2, compare_with: Dictio
 	_show("\n".join(lines), at)
 
 
-## A market listing: the item's tooltip + price / seller.
-func show_listing(l: Dictionary, player: Node, at: Vector2) -> void:
-	var tip := Market.tooltip(l, player.class_id if player else "", player.level if player else 99)
-	var lines: Array = []
-	for i in tip.size():
-		lines.append(_line(str(tip[i][0]), tip[i][1], i == 0))
-	_show("\n".join(lines), at)
-
-
 func show_stack(id: String, n: int, at: Vector2) -> void:
 	var info := Items.info(id)
 	var lines: Array = [_line("%s  x%d" % [info["name"], n], Color(0.75, 0.95, 1.0) if Items.type_of(id) == "orb" else Color.WHITE, true)]
