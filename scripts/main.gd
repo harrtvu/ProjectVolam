@@ -1036,8 +1036,12 @@ func transfer_player(node: Node, to_zone: String, arrive: Vector2i) -> void:
 	c["zone"] = to_zone
 	c["pos"] = [pos.x, pos.y]
 	var pname: String = node.display_name
-	node.queue_free()
 	peer_zone[id] = to_zone
+	# despawn the old zone's entities (and the old player node) for this peer NOW, before the
+	# new player is spawned: otherwise the client gets its new player first and still holds the
+	# old zone's monsters/loot until the next visibility pass (seen as foreign_entities > 0)
+	node.zone.hide_from(id)
+	node.queue_free()
 	_zone_since[id] = Time.get_ticks_msec()
 	_pending_chars[id] = c
 	var nn: Node = dest.player_spawner.spawn({"id": id, "name": pname, "pos": pos, "class": node.class_id})
@@ -1894,11 +1898,26 @@ func _show_zone(zone_id: String, announce := true) -> void:
 			banner_label.text = "%s\nMonsters Lv %s  -  %s" % [zi["name"], zi["levels"], "map iiq +%d%% iir +%d%%" % [roundi(d.get("iiq", 0.0)), roundi(d.get("iir", 0.0))]]
 
 
+## Client: entities of zones other than `here` this peer still holds (should always be 0).
+func _foreign_count(here: String) -> int:
+	var n := 0
+	for zid in zones:
+		if zid != here:
+			for root in [zones[zid].players_root, zones[zid].monsters_root, zones[zid].loot_root]:
+				for e in root.get_children():
+					if not e.is_queued_for_deletion():
+						n += 1
+	return n
+
+
 func _update_hud(delta: float) -> void:
 	if is_dedicated:
 		return
 	var me := _local_player()
 	if me and me.zone and me.zone.zone_id != _shown_zone:
+		if bot_mode and _shown_zone != "" and not multiplayer.is_server():
+			# the very frame our player shows up in the new zone: the old zone's entities must already be gone
+			_log("zone switch %s -> %s: foreign_entities=%d" % [_shown_zone, me.zone.zone_id, _foreign_count(me.zone.zone_id)])
 		_show_zone(me.zone.zone_id)
 	if _banner_t > 0.0:
 		_banner_t -= delta
@@ -3987,12 +4006,7 @@ func _log_status() -> void:
 	var mons: Array = []
 	for k in counts:
 		mons.append("%s %d/%d" % [k, counts[k][0], counts[k][1]])
-	# entities of OTHER zones this client received (should always be 0)
-	var foreign := 0
-	for zid in zones:
-		if zid != z.zone_id:
-			for root in [zones[zid].players_root, zones[zid].monsters_root, zones[zid].loot_root]:
-				foreign += root.get_child_count()
+	var foreign := _foreign_count(z.zone_id)
 	_log("status: zone=%s players=%d %s | monsters: %s | loot=%d | foreign_entities=%d" % [
 		z.zone_id, ps.size(), ", ".join(ps), ", ".join(mons), z.loot_root.get_child_count(), foreign])
 

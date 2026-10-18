@@ -10,7 +10,7 @@ cd "$(dirname "$0")/.."
 CLS="${1:-fire}"; OUT="${2:-test-logs/fp}"; PORT="${3:-8680}"; THEME="${4:-wood}"
 mkdir -p "$OUT"; rm -f "$OUT"/*.log "$OUT"/*.json
 run() { "$GODOT" --headless --path . -- "$@"; }
-S="$(pwd)/$OUT/save.json"
+case "$OUT" in /*) S="$OUT/save.json" ;; *) S="$(pwd)/$OUT/save.json" ;; esac
 run --server --port=$PORT --save-file="$S" --debug-level-for=Solo:6,Lead:6,Mate:6 ${SRV_EXTRA:-} --quit-after=75 > $OUT/server.log 2>&1 &
 sleep 2
 c() { n=$1; shift; run --join=127.0.0.1 --port=$PORT --name=$n --password=p --class=$CLS --bot --bot-no-gear ${CLI_EXTRA:-} "$@" --quit-after=70 > $OUT/$n.log 2>&1 & }

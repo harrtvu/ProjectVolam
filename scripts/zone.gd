@@ -163,6 +163,16 @@ func _peer_in_zone(peer: int) -> bool:
 	return main.peer_zone.get(peer, "") == zone_id
 
 
+## Server: re-run the visibility filters of this zone's entities for `peer` (after it left), so
+## their despawns go out right away instead of on the next visibility update.
+func hide_from(peer: int) -> void:
+	for root in [players_root, monsters_root, loot_root, proj_root]:
+		for e in root.get_children():
+			var sync := e.get_node_or_null("Sync") as MultiplayerSynchronizer
+			if sync:
+				sync.update_visibility(peer)
+
+
 func _attach_filter(node: Node) -> void:
 	var sync := node.get_node_or_null("Sync") as MultiplayerSynchronizer
 	if sync:
