@@ -251,6 +251,7 @@ b15() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=v "$@" --quit-aft
 b15 Shopper --class=metal --bot --bot-no-gear --bot-vendor=1
 b15 Pauper --class=fire --bot --bot-no-gear --bot-vendor=1 --bot-vendor-role=probe
 b15 FullBag --class=earth --bot --bot-no-gear --bot-vendor=1 --bot-vendor-role=probe
+b15 Seller --class=water --bot --bot-no-gear --bot-vendor=ui
 wait
 cp $L/accounts_p15_vendor.json $L/p15_vendor_before_restart.json
 run --server --save-file="$SAVE15" --quit-after=14 > $L/p15b_server.log 2>&1 &
@@ -712,6 +713,15 @@ check "unaffordable buy explained in the panel"       "vendor panel: Not enough 
 checkp "selling never drops the item on the ground"   "ground items near me before/after selling: (\d+) -> \1$"           p15_Shopper.log
 check "health potions sell for a little gold"         "Shopper sold [0-9]+ x health_potion for [0-9]+ gold"              p15_server.log
 check "buying with a full bag rejected"               "\[vendor\] FullBag buy rejected: your bag is full"                p15_server.log
+check "vendor: clicking a bag item only selects it"   "vendor: selected \[(magic|rare)\] .* \(not sold\)"                p15_Seller.log
+check "vendor: Sell right after the click is ignored"  "vendor: Sell pressed [0-9]+ ms after selecting - ignored"        p15_Seller.log
+check "vendor: item survives the (double) click"       "vendor ui bot: after the clicks the item is still in the bag"   p15_Seller.log
+check "vendor: magic/rare asks for confirmation"       "vendor: confirm asked for \[(magic|rare)\]"                       p15_Seller.log
+check "vendor: cancel keeps the item"                  "vendor ui bot: after cancel the item is still in the bag"       p15_Seller.log
+check "vendor: confirmed sale sells it"                "vendor ui bot: after confirming the item is sold"              p15_Seller.log
+check "vendor: quantity picker sells 1 of a stack"     "Seller sold 1 x health_potion for 2 gold"                        p15_server.log
+check "vendor: rest of the stack kept"                 "vendor ui bot: health potions ([0-9]+) -> [0-9]+ \(sold 1\)"    p15_Seller.log
+if [ "$(grep -c "Seller sold \[" $L/p15_server.log)" = "1" ]; then echo "PASS  vendor: exactly one gear sale from the UI test"; else echo "FAIL  vendor: exactly one gear sale from the UI test ($(grep -c "Seller sold \[" $L/p15_server.log))"; fi
 check "stock persists across restart (same rotation)" "\[vendor\] loaded accounts_p15_vendor.json: rotation [0-9]+ .*12 entries"  p15b_server.log
 if ! grep -q "stock rotated" $L/p15b_server.log && python3 tools/vendor_compare.py "$L/p15_vendor_before_restart.json" "$L/p15b_Shopper.log"; then echo "PASS  stock, prices and sold-out entries identical after restart"; else echo "FAIL  stock, prices and sold-out entries identical after restart"; fi
 check "bought item kept after restart"                "Login 'Shopper'.*restored save"                                     p15b_server.log

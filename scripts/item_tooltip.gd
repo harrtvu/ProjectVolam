@@ -51,11 +51,13 @@ func show_gear(inst: Dictionary, player: Node, at: Vector2, compare_with: Dictio
 	_show("\n".join(lines), at)
 
 
-func show_stack(id: String, n: int, at: Vector2) -> void:
+func show_stack(id: String, n: int, at: Vector2, selling := false) -> void:
 	var info := Items.info(id)
 	var lines: Array = [_line("%s  x%d" % [info["name"], n], Color(0.75, 0.95, 1.0) if Items.type_of(id) == "orb" else Color.WHITE, true)]
 	lines.append(_line(str(info.get("desc", "")), Color(0.8, 0.8, 0.8)))
-	if Items.type_of(id) == "orb":
+	if selling:
+		lines.append(_line("Click to select for selling" if int(info.get("sell", 0)) > 0 else "The vendor won't buy this", Color(1, 0.85, 0.5)))
+	elif Items.type_of(id) == "orb":
 		lines.append(_line("Right-click, then click an item to apply" + (" (at the blacksmith)" if id == "enhance_stone" else ""), Color(0.6, 0.6, 0.65)))
 	elif Items.type_of(id) == "consumable":
 		lines.append(_line("Click to drink (Q = quick potion)", Color(0.6, 0.6, 0.65)))

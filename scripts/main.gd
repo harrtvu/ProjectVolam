@@ -2679,6 +2679,39 @@ func _bot_vendor(me: Node, zone: Node, delta: float) -> void:
 					me.request_vendor("sell", {"stack": "health_potion"})],   # consumables sell for a little
 			[6.5, func(): _log("vendor bot: done, gold %d, potions %d" % [me.gold, int(me.inventory.get("health_potion", 0))])],
 		]
+	elif bot_vendor == "ui":   # the real panel path: a click only selects, Sell sells, magic+ asks first, stacks take a quantity
+		var slot_of := func(pred: Callable) -> Control:
+			for sl in inventory_ui._bag_slots:
+				if pred.call(sl):
+					return sl
+			return null
+		var click := func(sl: Control) -> void:
+			if sl:
+				inventory_ui._on_click(sl, MOUSE_BUTTON_LEFT, false, false)
+		steps = [
+			[1.0, func():
+				var sl: Control = slot_of.call(func(x): return not x.inst.is_empty() and str(x.inst["rarity"]) in ["magic", "rare"] and not Dungeons.is_ticket(x.inst))
+				_bv_done["magic"] = int(sl.inst["uid"]) if sl else -1
+				_log("vendor ui bot: clicking %s in the bag (bag %d)" % [Gear.summary(sl.inst) if sl else "?", me.bag_used()])
+				click.call(sl)
+				click.call(sl)            # double-click: still only selected
+				vendor_ui._sell()],       # a Sell press in the same instant is ignored
+			[1.8, func(): _log("vendor ui bot: after the clicks the item is %s" % ("still in the bag" if _bag_uid(me, int(_bv_done["magic"])).size() > 0 else "GONE"))],
+			[2.0, func(): vendor_ui._sell()],          # asks for confirmation
+			[2.4, func(): vendor_ui.cancel_sell()],
+			[3.0, func():
+				_log("vendor ui bot: after cancel the item is %s" % ("still in the bag" if _bag_uid(me, int(_bv_done["magic"])).size() > 0 else "GONE"))
+				vendor_ui._sell()],
+			[3.4, func(): vendor_ui.confirm_sell()],
+			[4.2, func():
+				_log("vendor ui bot: after confirming the item is %s" % ("still in the bag" if _bag_uid(me, int(_bv_done["magic"])).size() > 0 else "sold"))
+				var sl: Control = slot_of.call(func(x): return x.stack_id == "health_potion")
+				_bv_done["pots"] = int(me.inventory.get("health_potion", 0))
+				click.call(sl)
+				vendor_ui.set_qty(1)],
+			[4.8, func(): vendor_ui._sell()],
+			[5.6, func(): _log("vendor ui bot: health potions %d -> %d (sold 1)" % [int(_bv_done["pots"]), int(me.inventory.get("health_potion", 0))])],
+		]
 	else:
 		steps = [[2.0, func(): _log("vendor bot: stock after restart seen (%d entries)" % vendor.stock.size())]]
 	for i in steps.size():
@@ -4152,7 +4185,11 @@ func _build_ui() -> void:
 	hud.add_child(item_tip)
 	vendor_ui.tooltip = item_tip
 	inventory_ui.vendor_ui = vendor_ui
-	vendor_ui.visibility_changed.connect(func(): inventory_ui.set_compact(vendor_ui.visible))
+	vendor_ui.visibility_changed.connect(func():
+		inventory_ui.set_compact(vendor_ui.visible)
+		if inventory_ui.player:
+			inventory_ui._update_status())
+	vendor_ui.ui_log.connect(_log)
 	inventory_ui.map_ui = map_ui
 	inventory_ui.tooltip = item_tip
 	inventory_ui.smith = smith_ui

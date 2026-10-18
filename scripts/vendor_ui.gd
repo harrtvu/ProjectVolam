@@ -2,7 +2,10 @@ extends PanelContainer
 const Vendor := preload("res://scripts/vendor.gd")
 ## NPC vendor panel (press E next to the Vendor in Sunny Meadow or in your hideout).
 ## Left: the rotating stock (Buy). Right: sell - click an item / stack in your bag
-## (or drag it onto the slot) and press Sell. The server (vendor_server.gd) validates.
+## (or drag it onto the slot) to SELECT it, then press Sell. Anything above normal rarity asks
+## for a confirmation first; stacks get a quantity picker. The server (vendor_server.gd) validates.
+
+signal ui_log(msg: String)
 
 const SlotScript := preload("res://scripts/item_slot.gd")
 
@@ -20,6 +23,13 @@ var _status: Label
 var _buy_rows: Array = []   # [button, price label, price, qty] per stock row
 var _warn_t := 0.0
 var _t := 0.0
+var sell_qty := 1                 # stacks: how many to sell
+var _qty_row: HBoxContainer
+var _qty_lbl: Label
+var _confirm_row: HBoxContainer
+var _confirm_lbl: Label
+var _sel_ms := 0                  # when the selection last changed (a Sell press right after it is ignored)
+const SELL_ARM_MS := 350
 
 
 func _ready() -> void:
@@ -51,7 +61,7 @@ func _ready() -> void:
 	_rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	sc.add_child(_rows)
 	vb.add_child(HSeparator.new())
-	vb.add_child(_label("Sell: click an item or a stack in your bag (or drag it here).", Color(0.7, 0.7, 0.75), 10))
+	vb.add_child(_label("Sell: click an item or a stack in your bag (or drag it here) to select it, then press Sell.", Color(0.7, 0.7, 0.75), 10))
 	var h := HBoxContainer.new()
 	h.add_theme_constant_override("separation", 8)
 	vb.add_child(h)
@@ -68,8 +78,31 @@ func _ready() -> void:
 	_sell_info.custom_minimum_size = Vector2(400, 56)
 	_sell_info.add_theme_font_size_override("normal_font_size", 11)
 	h.add_child(_sell_info)
+	var right := VBoxContainer.new()
+	h.add_child(right)
+	_qty_row = HBoxContainer.new()
+	_qty_row.add_theme_constant_override("separation", 2)
+	right.add_child(_qty_row)
+	_qty_row.add_child(_button("-", func(): set_qty(sell_qty - 1), 24))
+	_qty_lbl = _label("1", Color.WHITE, 12)
+	_qty_lbl.custom_minimum_size = Vector2(34, 0)
+	_qty_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_qty_row.add_child(_qty_lbl)
+	_qty_row.add_child(_button("+", func(): set_qty(sell_qty + 1), 24))
+	_qty_row.add_child(_button("All", func(): set_qty(999999), 34))
+	_qty_row.visible = false
 	_sell_btn = _button("Sell", _sell, 110)
-	h.add_child(_sell_btn)
+	right.add_child(_sell_btn)
+	_confirm_row = HBoxContainer.new()
+	_confirm_row.add_theme_constant_override("separation", 6)
+	vb.add_child(_confirm_row)
+	_confirm_lbl = _label("", Color(1, 0.75, 0.4), 11)
+	_confirm_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_confirm_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_confirm_row.add_child(_confirm_lbl)
+	_confirm_row.add_child(_button("Yes, sell", confirm_sell, 80))
+	_confirm_row.add_child(_button("Cancel", cancel_sell, 64))
+	_confirm_row.visible = false
 
 
 
@@ -171,22 +204,81 @@ func _update_affordable() -> void:
 func select_uid(uid: int) -> void:
 	sell_uid = uid
 	sell_stack = ""
-	refresh()
+	_selected()
 
 
 func select_stack(id: String) -> void:
 	sell_stack = id
 	sell_uid = -1
+	sell_qty = 1
+	_selected()
+
+
+func _selected() -> void:
+	_sel_ms = Time.get_ticks_msec()
+	_confirm_row.visible = false
+	refresh()
+	ui_log.emit("vendor: selected %s (not sold)" % _sel_name())
+
+
+func set_qty(n: int) -> void:
+	if sell_stack == "" or player == null:
+		return
+	sell_qty = clampi(n, 1, maxi(1, int(player.inventory.get(sell_stack, 0))))
 	refresh()
 
 
-func _sell() -> void:
+func _sel_inst() -> Dictionary:
+	if player != null and sell_uid >= 0:
+		for it in player.bag:
+			if int(it["uid"]) == sell_uid:
+				return it
+	return {}
+
+
+func _sel_name() -> String:
 	if sell_stack != "":
-		player.request_vendor("sell", {"stack": sell_stack})
+		return "%d x %s" % [sell_qty, Items.display_name(sell_stack)]
+	var inst := _sel_inst()
+	return "[%s] %s" % [inst["rarity"], Gear.display_name(inst)] if not inst.is_empty() else "nothing"
+
+
+## The Sell button. Gear above normal rarity asks first ("Yes, sell" / "Cancel").
+func _sell() -> void:
+	if sell_stack == "" and sell_uid < 0:
+		return
+	if Time.get_ticks_msec() - _sel_ms < SELL_ARM_MS:   # a double-click on the item must not reach the button
+		ui_log.emit("vendor: Sell pressed %d ms after selecting - ignored" % (Time.get_ticks_msec() - _sel_ms))
+		return
+	var inst := _sel_inst()
+	if not inst.is_empty() and str(inst.get("rarity", "normal")) != "normal":
+		_confirm_lbl.text = "Sell %s for %d gold? This can't be undone." % [Gear.display_name(inst), Gear.sell_price(inst)]
+		_confirm_row.visible = true
+		ui_log.emit("vendor: confirm asked for %s" % _sel_name())
+		return
+	_do_sell()
+
+
+func confirm_sell() -> void:
+	if _confirm_row.visible:
+		_confirm_row.visible = false
+		_do_sell()
+
+
+func cancel_sell() -> void:
+	_confirm_row.visible = false
+	ui_log.emit("vendor: sale of %s cancelled" % _sel_name())
+
+
+func _do_sell() -> void:
+	ui_log.emit("vendor: selling %s" % _sel_name())
+	if sell_stack != "":
+		player.request_vendor("sell", {"stack": sell_stack, "n": sell_qty})
 	elif sell_uid >= 0:
 		player.request_vendor("sell", {"uid": sell_uid})
 	sell_uid = -1
 	sell_stack = ""
+	sell_qty = 1
 
 
 func _process(delta: float) -> void:
@@ -212,9 +304,11 @@ func refresh() -> void:
 		if have <= 0:
 			sell_stack = ""
 		else:
+			sell_qty = clampi(sell_qty, 1, have)
 			_sell_slot.set_stack(sell_stack, have)
-			price = have * each
-			_sell_info.text = "[b]%s[/b] x%d\n%s" % [Items.display_name(sell_stack), have, "The vendor pays %d gold each." % each if each > 0 else "[color=#ff8070]The vendor won't buy this.[/color]"]
+			price = sell_qty * each
+			_qty_lbl.text = str(sell_qty)
+			_sell_info.text = "[b]%s[/b]  sell %d of %d\n%s" % [Items.display_name(sell_stack), sell_qty, have, "The vendor pays %d gold each." % each if each > 0 else "[color=#ff8070]The vendor won't buy this.[/color]"]
 	if sell_uid >= 0:
 		var inst := {}
 		for it in player.bag:
@@ -230,7 +324,9 @@ func refresh() -> void:
 			for i in mini(tip.size(), 4):
 				lines.append("[color=#%s]%s[/color]" % [tip[i][1].to_html(false), str(tip[i][0]).replace("[", "[lb]")])
 			_sell_info.text = "\n".join(lines)
+	_qty_row.visible = sell_stack != ""
 	if sell_uid < 0 and sell_stack == "":
+		_confirm_row.visible = false
 		_sell_info.text = "[color=#999999]Nothing selected. Click an item in your bag.[/color]"
 	_sell_btn.text = "Sell for %d gold" % price if price > 0 else "Sell"
 	_sell_btn.disabled = price <= 0

@@ -1278,12 +1278,16 @@ func server_sell(arg: Variant) -> void:
 		return
 	if typeof(arg) == TYPE_DICTIONARY and arg.has("stack"):
 		var id := str(arg["stack"])
-		var n := int(inventory.get(id, 0))
+		var have := int(inventory.get(id, 0))
 		var each := int(Items.info(id).get("sell", 0))
-		if n <= 0 or each <= 0:
+		if have <= 0 or each <= 0:
 			_gear_reject("sell", "the vendor won't buy that")
 			return
-		inventory.erase(id)
+		var n := clampi(int(arg.get("n", have)), 1, have)   # (vendor quantity picker; the blacksmith sells the stack)
+		if n >= have:
+			inventory.erase(id)
+		else:
+			inventory[id] = have - n
 		gold += n * each
 		_srv_log("%s sold %d x %s for %d gold" % [display_name, n, id, n * each])
 		push_inventory()

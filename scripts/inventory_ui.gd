@@ -188,6 +188,8 @@ func _update_status() -> void:
 	if apply_orb != "":
 		_status.text = "Applying %s (%d): click an item. Right-click to cancel." % [Items.display_name(apply_orb), int(player.inventory.get(apply_orb, 0))]
 		_status.add_theme_color_override("font_color", Color(0.6, 0.9, 1.0))
+	elif vendor_ui and vendor_ui.visible:
+		_status.text = "Bag %d/%d. Selling: click an item to select it, then press Sell in the vendor panel." % [player.bag_used(), Items.BAG_SIZE]
 	else:
 		_status.text = "Bag %d/%d. Click gear = equip, shift = drop, ctrl x2 = destroy. Right-click orb, then item." % [player.bag_used(), Items.BAG_SIZE]
 		_status.add_theme_color_override("font_color", Color(1, 1, 1, 0.6))
@@ -244,7 +246,7 @@ func show_tooltip_for(s: Control) -> void:
 						cmp_slot = slots[1] if not cmp.is_empty() else slots[0]
 		tooltip.show_gear(s.inst, player, at, cmp, cmp_slot)
 	elif s.stack_id != "":
-		tooltip.show_stack(s.stack_id, s.count, at)
+		tooltip.show_stack(s.stack_id, s.count, at, vendor_ui != null and vendor_ui.visible)
 	else:
 		tooltip.hide_tip()
 
