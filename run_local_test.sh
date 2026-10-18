@@ -762,6 +762,8 @@ check "kill shared with the member next to it"         "was slain by XpLead \(\+
 check "member near the kill gains XP without hitting"  "XpNear gained [0-9]+ XP"                                    p17_server.log
 check "member's own client sees its XP rise"           "follow bot: [0-9]+ px from XpLead, xp [1-9][0-9]*/"        p17_XpNear.log
 check "far member logged as out of range"              "party share: XpFar too far from XpLead's kill \([0-9]+ > 1000 px\), no XP" p17_server.log
+check "XP/kill line in the killer's chat"               "\+[0-9]+ XP  \((Slime Lv[0-9]+|[0-9]+ kills)\)  -  [0-9]+ / [0-9]+ to Lv [0-9]+" p17_XpLead.log
+check "party share shows in the member's chat"         "\+[0-9]+ XP  \((.*party share from XpLead|[0-9]+ kills)\)"        p17_XpNear.log
 if grep -q "XpFar gained" $L/p17_server.log; then echo "FAIL  far member gets no XP"; else echo "PASS  far member gets no XP"; fi
 if grep -q "was slain by XpNear" $L/p17_server.log; then echo "FAIL  near member never attacked (XP came from the share)"; else echo "PASS  near member never attacked (XP came from the share)"; fi
 echo; echo "== Dungeon entrance safe area + T1 first pull (fresh Lv6 Pyromancer, no gear, --no-xp)"

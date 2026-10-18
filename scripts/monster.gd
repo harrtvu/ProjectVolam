@@ -346,14 +346,14 @@ func _die(killer: Node) -> void:
 	for pid in _damagers:
 		var p = _damagers[pid]
 		if is_instance_valid(p) and p.zone == zone and not p.is_queued_for_deletion():
-			p.server_add_xp(xp)
+			p.server_add_xp(xp, "%s Lv%d" % [display_name, level])
 			names.append(p.display_name)
 			got[p] = true
 	for p in got.keys():   # party share: members near the kill get the same XP
 		for q in _party_near(p):
 			if not got.has(q):
 				got[q] = true
-				q.server_add_xp(xp)
+				q.server_add_xp(xp, "%s Lv%d, party share from %s" % [display_name, level, p.display_name])
 				shared.append(q.display_name)
 	if is_boss and _fight_t0 >= 0.0:
 		var parts: Array = []

@@ -1181,6 +1181,15 @@ func player_notice(text: String, to_chat: bool) -> void:
 	local_notice(text, to_chat)
 
 
+## Client: "+N XP (kill)" line for the chat log only (no floating text: the kill already shows one).
+@rpc("authority", "call_local", "reliable")
+func xp_notice(text: String) -> void:
+	if bot_mode:
+		_log("notice: " + text)
+	if chat_log:
+		chat_log.append_text("[color=#e8d27a]%s[/color]\n" % _escape(text))
+
+
 ## Client: the server wants this (new) character to see the first-time tutorial.
 @rpc("authority", "call_local", "reliable")
 func tutorial_start() -> void:
