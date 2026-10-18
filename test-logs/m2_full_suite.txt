@@ -1,0 +1,485 @@
+Phase 1 (~86s)...
+Phase 2 (~45s)...
+Phase 3 (~130s)...
+Phase 4 (~75s): targeting + talents...
+Phase 4b (~14s): talents restored after restart...
+Phase 5 (~70s): gear, crafting, blacksmith...
+Phase 5b (~14s): gear restored after restart...
+Phase 6 (~200s): dungeon tickets, map device, instances, atlas...
+Phase 6b (~14s): atlas restored after restart...
+Phase 8 (~230s): PoE-style atlas (locked node, points, passives, extra portal, respec)...
+Phase 8b (~16s): atlas restored after restart + old atlas migrated...
+Phase 9 (~95s): Esc menu, pause, settings...
+Phase 10 (~110s): hideout (enter/leave, decorations, limits, themes, stations, restart)...
+Phase 11 (~25s): client performance in Whisperwood (entrance + boss lair, 200x128 map)...
+Phase 12 (~130s): Guardian kill unlocks a hideout theme (no unlock-all flag), boss decoration drop, Esc-menu Hideout button, patrols walk their routes...
+Phase 13 (~40s): Play Solo (one click, in-process local server, no login, profile slot saved)...
+Phase 14 (~120s): online co-op party: invite/accept, both enter the leader's dungeon and clear it together...
+Phase 15 (~75s): NPC vendor (sell loot, buy from the rotating stock, persistence, rotation timer)...
+Phase 16 (~50s): first-time tutorial (movement, skills, loot, equip, passive web; skip; shown once)...
+
+== Core features
+PASS  accounts created
+PASS  slime damages player
+PASS  kill gives XP
+PASS  level up + chat message
+PASS  loot dropped
+PASS  loot picked up
+PASS  gear equipped
+PASS  periodic save
+PASS  shutdown save
+PASS  save restored after restart
+PASS  wrong password rejected
+PASS  duplicate login rejected
+PASS  player death
+PASS  respawn at zone entrance
+PASS  potion used
+
+== Zones
+PASS  meadow -> forest (Bot1)
+PASS  forest -> meadow (Bot1)
+PASS  client sees zone banner
+PASS  zone saved + restored
+PASS  walker meadow -> forest
+PASS  walker forest -> crypt
+PASS  walker crypt -> frost
+PASS  walker frost -> crypt
+PASS  walker crypt -> forest
+PASS  walker forest -> meadow
+PASS  visibility isolation (no client ever received another zone's entities)
+PASS  Bot1 back in meadow sees only itself
+PASS  Bot2 in forest sees only itself
+
+== Big maps & monster groups
+PASS  offline big-map self-test passes
+PASS  meadow is ~10x bigger (200x128 vs 64x40)
+PASS  meadow has 4 distinct group types ({ "pack": 16, "camp": 3, "elite": 2, "patrol": 2 })
+PASS  forest is ~10x bigger (200x128 vs 64x40)
+PASS  forest has 5 distinct group types ({ "pack": 14, "guard": 1, "patrol": 2, "elite": 2, "camp": 3 })
+PASS  crypt is ~10x bigger (200x128 vs 64x40)
+PASS  crypt has 5 distinct group types ({ "pack": 13, "guard": 1, "patrol": 2, "camp": 3, "elite": 3 })
+PASS  frost is ~10x bigger (200x128 vs 64x40)
+PASS  frost has 5 distinct group types ({ "pack": 13, "guard": 1, "elite": 3, "patrol": 2, "camp": 3 })
+PASS  portals, NPCs, boss lairs and monster sites reachable
+PASS  bosses wait in their lairs deep in the zone
+PASS  group aggro (pull one, the group comes): 638 pulls
+PASS  a camp group aggroed together
+PASS  a elite group aggroed together
+PASS  groups respawn together (597 group respawns)
+PASS  elite group leader in the overworld
+PASS  old save: position shifted into the big map
+PASS  old save: restored at the shifted spot
+PASS  invalid saved position relocated
+PASS  interest management: far monsters sleep (81 monsters, 12 awake (AI running), 9 monster syncs to 1 player(s) (11% of a full-zone sync))
+PASS  Whisperwood client perf entrance:  frame_ms=6.90  physics_ms=0.42  nodes=772  monsters_here=5
+PASS  Whisperwood client perf lair:  frame_ms=6.90  physics_ms=0.84  nodes=797  monsters_here=12
+
+== Monsters (attack / die / respawn)
+PASS  Slime           attacks=273  kills=260  respawns=250
+PASS  Dire Rat        attacks=187  kills=340  respawns=310
+PASS  Cave Bat        attacks=114  kills=229  respawns=170
+PASS  Wood Spider     attacks=117  kills=304  respawns=251
+PASS  Crypt Archer    attacks=112  kills=201  respawns=199
+PASS  Restless Ghost  attacks=107  kills=230  respawns=225
+PASS  Grave Crawler   attacks=80   kills=118  respawns=57
+PASS  Yeti            attacks=88   kills=124  respawns=122
+PASS  Ice Ogre        attacks=32   kills=72   respawns=72
+PASS  Frost Bat       attacks=132  kills=204  respawns=197
+
+== Bosses
+PASS  Broodmother killed
+PASS  Broodmother loot dropped
+PASS  Broodmother kill announced in chat
+PASS  Broodmother respawned
+PASS  The Lich King killed
+PASS  The Lich King loot dropped
+PASS  The Lich King kill announced in chat
+PASS  The Lich King respawned
+PASS  Yeti King killed
+PASS  Yeti King loot dropped
+PASS  Yeti King kill announced in chat
+PASS  Yeti King respawned
+PASS  Broodmother summons
+PASS  Lich volley
+PASS  Yeti King quake
+PASS  boss loot picked up
+
+== Classes & character creation
+PASS  a character chose class metal
+PASS  a character chose class wood
+PASS  a character chose class water
+PASS  a character chose class fire
+PASS  a character chose class earth
+PASS  new account asked to pick a class
+PASS  starting gear: Metal gets a sword
+PASS  starting gear: Water gets a staff
+PASS  old account prompted (server)
+PASS  old account prompted (client)
+PASS  old account keeps its progress
+PASS  class persists (Bot1 metal)
+PASS  class persists (Bot2 water)
+PASS  restored players not re-prompted
+PASS  Bot1 not prompted again
+PASS  class-restricted weapon refused
+
+== Skills (server-authoritative)
+PASS  Whirling Blade         casts=88   hits=103
+PASS  Piercing Strike        casts=64   hits=106
+PASS  Blade Focus            casts=29   hits=0
+PASS  Thousand Cuts          casts=24   hits=38
+PASS  Poison Thorn           casts=60   hits=45
+PASS  Regrowth               casts=29   hits=0
+PASS  Entangling Roots       casts=25   hits=49
+PASS  Plague Bloom           casts=21   hits=26
+PASS  Ice Shard              casts=144  hits=114
+PASS  Healing Rain           casts=62   hits=0
+PASS  Frost Nova             casts=48   hits=63
+PASS  Tidal Wave             casts=42   hits=51
+PASS  Fireball               casts=158  hits=225
+PASS  Flame Burst            casts=83   hits=94
+PASS  Meteor                 casts=58   hits=77
+PASS  Inferno                casts=47   hits=105
+PASS  Ground Slam            casts=63   hits=43
+PASS  Stone Skin             casts=26   hits=0
+PASS  Mountain's Challenge   casts=32   hits=0
+PASS  Earthquake             casts=22   hits=76
+PASS  locked skill rejected (level)
+PASS  skill unlocked on level-up
+PASS  cooldown enforced
+PASS  mana cost enforced
+PASS  mana regenerates
+PASS  ranged basic attack (Water)
+PASS  ranged basic attack (Fire)
+
+== Status effects & element cycle
+PASS  is poisoned
+PASS  is burning
+PASS  is slowed
+PASS  is stunned
+PASS  Stone Skin shield absorbs
+PASS  is taunted by
+PASS  gains Blade Focus
+PASS  Healing Rain heals an ally
+PASS  +25% vs overcome element (player -> monster)
+PASS  -20% vs overcoming element (player -> monster)
+PASS  element bonus applies to monster -> player
+
+== Mouse targeting (server-validated)
+PASS  skills use selected target over nearer
+PASS  projectile aimed at cursor (Ice Shard)
+PASS  basic bolt aimed at cursor
+PASS  ground AoE at cursor (Entangling Roots)
+PASS  ground AoE at cursor (Meteor)
+PASS  cursor clamped to max range
+PASS  invalid target id rejected
+PASS  target in another zone rejected
+PASS  out-of-range target rejected
+PASS  no line of sight rejected
+
+== Passive web
+PASS  offline web self-test (graph + maths)
+PASS  web: every node reachable, 15 keystones
+PASS  refund that would disconnect rejected
+PASS  single node refunded for gold
+PASS  centre keystone allocated (Farmer)
+PASS  points granted (level 20 = 19 points)
+PASS  adjacency enforced (unconnected node)
+PASS  unknown node rejected
+PASS  already-allocated node rejected
+PASS  no points left rejected
+PASS  full reset with gold cost
+PASS  respec without enough gold rejected
+PASS  passives persist across restart (MetalA)
+PASS  passives persist across restart (FireB)
+PASS  retroactive points (old save Oldie, Lv4)
+PASS  retroactive points (pre-talent Bot1)
+PASS  stat talent: Honed Edge raises attack
+PASS  stat talent: Steel Body raises max life
+PASS  stat talent: Keen Eye raises crit
+PASS  stat talent: Mana Font raises mana
+PASS  stat talent: Granite raises defense
+PASS  stat talent: Fleet Foot raises speed
+PASS  passives change MetalA's Whirling Blade
+PASS  passives change MetalB's Piercing Strike
+PASS  passives change WoodA's Plague Bloom
+PASS  passives change WoodB's Regrowth
+PASS  passives change WaterA's Ice Shard
+PASS  passives change WaterB's Healing Rain
+PASS  passives change FireA's Meteor
+PASS  passives change FireB's Fireball
+PASS  passives change EarthA's Mountain's Challenge
+PASS  passives change EarthB's Ground Slam
+PASS  keystone Blade Storm (Metal)
+PASS  keystone Death Mark (Metal)
+PASS  keystone Pandemic (Wood)
+PASS  keystone Heart of the Forest (Wood)
+PASS  keystone Absolute Zero (Water)
+PASS  keystone Wellspring (Water)
+PASS  keystone Meteor Shower (Fire)
+PASS  keystone Phoenix Heart (Fire)
+PASS  keystone Unbreakable (Earth)
+PASS  keystone Tectonic Fury (Earth)
+PASS  farming stats boost loot (quantity/rarity/gold)
+PASS  life leech
+PASS  mana leech
+PASS  Shatter: bonus vs slowed
+
+== Gear, rarity & loot
+PASS  offline gear self-test passes
+PASS  IIQ: more drops (offline, 4000 kills)
+PASS  IIR: rarer drops (offline, 4000 kills)
+PASS  item level gates bases + affix tiers
+PASS  magic 1-2 / rare 3-6 affixes + rare names
+PASS  live drop of a normal item
+PASS  live drop of a magic item
+PASS  live drop of a rare item
+PASS  live drop of a unique item
+PASS  bosses drop their uniques
+PASS  boss drop table: magic+ guaranteed, monster IIQ/IIR
+PASS  item level from monster level
+PASS  monsters drop crafting currency
+PASS  currency stacks in the bag
+PASS  old saved items migrated to instances
+
+== Crafting currency & enhancement (server-validated)
+PASS  Transmutation: normal -> magic
+PASS  Transmutation on magic rejected
+PASS  Alteration rerolls magic
+PASS  Alteration on rare rejected
+PASS  Regal: magic -> rare
+PASS  Regal on rare rejected
+PASS  Exalted adds an affix
+PASS  Exalted on a full rare rejected
+PASS  Chaos rerolls rare
+PASS  Chaos on magic rejected
+PASS  Scouring: -> normal
+PASS  Scouring on normal rejected
+PASS  orbs on uniques rejected
+PASS  non-currency rejected
+PASS  unknown item rejected
+PASS  orbs work away from the blacksmith
+PASS  enhancement success (+gold cost)
+PASS  enhancement failure / downgrade happens
+PASS  enhancement limited by gold or +10 max
+PASS  enhancement only at the blacksmith
+PASS  enhancement odds + never destroys (offline)
+
+== Equipment, vendor, stash, bag
+PASS  equip changes resistances (Frost Aegis)
+PASS  equip rare armour raises defense
+PASS  resistance reduces live incoming damage
+PASS  resistances measurably cut damage (offline)
+PASS  unequip restores stats (offline)
+PASS  crafting an equipped item
+PASS  sell to the blacksmith
+PASS  selling away from the blacksmith rejected
+PASS  shared stash
+PASS  drop item on the ground
+PASS  destroy item
+PASS  bag full: pickup refused
+PASS  bag full: unequip refused
+PASS  gear persists across restart (upgrade, rares, stash)
+PASS  equipment persists across restart
+PASS  stash is stored account-wide (not per character)
+
+== Dungeons (tickets, map device, instances, atlas)
+PASS  ticket merchant: daily free ticket
+PASS  free ticket only once a day
+PASS  buy a ticket for gold
+PASS  merchant tiers locked by the atlas
+PASS  buying without gold rejected
+PASS  chisel adds quality (+IIQ)
+PASS  orbs add map mods (+IIQ/IIR)
+PASS  regal makes a rare ticket
+PASS  tickets can't be enhanced
+PASS  map device opens a private instance
+PASS  second player opens a separate instance
+PASS  instance populated (packs, elites, boss)
+PASS  themed procedural layouts (wood cave)
+PASS  map mods applied to monsters (unique map)
+PASS  entering uses a portal
+PASS  solo: other players can't enter
+PASS  client builds the instance locally
+PASS  instance isolation: A sees only A
+PASS  instance isolation: B sees only B
+PASS  no entities leak between instances
+PASS  two instances open at once
+PASS  map IIQ/IIR applied to drops
+PASS  elite bonus applied to drops
+PASS  tickets drop inside dungeons
+PASS  death in a dungeon -> town
+PASS  re-entry after death uses a portal
+PASS  all 6 portals used up
+PASS  instance closes when portals run out
+PASS  boss kill completes the run
+PASS  boss drops a next-tier ticket
+PASS  completion banner on the client
+PASS  atlas progress + merchant unlock
+PASS  completed instance times out + closes
+PASS  empty instance cleaned up
+PASS  instance destroyed on all peers
+PASS  dead instances freed on the server
+PASS  atlas persists across restart
+PASS  atlas panel shows the progress
+PASS  log back in town (never inside an instance)
+PASS  dungeon offline checks
+
+== Atlas (PoE-style map + atlas passive tree)
+PASS  atlas offline checks (graph, rules, migration, effects)
+PASS  effects measured: ticket drops / tier / currency / portals
+PASS  boss tickets favour adjacent nodes (offline)
+PASS  locked node can't be run
+PASS  no atlas points: allocation rejected
+PASS  T1 node opens (starting node)
+PASS  node has a fixed layout seed
+PASS  first completion grants a point
+PASS  bonus objective (rare ticket) grants a point
+PASS  boss ticket for an adjacent node (live)
+PASS  passive adjacency enforced
+PASS  atlas passive allocated
+PASS  points cap enforced
+PASS  adjacent node unlocked at the merchant
+PASS  merchant refuses locked nodes
+PASS  extra portal passive applied (7 portals)
+PASS  atlas respec for gold
+PASS  respec with nothing allocated rejected
+PASS  atlas persists across restart (points, bonus, passives)
+PASS  old atlas grid migrated to map nodes
+PASS  migrated nodes unlock their neighbours
+PASS  atlas panel lists node states
+
+== Esc menu & pause
+PASS  Esc closes an open panel first (not the menu)
+PASS  Esc with nothing open opens the menu
+PASS  solo host: tree paused, peer still connected
+PASS  solo host pause freezes monsters
+PASS  Esc again resumes
+PASS  monsters move again after resume
+PASS  Quit Game saves and exits cleanly
+PASS  online client: game continues, input stopped
+PASS  online client: world keeps running while menu open
+PASS  online client: still connected after the menu
+PASS  Return to Main Menu: clean disconnect
+PASS  Return to Main Menu: title screen shown
+PASS  server saw the clean disconnect + saved
+PASS  player joining a paused host unpauses it
+PASS  joiner logged in while host menu open
+PASS  settings persist (user://settings.cfg)
+
+== Hideout
+PASS  Hideout Master in town opens the panel
+PASS  buy decorations with gold
+PASS  buy rejected without gold
+PASS  unknown decoration rejected
+PASS  editing outside the hideout rejected
+PASS  /hideout creates + enters a private instance
+PASS  client is in its hideout zone
+PASS  place decorations (decoration mode clicks)
+PASS  placement blocking the door rejected
+PASS  placement outside the room rejected
+PASS  placement on a station rejected
+PASS  placing unowned decorations rejected
+PASS  pick up + move a decoration
+PASS  move onto the door rejected
+PASS  rotate + flip
+PASS  flip
+PASS  remove (back to inventory)
+PASS  move a station
+PASS  station on the door rejected
+PASS  theme switch keeps decorations
+PASS  locked theme rejected
+PASS  client rebuilt the themed hideout
+PASS  200-decoration limit enforced
+PASS  201st decoration rejected
+PASS  hideout Ticket Merchant works
+PASS  Map Device in the hideout opens a map
+PASS  dungeon exit portal leads to the hideout
+PASS  dungeon portal returns to the hideout
+PASS  logout in the hideout restores there
+PASS  layout survives a server restart
+PASS  door back to Sunny Meadow
+PASS  /hideout from town after restart
+PASS  Guardian test starts without the theme
+PASS  Guardian ticket opened (fire:10)
+PASS  killing the Fire Guardian unlocks Ember Forge
+PASS  boss decoration drop (forced chance 1.0)
+      saved hideout: unlocked ['meadow', 'fire'], owned {'flowers': 2, 'lantern': 1, 'statue': 1} (boss drop statue)
+PASS  drop lands in owned decorations + theme saved
+PASS  Esc menu Hideout button clicked (UI)
+PASS  the click fired the menu's Hideout action
+PASS  server took the button press
+PASS  client entered its hideout via the button
+
+== Overworld patrols
+PASS  watcher stands by a patrol route
+PASS  a patrol walks between its sites (3 waypoints reached with a player in range)
+
+== Play Solo (M2)
+PASS  Play Solo clicked once on the main menu
+PASS  in-process local server, no login step
+PASS  new local profile slot created (no password)
+PASS  solo hero spawned in the world
+PASS  solo game saved to the local profile
+PASS  other players can't join a solo game
+PASS  solo slot restored on the next Play Solo
+PASS  solo progress restored (class, level)
+
+== Party co-op dungeons (M2)
+PASS  party invite sent
+PASS  invite to an offline name rejected
+PASS  accept without an invite rejected
+PASS  party formed
+PASS  member's HUD gets the party
+PASS  leader opens the dungeon
+PASS  party member enters the leader's instance
+PASS  non-member still refused
+PASS  both players in the same instance
+PASS  both party members kill monsters in the instance (26 by Member, 27 by Leader)
+PASS  dungeon cleared by the party
+PASS  boss kill completes the party run
+PASS  version handshake accepted (same build)
+PASS  other build refused with a clear message
+PASS  server logged the refused version
+PASS  login without a handshake ignored
+PASS  peer without a handshake disconnected
+PASS  no rpc checksum errors from the version test
+PASS  member sees the completion banner
+
+== NPC vendor (M2, replaces the player market)
+PASS  vendor stock rolled and saved
+PASS  vendor panel opened at the Vendor (E)
+PASS  client receives the stock
+PASS  buy potions (gold -> stack)
+PASS  buy gear from the stock
+PASS  sold-out entry rejected
+PASS  unknown stock id rejected
+PASS  sell loot to the vendor for gold
+PASS  selling away from the vendor rejected
+PASS  buying without gold rejected
+PASS  buying with a full bag rejected
+PASS  stock persists across restart (same rotation)
+saved: ['#1 x14 @10', '#10 x1 @140', '#11 x1 @156', '#12 x1 @88', '#2 x10 @30', '#3 x1 @250', '#4 x3 @40', '#5 x0 @28', '#6 x1 @52', '#7 x1 @32', '#8 x1 @92', '#9 x1 @56']
+seen:  ['#1 x14 @10', '#10 x1 @140', '#11 x1 @156', '#12 x1 @88', '#2 x10 @30', '#3 x1 @250', '#4 x3 @40', '#5 x0 @28', '#6 x1 @52', '#7 x1 @32', '#8 x1 @92', '#9 x1 @56']
+PASS  stock, prices and sold-out entries identical after restart
+PASS  bought item kept after restart
+PASS  stock rotates on the timer
+PASS  vendor offline checks
+PASS  player market code removed (no market scripts or requests left)
+
+== First-time tutorial (M2)
+PASS  tutorial starts for a new character
+PASS  step 1: movement
+PASS  step 2: skills (keys 1-4)
+PASS  practice loot dropped
+PASS  step 3: loot pickup
+PASS  step 4: equipping gear
+PASS  step 5: passive web
+PASS  finished flag saved
+PASS  tutorial can be skipped
+PASS  skipped flag saved
+PASS  shown once (not again after a restart + re-login)
+PASS  tutorial flag stored per character
+PASS  old characters don't get the tutorial
+
+== Errors/warnings (should be none):
+none

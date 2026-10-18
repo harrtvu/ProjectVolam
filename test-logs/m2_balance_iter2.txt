@@ -1,0 +1,8 @@
+Boss trial: Broodmother (Whisperwood Forest boss) solo, intended level 7, class starting kit
+class  | level | result | time-to-kill | dmg taken | deaths | hp left
+metal  | Lv7   | killed |   10.3 s |   146 |   0 | 65/81
+wood   | Lv7   | killed |   17.4 s |   318 |   0 | 16/71
+water  | Lv7   | killed |   22.8 s |   242 |   0 | 54/66
+fire   | Lv7   | killed |   11.8 s |   139 |   0 | 48/56
+earth  | Lv7   | killed |   22.3 s |   203 |   0 | 102/105
+spread: fastest 10.3 s, slowest 22.8 s, ratio 2.21
