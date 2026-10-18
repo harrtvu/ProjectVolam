@@ -296,9 +296,18 @@ b18 SafeBot --bot-dungeon=safe --bot-dungeon-theme=wood --bot-dungeon-tier=1
 b18 Doomed --bot-dungeon=die --bot-dungeon-theme=wood --bot-dungeon-tier=1
 wait
 
+echo "Phase 19 (~45s): map portal in town: visible gate, entry area = the drawn gate (stand on its corner), unused portal refunds the ticket..."
+SAVE19="$(pwd)/$L/accounts_p19.json"; rm -f "$SAVE19"
+run --server --save-file="$SAVE19" --instance-timeout=10 --debug-level-for=Corner:6,Unused:6 --quit-after=44 > $L/p19_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Corner --password=p --class=fire --bot --bot-no-gear --bot-dungeon=corner --bot-dungeon-theme=wood --bot-dungeon-tier=1 --quit-after=40 > $L/p19_Corner.log 2>&1 &
+run --join=127.0.0.1 --name=Unused --password=p --class=water --bot --bot-no-gear --bot-dungeon=unused --bot-dungeon-theme=wood --bot-dungeon-tier=1 --quit-after=40 > $L/p19_Unused.log 2>&1 &
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
+check "a real new character starts with exactly 3 Health Potions" "Login 'Bot1' .*NEW account .*items \{ \"health_potion\": 3 \}" p1_server.log
 check "slime damages player"        "took [0-9]+ damage from Slime"          p1_server.log
 check "kill gives XP"               "gained [0-9]+ XP"                       p1_server.log
 check "level up + chat message"     "\[chat\] \* Bot[12] reached level"      p1_bot1.log
@@ -732,7 +741,7 @@ echo; echo "== First-time tutorial (M2)"
 check "big windows exclusive incl. N map (I/N x40, C/T/atlas)" "UI SELFTEST exclusive windows .*: PASS"                    p16_UiTest.log
 check "N zone map draws above chat/skill bar/help/stats"   "UI SELFTEST N map above the HUD: PASS"                     p16_UiTest.log
 check "fast typing after Enter goes into chat (no hotkeys)" "UI SELFTEST fast typing after Enter goes to chat: PASS"    p16_UiTest.log
-for m in per-frame burst x11-merged; do for t in "/accept wasd" "/invite Bravo"; do
+for m in per-frame burst x11-merged keycode-only no-release; do for t in "/accept wasd" "/invite Bravo"; do
   check "real keys after Enter ($m) '$t': all in chat, no walking" "UI SELFTEST real keys after Enter \($m\) '$t': PASS" p16_UiTest.log
 done; done
 check "skills back to back run out of mana (UiTest)"    "UiTest skill 4 rejected: not enough mana"                  p16_server.log
@@ -786,6 +795,19 @@ check "party panel back in town after the run"         "party panel: .*FreshLead
 check "dungeon death goes back to town"                "\[dungeon\] Doomed died in dun[0-9]+ - back to town"                 p18_server.log
 if awk '/\[dun[0-9]+\] Doomed died/{d=1; next} d && /\[dun[0-9]+\] Doomed took/{bad=1} /Zone transfer: Doomed dun[0-9]+ -> meadow/{d=0} END{exit bad?0:1}' $L/p18_server.log; then echo "FAIL  no damage between a dungeon death and the town transfer"; else echo "PASS  no damage between a dungeon death and the town transfer"; fi
 if grep -qE "\[dun[0-9]+\] Doomed respawned" $L/p18_server.log; then echo "FAIL  dead player never revives inside the dungeon"; else echo "PASS  dead player never revives inside the dungeon"; fi
+echo; echo "== Map portal (visible gate, entry area on the gate, refund when unused)"
+check "portal gate drawn above the ground, entry area = the gate, labels above it" "portal layout: gate .* \(same true\), label bottom -?[0-9]+ <= gate top -?[0-9]+: true, z [1-9]" p19_Corner.log
+check "gate uses the SpritePilot portal art (CC0)"   "portal layout: .* art sprite"                        p19_Corner.log
+check "teleport beam plays when someone steps in"   "portal fx: teleport beam on Corner's gate .* \(art sprite\)" p19_Corner.log
+check "bot aims at the gate's corner (outside the old 24 px radius)" "portal layout: .* \(2[5-9] px from the centre\)" p19_Corner.log
+check "standing on the drawn gate's corner enters"  "Corner entered dun[0-9]+"                              p19_server.log
+check "unused portal closes after the empty timeout" "closing dun[0-9]+ .*owner Unused\): empty for 10s"    p19_server.log
+check "its ticket is refunded (server)"               "refunded Unused's ticket .* to their bag: dun[0-9]+ closed with nobody having entered" p19_server.log
+check "owner told + ticket back in the bag"            "ticket refunded to your bag"                         p19_Unused.log
+check "bag shows the ticket again once the portal is gone" "unused bot: portal gone, tickets in bag [0-9]+ -> [0-9]+ \(refund seen\)" p19_Unused.log
+check "an entered portal is not refunded"              "Corner entered" p19_server.log
+if grep -q "refunded Corner's" $L/p19_server.log; then echo "FAIL  no refund for a used portal"; else echo "PASS  no refund for a used portal"; fi
+
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

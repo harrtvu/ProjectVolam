@@ -55,6 +55,7 @@ const SAVE_INTERVAL := 30.0
 const DEFAULT_SAVE_FILE := "user://volam_save/accounts.json"
 
 const ZoneScript := preload("res://scripts/zone.gd")
+const MapPortalVisualScript := preload("res://scripts/map_portal_visual.gd")
 const InventoryUIScript := preload("res://scripts/inventory_ui.gd")
 const BlacksmithUIScript := preload("res://scripts/blacksmith_ui.gd")
 const MapUIScript := preload("res://scripts/map_ui.gd")
@@ -153,6 +154,7 @@ var hideout_ui: PanelContainer
 var bot_hideout := ""              # client (tests): run the hideout bot ("1" = first session, "2" = after a restart)
 var _hideout_shot := ""            # client (screenshots): "decor" | "mode" | "theme"
 var _class_from_cli := false       # client: --class=X given -> pick it automatically (screenshots)
+var debug_real_kit := false        # server (tests): --debug-level-for/--debug-start-level characters get the real start kit, not the 5+5 potion test kit
 var instance_timeout := 0.0        # server: seconds an empty dungeon stays open (0 = default)
 var complete_timeout := 0.0        # server: seconds a completed dungeon stays open (0 = default)
 var debug_atlas_kit := false      # server: honour the bots' "debug_kit" request (a locked fire:3 ticket)
@@ -465,6 +467,7 @@ func _parse_args() -> void:
 	bot_passive = opts.has("bot-passive") or opts.has("bot-idle")
 	bot_idle = opts.has("bot-idle")
 	instance_timeout = float(opts.get("instance-timeout", "0"))
+	debug_real_kit = opts.has("debug-real-kit")
 	complete_timeout = float(opts.get("complete-timeout", "0"))
 	debug_next_tier = float(opts.get("debug-next-tier", "-1"))
 	bot_dungeon = str(opts.get("bot-dungeon", ""))
@@ -855,6 +858,8 @@ func _login_ok(id: int, pname: String, password: String) -> void:
 	if is_new and (debug_start_level > 1 or debug_level_for.has(pname.to_lower())) and not (debug_fresh != "" and pname.to_lower().begins_with(debug_fresh.to_lower())):
 		var lv0: int = int(debug_level_for.get(pname.to_lower(), debug_start_level))   # --debug-level-for=name:lv,...
 		character = {"level": lv0, "gold": 250, "inventory": {"health_potion": 5, "greater_potion": 5}, "items_v": 2}
+		if debug_real_kit:   # --debug-real-kit: only the level; potions/gold exactly like a real new character (class start_items)
+			character = {"level": lv0, "gold": 0, "inventory": {}, "items_v": 2}
 		if debug_gear:   # crafting test kit
 			character["gold"] = 2500
 			for orb in Items.ORBS:
@@ -1383,6 +1388,9 @@ func open_chat() -> void:
 
 
 func close_chat() -> void:
+	for act in InputMap.get_actions():   # keys typed into the chat (even ones whose release never came) are not held for the game
+		if not str(act).begins_with("ui_"):
+			Input.action_release(act)
 	chat_open = false
 	chat_active = false
 	chat_text = ""
@@ -1451,6 +1459,8 @@ func _chat_key(k: InputEventKey) -> void:
 		_chat_insert(DisplayServer.clipboard_get())
 	elif not ctrl and not k.alt_pressed and k.unicode >= 32:
 		_chat_insert(String.chr(k.unicode))
+	elif not ctrl and not k.alt_pressed and k.unicode == 0 and _keycode_char(k) != "":
+		_chat_insert(_keycode_char(k))   # input tools that send keycodes without a unicode
 	_chat_refresh()
 
 
@@ -1462,6 +1472,29 @@ func _chat_key(k: InputEventKey) -> void:
 ## Enter, Enter(echo) - and the old "not event.echo" check left the chat closed, so the next
 ## line ('/accept') went to the game: 'a' walked, 'c' opened the C panel. Holding Enter only
 ## toggles an empty line open/closed (empty lines are not sent).
+## The character a keycode-only key event stands for (US layout), or "" for non-text keys.
+static func _keycode_char(k: InputEventKey) -> String:
+	var kc := k.keycode if k.keycode != KEY_NONE else (k.physical_keycode if k.physical_keycode != KEY_NONE else k.key_label)
+	var sh := k.shift_pressed
+	if kc >= KEY_A and kc <= KEY_Z:
+		var c := String.chr(kc)
+		return c if sh else c.to_lower()
+	if kc >= KEY_0 and kc <= KEY_9:
+		return ")!@#$%^&*(".substr(kc - KEY_0, 1) if sh else String.chr(kc)
+	if kc >= KEY_KP_0 and kc <= KEY_KP_9:
+		return String.chr(KEY_0 + kc - KEY_KP_0)
+	var plain := {KEY_SPACE: " ", KEY_SLASH: "/", KEY_PERIOD: ".", KEY_COMMA: ",", KEY_MINUS: "-", KEY_EQUAL: "=", KEY_SEMICOLON: ";",
+		KEY_APOSTROPHE: "'", KEY_BRACKETLEFT: "[", KEY_BRACKETRIGHT: "]", KEY_BACKSLASH: "\\", KEY_QUOTELEFT: "`",
+		KEY_KP_DIVIDE: "/", KEY_KP_MULTIPLY: "*", KEY_KP_SUBTRACT: "-", KEY_KP_ADD: "+", KEY_KP_PERIOD: "."}
+	var shifted := {KEY_SLASH: "?", KEY_PERIOD: ">", KEY_COMMA: "<", KEY_MINUS: "_", KEY_EQUAL: "+", KEY_SEMICOLON: ":",
+		KEY_APOSTROPHE: "\"", KEY_BRACKETLEFT: "{", KEY_BRACKETRIGHT: "}", KEY_BACKSLASH: "|", KEY_QUOTELEFT: "~"}
+	if sh and shifted.has(kc):
+		return shifted[kc]
+	if kc >= 32 and kc < 127 and not plain.has(kc):   # printable keycodes that are their own character
+		return String.chr(kc)
+	return plain.get(kc, "")
+
+
 ## Enter opens chat here, BEFORE the GUI sees the key (a focused button would eat it as
 ## ui_accept); while it is open every key event is chat text (see open_chat()).
 func _input(event: InputEvent) -> void:
@@ -2305,6 +2338,10 @@ func _bot_follow(me: Node, zone: Node, delta: float) -> void:
 
 
 ## Test bot for dungeon runs (--bot-dungeon=full|die|enter|intrude). Returns true when it drove this frame.
+var _bd_layout_logged := false
+var _bd_unused_n := -1   # unused-portal bot: tickets in the bag while its portal was open
+
+
 func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 	if not (_bd_step == 3 and zone.zone_id == "meadow"):
 		_bd_walk_t = 0.0
@@ -2408,7 +2445,24 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			if _bd_t > 0.0 or me.dead:
 				bot_dir = Vector2.ZERO
 				return true
-			if bot_dungeon in ["enter", "safe"] and _bd_entries >= 1 or bot_dungeon == "die" and _bd_entries >= Dungeons.PORTALS or bot_dungeon in ["full", "party", "first"] and _bd_done_t >= 0.0:
+			if bot_dungeon == "unused":   # opened, never entered: wait away from the portal until it closes
+				if not me.near_merchant():
+					bot_dir = _bot_steer(zone, me.position, zone.merchant_pos() + Vector2(0, 24), delta)
+					return true
+				bot_dir = Vector2.ZERO
+				_bd_walk_t += delta
+				if _bd_walk_t > 3.0:
+					_bd_walk_t = 0.0
+					var nt: int = me.bag.filter(func(i): return Dungeons.is_ticket(i)).size()
+					var mine: Array = zone.map_portals.filter(func(mp): return str(mp["owner"]) == me.display_name)
+					_log("unused bot: my portals open %d, tickets in bag %d %s" % [mine.size(), nt, _ticket_list(me)])
+					if not mine.is_empty():
+						_bd_unused_n = nt
+					elif _bd_unused_n >= 0:
+						_log("unused bot: portal gone, tickets in bag %d -> %d (refund %s)" % [_bd_unused_n, nt, "seen" if nt == _bd_unused_n + 1 else "MISSING"])
+						_bd_unused_n = -1
+				return true
+			if bot_dungeon in ["enter", "safe", "corner"] and _bd_entries >= 1 or bot_dungeon == "die" and _bd_entries >= Dungeons.PORTALS or bot_dungeon in ["full", "party", "first"] and _bd_done_t >= 0.0:
 				if _bd_step != 9:
 					_log("dungeon bot: finished - back in town, atlas %s, run %s, bag tickets %s" % [me.atlas.get("done", {}), me.run_info, _ticket_list(me)])
 				_bd_step = 9
@@ -2416,7 +2470,22 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			for mp_ in zone.map_portals:
 				var mine: bool = str(mp_["owner"]) == me.display_name or (bot_dungeon == "party" and party_leader != "" and str(mp_["owner"]) == party_leader)
 				if mine != (bot_dungeon == "intrude"):
-					bot_dir = _bot_steer(zone, me.position, mp_["pos"], delta)
+					var goal: Vector2 = mp_["pos"]
+					if bot_dungeon == "corner":   # stand on the drawn gate's lower-right corner (outside the old 24 px radius)
+						goal += MapPortalVisualScript.SIZE / 2.0 - Vector2(5, 5)
+						if not _bd_layout_logged:
+							for v in zone.map_portal_root.get_children():
+								if v.has_method("layout_info") and v.owner_name == me.display_name:
+									_bd_layout_logged = true
+									var li: Dictionary = v.layout_info()
+									var gate: Rect2 = li["gate"]
+									var trig: Rect2 = MapPortalVisualScript.trigger_rect(mp_["pos"])
+									_log("portal layout: gate %s, entry area %s (same %s), label bottom %.0f <= gate top %.0f: %s, z %d, art %s, aiming at %s (%.0f px from the centre)" % [
+										gate, trig, gate == trig, li["label_bottom"], gate.position.y, li["label_bottom"] <= gate.position.y, li["z"], li["art"], goal, goal.distance_to(mp_["pos"])])
+					if bot_dungeon == "corner" and zone.map.local_to_map(me.position) == zone.map.local_to_map(goal):
+						bot_dir = (goal - me.position).limit_length(1.0) if me.position.distance_to(goal) > 2.0 else Vector2.ZERO
+					else:
+						bot_dir = _bot_steer(zone, me.position, goal, delta)
 					_bd_walk_t += delta if me.position.distance_to(mp_["pos"]) > 24.0 else 0.0   # (the intruder waits on the portal on purpose)
 					if _bd_walk_t > 15.0:   # diagnostics: a walk to a portal next to the arrival point takes ~3s
 						_bd_walk_t = 5.0
@@ -2480,7 +2549,7 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			_log("safe bot: 8s in the safe area after the pull, hp %d -> %d/%d (no damage: %s), nearest monster %.0f px" % [_bd_safe_hp, me.hp, me.max_hp, me.hp >= _bd_safe_hp,
 				me.position.distance_to(_nearest(zone.monsters_root, me.position, 5000.0).position) if _nearest(zone.monsters_root, me.position, 5000.0) else -1.0])
 		return true
-	if bot_dungeon == "enter":
+	if bot_dungeon in ["enter", "corner"]:
 		bot_dir = Vector2.ZERO
 		if _bd_t < -10.0:   # leave through the exit portal after a while
 			bot_dir = _bot_steer(zone, me.position, zone.map.cell_pos(Zones.info(zone.zone_id)["portals"][0]["rect"].get_center()), delta)
@@ -2952,9 +3021,10 @@ func _run_ui_selftest() -> void:
 	# 4b. the REAL keyboard path: OS events go through Input.parse_input_event (action state
 	#     updated first, then the viewport), one event per frame like a typist, and a burst with
 	#     Enter still held while the next keys arrive. Nothing may walk, open, or be lost.
-	for mode in ["per-frame", "burst", "x11-merged"]:
+	for mode in ["per-frame", "burst", "x11-merged", "keycode-only", "no-release"]:
 		for t in ["/accept wasd", "/invite Bravo"]:
-			var res: Dictionary = await _real_typing(t, mode == "burst", mode == "x11-merged")
+			_rt_mode = mode
+			var res: Dictionary = await _real_typing(t, mode in ["burst", "keycode-only", "no-release"], mode == "x11-merged")
 			var ok: bool = res["text"] == t and res["moved"] < 0.5 and not res["sent_move"] and res["open"].is_empty()
 			_log("UI SELFTEST real keys after Enter (%s) '%s': %s (chat '%s', player moved %.1f px, move input sent %s, open %s)" % [mode, t,
 				"PASS" if ok else "FAIL", res["text"], res["moved"], res["sent_move"], res["open"]])
@@ -3014,12 +3084,18 @@ func _run_ui_selftest() -> void:
 		await get_tree().create_timer(0.15).timeout
 
 
+var _rt_mode := ""   # UI selftest typing variant ("keycode-only": unicode 0, "no-release": presses only)
+
+
 ## A key event the way the X11/Windows display server builds it.
 func _os_key(keycode: int, unicode: int, pressed: bool) -> InputEventKey:
 	var ev := InputEventKey.new()
 	ev.keycode = keycode
 	ev.physical_keycode = keycode
 	ev.key_label = keycode
+	if _rt_mode == "keycode-only":   # some input tools: keycode (+shift) only, no unicode
+		ev.shift_pressed = unicode >= 65 and unicode <= 90
+		unicode = 0
 	ev.unicode = unicode if pressed else 0
 	ev.pressed = pressed
 	return ev
@@ -3063,6 +3139,8 @@ func _real_typing(t: String, burst: bool, merged := false) -> Dictionary:
 				evs.append(_os_key(KEY_ENTER, 0, false))
 			evs.append(_os_key(_keycode_for(t[i]), t.unicode_at(i), false))
 		for e in evs:
+			if _rt_mode == "no-release" and not e.pressed:
+				continue   # some tools send presses only (all in one frame)
 			_os_feed(e)
 	else:
 		evs.append(_os_key(KEY_ENTER, 0, false))

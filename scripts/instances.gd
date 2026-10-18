@@ -203,7 +203,8 @@ func open_run(p: Node, uid: int) -> void:
 		"portals": portals, "node": data["node"], "rarity": str(t.get("rarity", "normal")), "deaths": 0, "afx": afx,
 		"elites_total": int(z.elite_total), "elites_killed": 0, "inside": {}, "completed": false, "completed_at": 0.0, "created": _now(),
 		"empty_since": _now(), "iiq": ri["iiq"], "iir": ri["iir"], "mods": ri["mods"], "ticket": Gear.summary(t),
-		"pslot": _free_portal_slot(), "closing": false, "origin": p.zone.zone_id}
+		"pslot": _free_portal_slot(), "closing": false, "origin": p.zone.zone_id,
+		"ticket_item": t.duplicate(true), "entered": false}   # refunded if the portal closes before anyone went in
 	_log("%s opened a map from %s (portal there, the exit portal returns there)" % [p.display_name, p.zone.zone_id])
 	_log("%s opened %s with %s -> instance %s (seed %d, slot %d): %d portals, iiq +%d%% iir +%d%%, mods %s | atlas node %s, atlas passives %s" % [p.display_name,
 		Dungeons.theme_name(data["theme"]), Gear.summary(t), id, seed, slot, portals, roundi(ri["iiq"]), roundi(ri["iir"]), ri["mods"],
@@ -254,6 +255,7 @@ func try_enter(p: Node, id: String) -> void:
 		return
 	r["portals"] = int(r["portals"]) - 1
 	r["inside"][p.peer_id] = true
+	r["entered"] = true
 	var d: Dictionary = Zones.info(id)
 	_log("%s entered %s (%s) - portals left %d" % [p.display_name, id, d["name"], r["portals"]])
 	main.transfer_player(p, id, d["respawn"])
@@ -492,11 +494,50 @@ func _close(id: String, why: String) -> void:
 	runs.erase(id)
 	_broadcast_portals()
 	var owner := _player_by_key(str(r["owner_key"]))
+	if not bool(r.get("entered", true)) and not r.get("ticket_item", {}).is_empty():
+		_refund_ticket(r, owner, why)
 	if owner:
 		owner.push_atlas()
 	get_tree().create_timer(1.5).timeout.connect(func():
 		destroy_instance.rpc(id)
 		_log("instance %s destroyed (open instances: %d, zones: %d)" % [id, runs.size(), main.zones.size()]))
+
+
+## A portal nobody ever went through closed: give the ticket back (bag, else stash; the owner may
+## be offline - then into the saved character).
+func _refund_ticket(r: Dictionary, owner: Node, why: String) -> void:
+	var t: Dictionary = r["ticket_item"]
+	var where := ""
+	if owner:
+		if not owner.bag_full():
+			owner.bag.append(t)
+			where = "bag"
+		else:
+			owner.stash.append(t)   # (may go over the stash size: never lose a ticket)
+			where = "stash" if owner.stash.size() <= Items.STASH_SIZE else "stash (over capacity)"
+		owner.notify("Your portal to %s closed unused (%s) - ticket refunded to your %s" % [Dungeons.theme_name(r["theme"]), why, where.split(" ")[0]], true)
+		owner.push_inventory()
+		main._save_player(owner)
+	elif main.accounts:
+		var acc: Dictionary = main.accounts.get_account(str(r["owner_key"]))
+		var c: Dictionary = acc.get("character", {})
+		if c.is_empty():
+			_log("ticket refund for %s FAILED: no saved character (%s)" % [r["owner"], Gear.summary(t)])
+			return
+		var bag: Array = c.get("bag", [])
+		if bag.size() < Items.BAG_SIZE:
+			bag.append(t)
+			c["bag"] = bag
+			where = "bag (offline)"
+		else:
+			var st: Array = c.get("stash", [])
+			st.append(t)
+			c["stash"] = st
+			where = "stash (offline)"
+		main.accounts.set_character(str(r["owner_key"]), c)
+	if main.accounts:
+		main.accounts.save_file()
+	_log("refunded %s's ticket %s to their %s: %s closed with nobody having entered (%s)" % [r["owner"], Gear.summary(t), where, r["id"], why])
 
 
 # ================================================================ town portals

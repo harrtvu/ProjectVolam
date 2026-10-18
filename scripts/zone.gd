@@ -9,6 +9,7 @@ const PlayerScript := preload("res://scripts/player.gd")
 const MonsterScript := preload("res://scripts/monster.gd")
 const PickupScript := preload("res://scripts/pickup.gd")
 const ProjectileScript := preload("res://scripts/projectile.gd")
+const MapPortalVisual := preload("res://scripts/map_portal_visual.gd")
 
 var zone_id := "meadow"
 var info: Dictionary = {}
@@ -861,17 +862,17 @@ func set_map_portals(list: Array) -> void:
 	for c in map_portal_root.get_children():
 		c.queue_free()
 	for p in list:
-		var v := PortalVisual.new()
-		v.size = Vector2(44, 56)
+		var v := MapPortalVisual.new()
 		v.position = p["pos"]
 		v.text = str(p["text"])
+		v.owner_name = str(p.get("owner", ""))
 		map_portal_root.add_child(v)
 
 
 ## (server) The open dungeon portal at this town position, or {}.
 func map_portal_at(local_pos: Vector2) -> Dictionary:
-	for p in map_portals:
-		if (p["pos"] as Vector2).distance_to(local_pos) <= 24.0:
+	for p in map_portals:   # the entry area is exactly the drawn gate
+		if MapPortalVisual.trigger_rect(p["pos"]).has_point(local_pos):
 			return p
 	return {}
 

@@ -36,3 +36,12 @@ All GDScript in `scripts/` was written for Project Volam.
 * Skill icons (`assets/skills/`) are Kenney Tiny Dungeon / Tiny Town / Tiny Ski / Tiny Battle tiles (CC0)
   on an element-coloured frame drawn by `tools/build_assets.py`.
 * Element icons (`assets/elements/`) are drawn procedurally by `tools/build_assets.py` (no external art; CC0 like the rest).
+
+## Portal effects (SpritePilot, CC0)
+
+* `assets/fx/portal/portal-16px_strip8.png` - "Portal" (violet vortex, 8 frames, 10 fps, loops), the map portal gate in town / hideouts.
+* `assets/fx/portal/teleport-16px_strip12.png` - "Teleport" (light beam, 12 frames, 15 fps, one-shot), played when someone steps through.
+
+From SpritePilot "Free Pixel Art Spell & Projectile Effects", https://spritepilot.com/free-game-assets/magic -
+released under **CC0 1.0** (any use, no credit required; credited anyway, thank you SpritePilot!).
+Unmodified 16 px strips; drawn x3 with nearest filtering by `scripts/map_portal_visual.gd` (swappable: replace the PNG).
