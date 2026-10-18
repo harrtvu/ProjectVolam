@@ -14,6 +14,8 @@ var temporary := false        # summoned adds: no respawn, freed on death
 var home := Vector2.ZERO
 var display_name := "Monster"
 var is_boss := false
+var _fight_t0 := -1.0          # boss: time of the first hit of the current fight (fight report on death)
+var _fight := {}               # boss: peer_id -> {"dmg": dealt, "taken0": stat_dmg_taken at first hit, "deaths0"}
 var defense := 0
 var element := ""
 # status_flags bits (replicated for visuals)
@@ -196,6 +198,12 @@ func take_damage(amount: int, attacker: Node, opts: Dictionary = {}) -> void:
 	var dmg := maxi(1, amount if opts.get("dot", false) else amount - defense)
 	hp = maxi(0, hp - dmg)
 	_damagers[attacker.peer_id] = attacker
+	if is_boss:
+		if _fight_t0 < 0.0:
+			_fight_t0 = Time.get_ticks_msec() / 1000.0
+		if not _fight.has(attacker.peer_id):
+			_fight[attacker.peer_id] = {"dmg": 0, "taken0": int(attacker.stat_dmg_taken), "deaths0": int(attacker.stat_deaths)}
+		_fight[attacker.peer_id]["dmg"] += dmg
 	if target == null and not _evading:
 		_set_target(attacker)
 	if not opts.get("dot", false) and (not is_boss or hp == 0 or hp % 50 < dmg or opts.get("emult", 1.0) != 1.0):
@@ -313,6 +321,16 @@ func _die(killer: Node) -> void:
 		if is_instance_valid(p) and p.zone == zone and not p.is_queued_for_deletion():
 			p.server_add_xp(xp)
 			names.append(p.display_name)
+	if is_boss and _fight_t0 >= 0.0:
+		var parts: Array = []
+		for pid in _fight:
+			var p = _damagers.get(pid)
+			if is_instance_valid(p):
+				parts.append("%s Lv%d %s: dealt %d, damage taken %d, deaths %d, hp %d/%d" % [p.display_name, p.level, p.class_id, int(_fight[pid]["dmg"]),
+					int(p.stat_dmg_taken) - int(_fight[pid]["taken0"]), int(p.stat_deaths) - int(_fight[pid]["deaths0"]), p.hp, p.max_hp])
+		_srv_log("BOSS FIGHT %s(Lv%d, %d hp) killed in %.1fs | %s" % [display_name, level, max_hp, Time.get_ticks_msec() / 1000.0 - _fight_t0, " | ".join(parts)])
+		_fight_t0 = -1.0
+		_fight.clear()
 	_damagers.clear()
 	_srv_log("%s(Lv%d) was slain by %s (+%d XP each)" % [display_name, level, ", ".join(names), xp])
 	zone.drop_loot(position, type, level, killer, self)
