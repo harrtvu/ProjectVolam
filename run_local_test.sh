@@ -732,6 +732,9 @@ echo; echo "== First-time tutorial (M2)"
 check "big windows exclusive incl. N map (I/N x40, C/T/atlas)" "UI SELFTEST exclusive windows .*: PASS"                    p16_UiTest.log
 check "N zone map draws above chat/skill bar/help/stats"   "UI SELFTEST N map above the HUD: PASS"                     p16_UiTest.log
 check "fast typing after Enter goes into chat (no hotkeys)" "UI SELFTEST fast typing after Enter goes to chat: PASS"    p16_UiTest.log
+for m in per-frame burst x11-merged; do for t in "/accept wasd" "/invite Bravo"; do
+  check "real keys after Enter ($m) '$t': all in chat, no walking" "UI SELFTEST real keys after Enter \($m\) '$t': PASS" p16_UiTest.log
+done; done
 check "skills back to back run out of mana (UiTest)"    "UiTest skill 4 rejected: not enough mana"                  p16_server.log
 check "tutorial box never covers the inventory (step 4)"   "UI SELFTEST tutorial box clear of the inventory: PASS"     p16_UiTest.log
 check "tutorial box keeps clear of NPC labels (Map Device...)" "UI SELFTEST tutorial box clear of NPC labels: PASS"   p16_UiTest.log

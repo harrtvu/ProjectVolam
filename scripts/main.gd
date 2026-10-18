@@ -1357,67 +1357,172 @@ func send_chat(text: String) -> void:
 	submit_chat.rpc_id(1, text)
 
 
-func _on_chat_submitted(text: String) -> void:
-	send_chat(text)
-	chat_edit.clear()
-	chat_edit.release_focus()
+## Chat line. Typing is handled here in _input, NOT by giving the LineEdit GUI focus: on X11,
+## Godot 4.2.1's LineEdit focus turns on the IME (DisplayServerX11::window_set_ime_active maps a
+## child "xim" window and moves the X input focus to it, again on every caret blink), and keys
+## typed right after Enter could get lost or reach the game (PlayTester: '/invite Bravo' sent as
+## 'invite Bravo', '/accept' -> 'ccept' + the 'a' walked). Now Enter opens the chat synchronously
+## and every key from then on goes into chat_text in order - no focus hand-off, no IME, nothing
+## reaches hotkeys or movement until Enter/Esc. The LineEdit only displays the line.
+var chat_open := false
+var chat_text := ""
+var chat_caret := 0
+var _chat_style_open: StyleBoxFlat
 
 
-func _on_chat_gui_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		chat_edit.clear()
-		chat_edit.release_focus()
-		chat_edit.accept_event()
+func open_chat() -> void:
+	if chat_open or chat_edit == null:
+		return
+	chat_open = true
+	chat_active = true
+	chat_text = ""
+	chat_caret = 0
+	Input.action_release("move_left"); Input.action_release("move_right")
+	Input.action_release("move_up"); Input.action_release("move_down")
+	_chat_refresh()
 
 
+func close_chat() -> void:
+	chat_open = false
+	chat_active = false
+	chat_text = ""
+	chat_caret = 0
+	_chat_refresh()
+
+
+func _chat_refresh() -> void:
+	if chat_edit == null:
+		return
+	chat_edit.text = chat_text
+	chat_edit.caret_column = chat_caret
+	chat_edit.caret_force_displayed = chat_open
+	chat_edit.placeholder_text = "Type a message, Enter to send, Esc to cancel" if chat_open else "Press Enter to chat, Esc to cancel"
+	if chat_open:
+		chat_edit.add_theme_stylebox_override("normal", _chat_style_open)
+	else:
+		chat_edit.remove_theme_stylebox_override("normal")
+
+
+func _chat_insert(t: String) -> void:
+	t = t.replace("\n", " ").replace("\r", "").replace("\t", " ")
+	t = t.substr(0, maxi(0, 200 - chat_text.length()))
+	chat_text = chat_text.substr(0, chat_caret) + t + chat_text.substr(chat_caret)
+	chat_caret += t.length()
+
+
+## While the chat is open: one key event -> the chat line (always consumed).
+func _chat_key(k: InputEventKey) -> void:
+	if OS.has_environment("VOLAM_KEYLOG"):
+		_log("chat key %s pressed=%s echo=%s unicode=%d" % [OS.get_keycode_string(k.keycode), k.pressed, k.echo, k.unicode])
+	if not k.pressed:
+		return
+	var kc := k.keycode
+	var ctrl := k.ctrl_pressed or k.meta_pressed
+	if kc == KEY_ENTER or kc == KEY_KP_ENTER:
+		var t := chat_text
+		close_chat()
+		send_chat(t)
+		return
+	if kc == KEY_ESCAPE:
+		close_chat()
+		return
+	if kc == KEY_BACKSPACE:
+		if chat_caret > 0:
+			var from := chat_caret - 1
+			if ctrl:   # delete the word before the caret
+				from = chat_caret
+				while from > 0 and chat_text[from - 1] == " ":
+					from -= 1
+				while from > 0 and chat_text[from - 1] != " ":
+					from -= 1
+			chat_text = chat_text.substr(0, from) + chat_text.substr(chat_caret)
+			chat_caret = from
+	elif kc == KEY_DELETE:
+		chat_text = chat_text.substr(0, chat_caret) + chat_text.substr(chat_caret + 1)
+	elif kc == KEY_LEFT:
+		chat_caret = maxi(0, chat_caret - 1)
+	elif kc == KEY_RIGHT:
+		chat_caret = mini(chat_text.length(), chat_caret + 1)
+	elif kc == KEY_HOME:
+		chat_caret = 0
+	elif kc == KEY_END:
+		chat_caret = chat_text.length()
+	elif (ctrl and kc == KEY_V) or (k.shift_pressed and kc == KEY_INSERT):
+		_chat_insert(DisplayServer.clipboard_get())
+	elif not ctrl and not k.alt_pressed and k.unicode >= 32:
+		_chat_insert(String.chr(k.unicode))
+	_chat_refresh()
+
+
+## Enter presses count even when flagged echo: Godot 4.2.1's X11 backend
+## (DisplayServerX11::_handle_key_event) turns a release+press of the same key within 5 ms
+## into a dropped release + an "echo" press, and flags a press as echo whenever its Input key
+## state still says down from the previous frame's batch. With fast or scripted typing (VNC,
+## xdotool, a slow llvmpipe frame) "Enter (send) + Enter (open the next line)" arrives as
+## Enter, Enter(echo) - and the old "not event.echo" check left the chat closed, so the next
+## line ('/accept') went to the game: 'a' walked, 'c' opened the C panel. Holding Enter only
+## toggles an empty line open/closed (empty lines are not sent).
 ## Enter opens chat here, BEFORE the GUI sees the key (a focused button would eat it as
-## ui_accept) and synchronously, so the very next keys already land in the chat line
-## instead of acting as hotkeys (I, N, ...).
+## ui_accept); while it is open every key event is chat text (see open_chat()).
 func _input(event: InputEvent) -> void:
 	if not in_game or is_dedicated or chat_edit == null:
 		return
-	if event is InputEventKey and event.pressed and not event.echo and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) \
-			and not chat_edit.has_focus() and not (pause_menu and pause_menu.visible) and not class_select.visible:
-		chat_edit.grab_focus()
-		chat_active = true
+	if not event is InputEventKey:
+		return
+	if chat_open:
+		if (pause_menu and pause_menu.visible) or class_select.visible:
+			close_chat()
+			return
+		_chat_key(event)
 		get_viewport().set_input_as_handled()
+		return
+	if event.pressed and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) \
+			and not (pause_menu and pause_menu.visible) and not class_select.visible:
+		open_chat()
+		get_viewport().set_input_as_handled()
+
+
+func _on_chat_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		open_chat()   # clicking the chat line opens it too
+		chat_edit.accept_event()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not in_game or is_dedicated:
 		return
-	if chat_edit.has_focus():
+	if chat_open:
 		return   # typing: no key is a hotkey
 	if hideout_ui and hideout_ui.handle_world_input(event):
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.is_action("inventory") and not chat_edit.has_focus():
+		if event.is_action("inventory"):
 			toggle_inventory()
 			get_viewport().set_input_as_handled()
-		elif event.is_action("character") and not chat_edit.has_focus():
+		elif event.is_action("character"):
 			_open_exclusive(char_sheet, not char_sheet.visible)
 			get_viewport().set_input_as_handled()
-		elif event.is_action("talents") and not chat_edit.has_focus():
+		elif event.is_action("talents"):
 			_open_exclusive(talent_ui, not talent_ui.visible)
 			get_viewport().set_input_as_handled()
-		elif event.is_action("target_cycle") and not chat_edit.has_focus():
+		elif event.is_action("target_cycle"):
 			cycle_target()
 			get_viewport().set_input_as_handled()
 		elif event.is_action("fps_overlay"):
 			fps_label.visible = not fps_label.visible
 			get_viewport().set_input_as_handled()
-		elif event.is_action("zone_map") and not chat_edit.has_focus():
+		elif event.is_action("zone_map"):
 			toggle_zone_map()
 			get_viewport().set_input_as_handled()
-		elif event.is_action("atlas") and not chat_edit.has_focus():
+		elif event.is_action("atlas"):
 			_open_exclusive(atlas_ui, not atlas_ui.visible)
 			atlas_ui.set_player(_local_player())
 			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_H and not chat_edit.has_focus():
+		elif event.keycode == KEY_H:
 			toggle_hideout_ui(true)
 			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_ESCAPE and not chat_edit.has_focus():
+		elif event.keycode == KEY_ESCAPE:
 			handle_escape()
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -1866,7 +1971,7 @@ func _process(delta: float) -> void:
 		var err := img.save_png(_screenshot_path)
 		_log("screenshot saved to %s (err %d)" % [_screenshot_path, err])
 		_screenshot_path = ""
-	chat_active = chat_edit != null and chat_edit.has_focus()
+	chat_active = chat_open
 	if not in_game:
 		return
 	if multiplayer.is_server():
@@ -2842,8 +2947,17 @@ func _run_ui_selftest() -> void:
 	await get_tree().process_frame
 	var chat_ok: bool = chat_edit.text == typed and open_windows().is_empty()
 	_log("UI SELFTEST fast typing after Enter goes to chat: %s (chat '%s', open %s)" % ["PASS" if chat_ok else "FAIL", chat_edit.text, open_windows()])
-	chat_edit.text = ""
-	chat_edit.release_focus()
+	_inject_key(KEY_ESCAPE, 0)
+	await get_tree().process_frame
+	# 4b. the REAL keyboard path: OS events go through Input.parse_input_event (action state
+	#     updated first, then the viewport), one event per frame like a typist, and a burst with
+	#     Enter still held while the next keys arrive. Nothing may walk, open, or be lost.
+	for mode in ["per-frame", "burst", "x11-merged"]:
+		for t in ["/accept wasd", "/invite Bravo"]:
+			var res: Dictionary = await _real_typing(t, mode == "burst", mode == "x11-merged")
+			var ok: bool = res["text"] == t and res["moved"] < 0.5 and not res["sent_move"] and res["open"].is_empty()
+			_log("UI SELFTEST real keys after Enter (%s) '%s': %s (chat '%s', player moved %.1f px, move input sent %s, open %s)" % [mode, t,
+				"PASS" if ok else "FAIL", res["text"], res["moved"], res["sent_move"], res["open"]])
 	# 6. HUD/world declutter: the tutorial box keeps clear of NPC labels, help text ends above the
 	#    minimap, resistance lines never wrap (inventory + C panel)
 	tutorial_ui.begin()
@@ -2898,6 +3012,80 @@ func _run_ui_selftest() -> void:
 	for slot in 4:
 		me.request_skill(slot)
 		await get_tree().create_timer(0.15).timeout
+
+
+## A key event the way the X11/Windows display server builds it.
+func _os_key(keycode: int, unicode: int, pressed: bool) -> InputEventKey:
+	var ev := InputEventKey.new()
+	ev.keycode = keycode
+	ev.physical_keycode = keycode
+	ev.key_label = keycode
+	ev.unicode = unicode if pressed else 0
+	ev.pressed = pressed
+	return ev
+
+
+static func _keycode_for(ch: String) -> int:
+	if ch == " ":
+		return KEY_SPACE
+	if ch == "/":
+		return KEY_SLASH
+	return OS.find_keycode_from_string(ch.to_upper())
+
+
+## One OS key event the way the engine handles it: Input updates the action state (what
+## Input.get_vector polls), then the window gets it (Window._window_input -> push_input). The
+## headless display server has no window callback, so the second half is done here.
+func _os_feed(ev: InputEventKey) -> void:
+	Input.parse_input_event(ev)
+	Input.flush_buffered_events()
+	if DisplayServer.get_name() == "headless":
+		get_viewport().push_input(ev)
+
+
+## UI selftest: Enter, then `t`, through Input.parse_input_event; returns what the chat line shows,
+## how far the local player moved and whether any movement input went to the server.
+func _real_typing(t: String, burst: bool, merged := false) -> Dictionary:
+	var me := _local_player()
+	var start: Vector2 = me.position if me else Vector2.ZERO
+	var sent_move := false
+	var was_bot := bot_mode
+	bot_mode = false   # read the keyboard like a human client (bots steer via bot_dir)
+	var evs: Array = [_os_key(KEY_ENTER, 0, true)]
+	if merged:   # what X11 delivers for Enter (open) .. Enter (send an empty line) + Enter (open again) typed fast:
+		var echo := _os_key(KEY_ENTER, 0, true)   # the 2nd release is dropped and the 3rd press comes flagged echo
+		echo.echo = true
+		evs.append_array([_os_key(KEY_ENTER, 0, false), _os_key(KEY_ENTER, 0, true), echo, _os_key(KEY_ENTER, 0, false)])
+	if burst:   # rollover: Enter released only after the first characters went down
+		for i in t.length():
+			evs.append(_os_key(_keycode_for(t[i]), t.unicode_at(i), true))
+			if i == 1:
+				evs.append(_os_key(KEY_ENTER, 0, false))
+			evs.append(_os_key(_keycode_for(t[i]), t.unicode_at(i), false))
+		for e in evs:
+			_os_feed(e)
+	else:
+		evs.append(_os_key(KEY_ENTER, 0, false))
+		for i in t.length():
+			evs.append(_os_key(_keycode_for(t[i]), t.unicode_at(i), true))
+			evs.append(_os_key(_keycode_for(t[i]), t.unicode_at(i), false))
+		for e in evs:
+			_os_feed(e)
+			await get_tree().process_frame
+			if me and me._last_sent != Vector2.ZERO:
+				sent_move = true
+	for f in 6:
+		await get_tree().process_frame
+		if me and me._last_sent != Vector2.ZERO:
+			sent_move = true
+	var res := {"text": chat_edit.text, "moved": me.position.distance_to(start) if me else 0.0, "sent_move": sent_move, "open": open_windows()}
+	_os_feed(_os_key(KEY_ESCAPE, 0, true))
+	_os_feed(_os_key(KEY_ESCAPE, 0, false))
+	for f in 3:
+		await get_tree().process_frame
+	close_windows_except([])
+	bot_mode = was_bot
+	return res
 
 
 func _inject_key(keycode: int, unicode: int) -> void:
@@ -4255,8 +4443,14 @@ func _build_ui() -> void:
 	chat_edit = LineEdit.new()
 	chat_edit.placeholder_text = "Press Enter to chat, Esc to cancel"
 	chat_edit.max_length = 200
-	chat_edit.text_submitted.connect(_on_chat_submitted)
+	chat_edit.focus_mode = Control.FOCUS_NONE   # never takes GUI focus (no X11 IME hand-off), see open_chat()
+	chat_edit.context_menu_enabled = false
 	chat_edit.gui_input.connect(_on_chat_gui_input)
+	_chat_style_open = StyleBoxFlat.new()
+	_chat_style_open.bg_color = Color(0.08, 0.1, 0.16, 0.95)
+	_chat_style_open.border_color = Color(0.55, 0.75, 1.0)
+	_chat_style_open.set_border_width_all(1)
+	_chat_style_open.set_content_margin_all(4)
 	chat_vb.add_child(chat_edit)
 
 	inventory_ui = InventoryUIScript.new()
