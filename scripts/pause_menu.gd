@@ -244,6 +244,26 @@ func _unhandled_input(event: InputEvent) -> void:
 var _tt := 0.0
 var _tstep := 0
 var _tpos := {}
+var _tsyncs := 0   # monster sync packets received while the menu is open (menu test)
+
+
+func _count_sync() -> void:
+	_tsyncs += 1
+
+
+## Menu test: count server updates for the tracked monsters (idle monsters may not move for 4s).
+func _watch_syncs(on: bool) -> void:
+	var me: Node = main._local_player()
+	if me == null or me.zone == null:
+		return
+	for m in me.zone.monsters_root.get_children():
+		var sy := m.get_node_or_null("Sync") as MultiplayerSynchronizer
+		if sy == null:
+			continue
+		if on and not sy.synchronized.is_connected(_count_sync):
+			sy.synchronized.connect(_count_sync)
+		elif not on and sy.synchronized.is_connected(_count_sync):
+			sy.synchronized.disconnect(_count_sync)
 
 
 func _key(code: int) -> void:
@@ -294,11 +314,14 @@ func _process(delta: float) -> void:
 			_key(KEY_ESCAPE)     # nothing open -> menu
 		3:
 			_tpos = _monster_snapshot()
+			_tsyncs = 0
+			_watch_syncs(true)
 			main._log("menu test: menu open %s, tree paused %s, solo host %s, %d monsters tracked, peer connected %s" % [visible, get_tree().paused,
 				is_solo_host(), _tpos.size(), multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED])
 		4:
-			main._log("menu test: while the menu was open for 4s, monsters moved %.1f px in total (tree paused %s); local input dir %s" % [_moved(_tpos),
-				get_tree().paused, main._local_player()._last_sent])
+			_watch_syncs(false)
+			main._log("menu test: while the menu was open for 4s, monsters moved %.1f px in total, %d server updates (tree paused %s); local input dir %s" % [_moved(_tpos),
+				_tsyncs, get_tree().paused, main._local_player()._last_sent])
 			_key(KEY_ESCAPE)     # Esc again closes the menu
 		5:
 			_tpos = _monster_snapshot()

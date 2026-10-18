@@ -593,12 +593,12 @@ echo; echo "== Esc menu & pause"
 check "Esc closes an open panel first (not the menu)"  "Esc closed the inventory panel"                         p9_host.log
 check "Esc with nothing open opens the menu"           "menu opened \(solo host: world paused\)"              p9_host.log
 check "solo host: tree paused, peer still connected"   "menu test: menu open true, tree paused true, solo host true, [1-9][0-9]* monsters tracked, peer connected true" p9_host.log
-check "solo host pause freezes monsters"               "while the menu was open for 4s, monsters moved 0.0 px in total \(tree paused true\)" p9_host.log
+check "solo host pause freezes monsters"               "while the menu was open for 4s, monsters moved 0.0 px in total, [0-9]+ server updates \(tree paused true\)" p9_host.log
 check "Esc again resumes"                              "menu test: menu open false, tree paused false, peer connected true" p9_host.log
 check "monsters move again after resume"               "after resuming, monsters moved [1-9][0-9.]* px"         p9_host.log
 check "Quit Game saves and exits cleanly"              "Saved .*shutdown"                                       p9_host.log
 check "online client: game continues, input stopped"  "menu opened \(online: game continues, input stopped\)" p9b_client.log
-check "online client: world keeps running while menu open" "while the menu was open for 4s, monsters moved [1-9][0-9.]* px in total \(tree paused false\); local input dir \(0, 0\)" p9b_client.log
+check "online client: world keeps running while menu open" "while the menu was open for 4s, monsters moved [0-9.]+ px in total, [1-9][0-9]* server updates \(tree paused false\); local input dir \(0, 0\)" p9b_client.log
 check "online client: still connected after the menu" "menu test: menu open false, tree paused false, peer connected true" p9b_client.log
 check "Return to Main Menu: clean disconnect"          "left the game, back to the main menu"                   p9b_client.log
 check "Return to Main Menu: title screen shown"        "main menu shown after Return to Main Menu \(peer none\)" p9b_client.log
