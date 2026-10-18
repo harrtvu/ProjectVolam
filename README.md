@@ -860,6 +860,11 @@ changes zone. When the leader opens a dungeon (Map Device or ticket), **party me
 that same private instance** through its portal. Players outside the party are still refused. The boss
 kill completes the run for everyone inside.
 
+**Party XP share:** when a monster dies, every party member of anyone who hit it gets the **full kill XP**
+too (no split), provided they are alive, in the same zone and within **1000 px** (about 31 tiles, a bit
+under one screen width) of the monster (`Monster.XP_SHARE_RANGE`). Members farther away get nothing; the
+server logs `party share: NAME too far ...`. Tested in suite phase 17.
+
 **Version handshake:** on joining, the first thing a client sends is its build version (`BUILD_VERSION`
 in `main.gd`). A server running a different build replies with a clear message ("server runs X, you run
 Y") and disconnects the client. A client that skips the handshake is never logged in.

@@ -274,6 +274,15 @@ run --join=127.0.0.1 --name=Newbie --password=t --bot --bot-tutorial=full --quit
 run --join=127.0.0.1 --name=Skipper --password=t --bot --bot-tutorial=skip --quit-after=10 > $L/p16b_Skipper.log 2>&1 &
 wait
 
+echo "Phase 17 (~50s): party XP share (a member next to the kill gets the XP, one far away does not)..."
+SAVE17="$(pwd)/$L/accounts_p17.json"; rm -f "$SAVE17"
+run --server --save-file="$SAVE17" --allow-warp --quit-after=50 > $L/p17_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=XpLead --password=p --class=fire --bot --bot-no-gear --bot-party=invite:XpNear,XpFar --quit-after=46 > $L/p17_XpLead.log 2>&1 &
+run --join=127.0.0.1 --name=XpNear --password=p --class=water --bot --bot-follow=XpLead --bot-party=accept --quit-after=46 > $L/p17_XpNear.log 2>&1 &
+run --join=127.0.0.1 --name=XpFar --password=p --class=earth --bot --bot-idle --bot-party=accept --warp=meadow --warp-cell=20,64 --quit-after=46 > $L/p17_XpFar.log 2>&1 &
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
@@ -718,6 +727,16 @@ if python3 -c "import json,sys; a=json.load(open('$SAVE16'))['accounts']; sys.ex
 if grep -qE "\[tutorial\] (Oldie|Oldtown|Lost): starting" $L/p2_server.log; then echo "FAIL  old characters don't get the tutorial"; else echo "PASS  old characters don't get the tutorial"; fi
 echo; echo "== Fresh pull onto an old .godot cache"
 GODOT="$GODOT" tools/stale_cache_check.sh 86382b3 | grep -E "^(PASS|FAIL)"
+echo; echo "== Party XP share (range 1000 px, same zone, alive)"
+check "near member joined"                             "\[party\] XpNear joined XpLead's party"                     p17_server.log
+check "far member joined"                              "\[party\] XpFar joined XpLead's party"                      p17_server.log
+check "leader kills and gains XP"                      "XpLead gained [0-9]+ XP"                                    p17_server.log
+check "kill shared with the member next to it"         "was slain by XpLead \(\+[0-9]+ XP each, party share: XpNear\)" p17_server.log
+check "member near the kill gains XP without hitting"  "XpNear gained [0-9]+ XP"                                    p17_server.log
+check "member's own client sees its XP rise"           "follow bot: [0-9]+ px from XpLead, xp [1-9][0-9]*/"        p17_XpNear.log
+check "far member logged as out of range"              "party share: XpFar too far from XpLead's kill \([0-9]+ > 1000 px\), no XP" p17_server.log
+if grep -q "XpFar gained" $L/p17_server.log; then echo "FAIL  far member gets no XP"; else echo "PASS  far member gets no XP"; fi
+if grep -q "was slain by XpNear" $L/p17_server.log; then echo "FAIL  near member never attacked (XP came from the share)"; else echo "PASS  near member never attacked (XP came from the share)"; fi
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

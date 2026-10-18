@@ -4,6 +4,9 @@ extends CharacterBody2D
 
 const LEASH := 420.0
 const BOSS_LEASH := 360.0
+## Party XP share: every party member of a damager who is in the same zone, alive and
+## within this distance (px) of the dying monster gets the full kill XP too.
+const XP_SHARE_RANGE := 1000.0
 
 var monster_id: int = 0
 var type: String = "slime"
@@ -292,6 +295,26 @@ func _status_tick(delta: float) -> void:
 	status_flags = f
 
 
+## Server: party members of `p` (not p) who can share this kill's XP; logs the ones too far away.
+func _party_near(p: Node) -> Array:
+	var out: Array = []
+	var main_ = zone.main if zone else null
+	if main_ == null or main_.get("parties") == null or str(p.account_key) == "":
+		return out
+	for k in main_.parties.members_of(p.account_key):
+		if k == p.account_key:
+			continue
+		var q = main_.parties._player_by_key(k)
+		if q == null or not is_instance_valid(q) or q.is_queued_for_deletion() or q.zone != zone or q.dead:
+			continue
+		var d: float = q.position.distance_to(position)
+		if d <= XP_SHARE_RANGE:
+			out.append(q)
+		else:
+			_srv_log("party share: %s too far from %s's kill (%.0f > %.0f px), no XP" % [q.display_name, p.display_name, d, XP_SHARE_RANGE])
+	return out
+
+
 func _die(killer: Node) -> void:
 	alive = false
 	casting = false
@@ -316,11 +339,20 @@ func _die(killer: Node) -> void:
 	_shape.set_deferred("disabled", true)
 	var xp := Monsters.xp_reward(type, level)
 	var names: Array = []
+	var shared: Array = []
+	var got := {}
 	for pid in _damagers:
 		var p = _damagers[pid]
 		if is_instance_valid(p) and p.zone == zone and not p.is_queued_for_deletion():
 			p.server_add_xp(xp)
 			names.append(p.display_name)
+			got[p] = true
+	for p in got.keys():   # party share: members near the kill get the same XP
+		for q in _party_near(p):
+			if not got.has(q):
+				got[q] = true
+				q.server_add_xp(xp)
+				shared.append(q.display_name)
 	if is_boss and _fight_t0 >= 0.0:
 		var parts: Array = []
 		for pid in _fight:
@@ -332,7 +364,8 @@ func _die(killer: Node) -> void:
 		_fight_t0 = -1.0
 		_fight.clear()
 	_damagers.clear()
-	_srv_log("%s(Lv%d) was slain by %s (+%d XP each)" % [display_name, level, ", ".join(names), xp])
+	_srv_log("%s(Lv%d) was slain by %s (+%d XP each%s)" % [display_name, level, ", ".join(names), xp,
+		(", party share: " + ", ".join(shared)) if not shared.is_empty() else ""])
 	zone.drop_loot(position, type, level, killer, self)
 	zone.on_monster_died(self, killer)
 	if is_boss:

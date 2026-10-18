@@ -283,9 +283,11 @@ var party_members: Array = []      # client: [{name, class, level, zone}] of my 
 var party_leader := ""
 var invite_box: PanelContainer
 var _invite_from := ""
+var bot_follow := ""               # bot: walk after this player and never attack (--bot-follow=NAME, party XP-share test)
 var bot_party := ""                # bot: "invite:<Name>" (leader) | "accept" (member)
 var _bp_t := 0.0
 var _bp_probed := false
+var _bf_log_t := 0.0
 var _dungeon_complete_seen := false
 var handshake: Node                # version handshake (handshake.gd), first RPC exchange on join
 var _fake_version := ""            # client (tests): --fake-version=X claims another build
@@ -476,6 +478,7 @@ func _parse_args() -> void:
 	show_tutorial = bot_tutorial != "" or opts.has("show-tutorial") or ui_selftest
 	_open_vendor = opts.has("open-vendor")
 	bot_party = str(opts.get("bot-party", ""))
+	bot_follow = str(opts.get("bot-follow", ""))
 	no_xp = opts.has("no-xp")
 	bot_smart = opts.has("bot-smart")
 	_fake_version = str(opts.get("fake-version", ""))
@@ -2082,6 +2085,42 @@ func _bot_gear(me: Node) -> void:
 			return
 
 
+## Test bot (outside dungeon runs): --bot-party=invite:A,B invites every listed name until all
+## have joined. Returns true while it is still forming the party (the bot waits meanwhile).
+func _bot_form_party(delta: float) -> bool:
+	var want: Array = Array(bot_party.substr(7).split(",", false))
+	var have: Array = []
+	for m in party_members:
+		have.append(str(m["name"]))
+	var missing: Array = want.filter(func(n): return not have.has(n))
+	if missing.is_empty():
+		return false
+	if _elapsed > 40.0:   # give up (someone never came online): play on with whoever joined
+		return false
+	bot_dir = Vector2.ZERO
+	_bp_t -= delta
+	if _bp_t <= 0.0:
+		_bp_t = 4.0
+		for n in missing:
+			_log("party bot: inviting %s" % n)
+			send_chat("/invite " + str(n))
+	return true
+
+
+## Test bot (--bot-follow=NAME): stays within ~60 px of that player, never attacks.
+func _bot_follow(me: Node, zone: Node, delta: float) -> void:
+	bot_dir = Vector2.ZERO
+	for p in zone.players_root.get_children():
+		if str(p.display_name) == bot_follow and p != me:
+			if me.position.distance_to(p.position) > 60.0:
+				bot_dir = _bot_steer(zone, me.position, p.position, delta)
+			_bf_log_t -= delta
+			if _bf_log_t <= 0.0:
+				_bf_log_t = 5.0
+				_log("follow bot: %.0f px from %s, xp %d/%d lv %d" % [me.position.distance_to(p.position), bot_follow, me.xp, me.xp_next, me.level])
+			return
+
+
 ## Test bot for dungeon runs (--bot-dungeon=full|die|enter|intrude). Returns true when it drove this frame.
 func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 	if not (_bd_step == 3 and zone.zone_id == "meadow"):
@@ -2823,6 +2862,11 @@ func _bot_update(delta: float) -> void:
 		return
 	if bot_craft:
 		_bot_craft(me, delta)
+		return
+	if bot_dungeon == "" and bot_party.begins_with("invite:") and _bot_form_party(delta):
+		return
+	if bot_follow != "":
+		_bot_follow(me, zone, delta)
 		return
 	if bot_dungeon != "" and _bot_dungeon(me, zone, delta):
 		return
