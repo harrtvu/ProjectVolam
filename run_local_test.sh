@@ -266,7 +266,7 @@ SAVE16="$(pwd)/$L/accounts_p16.json"; rm -f "$SAVE16"
 run --server --save-file="$SAVE16" --debug-level-for=UiTest:10 --quit-after=36 > $L/p16_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Newbie --password=t --class=earth --bot --bot-no-gear --bot-tutorial=full --quit-after=32 > $L/p16_Newbie.log 2>&1 &
-run --join=127.0.0.1 --name=UiTest --password=t --class=earth --bot --bot-idle --ui-selftest --quit-after=20 > $L/p16_UiTest.log 2>&1 &
+run --join=127.0.0.1 --name=UiTest --password=t --class=earth --bot --bot-idle --ui-selftest --quit-after=32 > $L/p16_UiTest.log 2>&1 &
 run --join=127.0.0.1 --name=Skipper --password=t --class=water --bot --bot-tutorial=skip --quit-after=32 > $L/p16_Skipper.log 2>&1 &
 wait
 run --server --save-file="$SAVE16" --quit-after=14 > $L/p16b_server.log 2>&1 &
@@ -280,7 +280,7 @@ SAVE17="$(pwd)/$L/accounts_p17.json"; rm -f "$SAVE17"
 run --server --save-file="$SAVE17" --allow-warp --quit-after=50 > $L/p17_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=XpLead --password=p --class=fire --bot --bot-no-gear --bot-party=invite:XpNear,XpFar --quit-after=46 > $L/p17_XpLead.log 2>&1 &
-run --join=127.0.0.1 --name=XpNear --password=p --class=water --bot --bot-follow=XpLead --bot-party=accept --quit-after=46 > $L/p17_XpNear.log 2>&1 &
+run --join=127.0.0.1 --name=XpNear --password=p --class=water --bot --bot-follow=XpLead --bot-party=accept-chat --quit-after=46 > $L/p17_XpNear.log 2>&1 &
 run --join=127.0.0.1 --name=XpFar --password=p --class=earth --bot --bot-idle --bot-party=accept --warp=meadow --warp-cell=20,64 --quit-after=46 > $L/p17_XpFar.log 2>&1 &
 wait
 
@@ -728,6 +728,7 @@ check "buying without gold rejected"                  "\[vendor\] Pauper buy rej
 check "unaffordable buy explained in the panel"       "vendor panel: Not enough gold for #[0-9]+"                        p15_Pauper.log
 checkp "selling never drops the item on the ground"   "ground items near me before/after selling: (\d+) -> \1$"           p15_Shopper.log
 check "health potions sell for a little gold"         "Shopper sold [0-9]+ x health_potion for [0-9]+ gold"              p15_server.log
+check "a stack sale prints a chat line for the seller"   "Sold [0-9]+ x Health Potion for [0-9]+ gold"                     p15_Shopper.log
 check "buying with a full bag rejected"               "\[vendor\] FullBag buy rejected: your bag is full"                p15_server.log
 check "vendor: clicking a bag item only selects it"   "vendor: selected \[(magic|rare)\] .* \(not sold\)"                p15_Seller.log
 check "vendor: Sell right after the click is ignored"  "vendor: Sell pressed [0-9]+ ms after selecting - ignored"        p15_Seller.log
@@ -753,6 +754,11 @@ for m in per-frame burst x11-merged keycode-only no-release; do for t in "/accep
 done; done
 check "skills back to back run out of mana (UiTest)"    "UiTest skill 4 rejected: not enough mana"                  p16_server.log
 check "tutorial box never covers the inventory (step 4)"   "UI SELFTEST tutorial box clear of the inventory: PASS"     p16_UiTest.log
+check "tutorial box keeps clear of the chat panel"        "UI SELFTEST tutorial box clear of the chat panel: PASS"   p16_UiTest.log
+check "tutorial box never covers the C panel"             "UI SELFTEST C panel not covered by the tutorial box: PASS" p16_UiTest.log
+check "NPC labels: Vendor label clear of my name tag, none on the HUD corners" "UI SELFTEST NPC labels at the vendor: PASS" p16_UiTest.log
+check "C closes the open C panel (focus inside it)"       "UI SELFTEST C closes the C panel: PASS"                   p16_UiTest.log
+check "Esc closes the open C panel (focus inside it)"     "UI SELFTEST C closes the C panel: .*, Esc closes it: PASS" p16_UiTest.log
 check "tutorial box keeps clear of NPC labels (Map Device...)" "UI SELFTEST tutorial box clear of NPC labels: PASS"   p16_UiTest.log
 check "HUD help text (5 lines, /invite) ends above the minimap" "UI SELFTEST help text ends above the minimap: PASS"   p16_UiTest.log
 check "resistance lines don't wrap (inventory + C panel)"    "UI SELFTEST resistance lines don't wrap: PASS"         p16_UiTest.log
@@ -782,7 +788,13 @@ check "member near the kill gains XP without hitting"  "XpNear gained [0-9]+ XP"
 check "member's own client sees its XP rise"           "follow bot: [0-9]+ px from XpLead, xp [1-9][0-9]*/"        p17_XpNear.log
 check "far member logged as out of range"              "party share: XpFar too far from XpLead's kill \([0-9]+ > 1000 px\), no XP" p17_server.log
 check "XP/kill line in the killer's chat"               "\+[0-9]+ XP  \((Slime Lv[0-9]+|[0-9]+ kills)\)  -  [0-9]+ / [0-9]+ to Lv [0-9]+" p17_XpLead.log
-check "party share shows in the member's chat"         "\+[0-9]+ XP  \((.*party share from XpLead|[0-9]+ kills)\)"        p17_XpNear.log
+check "party share shows in the member's chat as '(party)'" "\+[0-9]+ XP  \(party\)  -  "                                   p17_XpNear.log
+if grep -qE "XP  \([0-9]+ kills\)" $L/p17_XpNear.log; then echo "FAIL  shared XP is not worded as the member's own kills"; else echo "PASS  shared XP is not worded as the member's own kills"; fi
+check "own kills still say what was killed"               "\+[0-9]+ XP  \(([A-Z][a-z].* Lv[0-9]+|[0-9]+ kills)( \+ party)?\)"   p17_XpLead.log
+check "invite popup shown, then /accept typed in chat"    "typing /accept with the invite popup open"                    p17_XpNear.log
+check "invite popup closes after /accept in chat"         "invite popup after /accept: closed"                           p17_XpNear.log
+check "a member's level-up refreshes the party panels"    "party panels refreshed: XpNear is now level [2-9]"            p17_server.log
+check "far member's panel shows the leader's new level"   "party panel: .*XpLead  Lv[2-9]"                               p17_XpFar.log
 if grep -q "XpFar gained" $L/p17_server.log; then echo "FAIL  far member gets no XP"; else echo "PASS  far member gets no XP"; fi
 if grep -q "was slain by XpNear" $L/p17_server.log; then echo "FAIL  near member never attacked (XP came from the share)"; else echo "PASS  near member never attacked (XP came from the share)"; fi
 echo; echo "== Dungeon entrance safe area + T1 first pull (fresh Lv6 Pyromancer, no gear, --no-xp)"

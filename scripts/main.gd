@@ -1251,6 +1251,9 @@ func _bot_tutorial(me: Node, zone: Node, delta: float) -> void:
 func party_state(members: Array, leader: String) -> void:
 	party_members = members
 	party_leader = leader
+	if members.size() > 1 and invite_box and invite_box.visible:
+		invite_box.visible = false   # in a party now (accepted somewhere): no stale invite popup
+		_log("invite popup closed (joined a party)")
 	var names: Array = []
 	var where: Array = []
 	for m in members:
@@ -1271,6 +1274,12 @@ func party_invite(from: String) -> void:
 	if invite_box:
 		(invite_box.get_node("V/L") as Label).text = "%s invites you to a party." % from
 		invite_box.visible = true
+	if bot_party == "accept-chat":   # test: answer like a player typing /accept (popup must close)
+		get_tree().create_timer(1.0).timeout.connect(func():
+			_log("typing /accept with the invite popup %s" % ("open" if invite_box.visible else "closed"))
+			send_chat("/accept")
+			await get_tree().create_timer(1.5).timeout
+			_log("invite popup after /accept: %s" % ("STILL OPEN" if invite_box.visible else "closed")))
 
 
 func _answer_invite(yes: bool) -> void:
@@ -1374,6 +1383,10 @@ func broadcast_system(text: String) -> void:
 func send_chat(text: String) -> void:
 	if text.strip_edges().is_empty():
 		return
+	var cmd := text.strip_edges().get_slice(" ", 0).to_lower()
+	if invite_box and invite_box.visible and cmd in ["/accept", "/decline"]:
+		invite_box.visible = false   # answered by typing: the popup goes too
+		_log("invite popup closed (answered with %s in chat)" % cmd)
 	submit_chat.rpc_id(1, text)
 
 
@@ -1541,6 +1554,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if chat_open:
 		return   # typing: no key is a hotkey
+	if OS.has_environment("VOLAM_KEYLOG") and event is InputEventKey and event.pressed:
+		_log("hotkey %s echo=%s (C panel %s)" % [OS.get_keycode_string(event.keycode), event.echo, "open" if char_sheet.visible else "closed"])
 	if hideout_ui and hideout_ui.handle_world_input(event):
 		get_viewport().set_input_as_handled()
 		return
@@ -1809,6 +1824,53 @@ func _hud_declutter() -> void:
 		if w.visible and w.get_global_rect().intersects(corner):
 			cover = true
 	minimap.covered = cover
+
+
+## NPC / station labels: each goes to the first of its spots (above / below the NPC) that keeps
+## clear of the HUD corners (help text, minimap, stats) and of my own name tag.
+func _place_npc_labels() -> void:
+	var me := _local_player()
+	if me == null or me.zone == null:
+		return
+	var avoid := _npc_label_avoid(me)
+	for n in get_tree().get_nodes_in_group("npc_visual"):
+		if not n.has_method("label_spots") or not (n as Node2D).is_visible_in_tree() or not me.zone.is_ancestor_of(n):
+			continue
+		var spots: Array = n.label_spots()
+		var pick: Array = []
+		for sp in spots:
+			if not _rect_hits(npc_label_rect(n, sp[1]), avoid):
+				pick = sp
+				break
+		# nowhere clear (the NPC is under a HUD corner, far from me): hide the label until it is
+		n.label_node.visible = not pick.is_empty()
+		if not pick.is_empty() and n.label_side != pick[0]:
+			n.set_label_spot(pick)
+
+
+func _npc_label_avoid(me: Node) -> Array:
+	var xf: Transform2D = me.get_global_transform_with_canvas()
+	return [info_label.get_global_rect().grow(6), minimap.get_global_rect().grow(8), hud.get_node("StatsPanel").get_global_rect().grow(4),
+		Rect2(xf * Vector2(-80, -52), Vector2(160, 18) * xf.get_scale()).grow(10)]   # my name tag, with room
+
+
+## Screen rect of an NPC's label (at local offset `at`, default where it is now); only the text lines.
+func npc_label_rect(n: Node, at = null) -> Rect2:
+	var l: Label = n.label_node
+	var xf: Transform2D = (n as Node2D).get_global_transform_with_canvas()
+	var lines := l.text.count("\n") + 1
+	var w := 0.0
+	for line in l.text.split("\n"):
+		w = maxf(w, l.get_theme_font("font").get_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, -1, l.get_theme_font_size("font_size")).x)
+	var pos: Vector2 = l.position if at == null else at
+	return Rect2(xf * (pos + Vector2((l.size.x - w) / 2.0, 0)), Vector2(w, 15.0 * lines) * xf.get_scale())
+
+
+static func _rect_hits(r: Rect2, rects: Array) -> bool:
+	for a in rects:
+		if r.intersects(a):
+			return true
+	return false
 
 
 func _big_windows() -> Array:
@@ -2088,6 +2150,7 @@ func _update_hud(delta: float) -> void:
 		here = zones[_shown_zone].players_root.get_child_count()
 	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  N map  P party\nEnter chat   /invite NAME = party" % here
 	_hud_declutter()
+	_place_npc_labels()
 	if me == null:
 		target_frame.visible = false
 		return
@@ -2995,6 +3058,16 @@ func _aim_test_monster(me: Node) -> Node:
 	return best
 
 
+func _first_focusable(n: Node) -> Control:
+	for c in n.get_children():
+		if c is Control and c.visible and c.focus_mode != Control.FOCUS_NONE:
+			return c
+		var f := _first_focusable(c)
+		if f:
+			return f
+	return null
+
+
 ## Presses the skill key through Input.parse_input_event like a player (not the bot path).
 func _press_skill_key(keycode: int) -> void:
 	bot_mode = false
@@ -3077,6 +3150,41 @@ func _run_ui_selftest() -> void:
 		await get_tree().process_frame
 	var covered: bool = tutorial_ui.covers_a_window()
 	_log("UI SELFTEST tutorial box clear of the inventory: %s (box %s, inventory %s)" % ["FAIL" if covered else "PASS", tutorial_ui.get_global_rect(), inventory_ui.get_global_rect()])
+	close_windows_except([])
+	# 3b. the tutorial box keeps clear of the chat panel, and the C panel is never drawn under it
+	for i in 6:
+		chat_log.append_text("A long chat line that runs all the way to the right end of the chat panel %d\n" % i)
+	for f in 3:
+		await get_tree().process_frame
+	var chat_r: Rect2 = hud.get_node("ChatPanel").get_global_rect()
+	_log("UI SELFTEST tutorial box clear of the chat panel: %s (box %s, chat %s)" % ["FAIL" if tutorial_ui.get_global_rect().intersects(chat_r) else "PASS", tutorial_ui.get_global_rect(), chat_r])
+	_open_exclusive(char_sheet, true)
+	for f in 4:
+		await get_tree().process_frame
+	var c_r: Rect2 = char_sheet.get_global_rect()
+	var c_ok: bool = not tutorial_ui.get_global_rect().intersects(c_r) or char_sheet.get_index() > tutorial_ui.get_index()
+	_log("UI SELFTEST C panel not covered by the tutorial box: %s (box %s, C panel %s, C above the box %s)" % ["PASS" if c_ok else "FAIL", tutorial_ui.get_global_rect(), c_r, char_sheet.get_index() > tutorial_ui.get_index()])
+	# 3c. C and Esc close the open C panel (real key events), also after clicking inside it
+	var focusable := _first_focusable(char_sheet)
+	if focusable:
+		focusable.grab_focus()
+	bot_mode = false
+	_os_feed(_os_key(KEY_C, 0x63, true))
+	_os_feed(_os_key(KEY_C, 0x63, false))
+	await get_tree().process_frame
+	var c_closed := not char_sheet.visible
+	_open_exclusive(char_sheet, true)
+	await get_tree().process_frame
+	if focusable:
+		focusable.grab_focus()
+	_os_feed(_os_key(KEY_ESCAPE, 0, true))
+	_os_feed(_os_key(KEY_ESCAPE, 0, false))
+	await get_tree().process_frame
+	var esc_closed := not char_sheet.visible and not pause_menu.visible
+	bot_mode = true
+	_log("UI SELFTEST C closes the C panel: %s, Esc closes it: %s (focus was on %s)" % ["PASS" if c_closed else "FAIL", "PASS" if esc_closed else "FAIL", focusable.get_class() if focusable else "nothing focusable"])
+	if pause_menu.visible:
+		pause_menu.close_menu()
 	tutorial_ui.visible = false
 	close_windows_except([])
 	# 4. Enter then fast typing: every key goes into chat, none acts as a hotkey (I, N ...)
@@ -3155,8 +3263,42 @@ func _run_ui_selftest() -> void:
 	for slot in 4:
 		me.request_skill(slot)
 		await get_tree().create_timer(0.15).timeout
+	# 7. NPC labels: standing right under the Vendor, its label keeps off my name tag and no NPC
+	#    label (the Blacksmith's ...) sits on the help text / minimap / stats corner
+	_ui_walk_goal = me.zone.vendor_pos() + Vector2(0, 44)
+	var walk_t := 0.0
+	while me.position.distance_to(_ui_walk_goal) > 8.0 and walk_t < 9.0:
+		await get_tree().process_frame
+		walk_t += get_process_delta_time()
+	_ui_walk_goal = null
+	for f in 6:
+		await get_tree().process_frame
+	var avoid := _npc_label_avoid(me)
+	var tag: Rect2 = avoid[3]
+	var hud_hits: Array = []
+	var vendor_tag := "no vendor label"
+	var sides: Array = []
+	for n in get_tree().get_nodes_in_group("npc_visual"):
+		if not n.has_method("label_spots") or not (n as Node2D).is_visible_in_tree() or not me.zone.is_ancestor_of(n):
+			continue
+		var r := npc_label_rect(n)
+		var nm: String = n.label_node.text.get_slice("\n", 0)
+		if not get_viewport().get_visible_rect().intersects(r):
+			continue
+		if not n.label_node.visible:
+			sides.append("%s hidden (under the HUD)" % nm)
+			continue
+		sides.append("%s %s" % [nm, n.label_side])
+		if _rect_hits(r, avoid.slice(0, 3)):
+			hud_hits.append(nm)
+		if nm == "Vendor":
+			vendor_tag = "OVERLAP" if r.intersects(tag) else "clear"
+	_log("UI SELFTEST NPC labels at the vendor: %s (walked %.1fs, %d px from the spot; HUD overlaps [%s]; vendor label vs my name tag %s; sides: %s)" % [
+		"PASS" if hud_hits.is_empty() and vendor_tag == "clear" else "FAIL", walk_t, roundi(me.position.distance_to(me.zone.vendor_pos() + Vector2(0, 44))),
+		", ".join(hud_hits), vendor_tag, ", ".join(sides)])
 
 
+var _ui_walk_goal = null   # UI selftest: walk here (idle bot)
 var _rt_mode := ""   # UI selftest typing variant ("keycode-only": unicode 0, "no-release": presses only)
 
 
@@ -3407,6 +3549,8 @@ func _bot_update(delta: float) -> void:
 		return
 	if bot_idle:
 		bot_dir = Vector2.ZERO
+		if _ui_walk_goal != null and me.position.distance_to(_ui_walk_goal) > 6.0:   # UI selftest walks somewhere
+			bot_dir = _bot_steer(zone, me.position, _ui_walk_goal, delta)
 		return
 	# --- decide where to go
 	var goal_pos := Vector2.INF
@@ -4725,10 +4869,14 @@ func _build_ui() -> void:
 	char_sheet.offset_top = 70
 	char_sheet.visible = false
 	hud.add_child(char_sheet)
+	if OS.has_environment("VOLAM_KEYLOG"):
+		char_sheet.visibility_changed.connect(func(): _log("C panel %s" % ("shown" if char_sheet.visible else "hidden")))
 
 	# Draw order: windowed panels sit above the always-on HUD (chat, skill bar, help text,
 	# minimap), the tutorial above them, the item tooltip on top of everything.
-	for panel_node in [inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, char_sheet, tutorial_ui, item_tip]:
+	# The tutorial sits under the windows: it docks away from them, and when nothing fits (the tall
+	# C panel) the window stays readable on top.
+	for panel_node in [tutorial_ui, inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, char_sheet, item_tip]:
 		hud.move_child(panel_node, -1)
 
 	class_select = ClassSelectScript.new()

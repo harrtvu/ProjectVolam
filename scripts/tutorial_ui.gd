@@ -126,6 +126,9 @@ func _place() -> void:
 	for w in main._big_windows() + [main.minimap]:
 		if w.visible and (w != main.minimap or main.minimap.big):
 			busy.append(w.get_global_rect())
+	var chat: Control = main.hud.get_node_or_null("ChatPanel") if main.hud else null
+	if chat and chat.visible:
+		busy.append(chat.get_global_rect())   # long chat lines must stay readable
 	var npcs: Array = main.npc_screen_rects()
 	var best := -1
 	var best_n := 999
@@ -149,7 +152,17 @@ func _place() -> void:
 	if counts.get(_spot, 999) == best_n:   # equally good: stay put (no jumping around while walking)
 		best = _spot
 	_spot = best
-	position = cands[best] if best >= 0 else cands[1]
+	if best < 0:   # no free spot (e.g. the tall C panel): the least covered one; open windows draw above the box
+		var least := INF
+		for i in cands.size():
+			var area := 0.0
+			for bb in busy:
+				area += Rect2(cands[i], size).intersection(bb).get_area()
+			if area < least:
+				least = area
+				best = i
+		_spot = -1
+	position = cands[best]
 	place_info = "spot %d, covers %d of %d NPC labels (best possible %d)" % [best, best_n if best >= 0 else -1, npcs.size(), best_n]
 
 

@@ -61,7 +61,8 @@ var _tutorial_loot := false
 var stat_dmg_taken := 0                # server: totals since login (boss fight reports)
 var stat_deaths := 0
 var _xpn_xp := 0                       # server: XP chat line being batched
-var _xpn_kills := 0
+var _xpn_kills := 0                     # own kills in the batch
+var _xpn_share := 0                     # party-share XP in the batch (kills by party members)
 var _xpn_what := ""
 var _xpn_t := 0.0
 var safe_hit_t := 0.0                  # server: >0 = hit a monster from the dungeon safe area recently (no protection)
@@ -253,11 +254,15 @@ func _server_tick(delta: float) -> void:
 	safe_hit_t = maxf(0.0, safe_hit_t - delta)
 	if _xpn_t > 0.0:
 		_xpn_t -= delta
-		if _xpn_t <= 0.0 and _xpn_kills > 0:
+		if _xpn_t <= 0.0 and _xpn_kills + _xpn_share > 0:
 			if Time.get_ticks_msec() - _born_ms >= 150 and _owner_connected() and _main:
-				_main.xp_notice.rpc_id(peer_id, "+%d XP  (%s)  -  %d / %d to Lv %d" % [_xpn_xp, _xpn_what if _xpn_kills == 1 else "%d kills" % _xpn_kills, xp, xp_next, level + 1])
+				var src := "" if _xpn_kills == 0 else (_xpn_what if _xpn_kills == 1 else "%d kills" % _xpn_kills)
+				if _xpn_share > 0:
+					src = "party" if src == "" else src + " + party"
+				_main.xp_notice.rpc_id(peer_id, "+%d XP  (%s)  -  %d / %d to Lv %d" % [_xpn_xp, src, xp, xp_next, level + 1])
 			_xpn_xp = 0
 			_xpn_kills = 0
+			_xpn_share = 0
 	_since_hit += delta
 	if zone and zone.is_dungeon() and not _fp_done:
 		if _fp_t < 0.0:
@@ -839,8 +844,11 @@ func server_add_xp(amount: int, what := "") -> void:
 	xp += amount
 	if what != "":   # XP / kill line in chat, batched per 0.8 s so an AoE pull is one line
 		_xpn_xp += amount
-		_xpn_kills += 1
-		_xpn_what = what
+		if "party share" in what:
+			_xpn_share += 1
+		else:
+			_xpn_kills += 1
+			_xpn_what = what
 		if _xpn_t <= 0.0:
 			_xpn_t = 0.8
 	_srv_log("%s gained %d XP (%d/%d)" % [display_name, amount, xp, xp_next])
@@ -858,6 +866,8 @@ func server_add_xp(amount: int, what := "") -> void:
 		_srv_log("%s reached level %d (max hp %d, attack %d)" % [display_name, level, max_hp, attack])
 		if _main:
 			_main.broadcast_system("%s reached level %d!" % [display_name, level])
+			if _main.parties:
+				_main.parties.on_member_changed(account_key)   # party panels show the new level
 
 
 func server_give(item_id: String, count: int) -> void:
@@ -1308,6 +1318,7 @@ func server_sell(arg: Variant) -> void:
 			inventory[id] = have - n
 		gold += n * each
 		_srv_log("%s sold %d x %s for %d gold" % [display_name, n, id, n * each])
+		notify("Sold %d x %s for %d gold" % [n, str(Items.info(id).get("name", id)), n * each], true)
 		push_inventory()
 		return
 	var i := find_bag(_uid_of(arg))

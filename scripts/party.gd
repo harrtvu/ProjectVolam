@@ -216,6 +216,14 @@ func on_zone_changed(key: String) -> void:
 		_push(pt)
 
 
+## A member levelled up: refresh the panels now (they list each member's level).
+func on_member_changed(key: String) -> void:
+	var pt := party_of(key)
+	if not pt.is_empty():
+		_push(pt)
+		_log("party panels refreshed: %s is now level %d" % [_name_of(key), _player_by_key(key).level if _player_by_key(key) else 0])
+
+
 func on_peer_left(key: String) -> void:
 	if key != "":
 		leave(key, "left the game and the party")

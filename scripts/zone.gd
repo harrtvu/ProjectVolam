@@ -815,6 +815,16 @@ class CampfireVisual extends Node2D:
 class BlacksmithVisual extends Node2D:
 	var _t := 0.0
 	var screen_box := Rect2(-100, -54, 200, 76)   # sprites + the label above (HUD declutter / tutorial placement)
+	var label_node: Label
+	var label_side := "above"
+
+	## Where the label may go, preferred first (main._place_npc_labels keeps it off the HUD and name tags).
+	func label_spots() -> Array:
+		return [["above", Vector2(-100, -52)], ["below", Vector2(-100, 22)]]
+
+	func set_label_spot(spot: Array) -> void:
+		label_side = spot[0]
+		label_node.position = spot[1]
 
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
@@ -830,6 +840,7 @@ class BlacksmithVisual extends Node2D:
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		l.size = Vector2(200, 36)
 		l.position = Vector2(-100, -52)
+		label_node = l
 		l.z_index = 30
 		l.add_theme_font_size_override("font_size", 11)
 		l.add_theme_color_override("font_color", Color(1.0, 0.8, 0.45))
@@ -960,6 +971,16 @@ class NpcVisual extends Node2D:
 	var _name := ""
 	var _hint := ""        # "(E: ...)" line, shown only while the local player stands close
 	var _near_t := 0.0
+	var label_node: Label
+	var label_side := "below"
+
+	## Where the label may go, preferred first (main._place_npc_labels keeps it off the HUD and name tags).
+	func label_spots() -> Array:
+		return [["below", Vector2(-110, 16)], ["above", Vector2(-110, -62)]]
+
+	func set_label_spot(spot: Array) -> void:
+		label_side = spot[0]
+		label_node.position = spot[1]
 
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
@@ -1012,6 +1033,7 @@ class NpcVisual extends Node2D:
 		l.add_theme_constant_override("outline_size", 4)
 		add_child(l)
 		_label = l
+		label_node = l
 
 	func _process(delta: float) -> void:
 		_t += delta
