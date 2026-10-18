@@ -382,6 +382,10 @@ func request_tutorial(op: String) -> void:
 
 
 func request_skill(slot: int) -> void:
+	var left := cooldown_left(slot)
+	if left > 0.05 and _main and not _main.bot_mode:
+		var sk_id := Classes.skill_id(class_id, slot)
+		NetUtil.popup(self, "%s is on cooldown (%.1fs)" % [skill_def(sk_id)["name"] if sk_id != "" else "Skill", left], Color(0.8, 0.9, 1.0), -70.0)
 	if _main and _main.tutorial_ui and _main.tutorial_ui.visible:
 		_main.tutorial_ui.on_skill()
 	var req: Dictionary = _main.target_request(self) if _main else {}
@@ -1324,17 +1328,12 @@ func client_skill_cast(slot: int, cd: float) -> void:
 	cd_client[slot] = [Time.get_ticks_msec() + int(cd * 1000.0), cd]
 
 
-@rpc("authority", "call_local", "reliable")
-func client_notice(text: String, to_chat: bool) -> void:
-	NetUtil.popup(self, text, Color(0.8, 0.9, 1.0), -70.0)
-	if _main:
-		_main.local_notice(text, to_chat)
-
-
 ## Server -> owner: a short message over your head (and optionally in chat).
 func notify(text: String, to_chat := false) -> void:
 	if multiplayer.is_server() and Time.get_ticks_msec() - _born_ms >= 150 and _owner_connected():
-		client_notice.rpc_id(peer_id, text, to_chat)
+		# sent through Main (a node that never goes away), not this player node: a notice right
+		# before a zone transfer frees this node used to make the client confirm a dead node path
+		_main.player_notice.rpc_id(peer_id, text, to_chat)
 
 
 ## The owning peer is still connected (or is the listen-server host itself).

@@ -27,13 +27,14 @@ static func monsters_in(p: Node, center: Vector2, radius: float) -> Array:
 	return out
 
 
-static func _deny(p: Node, slot: int, reason: String) -> void:
+static func _deny(p: Node, slot: int, reason: String, tell := true) -> void:
 	var key := "%d:%s" % [slot, reason]
 	var now := Time.get_ticks_msec()
 	if now - int(p._deny_ms.get(key, -99999)) > 2000:
 		p._deny_ms[key] = now
 		p._srv_log("%s skill %d rejected: %s" % [p.display_name, slot + 1, reason])
-		p.notify(reason)
+		if tell:
+			p.notify(reason)
 
 
 static func fx(p: Node, kind: String, pos: Vector2, radius: float, extra := Vector2.ZERO) -> void:
@@ -167,7 +168,8 @@ static func cast(p: Node, slot: int, req: Dictionary) -> void:
 		_deny(p, slot, "%s unlocks at level %d" % [sk["name"], need])
 		return
 	if p._cooldowns[slot] > 0.0:
-		_deny(p, slot, "%s is on cooldown (%.1fs)" % [sk["name"], p._cooldowns[slot]])
+		# the client shows its own message from the same counter as the skill bar (one source)
+		_deny(p, slot, "%s is on cooldown (%.1fs)" % [sk["name"], p._cooldowns[slot]], false)
 		return
 	var cost := int(sk["cost"])
 	if p.mp < cost:

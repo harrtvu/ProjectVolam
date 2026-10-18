@@ -262,10 +262,10 @@ run --server --save-file="$SAVE15" --vendor-rotate=6 --quit-after=16 > $L/p15c_s
 
 echo "Phase 16 (~50s): first-time tutorial (movement, skills, loot, equip, passive web; skip; shown once)..."
 SAVE16="$(pwd)/$L/accounts_p16.json"; rm -f "$SAVE16"
-run --server --save-file="$SAVE16" --quit-after=36 > $L/p16_server.log 2>&1 &
+run --server --save-file="$SAVE16" --debug-level-for=UiTest:10 --quit-after=36 > $L/p16_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Newbie --password=t --class=earth --bot --bot-no-gear --bot-tutorial=full --quit-after=32 > $L/p16_Newbie.log 2>&1 &
-run --join=127.0.0.1 --name=UiTest --password=t --class=fire --bot --bot-idle --ui-selftest --quit-after=14 > $L/p16_UiTest.log 2>&1 &
+run --join=127.0.0.1 --name=UiTest --password=t --class=earth --bot --bot-idle --ui-selftest --quit-after=16 > $L/p16_UiTest.log 2>&1 &
 run --join=127.0.0.1 --name=Skipper --password=t --class=water --bot --bot-tutorial=skip --quit-after=32 > $L/p16_Skipper.log 2>&1 &
 wait
 run --server --save-file="$SAVE16" --quit-after=14 > $L/p16b_server.log 2>&1 &
@@ -700,6 +700,8 @@ if grep -rqE "market_server|market_ui|request_market" scripts/; then echo "FAIL 
 echo; echo "== First-time tutorial (M2)"
 check "big windows exclusive incl. N map (I/N x40, C/T/atlas)" "UI SELFTEST exclusive windows .*: PASS"                    p16_UiTest.log
 check "N zone map draws above chat/skill bar/help/stats"   "UI SELFTEST N map above the HUD: PASS"                     p16_UiTest.log
+check "fast typing after Enter goes into chat (no hotkeys)" "UI SELFTEST fast typing after Enter goes to chat: PASS"    p16_UiTest.log
+check "skills back to back run out of mana (UiTest)"    "UiTest skill 4 rejected: not enough mana"                  p16_server.log
 check "tutorial box never covers the inventory (step 4)"   "UI SELFTEST tutorial box clear of the inventory: PASS"     p16_UiTest.log
 check "tutorial starts for a new character"            "\[tutorial\] Newbie: starting the tutorial \(new character\)"   p16_server.log
 check "step 1: movement"                               "tutorial step 1 done: Move"                                   p16_Newbie.log
@@ -719,3 +721,4 @@ GODOT="$GODOT" tools/stale_cache_check.sh 86382b3 | grep -E "^(PASS|FAIL)"
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"
+if grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log; then echo "FAIL  no engine/script errors or warnings in any log (see above)"; else echo "PASS  no engine/script errors or warnings in any log"; fi

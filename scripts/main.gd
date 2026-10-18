@@ -49,7 +49,7 @@ const Vendor := preload("res://scripts/vendor.gd")
 const GAME_TITLE := "Project Volam"
 const DEFAULT_PORT := 7777
 ## Build/protocol version checked on join (handshake.gd). Bump it whenever RPCs or synced data change.
-const BUILD_VERSION := "volam-m2.1"
+const BUILD_VERSION := "volam-m2.2"
 const MAX_PLAYERS := 32
 const SAVE_INTERVAL := 30.0
 const DEFAULT_SAVE_FILE := "user://volam_save/accounts.json"
@@ -192,6 +192,7 @@ var _tf_icon: TextureRect
 var _tf_name: Label
 var _tf_hp: ProgressBar
 var _tf_hp_text: Label
+var _tf_invite: Button     # target frame: invite the selected player
 var _tf_status: RichTextLabel
 var _open_talents := false
 var _debug_preview := -1
@@ -844,7 +845,7 @@ func _login_ok(id: int, pname: String, password: String) -> void:
 	var acc := accounts.get_account(pname)
 	var display: String = str(acc.get("name", pname))
 	var character: Dictionary = acc.get("character", {})
-	if is_new and debug_start_level > 1 and not (debug_fresh != "" and pname.to_lower().begins_with(debug_fresh.to_lower())):
+	if is_new and (debug_start_level > 1 or debug_level_for.has(pname.to_lower())) and not (debug_fresh != "" and pname.to_lower().begins_with(debug_fresh.to_lower())):
 		var lv0: int = int(debug_level_for.get(pname.to_lower(), debug_start_level))   # --debug-level-for=name:lv,...
 		character = {"level": lv0, "gold": 250, "inventory": {"health_potion": 5, "greater_potion": 5}, "items_v": 2}
 		if debug_gear:   # crafting test kit
@@ -1164,6 +1165,15 @@ func _send_tutorial(ref: WeakRef) -> void:
 		tutorial_start.rpc_id(node.peer_id)
 
 
+## Client: a short server message over your own head (and optionally in chat). See player.notify().
+@rpc("authority", "call_local", "reliable")
+func player_notice(text: String, to_chat: bool) -> void:
+	var me := _local_player()
+	if me:
+		NetUtil.popup(me, text, Color(0.8, 0.9, 1.0), -70.0)
+	local_notice(text, to_chat)
+
+
 ## Client: the server wants this (new) character to see the first-time tutorial.
 @rpc("authority", "call_local", "reliable")
 func tutorial_start() -> void:
@@ -1335,17 +1345,29 @@ func _on_chat_gui_input(event: InputEvent) -> void:
 		chat_edit.accept_event()
 
 
+## Enter opens chat here, BEFORE the GUI sees the key (a focused button would eat it as
+## ui_accept) and synchronously, so the very next keys already land in the chat line
+## instead of acting as hotkeys (I, N, ...).
+func _input(event: InputEvent) -> void:
+	if not in_game or is_dedicated or chat_edit == null:
+		return
+	if event is InputEventKey and event.pressed and not event.echo and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) \
+			and not chat_edit.has_focus() and not (pause_menu and pause_menu.visible) and not class_select.visible:
+		chat_edit.grab_focus()
+		chat_active = true
+		get_viewport().set_input_as_handled()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not in_game or is_dedicated:
 		return
+	if chat_edit.has_focus():
+		return   # typing: no key is a hotkey
 	if hideout_ui and hideout_ui.handle_world_input(event):
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
-		if (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and not chat_edit.has_focus():
-			chat_edit.grab_focus()
-			get_viewport().set_input_as_handled()
-		elif event.is_action("inventory") and not chat_edit.has_focus():
+		if event.is_action("inventory") and not chat_edit.has_focus():
 			toggle_inventory()
 			get_viewport().set_input_as_handled()
 		elif event.is_action("character") and not chat_edit.has_focus():
@@ -1826,7 +1848,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc menu  E pick up\nQ potion  I inventory  C character\nT passive web  N zone map  Enter chat" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills\nClick/Tab target  Esc menu  E pick up\nQ potion  I inventory  C character\nT passive web  N zone map  Enter chat\n/invite NAME  /leave  party" % here
 	if me == null:
 		target_frame.visible = false
 		return
@@ -1956,6 +1978,10 @@ func _update_target_frame(me: Node) -> void:
 		_tf_name.text = "%s%s  Lv %d   %s" % ["★ " if sel.is_boss else "", sel.display_name, sel.level, Classes.element_name(el)]
 	else:
 		_tf_name.text = "%s  Lv %d   %s (ally)" % [sel.display_name, sel.level, Classes.info(sel.class_id)["name"]]
+	var in_party := false
+	for m in party_members:
+		in_party = in_party or str(m["name"]) == str(sel.display_name)
+	_tf_invite.visible = not is_monster and sel != me and not in_party
 	_tf_name.add_theme_color_override("font_color", Classes.color(el).lerp(Color.WHITE, 0.4))
 	_tf_hp.max_value = sel.max_hp
 	_tf_hp.value = sel.hp
@@ -2623,6 +2649,33 @@ func _run_ui_selftest() -> void:
 	_log("UI SELFTEST tutorial box clear of the inventory: %s (box %s, inventory %s)" % ["FAIL" if covered else "PASS", tutorial_ui.get_global_rect(), inventory_ui.get_global_rect()])
 	tutorial_ui.visible = false
 	close_windows_except([])
+	# 4. Enter then fast typing: every key goes into chat, none acts as a hotkey (I, N ...)
+	var typed := "/invite Bravo"
+	_inject_key(KEY_ENTER, 0)
+	for ch in typed:
+		var kc: int = OS.find_keycode_from_string(ch.to_upper()) if ch != " " and ch != "/" else (KEY_SPACE if ch == " " else KEY_SLASH)
+		_inject_key(kc, ch.unicode_at(0))
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var chat_ok: bool = chat_edit.text == typed and open_windows().is_empty()
+	_log("UI SELFTEST fast typing after Enter goes to chat: %s (chat '%s', open %s)" % ["PASS" if chat_ok else "FAIL", chat_edit.text, open_windows()])
+	chat_edit.text = ""
+	chat_edit.release_focus()
+	# 5. mana: casting all four skills back to back runs out of mana (Lv10 Earth: 57 mp < 12+20+taunt+35)
+	var me := _local_player()
+	for slot in 4:
+		me.request_skill(slot)
+		await get_tree().create_timer(0.15).timeout
+
+
+func _inject_key(keycode: int, unicode: int) -> void:
+	for pressed in [true, false]:
+		var ev := InputEventKey.new()
+		ev.keycode = keycode
+		ev.physical_keycode = keycode
+		ev.unicode = unicode if pressed else 0
+		ev.pressed = pressed
+		get_viewport().push_input(ev)   # synchronous, through GUI focus -> _unhandled_input like a real key
 
 
 func _ground_items_near(me: Node, zone: Node) -> int:
@@ -4065,6 +4118,16 @@ func _build_ui() -> void:
 	tfs.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	tfv.add_child(tfs)
 	_tf_status = tfs
+	_tf_invite = Button.new()
+	_tf_invite.text = "Invite to party"
+	_tf_invite.focus_mode = Control.FOCUS_NONE
+	_tf_invite.add_theme_font_size_override("font_size", 11)
+	_tf_invite.visible = false
+	_tf_invite.pressed.connect(func():
+		var t: Node = NetUtil.selected
+		if is_instance_valid(t) and "display_name" in t:
+			send_chat("/invite %s" % t.display_name))
+	tfh.add_child(_tf_invite)
 
 	talent_ui = TalentUIScript.new()
 	talent_ui.anchor_left = 0.5
