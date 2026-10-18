@@ -1,4 +1,5 @@
-class_name Vendor
+## (no class_name: users preload this script as `const Vendor := preload("res://scripts/vendor.gd")`
+## so a stale .godot class cache after `git pull` can never break loading)
 ## NPC vendor (replaces the old player trade market): static rules shared by the
 ## server (vendor_server.gd) and the panel (vendor_ui.gd).
 ##   * players SELL loot for gold (Gear.sell_price / Items "sell"),

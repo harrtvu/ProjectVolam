@@ -1,4 +1,5 @@
 extends PanelContainer
+const Vendor := preload("res://scripts/vendor.gd")
 ## NPC vendor panel (press E next to the Vendor in Sunny Meadow or in your hideout).
 ## Left: the rotating stock (Buy). Right: sell - click an item / stack in your bag
 ## (or drag it onto the slot) and press Sell. The server (vendor_server.gd) validates.

@@ -705,6 +705,8 @@ check "skipped flag saved"                             "\[tutorial\] Skipper ski
 if grep -qE "\[tutorial\] (Newbie|Skipper): starting" $L/p16b_server.log || grep -q "tutorial started" $L/p16b_Newbie.log $L/p16b_Skipper.log; then echo "FAIL  shown once (not again after a restart + re-login)"; else echo "PASS  shown once (not again after a restart + re-login)"; fi
 if python3 -c "import json,sys; a=json.load(open('$SAVE16'))['accounts']; sys.exit(0 if a['newbie']['character']['tutorial']=='done' and a['skipper']['character']['tutorial']=='skipped' else 1)"; then echo "PASS  tutorial flag stored per character"; else echo "FAIL  tutorial flag stored per character"; fi
 if grep -qE "\[tutorial\] (Oldie|Oldtown|Lost): starting" $L/p2_server.log; then echo "FAIL  old characters don't get the tutorial"; else echo "PASS  old characters don't get the tutorial"; fi
+echo; echo "== Fresh pull onto an old .godot cache"
+GODOT="$GODOT" tools/stale_cache_check.sh 86382b3 | grep -E "^(PASS|FAIL)"
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"

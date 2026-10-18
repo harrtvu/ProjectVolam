@@ -1,4 +1,5 @@
 extends Node2D
+const Vendor := preload("res://scripts/vendor.gd")
 ## Project Volam - root of the game.
 ## One scene handles everything: main menu, world, networking, accounts, chat and HUD.
 ##

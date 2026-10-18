@@ -1,4 +1,5 @@
 extends Node
+const Vendor := preload("res://scripts/vendor.gd")
 ## NPC vendor (Sunny Meadow + every hideout), server-authoritative. See vendor.gd.
 ## The stock of the current rotation is saved to its own file next to accounts.json
 ## (user://volam_save/vendor.json, or X_vendor.json for --save-file=X.json) together
