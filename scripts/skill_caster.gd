@@ -120,10 +120,24 @@ static func _alog(p: Node, key: String, msg: String) -> void:
 		p._srv_log(msg)
 
 
-## Direction for projectiles / dashes: selected target > cursor > nearest monster > facing.
+## The selected enemy of a request even when it is out of range / behind a wall (alive, this zone).
+static func _selected_enemy(p: Node, req: Dictionary) -> Node:
+	if typeof(req.get("t")) != TYPE_INT or int(req["t"]) < 0 or str(req.get("k", "m")) != "m":
+		return null
+	var t := _find_in(p.zone, "m", int(req["t"]))
+	if t == null or t.is_queued_for_deletion() or not t.alive:
+		return null
+	return t
+
+
+## Direction for projectiles / dashes: selected target (even out of range: fly toward it) >
+## the CURRENT cursor (sent with the key press) > nearest monster > facing.
 static func aim_direction(p: Node, req: Dictionary, max_range: float, what: String) -> Vector2:
 	var t := resolve_target(p, req, max_range, what)
+	if t == null:
+		t = _selected_enemy(p, req)
 	if t:
+		_alog(p, what + ":t", "%s aims %s at the selected target %s (angle %d)" % [p.display_name, what, t.display_name, roundi(rad_to_deg(p.position.angle_to_point(t.position)))])
 		return p.position.direction_to(t.position)
 	var aim = _aim_vec(req)
 	if aim != null and p.position.distance_to(aim) > 4.0 and int(req.get("t", -1)) < 0:
@@ -139,7 +153,11 @@ static func aim_direction(p: Node, req: Dictionary, max_range: float, what: Stri
 static func aim_point(p: Node, req: Dictionary, max_range: float, what: String) -> Variant:
 	var t := resolve_target(p, req, max_range, what, false)
 	if t:
+		_alog(p, what + ":t", "%s casts %s on the selected target %s" % [p.display_name, what, t.display_name])
 		return t.position
+	var st := _selected_enemy(p, req)
+	if st:   # out of range: as far as it goes toward the target
+		return p.position + (st.position - p.position).limit_length(max_range)
 	var aim = _aim_vec(req)
 	if aim != null and int(req.get("t", -1)) < 0:
 		var at: Vector2 = p.position + (Vector2(aim) - p.position).limit_length(max_range)

@@ -143,6 +143,8 @@ var vendor_ui: PanelContainer
 var tutorial_ui: PanelContainer
 var bot_tutorial := ""             # bot: "full" (do every tutorial step) | "skip"
 static var _last_name := ""       # survives the scene reload of Return to Main Menu
+var aim_selftest := false         # client (tests): --aim-selftest, skill aim = selected target, else the cursor at the key press
+var _test_cursor = null           # aim selftest: stands in for the mouse (headless has none)
 var ui_selftest := false          # client (tests): --ui-selftest checks exclusive windows, N-map layer, tutorial placement
 var show_tutorial := false         # client: show the tutorial even when headless / a bot (tests, screenshots)
 var vendor_rotate := 0             # server (tests): --vendor-rotate=SECS stock rotation period (0 = default 2h)
@@ -283,6 +285,7 @@ var parties: Node                  # parties (party.gd), server state; party_sta
 var party_label: Label
 var party_members: Array = []      # client: [{name, class, level, zone}] of my party ([] = no party)
 var party_leader := ""
+var party_panel_pref := 0         # P key: 0 = automatic (shown while in a party), 1 = shown, -1 = hidden
 var invite_box: PanelContainer
 var _invite_from := ""
 var bot_no_potions := false        # bot: never drinks (first-pull trial without potions)
@@ -360,6 +363,7 @@ func _setup_input() -> void:
 	_add_action("talents", [KEY_T])
 	_add_action("target_cycle", [KEY_TAB])
 	_add_action("atlas", [KEY_M])
+	_add_action("party_panel", [KEY_P])
 	_add_action("zone_map", [KEY_N])
 	_add_action("fps_overlay", [KEY_F3])
 
@@ -482,6 +486,7 @@ func _parse_args() -> void:
 	bot_vendor_role = str(opts.get("bot-vendor-role", ""))
 	bot_tutorial = str(opts.get("bot-tutorial", ""))
 	ui_selftest = opts.has("ui-selftest")
+	aim_selftest = opts.has("aim-selftest")
 	show_tutorial = bot_tutorial != "" or opts.has("show-tutorial") or ui_selftest
 	_open_vendor = opts.has("open-vendor")
 	bot_party = str(opts.get("bot-party", ""))
@@ -1276,8 +1281,11 @@ func _answer_invite(yes: bool) -> void:
 func _update_party_label() -> void:
 	if party_label == null:
 		return
-	party_label.visible = party_members.size() > 1
-	var lines: Array = ["Party"]
+	party_label.visible = party_panel_pref == 1 or (party_panel_pref == 0 and party_members.size() > 1)
+	var lines: Array = ["Party  (P hides)"]
+	if party_members.size() <= 1:
+		lines.append("  Not in a party.")
+		lines.append("  /invite NAME, or select a player > Invite")
 	for m in party_members:
 		var cls := str(m.get("class", ""))
 		var zname := str(m.get("zone_name", ""))
@@ -1288,6 +1296,13 @@ func _update_party_label() -> void:
 	party_label.text = "\n".join(lines)
 	if party_label.visible:
 		_log("party panel: %s" % " | ".join(lines.slice(1)))
+
+
+## P: show / hide the party panel (shown even without a party, with how to start one).
+func toggle_party_panel() -> void:
+	party_panel_pref = -1 if party_label.visible else 1
+	_update_party_label()
+	_log("party panel toggled (P): %s (%d member(s))" % ["shown" if party_label.visible else "hidden", party_members.size()])
 
 
 func show_banner(title: String, sub: String) -> void:
@@ -1539,6 +1554,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action("talents"):
 			_open_exclusive(talent_ui, not talent_ui.visible)
 			get_viewport().set_input_as_handled()
+		elif event.is_action("party_panel"):
+			toggle_party_panel()
+			get_viewport().set_input_as_handled()
 		elif event.is_action("target_cycle"):
 			cycle_target()
 			get_viewport().set_input_as_handled()
@@ -1573,6 +1591,8 @@ func _unhandled_input(event: InputEvent) -> void:
 # ================================================================ targeting (client)
 
 func _cursor_zone_pos(me: Node) -> Vector2:
+	if _test_cursor != null:
+		return _test_cursor
 	return me.position + me.get_local_mouse_position()
 
 
@@ -2066,7 +2086,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  N map\nEnter chat   /invite NAME = party" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  N map  P party\nEnter chat   /invite NAME = party" % here
 	_hud_declutter()
 	if me == null:
 		target_frame.visible = false
@@ -2099,6 +2119,9 @@ func _update_hud(delta: float) -> void:
 	if ui_selftest and _elapsed > 4.0:
 		ui_selftest = false
 		_run_ui_selftest()
+	if aim_selftest and _elapsed > 5.0 and _aim_test_monster(me) != null:
+		aim_selftest = false
+		_run_aim_selftest()
 	if _open_inventory:
 		_open_inventory = false
 		toggle_inventory()
@@ -2960,6 +2983,56 @@ func _bot_vendor(me: Node, zone: Node, delta: float) -> void:
 		if t >= float(steps[i][0]) and not _bv_done.has(i):
 			_bv_done[i] = true
 			steps[i][1].call()
+
+
+func _aim_test_monster(me: Node) -> Node:
+	var best: Node = null
+	for m in me.zone.monsters_root.get_children():
+		var d: float = m.position.distance_to(me.position)
+		if m.alive and d >= 60.0 and d <= 260.0 and me.zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)) \
+				and (best == null or d < best.position.distance_to(me.position)):
+			best = m
+	return best
+
+
+## Presses the skill key through Input.parse_input_event like a player (not the bot path).
+func _press_skill_key(keycode: int) -> void:
+	bot_mode = false
+	_os_feed(_os_key(keycode, keycode, true))
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_os_feed(_os_key(keycode, keycode, false))
+	await get_tree().process_frame
+	bot_mode = true
+
+
+## --aim-selftest: (1) a target is selected and the mouse is on the other side: the skill goes
+## to the target; (2) no target, the mouse rests at A and moves to B just before the key: it goes to B.
+func _run_aim_selftest() -> void:
+	var me := _local_player()
+	bot_idle = true   # the bot walked up to monsters; stand still for the test
+	bot_dir = Vector2.ZERO
+	var m := _aim_test_monster(me)
+	NetUtil.selected = m
+	_test_cursor = (me.position + (me.position - m.position).normalized() * 150.0).round()
+	_log("AIM SELFTEST target: selected %s at %s, cursor on the other side at %s" % [m.display_name, m.position.round(), _test_cursor])
+	await _press_skill_key(KEY_1)
+	await get_tree().create_timer(3.6).timeout
+	NetUtil.selected = null
+	var a: Vector2 = (me.position + Vector2(-130, 40)).round()
+	_test_cursor = a
+	for i in 15:
+		await get_tree().process_frame
+	var b: Vector2 = (me.position + Vector2(90, -70)).round()
+	_test_cursor = b
+	_log("AIM SELFTEST cursor: no target, cursor rested at %s, moved to %s at the key press" % [a, b])
+	await _press_skill_key(KEY_1)
+	_test_cursor = null
+	_log("AIM SELFTEST done")
+	await _press_skill_key(KEY_P)   # P toggles the party panel (also without a party)
+	_log("P KEY TEST after 1st P: party panel visible %s, text '%s'" % [party_label.visible, party_label.text.replace("\n", " | ")])
+	await _press_skill_key(KEY_P)
+	_log("P KEY TEST after 2nd P: party panel visible %s" % party_label.visible)
 
 
 ## --ui-selftest: the window-management fixes from playtesting, checked on a real client.

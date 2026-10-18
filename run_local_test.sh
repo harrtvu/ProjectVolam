@@ -304,6 +304,13 @@ run --join=127.0.0.1 --name=Corner --password=p --class=fire --bot --bot-no-gear
 run --join=127.0.0.1 --name=Unused --password=p --class=water --bot --bot-no-gear --bot-dungeon=unused --bot-dungeon-theme=wood --bot-dungeon-tier=1 --quit-after=40 > $L/p19_Unused.log 2>&1 &
 wait
 
+echo "Phase 20 (~24s): skill aim (selected target; else the cursor at the key press)..."
+SAVE20="$(pwd)/$L/accounts_p20.json"; rm -f "$SAVE20"
+run --server --save-file="$SAVE20" --debug-level-for=AimTest:10 --allow-warp --quit-after=24 > $L/p20_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=AimTest --password=p --class=fire --bot --bot-passive --aim-selftest --warp=meadow --quit-after=20 > $L/p20_AimTest.log 2>&1 &
+wait
+
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 echo; echo "== Core features"
 check "accounts created"            "Created account 'Bot1'"                 p1_server.log
@@ -807,6 +814,18 @@ check "owner told + ticket back in the bag"            "ticket refunded to your 
 check "bag shows the ticket again once the portal is gone" "unused bot: portal gone, tickets in bag [0-9]+ -> [0-9]+ \(refund seen\)" p19_Unused.log
 check "an entered portal is not refunded"              "Corner entered" p19_server.log
 if grep -q "refunded Corner's" $L/p19_server.log; then echo "FAIL  no refund for a used portal"; else echo "PASS  no refund for a used portal"; fi
+
+echo; echo "== Skill aim (selected target; no target: the cursor at the key press)"
+AIM_T=$(grep -oE "AIM SELFTEST target: selected [A-Za-z ]+ at" $L/p20_AimTest.log | head -1 | sed -E 's/AIM SELFTEST target: selected (.*) at/\1/')
+check "aim test ran (target, then cursor)"  "AIM SELFTEST done"  p20_AimTest.log
+if [ -n "$AIM_T" ] && grep -q "AimTest aims Fireball at the selected target $AIM_T" $L/p20_server.log; then echo "PASS  target selected: Fireball goes to the target ($AIM_T), not the cursor"; else echo "FAIL  target selected: Fireball goes to the target ('$AIM_T')"; fi
+AIM_B=$(grep -oE "moved to \(-?[0-9]+, -?[0-9]+\) at the key press" $L/p20_AimTest.log | head -1 | grep -oE "\(-?[0-9]+, -?[0-9]+\)")
+AIM_A=$(grep -oE "cursor rested at \(-?[0-9]+, -?[0-9]+\)" $L/p20_AimTest.log | head -1 | grep -oE "\(-?[0-9]+, -?[0-9]+\)")
+if [ -n "$AIM_B" ] && grep -qF "AimTest aims Fireball at the cursor $AIM_B" $L/p20_server.log; then echo "PASS  no target: Fireball goes to the cursor at the key press $AIM_B"; else echo "FAIL  no target: Fireball goes to the cursor at the key press ('$AIM_B')"; fi
+if [ -n "$AIM_A" ] && grep -qF "at the cursor $AIM_A" $L/p20_server.log; then echo "FAIL  not to the old cursor position $AIM_A"; else echo "PASS  not to the old cursor position ($AIM_A)"; fi
+check "P opens the party panel (no party: how to start one)" "P KEY TEST after 1st P: party panel visible true, text 'Party  \(P hides\) \|   Not in a party\." p20_AimTest.log
+check "P again closes it"                                       "P KEY TEST after 2nd P: party panel visible false" p20_AimTest.log
+if grep -q "AimTest cast Fireball" $L/p20_server.log && [ "$(grep -c "AimTest cast Fireball" $L/p20_server.log)" -ge 2 ]; then echo "PASS  both test Fireballs were cast"; else echo "FAIL  both test Fireballs were cast"; fi
 
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
