@@ -56,6 +56,10 @@ var bag: Array = []                # gear instances (inventory holds the stackab
 var stash: Array = []              # account stash at the blacksmith
 var atlas: Dictionary = {"done": {}}   # dungeon completions {"done": {"wood:3": runs}} (see dungeons.gd)
 var free_day := ""                     # date of the last free daily ticket
+var tutorial := "legacy"               # server: "pending" (new character) | "done" | "skipped" | "legacy" (made before the tutorial)
+var _tutorial_loot := false
+var stat_dmg_taken := 0                # server: totals since login (boss fight reports)
+var stat_deaths := 0
 var run_info: Dictionary = {}          # (owner client) the open dungeon run, for the UI
 var _drop_block_t := 0.0
 var _bagfull_ms := -99999
@@ -288,8 +292,8 @@ func _handle_local_input() -> void:
 				_main.toggle_map_ui("device")
 			elif near_merchant() and not _loot_nearby() and _main:
 				_main.toggle_map_ui("merchant")
-			elif near_broker() and not _loot_nearby() and _main:
-				_main.toggle_market_ui()
+			elif near_vendor() and not _loot_nearby() and _main:
+				_main.toggle_vendor_ui()
 			elif near_hideout_master() and not _loot_nearby() and _main:
 				_main.toggle_hideout_ui()
 			else:
@@ -298,6 +302,10 @@ func _handle_local_input() -> void:
 			request_use(best_potion())
 		for i in 4:
 			var act := "skill_%d" % (i + 1)
+			if dead:            # skill keys pressed while dead are discarded, not queued
+				if _main.hold_slot == i:
+					_main.hold_slot = -1
+				continue
 			if Input.is_action_just_pressed(act):
 				if is_ground_skill(i):
 					_main.hold_slot = i      # aim with the preview, cast on release
@@ -367,7 +375,13 @@ func _loot_nearby() -> bool:
 func request_pickup() -> void:
 	_send("pickup")
 
+func request_tutorial(op: String) -> void:
+	_send("tutorial", op)
+
+
 func request_skill(slot: int) -> void:
+	if _main and _main.tutorial_ui and _main.tutorial_ui.visible:
+		_main.tutorial_ui.on_skill()
 	var req: Dictionary = _main.target_request(self) if _main else {}
 	if req.is_empty():
 		_send("skill", slot)      # plain request: server auto-targets the nearest monster
@@ -388,10 +402,10 @@ func request_refund(id: String) -> void:
 	_send("refund", id)
 
 
-func request_market(op: String, args := {}) -> void:
+func request_vendor(op: String, args := {}) -> void:
 	var d: Dictionary = args.duplicate()
 	d["op"] = op
-	_send("market", d)
+	_send("vendor", d)
 
 
 func request_hideout(op: String, args := {}) -> void:
@@ -499,6 +513,7 @@ func apply_character(c: Dictionary) -> void:
 		_srv_log("[atlas] %s: migrated old atlas grid %s -> atlas map nodes %s (remapped %s), %d atlas points granted for past completions" % [
 			display_name, c["atlas"].get("done", {}), atlas["done"], atlas["migrated"], Atlas.points_earned(atlas)])
 	free_day = str(c.get("free_day", ""))
+	tutorial = str(c.get("tutorial", "legacy"))
 	hideout = Hideouts.sanitize(c.get("hideout", {}))
 	talents = {}
 	var tl = c.get("talents", {})
@@ -625,7 +640,7 @@ func to_character() -> Dictionary:
 		"gold": gold, "inventory": inventory.duplicate(),
 		"equipment": equipment.duplicate(true), "bag": bag.duplicate(true), "stash": stash.duplicate(true), "items_v": 2,
 		"talents": talents.duplicate(),
-		"atlas": atlas.duplicate(true), "free_day": free_day,
+		"atlas": atlas.duplicate(true), "free_day": free_day, "tutorial": tutorial,
 	}
 
 
@@ -686,6 +701,7 @@ func server_take_damage(amount: int, source: String, src_element: String = "", a
 			_update_status_flags()
 			return
 	hp = maxi(0, hp - dmg)
+	stat_dmg_taken += dmg
 	_srv_log("%s took %d damage from %s (hp %d/%d)%s" % [display_name, dmg, source, hp, max_hp, note])
 	if hp == 0 and tm("flag:phoenix") > 0.0 and _phoenix_cd <= 0.0:
 		_phoenix_cd = 60.0
@@ -698,6 +714,7 @@ func server_take_damage(amount: int, source: String, src_element: String = "", a
 		return
 	if hp == 0:
 		dead = true
+		stat_deaths += 1
 		_respawn_t = RESPAWN_TIME
 		_input_dir = Vector2.ZERO
 		velocity = Vector2.ZERO
@@ -727,7 +744,7 @@ func _server_respawn() -> void:
 
 
 func server_add_xp(amount: int) -> void:
-	if level >= MAX_LEVEL:
+	if level >= MAX_LEVEL or (_main and _main.no_xp):
 		return
 	xp += amount
 	_srv_log("%s gained %d XP (%d/%d)" % [display_name, amount, xp, xp_next])
@@ -921,9 +938,28 @@ func handle_request(action: String, arg: Variant) -> void:
 		"party":
 			if _main and _main.parties and typeof(arg) == TYPE_DICTIONARY:
 				_main.parties.handle_request(self, arg)
-		"market":
-			if _main and _main.market and typeof(arg) == TYPE_DICTIONARY:
-				_main.market.handle_request(self, arg)
+		"tutorial":
+			server_tutorial(str(arg))
+		"vendor":
+			if _main and _main.vendor and typeof(arg) == TYPE_DICTIONARY:
+				_main.vendor.handle_request(self, arg)
+
+
+## First-time tutorial: "loot" drops a practice helmet once, "done" / "skip" saves the flag.
+func server_tutorial(op: String) -> void:
+	if tutorial != "pending":
+		return
+	match op:
+		"loot":
+			if not _tutorial_loot and zone:
+				_tutorial_loot = true
+				var inst := Gear.make("leather_cap", "magic", 1, _main.rng)
+				zone.spawn_pickup(str(inst["base"]), 1, position + facing.normalized() * 40.0 if facing != Vector2.ZERO else position + Vector2(40, 0), inst)
+				_srv_log("[tutorial] %s: practice loot dropped (%s)" % [display_name, Gear.summary(inst)])
+		"done", "skip":
+			tutorial = "done" if op == "done" else "skipped"
+			_srv_log("[tutorial] %s %s the tutorial - flag saved (%s)" % [display_name, "finished" if op == "done" else "skipped", tutorial])
+			_main.save_player_now(self)
 
 
 func server_set_input(dir: Vector2) -> void:
@@ -1016,9 +1052,9 @@ func near_merchant() -> bool:
 		and position.distance_to(zone.merchant_pos()) <= BLACKSMITH_RANGE
 
 
-func near_broker() -> bool:
-	return zone != null and zone.has_method("broker_pos") and zone.broker_pos() != Vector2.INF \
-		and position.distance_to(zone.broker_pos()) <= BLACKSMITH_RANGE
+func near_vendor() -> bool:
+	return zone != null and zone.has_method("vendor_pos") and zone.vendor_pos() != Vector2.INF \
+		and position.distance_to(zone.vendor_pos()) <= BLACKSMITH_RANGE
 
 
 func near_blacksmith() -> bool:
@@ -1153,15 +1189,15 @@ func server_craft(arg: Variant) -> void:
 
 
 func server_sell(arg: Variant) -> void:
-	if not near_blacksmith():
-		_gear_reject("sell", "you must be at the blacksmith in Sunny Meadow")
+	if not near_blacksmith() and not near_vendor():
+		_gear_reject("sell", "you must be at the vendor or the blacksmith")
 		return
 	if typeof(arg) == TYPE_DICTIONARY and arg.has("stack"):
 		var id := str(arg["stack"])
 		var n := int(inventory.get(id, 0))
 		var each := int(Items.info(id).get("sell", 0))
 		if n <= 0 or each <= 0:
-			_gear_reject("sell", "the blacksmith won't buy that")
+			_gear_reject("sell", "the vendor won't buy that")
 			return
 		inventory.erase(id)
 		gold += n * each

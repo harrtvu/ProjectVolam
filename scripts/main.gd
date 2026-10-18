@@ -11,7 +11,7 @@ extends Node2D
 ##   --password=secret   account password
 ##   --ws                use WebSockets instead of ENet (needed for web clients)
 ##   --save-file=PATH    server: where accounts are saved (default user://volam_save/accounts.json)
-##   --market-file=PATH  server: market save file (default user://volam_save/market.json / X_market.json beside --save-file=X.json)
+##   --vendor-rotate=SECS  server: vendor stock rotation period (default 2h; stock saved to vendor.json / X_vendor.json beside --save-file=X.json)
 ##   --debug-loot        server: much higher gear drop rates (testing)
 ##   --debug-start-level=N  server: brand-new accounts start at level N (testing high zones)
 ##   --fast-respawn      server: monsters/bosses respawn 10x faster (testing)
@@ -47,6 +47,8 @@ extends Node2D
 
 const GAME_TITLE := "Project Volam"
 const DEFAULT_PORT := 7777
+## Build/protocol version checked on join (handshake.gd). Bump it whenever RPCs or synced data change.
+const BUILD_VERSION := "volam-m2.1"
 const MAX_PLAYERS := 32
 const SAVE_INTERVAL := 30.0
 const DEFAULT_SAVE_FILE := "user://volam_save/accounts.json"
@@ -57,7 +59,8 @@ const BlacksmithUIScript := preload("res://scripts/blacksmith_ui.gd")
 const MapUIScript := preload("res://scripts/map_ui.gd")
 const AtlasUIScript := preload("res://scripts/atlas_ui.gd")
 const PauseMenuScript := preload("res://scripts/pause_menu.gd")
-const MarketUIScript := preload("res://scripts/market_ui.gd")
+const VendorUIScript := preload("res://scripts/vendor_ui.gd")
+const TutorialUIScript := preload("res://scripts/tutorial_ui.gd")
 const HideoutUIScript := preload("res://scripts/hideout_ui.gd")
 const ItemTooltipScript := preload("res://scripts/item_tooltip.gd")
 const ClassSelectScript := preload("res://scripts/class_select_ui.gd")
@@ -133,24 +136,20 @@ var _mht_step := 0
 var _mht_t := 0.0
 var hideout_debug := false         # server (tests): every hideout theme unlocked, boss always drops a decoration
 var hideouts: Node                 # player hideouts (hideout_server.gd), on every peer
-var market: Node                   # trade market (market_server.gd), on every peer
-var market_ui: PanelContainer
+var vendor: Node                   # NPC vendor (vendor_server.gd), on every peer
+var vendor_ui: PanelContainer
+var tutorial_ui: PanelContainer
+var bot_tutorial := ""             # bot: "full" (do every tutorial step) | "skip"
+var show_tutorial := false         # client: show the tutorial even when headless / a bot (tests, screenshots)
+var vendor_rotate := 0             # server (tests): --vendor-rotate=SECS stock rotation period (0 = default 2h)
+var bot_vendor := ""               # bot: vendor test role ("1" = buy/sell session, "2" = after a restart)
+var _open_vendor := false          # client (screenshots): open the vendor panel
+var bot_vendor_role := ""          # bot: "probe" = first try to buy what it can't (no gold / full bag), never sells
+var _bv_done := {}
 var hideout_ui: PanelContainer
 var bot_hideout := ""              # client (tests): run the hideout bot ("1" = first session, "2" = after a restart)
 var _hideout_shot := ""            # client (screenshots): "decor" | "mode" | "theme"
-var market_duration := 0           # server: listing lifetime in seconds (0 = default 48h)
-var market_max_listings := 0       # server: active listings per account (0 = default 20)
 var _class_from_cli := false       # client: --class=X given -> pick it automatically (screenshots)
-var market_file := ""              # server: market save file (default: next to the accounts file)
-var market_crash_test := ""        # server (test): kill -9 itself right after writing market.json for this commit ("buy")
-var market_short := ""             # server (test): listings of accounts starting with this expire after 15 s
-var bot_market := ""               # bot: market test role (seller|buyer|race|pauper|fullbag|expirer|collector)
-var _open_market := ""             # client: open the market panel on this tab (screenshots)
-var _open_market_at := 7.0
-var _bm_done := {}
-var _bm_qbought := false   # market bot qbuyer: a buy was sent
-var market_tip := false            # client (screenshots): show the first result's tooltip
-var _bm_ids := {}
 var instance_timeout := 0.0        # server: seconds an empty dungeon stays open (0 = default)
 var complete_timeout := 0.0        # server: seconds a completed dungeon stays open (0 = default)
 var debug_atlas_kit := false      # server: honour the bots' "debug_kit" request (a locked fire:3 ticket)
@@ -284,8 +283,15 @@ var bot_party := ""                # bot: "invite:<Name>" (leader) | "accept" (m
 var _bp_t := 0.0
 var _bp_probed := false
 var _dungeon_complete_seen := false
+var handshake: Node                # version handshake (handshake.gd), first RPC exchange on join
+var _fake_version := ""            # client (tests): --fake-version=X claims another build
+var _skip_handshake := false       # client (tests): behave like an old build (no handshake, straight to login)
+var _hs_wait := -1.0               # client: seconds waiting for the server's version answer
+var bot_smart := false             # bot (balance trial): --bot-smart casts only ready skills sensibly, ranged classes keep their distance
+var no_xp := false                 # server (balance trial): --no-xp keeps every character at its level
 var solo_mode := false             # "Play Solo": in-process local server bound to 127.0.0.1, no login, local profile slots
 var solo_slot := 1
+var solo_port := DEFAULT_PORT       # first port the solo server tries (127.0.0.1 only)
 var solo_btn: Button
 var solo_slot_pick: OptionButton
 const SOLO_SAVE_FILE := "user://volam_save/solo_profile.json"
@@ -308,6 +314,11 @@ func _ready() -> void:
 	var sm := multiplayer as SceneMultiplayer
 	if sm:
 		sm.server_relay = false
+	handshake = preload("res://scripts/handshake.gd").new()
+	handshake.version = BUILD_VERSION
+	add_child(handshake)
+	handshake.accepted.connect(_on_version_accepted)
+	handshake.rejected.connect(func(msg: String): _hs_wait = -1.0; login_result(false, msg))
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
@@ -369,9 +380,9 @@ func _build_world() -> void:
 	parties = preload("res://scripts/party.gd").new()
 	parties.name = "Parties"
 	add_child(parties)
-	market = preload("res://scripts/market_server.gd").new()
-	market.name = "Market"
-	add_child(market)
+	vendor = preload("res://scripts/vendor_server.gd").new()
+	vendor.name = "Vendor"
+	add_child(vendor)
 	# Menu / spectator camera (the local player's own camera takes over in game).
 	menu_cam = Camera2D.new()
 	menu_cam.name = "MenuCamera"
@@ -453,17 +464,17 @@ func _parse_args() -> void:
 	bot_atlas = opts.has("bot-atlas")
 	debug_atlas_kit = opts.has("debug-atlas-kit")
 	_open_map_ui = str(opts.get("open-map-ui", ""))
-	market_duration = int(opts.get("market-duration", "0"))
-	market_max_listings = int(opts.get("market-max-listings", "0"))
-	market_short = str(opts.get("market-short", ""))
-	market_file = str(opts.get("market-file", ""))
-	market_crash_test = str(opts.get("market-crash-test", ""))
-	bot_market = str(opts.get("bot-market", ""))
+	vendor_rotate = int(opts.get("vendor-rotate", "0"))
+	bot_vendor = str(opts.get("bot-vendor", ""))
+	bot_vendor_role = str(opts.get("bot-vendor-role", ""))
+	bot_tutorial = str(opts.get("bot-tutorial", ""))
+	show_tutorial = bot_tutorial != "" or opts.has("show-tutorial")
+	_open_vendor = opts.has("open-vendor")
 	bot_party = str(opts.get("bot-party", ""))
-	_open_market = str(opts.get("open-market", ""))
-	_open_market_at = float(opts.get("open-market-at", "7"))
-	if opts.has("market-tip"):
-		market_tip = true
+	no_xp = opts.has("no-xp")
+	bot_smart = opts.has("bot-smart")
+	_fake_version = str(opts.get("fake-version", ""))
+	_skip_handshake = opts.has("skip-handshake")
 	_open_atlas = opts.has("open-atlas")
 	_open_zone_map = opts.has("open-zone-map")
 	_show_fps = opts.has("show-fps")
@@ -570,12 +581,13 @@ func _parse_args() -> void:
 		is_dedicated = true
 		start_server(port, true)
 	elif opts.has("solo"):
-		start_solo(int(opts.get("solo-slot", "1")))
+		start_solo(int(opts.get("solo-slot", "1")), port)
 	elif opts.has("click-solo"):
 		# test: press the main menu's Play Solo button like a user would (one click)
 		_refresh_solo_slots()
 		solo_slot_pick.select(clampi(int(opts.get("solo-slot", "1")) - 1, 0, SOLO_SLOTS - 1))
 		_log("menu test: clicking Play Solo (%s)" % solo_slot_pick.get_item_text(solo_slot_pick.selected))
+		solo_port = port
 		solo_btn.pressed.emit()
 	elif opts.has("host"):
 		start_server(port, false)
@@ -608,7 +620,9 @@ func start_server(port: int, dedicated: bool) -> bool:
 	local_password = pass_edit.text
 	accounts = AccountStore.new(save_file)
 	accounts.load_file()
-	market.load_from(accounts)
+	if vendor_rotate > 0:
+		vendor.period = vendor_rotate
+	vendor.load_from(accounts)
 	if solo_mode:
 		local_name = _solo_account()
 	elif not dedicated:
@@ -659,7 +673,7 @@ func start_server(port: int, dedicated: bool) -> bool:
 		var boss: Dictionary = z.info["boss"]
 		if not boss.is_empty() and not z.map.is_reachable(boss["cell"]):
 			bad.append("boss")
-		for k in ["blacksmith", "map_device", "merchant", "broker", "hideout_master", "respawn"]:
+		for k in ["blacksmith", "map_device", "merchant", "vendor", "hideout_master", "respawn"]:
 			if z.info.has(k) and not z.map.is_reachable(z.info[k]):
 				bad.append(k)
 		for st in z.map.sites:
@@ -712,6 +726,7 @@ func _on_peer_connected(id: int) -> void:
 		(multiplayer.multiplayer_peer as ENetMultiplayerPeer).disconnect_peer(id)
 		return
 	if multiplayer.is_server():
+		handshake.server_peer_connected(id)
 		_log("Peer %d connected, waiting for login" % id)
 		if pause_menu:
 			pause_menu.on_peer_joined()
@@ -736,6 +751,7 @@ func _handle_peer_left(id: int) -> void:
 	peer_zone.erase(id)
 	_zone_since.erase(id)
 	_awaiting_class.erase(id)
+	handshake.server_peer_left(id)
 	parties.on_peer_left(str(peer_accounts.get(id, "")))
 	instances.on_peer_left(id)
 	var pname: String = player_names.get(id, "")
@@ -747,7 +763,19 @@ func _handle_peer_left(id: int) -> void:
 
 
 func _on_connected_to_server() -> void:
-	_log("Connected to server as peer %d, logging in" % multiplayer.get_unique_id())
+	if _skip_handshake:
+		_log("Connected to server as peer %d, logging in WITHOUT a version handshake (test)" % multiplayer.get_unique_id())
+		register_player.rpc_id(1, local_name, local_password)
+		return
+	var v := _fake_version if _fake_version != "" else BUILD_VERSION
+	_log("Connected to server as peer %d, checking the version (%s)" % [multiplayer.get_unique_id(), v])
+	_hs_wait = 0.0
+	handshake.hello.rpc_id(1, v)
+
+
+func _on_version_accepted() -> void:
+	_hs_wait = -1.0
+	_log("Version %s accepted by the server, logging in" % BUILD_VERSION)
 	register_player.rpc_id(1, local_name, local_password)
 
 
@@ -884,10 +912,11 @@ func choose_class(cls: String) -> void:
 		for slot in d["start_gear"]:
 			var base := str(d["start_gear"][slot])
 			var kit := Gear.make(base, "normal", 1, rng)
-			kit["bound"] = true     # starting gear is account-bound (can't be sold on the market)
+			kit["bound"] = true     # starting gear is account-bound
 			eq[Items.slots_for(base)[0]] = kit
 		character["equipment"] = eq
 		character["items_v"] = 2
+		character["tutorial"] = "pending"     # first-time tutorial, shown once
 		var inv: Dictionary = character.get("inventory", {})
 		for item in d["start_items"]:
 			inv[item] = int(inv.get(item, 0)) + int(d["start_items"][item])
@@ -939,12 +968,14 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	if node:
 		node.account_key = peer_accounts[id]
 		_push_inventory_later(node)
+		if node.tutorial == "pending":
+			_log("[tutorial] %s: starting the tutorial (new character)" % display)
+			get_tree().create_timer(1.5).timeout.connect(_send_tutorial.bind(weakref(node)))
 		_log("Login '%s' (peer %d): %s - class %s, level %d, xp %d, hp %d/%d, mp %d/%d, gold %d, items %s, equip %s, bag %d/%d %s, stash %d %s, zone %s, pos %s, talent points %d/%d %s" % [
 			display, id, "NEW account" if is_new else "restored save", node.class_id, node.level, node.xp, node.hp,
 			node.max_hp, node.mp, node.max_mp, node.gold, node.inventory, node.equip_summary(), node.bag_used(), Items.BAG_SIZE,
 			_inst_list(node.bag), node.stash.size(), _inst_list(node.stash), zone_id, pos.round(),
 			Talents.points_spent(node.talents), Talents.points_total(node.level), node.talents])
-		market.on_login(node)
 		_log("Login atlas '%s': %s (completed nodes %d, dungeon iiq +%d%%, free ticket %s) | bonus %s, atlas points %d earned / %d spent, passives %s" % [display, node.atlas.get("done", {}),
 			Dungeons.completed_nodes(node.atlas), roundi(Dungeons.atlas_iiq(node.atlas)), "taken " + node.free_day if node.free_day != "" else "available",
 			node.atlas.get("bonus", {}).keys(), Atlas.points_earned(node.atlas), Atlas.points_spent(node.atlas), node.atlas.get("passives", [])])
@@ -1076,6 +1107,9 @@ func register_player(pname: String, password: String) -> void:
 	var id := multiplayer.get_remote_sender_id()
 	if player_names.has(id):
 		return
+	if not handshake.is_ok(id):
+		_log("Ignored login from peer %d: no accepted version handshake" % id)
+		return
 	pname = _sanitize_name(pname)
 	var why := _check_login(pname, password, id)
 	if why != "":
@@ -1112,6 +1146,54 @@ func login_result(ok: bool, message: String) -> void:
 func save_player_now(node: Node) -> void:
 	_save_player(node)
 	accounts.save_file()
+
+
+func _send_tutorial(ref: WeakRef) -> void:
+	var node: Node = ref.get_ref()
+	if node and not node.is_queued_for_deletion() and node.tutorial == "pending":
+		tutorial_start.rpc_id(node.peer_id)
+
+
+## Client: the server wants this (new) character to see the first-time tutorial.
+@rpc("authority", "call_local", "reliable")
+func tutorial_start() -> void:
+	if (bot_mode or DisplayServer.get_name() == "headless") and not show_tutorial:
+		return
+	_log("tutorial started")
+	tutorial_ui.begin()
+
+
+## Bot (--bot-tutorial=full|skip): play through or skip the tutorial.
+func _bot_tutorial(me: Node, zone: Node, delta: float) -> void:
+	_bot_attack_timer -= delta
+	bot_dir = Vector2.ZERO
+	if bot_tutorial == "skip":
+		if _bot_attack_timer < -2.0:
+			tutorial_ui.skip_tutorial()
+		return
+	match tutorial_ui.step:
+		0:
+			bot_dir = Vector2.RIGHT
+		1:
+			if _bot_attack_timer <= 0.0:
+				_bot_attack_timer = 1.0
+				me.request_skill(0)
+		2:
+			var p: Node2D = _nearest(zone.loot_root, me.position, 600.0)
+			if p and me.position.distance_to(p.position) > 20.0:
+				bot_dir = me.position.direction_to(p.position)
+			elif p and _bot_attack_timer <= 0.0:
+				_bot_attack_timer = 0.5
+				me.request_pickup()
+		3:
+			if _bot_attack_timer <= 0.0:
+				_bot_attack_timer = 1.0
+				for inst in me.bag:
+					if inst["base"] == "leather_cap":
+						me.request_equip(int(inst["uid"]))
+		4:
+			if _bot_attack_timer <= 0.0:
+				talent_ui.visible = true
 
 
 ## Client: my party changed (members [] = not in a party).
@@ -1255,10 +1337,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			toggle_inventory()
 			get_viewport().set_input_as_handled()
 		elif event.is_action("character") and not chat_edit.has_focus():
-			char_sheet.visible = not char_sheet.visible
+			_open_exclusive(char_sheet, not char_sheet.visible)
 			get_viewport().set_input_as_handled()
 		elif event.is_action("talents") and not chat_edit.has_focus():
-			talent_ui.visible = not talent_ui.visible
+			_open_exclusive(talent_ui, not talent_ui.visible)
 			get_viewport().set_input_as_handled()
 		elif event.is_action("target_cycle") and not chat_edit.has_focus():
 			cycle_target()
@@ -1270,7 +1352,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			minimap.toggle_big()
 			get_viewport().set_input_as_handled()
 		elif event.is_action("atlas") and not chat_edit.has_focus():
-			atlas_ui.visible = not atlas_ui.visible
+			_open_exclusive(atlas_ui, not atlas_ui.visible)
 			atlas_ui.set_player(_local_player())
 			get_viewport().set_input_as_handled()
 		elif event.keycode == KEY_H and not chat_edit.has_focus():
@@ -1373,7 +1455,7 @@ func handle_escape() -> void:
 	if pause_menu.visible:
 		pause_menu.close_menu()
 		return
-	for pn in [["hideout", hideout_ui], ["market", market_ui], ["map device / merchant", map_ui], ["atlas", atlas_ui], ["blacksmith", smith_ui],
+	for pn in [["hideout", hideout_ui], ["vendor", vendor_ui], ["map device / merchant", map_ui], ["atlas", atlas_ui], ["blacksmith", smith_ui],
 			["passive web", talent_ui], ["character sheet", char_sheet], ["inventory", inventory_ui]]:
 		if pn[1].visible:
 			pn[1].visible = false
@@ -1443,6 +1525,15 @@ func _settings_test() -> void:
 	get_tree().quit(0 if ok else 1)
 
 
+## Opens `panel` (closing the other full-size windows first so they never stack) or closes it.
+func _open_exclusive(panel: Control, on: bool) -> void:
+	if on:
+		for other in [char_sheet, talent_ui, atlas_ui, map_ui, hideout_ui, smith_ui]:
+			if other != panel and other.visible:
+				other.visible = false
+	panel.visible = on
+
+
 func toggle_inventory() -> void:
 	inventory_ui.visible = not inventory_ui.visible
 	inventory_ui.set_player(_local_player())
@@ -1493,23 +1584,24 @@ func toggle_hideout_ui(from_key := false) -> void:
 	hideout_ui.refresh()
 
 
-## E next to the Trade Broker: open/close the market panel (with the inventory beside it).
-func toggle_market_ui(tab := "") -> void:
+## E next to the Vendor: open/close the vendor panel (with the inventory beside it).
+func toggle_vendor_ui() -> void:
 	var me := _local_player()
 	if me == null:
 		return
-	if market_ui.visible and tab == "":
-		market_ui.visible = false
+	if vendor_ui.visible:
+		vendor_ui.visible = false
 		item_tip.hide_tip()
 		return
-	market_ui.set_player(me, market)
-	if not me.inventory_changed.is_connected(market_ui.refresh):
-		me.inventory_changed.connect(market_ui.refresh)
-	market_ui.visible = true
-	market_ui.show_tab(tab if tab != "" else market_ui.tab)
-	market_ui.refresh()
+	vendor_ui.set_player(me, vendor)
+	if not me.inventory_changed.is_connected(vendor_ui.refresh):
+		me.inventory_changed.connect(vendor_ui.refresh)
+	vendor_ui.visible = true
+	me.request_vendor("stock")
+	vendor_ui.refresh()
 	if not inventory_ui.visible:
 		toggle_inventory()
+	_log("vendor panel opened")
 
 
 ## E next to the anvil: open/close the blacksmith (with the inventory beside it).
@@ -1578,6 +1670,11 @@ func _bench_tick(delta: float) -> void:
 # ================================================================ per-frame
 
 func _process(delta: float) -> void:
+	if _hs_wait >= 0.0:
+		_hs_wait += delta
+		if _hs_wait > handshake.TIMEOUT + 1.0:
+			_hs_wait = -1.0
+			login_result(false, "The server did not answer the version check (it runs a different build of the game).")
 	_elapsed += delta
 	if _bench_secs > 0.0:
 		_bench_tick(delta)
@@ -1592,7 +1689,7 @@ func _process(delta: float) -> void:
 			_fps_t = 0.25
 			var me := _local_player()
 			var mons: int = me.zone.monsters_root.get_child_count() if me and me.zone else 0
-			fps_label.text = "FPS %d  (%.1f ms)\nmonsters on client: %d\nnodes: %d" % [Engine.get_frames_per_second(), delta * 1000.0, mons,
+			fps_label.text = "FPS %d  (%.1f ms)\nmonsters on client: %d\nnodes: %d" % [Engine.get_frames_per_second(), 1000.0 / maxf(Engine.get_frames_per_second(), 1.0), mons,
 				Performance.get_monitor(Performance.OBJECT_NODE_COUNT)]
 	if _open_zone_map and _local_player() != null:
 		_open_zone_map = false
@@ -1626,7 +1723,7 @@ func _show_zone(zone_id: String, announce := true) -> void:
 		zones[id].visible = id == zone_id
 	if announce and banner_label:
 		var zi := Zones.info(zone_id)
-		banner_label.text = "%s\n%s" % [zi["name"], "Safe haven  -  Lv " + zi["levels"] if zi.get("safe", false) else "Monsters Lv " + zi["levels"]]
+		banner_label.text = "%s\n%s" % [zi["name"], ("Safe haven" if str(zi["levels"]) in ["", "-"] else "Safe haven  -  Lv " + zi["levels"]) if zi.get("safe", false) else "Monsters Lv " + zi["levels"]]
 		_banner_t = 3.5
 		_log("Entered zone %s (%s)" % [zone_id, zi["name"]])
 		if zi.has("dungeon"):
@@ -1688,26 +1785,13 @@ func _update_hud(delta: float) -> void:
 			if Dungeons.is_ticket(inst) and (inst["rarity"] == "rare" or map_ui.selected_uid < 0):
 				map_ui.select(inst)
 		_log("map panel opened (%s), selected %s" % [map_ui.mode, map_ui.selected_uid])
-	if _open_market != "" and _elapsed > _open_market_at and me.near_broker():
-		var parts := _open_market.split(":")
-		market_ui.show_first_tip = market_tip
-		toggle_market_ui(parts[0])
-		if parts[0] == "browse" and parts.size() > 1:
-			var f := {}
-			for kv in parts[1].split(","):
-				f[kv.get_slice("=", 0)] = kv.get_slice("=", 1)
-			if f.has("usable"):
-				f["usable"] = true
-			market_ui.set_filters(f)
-			market_ui.search(0)
-		elif parts[0] == "sell":
-			for inst in me.bag:
-				if inst["rarity"] == "rare" and not Dungeons.is_ticket(inst):
-					market_ui.select_uid(int(inst["uid"]))
-					market_ui._price.value = 450
-					break
-		_log("market panel opened on %s" % _open_market)
-		_open_market = ""
+	if _open_vendor and _elapsed > 7.0 and me.near_vendor():
+		_open_vendor = false
+		toggle_vendor_ui()
+		for inst in me.bag:
+			if not Dungeons.is_ticket(inst) and not inst.get("bound", false):
+				vendor_ui.select_uid(int(inst["uid"]))
+				break
 	if _open_menu_at >= 0.0 and _elapsed > _open_menu_at:
 		_open_menu_at = -1.0
 		pause_menu.open_menu()
@@ -2252,15 +2336,15 @@ func _bot_hideout(me: Node, zone: Node, delta: float) -> void:
 		5:
 			_bh_log(me, "moved / rotated / flipped")
 			hu.click(Vector2i(20, 13), true)  # right click: remove the second pine
-			me.request_hideout("station", {"station": "broker", "x": 31, "y": 26})   # rejected: door
-			me.request_hideout("station", {"station": "broker", "x": 21, "y": 26})
+			me.request_hideout("station", {"station": "vendor", "x": 31, "y": 26})   # rejected: door
+			me.request_hideout("station", {"station": "vendor", "x": 21, "y": 26})
 			me.request_hideout("theme", {"id": "fire"})
 			me.request_hideout("theme", {"id": "water"})   # rejected: locked
 			me.request_hideout("theme", {"id": "nope"})    # rejected
 			_bh_step = 6
 			_bh_t = 2.0
 		6:
-			_bh_log(me, "removed one, moved the broker, theme switched")
+			_bh_log(me, "removed one, moved the vendor, theme switched")
 			_log("hideout bot: client zone theme %s, %d decoration sprites" % [zone.info["hideout"]["theme"],
 				zone.get_node("HideoutDeco").get_children().filter(func(n): return n is Sprite2D).size() if zone.has_node("HideoutDeco") else -1])
 			# limit: own plenty of rocks, then fill the room past 200
@@ -2338,170 +2422,69 @@ func _bot_hideout(me: Node, zone: Node, delta: float) -> void:
 			_bh_step = 99
 
 
-## Test bot for the trade market (--bot-market=ROLE): walks to the Trade Broker, then
-## runs a timed script of market requests (the server validates / logs everything).
-func _bot_market(me: Node, zone: Node, delta: float) -> void:
+## Test bot for the NPC vendor (--bot-vendor=1|2): a timed script of vendor requests
+## (the server validates / logs everything). "2" = after a server restart: just look at the stock.
+func _bot_vendor(me: Node, zone: Node, delta: float) -> void:
 	if zone.zone_id != "meadow" or _elapsed < 3.0:
-		bot_dir = Vector2.ZERO
 		return
-	if bot_market == "expirer" and not _bm_done.has("gift"):
-		# first fetch the (account-bound) daily free ticket from the Ticket Merchant
-		if not me.near_merchant():
-			bot_dir = _bot_steer(zone, me.position, zone.merchant_pos() + Vector2(0, 30), delta)
-			return
-		bot_dir = Vector2.ZERO
-		me.request_dungeon("free", {"theme": "fire"})
-		_bm_done["gift"] = _elapsed
-		return
-	if not me.near_broker():
-		bot_dir = _bot_steer(zone, me.position, zone.broker_pos() + Vector2(0, 30), delta)
+	if not _bv_done.has("far"):
+		_bv_done["far"] = true
+		for inst in me.bag:
+			if not inst.get("bound", false):
+				me.request_vendor("sell", {"uid": int(inst["uid"])})     # invalid: not at the vendor
+				break
+	if not me.near_vendor():
+		bot_dir = _bot_steer(zone, me.position, zone.vendor_pos() + Vector2(0, 30), delta)
 		return
 	bot_dir = Vector2.ZERO
-	if not _bm_done.has("arrived"):
-		_bm_done["arrived"] = _elapsed
-		_log("market bot (%s): at the broker, gold %d, bag %d/%d" % [bot_market, me.gold, me.bag_used(), Items.BAG_SIZE])
-	var t: float = _elapsed - float(_bm_done["arrived"])
+	if not _bv_done.has("t0"):
+		_bv_done["t0"] = _elapsed
+		_log("vendor bot (%s): at the vendor, gold %d, bag %d/%d" % [bot_vendor, me.gold, me.bag_used(), Items.BAG_SIZE])
+		toggle_vendor_ui()
+	var t: float = _elapsed - float(_bv_done["t0"])
+	var first_gear := func() -> Dictionary:
+		for e in vendor.stock:
+			if e.has("item"):
+				return e
+		return {}
 	var steps: Array = []
-	match bot_market:
-		"seller":
-			steps = [
-				[1.0, func():
-					me.request_market("list", {"uid": int(_bag_find(me, "chain_mail", "rare").get("uid", -1)), "price": 300})
-					me.request_market("list", {"uid": int(_bag_find(me, "copper_ring").get("uid", -1)), "price": 50})
-					me.request_market("list", {"stack": "orb_chaos", "n": 5, "price": 120})
-					me.request_market("list", {"uid": int(_bag_find(me, "frost_aegis").get("uid", -1)), "price": 900})],
-				[2.0, func(): me.request_market("list", {"uid": int(_bag_find(me, "horned_helm").get("uid", -1)), "price": 10})],   # over the max
-				[3.0, func():
-					me.request_market("list", {"uid": int(_bag_find(me, "leather_boots").get("uid", -1)), "price": 0})               # bad price
-					_bm_ids["weapon"] = int(me.equipment["weapon"].get("uid", -1))
-					me.request_unequip("weapon")],
-				[4.5, func(): me.request_market("list", {"uid": int(_bm_ids["weapon"]), "price": 25})],                          # bound starter gear
-				[5.0, func(): me.request_market("mine")],
-				[6.0, func():
-					var ls: Array = market.mine["listings"]
-					_log("market bot: my listings %s" % [ls.map(func(l): return "#%d %s @%d" % [l["id"], Market.item_summary(l["item"]), l["price"]])])
-					if not ls.is_empty():
-						me.request_market("buy", {"id": int(ls[0]["id"]), "price": int(ls[0]["price"])})],                      # self-buy
-			]
-		"buyer":
-			steps = [
-				[9.0, func(): me.request_market("browse", {"filters": {"cat": "body", "rarity": "rare"}})],
-				[9.5, func(): me.request_market("browse", {"filters": {"stat": "res:water", "stat_min": 25}})],
-				[10.0, func(): me.request_market("browse", {"filters": {"text": "ring"}})],
-				[10.5, func(): me.request_market("browse", {"filters": {"cat": "currency"}})],
-				[11.0, func(): me.request_market("browse", {"filters": {"price_max": 100, "sort": "price_desc"}})],
-				[11.5, func(): me.request_market("browse", {"filters": {"max_req": 5, "cat": "ring"}})],
-				[12.0, func(): me.request_market("browse", {"filters": {"theme": "water", "tier_min": 3}})],
-				[12.5, func(): me.request_market("browse", {"filters": {"sort": "newest"}})],
-				[13.0, func(): me.request_market("browse", {"filters": {"usable": true, "cat": "offhand"}})],
-				[16.0, func(): me.request_market("browse", {"filters": {"cat": "body", "rarity": "rare"}})],
-				[17.0, func():
-					var rows: Array = market.page["rows"]
-					if not rows.is_empty():
-						me.request_market("buy", {"id": int(rows[0]["id"]), "price": int(rows[0]["price"])})],
-				[32.0, func(): me.request_market("browse", {"filters": {"cat": "currency"}})],
-				[33.0, func():
-					var rows: Array = market.page["rows"]
-					if not rows.is_empty():
-						me.request_market("buy", {"id": int(rows[0]["id"]), "price": int(rows[0]["price"])})],
-			]
-		"race":
-			steps = [
-				[18.0, func(): me.request_market("browse", {"filters": {"text": "copper"}})],
-				[19.0, func():
-					_log("race bot: page %s" % [market.page["rows"].map(func(l): return l["id"])])
-					if not market.page["rows"].is_empty():
-						_bm_ids["race"] = int(market.page["rows"][0]["id"])],
-				[20.0, func():   # both racers fire in the same second (the server serializes them)
-					if _bm_ids.has("race"):
-						me.request_market("buy", {"id": _bm_ids["race"], "price": 50})],
-			]
-		"pauper":
-			steps = [
-				[9.0, func(): me.request_market("list", {"stack": "health_potion", "n": 1, "price": 500})],    # can't pay the fee
-				[10.0, func(): me.request_market("browse", {"filters": {"rarity": "unique"}})],
-				[11.0, func():
-					if not market.page["rows"].is_empty():
-						me.request_market("buy", {"id": int(market.page["rows"][0]["id"]), "price": -1})],
-			]
-		"fullbag":
-			steps = [
-				[10.0, func(): me.request_market("browse", {"filters": {"rarity": "unique"}})],
-				[11.0, func():
-					if not market.page["rows"].is_empty():
-						me.request_market("buy", {"id": int(market.page["rows"][0]["id"]), "price": -1})],
-			]
-		"expirer":
-			steps = [
-				[1.0, func():
-					me.request_market("list", {"uid": int(_bag_find(me, "ticket_water").get("uid", -1)), "price": 200})
-					me.request_market("list", {"uid": int(_bag_find(me, "leather_cap").get("uid", -1)), "price": 40})],
-				[2.0, func():
-					var gift: Dictionary = {}
-					for i in me.bag:
-						if Dungeons.is_ticket(i) and bool(i.get("bound", false)):
-							gift = i
-					_log("expirer bot: free ticket in bag: %s" % (Gear.summary(gift) if not gift.is_empty() else "none"))
-					me.request_market("list", {"uid": int(gift.get("uid", -1)), "price": 80})],                                  # bound daily gift
-				[3.0, func():
-					for l in market.mine["listings"]:
-						if not Market.is_stack(l["item"]) and l["item"]["base"] == "leather_cap":
-							me.request_market("cancel", {"id": int(l["id"])})],
-				[30.0, func(): me.request_market("claim")],
-				[31.0, func(): _log("expirer bot: bag tickets %s" % [me.bag.filter(func(i): return Dungeons.is_ticket(i)).map(func(i): return Gear.summary(i))])],
-			]
-		"stocker":    # screenshots: put a bit of everything on the market
-			steps = [
-				[1.0, func():
-					var prices := {"normal": 35, "magic": 120, "rare": 380, "unique": 950}
-					var n := 0
-					for inst in me.bag.duplicate():
-						if n >= 7 or bool(inst.get("bound", false)):
-							continue
-						var pr: int = int(prices.get(str(inst["rarity"]), 50)) + (me.peer_id % 40) + n * 7
-						if Dungeons.is_ticket(inst):
-							pr = 160 + 40 * Dungeons.tier_of(inst)
-						me.request_market("list", {"uid": int(inst["uid"]), "price": pr})
-						n += 1
-					me.request_market("list", {"stack": "orb_chaos", "n": 3, "price": 75})
-					me.request_market("list", {"stack": "orb_regal", "n": 2, "price": 40})],
-			]
-		"onebuyer":   # screenshots: buy two of Mira's listings
-			steps = [
-				[8.0, func(): me.request_market("browse", {"filters": {"cat": "currency"}})],
-				[9.0, func(): _bm_ids["n"] = 0],
-			]
-			if _bm_done.has(1) and int(_bm_ids.get("n", 0)) < 2 and not _bm_done.has("b%d" % int(_bm_ids.get("n", 0))):
-				for l in market.page["rows"]:
-					if l["seller_name"] == "Mira" and not _bm_done.has("id%d" % int(l["id"])):
-						_bm_done["id%d" % int(l["id"])] = true
-						_bm_done["b%d" % int(_bm_ids["n"])] = true
-						_bm_ids["n"] = int(_bm_ids["n"]) + 1
-						me.request_market("buy", {"id": int(l["id"]), "price": int(l["price"])})
-						break
-		"qbuyer":     # crash test: buy whatever is listed, quickly
-			# browse + buy, retried: the seller reaches the broker at about the same time and its
-			# listings can land just after the first search (race seen: search 0 hits, then 5 listed)
-			var qbuy := func():
-				if _bm_qbought:
+	if bot_vendor == "1":
+		steps = [
+			[1.0, func():
+				if bot_vendor_role != "probe":
 					return
-				for l in market.page["rows"]:
-					_bm_qbought = true
-					me.request_market("buy", {"id": int(l["id"]), "price": int(l["price"])})
-			var qbrowse := func():
-				if not _bm_qbought:
-					me.request_market("browse", {"filters": {"sort": "newest"}})
-			steps = [[3.0, qbrowse], [4.0, qbuy], [5.0, qbrowse], [6.0, qbuy], [7.0, qbrowse], [8.0, qbuy]]
-		"collector":
-			steps = [
-				[1.0, func(): me.request_market("mine")],
-				[2.0, func(): me.request_market("claim")],
-				[3.0, func(): me.request_market("claim")],      # nothing left
-				[4.0, func(): me.request_market("browse", {"filters": {}})],
-			]
+				var e: Dictionary = {}
+				for x in vendor.stock:
+					if x.has("item") and int(x["qty"]) > 0 and int(x["price"]) > me.gold:
+						e = x
+				if e.is_empty():
+					for x in vendor.stock:
+						if x.has("item") and int(x["qty"]) > 0:
+							e = x
+				me.request_vendor("buy", {"id": int(e.get("id", -1))})],                    # pauper: not enough gold, full bag: bag full
+			[1.5, func(): me.request_vendor("buy", {"id": 1, "n": 3})],           # 3 health potions
+			[2.0, func():
+				var e: Dictionary = first_gear.call()
+				_bv_done["gear"] = int(e.get("id", -1))
+				_log("vendor bot: buying stock entry #%d %s" % [int(e.get("id", -1)), Vendor.entry_summary(e) if not e.is_empty() else "?"])
+				me.request_vendor("buy", {"id": int(e.get("id", -1))})],
+			[3.0, func(): me.request_vendor("buy", {"id": int(_bv_done.get("gear", -1))})],   # invalid: sold out
+			[3.5, func(): me.request_vendor("buy", {"id": 999})],                              # invalid: not in stock
+			[4.0, func():
+				if bot_vendor_role == "probe":
+					return
+				for inst in me.bag:
+					if not inst.get("bound", false) and not Dungeons.is_ticket(inst):
+						me.request_vendor("sell", {"uid": int(inst["uid"])})
+						break],
+			[4.5, func(): me.request_vendor("sell", {"stack": "slime_gel"} if me.inventory.has("slime_gel") else {"uid": -5})],
+			[6.5, func(): _log("vendor bot: done, gold %d, potions %d" % [me.gold, int(me.inventory.get("health_potion", 0))])],
+		]
+	else:
+		steps = [[2.0, func(): _log("vendor bot: stock after restart seen (%d entries)" % vendor.stock.size())]]
 	for i in steps.size():
-		if t >= float(steps[i][0]) and not _bm_done.has(i):
-			_bm_done[i] = true
+		if t >= float(steps[i][0]) and not _bv_done.has(i):
+			_bv_done[i] = true
 			steps[i][1].call()
 
 
@@ -2634,6 +2617,9 @@ func _bot_update(delta: float) -> void:
 				_log("bot route finished in %s" % zone.zone_id)
 	_bot_zone_t += delta
 
+	if tutorial_ui.visible and bot_tutorial != "":
+		_bot_tutorial(me, zone, delta)
+		return
 	if bot_hideout != "":
 		_bot_hideout(me, zone, delta)
 		return
@@ -2642,8 +2628,8 @@ func _bot_update(delta: float) -> void:
 		return
 	if bot_dungeon != "" and _bot_dungeon(me, zone, delta):
 		return
-	if bot_market != "":
-		_bot_market(me, zone, delta)
+	if bot_vendor != "":
+		_bot_vendor(me, zone, delta)
 		return
 	if bot_idle:
 		bot_dir = Vector2.ZERO
@@ -2691,6 +2677,14 @@ func _bot_update(delta: float) -> void:
 				var pc: Vector2 = zone.map.cell_pos(p["rect"].get_center())
 				if pc.distance_to(me.position) < 220.0:
 					bot_dir = (me.position - pc).normalized().rotated(rng.randf_range(-0.6, 0.6))
+	elif bot_smart and Classes.info(me.class_id)["basic"] == "ranged" and _nearest(zone.monsters_root, me.position, 140.0) != null \
+			and zone.map.has_los(me.position, goal_pos):
+		# ranged class: back off from the nearest monster, keep shooting from ~150-220 px
+		var threat: Node2D = _nearest(zone.monsters_root, me.position, 140.0)
+		var away: Vector2 = me.position + (me.position - threat.position).normalized() * 120.0
+		bot_dir = _bot_steer(zone, me.position, away, delta) if zone.map.is_walkable(zone.map.local_to_map(away)) else Vector2.ZERO
+	elif bot_smart and Classes.info(me.class_id)["basic"] == "ranged" and me.position.distance_to(goal_pos) < 220.0 and zone.map.has_los(me.position, goal_pos):
+		bot_dir = Vector2.ZERO
 	else:
 		bot_dir = _bot_steer(zone, me.position, goal_pos, delta)
 
@@ -2701,7 +2695,10 @@ func _bot_update(delta: float) -> void:
 	_bot_targeting(me, zone, delta)
 	_bot_talent_logic(me, delta)
 	_bot_skill_timer -= delta
-	if bot_skills and not bot_passive and _bot_skill_timer <= 0.0:
+	if bot_smart and not bot_passive and _bot_skill_timer <= 0.0:
+		_bot_skill_timer = 0.3
+		_bot_smart_skill(me, zone)
+	elif bot_skills and not bot_passive and _bot_skill_timer <= 0.0:
 		_bot_skill_timer = 0.8
 		# cycle through all 4 slots without checking cooldown / mana / level
 		# locally, so the server's rejections get exercised too
@@ -2722,6 +2719,33 @@ func _bot_update(delta: float) -> void:
 	if not _bot_chatted and _elapsed > 3.0:
 		_bot_chatted = true
 		send_chat("Hello from %s!" % local_name)
+
+
+## Balance-trial bot: the skill a sensible player would press now (ready, affordable, unlocked,
+## in range; heals only when hurt; buffs / shields / taunts in combat), bigger skills first.
+func _bot_smart_skill(me: Node, zone: Node) -> void:
+	var tgt: Node2D = _nearest(zone.monsters_root, me.position, 400.0)
+	for slot in [3, 2, 1, 0]:
+		if me.level < Classes.UNLOCK_LEVELS[slot] or me.cooldown_left(slot) > 0.0:
+			continue
+		var sk: Dictionary = me.skill_def(Classes.skill_id(me.class_id, slot))
+		if me.mp < int(sk["cost"]):
+			continue
+		var kind := str(sk["kind"])
+		var d: float = tgt.position.distance_to(me.position) if tgt else INF
+		var use := false
+		match kind:
+			"hot", "heal_area":
+				use = me.hp < me.max_hp * 0.7
+			"buff", "shield", "taunt":
+				use = d < 200.0
+			"aoe_self", "pulses", "ring":
+				use = d < float(sk.get("radius", 90.0)) + 10.0
+			_:
+				use = d < float(sk.get("range", 200.0))
+		if use:
+			me.request_skill(slot)
+			return
 
 
 ## Test bot: mouse-targeting stand-ins (select far targets, aim points, invalid probes).
@@ -2911,7 +2935,7 @@ func _bigmap_selftest() -> void:
 		for p in zi["portals"]:
 			if not m.is_reachable(p["rect"].position):
 				bad.append("portal->" + str(p["to"]))
-		for k in ["respawn", "blacksmith", "map_device", "merchant", "broker", "hideout_master"]:
+		for k in ["respawn", "blacksmith", "map_device", "merchant", "vendor", "hideout_master"]:
 			if zi.has(k) and not m.is_reachable(zi[k]):
 				bad.append(k)
 		if not zi["boss"].is_empty() and not m.is_reachable(zi["boss"]["cell"]):
@@ -3120,7 +3144,7 @@ func _gear_selftest() -> void:
 	var cmp := Gear.compare(Gear.make("great_hammer", "rare", 15, g), Gear.make("iron_sword", "magic", 3, g))
 	print("GEAR SELFTEST tooltip %d lines, compare %d lines: %s" % [tip.size(), cmp.size(), str(cmp.map(func(x): return x[0]))])
 	ok = _dungeon_selftest(g) and ok
-	ok = _market_selftest(g) and ok
+	ok = _vendor_selftest(g) and ok
 	ok = _atlas_selftest(g) and ok
 	print("GEAR SELFTEST RESULT: %s" % ("PASS" if ok else "FAIL"))
 	get_tree().quit()
@@ -3315,61 +3339,34 @@ func _atlas_selftest(g: RandomNumberGenerator) -> bool:
 	return fails.is_empty()
 
 
-## Offline market checks: fee/tax math, tradeability, filters, sorting/paging, save sanitizing.
-func _market_selftest(g: RandomNumberGenerator) -> bool:
+## Offline vendor checks: deterministic stock, prices, rotation maths, save sanitizing.
+func _vendor_selftest(_g: RandomNumberGenerator) -> bool:
 	var fails: Array = []
-	var cnt: Array = [0]
-	var expect := func(cond: bool, what: String):
+	var cnt := [0]
+	var expect := func(c: bool, what: String) -> void:
 		cnt[0] += 1
-		if not cond:
+		if not c:
 			fails.append(what)
-	expect.call(Market.fee(10) == 1 and Market.fee(1000) == 20 and Market.fee(1) == 1, "fee 2% min 1")
-	expect.call(Market.tax(1000) == 50 and Market.tax(10) == 1 and Market.tax(1) == 0, "tax 5%")
-	var bound := Gear.make("iron_sword", "normal", 1, g)
-	bound["bound"] = true
-	expect.call(Market.tradeable_reason(bound) != "", "bound gear untradeable")
-	expect.call(Gear.sanitize(bound).get("bound", false) == true, "bound flag survives saves")
-	expect.call(Gear.tooltip(bound).back()[0].contains("bound"), "tooltip shows bound")
-	expect.call(Market.tradeable_reason({"stack": "gold", "n": 5}) != "" and Market.tradeable_reason({"stack": "orb_chaos", "n": 2}) == "", "gold not listable, orbs are")
-	var aegis := Gear.make_unique("frost_aegis", 13, g)
-	var ls: Array = [
-		{"id": 1, "seller": "a", "seller_name": "A", "price": 300, "item": Gear.make("chain_mail", "rare", 12, g)},
-		{"id": 2, "seller": "a", "seller_name": "A", "price": 50, "item": Gear.make("copper_ring", "normal", 3, g)},
-		{"id": 3, "seller": "b", "seller_name": "B", "price": 900, "item": aegis},
-		{"id": 4, "seller": "b", "seller_name": "B", "price": 120, "item": {"stack": "orb_chaos", "n": 5}},
-		{"id": 5, "seller": "c", "seller_name": "C", "price": 200, "item": Dungeons.make_ticket("water", 4, "rare", g)},
-		{"id": 6, "seller": "c", "seller_name": "C", "price": 75, "item": Gear.make("great_hammer", "normal", 10, g)},
-	]
-	var q := func(f: Dictionary, cls := "water") -> Array:
-		return Market.search(ls, Market.sanitize_filters(f), cls)["rows"].map(func(l): return int(l["id"]))
-	expect.call(q.call({}) == [2, 6, 4, 5, 1, 3], "default sort: price asc")
-	expect.call(q.call({"sort": "price_desc"})[0] == 3 and q.call({"sort": "newest"})[0] == 6, "sort desc / newest")
-	expect.call(q.call({"cat": "body"}) == [1], "category filter")
-	expect.call(q.call({"rarity": "unique"}) == [3], "rarity filter")
-	expect.call(q.call({"text": "COPPER"}) == [2], "text filter (case-insensitive)")
-	expect.call(q.call({"stat": "res:water", "stat_min": 25}) == [3], "affix filter res:water >= 25")
-	expect.call(q.call({"price_min": 60, "price_max": 250}) == [6, 4, 5], "price range")
-	expect.call(q.call({"cat": "currency"}) == [4], "currency category")
-	expect.call(q.call({"theme": "water", "tier_min": 4, "tier_max": 4}) == [5] and q.call({"theme": "fire"}) == [], "ticket theme / tier")
-	expect.call(not 6 in q.call({"usable": true}, "water") and 6 in q.call({"usable": true}, "metal"), "usable by class")
-	expect.call(not 3 in q.call({"max_req": 10}) and 2 in q.call({"max_req": 10}), "required level filter")
-	var many: Array = []
-	for i in 19:
-		many.append({"id": i + 1, "seller": "a", "seller_name": "A", "price": i + 1, "item": {"stack": "orb_chaos", "n": 1}})
-	var p2 := Market.search(many, Market.sanitize_filters({"page": 2}), "")
-	expect.call(p2["pages"] == 3 and p2["rows"].size() == 3 and int(p2["rows"][0]["price"]) == 17, "paging")
-	var dirty := {"next_id": 2, "listings": [{"id": 7, "seller": "x", "price": -5, "item": {"base": "nope"}},
-		{"id": 9, "seller": "x", "price": 99999999999, "item": {"stack": "orb_regal", "n": 2}}],
-		"claims": {"x": {"gold": -3, "items": [{"base": "iron_sword", "uid": 4}], "stacks": {"bogus": 2}}}}
-	var clean := Market.sanitize_data(dirty)
-	expect.call(clean["listings"].size() == 1 and int(clean["listings"][0]["price"]) == Market.MAX_PRICE and clean["next_id"] == 10, "sanitize listings")
-	expect.call(clean["claims"]["x"]["gold"] == 0 and clean["claims"]["x"]["items"].size() == 1 and clean["claims"]["x"]["stacks"].is_empty(), "sanitize claims")
+	var a := Vendor.roll_stock(12345)
+	var b := Vendor.roll_stock(12345)
+	var c := Vendor.roll_stock(54321)
+	expect.call(JSON.stringify(a) == JSON.stringify(b), "same seed -> same stock")
+	expect.call(JSON.stringify(a) != JSON.stringify(c), "new rotation -> new stock")
+	var gear := a.filter(func(e): return e.has("item"))
+	expect.call(gear.size() == Vendor.STOCK_GEAR, "gear count")
+	expect.call(a.size() == Vendor.STOCK_GEAR + Vendor.STAPLES.size() + 2, "staples + 2 orbs")
+	var ok_price := true
+	for e in gear:
+		ok_price = ok_price and int(e["price"]) == Vendor.gear_price(e["item"]) and int(e["price"]) > Gear.sell_price(e["item"])
+	expect.call(ok_price, "buy price above sell price")
+	expect.call(Vendor.rotation_index(7200 * 5 + 10) == 5 and Vendor.rotation_index(7199) == 0, "rotation index")
+	var clean := Vendor.sanitize({"rotation": 3, "day": "2026-10-18", "stock": [a[0], {"stack": "bogus"}, {"item": {"base": "nope"}}, gear[0], 5]})
+	expect.call(clean["stock"].size() == 2 and clean["rotation"] == 3, "sanitize drops junk")
 	if fails.is_empty():
-		print("GEAR SELFTEST market selftest: all %d checks passed" % cnt[0])
+		print("GEAR SELFTEST vendor selftest: all %d checks passed" % cnt[0])
 	else:
-		print("GEAR SELFTEST market selftest: %d/%d FAILED: %s" % [fails.size(), cnt[0], fails])
+		print("GEAR SELFTEST vendor selftest: %d/%d FAILED: %s" % [fails.size(), cnt[0], fails])
 	return fails.is_empty()
-
 
 func _talent_selftest() -> void:
 	var PS := load("res://scripts/player.gd")
@@ -3835,6 +3832,7 @@ func _build_ui() -> void:
 	inventory_ui.offset_left = -572
 	inventory_ui.offset_right = -10
 	inventory_ui.offset_top = 80
+	inventory_ui.grow_horizontal = Control.GROW_DIRECTION_BEGIN   # wider content grows left, never off-screen
 	inventory_ui.visible = false
 	hud.add_child(inventory_ui)
 	smith_ui = BlacksmithUIScript.new()
@@ -3853,15 +3851,21 @@ func _build_ui() -> void:
 	hideout_ui.position = Vector2(10, 70)
 	hideout_ui.visible = false
 	hud.add_child(hideout_ui)
-	market_ui = MarketUIScript.new()
-	market_ui.position = Vector2(10, 70)
-	market_ui.visible = false
-	hud.add_child(market_ui)
+	tutorial_ui = TutorialUIScript.new()
+	tutorial_ui.main = self
+	tutorial_ui.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	tutorial_ui.position = Vector2(-220, 64)
+	tutorial_ui.visible = false
+	hud.add_child(tutorial_ui)
+	vendor_ui = VendorUIScript.new()
+	vendor_ui.position = Vector2(10, 70)
+	vendor_ui.visible = false
+	hud.add_child(vendor_ui)
 	item_tip = ItemTooltipScript.new()
 	hud.add_child(item_tip)
-	market_ui.tooltip = item_tip
-	inventory_ui.market_ui = market_ui
-	market_ui.visibility_changed.connect(func(): inventory_ui.set_compact(market_ui.visible))
+	vendor_ui.tooltip = item_tip
+	inventory_ui.vendor_ui = vendor_ui
+	vendor_ui.visibility_changed.connect(func(): inventory_ui.set_compact(vendor_ui.visible))
 	inventory_ui.map_ui = map_ui
 	inventory_ui.tooltip = item_tip
 	inventory_ui.smith = smith_ui
@@ -3931,6 +3935,11 @@ func _build_ui() -> void:
 	char_sheet.visible = false
 	hud.add_child(char_sheet)
 
+	# Draw order: windowed panels sit above the always-on HUD (chat, skill bar, help text,
+	# minimap), the tutorial above them, the item tooltip on top of everything.
+	for panel_node in [inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, char_sheet, tutorial_ui, item_tip]:
+		hud.move_child(panel_node, -1)
+
 	class_select = ClassSelectScript.new()
 	class_select.visible = false
 	class_select.chosen.connect(_on_class_chosen)
@@ -3953,18 +3962,18 @@ func _refresh_solo_slots() -> void:
 
 
 func _on_solo_pressed() -> void:
-	start_solo(solo_slot_pick.get_selected_id() if solo_slot_pick.selected >= 0 else 1)
+	start_solo(solo_slot_pick.get_selected_id() if solo_slot_pick.selected >= 0 else 1, solo_port)
 
 
 ## "Play Solo": one click. Runs the normal authoritative server in-process (ENet bound to
 ## 127.0.0.1, nobody else can join) and logs the local profile slot in without a password.
-func start_solo(slot: int) -> bool:
+func start_solo(slot: int, port := DEFAULT_PORT) -> bool:
 	solo_mode = true
 	solo_slot = clampi(slot, 1, SOLO_SLOTS)
 	if save_file == DEFAULT_SAVE_FILE:
 		save_file = SOLO_SAVE_FILE
 	_log("Play Solo: local profile slot %d (%s)" % [solo_slot, ProjectSettings.globalize_path(save_file)])
-	return start_server(DEFAULT_PORT, false)
+	return start_server(port, false)
 
 
 ## Solo: the account key of the local profile slot, created on first use (display name from the name box).

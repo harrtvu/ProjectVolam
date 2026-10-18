@@ -19,8 +19,11 @@ cd "$(dirname "$0")"
 L=test-logs; mkdir -p $L; rm -f $L/*.log
 SAVE="$(pwd)/$L/accounts.json"; rm -f "$SAVE"
 SAVE3="$(pwd)/$L/accounts_p3.json"; rm -f "$SAVE3"
-rm -f $L/*_market.json $L/*.tmp
-run() { "$GODOT" --headless --path . -- "$@"; }
+rm -f $L/*_vendor.json $L/*.tmp
+# Ports: everything uses $PORT (default 7920, away from the usual 7777 and other testers' 7790);
+# the parallel boss trial uses $PORT+21..+25. Override with PORT=... ./run_local_test.sh
+PORT="${PORT:-7920}"
+run() { "$GODOT" --headless --path . -- "$@" --port=$PORT; }
 
 echo "Phase 1 (~86s)..."
 run --server --debug-loot --save-file="$SAVE" --quit-after=86 > $L/p1_server.log 2>&1 &
@@ -96,7 +99,7 @@ b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-tar
 b4 MetalB --class=metal --bot-talents=auto:1 --warp=forest
 b4 WoodA  --class=wood  --bot-talents=auto:0 --bot-aim --warp=forest
 b4 WoodB  --class=wood  --bot-talents=auto:1 --warp=crypt
-b4 WaterA --class=water --bot-talents=goals:a_siphon,a_zero --bot-aim --warp=frost
+b4 WaterA --class=water --bot-talents=goals:a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=180,28
 b4 WaterB --class=water --bot-talents=auto:1 --bot-probe --warp=forest
 b4 FireA  --class=fire  --bot-talents=goals:f_quicken,f_shower --bot-aim --warp=crypt
 b4 FireB  --class=fire  --bot-talents=auto:1 --bot-target=far --bot-respec-at=28,31,34,37,40,43,46 --warp=frost
@@ -146,56 +149,6 @@ sleep 2
 run --join=127.0.0.1 --name=MapperA --password=d --bot-idle --open-atlas --quit-after=8 > $L/p6b_mappera.log 2>&1 &
 wait
 
-echo "Phase 7 (~55s): trade market (list, search, buy, race, expiry, claim box)..."
-SAVE7="$(pwd)/$L/accounts_p7.json"; rm -f "$SAVE7"
-run --server --save-file="$SAVE7" --debug-start-level=20 --debug-gear --debug-full-bag=Full --debug-fresh=Pauper --market-max-listings=4 --market-short=Exp --quit-after=52 > $L/p7_server.log 2>&1 &
-sleep 2
-b7() { n=$1; q=$2; shift 2; run --join=127.0.0.1 --name=$n --password=m --bot "$@" --quit-after=$q > $L/p7_$n.log 2>&1 & }
-b7 Sella 34 --class=metal --bot-market=seller
-b7 Buyer 48 --class=water --bot-market=buyer
-b7 RaceA 46 --class=fire --bot-market=race
-b7 RaceB 46 --class=earth --bot-market=race
-b7 Pauper 46 --class=wood --bot-market=pauper
-b7 FullBag 46 --class=metal --bot-market=fullbag
-b7 Expo 46 --class=water --bot-market=expirer
-wait
-echo "Phase 7b (~16s): market restored after restart, offline seller collects..."
-run --server --save-file="$SAVE7" --quit-after=16 > $L/p7b_server.log 2>&1 &
-sleep 2
-run --join=127.0.0.1 --name=Sella --password=m --bot --bot-market=collector --quit-after=12 > $L/p7b_Sella.log 2>&1 &
-run --join=127.0.0.1 --name=Buyer --password=m --bot-idle --quit-after=8 > $L/p7b_Buyer.log 2>&1 &
-wait
-python3 tools/market_audit.py "$SAVE7" $L/p7_server.log $L/p7b_server.log > $L/p7_audit.log 2>&1
-echo "Phase 7c (~30s): server killed (-9) right after a trade, then restarted..."
-SAVE7C="$(pwd)/$L/accounts_p7c.json"; rm -f "$SAVE7C"
-"$GODOT" --headless --path . -- --server --save-file="$SAVE7C" --debug-start-level=20 --debug-gear > $L/p7c_server.log 2>&1 &
-SPID=$!   # (the Godot process itself, not a subshell, so kill -9 really kills the server)
-sleep 2
-run --join=127.0.0.1 --name=Crasher --password=m --class=metal --bot --bot-market=seller --quit-after=14 > $L/p7c_seller.log 2>&1 &
-run --join=127.0.0.1 --name=Snatcher --password=m --class=fire --bot --bot-market=qbuyer --quit-after=14 > $L/p7c_buyer.log 2>&1 &
-sleep 13
-kill -9 $SPID 2>/dev/null
-wait
-run --server --save-file="$SAVE7C" --quit-after=12 > $L/p7d_server.log 2>&1 &
-sleep 2
-run --join=127.0.0.1 --name=Crasher --password=m --bot --bot-market=collector --quit-after=8 > $L/p7d_seller.log 2>&1 &
-wait
-python3 tools/market_audit.py "$SAVE7C" $L/p7c_server.log $L/p7d_server.log > $L/p7c_audit.log 2>&1
-echo "Phase 7e (~30s): server dies BETWEEN writing market.json and accounts.json, then restarted..."
-SAVE7E="$(pwd)/$L/accounts_p7e.json"; rm -f "$SAVE7E"
-run --server --save-file="$SAVE7E" --debug-start-level=20 --debug-gear --market-crash-test=buy --quit-after=20 > $L/p7e_server.log 2>&1 &
-sleep 2
-run --join=127.0.0.1 --name=Crasher --password=m --class=metal --bot --bot-market=seller --quit-after=14 > $L/p7e_seller.log 2>&1 &
-run --join=127.0.0.1 --name=Snatcher --password=m --class=fire --bot --bot-market=qbuyer --quit-after=14 > $L/p7e_buyer.log 2>&1 &
-wait
-cp "$SAVE7E" $L/p7e_accounts_before_restart.json
-run --server --save-file="$SAVE7E" --quit-after=12 > $L/p7f_server.log 2>&1 &
-sleep 2
-run --join=127.0.0.1 --name=Snatcher --password=m --bot-idle --quit-after=8 > $L/p7f_buyer.log 2>&1 &
-run --join=127.0.0.1 --name=Crasher --password=m --bot --bot-market=collector --quit-after=8 > $L/p7f_seller.log 2>&1 &
-wait
-python3 tools/market_audit.py "$SAVE7E" $L/p7e_server.log $L/p7f_server.log > $L/p7e_audit.log 2>&1
-
 echo "Phase 8 (~230s): PoE-style atlas (locked node, points, passives, extra portal, respec)..."
 SAVE8="$(pwd)/$L/accounts_p8.json"; rm -f "$SAVE8"
 run --server --save-file="$SAVE8" --debug-start-level=20 --debug-gear --fast-respawn --instance-timeout=15 --complete-timeout=12 --debug-atlas-kit --debug-next-tier=1 --quit-after=230 > $L/p8_server.log 2>&1 &
@@ -222,14 +175,14 @@ wait
 echo "Phase 9 (~95s): Esc menu, pause, settings..."
 SAVE9="$(pwd)/$L/accounts_p9.json"; rm -f "$SAVE9" $L/settings_test.cfg
 # 9a: solo host (listen server, nobody else online): the menu really pauses the world, then quits cleanly
-"$GODOT" --headless --path . -- --host --name=Solo --password=s --class=fire --bot-idle --menu-test --menu-test-leave=quit --save-file="$SAVE9" --quit-after=40 > $L/p9_host.log 2>&1
+"$GODOT" --headless --path . -- --port=$PORT --host --name=Solo --password=s --class=fire --bot-idle --menu-test --menu-test-leave=quit --save-file="$SAVE9" --quit-after=40 > $L/p9_host.log 2>&1
 # 9b: client of a dedicated server: the game continues online, input stops; then Return to Main Menu
 run --server --save-file="$SAVE9" --debug-start-level=5 --quit-after=30 > $L/p9b_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Online --password=o --class=water --bot --menu-test --menu-test-leave=menu --quit-after=26 > $L/p9b_client.log 2>&1 &
 wait
 # 9c: a player joins a host whose menu is open -> the host unpauses
-"$GODOT" --headless --path . -- --host --name=Solo --password=s --bot-idle --open-menu=4 --save-file="$SAVE9" --quit-after=22 > $L/p9c_host.log 2>&1 &
+"$GODOT" --headless --path . -- --port=$PORT --host --name=Solo --password=s --bot-idle --open-menu=4 --save-file="$SAVE9" --quit-after=22 > $L/p9c_host.log 2>&1 &
 sleep 9
 run --join=127.0.0.1 --name=Joiner --password=j --class=earth --bot-idle --quit-after=8 > $L/p9c_joiner.log 2>&1 &
 wait
@@ -268,13 +221,13 @@ wait
 echo "Phase 13 (~40s): Play Solo (one click, in-process local server, no login, profile slot saved)..."
 SAVE13="$(pwd)/$L/solo_profile.json"; rm -f "$SAVE13"
 # 13a: click the menu's Play Solo button once (headless): a new hero in profile slot 2
-"$GODOT" --headless --path . -- --click-solo --solo-slot=2 --name=Soloist --class=wood --bot --save-file="$SAVE13" --quit-after=16 > $L/p13_solo.log 2>&1 &
+"$GODOT" --headless --path . -- --port=$PORT --click-solo --solo-slot=2 --name=Soloist --class=wood --bot --save-file="$SAVE13" --quit-after=16 > $L/p13_solo.log 2>&1 &
 sleep 8
 # nobody can join a solo game (bound to 127.0.0.1, peers refused)
 run --join=127.0.0.1 --name=Crasher --password=x --bot-idle --quit-after=5 > $L/p13_joiner.log 2>&1
 wait
 # 13b: Play Solo again: the same slot is restored (level, class), no password asked
-"$GODOT" --headless --path . -- --click-solo --solo-slot=2 --bot-idle --save-file="$SAVE13" --quit-after=8 > $L/p13_solo_again.log 2>&1
+"$GODOT" --headless --path . -- --port=$PORT --click-solo --solo-slot=2 --bot-idle --save-file="$SAVE13" --quit-after=8 > $L/p13_solo_again.log 2>&1
 
 echo "Phase 14 (~120s): online co-op party: invite/accept, both enter the leader's dungeon and clear it together..."
 SAVE14="$(pwd)/$L/accounts_p14.json"; rm -f "$SAVE14"
@@ -285,6 +238,39 @@ b14 Leader --class=fire --bot-dungeon=full --bot-dungeon-theme=fire --bot-party=
 b14 Member --class=water --bot-dungeon=party --bot-party=accept
 sleep 20
 b14 Outsider --class=metal --bot-dungeon=intrude
+# version handshake: a client of another build is refused with a clear message; a peer that skips it is ignored + dropped
+run --join=127.0.0.1 --name=OldBuild --password=p --bot --fake-version=volam-old --quit-after=10 > $L/p14_oldbuild.log 2>&1
+run --join=127.0.0.1 --name=NoHello --password=p --bot --skip-handshake --quit-after=10 > $L/p14_nohello.log 2>&1
+wait
+
+echo "Phase 15 (~75s): NPC vendor (sell loot, buy from the rotating stock, persistence, rotation timer)..."
+SAVE15="$(pwd)/$L/accounts_p15.json"; rm -f "$SAVE15"
+run --server --save-file="$SAVE15" --debug-start-level=10 --debug-gear --debug-fresh=Pauper --debug-full-bag=Full --debug-loot --quit-after=30 > $L/p15_server.log 2>&1 &
+sleep 2
+b15() { n=$1; shift; run --join=127.0.0.1 --name=$n --password=v "$@" --quit-after=26 > $L/p15_$n.log 2>&1 & }
+b15 Shopper --class=metal --bot --bot-no-gear --bot-vendor=1
+b15 Pauper --class=fire --bot --bot-no-gear --bot-vendor=1 --bot-vendor-role=probe
+b15 FullBag --class=earth --bot --bot-no-gear --bot-vendor=1 --bot-vendor-role=probe
+wait
+cp $L/accounts_p15_vendor.json $L/p15_vendor_before_restart.json
+run --server --save-file="$SAVE15" --quit-after=14 > $L/p15b_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Shopper --password=v --bot --bot-no-gear --bot-vendor=2 --quit-after=10 > $L/p15b_Shopper.log 2>&1 &
+wait
+# a short rotation period: the stock rotates on the timer while the server runs
+run --server --save-file="$SAVE15" --vendor-rotate=6 --quit-after=16 > $L/p15c_server.log 2>&1
+
+echo "Phase 16 (~50s): first-time tutorial (movement, skills, loot, equip, passive web; skip; shown once)..."
+SAVE16="$(pwd)/$L/accounts_p16.json"; rm -f "$SAVE16"
+run --server --save-file="$SAVE16" --quit-after=36 > $L/p16_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Newbie --password=t --class=earth --bot --bot-no-gear --bot-tutorial=full --quit-after=32 > $L/p16_Newbie.log 2>&1 &
+run --join=127.0.0.1 --name=Skipper --password=t --class=water --bot --bot-tutorial=skip --quit-after=32 > $L/p16_Skipper.log 2>&1 &
+wait
+run --server --save-file="$SAVE16" --quit-after=14 > $L/p16b_server.log 2>&1 &
+sleep 2
+run --join=127.0.0.1 --name=Newbie --password=t --bot --bot-tutorial=full --quit-after=10 > $L/p16b_Newbie.log 2>&1 &
+run --join=127.0.0.1 --name=Skipper --password=t --bot --bot-tutorial=skip --quit-after=10 > $L/p16b_Skipper.log 2>&1 &
 wait
 
 check() { if grep -qE "$2" $L/$3; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
@@ -312,7 +298,7 @@ check "zone saved + restored"       "Login 'Bot2'.*restored save.*zone forest" p
 for t in "meadow -> forest" "forest -> crypt" "crypt -> frost" "frost -> crypt" "crypt -> forest" "forest -> meadow"; do
   check "walker $t"                 "Zone transfer: Walker $t"               p3_server.log
 done
-if grep -qhE "foreign_entities=[1-9]" $(ls $L/*.log | grep -v "_host.log"); then echo "FAIL  visibility isolation (client received other-zone entities)"; else echo "PASS  visibility isolation (no client ever received another zone's entities)"; fi
+if grep -qhE "foreign_entities=[1-9]" $(ls $L/*.log | grep -vE "_host.log|p13_solo"); then echo "FAIL  visibility isolation (client received other-zone entities)"; else echo "PASS  visibility isolation (no client ever received another zone's entities)"; fi
 check "Bot1 back in meadow sees only itself" "zone=meadow players=1 Bot1\(" p1_bot1.log
 check "Bot2 in forest sees only itself"      "zone=forest players=1 Bot2\(" p1_bot2.log
 echo; echo "== Big maps & monster groups"
@@ -439,7 +425,7 @@ checkp "stat talent: Granite raises defense"     "passive Granite I .*def (\d+) 
 checkp "stat talent: Fleet Foot raises speed"    "passive Fleet Foot I .*speed (\d+) .*-> .*speed (?!\1$)" p4_server.log
 for pair in "MetalA:Whirling Blade.*cd 2.4s, x2.32" "MetalB:Piercing Strike.*cd 4.9s" "WoodA:Plague Bloom.*cd 12.8s" \
             "WoodB:Regrowth.*cd 8.4s" "WaterA:Ice Shard.*cd 1.0s, x1.90" "WaterB:Healing Rain.*cd 7.6s" \
-            "FireA:Meteor.*cd 10.0s" "FireB:Fireball.*cd 2.1s, x2.61" "EarthA:Mountain's Challenge.*cd 8.4s" "EarthB:Ground Slam.*cd 3.0s, x1.63"; do
+            "FireA:Meteor.*cd 10.0s" "FireB:Fireball.*cd 2.1s, x2.61" "EarthA:Mountain's Challenge.*cd 8.4s" "EarthB:Ground Slam.*cd 2.5s, x2.18"; do
   who=${pair%%:*}; pat=${pair#*:}
   check "passives change $who's ${pat%%.\**}" "\] $who cast $pat" p4_server.log
 done
@@ -502,7 +488,7 @@ check "resistances measurably cut damage (offline)" "40 water damage taken [0-9]
 check "unequip restores stats (offline)"          "unequip all: max hp ([0-9]+), attack ([0-9]+), water damage taken ([0-9]+) \(back to \1/\2/\3\)" gear_selftest.log
 check "crafting an equipped item"                 "Smith used Orb of Transmutation on \[normal\] Copper Ring.*-> \[magic\].*equipped in ring1" p5_server.log
 check "sell to the blacksmith"                    "Smith sold \[normal\] Leather Cap .* for [0-9]+ gold"            p5_server.log
-check "selling away from the blacksmith rejected" "Smith sell rejected: you must be at the blacksmith"               p5_server.log
+check "selling away from the blacksmith rejected" "Smith sell rejected: you must be at the vendor or the blacksmith"               p5_server.log
 check "shared stash"                              "Smith stashed \[unique\] Gold Seeker's Ring"                      p5_server.log
 check "drop item on the ground"                   "Smith dropped \[normal\] Sandals .* on the ground"               p5_server.log
 check "destroy item"                              "Smith destroyed \[normal\] Cloth Wraps"                          p5_server.log
@@ -557,58 +543,6 @@ check "atlas persists across restart"             "Login atlas 'MapperA': \{ \"f
 check "atlas panel shows the progress"            "atlas panel opened: .*fire:1"                                  p6b_mappera.log
 check "log back in town (never inside an instance)" "Login 'MapperA'.*zone meadow"                                p6b_server.log
 check "dungeon offline checks"                    "dungeon selftest: all [0-9]+ checks passed"                    gear_selftest.log
-echo; echo "== Trade market (Trade Broker)"
-check "listing: fee charged, item into escrow"     "Sella listed #[0-9]+ \[rare\] .*chain_mail.* for 300 gold \(fee 6, gold left 2494" p7_server.log
-check "currency stack listed with quantity"       "Sella listed #[0-9]+ 5 x orb_chaos for 120 gold \(fee 3"           p7_server.log
-check "max active listings enforced"              "Sella list rejected: you already have 4 active listings \(max 4\)" p7_server.log
-check "bad price rejected"                        "Sella list rejected: price must be 1-"                              p7_server.log
-check "untradeable (bound starter gear) refused"  "Sella list rejected: .* is account-bound \(untradeable\)"          p7_server.log
-check "listing fee needs gold"                    "Pauper list rejected: the listing fee is 10 gold \(you have 0\)"  p7_server.log
-check "search: category + rarity"                 "Buyer searched \{cat=body rarity=rare\} -> 1 hit\(s\): #[0-9]+ \[rare\] .*chain_mail" p7_server.log
-check "search: affix (res:water >= 25)"           "Buyer searched \{stat=res:water stat_min=25\} -> 1 hit\(s\): #[0-9]+ \[unique\] Frost Aegis" p7_server.log
-check "search: name text"                         "Buyer searched \{text=ring\} -> 1 hit\(s\): #[0-9]+ \[normal\] Copper Ring" p7_server.log
-check "search: currency category"                 "Buyer searched \{cat=currency\} -> 1 hit\(s\): #[0-9]+ 5 x orb_chaos" p7_server.log
-check "search: price range + sort"                "Buyer searched \{price_max=100 sort=price_desc\} -> 1 hit\(s\): #[0-9]+ \[normal\] Copper Ring" p7_server.log
-check "search: required level"                    "Buyer searched \{cat=ring max_req=5\} -> 1 hit"                  p7_server.log
-check "search: ticket theme + tier"               "Buyer searched \{theme=water tier_min=3\} -> 1 hit\(s\): #[0-9]+ \[rare\] .*ticket_water T3" p7_server.log
-check "search: usable by class"                   "Buyer searched \{cat=offhand usable=true\} -> 1 hit"             p7_server.log
-if python3 -c "import re,sys; m=re.search(r'Buyer searched \{sort=newest\} -> 5 hit\(s\): (.*)', open('$L/p7_server.log').read()); ids=[int(x) for x in re.findall(r'#(\d+) ', m.group(1))] if m else []; sys.exit(0 if len(ids)==5 and ids==sorted(ids, reverse=True) else 1)"; then echo "PASS  search: newest first (all listings)"; else echo "FAIL  search: newest first (all listings)"; fi
-check "client receives result pages"              "market page: 1 hit\(s\), page 1/1: #[0-9]+ \[rare\]"           p7_Buyer.log
-check "buy: gold moves, 5% tax, seller credited"  "Buyer bought #[0-9]+ \[rare\] .*chain_mail.* from Sella for 300 gold \(tax 15, seller gets 285 into the claim box; buyer gold left 2200; seller online\)" p7_server.log
-check "online seller notified"                    "notice: \[Market\] Your .* sold to Buyer for 300 gold \(285 after 5% tax\)" p7_Sella.log
-check "self-buy rejected"                         "Sella buy #[0-9]+ rejected: you can't buy your own listing"        p7_server.log
-check "not enough gold rejected"                  "Pauper buy #[0-9]+ rejected: not enough gold \(0/900\)"          p7_server.log
-check "full bag rejected"                         "FullBag buy #[0-9]+ rejected: your bag is full"                     p7_server.log
-if [ "$(grep -cE "Race[AB] bought #[0-9]+ \[normal\] Copper Ring" $L/p7_server.log)" = 1 ] && grep -qE "Race[AB] buy #[0-9]+ rejected: that listing is gone" $L/p7_server.log; then echo "PASS  two buyers race one listing: exactly one wins"; else echo "FAIL  two buyers race one listing: exactly one wins"; fi
-check "cancel returns the item"                   "Expo cancelled #[0-9]+ \[normal\] Leather Cap .* -> bag"          p7_server.log
-check "expired listing -> claim box"              "listing #[0-9]+ \(.*ticket_water T3.* by Expo\) expired -> returned to the seller's claim box" p7_server.log
-check "claim box returns the expired item"        "Expo claimed 0 gold and 1 item\(s\) \[\[rare\] .*ticket_water T3"  p7_server.log
-check "offline seller's sale goes to the claim box" "Buyer bought #[0-9]+ 5 x orb_chaos from Sella for 120 gold \(tax 6, seller gets 114 .*seller offline\)" p7_server.log
-check "market persists across restart"            "\[market\] loaded accounts_p7_market\.json: 1 active listing\(s\), 1 claim box"         p7b_server.log
-check "offline seller told on next login"         "notice: \[Market\] While you were away: 447 gold"                 p7b_Sella.log
-check "offline seller collects the gold"          "Sella claimed 447 gold .* \(gold now 2919,"                        p7b_server.log
-check "empty claim box rejected"                  "Sella claim rejected: your claim box is empty"                      p7b_server.log
-check "bought item kept after restart"            "Login 'Buyer'.*restored save.*gold 2080.*chain_mail\(rare\)"     p7b_server.log
-check "unsold listing still listed after restart" "Sella searched \{\} -> 1 hit\(s\): #[0-9]+ \[unique\] Frost Aegis"  p7b_server.log
-check "no item duplication (uid audit)"           "duplicates: none"                                                    p7_audit.log
-check "gold conserved (fees + tax are the only sink)" "CONSERVED$"                                                   p7_audit.log
-check "crash test: trade happened before kill -9" "Snatcher bought #[0-9]+"                                            p7c_server.log
-check "crash test: no duplication after restart"  "duplicates: none"                                                    p7c_audit.log
-check "crash test: gold conserved after restart"  "CONSERVED$"                                                        p7c_audit.log
-check "free daily ticket refused (untradeable)"   "Expo list rejected: .*Ticket.* is account-bound \(untradeable\)"   p7_server.log
-if [ -s $L/accounts_p7_market.json ] && ! grep -q '"listings"' $L/accounts_p7.json; then echo "PASS  market saved to its own file (*_market.json, not accounts.json)"; else echo "FAIL  market saved to its own file (*_market.json, not accounts.json)"; fi
-check "crash between writes: trade committed to market.json" "CRASH TEST: dying between market.json"           p7e_server.log
-check "crash between writes: journal replayed on restart"     "recovered: accounts.json was at tx [0-9]+, market at tx [0-9]+ - replayed the journal for \[.*snatcher" p7f_server.log
-if python3 - "$L/p7e_server.log" "$L/p7e_accounts_before_restart.json" "$SAVE7E" <<'PYC'
-import json, re, sys
-m = re.search(r"Snatcher bought #\d+ .*?\((\w+) ilvl", open(sys.argv[1]).read())
-n = lambda f: sum(1 for i in json.load(open(f))["accounts"]["snatcher"]["character"]["bag"] if m and i.get("base") == m.group(1))
-sys.exit(0 if m and n(sys.argv[3]) == n(sys.argv[2]) + 1 else 1)
-PYC
-then echo "PASS  crash between writes: trade missing from accounts.json on disk, buyer has the item after restart"; else echo "FAIL  crash between writes: trade missing from accounts.json on disk, buyer has the item after restart"; fi
-check "crash between writes: no duplication"                 "duplicates: none"                                   p7e_audit.log
-check "crash between writes: gold conserved"                 "CONSERVED$"                                         p7e_audit.log
-check "market offline checks"                     "market selftest: all [0-9]+ checks passed"                           gear_selftest.log
 echo; echo "== Atlas (PoE-style map + atlas passive tree)"
 check "atlas offline checks (graph, rules, migration, effects)" "atlas selftest: all [0-9]+ checks passed"      atlas_selftest.log
 check "effects measured: ticket drops / tier / currency / portals" "ATLAS SELFTEST effects over 20000 kills .*ticket drops ([0-9]+) -> ([0-9]+), higher-tier tickets 0 -> [1-9]" atlas_selftest.log
@@ -667,7 +601,7 @@ check "move onto the door rejected"                     "move rejected: \(32, 26
 check "rotate + flip"                                   "rotated .* to 90 deg"                                   p10_server.log
 check "flip"                                            "flipped .*flip true"                                    p10_server.log
 check "remove (back to inventory)"                      "removed Pine Tree #[0-9]+ \(back to the decoration inventory\)" p10_server.log
-check "move a station"                                  "moved the Trade Broker to \(21, 26\)"                 p10_server.log
+check "move a station"                                  "moved the Vendor to \(21, 26\)"                 p10_server.log
 check "station on the door rejected"                    "station rejected: \(31, 26\) would block the door"   p10_server.log
 check "theme switch keeps decorations"                  "switched the theme to Ember Forge \(kept [0-9]+ decorations" p10_server.log
 check "locked theme rejected"                           "Lotus Lake is locked"                                   p10_server.log
@@ -732,7 +666,45 @@ check "both players in the same instance"              "zone=dun[0-9]+ players=2
 if grep -qE "\[dun[0-9]+\] .* was slain by Member" $L/p14_server.log && grep -qE "\[dun[0-9]+\] .* was slain by Leader" $L/p14_server.log; then echo "PASS  both party members kill monsters in the instance ($(grep -cE "\[dun[0-9]+\] .* was slain by Member" $L/p14_server.log) by Member, $(grep -cE "\[dun[0-9]+\] .* was slain by Leader" $L/p14_server.log) by Leader)"; else echo "FAIL  both party members kill monsters in the instance"; fi
 check "dungeon cleared by the party"                   "dun[0-9]+ cleared by a party of 2: "                                 p14_server.log
 check "boss kill completes the party run"              "dun[0-9]+ COMPLETED Ember Caverns T1"                               p14_server.log
+check "version handshake accepted (same build)"        "Version volam-m2\.[0-9]+ accepted by the server, logging in"  p14_Member.log
+check "other build refused with a clear message"       "Login rejected: Version mismatch: server volam-m2\.[0-9]+, you volam-old"  p14_oldbuild.log
+check "server logged the refused version"              "Peer [0-9]+ refused: Version mismatch"                         p14_server.log
+check "login without a handshake ignored"              "Ignored login from peer [0-9]+: no accepted version handshake" p14_server.log
+check "peer without a handshake disconnected"          "Peer [0-9]+ sent no version handshake in 4s .* disconnected"   p14_server.log
+if grep -q "checksum failed" $L/p14_*.log; then echo "FAIL  no rpc checksum errors from the version test"; else echo "PASS  no rpc checksum errors from the version test"; fi
 check "member sees the completion banner"              "banner: Dungeon Complete!"                                          p14_Member.log
+echo; echo "== NPC vendor (M2, replaces the player market)"
+check "vendor stock rolled and saved"                 "\[vendor\] stock rotated \(first stock\): rotation [0-9]+, day [0-9-]+, 12 entries"   p15_server.log
+check "vendor panel opened at the Vendor (E)"         "vendor panel opened"                                                p15_Shopper.log
+check "client receives the stock"                     "vendor stock: 12 entries, next rotation in [0-9]+s"                p15_Shopper.log
+check "buy potions (gold -> stack)"                   "\[vendor\] Shopper bought 3 x health_potion for 30 gold"         p15_server.log
+check "buy gear from the stock"                       "\[vendor\] Shopper bought \[(normal|magic|rare)\] .* for [0-9]+ gold .*0 left in stock" p15_server.log
+check "sold-out entry rejected"                       "\[vendor\] Shopper buy rejected: .* is sold out"                  p15_server.log
+check "unknown stock id rejected"                     "\[vendor\] Shopper buy rejected: that item is not in stock"      p15_server.log
+check "sell loot to the vendor for gold"              "Shopper sold \[[a-z]+\] .* for [0-9]+ gold"                       p15_server.log
+check "selling away from the vendor rejected"         "Shopper sell rejected: you must be at the vendor"                   p15_server.log
+check "buying without gold rejected"                  "\[vendor\] Pauper buy rejected: not enough gold"                  p15_server.log
+check "buying with a full bag rejected"               "\[vendor\] FullBag buy rejected: your bag is full"                p15_server.log
+check "stock persists across restart (same rotation)" "\[vendor\] loaded accounts_p15_vendor.json: rotation [0-9]+ .*12 entries"  p15b_server.log
+if ! grep -q "stock rotated" $L/p15b_server.log && python3 tools/vendor_compare.py "$L/p15_vendor_before_restart.json" "$L/p15b_Shopper.log"; then echo "PASS  stock, prices and sold-out entries identical after restart"; else echo "FAIL  stock, prices and sold-out entries identical after restart"; fi
+check "bought item kept after restart"                "Login 'Shopper'.*restored save"                                     p15b_server.log
+check "stock rotates on the timer"                    "\[vendor\] stock rotated \(timer\)"                               p15c_server.log
+check "vendor offline checks"                         "vendor selftest: all [0-9]+ checks passed"                          gear_selftest.log
+if grep -rqE "market_server|market_ui|request_market" scripts/; then echo "FAIL  player market code removed"; else echo "PASS  player market code removed (no market scripts or requests left)"; fi
+echo; echo "== First-time tutorial (M2)"
+check "tutorial starts for a new character"            "\[tutorial\] Newbie: starting the tutorial \(new character\)"   p16_server.log
+check "step 1: movement"                               "tutorial step 1 done: Move"                                   p16_Newbie.log
+check "step 2: skills (keys 1-4)"                      "tutorial step 2 done: Skills"                                 p16_Newbie.log
+check "practice loot dropped"                          "\[tutorial\] Newbie: practice loot dropped"                   p16_server.log
+check "step 3: loot pickup"                            "tutorial step 3 done: Loot"                                   p16_Newbie.log
+check "step 4: equipping gear"                         "tutorial step 4 done: Equip gear"                             p16_Newbie.log
+check "step 5: passive web"                            "tutorial step 5 done: Passive web"                            p16_Newbie.log
+check "finished flag saved"                            "\[tutorial\] Newbie finished the tutorial - flag saved \(done\)" p16_server.log
+check "tutorial can be skipped"                        "tutorial skipped at step 1/5"                                 p16_Skipper.log
+check "skipped flag saved"                             "\[tutorial\] Skipper skipped the tutorial - flag saved \(skipped\)" p16_server.log
+if grep -qE "\[tutorial\] (Newbie|Skipper): starting" $L/p16b_server.log || grep -q "tutorial started" $L/p16b_Newbie.log $L/p16b_Skipper.log; then echo "FAIL  shown once (not again after a restart + re-login)"; else echo "PASS  shown once (not again after a restart + re-login)"; fi
+if python3 -c "import json,sys; a=json.load(open('$SAVE16'))['accounts']; sys.exit(0 if a['newbie']['character']['tutorial']=='done' and a['skipper']['character']['tutorial']=='skipped' else 1)"; then echo "PASS  tutorial flag stored per character"; else echo "FAIL  tutorial flag stored per character"; fi
+if grep -qE "\[tutorial\] (Oldie|Oldtown|Lost): starting" $L/p2_server.log; then echo "FAIL  old characters don't get the tutorial"; else echo "PASS  old characters don't get the tutorial"; fi
 echo; echo "== Errors/warnings (should be none):"
 grep -iE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log | sort | uniq -c | head -40 || true
 grep -qiE "SCRIPT ERROR|^ERROR|^WARNING" $L/*.log || echo "none"
