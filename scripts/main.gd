@@ -3052,7 +3052,7 @@ func _aim_test_monster(me: Node) -> Node:
 	var best: Node = null
 	for m in me.zone.monsters_root.get_children():
 		var d: float = m.position.distance_to(me.position)
-		if m.alive and d >= 60.0 and d <= 260.0 and me.zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)) \
+		if m.alive and d <= 260.0 and me.zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)) \
 				and (best == null or d < best.position.distance_to(me.position)):
 			best = m
 	return best
@@ -3224,6 +3224,8 @@ func _run_ui_selftest() -> void:
 	var vp_sz := get_viewport().get_visible_rect().size
 	for c in [Vector2((vp_sz.x - tutorial_ui.size.x) / 2.0, 64.0), Vector2((vp_sz.x - tutorial_ui.size.x) / 2.0, vp_sz.y - 80.0 - tutorial_ui.size.y),
 			Vector2(vp_sz.x - tutorial_ui.size.x - 10.0, vp_sz.y - 80.0 - tutorial_ui.size.y), Vector2(10.0, 176.0), Vector2(vp_sz.x - tutorial_ui.size.x - 10.0, 250.0)]:
+		if Rect2(c, tutorial_ui.size).intersects(hud.get_node("ChatPanel").get_global_rect()):
+			continue   # spots over the chat panel are not allowed (long chat lines stay readable)
 		var k := 0
 		for r in npc_screen_rects():
 			if Rect2(c, tutorial_ui.size).intersects(r):
