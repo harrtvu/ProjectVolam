@@ -209,6 +209,13 @@ func leave(key: String, why: String) -> void:
 	_push(pt)
 
 
+## A member changed zone: refresh everyone's party panel (it lists each member's zone).
+func on_zone_changed(key: String) -> void:
+	var pt := party_of(key)
+	if not pt.is_empty():
+		_push(pt)
+
+
 func on_peer_left(key: String) -> void:
 	if key != "":
 		leave(key, "left the game and the party")

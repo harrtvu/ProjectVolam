@@ -90,6 +90,10 @@ func _process(_delta: float) -> void:
 		return
 	if _start_pos == Vector2.INF:
 		_start_pos = me.position
+	_place()
+	if step == 0:   # show how far along the Move step is
+		var pct := clampi(roundi(me.position.distance_to(_start_pos) / 120.0 * 100.0), 0, 100)
+		_text.text = "%s\nProgress: %d%%" % [STEPS[0][1], pct]
 	var done := false
 	match step:
 		0: done = me.position.distance_to(_start_pos) > 120.0
@@ -104,6 +108,36 @@ func _process(_delta: float) -> void:
 			_finish(false)
 		else:
 			_enter_step()
+
+
+## Dock the box where it covers none of the open windows (the step may have just asked
+## for one, e.g. the inventory): top-centre, else left under the stats, else bottom-right, else above the skill bar.
+func _place() -> void:
+	var vp := get_viewport_rect().size
+	var cands := [Vector2((vp.x - size.x) / 2.0, 64.0), Vector2(10.0, 176.0), Vector2(vp.x - size.x - 10.0, vp.y - 80.0 - size.y), Vector2((vp.x - size.x) / 2.0, vp.y - 80.0 - size.y)]
+	var busy: Array = []
+	for w in main._big_windows() + [main.minimap]:
+		if w.visible and (w != main.minimap or main.minimap.big):
+			busy.append(w.get_global_rect())
+	for c in cands:
+		var r := Rect2(c, size)
+		var ok := true
+		for b in busy:
+			if r.intersects(b):
+				ok = false
+		if ok:
+			position = c
+			return
+	position = cands[3]
+
+
+## For the UI self-test: does the box overlap any open big window?
+func covers_a_window() -> bool:
+	var r := get_global_rect()
+	for w in main._big_windows():
+		if w.visible and r.intersects(w.get_global_rect()):
+			return true
+	return false
 
 
 func skip_tutorial() -> void:

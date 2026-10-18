@@ -71,7 +71,8 @@ func setup(id: String, main_ref: Node) -> void:
 		if not dun.is_empty():
 			vis.text = "Portal back to\n%s" % ("your Hideout" if Zones.is_hideout(str(p["to"])) else "Sunny Meadow")
 		elif info.has("hideout"):
-			vis.text = "Door to\nSunny Meadow"
+			vis.text = "Door to Sunny Meadow\n(E)"
+			vis.door = true
 		add_child(vis)
 
 	var ho := info.has("hideout")
@@ -662,14 +663,17 @@ func peers() -> Array:
 # ---------------------------------------------------------------- portal visual
 
 class PortalVisual extends Node2D:
+	const DOOR_TEX := preload("res://assets/kenney/tiny_dungeon_packed.png")
+	const DOOR_REGION := Rect2(160, 48, 32, 16)   # Kenney Tiny Dungeon: wooden double door
 	var size := Vector2(64, 128)
 	var text := ""
+	var door := false   # hideout exit: drawn as a wooden door instead of a glowing gate
 	var _t := 0.0
 	var _label: Label
 
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
-		z_index = -1
+		z_index = 0 if door else -1
 		_label = Label.new()
 		_label.text = text
 		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -690,6 +694,9 @@ class PortalVisual extends Node2D:
 
 	func _draw() -> void:
 		var r := Rect2(-size / 2.0, size)
+		if door:
+			draw_texture_rect_region(DOOR_TEX, Rect2(-size.x / 2.0, -size.y / 2.0 - size.x / 2.0 + size.y, size.x, size.x / 2.0), DOOR_REGION)
+			return
 		draw_rect(r, Color(0.45, 0.2, 0.8, 0.25 + 0.1 * sin(_t * 3.0)))
 		draw_rect(r, Color(0.75, 0.55, 1.0, 0.8), false, 2.0)
 		for i in 6:
@@ -865,6 +872,10 @@ func merchant_pos() -> Vector2:
 class NpcVisual extends Node2D:
 	var kind := "device"
 	var _t := 0.0
+	var _label: Label
+	var _name := ""
+	var _hint := ""        # "(E: ...)" line, shown only while the local player stands close
+	var _near_t := 0.0
 
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
@@ -879,7 +890,8 @@ class NpcVisual extends Node2D:
 			st.texture = load("res://assets/items/ticket_wood.png")
 			st.position = Vector2(20, 2)
 			add_child(st)
-			l.text = "Ticket Merchant\n(E: buy tickets  -  M: atlas)"
+			_name = "Ticket Merchant"
+			_hint = "(E: buy tickets  -  M: atlas)"
 		elif kind == "vendor":
 			var s := Sprite2D.new()
 			s.texture = load("res://assets/merchant.png")
@@ -891,28 +903,43 @@ class NpcVisual extends Node2D:
 			gi.texture = load("res://assets/items/gold.png") if ResourceLoader.exists("res://assets/items/gold.png") else null
 			gi.position = Vector2(-20, 2)
 			add_child(gi)
-			l.text = "Vendor\n(E: buy & sell)"
+			_name = "Vendor"
+			_hint = "(E: buy & sell)"
 		elif kind == "master":
 			var s := Sprite2D.new()
 			s.texture = load("res://assets/merchant.png")
 			s.modulate = Color(1.0, 0.8, 1.0)
 			s.position = Vector2(0, -6)
 			add_child(s)
-			l.text = "Hideout Master\n(E: hideout + decorations)"
+			_name = "Hideout Master"
+			_hint = "(E: hideout + decorations)"
 		else:
-			l.text = "Map Device\n(E: open a dungeon ticket)"
+			_name = "Map Device"
+			_hint = "(E: open a dungeon ticket)"
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.text = _name
 		l.size = Vector2(220, 36)
-		l.position = Vector2(-110, -56)
+		l.position = Vector2(-110, 16)   # under the NPC: never hidden behind the top-left HUD
 		l.z_index = 30
 		l.add_theme_font_size_override("font_size", 11)
 		l.add_theme_color_override("font_color", Color(0.75, 0.9, 1.0) if kind == "device" else (Color(0.6, 1.0, 0.7) if kind == "vendor" else Color(1.0, 0.85, 0.55)))
 		l.add_theme_color_override("font_outline_color", Color.BLACK)
 		l.add_theme_constant_override("outline_size", 4)
 		add_child(l)
+		_label = l
 
 	func _process(delta: float) -> void:
 		_t += delta
+		_near_t -= delta
+		if _near_t <= 0.0:
+			_near_t = 0.25
+			var near := false
+			var z := get_parent()
+			if z and "players_root" in z and z.players_root and multiplayer.has_multiplayer_peer():
+				for p in z.players_root.get_children():
+					if int(p.get("peer_id")) == multiplayer.get_unique_id() and p.position.distance_to(position) <= 110.0:
+						near = true
+			_label.text = _name + ("\n" + _hint if near else "")
 		queue_redraw()
 
 	func _draw() -> void:

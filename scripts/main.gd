@@ -141,6 +141,8 @@ var vendor: Node                   # NPC vendor (vendor_server.gd), on every pee
 var vendor_ui: PanelContainer
 var tutorial_ui: PanelContainer
 var bot_tutorial := ""             # bot: "full" (do every tutorial step) | "skip"
+static var _last_name := ""       # survives the scene reload of Return to Main Menu
+var ui_selftest := false          # client (tests): --ui-selftest checks exclusive windows, N-map layer, tutorial placement
 var show_tutorial := false         # client: show the tutorial even when headless / a bot (tests, screenshots)
 var vendor_rotate := 0             # server (tests): --vendor-rotate=SECS stock rotation period (0 = default 2h)
 var bot_vendor := ""               # bot: vendor test role ("1" = buy/sell session, "2" = after a restart)
@@ -469,7 +471,8 @@ func _parse_args() -> void:
 	bot_vendor = str(opts.get("bot-vendor", ""))
 	bot_vendor_role = str(opts.get("bot-vendor-role", ""))
 	bot_tutorial = str(opts.get("bot-tutorial", ""))
-	show_tutorial = bot_tutorial != "" or opts.has("show-tutorial")
+	ui_selftest = opts.has("ui-selftest")
+	show_tutorial = bot_tutorial != "" or opts.has("show-tutorial") or ui_selftest
 	_open_vendor = opts.has("open-vendor")
 	bot_party = str(opts.get("bot-party", ""))
 	no_xp = opts.has("no-xp")
@@ -618,6 +621,8 @@ func _drop_showcase() -> void:
 
 func start_server(port: int, dedicated: bool) -> bool:
 	local_name = _sanitize_name(name_edit.text)
+	if not solo_mode:
+		_last_name = local_name
 	local_password = pass_edit.text
 	accounts = AccountStore.new(save_file)
 	accounts.load_file()
@@ -689,6 +694,7 @@ func start_server(port: int, dedicated: bool) -> bool:
 
 func start_client(address: String, port: int) -> bool:
 	local_name = _sanitize_name(name_edit.text)
+	_last_name = local_name
 	local_password = pass_edit.text
 	if local_password.is_empty():
 		status_label.text = "Please enter a password (it creates your account on first join)."
@@ -863,11 +869,11 @@ func _login_ok(id: int, pname: String, password: String) -> void:
 		# new account, or a save from before classes existed: pick one first
 		_awaiting_class[id] = {"name": pname, "is_new": is_new}
 		_log("Account '%s' has no class yet - asking peer %d to choose (%s)" % [display, id, "new account" if is_new else "old save"])
-		login_result.rpc_id(id, true, "Account created. Welcome to Volam!" if is_new else "Welcome back, %s!" % display)
+		login_result.rpc_id(id, true, _welcome_text(is_new, display))
 		class_select_request.rpc_id(id, is_new)
 		return
 	_spawn_logged_in(id, pname, is_new)
-	login_result.rpc_id(id, true, "Account created. Welcome to Volam!" if is_new else "Welcome back, %s!" % display)
+	login_result.rpc_id(id, true, _welcome_text(is_new, display))
 	broadcast_system("%s joined the world." % display)
 
 
@@ -884,10 +890,12 @@ func class_select_request(is_new: bool) -> void:
 		return
 	class_select.set_subtitle("Choose your element - Ngũ Hành" if is_new else "Your hero needs an element - choose once")
 	class_select.visible = true
+	hud.visible = false   # the class cards would overlap chat / help text / skill bar
 
 
 func _on_class_chosen(cls: String) -> void:
 	class_select.visible = false
+	hud.visible = true
 	choose_class.rpc_id(1, cls)
 
 
@@ -971,7 +979,7 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 		_push_inventory_later(node)
 		if node.tutorial == "pending":
 			_log("[tutorial] %s: starting the tutorial (new character)" % display)
-			get_tree().create_timer(1.5).timeout.connect(_send_tutorial.bind(weakref(node)))
+			get_tree().create_timer(0.4).timeout.connect(_send_tutorial.bind(weakref(node)))   # right after spawn, before the first keypress
 		_log("Login '%s' (peer %d): %s - class %s, level %d, xp %d, hp %d/%d, mp %d/%d, gold %d, items %s, equip %s, bag %d/%d %s, stash %d %s, zone %s, pos %s, talent points %d/%d %s" % [
 			display, id, "NEW account" if is_new else "restored save", node.class_id, node.level, node.xp, node.hp,
 			node.max_hp, node.mp, node.max_mp, node.gold, node.inventory, node.equip_summary(), node.bag_used(), Items.BAG_SIZE,
@@ -1028,6 +1036,7 @@ func transfer_player(node: Node, to_zone: String, arrive: Vector2i) -> void:
 	nn.account_key = str(peer_accounts.get(id, ""))
 	_push_inventory_later(nn)
 	instances.on_transfer(id, from, to_zone)
+	parties.on_zone_changed.call_deferred(nn.account_key)   # party panels show where everyone is
 	_log("Zone transfer: %s %s -> %s at %s" % [pname, from, to_zone, pos.round()])
 	_save_player(nn)
 	accounts.save_file()
@@ -1203,9 +1212,11 @@ func party_state(members: Array, leader: String) -> void:
 	party_members = members
 	party_leader = leader
 	var names: Array = []
+	var where: Array = []
 	for m in members:
 		names.append(str(m["name"]))
-	_log("party state: %d member(s) [%s], leader %s" % [members.size(), ", ".join(names), leader if leader != "" else "-"])
+		where.append("%s@%s" % [m["name"], m.get("zone", "")])
+	_log("party state: %d member(s) [%s], leader %s | zones: %s" % [members.size(), ", ".join(names), leader if leader != "" else "-", " ".join(where)])
 	_update_party_label()
 
 
@@ -1350,7 +1361,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			fps_label.visible = not fps_label.visible
 			get_viewport().set_input_as_handled()
 		elif event.is_action("zone_map") and not chat_edit.has_focus():
-			minimap.toggle_big()
+			toggle_zone_map()
 			get_viewport().set_input_as_handled()
 		elif event.is_action("atlas") and not chat_edit.has_focus():
 			_open_exclusive(atlas_ui, not atlas_ui.visible)
@@ -1473,6 +1484,30 @@ func menu_open() -> bool:
 	return pause_menu != null and pause_menu.visible
 
 
+func _show_leaving_overlay() -> void:
+	var ov := ColorRect.new()
+	ov.color = Color(0.03, 0.04, 0.07, 0.85)
+	ov.set_anchors_preset(Control.PRESET_FULL_RECT)
+	ov.mouse_filter = Control.MOUSE_FILTER_STOP
+	var l := Label.new()
+	l.text = "Returning to menu..."
+	l.add_theme_font_size_override("font_size", 24)
+	l.set_anchors_preset(Control.PRESET_CENTER)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.position = Vector2(-150, -20)
+	l.size = Vector2(300, 40)
+	ov.add_child(l)
+	get_node("UI").add_child(ov)
+	_log("leaving: 'Returning to menu...' shown")
+
+
+## Solo play has no account, so no "Account created" there.
+func _welcome_text(is_new: bool, display: String) -> String:
+	if solo_mode:
+		return "Welcome to Volam, %s!" % display if is_new else "Welcome back, %s!" % display
+	return "Account created. Welcome to Volam!" if is_new else "Welcome back, %s!" % display
+
+
 ## Return to Main Menu / Quit Game: save (host), disconnect cleanly, then reload or quit.
 func leave_game(to_menu: bool) -> void:
 	if not to_menu:
@@ -1481,6 +1516,9 @@ func leave_game(to_menu: bool) -> void:
 	if _shutting_down:
 		return
 	_shutting_down = true
+	_show_leaving_overlay()     # instant feedback: saving + reloading takes a couple of seconds
+	await get_tree().process_frame
+	await get_tree().process_frame
 	var is_srv := multiplayer.has_multiplayer_peer() and multiplayer.is_server() and not (multiplayer.multiplayer_peer is OfflineMultiplayerPeer)
 	if is_srv:
 		if in_game:
@@ -1526,16 +1564,51 @@ func _settings_test() -> void:
 	get_tree().quit(0 if ok else 1)
 
 
-## Opens `panel` (closing the other full-size windows first so they never stack) or closes it.
+## Big windows are exclusive: opening one closes every other one, except its companions
+## (vendor / blacksmith / Map Device open the inventory beside them). The N zone map is one of them.
+func _big_windows() -> Array:
+	return [inventory_ui, char_sheet, talent_ui, atlas_ui, map_ui, hideout_ui, smith_ui, vendor_ui]
+
+
+func close_windows_except(keep: Array) -> void:
+	for w in _big_windows():
+		if w not in keep and w.visible:
+			w.visible = false
+	if minimap and minimap.big and minimap not in keep:
+		minimap.toggle_big()
+	if inventory_ui not in keep:
+		item_tip.hide_tip()
+		inventory_ui.apply_orb = ""
+
+
+## Opens `panel` alone (closing every other big window) or closes it.
 func _open_exclusive(panel: Control, on: bool) -> void:
 	if on:
-		for other in [char_sheet, talent_ui, atlas_ui, map_ui, hideout_ui, smith_ui]:
-			if other != panel and other.visible:
-				other.visible = false
+		close_windows_except([panel])
 	panel.visible = on
 
 
+## N: the full zone map, exclusive with the other big windows and drawn above the HUD.
+func toggle_zone_map() -> void:
+	if not minimap.big:
+		close_windows_except([minimap])
+	minimap.toggle_big()
+
+
+## How many big windows are open (the N map counts) - for the UI self-test / logs.
+func open_windows() -> Array:
+	var out: Array = []
+	for w in _big_windows():
+		if w.visible:
+			out.append(w.get_script().resource_path.get_file().get_basename())
+	if minimap.big:
+		out.append("zone_map")
+	return out
+
+
 func toggle_inventory() -> void:
+	if not inventory_ui.visible:
+		close_windows_except([inventory_ui, vendor_ui, smith_ui, map_ui])   # its companions stay
 	inventory_ui.visible = not inventory_ui.visible
 	inventory_ui.set_player(_local_player())
 	inventory_ui.refresh()
@@ -1553,6 +1626,7 @@ func toggle_map_ui(mode: String) -> void:
 	if map_ui.visible and map_ui.mode == mode:
 		map_ui.visible = false
 		return
+	close_windows_except([map_ui, inventory_ui])
 	map_ui.set_player(me)
 	if not me.inventory_changed.is_connected(map_ui.refresh):
 		me.inventory_changed.connect(map_ui.refresh)
@@ -1579,6 +1653,8 @@ func toggle_hideout_ui(from_key := false) -> void:
 		return
 	if from_key and not hideout_ui.visible:
 		return   # H does nothing outside your hideout (the Hideout Master opens the panel there)
+	if not hideout_ui.visible:
+		close_windows_except([hideout_ui])
 	hideout_ui.visible = not hideout_ui.visible
 	if not hideout_ui.visible and hideout_ui.deco_mode:
 		hideout_ui.toggle_mode()
@@ -1594,6 +1670,7 @@ func toggle_vendor_ui() -> void:
 		vendor_ui.visible = false
 		item_tip.hide_tip()
 		return
+	close_windows_except([vendor_ui, inventory_ui])
 	vendor_ui.set_player(me, vendor)
 	if not me.inventory_changed.is_connected(vendor_ui.refresh):
 		me.inventory_changed.connect(vendor_ui.refresh)
@@ -1610,6 +1687,8 @@ func toggle_smith() -> void:
 	var me := _local_player()
 	if me == null:
 		return
+	if not smith_ui.visible and me.near_blacksmith():
+		close_windows_except([smith_ui, inventory_ui])
 	smith_ui.visible = not smith_ui.visible and me.near_blacksmith()
 	if smith_ui.visible:
 		smith_ui.set_player(me)
@@ -1694,7 +1773,7 @@ func _process(delta: float) -> void:
 				Performance.get_monitor(Performance.OBJECT_NODE_COUNT)]
 	if _open_zone_map and _local_player() != null:
 		_open_zone_map = false
-		minimap.toggle_big()
+		toggle_zone_map()
 	if _screenshot_path != "" and _elapsed > _screenshot_delay and _screenshot_ready():
 		var img := get_viewport().get_texture().get_image()
 		var err := img.save_png(_screenshot_path)
@@ -1770,12 +1849,15 @@ func _update_hud(delta: float) -> void:
 		_warp_pending = false
 		request_warp.rpc_id(1, _warp_to, _warp_cell)
 	var zi := Zones.info(me.zone.zone_id)
-	zone_label.text = "%s  (Lv %s)" % [zi["name"], zi["levels"]]
+	zone_label.text = zi["name"] if str(zi["levels"]) in ["", "-"] else "%s  (Lv %s)" % [zi["name"], zi["levels"]]
 	if zi.has("dungeon"):
 		var dd: Dictionary = zi["dungeon"]
 		var aq: float = Dungeons.atlas_iiq(me.atlas)
 		zone_label.text += "   Map: +%d%% quantity (+%d%% atlas)  +%d%% rarity%s" % [roundi(dd.get("iiq", 0.0)), roundi(aq), roundi(dd.get("iir", 0.0)),
 			("  -  %d portals left" % int(me.run_info["portals"])) if not me.run_info.is_empty() else ""]
+	if ui_selftest and _elapsed > 4.0:
+		ui_selftest = false
+		_run_ui_selftest()
 	if _open_inventory:
 		_open_inventory = false
 		toggle_inventory()
@@ -2261,8 +2343,11 @@ func _bot_hideout(me: Node, zone: Node, delta: float) -> void:
 			0:
 				_bh_log(me, "logged back in (restart)")
 				_bh_step = 1
-			1:   # leave through the door
-				if zone.is_hideout():
+			1:   # leave through the door, pressing E as soon as it is in reach (before stepping on it)
+				if zone.is_hideout() and me.near_hideout_door():
+					me._send("door")
+					_bh_t = 1.0
+				elif zone.is_hideout():
 					bot_dir = _bot_steer(zone, me.position, zone.map.cell_pos(Hideouts.DOOR.get_center()) + Vector2(0, 8), delta)
 				else:
 					_bh_log(me, "left the hideout through the door")
@@ -2462,7 +2547,7 @@ func _bot_vendor(me: Node, zone: Node, delta: float) -> void:
 					for x in vendor.stock:
 						if x.has("item") and int(x["qty"]) > 0:
 							e = x
-				me.request_vendor("buy", {"id": int(e.get("id", -1))})],                    # pauper: not enough gold, full bag: bag full
+				vendor_ui._buy(int(e.get("id", -1)))],   # clicked in the panel - pauper: "Not enough gold" + server rejects; full bag: bag full
 			[1.5, func(): me.request_vendor("buy", {"id": 1, "n": 3})],           # 3 health potions
 			[2.0, func():
 				var e: Dictionary = first_gear.call()
@@ -2474,11 +2559,16 @@ func _bot_vendor(me: Node, zone: Node, delta: float) -> void:
 			[4.0, func():
 				if bot_vendor_role == "probe":
 					return
+				_bv_done["ground"] = _ground_items_near(me, zone)
 				for inst in me.bag:
 					if not inst.get("bound", false) and not Dungeons.is_ticket(inst):
 						me.request_vendor("sell", {"uid": int(inst["uid"])})
 						break],
 			[4.5, func(): me.request_vendor("sell", {"stack": "slime_gel"} if me.inventory.has("slime_gel") else {"uid": -5})],
+			[5.0, func():
+				if bot_vendor_role != "probe":
+					_log("vendor bot: ground items near me before/after selling: %d -> %d" % [int(_bv_done.get("ground", -1)), _ground_items_near(me, zone)])
+					me.request_vendor("sell", {"stack": "health_potion"})],   # consumables sell for a little
 			[6.5, func(): _log("vendor bot: done, gold %d, potions %d" % [me.gold, int(me.inventory.get("health_potion", 0))])],
 		]
 	else:
@@ -2487,6 +2577,60 @@ func _bot_vendor(me: Node, zone: Node, delta: float) -> void:
 		if t >= float(steps[i][0]) and not _bv_done.has(i):
 			_bv_done[i] = true
 			steps[i][1].call()
+
+
+## --ui-selftest: the window-management fixes from playtesting, checked on a real client.
+func _run_ui_selftest() -> void:
+	var fails: Array = []
+	# 1. big windows are exclusive (the N map too): I/N alternating used to leave both open
+	close_windows_except([])
+	for i in 40:
+		if i % 2 == 0:
+			toggle_inventory()
+		else:
+			toggle_zone_map()
+		await get_tree().process_frame
+		var open := open_windows()
+		if open.size() > 1:
+			fails.append("I/N #%d left %s open" % [i, open])
+			break
+	for w in [char_sheet, talent_ui, atlas_ui]:
+		toggle_inventory() if not inventory_ui.visible else null
+		toggle_zone_map() if not minimap.big else null
+		_open_exclusive(w, true)
+		await get_tree().process_frame
+		if open_windows().size() != 1:
+			fails.append("opening %s left %s open" % [w.get_script().resource_path.get_file(), open_windows()])
+	_log("UI SELFTEST exclusive windows (I/N x40, C/T/atlas): %s" % ("PASS" if fails.is_empty() else "FAIL %s" % [fails]))
+	# 2. the N map draws above chat, skill bar, help text and the other HUD
+	close_windows_except([])
+	toggle_zone_map()
+	await get_tree().process_frame
+	var layer_ok: bool = minimap.big and minimap.z_index > 0
+	for n in [hud.get_node("ChatPanel"), skill_bar, info_label, hud.get_node("StatsPanel")]:
+		layer_ok = layer_ok and minimap.get_index() > n.get_index() and minimap.z_index >= n.z_index
+	_log("UI SELFTEST N map above the HUD: %s" % ("PASS" if layer_ok else "FAIL (index %d z %d)" % [minimap.get_index(), minimap.z_index]))
+	toggle_zone_map()
+	# 3. the tutorial box never covers the window its step asks for (step 4 = inventory)
+	tutorial_ui.begin()
+	tutorial_ui.step = 3
+	tutorial_ui._enter_step()
+	if not inventory_ui.visible:
+		toggle_inventory()
+	for f in 3:
+		await get_tree().process_frame
+	var covered: bool = tutorial_ui.covers_a_window()
+	_log("UI SELFTEST tutorial box clear of the inventory: %s (box %s, inventory %s)" % ["FAIL" if covered else "PASS", tutorial_ui.get_global_rect(), inventory_ui.get_global_rect()])
+	tutorial_ui.visible = false
+	close_windows_except([])
+
+
+func _ground_items_near(me: Node, zone: Node) -> int:
+	var n := 0
+	for p in zone.loot_root.get_children():
+		if p.position.distance_to(me.position) < 300.0:
+			n += 1
+	return n
 
 
 func _bag_find(me: Node, base: String, rarity := "") -> Dictionary:
@@ -3650,7 +3794,7 @@ func _build_ui() -> void:
 	vb.add_child(_mk_label("Online play"))
 	vb.add_child(_mk_label("Account name"))
 	name_edit = LineEdit.new()
-	name_edit.text = "Hero%d" % rng.randi_range(100, 999)
+	name_edit.text = _last_name if _last_name != "" else "Hero%d" % rng.randi_range(100, 999)   # keep the name after Return to Main Menu
 	name_edit.max_length = 16
 	vb.add_child(name_edit)
 	vb.add_child(_mk_label("Password (first join creates the account)"))
@@ -3692,6 +3836,7 @@ func _build_ui() -> void:
 	ui.add_child(hud)
 
 	var stats_panel := PanelContainer.new()
+	stats_panel.name = "StatsPanel"
 	stats_panel.position = Vector2(10, 10)
 	stats_panel.add_theme_stylebox_override("panel", _panel_style())
 	hud.add_child(stats_panel)
@@ -3767,7 +3912,8 @@ func _build_ui() -> void:
 	info_label.offset_right = -10
 	info_label.offset_top = 8
 	info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	info_label.add_theme_font_size_override("font_size", 13)
+	info_label.add_theme_font_size_override("font_size", 11)
+	info_label.modulate = Color(1, 1, 1, 0.6)   # small + faded: hints, not a wall over monsters
 	info_label.add_theme_color_override("font_outline_color", Color.BLACK)
 	info_label.add_theme_constant_override("outline_size", 4)
 	hud.add_child(info_label)
@@ -3776,9 +3922,9 @@ func _build_ui() -> void:
 	fps_label.anchor_right = 1.0
 	fps_label.offset_left = -300
 	fps_label.offset_right = -10
-	fps_label.offset_top = 262
+	fps_label.offset_top = 216   # right under the (smaller) minimap
 	fps_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	fps_label.add_theme_font_size_override("font_size", 13)
+	fps_label.add_theme_font_size_override("font_size", 11)
 	fps_label.add_theme_color_override("font_color", Color(0.6, 1.0, 0.6))
 	fps_label.add_theme_color_override("font_outline_color", Color.BLACK)
 	fps_label.add_theme_constant_override("outline_size", 4)
@@ -3803,6 +3949,7 @@ func _build_ui() -> void:
 	hud.add_child(dead_label)
 
 	var chat_panel := PanelContainer.new()
+	chat_panel.name = "ChatPanel"
 	chat_panel.anchor_top = 1.0
 	chat_panel.anchor_bottom = 1.0
 	chat_panel.offset_left = 10
@@ -3854,8 +4001,7 @@ func _build_ui() -> void:
 	hud.add_child(hideout_ui)
 	tutorial_ui = TutorialUIScript.new()
 	tutorial_ui.main = self
-	tutorial_ui.set_anchors_preset(Control.PRESET_CENTER_TOP)
-	tutorial_ui.position = Vector2(-220, 64)
+	tutorial_ui.position = Vector2(292, 64)   # tutorial_ui._place() docks it away from open windows
 	tutorial_ui.visible = false
 	hud.add_child(tutorial_ui)
 	vendor_ui = VendorUIScript.new()

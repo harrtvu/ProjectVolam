@@ -86,7 +86,7 @@ func _ready() -> void:
 	_stats_label.add_theme_font_size_override("font_size", 11)
 	_stats_label.modulate = Color(1, 1, 1, 0.85)
 	_stats_label.custom_minimum_size = Vector2(176, 0)
-	_stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	_stats_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	left.add_child(_stats_label)
 	# bag
 	var right := VBoxContainer.new()
@@ -199,9 +199,10 @@ func _process(_delta: float) -> void:
 	_gold_label.text = "%d gold" % player.gold
 	var res: Array = []
 	for e in Gear.ELEMENTS:
-		res.append("%s %d%%" % [Classes.ELEMENT_INFO[e]["name"].substr(0, 2), roundi(player.resistance(e))])
-	_stats_label.text = "Lv %d  HP %d  MP %d\nAttack %d  Defense %d\nRes: %s" % [player.level, player.max_hp, player.max_mp,
-		player.attack, player.defense, " ".join(res)]
+		res.append("%s %d%%" % [Classes.ELEMENT_INFO[e]["name"], roundi(player.resistance(e))])
+	# full element names (2-letter "Fi"/"Me" read as garbage), on two fixed lines so they never wrap mid-entry
+	_stats_label.text = "Lv %d  HP %d  MP %d\nAttack %d  Defense %d\nResist: %s\n%s" % [player.level, player.max_hp, player.max_mp,
+		player.attack, player.defense, "  ".join(res.slice(0, 3)), "  ".join(res.slice(3))]
 	for sl in _doll:
 		_doll[sl].highlight = Color(0.5, 1, 0.5, 0.12) if apply_orb == "" and _hover and is_instance_valid(_hover) and not _hover.inst.is_empty() \
 			and _hover.kind == "bag" and sl in Items.slots_for(str(_hover.inst["base"])) else Color(0, 0, 0, 0)

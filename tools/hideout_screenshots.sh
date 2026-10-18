@@ -26,7 +26,7 @@ owned = {}
 for d in decor: owned[d["id"]] = owned.get(d["id"], 0) + 1
 owned["pine"] += 3; owned["lantern"] += 1
 ho = {"theme": sys.argv[2], "unlocked": ["meadow", "wood", "fire", "earth", "metal", "water"], "owned": owned, "decor": decor,
-      "stations": {"map_device": [24, 15], "merchant": [21, 20], "broker": [21, 24], "blacksmith": [40, 15]}}
+      "stations": {"map_device": [24, 15], "merchant": [21, 20], "vendor": [21, 24], "blacksmith": [40, 15]}}
 acc = {"name": "Harry", "salt": salt, "hash": hashlib.sha256((salt + "s").encode()).hexdigest(), "created": "2026-10-15T12:00:00",
        "character": {"class": "metal", "level": 20, "xp": 0, "hp": 200, "gold": 25000, "zone": "hideout", "pos": [32 * 32 + 16, 24 * 32 + 16], "hideout": ho}}
 json.dump({"accounts": {"harry": acc}}, open(sys.argv[1], "w"), indent="\t")

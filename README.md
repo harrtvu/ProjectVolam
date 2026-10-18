@@ -26,8 +26,8 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Health, death, XP, levels | Monsters chase nearby players and hit them (damage reduced by armor). At 0 HP you become a tombstone and respawn at the current zone's entrance after 4 s with full HP. You slowly regenerate when out of combat. XP per kill = 6 + 4 × monster level (bosses 100 + 20 × level), shared by everyone who hit it. Levelling (20 × level XP per level) raises your stats by your class's growth rates, refills HP and mana, unlocks skills at levels 3/6/10, and announces it in chat. The HUD shows HP/mana/XP bars, class, ATK/DEF, gold, zone and the skill bar. |
 | Gear & loot (PoE × Vo Lam) | Ten equipment slots (weapon, off-hand, helmet, body, gloves, boots, belt, amulet, 2 rings). Every piece of gear is an **item instance** with a rarity (Normal / Magic / Rare / Unique), rolled prefixes/suffixes gated by item level, and an enhancement level +0..+10. 12 uniques (5 boss uniques + 7 element-themed world uniques). Monster and player **item quantity / rarity** feed the drop rolls. Six crafting orbs and Vo Lam enhancement stones drop from monsters. Ground loot has rarity-coloured labels and beams, with a flash + chime for rares/uniques. See [Gear, loot & crafting](#gear-loot--crafting). |
 | Inventory & blacksmith | **I** opens a 40-slot bag with a paper-doll equipment panel. You can click or drag to equip, shift-click or drag onto *Drop* to drop, and ctrl-click twice or drag onto *Destroy* to destroy. Currency stacks. Tooltips compare with what you're wearing. The **blacksmith** (anvil in Sunny Meadow, press **E** next to it) has the crafting/enhancement panel, a vendor, and a 40-slot **account-wide stash**. Potions: click to drink, or **Q**. |
-| Trade market | The **Trade Broker** in Sunny Meadow runs an asynchronous auction house. List bag items or currency stacks for gold (2% listing fee, the item goes into server escrow, 20 listings, 48 h). Search with filters (text, slot, rarity, level, class, ticket theme/tier, affix ≥ X, price), sort and page through results, then buy out instantly (5% sales tax). Sellers collect from a claim box, even if they were offline when the item sold. Starting gear and free tickets are account-bound. See [Trade market](#trade-market-trade-broker-asynchronous-auction-house). |
-| Hideout | A private, per-account hideout (Path of Exile style) with its own **Map Device, Ticket Merchant, Trade Broker and blacksmith + stash**. Enter it through the **Hideout Master** in Sunny Meadow, the `/hideout` chat command or **Esc > Hideout**; leave through the door. Buy Kenney CC0 decorations with gold (or find them in dungeons), place / move / rotate / flip / remove them on a grid in **decoration mode (H)**, move the stations, and pick one of six themes unlocked by Atlas Guardians. See [Hideout](#hideout-path-of-exile-style). |
+| NPC vendor | The **Vendor** in Sunny Meadow (and in every hideout) buys your loot for gold and sells potions, orbs and a rotating gear stock (every 2 h and every day). Stock persists across restarts. See [Milestone 2](#milestone-2-solo-play-parties-npc-vendor-tutorial-balance). |
+| Hideout | A private, per-account hideout (Path of Exile style) with its own **Map Device, Ticket Merchant, Vendor and blacksmith + stash**. Enter it through the **Hideout Master** in Sunny Meadow, the `/hideout` chat command or **Esc > Hideout**; leave through the door. Buy Kenney CC0 decorations with gold (or find them in dungeons), place / move / rotate / flip / remove them on a grid in **decoration mode (H)**, move the stations, and pick one of six themes unlocked by Atlas Guardians. See [Hideout](#hideout-path-of-exile-style). |
 | Accounts & saving | The first login with a name creates the account. The password is stored as SHA-256(random salt + password) using `HashingContext`. Later logins need the same password, and an account can't be logged in twice at once. The server saves level, XP, HP, **zone**, position, currency stacks, gold, every item instance (equipped, bag, and the account-wide stash) to JSON on disconnect, on every zone change, every 30 s, and on shutdown, then restores it on the next login (you come back in the zone you left). |
 | Chat | Global. **Enter** to type, Enter to send, **Esc** to cancel. The server stamps the sender's zone and name (`[Forest] Harry: hi`). Join/leave/level-up/defeat/boss messages show up in yellow. |
 | Web support | Browsers can't use ENet, so the server can also run in WebSocket mode (`--ws`), and the web build uses WebSockets automatically. |
@@ -804,7 +804,7 @@ Press **M** anywhere (or look at the Ticket Merchant's "M: atlas" hint) to open 
 Every account has a private hideout. It is a dynamic zone (`ho<N>`) built by the same instance system as dungeons: the server creates it on every peer from the account's layout, and the normal per-zone visibility keeps it private. It closes 20 s after it becomes empty (it stays open while a dungeon you opened from it is still running).
 
 * **Getting there:** talk to the **Hideout Master** in Sunny Meadow (E, east of the spawn), type `/hideout` in chat, or press **Esc > Hideout**. You can't go there from inside a dungeon. The **door** at the bottom of the hideout takes you back to Sunny Meadow. If you log out in your hideout, you log back in there, even after a server restart.
-* **Stations:** a Map Device, Ticket Merchant, Trade Broker and blacksmith (crafting, enhancement, vendor and the account-wide stash) stand in a default layout. They use the same code as their town versions. A map opened at the hideout's Map Device puts its portal under that device, and the dungeon's exit portal (and dying or the dungeon collapsing) brings you back to the hideout.
+* **Stations:** a Map Device, Ticket Merchant, Vendor and blacksmith (crafting, enhancement, vendor and the account-wide stash) stand in a default layout. They use the same code as their town versions. A map opened at the hideout's Map Device puts its portal under that device, and the dungeon's exit portal (and dying or the dungeon collapsing) brings you back to the hideout.
 * **Decorations:** 18 decorations made from Kenney CC0 tiles (trees, bamboo, statues, shrines, lanterns, banners, rugs, ponds, a snowman and more), bought with gold from the Hideout Master (or from the panel inside your hideout). Dungeon bosses rarely drop one (8%). Owned decorations form an inventory, and a hideout holds at most **200** placed decorations.
 * **Decoration mode (H in your hideout):** opens the panel and shows the grid. Choose one of your decorations, then:
   * **left-click** a cell to place it;
@@ -831,63 +831,87 @@ Every account has a private hideout. It is a dynamic zone (`ho<N>`) built by the
 
 Code: `scripts/hideout.gd` (catalog, themes, layout data and the pure validation used by both server and client), `scripts/hideout_server.gd` (the zones, requests and RPCs), `scripts/hideout_ui.gd` (the panel and decoration mode), plus small hooks in `zone.gd`, `zone_map.gd`, `instances.gd`, `player.gd` and `main.gd`. Screenshots: `tools/hideout_screenshots.sh`.
 
-## Trade market (Trade Broker, asynchronous auction house)
+## Milestone 2: solo play, parties, NPC vendor, tutorial, balance
 
-Players trade items for gold through the **Trade Broker** NPC in Sunny Meadow (south-west of the
-Ticket Merchant, press **E** next to him). It works like an auction house: sellers don't have to be
-online when their item sells.
+| Play Solo menu | NPC vendor | First-time tutorial | Two-player party in a dungeon |
+|---|---|---|---|
+| ![play solo](docs/m2/play_solo_menu.png) | ![vendor](docs/m2/vendor_ui.png) | ![tutorial](docs/m2/tutorial.png) | ![party](docs/m2/party_dungeon.png) |
 
-| Browse with filters (+ full item tooltip) | Listing an item | My Listings / claim box |
+### Play Solo
+**Play Solo** on the main menu starts the game in one click. The game runs its own server inside the
+same process, bound to `127.0.0.1` and limited to one player, so nobody else can join. There is no
+host-and-join step and no login. Pick one of **3 local profile slots** (an empty slot creates a new hero
+through class select). Profiles are saved in `user://volam_save/solo_profile.json`. The name/password
+login and Host/Join stay as they are for online play.
+
+### Parties and co-op dungeons
+Party commands are typed in chat. A party has up to 4 members, and an invite expires after 60 s.
+
+| Command | Effect |
+|---|---|
+| `/invite NAME` | invite an online player (the invitee gets an Accept/Decline prompt) |
+| `/accept`, `/decline` | answer an invite |
+| `/leave` | leave the party (the party disbands when one member is left) |
+| `/kick NAME` | leader only |
+| `/p TEXT` | party chat |
+
+The HUD lists the members with level, class and **current zone**, and the panel updates when someone
+changes zone. When the leader opens a dungeon (Map Device or ticket), **party members may enter
+that same private instance** through its portal. Players outside the party are still refused. The boss
+kill completes the run for everyone inside.
+
+**Version handshake:** on joining, the first thing a client sends is its build version (`BUILD_VERSION`
+in `main.gd`). A server running a different build replies with a clear message ("server runs X, you run
+Y") and disconnects the client. A client that skips the handshake is never logged in.
+
+### NPC vendor (replaces the player trade market)
+The player-to-player trade market is gone, along with its code, UI, tools and tests. The **Vendor** stands in
+Sunny Meadow and in every hideout (where the Trade Broker used to be). Press **E** next to the Vendor:
+* **Sell:** click an item or a stack in your bag (or drag it onto the slot). The Vendor pays the item's
+  sell price in gold. Account-bound starting gear can't be sold.
+* **Buy:** health and greater potions are always in stock. On top of those, **8 gear pieces** (item
+  levels spread over 1-20) and **2 orbs** rotate **every 2 hours and at each new UTC day**. Gear costs 4× its
+  sell price, and stock counts go down as players buy.
+* The server saves the stock, prices and what has sold out (in `vendor.json` beside the accounts save), so
+  they **survive restarts**. A restart within the same rotation shows the same stock. `--vendor-rotate=SECS`
+  changes the rotation period.
+
+### First-time tutorial
+New characters get a short overlay with 5 steps: **move** (WASD), **use a skill** (keys 1-4),
+**pick up loot** (a training drop appears at your feet), **equip gear** (I, then click an item) and **open the
+passive web** (T). Each step is completed by actually doing it. **Skip tutorial** ends it at once.
+The result (`done`, `skipped`, or `legacy` for characters created before M2) is saved on the character, so
+the tutorial is shown **once per character**.
+
+### Balance pass (first zone boss)
+`tools/boss_trial.sh LEVEL` puts one bot of each class at the intended level (Lv7, no XP gain during the
+fight) against the **Broodmother** (Whisperwood Forest boss, Lv8, 460 HP), all 5 in parallel. The bots
+use their skills sensibly, and ranged classes kite. The server logs a `BOSS FIGHT` report: time to kill,
+damage dealt and taken, deaths.
+
+| Class | Before (s / dmg taken / deaths) | After |
 |---|---|---|
-| ![market browse](docs/market_browse.png) | ![market sell](docs/market_sell.png) | ![market mine](docs/market_mine.png) |
+| Metal | 4.8 / 64 / 0 | 10.3 / 146 / 0 |
+| Wood | 17.1 / 334 / 0 | 13.4 / 239 / 0 |
+| Water | not killed (boss at 306/460) | 13.7 / 305 / 0 |
+| Fire | 11.9 / 238 / 0 | 11.5 / 162 / 0 |
+| Earth | 116.7 / 460 / 1 | 19.0 / 173 / 0 |
 
-* **Sell tab.** Click an item or a currency stack in your bag (or drag it onto the slot), pick the
-  quantity (stacks), set a price (1 - 10,000,000 gold) and press *List it*. You pay a **listing fee of
-  2% (min 1 gold)**, a gold sink, and the item leaves your bag into **server escrow**.
-  You can have **20 active listings** per account. A listing lasts **48 hours (real time)**.
-* **Browse tab.** Filters: name text, category/slot (weapon … ring, Dungeon Ticket, currency),
-  rarity, max required level, *usable by my class*, ticket theme + tier range, an affix stat with a
-  minimum (for example *Fire resistance >= 20*; all-res counts toward each element), and price range.
-  Sort by price (low/high) or newest. 8 results per page with Prev/Next. Hover the icon for the full tooltip.
-* **Buy** is an instant buyout. The server checks your gold and bag space, moves the item into your bag
-  and credits the seller with the price minus a **5% sales tax** (also a sink) into the seller's
-  **claim box**. If the seller is online they get a chat notice. Buying your own listing is refused.
-* **My Listings / Claim tab.** Cancel a listing (the item comes back to your bag, or to the claim box if
-  your bag is full). *Collect all* moves the claim box (gold from sales, expired items) into your bag.
-  The history shows what you sold, bought, cancelled and what expired.
-* **Expiry.** An expired listing goes back to the seller's claim box. If you were offline when something
-  sold or expired, you get a chat message the next time you log in.
-* **Untradeable items.** Items with the `bound` flag can't be listed. The starting gear of every new
-  character and the Ticket Merchant's free daily ticket are account-bound. The tooltip says
-  "Account-bound (can't be traded)". Gold itself isn't an item, and stackables can't be bound.
+Changes:
+* **Metal:** attack growth reduced, crit 15% → 8%.
+* **Wood:** more HP and attack.
+* **Water:** more HP, attack and defence growth; Ice Shard costs 6 mana.
+* **Earth:** more attack; Ground Slam cooldown 5 s and 160%; Earthquake 130%.
 
-### How it's built (and why it can't duplicate items)
+Logs are in `test-logs/m2_balance_*.txt`.
 
-* `scripts/market.gd` holds the shared rules: fee/tax, tradeability, filters, sort and paging, and
-  save validation. `scripts/market_server.gd` is the server node: requests, escrow, claim boxes,
-  expiry, login notices and the RPCs to the owner. `scripts/market_ui.gd` is the panel.
-* Everything is **server-authoritative**. Clients send requests (`list`, `buy`, `cancel`, `claim`,
-  `browse`, `mine`), and only `browse`/`mine` work away from the broker.
-* **Races.** Requests are handled one at a time on the server's main thread, and a buy has no `await`
-  in it. When two buyers hit the same listing, the first removes it and the second gets
-  "that listing is gone". The test fires two bots at one listing in the same second.
-* **Persistence and no duplication.** The market (listings in escrow, claim boxes, history) is saved
-  to its own file, **`user://volam_save/market.json`**, next to `accounts.json`. With a custom
-  `--save-file=X.json` it is `X_market.json`, and `--market-file=PATH` overrides it. Every
-  list/buy/cancel/claim/expiry is committed immediately, in this order:
-  1. `market.json` is written atomically (temp file + rename) with a new transaction number and a
-     **journal**: the post-trade character data of the players involved (buyer, online seller).
-  2. `accounts.json` is written atomically, stamped `"market_tx"` with the same number.
-
-  If the server dies between the two writes, the next start sees `accounts.json` behind `market.json`
-  and replays the journal into the characters before anyone can log in. So a crash can't leave an item
-  both in escrow and in a bag, and it can't take the buyer's gold without delivering the item (or the
-  reverse). The test suite kills the server with `kill -9` right after a trade, and with
-  `--market-crash-test=buy` it makes the server kill itself *exactly between* the two writes. Both
-  times it restarts the server and audits that no item uid exists twice and that gold is conserved
-  (fees and tax are the only sinks). `tools/market_audit.py` does the audit.
-  Saves from the in-progress build that kept the market inside `accounts.json` are migrated on load.
-* Market data loaded from disk is validated (`Market.sanitize_data`) like characters are.
+### Testing notes
+* `./run_local_test.sh` has phases 13 (Play Solo), 14 (party co-op dungeon, version handshake), 15 (vendor:
+  sell, buy, persistence, rotation) and 16 (tutorial: complete, skip, once per character).
+* Tests use `PORT` (default 7920), so they don't collide with a game on 7777.
+* `tools/stale_cache_check.sh` checks that a clone with an old `.godot/` cache still starts after `git pull`
+  without opening the editor. New shared scripts are preloaded (`const X := preload(...)`) instead of
+  relying on `class_name`.
 
 ## Project layout
 
@@ -895,13 +919,20 @@ online when their item sells.
 project.godot          Godot 4.2 project ("Project Volam", Compatibility renderer)
 scenes/main.tscn       The only scene (root node "Main")
 scripts/main.gd        Menu, HUD, chat, networking, login/accounts, zone transfers, saving, test bot
-scripts/market.gd      Trade market rules: fee / tax, tradeability, search filters, sort + paging, save validation
-scripts/market_server.gd Trade Broker server: listings in escrow, buy / cancel / claim box / expiry, atomic commits
 scripts/hideout.gd     Hideout data: decoration catalog, themes, layout + placement validation
 scripts/hideout_server.gd  Hideout zones (one private instance per account), requests, RPCs
 scripts/hideout_ui.gd  Hideout panel + decoration mode (grid overlay)
-scripts/market_ui.gd   Trade Broker panel: Browse / Sell / My Listings + claim box
 scripts/zones.gd       Zone definitions: sizes, core offsets, names, levels, portals, NPC cells, monster groups, boss lairs
+scripts/party.gd       Parties (server): invites, members, leader, party chat, HUD state; dungeon entry checks use it
+scripts/handshake.gd   Build version handshake: first RPC on join, mismatches refused with a message
+scripts/vendor.gd      NPC vendor rules: rotating stock roll, prices, save validation (preloaded, no class_name)
+scripts/vendor_server.gd Vendor server: persisted stock (vendor.json), rotation timer, buy / sell
+scripts/vendor_ui.gd   Vendor panel: stock list + buy, sell slot, rotation countdown
+scripts/tutorial_ui.gd First-time tutorial overlay (5 steps, skippable)
+tools/boss_trial.sh    Balance trial: one bot per class vs the first zone boss, prints the table
+tools/m2_screenshots.sh Regenerates docs/m2/*.png (needs a display)
+tools/stale_cache_check.sh Starts the game on a .godot cache from an older commit (git-pull regression check)
+tools/vendor_compare.py Test helper: vendor stock persistence / rotation comparison
 scripts/zone.gd        One zone: map + entity containers + spawners + visibility filters, monster groups (spawn/respawn/patrol), loot drops
 scripts/minimap.gd     HUD minimap + N full zone map
 scripts/zone_map.gd    Tile map (TileMap) generation for each zone (big overworld: terrain, core, sites, roads, lairs), collision, reachability, A*
@@ -937,8 +968,6 @@ scripts/net_util.gd    Helpers: MultiplayerSynchronizer configs, smoothing, floa
 assets/                Game textures (built from assets/kenney/ by tools/build_assets.py)
 tools/build_assets.py  Rebuilds the textures from the Kenney sheets (Python 3 + Pillow)
 tools/build_dungeon_icons.py Draws the ticket / chisel icons and the merchant sprite
-tools/market_screenshots.sh Regenerates docs/market_*.png (needs a display)
-tools/market_audit.py   Test helper: no-duplication (item uid) + gold-conservation audit of a save after market trades
 tools/build_gear_icons.py Draws the gear / orb icons (and cuts the anvil + chest from Kenney sheets)
 export_presets.cfg     Linux / Windows / Web export presets
 run_local_test.sh      Headless end-to-end test (server + bots, prints PASS/FAIL)
@@ -1031,20 +1060,21 @@ godot --headless --path project-volam -- --server --ws
 | `--bot-guardian=fire:10` (with `--bot-dungeon=full`, server `--debug-atlas-kit`) | Guardian test bot: asks for a debug ticket of that atlas node (the server marks the node before it completed), runs it to the end |
 | `--bot-watch-patrol` (server `--allow-warp`) | Bot warps next to a meadow patrol route (inside monster activation range, outside aggro range) and stands still; the server logs `patrol #id ... reached site k/N` |
 | `--menu-hideout-test` (client) | Opens the Esc menu and clicks its Hideout button with real mouse events, then logs whether the client ended up in its hideout |
-| `--market-duration=S` / `--market-max-listings=N` | server: listing lifetime in seconds (default 48 h) / active listings per account (default 20) |
-| `--market-short=PREFIX` | server (test): listings of accounts starting with PREFIX expire after 15 s |
-| `--market-file=PATH` | server: market save file (default `user://volam_save/market.json`, or `X_market.json` next to a custom `--save-file=X.json`) |
-| `--market-crash-test=buy` | server (test): kill itself right after writing market.json for the first buy, before accounts.json (crash-recovery test) |
-| `--bot-market=ROLE` | test bot walks to the Trade Broker and runs a market script (seller, buyer, race, pauper, fullbag, expirer, collector, qbuyer, stocker, onebuyer) |
-| `--open-market=browse[:filters]\|sell\|mine` / `--open-market-at=S` / `--market-tip` | open the market panel on a tab once in game (screenshots); `tools/market_screenshots.sh` regenerates the three market screenshots |
 | `--open-smith` / `--debug-tooltip=N` | open the blacksmith panel / show the tooltip of bag slot N once in game (screenshots) |
+| `--solo` / `--click-solo` / `--solo-slot=N` | Play Solo from the command line (or click the button on start) with local profile slot N (1-3) |
+| `--vendor-rotate=SECS` | server: vendor stock rotation period (default 7200) |
+| `--bot-vendor=1\|2` / `--open-vendor` | test bot vendor script / open the vendor panel when next to it (screenshots) |
+| `--bot-party=invite:NAME\|accept` | test bot forms a party (with `--bot-dungeon=full\|party`) |
+| `--bot-tutorial=MODE` / `--show-tutorial` | test bot plays or skips the tutorial / show the tutorial even headless |
+| `--fake-version=X` / `--skip-handshake` | client (tests): claim another build / log in without the version handshake |
+| `--no-xp` / `--bot-smart` | balance trials: no XP gain / bot uses skills sensibly and kites |
 
 Headless end-to-end test (about 14 minutes). It runs a server with bots in thirteen phases (with
 restarts in between) and prints PASS/FAIL for damage, death/respawn, XP/level-up,
 loot/pickup/potion/equip, account create/login/wrong-password/duplicate rejection, save/restore
 (including the zone), zone travel through every portal in both directions, zone visibility
 isolation, every monster type attacking/dying/respawning, and all three bosses (special attacks,
-kill, loot, chat announcement, respawn), classes/skills/status effects, targeting, the passive web, the trade market (listing fee + escrow, every search filter, buy with tax, self-buy / no gold / full bag / max listings / bound item rejected, two buyers racing one listing, cancel, expiry, claim box, offline seller paid on next login, persistence across restart, a kill -9 crash test, a crash exactly between the market.json and accounts.json writes, the free daily ticket refused, and a no-duplication / gold-conservation audit), the dungeon endgame (merchant, free ticket, ticket crafting, Map Device, private instances and their isolation, portals, death, boss completion, next-tier drops, map mods, IIQ/IIR on drops, atlas persistence, cleanup), hideout rewards (an Atlas Guardian kill unlocks its element's theme without any unlock-all flag, a boss decoration drop with a forced chance lands in the saved owned decorations, and the Esc-menu Hideout button clicked through the UI), overworld patrols walking between their sites while a player is in activation range, and the gear system (drops of every rarity, IIQ/IIR, item-level gating, every orb plus its invalid uses, enhancement success/failure/downgrade/gold, equip/unequip stats and resistances, selling, stash, drop/destroy, full bag, migration of old saves, persistence):
+kill, loot, chat announcement, respawn), classes/skills/status effects, targeting, the passive web, the NPC vendor (sell, buy, rotation, persistence), Play Solo, parties and co-op dungeons, the version handshake, the first-time tutorial, the dungeon endgame (merchant, free ticket, ticket crafting, Map Device, private instances and their isolation, portals, death, boss completion, next-tier drops, map mods, IIQ/IIR on drops, atlas persistence, cleanup), hideout rewards (an Atlas Guardian kill unlocks its element's theme without any unlock-all flag, a boss decoration drop with a forced chance lands in the saved owned decorations, and the Esc-menu Hideout button clicked through the UI), overworld patrols walking between their sites while a player is in activation range, and the gear system (drops of every rarity, IIQ/IIR, item-level gating, every orb plus its invalid uses, enhancement success/failure/downgrade/gold, equip/unequip stats and resistances, selling, stash, drop/destroy, full bag, migration of old saves, persistence):
 ```bash
 GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min, 400+ checks (needs python3)
 ```
@@ -1061,7 +1091,7 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min,
 | Left-click | Select monster/player (empty ground clears) |
 | Right-click | Select monster and attack |
 | Tab | Cycle nearest enemies |
-| Esc | Close the topmost open panel (market, Map Device/merchant, atlas, blacksmith, passive web, character sheet, inventory); with nothing open, open/close the in-game menu |
+| Esc | Close the topmost open panel (vendor, Map Device/merchant, atlas, blacksmith, passive web, character sheet, inventory); with nothing open, open/close the in-game menu |
 | Hold 1-4 | Ground skills: aim preview at the cursor, cast on release |
 | E | Pick up the nearest item (walking over items also picks them up). Next to the blacksmith anvil: open the blacksmith panel. Next to the Map Device / Ticket Merchant: open the dungeon panel |
 | M | Atlas (map of dungeon nodes + atlas passive tree) |
@@ -1121,7 +1151,7 @@ Esc no longer clears the target; click empty ground for that.
   `~/.local/share/godot/app_userdata/Project Volam/volam_save/accounts.json`. On Windows it's
   `%APPDATA%\Godot\app_userdata\Project Volam\volam_save\accounts.json`.
   Use `--save-file=PATH` to put it elsewhere. Delete the file to wipe all accounts.
-  The trade market (escrow, claim boxes) is saved beside it in `market.json`; delete both together.
+  The vendor stock is saved beside it in `vendor.json`; solo profiles are in `solo_profile.json`.
 * Each account entry holds the password hash and salt, `character` (class, level, XP, HP, zone, position, gold,
   currency stacks in `inventory`, gear instances in `equipment` and `bag`, passive-web nodes, `items_v: 2`) and the
   account-wide `stash` (gear instances).

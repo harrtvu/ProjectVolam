@@ -14,8 +14,8 @@ const STASH_SIZE := 40
 const DB := {
 	"gold": {"name": "Gold", "type": "currency", "desc": "Shiny coins."},
 	"slime_gel": {"name": "Slime Gel", "type": "material", "desc": "Sticky. The blacksmith pays a little for it.", "sell": 1},
-	"health_potion": {"name": "Health Potion", "type": "consumable", "heal": 15, "desc": "Restores 15 HP."},
-	"greater_potion": {"name": "Greater Potion", "type": "consumable", "heal": 40, "desc": "Restores 40 HP."},
+	"health_potion": {"name": "Health Potion", "type": "consumable", "heal": 15, "sell": 2, "desc": "Restores 15 HP."},
+	"greater_potion": {"name": "Greater Potion", "type": "consumable", "heal": 40, "sell": 6, "desc": "Restores 40 HP."},
 	"orb_transmute": {"name": "Orb of Transmutation", "type": "orb", "desc": "Upgrades a Normal item to Magic (1-2 affixes)."},
 	"orb_alteration": {"name": "Orb of Alteration", "type": "orb", "desc": "Rerolls the affixes of a Magic item."},
 	"orb_regal": {"name": "Regal Orb", "type": "orb", "desc": "Upgrades a Magic item to Rare, adding one affix (a Rare has at least 3)."},

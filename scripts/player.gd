@@ -296,6 +296,8 @@ func _handle_local_input() -> void:
 				_main.toggle_vendor_ui()
 			elif near_hideout_master() and not _loot_nearby() and _main:
 				_main.toggle_hideout_ui()
+			elif near_hideout_door() and not _loot_nearby():
+				_send("door")
 			else:
 				request_pickup()
 		if Input.is_action_just_pressed("use_potion"):
@@ -412,6 +414,12 @@ func request_hideout(op: String, args := {}) -> void:
 	var d: Dictionary = args.duplicate()
 	d["op"] = op
 	_send("hideout", d)
+
+
+## Standing at the hideout's exit door (E walks you through it, same as stepping on it).
+func near_hideout_door() -> bool:
+	return zone != null and Zones.is_hideout(zone.zone_id) \
+		and position.distance_to(zone.map.cell_pos(Hideouts.DOOR.get_center())) <= BLACKSMITH_RANGE
 
 
 func near_hideout_master() -> bool:
@@ -902,6 +910,12 @@ func handle_request(action: String, arg: Variant) -> void:
 			server_attack(arg if typeof(arg) == TYPE_DICTIONARY else {})
 		"pickup":
 			server_pickup()
+		"door":
+			if near_hideout_door() and not dead and _main and _portal_cd <= 0.0:
+				var door: Dictionary = zone.info["portals"][0]
+				_portal_cd = 1.0
+				_srv_log("%s used the hideout door (E)" % display_name)
+				_main.transfer_player.call_deferred(self, door["to"], door["arrive"])
 		"use":
 			server_use_item(str(arg))
 		"equip":

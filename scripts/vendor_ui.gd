@@ -17,6 +17,8 @@ var _sell_slot: Control
 var _sell_info: RichTextLabel
 var _sell_btn: Button
 var _status: Label
+var _buy_rows: Array = []   # [button, price label, price, qty] per stock row
+var _warn_t := 0.0
 var _t := 0.0
 
 
@@ -32,7 +34,13 @@ func _ready() -> void:
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 6)
 	add_child(vb)
-	vb.add_child(_label("Vendor  -  buy supplies, sell your loot   (E / Esc to close)", Color(1.0, 0.85, 0.5), 13))
+	var head := HBoxContainer.new()
+	vb.add_child(head)
+	var title := _label("Vendor  -  buy supplies, sell your loot   (E / Esc to close)", Color(1.0, 0.85, 0.5), 13)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	head.add_child(title)
+	_status = _label("", Color(1, 0.85, 0.3), 13)   # your gold, top-right (the panel covers the HUD's gold line)
+	head.add_child(_status)
 	_rot_lbl = _label("", Color(0.75, 0.75, 0.8), 10)
 	vb.add_child(_rot_lbl)
 	var sc := ScrollContainer.new()
@@ -62,8 +70,7 @@ func _ready() -> void:
 	h.add_child(_sell_info)
 	_sell_btn = _button("Sell", _sell, 110)
 	h.add_child(_sell_btn)
-	_status = _label("", Color(1, 0.85, 0.3), 11)
-	vb.add_child(_status)
+
 
 
 func set_player(p: Node, v: Node) -> void:
@@ -96,6 +103,7 @@ func _refresh_stock() -> void:
 		return
 	for c in _rows.get_children():
 		c.queue_free()
+	_buy_rows.clear()
 	for e in vendor.stock:
 		var h := HBoxContainer.new()
 		h.add_theme_constant_override("separation", 6)
@@ -122,8 +130,9 @@ func _refresh_stock() -> void:
 		pl.custom_minimum_size = Vector2(70, 0)
 		h.add_child(pl)
 		var b := _button("Sold out" if int(e["qty"]) <= 0 else "Buy", _buy.bind(int(e["id"])), 70)
-		b.disabled = int(e["qty"]) <= 0 or (player != null and player.gold < int(e["price"]))
+		b.disabled = int(e["qty"]) <= 0
 		h.add_child(b)
+		_buy_rows.append([b, pl, int(e["price"]), int(e["qty"])])
 	refresh()
 
 
@@ -139,7 +148,24 @@ func _hover(_slot: Control, on: bool, e: Dictionary, s: Control) -> void:
 
 
 func _buy(id: int) -> void:
-	player.request_vendor("buy", {"id": id, "n": 1})
+	for e in (vendor.stock if vendor else []):
+		if int(e.get("id", -1)) == id and player.gold < int(e["price"]):
+			_status.text = "Not enough gold (you have %d, it costs %d)" % [player.gold, int(e["price"])]
+			_status.add_theme_color_override("font_color", Color(1, 0.45, 0.4))
+			_warn_t = 3.0
+			if player._main:
+				player._main._log("vendor panel: Not enough gold for #%d (%d/%d)" % [id, player.gold, int(e["price"])])
+	player.request_vendor("buy", {"id": id, "n": 1})   # the server checks again (and logs the rejection)
+
+
+## Rows you can't afford look greyed out (price in red) but stay clickable, so a click explains why.
+func _update_affordable() -> void:
+	for r in _buy_rows:
+		if not is_instance_valid(r[0]):
+			continue
+		var poor: bool = player != null and player.gold < int(r[2]) and int(r[3]) > 0
+		r[0].modulate = Color(1, 1, 1, 0.45) if poor else Color.WHITE
+		r[1].add_theme_color_override("font_color", Color(1, 0.45, 0.4) if poor else Color(1, 0.85, 0.3))
 
 
 func select_uid(uid: int) -> void:
@@ -165,6 +191,10 @@ func _sell() -> void:
 
 func _process(delta: float) -> void:
 	_t -= delta
+	if _warn_t > 0.0:
+		_warn_t -= delta
+		if _warn_t <= 0.0:
+			refresh()
 	if visible and _t <= 0.0 and vendor:
 		_t = 1.0
 		var left: int = maxi(0, vendor.next_rotation - int(Time.get_unix_time_from_system()))
@@ -204,4 +234,7 @@ func refresh() -> void:
 		_sell_info.text = "[color=#999999]Nothing selected. Click an item in your bag.[/color]"
 	_sell_btn.text = "Sell for %d gold" % price if price > 0 else "Sell"
 	_sell_btn.disabled = price <= 0
-	_status.text = "Gold: %d" % player.gold
+	_update_affordable()
+	if _warn_t <= 0.0:
+		_status.text = "Gold: %d" % player.gold
+		_status.add_theme_color_override("font_color", Color(1, 0.85, 0.3))

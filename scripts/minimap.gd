@@ -9,7 +9,7 @@ var big := false           # N: full zone map in the middle of the screen
 var _zone_id := ""
 var _tex: ImageTexture
 var _map_size := Vector2i(1, 1)
-const SMALL := Vector2(220, 141)
+const SMALL := Vector2(180, 115)
 
 
 func _ready() -> void:
@@ -18,18 +18,22 @@ func _ready() -> void:
 
 func toggle_big() -> void:
 	big = not big
+	if big and get_parent():
+		get_parent().move_child(self, -1)   # topmost HUD child while open (over the skill bar too)
 	_layout()
 
 
 func _layout() -> void:
 	var vp := get_viewport_rect().size
+	z_index = 50 if big else 0           # the big map draws over chat, skill bar and help text
+	modulate.a = 1.0 if big else 0.75   # the corner minimap lets monsters/nameplates show through
 	if big:
 		var s := minf((vp.x - 120.0) / _map_size.x, (vp.y - 120.0) / _map_size.y)
 		size = Vector2(_map_size) * s
 		position = (vp - size) / 2.0
 	else:
 		size = SMALL
-		position = Vector2(vp.x - SMALL.x - 10.0, 112.0)
+		position = Vector2(vp.x - SMALL.x - 10.0, 96.0)
 
 
 func _process(_delta: float) -> void:
@@ -75,8 +79,8 @@ func _draw() -> void:
 	for p in z.players_root.get_children():
 		if p != me:
 			draw_circle(tp.call(p.position), dot + 0.5, Color(0.3, 0.9, 1.0))
-	draw_circle(tp.call(me.position), dot + 1.5, Color.WHITE)
-	draw_circle(tp.call(me.position), dot + 0.3, Color(0.1, 0.5, 1.0))
+	draw_circle(tp.call(me.position), dot + 2.5, Color(0, 0, 0, 0.8))   # dark outline so white reads on any ground
+	draw_circle(tp.call(me.position), dot + 1.5, Color.WHITE)          # "white: you" (legend) - no tint
 	var font := get_theme_default_font()
 	draw_string(font, Vector2(4, 13 if not big else 18), z.info["name"] + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
 	if big:

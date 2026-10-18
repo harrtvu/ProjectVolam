@@ -265,6 +265,7 @@ SAVE16="$(pwd)/$L/accounts_p16.json"; rm -f "$SAVE16"
 run --server --save-file="$SAVE16" --quit-after=36 > $L/p16_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Newbie --password=t --class=earth --bot --bot-no-gear --bot-tutorial=full --quit-after=32 > $L/p16_Newbie.log 2>&1 &
+run --join=127.0.0.1 --name=UiTest --password=t --class=fire --bot --bot-idle --ui-selftest --quit-after=14 > $L/p16_UiTest.log 2>&1 &
 run --join=127.0.0.1 --name=Skipper --password=t --class=water --bot --bot-tutorial=skip --quit-after=32 > $L/p16_Skipper.log 2>&1 &
 wait
 run --server --save-file="$SAVE16" --quit-after=14 > $L/p16b_server.log 2>&1 &
@@ -612,6 +613,7 @@ check "hideout Ticket Merchant works"                   "\[ho[0-9]+\] Decor took
 check "Map Device in the hideout opens a map"           "Decor opened a map from ho[0-9]+"                       p10_server.log
 check "dungeon exit portal leads to the hideout"        "inside the dungeon opened from the hideout \(zone dun[0-9]+, exit portal -> ho" p10_bot.log
 check "dungeon portal returns to the hideout"           "Zone transfer: Decor dun[0-9]+ -> ho[0-9]+"             p10_server.log
+check "hideout door works with E"                       "Decor used the hideout door \(E\)"                     p10b_server.log
 check "logout in the hideout restores there"            "Login 'Decor': restoring into the hideout"              p10b_server.log
 check "layout survives a server restart"                "logged back in \(restart\) \| zone ho[0-9]+, theme fire, .*5/200 decorations" p10b_bot.log
 check "door back to Sunny Meadow"                       "left the hideout through the door \| zone meadow"      p10b_bot.log
@@ -658,6 +660,7 @@ check "party invite sent"                              "\[party\] Leader invited
 check "invite to an offline name rejected"             "\[party\] Leader invite rejected: 'Nobody' is not online"        p14_server.log
 check "accept without an invite rejected"              "\[party\] Leader accept rejected: you have no pending party invite" p14_server.log
 check "party formed"                                   "\[party\] Member joined Leader's party #[0-9]+: Leader \(leader\), Member" p14_server.log
+check "party panel follows members into the dungeon"     "party state: 2 member.* zones: Leader@dun[0-9]+ Member@dun[0-9]+"   p14_Member.log
 check "member's HUD gets the party"                    "party state: 2 member\(s\) \[Leader, Member\], leader Leader"   p14_Member.log
 check "leader opens the dungeon"                       "\[dungeon\] Leader opened Ember Caverns"                          p14_server.log
 check "party member enters the leader's instance"      "\[dungeon\] Member entered (dun[0-9]+)"                           p14_server.log
@@ -684,6 +687,9 @@ check "unknown stock id rejected"                     "\[vendor\] Shopper buy re
 check "sell loot to the vendor for gold"              "Shopper sold \[[a-z]+\] .* for [0-9]+ gold"                       p15_server.log
 check "selling away from the vendor rejected"         "Shopper sell rejected: you must be at the vendor"                   p15_server.log
 check "buying without gold rejected"                  "\[vendor\] Pauper buy rejected: not enough gold"                  p15_server.log
+check "unaffordable buy explained in the panel"       "vendor panel: Not enough gold for #[0-9]+"                        p15_Pauper.log
+checkp "selling never drops the item on the ground"   "ground items near me before/after selling: (\d+) -> \1$"           p15_Shopper.log
+check "health potions sell for a little gold"         "Shopper sold [0-9]+ x health_potion for [0-9]+ gold"              p15_server.log
 check "buying with a full bag rejected"               "\[vendor\] FullBag buy rejected: your bag is full"                p15_server.log
 check "stock persists across restart (same rotation)" "\[vendor\] loaded accounts_p15_vendor.json: rotation [0-9]+ .*12 entries"  p15b_server.log
 if ! grep -q "stock rotated" $L/p15b_server.log && python3 tools/vendor_compare.py "$L/p15_vendor_before_restart.json" "$L/p15b_Shopper.log"; then echo "PASS  stock, prices and sold-out entries identical after restart"; else echo "FAIL  stock, prices and sold-out entries identical after restart"; fi
@@ -692,6 +698,9 @@ check "stock rotates on the timer"                    "\[vendor\] stock rotated 
 check "vendor offline checks"                         "vendor selftest: all [0-9]+ checks passed"                          gear_selftest.log
 if grep -rqE "market_server|market_ui|request_market" scripts/; then echo "FAIL  player market code removed"; else echo "PASS  player market code removed (no market scripts or requests left)"; fi
 echo; echo "== First-time tutorial (M2)"
+check "big windows exclusive incl. N map (I/N x40, C/T/atlas)" "UI SELFTEST exclusive windows .*: PASS"                    p16_UiTest.log
+check "N zone map draws above chat/skill bar/help/stats"   "UI SELFTEST N map above the HUD: PASS"                     p16_UiTest.log
+check "tutorial box never covers the inventory (step 4)"   "UI SELFTEST tutorial box clear of the inventory: PASS"     p16_UiTest.log
 check "tutorial starts for a new character"            "\[tutorial\] Newbie: starting the tutorial \(new character\)"   p16_server.log
 check "step 1: movement"                               "tutorial step 1 done: Move"                                   p16_Newbie.log
 check "step 2: skills (keys 1-4)"                      "tutorial step 2 done: Skills"                                 p16_Newbie.log
