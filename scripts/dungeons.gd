@@ -61,9 +61,15 @@ static func theme_name(t: String) -> String:
 
 ## Monster level inside a tier-N dungeon.
 ## T1 tuning (a fresh Lv6 must survive the first pull): monsters hit for x0.8 (not the boss),
-## and every pack within T1_FIRST_PULL_RADIUS px of the entrance is a pair.
+## and every pack within T1_FIRST_PULL_RADIUS px of the entrance is a pair (1200 px: a fresh Lv6
+## running in pulls 5-8 packs in its first 20 s; at 800 px the packs just past it did the damage).
 const T1_DMG_MULT := 0.8
-const T1_FIRST_PULL_RADIUS := 800.0
+const T1_FIRST_PULL_RADIUS := 1200.0
+## The warm-up packs (within T1_FIRST_PULL_RADIUS of a T1 entrance) hit softer still, so a fresh
+## Lv6 on the real kit (3 Health Potions) survives its first pull; the rest of T1 is unchanged.
+const T1_WARMUP_DMG_MULT := 0.6
+const T1_WARMUP_HP_MULT := 1.0
+const T1_WARMUP_PACKS := 99   # cap on how many of the nearest packs are warm-up (99 = every pack inside the radius; 8 tested: 26/30)
 
 
 static func level(tier: int) -> int:

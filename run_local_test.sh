@@ -799,7 +799,9 @@ if grep -q "XpFar gained" $L/p17_server.log; then echo "FAIL  far member gets no
 if grep -q "was slain by XpNear" $L/p17_server.log; then echo "FAIL  near member never attacked (XP came from the share)"; else echo "PASS  near member never attacked (XP came from the share)"; fi
 echo; echo "== Dungeon entrance safe area + T1 first pull (fresh Lv6 Pyromancer, no gear, --no-xp)"
 check "safe area: no pack spawns near the entrance"    "entrance safe area: radius 224 px .* no pack within 480 px .* nearest monster ([4-9][0-9]{2}|[0-9]{4}) px" p18_server.log
-check "T1 warm-up packs near the entrance are pairs"   "T1: [0-9]+ warm-up pack\(s\) of 2 within 800 px, monster damage x0\.80"   p18_server.log
+check "T1 warm-up packs near the entrance are pairs"   "T1: [0-9]+ warm-up pack\(s\) of 2 within 1200 px \(damage x0\.60 more, life x1\.00\), monster damage x0\.80"   p18_server.log
+check "warm-up monsters hit softer (tagged in the damage log)" "took [0-9]+ damage from .*\[pack #[0-9]+ warm-up\]" p18_server.log
+check "first-pull summary counts potions"              "FIRST PULL .*potions used [0-9]+, left [0-9]+"                    p18_server.log
 check "safe area: nothing attacks a player idling in it" "safe bot: idled 6s in the safe area, hp 51/51, in safe area true"      p18_SafeBot.log
 check "safe area: bot pulled a monster"                "safe bot: hit \(hp [0-9]+/51\) - retreating into the safe area"     p18_SafeBot.log
 check "safe area: chasers stop at its edge"            "stops chasing SafeBot at the entrance safe area"                     p18_server.log

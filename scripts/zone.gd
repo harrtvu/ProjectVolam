@@ -197,7 +197,7 @@ func _spawn_monster(data: Variant) -> Node:
 	var m := MonsterScript.new()
 	m.zone = self
 	m.setup(int(data["id"]), str(data["type"]), int(data["level"]), data["pos"], int(data.get("pack", -1)), bool(data.get("temp", false)),
-		{"el": str(data.get("el", "")), "elite": str(data.get("elite", ""))})
+		{"el": str(data.get("el", "")), "elite": str(data.get("elite", "")), "warmup": bool(data.get("warmup", false))})
 	_attach_filter(m)
 	if Zones.DB.has(zone_id) and not m.is_boss:
 		var sync := m.get_node("Sync") as MultiplayerSynchronizer
@@ -492,11 +492,23 @@ func spawn_dungeon() -> void:
 	var elites := 1 + tier / 4 + int(dungeon_mod("map_elites")) + int(afx.get("elites", 0.0))
 	for k in mini(elites, placed.size()):
 		placed[_rng.randi() % placed.size()][1] = 1
+	# T1 warm-up = the T1_WARMUP_PACKS packs nearest the entrance (by room centre), within the radius
+	var warm_rank := {}
+	if tier == 1:
+		var idx: Array = range(placed.size())
+		idx.sort_custom(func(a, b): return map.cell_pos(placed[a][0].get_center()).distance_to(safe_center()) < map.cell_pos(placed[b][0].get_center()).distance_to(safe_center()))
+		var r := 0
+		for k in idx:   # packs in rooms next to the entrance are mostly dropped by the safe area: they don't use up the count
+			var near := map.cell_pos(placed[k][0].get_center()).distance_to(safe_center()) < SAFE_RADIUS + SAFE_SPAWN_GAP
+			warm_rank[k] = 0 if near else r
+			if not near:
+				r += 1
 	var n_elite := 0
 	var skipped := 0
 	var first_pull := 0
 	var elite_carry := 0
-	for pk in placed:
+	for pi in placed.size():
+		var pk: Array = placed[pi]
 		var rect: Rect2i = pk[0]
 		var cell := _room_cell(rect)
 		if cell == Vector2i(-1, -1):
@@ -507,7 +519,9 @@ func spawn_dungeon() -> void:
 		_pack_counter += 1
 		packs += 1
 		var is_elite: bool = pk[1] == 1 or (elite_carry > 0 and tier == 1)
-		if tier == 1 and map.cell_pos(cell).distance_to(safe_center()) < Dungeons.T1_FIRST_PULL_RADIUS:
+		var warm: bool = tier == 1 and map.cell_pos(cell).distance_to(safe_center()) < Dungeons.T1_FIRST_PULL_RADIUS \
+			and int(warm_rank.get(pi, 999)) < Dungeons.T1_WARMUP_PACKS
+		if warm:
 			size = 2   # T1 warm-up: the packs nearest the entrance are pairs, and never elite
 			first_pull += 1
 			if is_elite:
@@ -517,6 +531,8 @@ func spawn_dungeon() -> void:
 			elite_carry = 0
 		for m in size:
 			var opts := {}
+			if warm:
+				opts["warmup"] = true
 			if is_elite and m == 0:
 				opts["elite"] = Dungeons.ELITE_MODS[_rng.randi() % Dungeons.ELITE_MODS.size()]
 				n_elite += 1
@@ -540,7 +556,8 @@ func spawn_dungeon() -> void:
 		nearest = minf(nearest, m.position.distance_to(safe_center()))
 	main.log_server("[%s] entrance safe area: radius %.0f px at %s, no pack within %.0f px (%d pack(s) dropped), nearest monster %.0f px%s" % [
 		zone_id, SAFE_RADIUS, safe_center().round(), SAFE_RADIUS + SAFE_SPAWN_GAP, skipped, nearest,
-		(" | T1: %d warm-up pack(s) of 2 within %.0f px, monster damage x%.2f" % [first_pull, Dungeons.T1_FIRST_PULL_RADIUS, Dungeons.T1_DMG_MULT]) if tier == 1 else ""])
+		(" | T1: %d warm-up pack(s) of 2 (nearest %d) within %.0f px (damage x%.2f more, life x%.2f), monster damage x%.2f" % [first_pull, Dungeons.T1_WARMUP_PACKS, Dungeons.T1_FIRST_PULL_RADIUS,
+			Dungeons.T1_WARMUP_DMG_MULT, Dungeons.T1_WARMUP_HP_MULT, Dungeons.T1_DMG_MULT]) if tier == 1 else ""])
 
 
 func _room_cell(rect: Rect2i) -> Vector2i:

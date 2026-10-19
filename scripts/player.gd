@@ -71,6 +71,7 @@ var _fp_t := -1.0
 var _fp_min := 0
 var _fp_taken0 := 0
 var _fp_done := false
+var _fp_pots := 0                       # potions drunk during the first-pull window
 var _fp_pack := -2                     # pack id of the first pack this player fought in the dungeon
 var _fp_pack_t := 0.0
 var _fp_pack_done := false
@@ -269,6 +270,7 @@ func _server_tick(delta: float) -> void:
 			_fp_t = 0.0
 			_fp_min = hp
 			_fp_taken0 = stat_dmg_taken
+			_fp_pots = 0
 		_fp_t += delta
 		_fp_min = mini(_fp_min, hp)
 		_fp_pack_check -= delta
@@ -761,6 +763,8 @@ func server_take_damage(amount: int, source: String, src_element: String = "", a
 			return
 	hp = maxi(0, hp - dmg)
 	stat_dmg_taken += dmg
+	if attacker and is_instance_valid(attacker) and zone and zone.is_dungeon() and "pack_id" in attacker:
+		note += " [pack #%d%s]" % [attacker.pack_id, " warm-up" if attacker.get("warmup") else ""]
 	_srv_log("%s took %d damage from %s (hp %d/%d)%s" % [display_name, dmg, source, hp, max_hp, note])
 	if hp == 0 and tm("flag:phoenix") > 0.0 and _phoenix_cd <= 0.0:
 		_phoenix_cd = 60.0
@@ -798,7 +802,8 @@ func _first_pack_engaged(m: Node) -> void:
 		for o in zone.monsters_root.get_children():
 			if o.alive and o.pack_id == _fp_pack:
 				n += 1
-		_srv_log("FIRST PACK %s engages pack #%d (%d x %s) %.1fs after landing, hp %d/%d" % [display_name, _fp_pack, n, m.display_name, _fp_t, hp, max_hp])
+		_srv_log("FIRST PACK %s engages pack #%d (%d x %s%s, %d px from the entrance) %.1fs after landing, hp %d/%d" % [display_name, _fp_pack, n, m.display_name,
+			", warm-up" if m.get("warmup") else "", roundi(m.home.distance_to(zone.safe_center())), _fp_t, hp, max_hp])
 
 
 func _first_pack_report(how: String) -> void:
@@ -813,8 +818,12 @@ func _first_pull_report(how: String) -> void:
 	var party := 1
 	if _main and _main.get("parties"):
 		party = _main.parties.members_of(account_key).size()
-	_srv_log("FIRST PULL %s Lv%d %s (party of %d) in %s: %s %.1fs | hp min %d/%d, now %d, damage taken %d" % [display_name, level, class_id, party,
-		zone.info["name"], how, _fp_t, _fp_min, max_hp, hp, stat_dmg_taken - _fp_taken0])
+	var left := 0
+	for pid in inventory:
+		if Items.stat(pid, "heal") > 0:
+			left += int(inventory[pid])
+	_srv_log("FIRST PULL %s Lv%d %s (party of %d) in %s: %s %.1fs | hp min %d/%d, now %d, damage taken %d, potions used %d, left %d" % [display_name, level, class_id, party,
+		zone.info["name"], how, _fp_t, _fp_min, max_hp, hp, stat_dmg_taken - _fp_taken0, _fp_pots, left])
 
 
 func _server_respawn() -> void:
@@ -1126,6 +1135,8 @@ func server_use_item(item_id: String) -> void:
 	var heal := Items.stat(item_id, "heal")
 	hp = mini(max_hp, hp + heal)
 	_srv_log("%s used %s (+%d hp -> %d/%d)" % [display_name, item_id, heal, hp, max_hp])
+	if zone and zone.is_dungeon() and not _fp_done and _fp_t >= 0.0:
+		_fp_pots += 1
 	push_inventory()
 
 

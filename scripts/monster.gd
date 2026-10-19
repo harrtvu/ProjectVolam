@@ -67,6 +67,7 @@ var _label: Label
 var _tint := Color.WHITE
 var _born_ms := Time.get_ticks_msec()
 # dungeon instances: map modifiers + elites (see dungeons.gd)
+var warmup := false           # T1 warm-up pack near the entrance (softer hits)
 var elite := ""               # "" or an elite modifier (hasted / armoured / brutal / regenerating)
 var _dmg_mult := 1.0
 var _spd_mult := 1.0
@@ -96,6 +97,7 @@ func setup(id: int, t: String, lv: int, pos: Vector2, pack: int, temp: bool, opt
 	if Classes.ELEMENTS.has(str(opts.get("el", ""))):
 		element = str(opts["el"])   # dungeon monsters take the dungeon's element
 	elite = str(opts.get("elite", ""))
+	warmup = bool(opts.get("warmup", false))
 	level = lv
 	max_hp = Monsters.max_hp(t, lv)
 	_apply_dungeon_mods()
@@ -148,6 +150,9 @@ func _apply_dungeon_mods() -> void:
 	defense += int(dm.get("map_mon_def", 0.0))
 	if zone and int(zone.info.get("dungeon", {}).get("tier", 0)) == 1 and not is_boss:
 		_dmg_mult *= Dungeons.T1_DMG_MULT   # T1 = the first dungeon a fresh Lv6 enters
+	if warmup:
+		_dmg_mult *= Dungeons.T1_WARMUP_DMG_MULT
+		max_hp = maxi(1, roundi(max_hp * Dungeons.T1_WARMUP_HP_MULT))
 	if elite != "":
 		max_hp = roundi(max_hp * 2.5)
 		_dmg_mult *= 1.3
