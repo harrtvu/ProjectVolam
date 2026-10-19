@@ -253,6 +253,10 @@ var debug_start_level := 0
 var allow_warp := false
 var _warp_to := ""
 var _warp_cell := Vector2i(-1, -1)
+var _probe_last_pos := Vector2.INF   # --bot-probe: stuck detection on the walk to an out-of-sight monster
+var _probe_still_t := 0.0
+var _probe_goal_id := -1
+var _probe_skip := {}
 var _bot_probe_goal := Vector2.INF   # --bot-probe: walk toward a monster behind a wall until the line-of-sight probe can fire
 var _save_timer := 0.0
 
@@ -3899,12 +3903,24 @@ func _bot_targeting(me: Node, zone: Node, delta: float) -> void:
 			if req.is_empty() and _bot_probe_step >= 3:
 				# no monster behind a wall within reach right now (big maps: often none nearby);
 				# head for the nearest one that is out of sight, so the probe gets its chance
+				# no headway for 3 s (the walk toward it is blocked): skip that monster from now on
+				if me.position.distance_to(_probe_last_pos) > 24.0:
+					_probe_last_pos = me.position
+					_probe_still_t = 0.0
+				else:
+					_probe_still_t += 0.5
+				if _probe_still_t >= 3.0 and _probe_goal_id >= 0:
+					_probe_skip[_probe_goal_id] = true
+					_log("probe: no progress toward m%d for 3s (blocked), trying another monster" % _probe_goal_id)
+					_probe_still_t = 0.0
+				_probe_goal_id = -1
 				var bd := 1500.0
 				for m in zone.monsters_root.get_children():
 					var d2: float = m.position.distance_to(me.position)
-					if m.alive and d2 < bd and not zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)):
+					if m.alive and d2 < bd and not _probe_skip.has(m.monster_id) and not zone.map.has_los(me.position + Vector2(0, -6), m.position + Vector2(0, -6)):
 						bd = d2
 						_bot_probe_goal = m.position
+						_probe_goal_id = m.monster_id
 				_bot_probe_t = 0.5
 				return   # try again shortly
 			_bot_probe_step += 1
