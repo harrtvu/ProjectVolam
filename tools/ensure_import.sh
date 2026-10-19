@@ -7,6 +7,7 @@ GODOT="${GODOT:-godot}"
 cd "$(dirname "$0")/.."
 missing() {
   git ls-files '*.import' 2>/dev/null | while read -r f; do
+    [ -e "${f%.import}" ] || continue   # orphan .import (its asset was removed, e.g. assets/slime.png): nothing to import
     p=$(sed -n 's/^path="res:\/\/\(.*\)"$/\1/p' "$f" | head -1)
     [ -n "$p" ] && [ ! -e "$p" ] && echo "$f"
   done
