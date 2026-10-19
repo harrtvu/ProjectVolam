@@ -1303,6 +1303,8 @@ func _update_party_label() -> void:
 		lines.append("%s%s  Lv%d %s%s" % ["* " if str(m["name"]) == party_leader else "  ", m["name"], int(m.get("level", 0)),
 			Classes.info(cls)["name"] if Classes.exists(cls) else "", ("  [%s]" % zname) if zname != "" else ""])
 	party_label.text = "\n".join(lines)
+	if hud and hud.get_node_or_null("PartyPanel"):
+		(hud.get_node("PartyPanel") as Control).reset_size()
 	if party_label.visible:
 		_log("party panel: %s" % " | ".join(lines.slice(1)))
 
@@ -1592,11 +1594,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			handle_escape()
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		select_at_mouse()
+		_dbg_clicks += 1
+		select_at_mouse(event.position)
 		get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		# bonus: right-click a monster = select it and attack
-		select_at_mouse()
+		select_at_mouse(event.position)
 		var me := _local_player()
 		if me and NetUtil.selected != null:
 			me.request_attack()
@@ -1611,20 +1614,24 @@ func _cursor_zone_pos(me: Node) -> Vector2:
 	return me.position + me.get_local_mouse_position()
 
 
-## Left click: select the monster (or player) under the cursor, or clear.
-func select_at_mouse() -> void:
+## Left click: select the monster (or player) under the cursor, or clear. `screen_pos` = the
+## click's own position (not the mouse "now"); the hit area is generous (moving monsters: the drawn
+## position or where the server has it, whichever is closer).
+func select_at_mouse(screen_pos = null) -> void:
 	var me := _local_player()
 	if me == null or me.zone == null:
 		return
 	var pt := _cursor_zone_pos(me)
+	if screen_pos is Vector2:
+		pt = me.get_parent().get_global_transform_with_canvas().affine_inverse() * screen_pos
 	var best: Node = null
 	var best_d := INF
 	for m in me.zone.monsters_root.get_children():
 		if not m.alive:
 			continue
 		var sc := float(m.def.get("scale", 1.0))
-		var d: float = (m.position + Vector2(0, -10.0 * sc)).distance_to(pt)
-		if d <= 18.0 * sc + 4.0 and d < best_d:
+		var d: float = minf((m.position + Vector2(0, -10.0 * sc)).distance_to(pt), (m.sync_pos + Vector2(0, -10.0 * sc)).distance_to(pt))
+		if d <= 22.0 * sc + 10.0 and d < best_d:
 			best_d = d
 			best = m
 	if best == null:
@@ -1635,7 +1642,27 @@ func select_at_mouse() -> void:
 				best = p
 	NetUtil.selected = best
 	if best:
-		_log("selected target %s" % best.display_name)
+		_log("selected target %s (click %s, %d px from it)" % [best.display_name, pt.round(), roundi(best_d)])
+	elif bot_mode:
+		var near := INF
+		for m in me.zone.monsters_root.get_children():
+			if m.alive:
+				near = minf(near, m.position.distance_to(pt))
+		_log("click at %s selected nothing (nearest monster %.0f px)" % [pt.round(), near])
+	if multiplayer.has_multiplayer_peer() and not multiplayer.is_server():
+		report_selection.rpc_id(1, (best.monster_id if best.has_method("take_damage") else best.peer_id) if best else -1,
+			"m" if best and best.has_method("take_damage") else "p", best.display_name if best else "")
+
+
+## Client -> server, log only: what the player selected (so a cast can be matched to it).
+@rpc("any_peer", "reliable")
+func report_selection(id: int, kind: String, what: String) -> void:
+	if not multiplayer.is_server():
+		return
+	var p := _player_node(multiplayer.get_remote_sender_id())
+	if p == null:
+		return
+	p._srv_log("%s selected target %s" % [p.display_name, ("%s (%s%d)" % [what.left(40), kind, id]) if id >= 0 else "none (cleared)"])
 
 
 ## Tab: cycle through living monsters near you, nearest first.
@@ -1807,6 +1834,11 @@ func npc_screen_rects() -> Array:
 ## HUD vs world: fade the top-left stats panel and the help text while an NPC (and its label) is
 ## under them; hide the corner minimap while a right-side window (inventory, vendor, smith) is open.
 func _hud_declutter() -> void:
+	var sp := hud.get_node("StatsPanel") as Control
+	sp.reset_size()   # shrink back after a long line
+	var pp := hud.get_node_or_null("PartyPanel") as Control
+	if pp:
+		pp.position = Vector2(sp.position.x, sp.get_global_rect().end.y + 6.0)
 	var rects := npc_screen_rects()
 	for c in [hud.get_node("StatsPanel"), info_label]:
 		var under := false
@@ -1850,7 +1882,9 @@ func _place_npc_labels() -> void:
 
 func _npc_label_avoid(me: Node) -> Array:
 	var xf: Transform2D = me.get_global_transform_with_canvas()
-	return [info_label.get_global_rect().grow(6), minimap.get_global_rect().grow(8), hud.get_node("StatsPanel").get_global_rect().grow(4),
+	var pp := hud.get_node("PartyPanel") as Control
+	return [info_label.get_global_rect().grow(6), minimap.get_global_rect().grow(8),
+		hud.get_node("StatsPanel").get_global_rect().merge(pp.get_global_rect() if pp.visible else hud.get_node("StatsPanel").get_global_rect()).grow(4),
 		Rect2(xf * Vector2(-80, -52), Vector2(160, 18) * xf.get_scale()).grow(10)]   # my name tag, with room
 
 
@@ -2138,6 +2172,10 @@ func _update_hud(delta: float) -> void:
 		if bot_mode and _shown_zone != "" and not multiplayer.is_server():
 			# the very frame our player shows up in the new zone: the old zone's entities must already be gone
 			_log("zone switch %s -> %s: foreign_entities=%d" % [_shown_zone, me.zone.zone_id, _foreign_count(me.zone.zone_id)])
+		if _shown_zone != "" and me.zone.is_dungeon() and Zones.exists(_shown_zone):
+			# stepped through a map portal: my own view jumps to the dungeon, so the beam plays where I land
+			MapPortalVisualScript.spawn_beam(me.zone, me.position)
+			_log("portal fx: teleport beam on arrival in %s at %s" % [me.zone.zone_id, me.position.round()])
 		_show_zone(me.zone.zone_id)
 	if _banner_t > 0.0:
 		_banner_t -= delta
@@ -2177,7 +2215,7 @@ func _update_hud(delta: float) -> void:
 	if zi.has("dungeon"):
 		var dd: Dictionary = zi["dungeon"]
 		var aq: float = Dungeons.atlas_iiq(me.atlas)
-		zone_label.text += "   Map: +%d%% quantity (+%d%% atlas)  +%d%% rarity%s" % [roundi(dd.get("iiq", 0.0)), roundi(aq), roundi(dd.get("iir", 0.0)),
+		zone_label.text += "\nMap: +%d%% quantity (+%d%% atlas)  +%d%% rarity%s" % [roundi(dd.get("iiq", 0.0)), roundi(aq), roundi(dd.get("iir", 0.0)),
 			("  -  %d portals left" % int(me.run_info["portals"])) if not me.run_info.is_empty() else ""]
 	if ui_selftest and _elapsed > 4.0:
 		ui_selftest = false
@@ -3072,6 +3110,33 @@ func _aim_test_monster(me: Node) -> Node:
 	return best
 
 
+var _dbg_clicks := 0
+
+
+func _controls_at(n: Node, at: Vector2, out: Array) -> void:
+	if n is CanvasItem and not (n as CanvasItem).visible:
+		return
+	if n is Control and (n as Control).mouse_filter != Control.MOUSE_FILTER_IGNORE and (n as Control).get_global_rect().has_point(at):
+		out.append("%s(%s)" % [n.get_path(), n.get_class()])
+	for c in n.get_children():
+		_controls_at(c, at, out)
+
+
+## A real left click (press + release) at a screen position, through the engine's input path.
+func _feed_click(at: Vector2) -> void:
+	for pressed in [true, false]:
+		var mb := InputEventMouseButton.new()
+		mb.button_index = MOUSE_BUTTON_LEFT
+		mb.pressed = pressed
+		mb.position = at
+		mb.global_position = at
+		Input.parse_input_event(mb)
+		Input.flush_buffered_events()
+		if DisplayServer.get_name() == "headless":
+			get_viewport().push_input(mb, true)   # `at` is in viewport (canvas) coordinates, not window pixels
+		await get_tree().process_frame
+
+
 func _first_focusable(n: Node) -> Control:
 	for c in n.get_children():
 		if c is Control and c.visible and c.focus_mode != Control.FOCUS_NONE:
@@ -3100,7 +3165,20 @@ func _run_aim_selftest() -> void:
 	bot_idle = true   # the bot walked up to monsters; stand still for the test
 	bot_dir = Vector2.ZERO
 	var m := _aim_test_monster(me)
-	NetUtil.selected = m
+	# a real left click (Input.parse_input_event + the window path) a few px off the monster's drawn
+	# body while it may be moving: must select it, the server logs the selection
+	NetUtil.selected = null
+	var click_at: Vector2 = m.get_global_transform_with_canvas() * Vector2(7, -4)
+	await _feed_click(click_at)
+	# PASS: the clicked monster, or another one standing right there (slimes overlap) that the click is nearer to
+	var click_ok: bool = NetUtil.is_selected(m) or (NetUtil.selected != null and is_instance_valid(NetUtil.selected) \
+		and NetUtil.selected.has_method("take_damage") and NetUtil.selected.position.distance_to(m.position) < 40.0)
+	_log("AIM SELFTEST click: %s (clicked %s px on screen next to %s)" % ["PASS selected " + NetUtil.selected.display_name if click_ok else "FAIL selected %s" % (NetUtil.selected.display_name if NetUtil.selected else "nothing"), click_at.round(), m.display_name])
+	if not NetUtil.is_selected(m):
+		var under: Array = []
+		_controls_at(get_tree().root, click_at, under)
+		_log("AIM SELFTEST click diagnostics: unhandled clicks seen %d, controls under the click that take the mouse: [%s]" % [_dbg_clicks, ", ".join(under)])
+		NetUtil.selected = m   # (keep testing the aim part)
 	_test_cursor = (me.position + (me.position - m.position).normalized() * 150.0).round()
 	_log("AIM SELFTEST target: selected %s at %s, cursor on the other side at %s" % [m.display_name, m.position.round(), _test_cursor])
 	await _press_skill_key(KEY_1)
@@ -3178,6 +3256,16 @@ func _run_ui_selftest() -> void:
 	var c_r: Rect2 = char_sheet.get_global_rect()
 	var c_ok: bool = not tutorial_ui.get_global_rect().intersects(c_r) or char_sheet.get_index() > tutorial_ui.get_index()
 	_log("UI SELFTEST C panel not covered by the tutorial box: %s (box %s, C panel %s, C above the box %s)" % ["PASS" if c_ok else "FAIL", tutorial_ui.get_global_rect(), c_r, char_sheet.get_index() > tutorial_ui.get_index()])
+	# 3b2. a single left click inside the open C panel (text, empty space) keeps it open
+	_open_exclusive(char_sheet, true)
+	for f in 2:
+		await get_tree().process_frame
+	var cr: Rect2 = char_sheet.get_global_rect()
+	var click_ok := true
+	for at in [cr.get_center(), cr.position + Vector2(40, 60), cr.position + cr.size * Vector2(0.8, 0.85)]:
+		await _feed_click(at)
+		click_ok = click_ok and char_sheet.visible
+	_log("UI SELFTEST a click inside the C panel keeps it open: %s" % ("PASS" if click_ok else "FAIL (closed)"))
 	# 3c. C and Esc close the open C panel (real key events), also after clicking inside it
 	var focusable := _first_focusable(char_sheet)
 	if focusable:
@@ -3235,16 +3323,29 @@ func _run_ui_selftest() -> void:
 		if tutorial_ui.get_global_rect().intersects(r):
 			npc_hit.append(r)
 	var fewest := 999
-	var vp_sz := get_viewport().get_visible_rect().size
-	for c in [Vector2((vp_sz.x - tutorial_ui.size.x) / 2.0, 64.0), Vector2((vp_sz.x - tutorial_ui.size.x) / 2.0, vp_sz.y - 80.0 - tutorial_ui.size.y),
-			Vector2(vp_sz.x - tutorial_ui.size.x - 10.0, vp_sz.y - 80.0 - tutorial_ui.size.y), Vector2(10.0, 176.0), Vector2(vp_sz.x - tutorial_ui.size.x - 10.0, 250.0)]:
-		if Rect2(c, tutorial_ui.size).intersects(hud.get_node("ChatPanel").get_global_rect()):
-			continue   # spots over the chat panel are not allowed (long chat lines stay readable)
+	var sb: Array = tutorial_ui.spots_and_busy()
+	for c in sb[0]:
+		var blocked := false
+		for bb in sb[1]:
+			blocked = blocked or Rect2(c, tutorial_ui.size).intersects(bb)
+		if blocked:
+			continue   # spots over the chat / HUD / windows are not allowed
 		var k := 0
 		for r in npc_screen_rects():
 			if Rect2(c, tutorial_ui.size).intersects(r):
 				k += 1
 		fewest = mini(fewest, k)
+	if fewest == 999:
+		fewest = npc_hit.size()   # no free spot at all: the fallback is judged by the HUD checks
+	var hud_hit := []
+	for hn in ["StatsPanel", "ChatPanel"]:
+		if tutorial_ui.get_global_rect().intersects(hud.get_node(hn).get_global_rect()):
+			hud_hit.append(hn)
+	if tutorial_ui.get_global_rect().intersects(info_label.get_global_rect()):
+		hud_hit.append("help text")
+	if tutorial_ui.get_global_rect().intersects(skill_bar.get_global_rect()):
+		hud_hit.append("skill bar")
+	_log("UI SELFTEST tutorial box clear of the HUD (stats, chat, help text, skill bar): %s (covers [%s])" % ["PASS" if hud_hit.is_empty() else "FAIL", ", ".join(hud_hit)])
 	_log("UI SELFTEST tutorial box clear of NPC labels: %s (box %s, %d NPC labels on screen, %d covered, fewest possible %d; %s)" % [
 		"PASS" if not npc_screen_rects().is_empty() and npc_hit.size() == fewest else "FAIL",
 		tutorial_ui.get_global_rect(), npc_screen_rects().size(), npc_hit.size(), fewest, tutorial_ui.place_info])
@@ -4651,12 +4752,24 @@ func _build_ui() -> void:
 	zone_label = Label.new()
 	zone_label.add_theme_font_size_override("font_size", 13)
 	zone_label.add_theme_color_override("font_color", Color(0.75, 0.85, 1.0))
+	zone_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART   # long dungeon lines wrap: the box stays 230 px wide
 	svb.add_child(zone_label)
+	# the party list is its own box under the stats (it used to grow the stats box, which the HUD
+	# declutter then faded whenever an NPC was under the taller box)
+	var party_panel := PanelContainer.new()
+	party_panel.name = "PartyPanel"
+	party_panel.position = Vector2(10, 200)
+	party_panel.add_theme_stylebox_override("panel", _panel_style())
+	party_panel.visible = false
+	hud.add_child(party_panel)
 	party_label = Label.new()
 	party_label.add_theme_font_size_override("font_size", 13)
 	party_label.add_theme_color_override("font_color", Color(0.6, 1.0, 0.7))
 	party_label.visible = false
-	svb.add_child(party_label)
+	party_label.visibility_changed.connect(func():
+		party_panel.visible = party_label.visible
+		party_panel.reset_size())
+	party_panel.add_child(party_label)
 	invite_box = PanelContainer.new()
 	invite_box.set_anchors_preset(Control.PRESET_CENTER_TOP)
 	invite_box.position = Vector2(-150, 160)

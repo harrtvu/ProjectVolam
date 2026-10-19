@@ -119,6 +119,14 @@ var _spot := -1   # (self-test) how the last placement went
 ## Where the box sits: never over an open big window, and over as few NPC / station labels
 ## (Map Device, Blacksmith ...) as possible; ties keep the earlier (preferred) spot.
 func _place() -> void:
+	var sb := spots_and_busy()
+	var cands: Array = sb[0]
+	var busy: Array = sb[1]
+	_place_in(cands, busy)
+
+
+## [candidate positions, rects the box must not cover] (shared with the UI self-test).
+func spots_and_busy() -> Array:
 	var vp := get_viewport_rect().size
 	var cands := [Vector2((vp.x - size.x) / 2.0, 64.0), Vector2((vp.x - size.x) / 2.0, vp.y - 80.0 - size.y),
 		Vector2(vp.x - size.x - 10.0, vp.y - 80.0 - size.y), Vector2(10.0, 176.0), Vector2(vp.x - size.x - 10.0, 250.0)]
@@ -126,9 +134,18 @@ func _place() -> void:
 	for w in main._big_windows() + [main.minimap]:
 		if w.visible and (w != main.minimap or main.minimap.big):
 			busy.append(w.get_global_rect())
-	var chat: Control = main.hud.get_node_or_null("ChatPanel") if main.hud else null
-	if chat and chat.visible:
-		busy.append(chat.get_global_rect())   # long chat lines must stay readable
+	for hud_name in ["ChatPanel", "StatsPanel", "PartyPanel"]:   # chat lines, my HP/MP/zone, the party list stay readable
+		var c: Control = main.hud.get_node_or_null(hud_name) if main.hud else null
+		if c and c.visible:
+			busy.append(c.get_global_rect())
+	if main.skill_bar and main.skill_bar.visible:
+		busy.append(main.skill_bar.get_global_rect())
+	if main.info_label:
+		busy.append(main.info_label.get_global_rect())
+	return [cands, busy]
+
+
+func _place_in(cands: Array, busy: Array) -> void:
 	var npcs: Array = main.npc_screen_rects()
 	var best := -1
 	var best_n := 999
@@ -149,7 +166,7 @@ func _place() -> void:
 		if n < best_n:
 			best_n = n
 			best = i
-	if counts.get(_spot, 999) == best_n:   # equally good: stay put (no jumping around while walking)
+	if best >= 0 and counts.get(_spot, -1) == best_n:   # equally good: stay put (no jumping around while walking)
 		best = _spot
 	_spot = best
 	if best < 0:   # no free spot (e.g. the tall C panel): the least covered one; open windows draw above the box
@@ -158,6 +175,9 @@ func _place() -> void:
 			var area := 0.0
 			for bb in busy:
 				area += Rect2(cands[i], size).intersection(bb).get_area()
+			for w in main._big_windows():   # an open window (inventory, C, ...) matters far more than the HUD
+				if w.visible:
+					area += 100.0 * Rect2(cands[i], size).intersection(w.get_global_rect()).get_area()
 			if area < least:
 				least = area
 				best = i

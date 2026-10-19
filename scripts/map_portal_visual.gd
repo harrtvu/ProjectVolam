@@ -45,6 +45,37 @@ static func _load_tex(path: String) -> Texture2D:
 	return ImageTexture.create_from_image(img)
 
 
+## One teleport beam at `pos` in `parent` (e.g. where the entering player lands), then it frees itself.
+static func spawn_beam(parent: Node, pos: Vector2) -> void:
+	var b := Beam.new()
+	b.position = pos
+	b.tex = _load_tex(TELEPORT_PATH)
+	parent.add_child(b)
+
+
+class Beam extends Node2D:
+	var tex: Texture2D
+	var _t := 0.0
+
+	func _ready() -> void:
+		z_index = 3
+		texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+
+	func _process(delta: float) -> void:
+		_t += delta
+		if _t * TELEPORT_FPS >= 12.0:
+			queue_free()
+		queue_redraw()
+
+	func _draw() -> void:
+		if tex == null or tex.get_height() == 0:
+			draw_circle(Vector2(0, -10), 18.0 * (1.0 - _t), Color(0.7, 0.85, 1.0, 0.5))
+			return
+		var th := tex.get_height()
+		var tf := mini(int(_t * TELEPORT_FPS), tex.get_width() / th - 1)
+		draw_texture_rect_region(tex, Rect2(-SIZE.x / 2.0, -SIZE.y, SIZE.x, SIZE.y * 1.5), Rect2(tf * th, 0, th, th))
+
+
 ## Is there an imported (.ctex) file for this source asset?
 static func _imported_ok(path: String) -> bool:
 	var cf := ConfigFile.new()

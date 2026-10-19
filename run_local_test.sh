@@ -756,9 +756,11 @@ for m in per-frame burst x11-merged keycode-only no-release; do for t in "/accep
 done; done
 check "skills back to back run out of mana (UiTest)"    "UiTest skill 4 rejected: not enough mana"                  p16_server.log
 check "tutorial box never covers the inventory (step 4)"   "UI SELFTEST tutorial box clear of the inventory: PASS"     p16_UiTest.log
+check "tutorial box keeps clear of the HUD (stats, help, skill bar)" "UI SELFTEST tutorial box clear of the HUD \(stats, chat, help text, skill bar\): PASS" p16_UiTest.log
 check "tutorial box keeps clear of the chat panel"        "UI SELFTEST tutorial box clear of the chat panel: PASS"   p16_UiTest.log
 check "tutorial box never covers the C panel"             "UI SELFTEST C panel not covered by the tutorial box: PASS" p16_UiTest.log
 check "NPC labels: Vendor label clear of my name tag, none on the HUD corners" "UI SELFTEST NPC labels at the vendor: PASS" p16_UiTest.log
+check "a single click inside the C panel keeps it open"  "UI SELFTEST a click inside the C panel keeps it open: PASS" p16_UiTest.log
 check "C closes the open C panel (focus inside it)"       "UI SELFTEST C closes the C panel: PASS"                   p16_UiTest.log
 check "Esc closes the open C panel (focus inside it)"     "UI SELFTEST C closes the C panel: .*, Esc closes it: PASS" p16_UiTest.log
 check "tutorial box keeps clear of NPC labels (Map Device...)" "UI SELFTEST tutorial box clear of NPC labels: PASS"   p16_UiTest.log
@@ -822,6 +824,8 @@ echo; echo "== Map portal (visible gate, entry area on the gate, refund when unu
 check "portal gate drawn above the ground, entry area = the gate, labels above it" "portal layout: gate .* \(same true\), label bottom -?[0-9]+ <= gate top -?[0-9]+: true, z [1-9]" p19_Corner.log
 check "gate uses the SpritePilot portal art (CC0)"   "portal layout: .* art sprite"                        p19_Corner.log
 check "teleport beam plays when someone steps in"   "portal fx: teleport beam on Corner's gate .* \(art sprite\)" p19_Corner.log
+check "the entering player sees the beam where it lands" "portal fx: teleport beam on arrival in dun[0-9]+" p19_Corner.log
+check "other players in town see the beam too"        "portal fx: teleport beam on Corner's gate"          p19_Unused.log
 check "bot aims at the gate's corner (outside the old 24 px radius)" "portal layout: .* \(2[5-9] px from the centre\)" p19_Corner.log
 check "standing on the drawn gate's corner enters"  "Corner entered dun[0-9]+"                              p19_server.log
 check "unused portal closes after the empty timeout" "closing dun[0-9]+ .*owner Unused\): empty for 10s"    p19_server.log
@@ -834,6 +838,8 @@ if grep -q "refunded Corner's" $L/p19_server.log; then echo "FAIL  no refund for
 echo; echo "== Skill aim (selected target; no target: the cursor at the key press)"
 AIM_T=$(grep -oE "AIM SELFTEST target: selected [A-Za-z ]+ at" $L/p20_AimTest.log | head -1 | sed -E 's/AIM SELFTEST target: selected (.*) at/\1/')
 check "aim test ran (target, then cursor)"  "AIM SELFTEST done"  p20_AimTest.log
+check "a real left click next to a monster selects it" "AIM SELFTEST click: PASS selected" p20_AimTest.log
+check "server logs the selected target"               "AimTest selected target [A-Za-z ]+ \(m[0-9]+\)" p20_server.log
 if [ -n "$AIM_T" ] && grep -q "AimTest aims Fireball at the selected target $AIM_T" $L/p20_server.log; then echo "PASS  target selected: Fireball goes to the target ($AIM_T), not the cursor"; else echo "FAIL  target selected: Fireball goes to the target ('$AIM_T')"; fi
 AIM_B=$(grep -oE "moved to \(-?[0-9]+, -?[0-9]+\) at the key press" $L/p20_AimTest.log | head -1 | grep -oE "\(-?[0-9]+, -?[0-9]+\)")
 AIM_A=$(grep -oE "cursor rested at \(-?[0-9]+, -?[0-9]+\)" $L/p20_AimTest.log | head -1 | grep -oE "\(-?[0-9]+, -?[0-9]+\)")
