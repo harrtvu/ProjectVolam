@@ -1187,6 +1187,11 @@ func login_result(ok: bool, message: String) -> void:
 	_log("Login rejected: %s" % message)
 	_rejected = true
 	if bot_mode or DisplayServer.get_name() == "headless":
+		# drop the connection right away: the server cuts us off 0.5 s later, and anything still
+		# sent on the reset ENet peer printed "Unable to send packet on channel 0" (fresh28 p14)
+		get_tree().paused = true   # and nothing may use the peer any more
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
 		shutdown(3)
 		return
 	multiplayer.multiplayer_peer.close()
