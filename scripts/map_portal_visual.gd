@@ -6,6 +6,7 @@ extends Node2D
 ## someone steps through, TELEPORT_PATH (SpritePilot "Teleport", 12 frames, 15 fps, one-shot)
 ## plays on the gate. Missing art -> a procedural placeholder.
 
+const TRIGGER_PAD := 8.0               # the server's entry area = the drawn gate grown by this (px), forgiving
 const SIZE := Vector2(48, 48)            # the drawn gate = the entry area (px, centred on the portal pos; 16 px art x3)
 const SPRITE_PATH := "res://assets/fx/portal/portal-16px_strip8.png"
 const FPS := 10.0
@@ -26,6 +27,20 @@ var _inside := {}           # instance ids of players standing on the gate last 
 
 static func trigger_rect(pos: Vector2) -> Rect2:
 	return Rect2(pos - SIZE / 2.0, SIZE)
+
+
+## Did a walk from `from` to `to` touch the entry area (the gate + TRIGGER_PAD) of the portal at `pos`?
+static func crossed(pos: Vector2, from: Vector2, to: Vector2) -> bool:
+	var d := from.distance_to(to)
+	if d > 200.0 or not from.is_finite():   # a teleport / zone change, not a walk: only the end point counts
+		from = to
+		d = 0.0
+	var r := trigger_rect(pos).grow(TRIGGER_PAD)
+	var n := maxi(1, ceili(d / 6.0))
+	for i in n + 1:
+		if r.has_point(from.lerp(to, float(i) / n)):
+			return true
+	return false
 
 
 ## Imported texture, or the raw PNG (a clone whose .godot cache predates the file).

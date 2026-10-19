@@ -583,6 +583,7 @@ func _parse_args() -> void:
 		save_file = str(opts["save-file"])
 	if opts.has("quit-after"):
 		_quit_after = float(opts["quit-after"])
+	_net_timeout = float(opts.get("net-timeout", 0.0))
 	_bench_secs = float(opts.get("bench", 0.0))
 	if opts.has("no-interest"):
 		ZoneScript.interest = false
@@ -743,7 +744,24 @@ func start_client(address: String, port: int) -> bool:
 
 
 
+## --net-timeout=SECS (test suite): ENet drops a peer only after SECS without an answer (default ~30 s).
+## A paused / starved box froze every process for 1.5-3 min (PlayTester b2d389d, fresh25): on resume
+## all peers had timed out and the bots were disconnected half-way through their script.
+var _net_timeout := 0.0
+
+
+func _apply_net_timeout(id: int) -> void:
+	var enet := multiplayer.multiplayer_peer as ENetMultiplayerPeer
+	if _net_timeout <= 0.0 or enet == null:
+		return
+	var pk := enet.get_peer(id)
+	if pk:
+		var ms := int(_net_timeout * 1000.0)
+		pk.set_timeout(32, ms, ms)
+
+
 func _on_peer_connected(id: int) -> void:
+	_apply_net_timeout(id)
 	if multiplayer.is_server() and solo_mode:
 		_log("Solo game: refusing peer %d" % id)
 		(multiplayer.multiplayer_peer as ENetMultiplayerPeer).disconnect_peer(id)
@@ -786,6 +804,7 @@ func _handle_peer_left(id: int) -> void:
 
 
 func _on_connected_to_server() -> void:
+	_apply_net_timeout(1)
 	if _skip_handshake:
 		_log("Connected to server as peer %d, logging in WITHOUT a version handshake (test)" % multiplayer.get_unique_id())
 		register_player.rpc_id(1, local_name, local_password)
@@ -1103,6 +1122,7 @@ func fx(zone_id: String, kind: String, pos: Vector2, radius: float, color: Color
 func local_notice(text: String, to_chat: bool) -> void:
 	if bot_mode:
 		_log("notice: " + text)
+		_srv_seq += 1
 	if chat_log and to_chat:
 		chat_log.append_text("[color=#a0c8ff]%s[/color]\n" % _escape(text))
 
@@ -1821,7 +1841,7 @@ func npc_screen_rects() -> Array:
 		return out
 	var vp := get_viewport().get_visible_rect()
 	for n in get_tree().get_nodes_in_group("npc_visual"):
-		if not (n as Node2D).is_visible_in_tree() or not me.zone.is_ancestor_of(n):
+		if not (n as Node2D).is_visible_in_tree() or not me.zone.is_ancestor_of(n) or n.has_method("is_portal_visual"):
 			continue
 		var o: Vector2 = (n as Node2D).get_global_transform_with_canvas().origin
 		var box = n.get("screen_box")
@@ -2096,7 +2116,8 @@ func _process(delta: float) -> void:
 		if _hs_wait > handshake.TIMEOUT + 1.0:
 			_hs_wait = -1.0
 			login_result(false, "The server did not answer the version check (it runs a different build of the game).")
-	_elapsed += delta
+	# test clock: never more than 0.5 s per frame (Godot already caps a long pause's delta; belt and braces)
+	_elapsed += minf(delta, 0.5)
 	if _bench_secs > 0.0:
 		_bench_tick(delta)
 	if _quit_after > 0.0 and _elapsed >= _quit_after:
@@ -2215,8 +2236,13 @@ func _update_hud(delta: float) -> void:
 	if zi.has("dungeon"):
 		var dd: Dictionary = zi["dungeon"]
 		var aq: float = Dungeons.atlas_iiq(me.atlas)
-		zone_label.text += "\nMap: +%d%% quantity (+%d%% atlas)  +%d%% rarity%s" % [roundi(dd.get("iiq", 0.0)), roundi(aq), roundi(dd.get("iir", 0.0)),
-			("  -  %d portals left" % int(me.run_info["portals"])) if not me.run_info.is_empty() else ""]
+		# phrases glued with no-break spaces: the box wraps only between them, never inside "+6% rarity"
+		var nb := func(t: String) -> String: return t.replace(" ", "\u00a0")
+		var parts: Array = [nb.call("Map: +%d%% quantity" % roundi(dd.get("iiq", 0.0))), nb.call("(+%d%% atlas)," % roundi(aq)),
+			nb.call("+%d%% rarity" % roundi(dd.get("iir", 0.0)))]
+		zone_label.text += "\n" + " ".join(parts)
+		if not me.run_info.is_empty():
+			zone_label.text += "\n" + nb.call("%d portals left" % int(me.run_info["portals"]))
 	if ui_selftest and _elapsed > 4.0:
 		ui_selftest = false
 		_run_ui_selftest()
@@ -3541,14 +3567,28 @@ func _bag_uid(me: Node, uid: int) -> Dictionary:
 	return {}
 
 
+var _srv_seq := 0          # (bot) bumps on every server notice / inventory change
+var _craft_ack_seq := -1   # (craft bot) _srv_seq when the last request went out (-1: none to wait for)
+var _craft_wait_t := 0.0
+
+
 ## Scripted crafting test (bot standing at the blacksmith with the --debug-gear kit).
 ## Every request goes to the server, which does the rolls and validates; this only drives it.
 func _bot_craft(me: Node, delta: float) -> void:
 	bot_dir = _bot_hold_dir
 	_craft_t -= delta
+	_craft_wait_t += delta
 	if _craft_t > 0.0 or _elapsed < 4.0:
 		return
+	# each step waits for the server's answer to the last request (a notice or an inventory/bag/gold
+	# change), at most 4 s: under load the next request must not race the last one's result
+	if _craft_ack_seq >= 0 and _srv_seq == _craft_ack_seq and _craft_wait_t < 4.0:
+		return
+	if _craft_ack_seq >= 0 and _srv_seq == _craft_ack_seq:
+		_log("craft bot: no server answer to step %d within 4s, going on" % (_craft_step - 1))
 	_craft_t = 0.6
+	_craft_wait_t = 0.0
+	_craft_ack_seq = _srv_seq if _craft_step not in [31, 33, 36] and _craft_step <= 36 else -1
 	var ring := _bag_uid(me, _craft_ring)
 	var step := _craft_step
 	_craft_step += 1
@@ -3557,6 +3597,7 @@ func _bot_craft(me: Node, delta: float) -> void:
 			var r := _bag_find(me, "copper_ring", "normal")
 			if r.is_empty():
 				_craft_step = 0
+				_craft_ack_seq = -1
 				return
 			_craft_ring = int(r["uid"])
 			_log("craft bot: starting at the blacksmith, gold %d, bag %d, near smith %s" % [me.gold, me.bag.size(), me.near_blacksmith()])
@@ -3572,6 +3613,8 @@ func _bot_craft(me: Node, delta: float) -> void:
 		9, 10, 11, 12:
 			if ring.get("mods", []).size() < 6:
 				me.request_craft("orb_exalt", _craft_ring)
+			else:
+				_craft_ack_seq = -1
 		13: me.request_craft("orb_exalt", _craft_ring)       # invalid once full (6 affixes)
 		14: me.request_craft("orb_chaos", _craft_ring)
 		15: me.request_craft("orb_scour", _craft_ring)
@@ -3638,6 +3681,7 @@ func _bot_update(delta: float) -> void:
 	if inv_str != _bot_last_inv:
 		_bot_last_inv = inv_str
 		_log("inventory: " + inv_str)
+		_srv_seq += 1
 	if me.dead:
 		bot_dir = Vector2.ZERO
 		_bot_path.clear()
@@ -4233,6 +4277,13 @@ func _dungeon_selftest(g: RandomNumberGenerator) -> bool:
 			zm.free()
 			Zones.DYN.erase(id)
 		expect.call(maps[0] == maps[2] and maps[1] == maps[3], "deterministic layout " + th)
+	# town map portal entry: forgiving (gate + pad) and caught between two position updates
+	var MPV = MapPortalVisualScript
+	var gp := Vector2(1000, 1000)
+	expect.call(MPV.crossed(gp, gp + Vector2(-60, 10), gp + Vector2(60, 10)), "portal: walking straight across between two updates enters")
+	expect.call(MPV.crossed(gp, gp + Vector2(30, 0), gp + Vector2(30, 0)), "portal: standing just off the drawn edge (within the pad) enters")
+	expect.call(not MPV.crossed(gp, gp + Vector2(-60, 40), gp + Vector2(60, 40)), "portal: walking past below the gate does not enter")
+	expect.call(not MPV.crossed(gp, gp + Vector2(-900, 0), gp + Vector2(900, 0)), "portal: a teleport across does not count as a walk")
 	var u := Dungeons.make_unique_ticket("wuxing_sanctum", g)
 	expect.call(Gear.apply_orb(u, "orb_chaos", g, "") != "", "unique ticket rejects orbs")
 	expect.call(Gear.apply_orb(Gear.make("iron_sword", "normal", 5, g), "orb_chisel", g, "") != "", "chisel only on tickets")

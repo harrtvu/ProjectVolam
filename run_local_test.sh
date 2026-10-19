@@ -25,7 +25,8 @@ rm -f $L/*_vendor.json $L/*.tmp
 # Ports: everything uses $PORT (default 7920, away from the usual 7777 and other testers' 7790);
 # the parallel boss trial uses $PORT+21..+25. Override with PORT=... ./run_local_test.sh
 PORT="${PORT:-7920}"
-run() { "$GODOT" --headless --path . -- "$@" --port=$PORT; }
+# --net-timeout: a paused/starved box (all processes frozen for minutes) must not drop every ENet peer
+run() { "$GODOT" --headless --path . -- "$@" --port=$PORT --net-timeout=600; }
 
 echo "Phase 1 (~86s)..."
 run --server --debug-loot --save-file="$SAVE" --quit-after=86 > $L/p1_server.log 2>&1 &
@@ -524,7 +525,7 @@ check "enhancement odds + never destroys (offline)" "enhancement rules: destroye
 echo; echo "== Equipment, vendor, stash, bag"
 checkp "equip changes resistances (Frost Aegis)"  "Smith equipped \[unique\] Frost Aegis .* res metal 0%, wood 0%, water 30%, fire 20%" p5_server.log
 checkp "equip rare armour raises defense"         "Smith equipped \[rare\] .*chain_mail.*def (\d+) .*-> .*def (?!\1 )"  p5_server.log
-check "resistance reduces live incoming damage"   "took [0-9]+ damage from .*\[Water res [0-9]+%\]"                  p5_server.log
+check "resistance reduces live incoming damage"   "took [0-9]+ damage from .*\[(Water|Wood|Fire|Metal|Earth) res [1-9][0-9]*%\]"   p5_server.log   # any element: which monsters Warden meets first is up to its wandering
 check "resistances measurably cut damage (offline)" "40 water damage taken [0-9]+->[0-9]+"                            gear_selftest.log
 check "unequip restores stats (offline)"          "unequip all: max hp ([0-9]+), attack ([0-9]+), water damage taken ([0-9]+) \(back to \1/\2/\3\)" gear_selftest.log
 check "crafting an equipped item"                 "Smith used Orb of Transmutation on \[normal\] Copper Ring.*-> \[magic\].*equipped in ring1" p5_server.log
@@ -811,7 +812,7 @@ check "safe area: bot pulled a monster"                "safe bot: hit \(hp [0-9]
 check "safe area: chasers stop at its edge"            "stops chasing SafeBot at the entrance safe area"                     p18_server.log
 check "safe area: no damage while back inside"         "safe bot: 8s in the safe area after the pull, hp [0-9]+ -> [0-9]+/51 \(no damage: true\)"   p18_SafeBot.log
 for n in FreshSolo FreshLead FreshMate; do
-  check "$n (fresh Lv6 fire) survives its first pack"  "FIRST PACK $n Lv6 fire cleared pack"                                 p18_server.log
+  check "$n (fresh Lv6 fire) survives its first pack"  "FIRST PACK $n Lv6 fire (cleared|survived 20 s with [0-9]+ left of) pack"                                 p18_server.log
   check "$n survives its first 20 s in Forest Den T1"  "FIRST PULL $n Lv6 fire \(party of [12]\) in Forest Den \(T1\): survived" p18_server.log
 done
 check "party runs share one instance"                  "FIRST PULL FreshMate Lv6 fire \(party of 2\)"                       p18_server.log

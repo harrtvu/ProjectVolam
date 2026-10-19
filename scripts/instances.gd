@@ -209,7 +209,7 @@ func open_run(p: Node, uid: int) -> void:
 	_log("%s opened %s with %s -> instance %s (seed %d, slot %d): %d portals, iiq +%d%% iir +%d%%, mods %s | atlas node %s, atlas passives %s" % [p.display_name,
 		Dungeons.theme_name(data["theme"]), Gear.summary(t), id, seed, slot, portals, roundi(ri["iiq"]), roundi(ri["iir"]), ri["mods"],
 		Atlas.display(nid) if not unique else "(unique ticket: any node)", _fx_str(afx)])
-	p.notify("A portal to %s opens above the Map Device (%d portals)" % [Zones.info(id)["name"], portals], true)
+	p.notify("A portal to %s opens %s (%d portals)" % [Zones.info(id)["name"], _portal_where(p.zone, p.zone.zone_id, int(runs[id]["pslot"])), portals], true)
 	_broadcast_portals()
 	p.push_inventory()
 
@@ -550,6 +550,26 @@ func return_of(id: String) -> Array:
 	return ["meadow", Zones.TOWN_ARRIVE]
 
 
+const SLOT_X := [0, -2, 2, -4, 4]   # portal slots in a row: the first one right above the Map Device, then alternating sides
+
+
+## Town cell of portal slot k opened from zone `oz`.
+func _portal_cell(town: Node, oz: String, k: int) -> Vector2i:
+	var base: Vector2i = town.info["map_device"]
+	if Zones.is_hideout(oz):   # one run per account: right below its hideout's device
+		return base + Vector2i(0, 2)
+	return Vector2i(base.x + SLOT_X[k % 5], int(town.info["map_portal_row"]) - (k / 5) * 2)
+
+
+## Where the portal is, said the way the player sees it ("above the Map Device", ...).
+func _portal_where(town: Node, oz: String, k: int) -> String:
+	var d: Vector2i = _portal_cell(town, oz, k) - Vector2i(town.info["map_device"])
+	var v := "above" if d.y < 0 else ("below" if d.y > 0 else "next to")
+	if d.x == 0:
+		return "%s the Map Device" % v
+	return "%s the Map Device, a little to the %s" % [v, "left" if d.x < 0 else "right"]
+
+
 func _portal_list() -> Array:
 	var out: Array = []
 	for id in runs:
@@ -558,13 +578,7 @@ func _portal_list() -> Array:
 		if not main.zones.has(oz):
 			oz = "meadow"
 		var town: Node = main.zones[oz]
-		var base: Vector2i = town.info["map_device"]
-		var k := int(r["pslot"])
-		var cell: Vector2i
-		if Zones.is_hideout(oz):   # one run per account: right below its hideout's device
-			cell = base + Vector2i(0, 2)
-		else:
-			cell = Vector2i(base.x - 4 + (k % 5) * 2, int(town.info["map_portal_row"]) - (k / 5) * 2)
+		var cell := _portal_cell(town, oz, int(r["pslot"]))
 		out.append({"id": id, "zone": oz, "pos": town.map.cell_pos(cell), "owner": r["owner"],
 			"text": "%s\n%s - %d portal%s%s" % [Zones.info(id)["name"], r["owner"], r["portals"], "" if int(r["portals"]) == 1 else "s", "  (done)" if r["completed"] else ""]})
 	return out

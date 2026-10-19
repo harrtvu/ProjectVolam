@@ -94,6 +94,8 @@ var _flash := 0.0
 var _anim_t := 0.0
 var _last_pos := Vector2.ZERO
 var _portal_cd := 1.0
+var _mp_last_pos := Vector2.INF   # (server) position at the last portal check: crossing the gate between two updates counts
+var _mp_last_zone: Node = null
 var _main: Node
 var _sprite: Sprite2D
 var _label: Label
@@ -283,6 +285,12 @@ func _server_tick(delta: float) -> void:
 			if left == 0:
 				_first_pack_report("cleared")
 		if _fp_t >= FIRST_PULL_S:
+			if _fp_pack >= 0 and not _fp_pack_done:   # alive, but a straggler of the pack is still out there (e.g. a bat that flew off)
+				var left := 0
+				for m in zone.monsters_root.get_children():
+					if m.alive and m.pack_id == _fp_pack:
+						left += 1
+				_first_pack_report("survived %.0f s with %d left of" % [FIRST_PULL_S, left])
 			_first_pull_report("survived")
 	if dead:
 		_respawn_t -= delta
@@ -316,10 +324,12 @@ func _server_tick(delta: float) -> void:
 			_portal_cd = 1.0
 			_main.transfer_player.call_deferred(self, portal["to"], portal["arrive"])
 		elif _main and _main.instances and not zone.map_portals.is_empty():
-			var mp_: Dictionary = zone.map_portal_at(position)
+			var mp_: Dictionary = zone.map_portal_crossed(_mp_last_pos if _mp_last_zone == zone else position, position)
 			if not mp_.is_empty():
 				_portal_cd = 1.5
 				_main.instances.try_enter.call_deferred(self, str(mp_["id"]))
+	_mp_last_pos = position
+	_mp_last_zone = zone
 
 
 func _handle_local_input() -> void:

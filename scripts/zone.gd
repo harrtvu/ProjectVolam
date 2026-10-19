@@ -741,11 +741,29 @@ class PortalVisual extends Node2D:
 	var door := false   # hideout exit: drawn as a wooden door instead of a glowing gate
 	var _t := 0.0
 	var _label: Label
+	var label_node: Label   # (= _label) main._place_npc_labels keeps it off the HUD (stats box, help text, minimap)
+	var label_side := "first"
+	var _label_first := Vector2.ZERO
+
+	## (only its label is placed; the gate is not an NPC box for the HUD fade / tutorial)
+	func is_portal_visual() -> bool:
+		return true
+
+	## Where the label may go, preferred first.
+	func label_spots() -> Array:
+		var sx := size.x / 2.0 + 70.0
+		return [["first", _label_first], ["below", Vector2(-100, size.y / 2.0 + 4.0)], ["above", Vector2(-100, -size.y / 2.0 - 40.0)],
+			["right", Vector2(sx - 100.0, -18.0)], ["left", Vector2(-sx - 100.0, -18.0)]]
+
+	func set_label_spot(spot: Array) -> void:
+		label_side = spot[0]
+		_label.position = spot[1]
 
 	func _ready() -> void:
 		NetUtil.cull_offscreen(self, 160.0)
 		z_index = 0 if door else -1
 		_label = Label.new()
+		label_node = _label
 		_label.text = text
 		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_label.size = Vector2(200, 36)
@@ -758,6 +776,8 @@ class PortalVisual extends Node2D:
 		_label.add_theme_color_override("font_outline_color", Color.BLACK)
 		_label.add_theme_constant_override("outline_size", 4)
 		add_child(_label)
+		_label_first = _label.position
+		add_to_group("npc_visual")
 
 	func _process(delta: float) -> void:
 		_t += delta
@@ -901,6 +921,16 @@ func set_map_portals(list: Array) -> void:
 func map_portal_at(local_pos: Vector2) -> Dictionary:
 	for p in map_portals:   # the entry area is exactly the drawn gate
 		if MapPortalVisual.trigger_rect(p["pos"]).has_point(local_pos):
+			return p
+	return {}
+
+
+## (server) The open dungeon portal crossed on the way from `from` to `to` (both town positions), or {}.
+## The gate area is grown by TRIGGER_PAD px, and the path between two position updates is sampled
+## every 6 px, so walking straight across the gate between two server ticks still enters.
+func map_portal_crossed(from: Vector2, to: Vector2) -> Dictionary:
+	for p in map_portals:
+		if MapPortalVisual.crossed(p["pos"], from, to):
 			return p
 	return {}
 
