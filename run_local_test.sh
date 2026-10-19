@@ -26,7 +26,7 @@ rm -f $L/*_vendor.json $L/*.tmp
 # the parallel boss trial uses $PORT+21..+25. Override with PORT=... ./run_local_test.sh
 PORT="${PORT:-7920}"
 # --net-timeout: a paused/starved box (all processes frozen for minutes) must not drop every ENet peer
-run() { "$GODOT" --headless --path . -- "$@" --port=$PORT --net-timeout=600; }
+run() { "$GODOT" --headless --path . -- "$@" --port=$PORT --net-timeout=7200; }
 
 echo "Phase 1 (~86s)..."
 run --server --debug-loot --save-file="$SAVE" --quit-after=86 > $L/p1_server.log 2>&1 &
@@ -556,7 +556,7 @@ check "regal makes a rare ticket"                 "MapperA used Regal Orb on \[m
 check "tickets can't be enhanced"                 "MapperA enhance rejected: Dungeon Tickets can't be enhanced"   p6_server.log
 check "map device opens a private instance"       "\[dungeon\] MapperA opened Ember Caverns with .* -> instance dun[0-9]+ .*6 portals" p6_server.log
 check "second player opens a separate instance"   "\[dungeon\] MapperB opened Forest Den with .* -> instance dun[0-9]+" p6_server.log
-check "instance populated (packs, elites, boss)"  "dungeon Ember Caverns T1 .*populated: [0-9]+ packs \([1-9][0-9]* elite\), [0-9]+ monsters, boss Ember Tyrant" p6_server.log
+check "instance populated (packs, elites, boss)"  "dungeon Ember Caverns T1 .*populated: [0-9]+ packs \([0-9]+ elite\), [0-9]+ monsters, boss Ember Tyrant" p6_server.log   # T1: 0 elites is fine (GPM: elites start at T2)
 check "themed procedural layouts (wood cave)"     "dungeon Forest Den T1 .*populated: .*boss Den Matriarch"       p6_server.log
 check "map mods applied to monsters (unique map)" "dungeon Metal Forge T8 .*boss Forge Golem hp ([0-9]+) .*dmg x1\.30 .*map_mon_hp\": 60"  p6_server.log
 check "entering uses a portal"                    "MapperA entered dun[0-9]+ .* - portals left 5"                 p6_server.log
@@ -567,7 +567,9 @@ check "instance isolation: B sees only B"         "zone=dun[0-9]+ players=1 Mapp
 if grep -hE "zone=dun" $L/p6_*.log | grep -qE "foreign_entities=[1-9]"; then echo "FAIL  no entities leak between instances"; else echo "PASS  no entities leak between instances"; fi
 check "two instances open at once"                "instances: dun[0-9]+\([a-z]+ T[0-9]+ .*\), dun[0-9]+\("     p6_server.log
 check "map IIQ/IIR applied to drops"              "\[dun[0-9]+\] .* dropped: .*map/elite iiq \+[1-9][0-9]*% iir \+[0-9]+%" p6_server.log
-check "elite bonus applied to drops"              "\[dun[0-9]+\] (Hasted|Armoured|Brutal|Regenerating) .* dropped: .*map/elite iiq \+([4-9][0-9]|[1-9][0-9]{2,})%" p6_server.log
+check "elite bonus applied to drops (Guardian T10 run)" "\[dun[0-9]+\] (Hasted|Armoured|Brutal|Regenerating) .* dropped: .*map/elite iiq \+([4-9][0-9]|[1-9][0-9]{2,})%" p12_server.log
+check "T2 maps have elites (Ember Caverns T2, atlas run)" "dungeon Ember Caverns T2 \(lv.*populated: [0-9]+ packs \([1-9][0-9]* elite\)" p8_server.log
+if grep -qhE "T([2-9]|10) \(lv.*populated: [0-9]+ packs \(0 elite\)" $L/*_server.log; then echo "FAIL  no T2+ map without elites"; else echo "PASS  no T2+ map without elites ($(grep -hE 'T([2-9]|10) \(lv.*populated' $L/*_server.log | wc -l) T2+ maps)"; fi
 check "tickets drop inside dungeons"              "\[dun[0-9]+\] .* dropped: .*\(ticket_[a-z]+ T[0-9]+, "           p6_server.log
 check "death in a dungeon -> town"                "Diver died in dun[0-9]+ - back to town"                         p6_server.log
 check "re-entry after death uses a portal"        "Diver entered dun[0-9]+ .* - portals left 4"                    p6_server.log

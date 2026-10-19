@@ -749,7 +749,7 @@ func start_client(address: String, port: int) -> bool:
 
 
 ## --net-timeout=SECS (test suite): ENet drops a peer only after SECS without an answer (default ~30 s).
-## A paused / starved box froze every process for 1.5-3 min (PlayTester b2d389d, fresh25): on resume
+## A paused / starved box froze every process for 1.5 min to 1 h (PlayTester b2d389d, fresh25, fresh32: 13 min): on resume
 ## all peers had timed out and the bots were disconnected half-way through their script.
 var _net_timeout := 0.0
 
