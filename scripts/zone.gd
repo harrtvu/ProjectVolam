@@ -556,7 +556,7 @@ func spawn_dungeon() -> void:
 		nearest = minf(nearest, m.position.distance_to(safe_center()))
 	main.log_server("[%s] entrance safe area: radius %.0f px at %s, no pack within %.0f px (%d pack(s) dropped), nearest monster %.0f px%s" % [
 		zone_id, SAFE_RADIUS, safe_center().round(), SAFE_RADIUS + SAFE_SPAWN_GAP, skipped, nearest,
-		(" | T1: %d warm-up pack(s) of 2 (nearest %d) within %.0f px (damage x%.2f more, life x%.2f), monster damage x%.2f" % [first_pull, Dungeons.T1_WARMUP_PACKS, Dungeons.T1_FIRST_PULL_RADIUS,
+		(" | T1: %d warm-up pack(s) of 2%s within %.0f px (damage x%.2f more, life x%.2f), monster damage x%.2f" % [first_pull, (" (nearest %d)" % Dungeons.T1_WARMUP_PACKS) if Dungeons.T1_WARMUP_PACKS < 99 else "", Dungeons.T1_FIRST_PULL_RADIUS,
 			Dungeons.T1_WARMUP_DMG_MULT, Dungeons.T1_WARMUP_HP_MULT, Dungeons.T1_DMG_MULT]) if tier == 1 else ""])
 
 

@@ -17,6 +17,8 @@ set -u
 GODOT="${GODOT:-godot}"
 cd "$(dirname "$0")"
 L=test-logs; mkdir -p $L; rm -f $L/*.log
+# a fresh clone has no .godot/ (an older one misses new assets): import first, or every PNG load fails
+GODOT="$GODOT" tools/ensure_import.sh || echo "FAIL  every asset is imported before the run (tools/ensure_import.sh)"
 SAVE="$(pwd)/$L/accounts.json"; rm -f "$SAVE"
 SAVE3="$(pwd)/$L/accounts_p3.json"; rm -f "$SAVE3"
 rm -f $L/*_vendor.json $L/*.tmp
@@ -99,7 +101,7 @@ b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-tar
 b4 MetalB --class=metal --bot-talents=auto:1 --warp=forest
 b4 WoodA  --class=wood  --bot-talents=auto:0 --bot-aim --warp=forest
 b4 WoodB  --class=wood  --bot-talents=auto:1 --warp=crypt
-b4 WaterA --class=water --bot-talents=goals:a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=180,28
+b4 WaterA --class=water --bot-talents=goals:a_shatter,a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=180,28
 b4 WaterB --class=water --bot-talents=auto:1 --bot-probe --warp=forest
 b4 FireA  --class=fire  --bot-talents=goals:f_quicken,f_shower --bot-aim --warp=crypt
 b4 FireB  --class=fire  --bot-talents=auto:1 --bot-target=far --bot-respec-at=28,31,34,37,40,43,46 --warp=frost

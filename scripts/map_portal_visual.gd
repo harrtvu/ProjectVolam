@@ -30,12 +30,28 @@ static func trigger_rect(pos: Vector2) -> Rect2:
 
 ## Imported texture, or the raw PNG (a clone whose .godot cache predates the file).
 static func _load_tex(path: String) -> Texture2D:
-	if ResourceLoader.exists(path):
+	# The imported texture only when its .ctex really exists: a fresh clone / an older .godot cache
+	# has the committed .import file (so ResourceLoader.exists() is true) but no .ctex, and load()
+	# would print engine errors. Otherwise decode the PNG bytes directly (no errors, no warnings).
+	if _imported_ok(path):
 		var t = load(path)
 		if t is Texture2D:
 			return t
-	var img := Image.load_from_file(ProjectSettings.globalize_path(path)) if FileAccess.file_exists(path) else null
-	return ImageTexture.create_from_image(img) if img else null
+	if not FileAccess.file_exists(path):
+		return null
+	var img := Image.new()
+	if img.load_png_from_buffer(FileAccess.get_file_as_bytes(path)) != OK:
+		return null
+	return ImageTexture.create_from_image(img)
+
+
+## Is there an imported (.ctex) file for this source asset?
+static func _imported_ok(path: String) -> bool:
+	var cf := ConfigFile.new()
+	if cf.load(path + ".import") != OK:
+		return false
+	var dest := str(cf.get_value("remap", "path", ""))
+	return dest != "" and FileAccess.file_exists(dest)
 
 
 func _ready() -> void:

@@ -2425,6 +2425,9 @@ func _bot_follow(me: Node, zone: Node, delta: float) -> void:
 
 ## Test bot for dungeon runs (--bot-dungeon=full|die|enter|intrude). Returns true when it drove this frame.
 var _bd_layout_logged := false
+var _bd_settle := 0.0
+var _bd_merch_t := 0.0
+var _bd_ticket_tries := 0
 var _bd_unused_n := -1   # unused-portal bot: tickets in the bag while its portal was open
 
 
@@ -2469,10 +2472,15 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 			_bd_t = 1.5
 			return true
 		if _bd_step == 0:     # walk to the merchant, take the free ticket, buy one
-			if not me.near_merchant():
+			_bd_merch_t += delta
+			if not me.near_merchant() or (me.position.distance_to(zone.merchant_pos() + Vector2(0, 24)) > 16.0 and _bd_merch_t < 4.0):
 				bot_dir = _bot_steer(zone, me.position, zone.merchant_pos() + Vector2(0, 24), delta)
+				_bd_settle = 0.6
 				return true
 			bot_dir = Vector2.ZERO
+			_bd_settle -= delta
+			if _bd_settle > 0.0:   # stand still until the server has us at the merchant too (slow machines lag)
+				return true
 			_log("dungeon bot: at the merchant, gold %d, atlas %s, free ticket %s" % [me.gold, me.atlas.get("done", {}), "taken" if me.free_day != "" else "available"])
 			me.request_dungeon("free", {"theme": bot_dungeon_theme})
 			me.request_dungeon("free", {"theme": bot_dungeon_theme})                        # invalid: once a day
@@ -2498,6 +2506,12 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 				for inst in me.bag:
 					if Dungeons.is_ticket(inst):
 						best = inst
+			if best.is_empty() and _bd_ticket_tries < 3 and bot_guardian == "":
+				_bd_ticket_tries += 1
+				_log("dungeon bot: no ticket yet (try %d), asking the merchant again" % _bd_ticket_tries)
+				_bd_step = 0
+				_bd_settle = 1.0
+				return true
 			if best.is_empty():
 				_log("dungeon bot: no ticket in the bag!")
 				_bd_step = 9
