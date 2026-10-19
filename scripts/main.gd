@@ -2644,8 +2644,16 @@ func _bot_dungeon(me: Node, zone: Node, delta: float) -> bool:
 		_log("dungeon bot: inside %s (entry %d), run %s" % [zone.zone_id, _bd_entries, me.run_info])
 	if bot_dungeon == "die":
 		bot_dir = Vector2.ZERO      # stand still and let the monsters win
+		var hard: Node2D = null   # T1 warm-up pairs barely scratch a Lv1 (1 dmg/hit): go die at a normal pack
+		var hard_d := 3000.0
+		for mm in zone.monsters_root.get_children():
+			if mm.alive and not bool(mm.get("warmup")) and mm.position.distance_to(me.position) < hard_d:
+				hard_d = mm.position.distance_to(me.position)
+				hard = mm
 		if me.dead or me.hp <= 0:
 			_bd_step = 5
+		elif hard and hard_d > 70.0:
+			bot_dir = _bot_steer(zone, me.position, hard.position, delta)
 		elif _bd_t < -1.0:   # nothing around yet: walk at the nearest pack
 			var n: Node2D = _nearest(zone.monsters_root, me.position, 3000.0)
 			if n:
