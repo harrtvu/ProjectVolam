@@ -53,10 +53,19 @@ anchors as the previous 200×128 maps so existing characters keep their town / p
 
 | Zone | Levels | Entrance area (the old map) | The new wilds | Boss |
 |---|---|---|---|---|
-| Sunny Meadow | 1-4 | the town (all NPCs) on the east side, gate to the forest on the east edge | groves, ponds, stone ruins and roads to the west, north and south | - |
+| Sunny Meadow | 1-4 | **Sunnyhaven** walled town (all NPCs, shops, portal yard, gates) on the east side; forest gate on the map's east edge | groves, ponds, stone ruins and roads to the west, north and south | - |
 | Whisperwood Forest | 3-7 | north-west corner (gates to the meadow and the crypt) | dense woods with clearings and ponds to the east and south | Broodmother, lair in the far south-east |
 | Bone Crypt | 6-11 | south-east corner (gates to the forest and Frostpeak) | catacomb halls, 3-wide corridors and sandy caverns to the north and west | The Lich King, lair in the far north-west |
 | Frostpeak Ruins | 9-13 | west side (gate to the crypt) | pine forests, frozen lakes and rocks to the north, east and south | Yeti King, walled fortress in the far north-east |
+
+### Sunnyhaven (starter town)
+
+New characters wake up in **Sunnyhaven**, a walled village inside Sunny Meadow (Vo Lâm–style thôn around the PoE stations):
+
+* **Wall + four gates** onto the wilds roads (west into the meadows, east toward the forest portal, north/south side gates).
+* **Shops** as small buildings on the plaza: Ticket Merchant, Map Device pavilion (opens onto the **portal yard** where dungeon gates appear), Blacksmith forge, Vendor stall, Hideout Master.
+* **Well**, flower beds and corner watch posts; gate signs name the town.
+* NPC / portal / stash coordinates are unchanged (`map_v` stays valid). Wild packs never spawn inside the town rect.
 
 **How a big map is built** (`scripts/zone_map.gd`, `_gen_overworld`, all from the zone's fixed seed):
 1. themed outer terrain from two `FastNoiseLite` layers (tree groves / dense woods / pine forests, lakes, crypt caverns);

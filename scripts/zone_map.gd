@@ -586,6 +586,9 @@ func _carve_lair(id: String, c: Vector2i) -> void:
 
 # ---------------------------------------------------------------- Meadow
 
+## Sunnyhaven: a walled starter village around the Map Device / merchant / smith / vendor /
+## Hideout Master. Core coordinates (NPC cells stay put so map_v saves keep working).
+## Town wall: x 16..45, y 8..29. Gates on all four sides open onto the wilds roads.
 func _gen_meadow() -> void:
 	var spawn := Vector2i(32, 20)
 	for x in W:
@@ -599,25 +602,100 @@ func _gen_meadow() -> void:
 			elif roll < 0.143:
 				t = Tiles.MUSHROOM
 			_put(Vector2i(x, y), t)
+	_gen_sunnyhaven(spawn)
+	# Roads out of town into the wilds (cross the gates, reach the core edge / anchors).
 	for x in range(2, W):
 		for dy in [0, 1]:
 			_put(Vector2i(x, spawn.y + dy), Tiles.PATH_C)
 	for y in range(2, H - 2):
 		for dx in [0, 1]:
 			_put(Vector2i(spawn.x + dx, y), Tiles.PATH_C)
-	_ellipse(Vector2(47, 10), Vector2(8, 5), [Tiles.WATER, Tiles.WATER, Tiles.WATER2])
-	_ellipse(Vector2(11, 31), Vector2(4.5, 3), [Tiles.WATER, Tiles.WATER, Tiles.WATER2])
-	_ruin(Rect2i(7, 5, 12, 8), Vector2i(12, 12), Tiles.WALL, Tiles.FLOOR)
-	_ruin(Rect2i(42, 26, 9, 8), Vector2i(42, 29), Tiles.WALL, Tiles.FLOOR)
-	for i in 110:
+	_ensure_town_npc_floors()
+	_ellipse(Vector2(52, 8), Vector2(6, 4), [Tiles.WATER, Tiles.WATER, Tiles.WATER2])
+	_ellipse(Vector2(8, 32), Vector2(4.5, 3), [Tiles.WATER, Tiles.WATER, Tiles.WATER2])
+	_ruin(Rect2i(4, 4, 10, 7), Vector2i(8, 10), Tiles.WALL, Tiles.FLOOR)     # west ruin outside the wall
+	_ruin(Rect2i(48, 28, 9, 7), Vector2i(48, 31), Tiles.WALL, Tiles.FLOOR)   # south-east ruin
+	var town := Rect2i(16, 8, 30, 22)
+	for i in 90:
 		var cell := Vector2i(_r.randi_range(2, W - 3), _r.randi_range(2, H - 3))
 		if not (_at(cell) in [Tiles.GRASS, Tiles.GRASS2, Tiles.FLOWER, Tiles.MUSHROOM]):
 			continue
-		if Vector2(cell).distance_to(Vector2(spawn)) < 6.0:
+		if town.has_point(cell) or Vector2(cell).distance_to(Vector2(spawn)) < 6.0:
 			continue
-		if cell.x >= 21 and cell.x <= 39 and cell.y >= 10 and cell.y <= 19:
-			continue   # town plaza: Ticket Merchant, Map Device + its portals, blacksmith
 		_put(cell, [Tiles.TREE, Tiles.TREE, Tiles.TREE2][_r.randi() % 3])
+
+
+## Paves Sunnyhaven: wall, gates, plaza, shop buildings, portal yard, well and barrels.
+## NPC cells (merchant 24,18 / device 29,15 / smith 36,17 / vendor 20,22 / master 40,22 / spawn 32,20)
+## stay walkable floor or path.
+func _gen_sunnyhaven(spawn: Vector2i) -> void:
+	var wall := Rect2i(16, 8, 30, 22)   # x 16..45, y 8..29
+	# Plaza paving inside the wall.
+	for x in range(wall.position.x + 1, wall.end.x - 1):
+		for y in range(wall.position.y + 1, wall.end.y - 1):
+			_put(Vector2i(x, y), Tiles.PATH_C if (x + y) % 5 == 0 else Tiles.FLOOR)
+	# Perimeter wall.
+	for x in range(wall.position.x, wall.end.x):
+		for y in range(wall.position.y, wall.end.y):
+			if x == wall.position.x or y == wall.position.y or x == wall.end.x - 1 or y == wall.end.y - 1:
+				_put(Vector2i(x, y), Tiles.WALL)
+	# Gates (3 tiles): west wilds, east forest road, north approach, south market.
+	for dy in [-1, 0, 1]:
+		_put(Vector2i(wall.position.x, spawn.y + dy), Tiles.PATH_C)
+		_put(Vector2i(wall.end.x - 1, spawn.y + dy), Tiles.PATH_C)
+	for dx in [-1, 0, 1]:
+		_put(Vector2i(spawn.x + dx, wall.position.y), Tiles.PATH_C)
+		_put(Vector2i(spawn.x + dx, wall.end.y - 1), Tiles.PATH_C)
+	# Main streets through the plaza (autotile dresses the edges later).
+	for x in range(wall.position.x + 1, wall.end.x - 1):
+		for dy in [0, 1]:
+			_put(Vector2i(x, spawn.y + dy), Tiles.PATH_C)
+	for y in range(wall.position.y + 1, wall.end.y - 1):
+		for dx in [0, 1]:
+			_put(Vector2i(spawn.x + dx, y), Tiles.PATH_C)
+	# Portal yard north of the Map Device (dungeon portals land on map_portal_row = core y 12).
+	for x in range(25, 34):
+		for y in range(10, 14):
+			_put(Vector2i(x, y), Tiles.PATH_C)
+	# Shop buildings (door faces the plaza / street). Map Device pavilion opens north into the portal yard.
+	_shop(Rect2i(21, 15, 6, 5), Vector2i(24, 19), [Vector2i(22, 16), Vector2i(25, 16)])          # Ticket Merchant
+	_shop(Rect2i(27, 13, 6, 5), Vector2i(29, 17), [Vector2i(28, 14), Vector2i(31, 14)])          # Map Device
+	for dx in [-1, 0, 1]:   # open the pavilion north wall into the portal yard
+		_put(Vector2i(29 + dx, 13), Tiles.PATH_C)
+	_shop(Rect2i(34, 14, 7, 6), Vector2i(34, 17), [Vector2i(36, 15), Vector2i(38, 15), Vector2i(39, 18)])  # Blacksmith
+	_shop(Rect2i(18, 20, 5, 5), Vector2i(22, 22), [Vector2i(19, 21), Vector2i(19, 23)])          # Vendor
+	_shop(Rect2i(38, 20, 5, 5), Vector2i(38, 22), [Vector2i(41, 21), Vector2i(41, 23)])          # Hideout Master
+	# Corner watch posts and a well on the south plaza.
+	for c in [Vector2i(18, 10), Vector2i(43, 10), Vector2i(18, 27), Vector2i(43, 27)]:
+		_put(c, Tiles.C_PILLAR)
+	_put(Vector2i(28, 24), Tiles.WATER)
+	_put(Vector2i(29, 24), Tiles.WATER)
+	_put(Vector2i(28, 25), Tiles.WATER2)
+	_put(Vector2i(29, 25), Tiles.WATER)
+	for c in [Vector2i(27, 24), Vector2i(30, 24), Vector2i(27, 25), Vector2i(30, 25), Vector2i(28, 23), Vector2i(29, 26)]:
+		_put(c, Tiles.FLOOR)
+	# Flower beds by the west and east gates.
+	for c in [Vector2i(18, 18), Vector2i(19, 18), Vector2i(18, 23), Vector2i(19, 23),
+			Vector2i(42, 18), Vector2i(43, 18), Vector2i(42, 23), Vector2i(43, 23)]:
+		_put(c, Tiles.FLOWER)
+
+
+## Keep every town NPC cell walkable after roads / shops have painted.
+func _ensure_town_npc_floors() -> void:
+	for key in ["respawn", "blacksmith", "map_device", "merchant", "vendor", "hideout_master"]:
+		if not Zones.info("meadow").has(key):
+			continue
+		var abs_c: Vector2i = Zones.info("meadow")[key]
+		var local: Vector2i = abs_c - Zones.core_of("meadow")
+		_put(local, Tiles.PATH_C if key == "respawn" else Tiles.FLOOR)
+
+
+## A shop: walled room, floor inside, a 2-tile door, optional barrel decorations along the walls.
+func _shop(rect: Rect2i, door: Vector2i, barrels: Array = []) -> void:
+	_ruin(rect, door, Tiles.WALL, Tiles.FLOOR)
+	for b in barrels:
+		if rect.has_point(b) and b != door and b != door + Vector2i(1, 0) and b != door + Vector2i(0, 1):
+			_put(b, Tiles.C_BARREL)
 
 
 func _ruin(rect: Rect2i, door: Vector2i, wall: Vector2i, floor_t: Vector2i) -> void:

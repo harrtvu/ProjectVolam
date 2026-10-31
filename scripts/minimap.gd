@@ -73,6 +73,10 @@ func _draw() -> void:
 	for m in z.monsters_root.get_children():
 		if m.alive and not m.is_boss:
 			draw_circle(tp.call(m.position), dot * 0.6, Color(1.0, 0.25, 0.2, 0.85))
+	if z.info.has("town"):
+		var tr: Rect2i = z.info["town"]["rect"]
+		draw_rect(Rect2(Vector2(tr.position) * k, Vector2(tr.size) * k), Color(0.95, 0.85, 0.45, 0.18))
+		draw_rect(Rect2(Vector2(tr.position) * k, Vector2(tr.size) * k), Color(0.95, 0.8, 0.35, 0.7), false, 1.5)
 	for p in z.info["portals"]:
 		var r: Rect2i = p["rect"]
 		draw_rect(Rect2(Vector2(r.position) * k, Vector2(r.size) * k).grow(1.5), Color(0.7, 0.4, 1.0))
@@ -87,4 +91,4 @@ func _draw() -> void:
 	var font := get_theme_default_font()
 	draw_string(font, Vector2(4, 13 if not big else 18), z.info["name"] + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
 	if big:
-		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   purple: portals   yellow: NPCs   orange: camps   violet: nests   pink: hordes   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))
+		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   gold box: town   purple: portals   yellow: NPCs   orange: camps   violet: nests   pink: hordes   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))

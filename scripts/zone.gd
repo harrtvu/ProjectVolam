@@ -111,6 +111,8 @@ func setup(id: String, main_ref: Node) -> void:
 		br.kind = "vendor"
 		br.position = map.cell_pos(info["vendor"])
 		add_child(br)
+	if info.has("town") and not ho:
+		_spawn_town_signs()
 	if info.has("map_device"):
 		map_portal_root = Node2D.new()
 		map_portal_root.name = "MapPortals"
@@ -286,11 +288,12 @@ func _spawn_groups() -> void:
 	for i in specs.size():
 		var g: Dictionary = specs[i]
 		if g.get("core", false):
+			var town_r: Rect2i = info["town"]["rect"] if info.has("town") else Rect2i()
 			for k in int(g["n"]):
 				var cell := Vector2i(-1, -1)
-				for tries in 60:
+				for tries in 80:
 					var c := map.local_to_map(map.random_open_position(_rng, avoid_cells()))
-					if core.has_point(c):
+					if core.has_point(c) and not town_r.has_point(c):
 						cell = c
 						break
 				if cell.x >= 0:
@@ -798,7 +801,57 @@ class PortalVisual extends Node2D:
 			draw_circle(p, 2.5, Color(0.9, 0.8, 1.0, 0.8))
 
 
-# ---------------------------------------------------------------- blacksmith station (Sunny Meadow)
+# ---------------------------------------------------------------- Sunnyhaven town signs
+
+## Gate signs for the walled starter town (east = forest road, west = wilds).
+func _spawn_town_signs() -> void:
+	var town: Dictionary = info["town"]
+	var r: Rect2i = town["rect"]
+	var tname := str(town.get("name", "Town"))
+	for spec in [
+		[Vector2i(r.end.x - 1, r.position.y + r.size.y / 2), "east", "%s\n← town   wilds →" % tname],
+		[Vector2i(r.position.x, r.position.y + r.size.y / 2), "west", "← wilds   %s →\ntown" % tname],
+	]:
+		var s := TownSignVisual.new()
+		s.position = map.cell_pos(spec[0])
+		s.side = str(spec[1])
+		s.text = str(spec[2])
+		add_child(s)
+
+
+class TownSignVisual extends Node2D:
+	var side := "east"
+	var text := "Town"
+	var _t := 0.0
+
+	func _ready() -> void:
+		NetUtil.cull_offscreen(self, 160.0)
+		z_index = 0
+		var l := Label.new()
+		l.text = text
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.size = Vector2(160, 36)
+		l.position = Vector2(-80, -48)
+		l.add_theme_font_size_override("font_size", 11)
+		l.add_theme_color_override("font_color", Color(1.0, 0.92, 0.65))
+		l.add_theme_color_override("font_outline_color", Color.BLACK)
+		l.add_theme_constant_override("outline_size", 4)
+		add_child(l)
+
+	func _process(delta: float) -> void:
+		_t += delta
+		queue_redraw()
+
+	func _draw() -> void:
+		draw_set_transform(Vector2(0, 10), 0.0, Vector2(1.0, 0.35))
+		draw_circle(Vector2.ZERO, 22.0, Color(0, 0, 0, 0.16))
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		draw_rect(Rect2(-4, -18, 8, 28), Color(0.45, 0.28, 0.12))
+		draw_rect(Rect2(-22, -36, 44, 22), Color(0.55, 0.22, 0.14))
+		draw_rect(Rect2(-20, -34, 40, 18), Color(0.75, 0.35, 0.18))
+		var pulse := 0.55 + 0.25 * sin(_t * 2.2)
+		draw_circle(Vector2(0, -25), 3.0, Color(1.0, 0.85, 0.35, pulse))
+
 
 # ---------------------------------------------------------------- dungeon entrance safe area
 

@@ -50,6 +50,8 @@ const DB := {
 		"vendor": Vector2i(156, 66),
 		"hideout_master": Vector2i(176, 66),
 		"map_portal_row": 56,
+		## Walled starter village around the NPCs (absolute cells). No wild packs spawn inside.
+		"town": {"name": "Sunnyhaven", "rect": Rect2i(152, 52, 30, 22)},
 		"portals": [
 			# Inside the 2-tile solid border (x = BIG_W-4) so roads can reach the gate.
 			{"rect": Rect2i(356, 63, 2, 4), "to": "forest", "arrive": Vector2i(4, 20)},

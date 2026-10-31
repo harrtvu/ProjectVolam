@@ -4064,6 +4064,18 @@ func _bigmap_selftest() -> void:
 		for k in ["respawn", "blacksmith", "map_device", "merchant", "vendor", "hideout_master"]:
 			if zi.has(k) and not m.is_reachable(zi[k]):
 				bad.append(k)
+		if zi.has("town"):
+			var tr: Rect2i = zi["town"]["rect"]
+			for k2 in ["respawn", "blacksmith", "map_device", "merchant", "vendor", "hideout_master"]:
+				if zi.has(k2) and not tr.has_point(zi[k2]):
+					bad.append("town misses " + k2)
+			# Portal yard + a gate cell must be walkable; the wall itself is solid on purpose.
+			var portal_yard := Vector2i(zi["map_device"].x, int(zi["map_portal_row"]))
+			if not m.is_reachable(portal_yard):
+				bad.append("town portal yard")
+			var wall_sample := tr.position
+			if m.is_walkable(wall_sample):
+				bad.append("town wall missing")
 		if not zi["boss"].is_empty() and not m.is_reachable(zi["boss"]["cell"]):
 			bad.append("boss lair")
 		var kinds := {}
