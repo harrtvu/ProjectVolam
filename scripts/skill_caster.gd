@@ -190,19 +190,39 @@ static func cast(p: Node, slot: int, req: Dictionary) -> void:
 		_deny(p, slot, "%s is on cooldown (%.1fs)" % [sk["name"], p._cooldowns[slot]], false)
 		return
 	var cost := int(sk["cost"])
-	if p.mp < cost:
+	var lifetap: bool = p.tm("flag:lifetap") > 0.0
+	var life_cost := 0
+	if lifetap:
+		life_cost = maxi(1, roundi(p.max_hp * 0.08))
+		if p.hp <= life_cost:
+			_deny(p, slot, "not enough life for %s (Blood Pact needs %d HP)" % [sk["name"], life_cost])
+			return
+	elif p.mp < cost:
 		_deny(p, slot, "not enough mana for %s (%d/%d)" % [sk["name"], p.mp, cost])
 		return
 	if not _do(p, sid, sk, req):
 		_deny(p, slot, "%s: no target in range" % sk["name"])
 		return
-	p.mp -= cost
+	if lifetap:
+		p.hp = maxi(1, p.hp - life_cost)
+	else:
+		p.mp -= cost
 	p._cooldowns[slot] = float(sk["cd"])
+	var ev: Dictionary = Forms.on_cast(p, slot)
+	if ev.get("kind") == "finisher":
+		p._srv_log("%s completed Martial Form combo (%s): Finisher +%d%% skill damage for %.0fs" % [
+			p.display_name, ev.get("name", p.form_id), roundi(float(ev.get("dmg", 0))), Forms.FINISHER_DURATION])
+		p.notify("Finisher! +%d%% skill damage" % roundi(float(ev.get("dmg", 0))))
+		p.push_form()
+	elif ev.get("kind") in ["advance", "reset"]:
+		p.push_form()
 	if Time.get_ticks_msec() - p._born_ms >= 150:
 		if p._owner_connected():
 			p.client_skill_cast.rpc_id(p.peer_id, slot, float(sk["cd"]))
-	p._srv_log("%s cast %s (mp %d/%d, cd %.0fs) [cost %d, cd %.1fs%s]" % [p.display_name, sk["name"], p.mp, p.max_mp,
-		float(sk["cd"]), cost, float(sk["cd"]), (", x%.2f" % float(sk["mult"])) if sk.has("mult") else ""])
+	var cost_note := ("life %d" % life_cost) if lifetap else ("cost %d" % cost)
+	p._srv_log("%s cast %s (mp %d/%d, cd %.0fs) [%s, cd %.1fs%s%s]" % [p.display_name, sk["name"], p.mp, p.max_mp,
+		float(sk["cd"]), cost_note, float(sk["cd"]), (", x%.2f" % float(sk["mult"])) if sk.has("mult") else "",
+		", combo %d" % p.combo_step if p.combo_step > 0 or ev.get("kind") == "finisher" else ""])
 
 
 static func _do(p: Node, sid: String, sk: Dictionary, req: Dictionary) -> bool:

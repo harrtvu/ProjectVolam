@@ -118,6 +118,7 @@ run --join=127.0.0.1 --name=MetalA --password=t --bot --quit-after=8 > $L/p4b_me
 run --join=127.0.0.1 --name=FireB --password=t --bot --quit-after=8 > $L/p4b_fire.log 2>&1 &
 wait
 "$GODOT" --headless --path . -- --talent-selftest > $L/talent_selftest.log 2>&1
+"$GODOT" --headless --path . -- --form-selftest > $L/form_selftest.log 2>&1
 
 echo "Phase 5 (~70s): gear, crafting, blacksmith..."
 SAVE5="$(pwd)/$L/accounts_p5.json"; rm -f "$SAVE5"
@@ -445,6 +446,7 @@ check "no line of sight rejected"                "target rejected: .*no line of 
 echo; echo "== Passive web"
 check "offline web self-test (graph + maths)"  "TALENT SELFTEST OK"                       talent_selftest.log
 check "web: every node reachable, 15 keystones" "WEB SELFTEST 1[0-9][0-9] nodes: .*\"keystone\": 15" talent_selftest.log
+check "offline Martial Forms self-test"        "FORM SELFTEST OK"                         form_selftest.log
 check "refund that would disconnect rejected"   "refund [a-z_0-9]+ rejected: refunding .* would disconnect" p4_server.log
 check "single node refunded for gold"           "refunded passive .* for [0-9]+ gold"       p4_server.log
 check "centre keystone allocated (Farmer)"      "Farmer allocated passive Treasure Hunter's Oath \[keystone\]" p4_server.log

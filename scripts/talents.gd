@@ -498,7 +498,10 @@ static func skill_def_m(m: Dictionary, sid: String) -> Dictionary:
 	sk["cost"] = roundi(float(sk["cost"]) * (1.0 - _g(m, "cost_pct") / 100.0))
 	for key in ["radius", "range"]:
 		if sk.has(key):
-			sk[key] = float(sk[key]) * (1.0 + _g(m, key + ":" + sid) / 100.0)
+			var mult := 1.0 + _g(m, key + ":" + sid) / 100.0
+			if key == "radius":
+				mult *= 1.0 + _g(m, "aoe_pct") / 100.0   # Martial Form / gear: global AoE
+			sk[key] = float(sk[key]) * mult
 	if sk.has("stun"):
 		sk["stun"] = float(sk["stun"]) + _g(m, "stun:" + sid)
 	if sk.has("duration"):

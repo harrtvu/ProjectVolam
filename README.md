@@ -21,6 +21,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on keys **1-4**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
 | Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, clicking empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
 | Passive web | One shared Path-of-Exile-style web of 175 nodes. Class starts sit on the five-element pentagon, with small/notable/keystone nodes, an adjacency rule, 1 point per level (retroactive), per-node refund and full reset for gold, and farming stats (item quantity/rarity, gold, leech, attack/cast speed, damage vs element). All bonuses flow through one stat aggregator that gear affixes can plug into. See [Passive web](#passive-web-shared-path-of-exile-style). |
+| Martial Forms (Vo Lam × PoE) | Press **F**. Each class has two **Martial Forms** (chiêu thức): a Vo Lam-style **combo route** of skill slots and 1–2 PoE-style **support link** sockets. Cast skills in order to fill the combo meter above the skill bar; completing the route triggers a **Finisher** (+% skill damage for a few seconds). Socket supports (Added Firepower, Swift Forms, Expanding Force, Blood Pact, Culling Strike, …) to reshape every skill — same modifier keys as the passive web and gear. Second Form unlocks at level 6 with two links. See [Martial Forms](#martial-forms-vo-lam--path-of-exile). |
 | Players | WASD / arrows to move. The camera follows you, and the sprite flips and waddles while walking. A name + level label and an HP bar float over each head. **Server-authoritative**: clients send only input; the server moves everyone and replicates the results with `MultiplayerSynchronizer`/`MultiplayerSpawner`. |
 | Monsters & bosses | 13 regular monster types plus 3 zone bosses in walled lairs at the far end of their zones, with different behaviours (packs, erratic flyers, lunges, ranged archers, wall-phasing ghosts, armored brutes). Stats and XP scale with monster level, and the name + level float over each head. Every non-starter zone has a boss with a special attack, a big HP bar, chat announcements and guaranteed loot. See [Monsters](#monsters). |
 | Health, death, XP, levels | Monsters chase nearby players and hit them (damage reduced by armor). At 0 HP you become a tombstone and respawn at the current zone's entrance after 4 s with full HP. You slowly regenerate when out of combat. XP per kill = 6 + 4 × monster level (bosses 100 + 20 × level), shared by everyone who hit it. Levelling (20 × level XP per level) raises your stats by your class's growth rates, refills HP and mana, unlocks skills at levels 3/6/10, and announces it in chat. The HUD shows HP/mana/XP bars, class, ATK/DEF, gold, zone and the skill bar. |
@@ -287,6 +288,32 @@ Press **T** to open the **passive web**. It's one big graph of **175 nodes** tha
 
 Screenshots for every class: `docs/screenshot_web_metal.png`, `_wood`, `_water`, `_fire`, `_earth` (each is a level-20 bot
 that pathed to a class keystone).
+
+## Martial Forms (Vo Lam × Path of Exile)
+
+Press **F** to open **Martial Forms**. This is the combat playstyle layer that mixes
+**Võ Lâm Truyền Kỳ combo routes** with **Path of Exile support gems**:
+
+* **Two Forms per class.** The starter Form (level 1) has a longer combo and **1 support link**.
+  The second Form unlocks at **level 6** with a shorter, burstier route and **2 support links**.
+* **Combo routes (Vo Lam).** Each Form lists a sequence of skill slots (e.g. Metal *Blade Dance*:
+  1 → 2 → 1 → 4). Cast them in order within a 4 s window; the HUD above the skill bar shows pips
+  and the next key. Completing the route triggers a **Finisher**: +30–55% skill damage for 5 s
+  (shown as `FINISHER` on the bar). A wrong skill or a timeout resets the meter.
+* **Support links (PoE).** Socket shared supports into the Form — *Added Firepower*, *Swift Forms*,
+  *Expanding Force*, *Venom Coating*, *Combustion*, *Blood Pact Link* (skills cost life instead of
+  mana), *Soul Siphon*, *Mountain Guard*, *Culling Strike*. Their mods use the same keys as the
+  passive web and gear, so `Stats.gather` + `Talents.skill_def_m` apply them automatically.
+* **Server-authoritative.** Form choice and supports are saved with the character. The server
+  validates unlock level, socket count and duplicates; combo / Finisher state is pushed to the owner.
+
+| Class | Starter Form | Ascendant Form (Lv 6) |
+|---|---|---|
+| Metal | Blade Dance (Kiếm Vũ) — Whirl, Pierce, Whirl, Cuts | Death Mark Form (Tử Ấn) — Pierce, Focus, Cuts |
+| Wood | Thorn Path (Gai Lộ) — Thorn, Roots, Thorn, Bloom | Grove Heart Form (Lâm Tâm) — Regrowth, Roots, Bloom |
+| Water | Frost Tide (Sương Triều) — Shard, Nova, Shard, Wave | Tideweaver (Triều Chức) — Rain, Nova, Wave |
+| Fire | Ember Cycle (Tàn Luân) — Fireball, Burst, Fireball, Meteor | Inferno Form (Hỏa Ngục) — Burst, Meteor, Inferno |
+| Earth | Stone March (Thạch Hành) — Slam, Stoneskin, Slam, Quake | Mountain Form (Sơn Thế) — Taunt, Stoneskin, Quake |
 
 ### Centre keystones (trade-offs)
 
@@ -959,8 +986,10 @@ scripts/player.gd      Player: input -> server, movement, combat, HP/mana/XP/lev
 scripts/classes.gd     The 5 classes (stats, growth, skills) and the element cycle / multipliers
 scripts/skill_caster.gd Server-side skill logic (checks, target validation/aiming, hit detection, effects)
 scripts/talents.gd      Passive web: node graph generation, allocation/refund rules, skill modifiers
-scripts/stats.gd        Central stat/modifier aggregation (passive web + gear affixes)
+scripts/stats.gd        Central stat/modifier aggregation (passive web + gear affixes + Form supports)
 scripts/talent_ui.gd    Passive web panel (T): pan/zoom view, tooltips, refund/reset
+scripts/forms.gd        Martial Forms: combo routes, Finisher, support link pool and sanitize rules
+scripts/form_ui.gd      Martial Forms panel (F): pick Form, socket supports
 scripts/fx.gd          Client-side skill visual effects (rings, bursts, roots, rain, meteor...)
 scripts/class_select_ui.gd  Class selection screen
 scripts/character_sheet.gd  Character sheet (C)
@@ -1104,8 +1133,9 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min,
 | W A S D / Arrow keys | Move |
 | Space | Basic attack (melee within ~56 px, or a bolt for Water/Fire) |
 | 1 2 3 4 | Use skill 1-4 (or click the skill bar) |
-| C | Character sheet (class, stats, skills, element cycle) |
+| C | Character sheet (class, stats, skills, element cycle, Martial Form) |
 | T | Passive web (drag to pan, wheel to zoom, click to allocate, right-click twice to refund) |
+| F | Martial Forms (combo routes + support links) |
 | Left-click | Select monster/player (empty ground clears) |
 | Right-click | Select monster and attack |
 | Tab | Cycle nearest enemies |

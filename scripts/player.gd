@@ -82,6 +82,13 @@ var _bagfull_ms := -99999
 var _rng := RandomNumberGenerator.new()   # server: every loot / crafting roll
 var talents: Dictionary = {}     # talent id -> rank (server truth; owner gets a copy)
 var tmods: Dictionary = {}       # Talents.mods() cache
+# Martial Forms (Vo Lam combo routes + PoE support links)
+var form_id: String = ""         # active Form id for this class
+var form_supports: Array = []    # support link ids socketed into the Form (max Forms.MAX_LINKS)
+var combo_step: int = 0          # next index in the Form's combo route
+var combo_t: float = 0.0         # seconds left to continue the combo
+var finisher_t: float = 0.0      # seconds left on the Finisher damage buff
+var finisher_dmg: float = 0.0    # % skill damage from the completed combo
 
 var _input_dir := Vector2.ZERO        # server: latest input from owner
 var _last_sent := Vector2(INF, INF)   # owner: last input sent
@@ -465,6 +472,14 @@ func request_refund(id: String) -> void:
 	_send("refund", id)
 
 
+func request_form(id: String) -> void:
+	_send("form", {"op": "select", "id": id})
+
+
+func request_form_support(slot: int, support_id: String) -> void:
+	_send("form", {"op": "support", "slot": slot, "id": support_id})
+
+
 func request_vendor(op: String, args := {}) -> void:
 	var d: Dictionary = args.duplicate()
 	d["op"] = op
@@ -555,8 +570,9 @@ func recalc_stats() -> void:
 		defense += Gear.defense(equipment[slot])
 	crit = Classes.stat(class_id, "crit", level)
 	move_speed = float(Classes.info(class_id)["speed"])
-	# passives + gear affixes (one aggregated modifier dictionary)
+	# passives + gear affixes + Martial Form support links (one aggregated modifier dictionary)
 	tmods = Stats.gather(class_id, talents, equipment)
+	Stats.add_into(tmods, Forms.mods(class_id, form_id, form_supports))
 	max_hp += roundi(tm("life_flat"))
 	max_mp += roundi(tm("mana_flat"))
 	attack += roundi(tm("dmg_flat"))
@@ -590,6 +606,13 @@ func apply_character(c: Dictionary) -> void:
 		talents = Talents.sanitize(class_id, level, tl)
 		if talents.size() != tl.size():   # (server only)
 			_srv_log("%s: saved passives didn't fit the current web (old talent-tree save?) - %d of %d kept, points refunded" % [display_name, talents.size(), tl.size()])
+	var fs = Forms.sanitize(class_id, level, str(c.get("form_id", "")), c.get("form_supports", []) if typeof(c.get("form_supports", [])) == TYPE_ARRAY else [])
+	form_id = str(fs["form_id"])
+	form_supports = fs["supports"]
+	combo_step = 0
+	combo_t = 0.0
+	finisher_t = 0.0
+	finisher_dmg = 0.0
 	hp = 999999
 	mp = 999999
 	recalc_stats()
@@ -709,6 +732,7 @@ func to_character() -> Dictionary:
 		"gold": gold, "inventory": inventory.duplicate(),
 		"equipment": equipment.duplicate(true), "bag": bag.duplicate(true), "stash": stash.duplicate(true), "items_v": 2,
 		"talents": talents.duplicate(),
+		"form_id": form_id, "form_supports": form_supports.duplicate(),
 		"atlas": atlas.duplicate(true), "free_day": free_day, "tutorial": tutorial,
 	}
 
@@ -929,6 +953,7 @@ func push_inventory() -> void:
 	if multiplayer.is_server() and Time.get_ticks_msec() - _born_ms >= 150 and _owner_connected():
 		client_set_inventory.rpc_id(peer_id, inventory, gold, equipment, bag, stash)
 		client_set_talents.rpc_id(peer_id, talents)
+		push_form()
 		push_atlas()
 		push_hideout()
 
@@ -1060,6 +1085,9 @@ func handle_request(action: String, arg: Variant) -> void:
 			server_respec()
 		"refund":
 			server_refund_node(str(arg))
+		"form":
+			if typeof(arg) == TYPE_DICTIONARY:
+				server_form(arg)
 		"dungeon":
 			if _main and _main.instances and typeof(arg) == TYPE_DICTIONARY:
 				_main.instances.handle_request(self, arg)
@@ -1429,6 +1457,78 @@ func client_set_atlas(a: Dictionary, fd: String, ri: Dictionary) -> void:
 func client_set_talents(t: Dictionary) -> void:
 	talents = t
 	tmods = Stats.gather(class_id, talents, equipment)
+	Stats.add_into(tmods, Forms.mods(class_id, form_id, form_supports))
+
+
+func push_form() -> void:
+	if multiplayer.is_server() and Time.get_ticks_msec() - _born_ms >= 150 and _owner_connected():
+		client_set_form.rpc_id(peer_id, form_id, form_supports, combo_step, combo_t, finisher_t, finisher_dmg)
+
+
+@rpc("authority", "call_local", "reliable")
+func client_set_form(fid: String, supports: Array, step: int, ct: float, ft: float, fd: float) -> void:
+	form_id = fid
+	form_supports = supports.duplicate()
+	combo_step = step
+	combo_t = ct
+	finisher_t = ft
+	finisher_dmg = fd
+	tmods = Stats.gather(class_id, talents, equipment)
+	Stats.add_into(tmods, Forms.mods(class_id, form_id, form_supports))
+	inventory_changed.emit()
+
+
+## Server: Martial Form select / support socketing.
+func server_form(arg: Dictionary) -> void:
+	var op := str(arg.get("op", ""))
+	match op:
+		"select":
+			var id := str(arg.get("id", ""))
+			var why := Forms.can_select_form(class_id, level, id)
+			if why != "":
+				_srv_log("%s Form %s rejected: %s" % [display_name, id, why])
+				notify("Form: " + why)
+				return
+			if id == form_id:
+				return
+			var before := form_id
+			form_id = id
+			# drop excess supports if the new Form has fewer sockets
+			var f := Forms.form(class_id, form_id)
+			var links := mini(int(f.get("links", 1)), Forms.MAX_LINKS)
+			while form_supports.size() > links:
+				form_supports.pop_back()
+			combo_step = 0
+			combo_t = 0.0
+			finisher_t = 0.0
+			finisher_dmg = 0.0
+			recalc_stats()
+			_srv_log("%s switched Martial Form %s -> %s (%s), supports %s" % [display_name, before, form_id, f.get("name", "?"), form_supports])
+			notify("Martial Form: %s (%s)" % [f.get("name", id), f.get("viet", "")])
+			push_form()
+			push_inventory()
+		"support":
+			var slot := int(arg.get("slot", -1))
+			var sid := str(arg.get("id", ""))
+			var why2 := Forms.can_set_support(class_id, level, form_id, form_supports, slot, sid)
+			if why2 != "":
+				_srv_log("%s Form support %s in slot %d rejected: %s" % [display_name, sid, slot, why2])
+				notify("Support: " + why2)
+				return
+			while form_supports.size() <= slot:
+				form_supports.append("")
+			form_supports[slot] = sid
+			# trim trailing empties for a tidy save
+			while not form_supports.is_empty() and str(form_supports.back()) == "":
+				form_supports.pop_back()
+			recalc_stats()
+			var sp := Forms.support(sid)
+			_srv_log("%s Form support slot %d -> %s | %s" % [display_name, slot + 1, sid if sid != "" else "(empty)", _stat_line()])
+			notify("Support link %d: %s" % [slot + 1, sp.get("name", "(empty)") if sid != "" else "(empty)"])
+			push_form()
+			push_inventory()
+		_:
+			_srv_log("%s Form request rejected: unknown op '%s'" % [display_name, op])
 	inventory_changed.emit()
 
 
@@ -1440,6 +1540,7 @@ func client_set_inventory(inv: Dictionary, g: int, eq: Dictionary, b: Array, st:
 	bag = b
 	stash = st
 	tmods = Stats.gather(class_id, talents, equipment)
+	Stats.add_into(tmods, Forms.mods(class_id, form_id, form_supports))
 	inventory_changed.emit()
 
 
@@ -1478,6 +1579,16 @@ func _combat_tick(delta: float) -> void:
 		if mp < max_mp:
 			mp = mini(max_mp, mp + maxi(1, roundi(max_mp * (0.02 if _since_hit < 4.0 else 0.04) * (1.0 + tm("mp_regen_pct") / 100.0) * (1.0 - zone.dungeon_mod("map_less_mana_regen") / 100.0))))
 	_phoenix_cd = maxf(0.0, _phoenix_cd - delta)
+	if combo_t > 0.0:
+		combo_t = maxf(0.0, combo_t - delta)
+		if combo_t <= 0.0 and combo_step > 0:
+			combo_step = 0
+			push_form()
+	if finisher_t > 0.0:
+		finisher_t = maxf(0.0, finisher_t - delta)
+		if finisher_t <= 0.0:
+			finisher_dmg = 0.0
+			push_form()
 	if _shield_t > 0.0:
 		_shield_t -= delta
 		if _shield_t <= 0.0:
@@ -1565,7 +1676,9 @@ func hit_monster(m: Node, mult: float, sk: Dictionary) -> void:
 		bonus *= 2.0
 		_tlog("execute", "%s's Death Mark executes %s (double damage below 30%% HP)" % [display_name, m.display_name])
 	if not sk.get("basic_melee", false) and not sk.get("basic", false) and tm("ele_dmg_pct") != 0.0:
-		bonus *= 1.0 + tm("ele_dmg_pct") / 100.0     # gear: increased elemental (skill) damage
+		bonus *= 1.0 + tm("ele_dmg_pct") / 100.0     # gear / Form supports: increased elemental (skill) damage
+	if not sk.get("basic_melee", false) and not sk.get("basic", false) and finisher_t > 0.0 and finisher_dmg > 0.0:
+		bonus *= 1.0 + finisher_dmg / 100.0           # Martial Form Finisher buff (Vo Lam combo complete)
 	var dmg := maxi(1, roundi(attack * mult * attack_mult() * (crit_mult() if is_crit else 1.0) * emult * bonus))
 	if sk.get("basic_melee", false) and tm("mp_on_hit") > 0.0:
 		mp = mini(max_mp, mp + roundi(tm("mp_on_hit")))

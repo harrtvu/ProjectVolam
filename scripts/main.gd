@@ -37,6 +37,7 @@ const Vendor := preload("res://scripts/vendor.gd")
 ##   --bench=SECS        client: measure frame time / nodes / physics for SECS seconds, print a BENCH line, quit
 ##   --bigmap-selftest   offline checks of the big overworld maps (size, reachability, groups, old-save positions)
 ##   --gear-selftest     offline gear checks (drop statistics, orbs, enhancement, resistances)
+##   --form-selftest     offline Martial Forms checks (combo routes + support links)
 ##   --open-smith        open the blacksmith panel when standing next to it (screenshots)
 ##   --debug-tooltip=N   show the tooltip of the N-th gear item in the bag (screenshots)
 ##   --open-sheet        open the character sheet (C) on login (screenshots)
@@ -49,7 +50,7 @@ const Vendor := preload("res://scripts/vendor.gd")
 const GAME_TITLE := "Project Volam"
 const DEFAULT_PORT := 7777
 ## Build/protocol version checked on join (handshake.gd). Bump it whenever RPCs or synced data change.
-const BUILD_VERSION := "volam-m2.2"
+const BUILD_VERSION := "volam-m2.3"
 const MAX_PLAYERS := 32
 const SAVE_INTERVAL := 30.0
 const DEFAULT_SAVE_FILE := "user://volam_save/accounts.json"
@@ -70,6 +71,7 @@ const CharacterSheetScript := preload("res://scripts/character_sheet.gd")
 const SkillBarScript := preload("res://scripts/skill_bar.gd")
 const FxScript := preload("res://scripts/fx.gd")
 const TalentUIScript := preload("res://scripts/talent_ui.gd")
+const FormUIScript := preload("res://scripts/form_ui.gd")
 
 var zones := {}             # zone_id -> zone node (every peer builds all of them)
 var menu_cam: Camera2D
@@ -118,6 +120,7 @@ var mp_text: Label
 var class_label: Label
 var skill_bar: HBoxContainer
 var char_sheet: PanelContainer
+var form_ui: PanelContainer
 var class_select: Control
 
 # State
@@ -365,6 +368,7 @@ func _setup_input() -> void:
 	_add_action("skill_3", [KEY_3])
 	_add_action("skill_4", [KEY_4])
 	_add_action("talents", [KEY_T])
+	_add_action("forms", [KEY_F])
 	_add_action("target_cycle", [KEY_TAB])
 	_add_action("atlas", [KEY_M])
 	_add_action("party_panel", [KEY_P])
@@ -571,6 +575,9 @@ func _parse_args() -> void:
 			bot_respec_at.append(float(t))
 	if opts.has("talent-selftest"):
 		_talent_selftest()
+		return
+	if opts.has("form-selftest"):
+		_form_selftest()
 		return
 	if _gear_selftest_flag:
 		_gear_selftest()
@@ -1600,6 +1607,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action("talents"):
 			_open_exclusive(talent_ui, not talent_ui.visible)
 			get_viewport().set_input_as_handled()
+		elif event.is_action("forms"):
+			_open_exclusive(form_ui, not form_ui.visible)
+			if form_ui.visible:
+				form_ui.set_player(_local_player())
+			get_viewport().set_input_as_handled()
 		elif event.is_action("party_panel"):
 			toggle_party_panel()
 			get_viewport().set_input_as_handled()
@@ -1744,7 +1756,7 @@ func handle_escape() -> void:
 		pause_menu.close_menu()
 		return
 	for pn in [["hideout", hideout_ui], ["vendor", vendor_ui], ["map device / merchant", map_ui], ["atlas", atlas_ui], ["blacksmith", smith_ui],
-			["passive web", talent_ui], ["character sheet", char_sheet], ["inventory", inventory_ui]]:
+			["martial forms", form_ui], ["passive web", talent_ui], ["character sheet", char_sheet], ["inventory", inventory_ui]]:
 		if pn[1].visible:
 			pn[1].visible = false
 			item_tip.hide_tip()
@@ -1937,7 +1949,7 @@ static func _rect_hits(r: Rect2, rects: Array) -> bool:
 
 
 func _big_windows() -> Array:
-	return [inventory_ui, char_sheet, talent_ui, atlas_ui, map_ui, hideout_ui, smith_ui, vendor_ui]
+	return [inventory_ui, char_sheet, talent_ui, form_ui, atlas_ui, map_ui, hideout_ui, smith_ui, vendor_ui]
 
 
 func close_windows_except(keep: Array) -> void:
@@ -2216,7 +2228,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  N map  P party\nEnter chat   /invite NAME = party" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  F forms  N map  P party\nEnter chat   /invite NAME = party" % here
 	_hud_declutter()
 	_place_npc_labels()
 	if me == null:
@@ -2232,6 +2244,8 @@ func _update_hud(delta: float) -> void:
 		_open_talents = false
 		talent_ui.visible = true
 	talent_ui.set_player(me)
+	if form_ui.visible:
+		form_ui.set_player(me)
 	if bot_watch_patrol and not _watch_sent and _elapsed > 3.0 and me.zone.zone_id == "meadow":
 		_watch_sent = true
 		_watch_patrol(me)
@@ -4559,6 +4573,75 @@ func _talent_selftest() -> void:
 	get_tree().quit(0 if all_ok else 1)
 
 
+## Offline Martial Forms checks: every class has two Forms, combo routes use real skills,
+## support links sanitize/level-gate, and completing a combo applies the Finisher buff.
+func _form_selftest() -> void:
+	var PS := load("res://scripts/player.gd")
+	var all_ok := true
+	var cnt := [0]
+	var fails: Array = []
+	var check := func(ok: bool, msg: String) -> void:
+		cnt[0] += 1
+		if not ok:
+			all_ok = false
+			fails.append(msg)
+			print("FORM SELFTEST FAIL: %s" % msg)
+	for cls in Classes.ELEMENTS:
+		var list: Array = Forms.for_class(cls)
+		check.call(list.size() == 2, "%s should have 2 Forms, has %d" % [cls, list.size()])
+		for f in list:
+			check.call(int(f["links"]) >= 1 and int(f["links"]) <= Forms.MAX_LINKS, "%s/%s links" % [cls, f["id"]])
+			check.call((f["combo"] as Array).size() >= 2, "%s/%s combo too short" % [cls, f["id"]])
+			for slot in f["combo"]:
+				check.call(Classes.skill_id(cls, int(slot)) != "", "%s/%s combo slot %s" % [cls, f["id"], slot])
+			check.call(Forms.can_select_form(cls, int(f["unlock"]), f["id"]) == "", "%s/%s unlock gate" % [cls, f["id"]])
+			if int(f["unlock"]) > 1:
+				check.call(Forms.can_select_form(cls, int(f["unlock"]) - 1, f["id"]) != "", "%s/%s locked below unlock" % [cls, f["id"]])
+	check.call(Forms.support_ids().size() >= 8, "support pool size")
+	check.call(Forms.can_set_support("metal", 1, "blade_dance", [], 0, "culling") != "", "culling gated by level")
+	check.call(Forms.can_set_support("metal", 10, "blade_dance", [], 0, "culling") == "", "culling ok at 10")
+	check.call(Forms.can_set_support("metal", 10, "blade_dance", [], 1, "added_dmg") != "", "blade_dance has 1 link only")
+	var san := Forms.sanitize("metal", 1, "death_mark_form", ["culling", "added_dmg"])
+	check.call(san["form_id"] == "blade_dance", "sanitize drops locked Form")
+	check.call(san["supports"].is_empty() or not san["supports"].has("culling"), "sanitize drops locked support")
+	# live combo on a throwaway player
+	var p: Node = PS.new()
+	p.class_id = "metal"
+	p.element = "metal"
+	p.level = 10
+	p.form_id = "blade_dance"
+	p.form_supports = ["added_dmg"]
+	p.recalc_stats()
+	check.call(p.tm("ele_dmg_pct") >= 25.0, "support mods land in tmods (got %.1f)" % p.tm("ele_dmg_pct"))
+	var route: Array = Forms.form("metal", "blade_dance")["combo"]
+	for i in route.size():
+		var ev: Dictionary = Forms.on_cast(p, int(route[i]))
+		if i < route.size() - 1:
+			check.call(ev.get("kind") == "advance", "combo step %d advance (got %s)" % [i, ev.get("kind")])
+		else:
+			check.call(ev.get("kind") == "finisher", "combo finisher (got %s)" % ev.get("kind"))
+			check.call(p.finisher_t > 0.0 and p.finisher_dmg >= 30.0, "finisher buff applied")
+	# wrong skill resets
+	p.combo_step = 0
+	p.combo_t = Forms.COMBO_WINDOW
+	Forms.on_cast(p, int(route[0]))
+	var bad: Dictionary = Forms.on_cast(p, (int(route[1]) + 1) % 4 if (int(route[1]) + 1) % 4 != int(route[0]) else (int(route[1]) + 2) % 4)
+	check.call(bad.get("kind") == "reset", "wrong skill resets combo")
+	# skill_def picks up aoe_pct from greater_aoe
+	p.form_supports = ["greater_aoe"]
+	p.recalc_stats()
+	var whirl0: Dictionary = Classes.SKILLS["whirl"]
+	var whirl1: Dictionary = p.skill_def("whirl")
+	check.call(float(whirl1["radius"]) > float(whirl0["radius"]), "greater_aoe grows Whirl radius")
+	p.free()
+	if all_ok:
+		print("FORM SELFTEST: all %d checks passed" % cnt[0])
+	else:
+		print("FORM SELFTEST: %d/%d FAILED: %s" % [fails.size(), cnt[0], fails])
+	print("FORM SELFTEST %s" % ("OK" if all_ok else "FAILED"))
+	get_tree().quit(0 if all_ok else 1)
+
+
 func _fmt(v: Variant) -> String:
 	if typeof(v) == TYPE_FLOAT:
 		return "%.2f" % v
@@ -5071,6 +5154,14 @@ func _build_ui() -> void:
 	talent_ui.visible = false
 	hud.add_child(talent_ui)
 
+	form_ui = FormUIScript.new()
+	form_ui.anchor_left = 0.5
+	form_ui.anchor_right = 0.5
+	form_ui.offset_left = -260
+	form_ui.offset_top = 60
+	form_ui.visible = false
+	hud.add_child(form_ui)
+
 	char_sheet = CharacterSheetScript.new()
 	char_sheet.anchor_left = 0.5
 	char_sheet.anchor_right = 0.5
@@ -5085,7 +5176,7 @@ func _build_ui() -> void:
 	# minimap), the tutorial above them, the item tooltip on top of everything.
 	# The tutorial sits under the windows: it docks away from them, and when nothing fits (the tall
 	# C panel) the window stays readable on top.
-	for panel_node in [tutorial_ui, inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, char_sheet, item_tip]:
+	for panel_node in [tutorial_ui, inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, form_ui, char_sheet, item_tip]:
 		hud.move_child(panel_node, -1)
 
 	class_select = ClassSelectScript.new()

@@ -1,8 +1,10 @@
 extends HBoxContainer
 ## HUD skill bar: 4 slots with icon, hotkey, mana cost, cooldown sweep, lock state.
+## Also draws the Martial Form combo pips and Finisher buff above the bar.
 
 var player: Node
 var _slots: Array = []
+var _combo_label: Label
 
 
 func _ready() -> void:
@@ -14,6 +16,13 @@ func _ready() -> void:
 		s.bar = self
 		add_child(s)
 		_slots.append(s)
+	_combo_label = Label.new()
+	_combo_label.add_theme_font_size_override("font_size", 11)
+	_combo_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_combo_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_combo_label.position = Vector2(-20, -18)
+	_combo_label.size = Vector2(280, 16)
+	add_child(_combo_label)
 
 
 func _process(_delta: float) -> void:
@@ -22,9 +31,27 @@ func _process(_delta: float) -> void:
 		if is_instance_valid(player):
 			var sid := Classes.skill_id(player.class_id, s.index)
 			var sk: Dictionary = player.skill_def(sid)
-			s.tooltip_text = "[%d] %s\n%s\nMana %d  Cooldown %.1fs  Unlocks at level %d%s" % [s.index + 1, sk["name"], sk["desc"],
-				sk["cost"], sk["cd"], Classes.UNLOCK_LEVELS[s.index],
-				"\nHold the key to aim at the ground, release to cast" if player.is_ground_skill(s.index) else ""]
+			var cost_line: String = ("Life %d%%" % 8) if player.tm("flag:lifetap") > 0.0 else ("Mana %d" % int(sk["cost"]))
+			var aim_hint: String = "\nHold the key to aim at the ground, release to cast" if player.is_ground_skill(s.index) else ""
+			s.tooltip_text = "[%d] %s\n%s\n%s  Cooldown %.1fs  Unlocks at level %d%s" % [s.index + 1, sk["name"], sk["desc"],
+				cost_line, sk["cd"], Classes.UNLOCK_LEVELS[s.index], aim_hint]
+	if is_instance_valid(player) and _combo_label:
+		var f := Forms.form(player.class_id, player.form_id)
+		if f.is_empty():
+			_combo_label.text = ""
+		elif player.finisher_t > 0.0:
+			_combo_label.text = "FINISHER +%d%%  %.1fs" % [roundi(player.finisher_dmg), player.finisher_t]
+			_combo_label.add_theme_color_override("font_color", Color(1.0, 0.75, 0.25))
+		elif player.combo_step > 0:
+			var route: Array = f["combo"]
+			var pips := ""
+			for i in route.size():
+				pips += "●" if i < player.combo_step else "○"
+			_combo_label.text = "%s  %s  next [%d]" % [f["viet"], pips, int(route[player.combo_step]) + 1]
+			_combo_label.add_theme_color_override("font_color", Color(0.7, 0.95, 1.0))
+		else:
+			_combo_label.text = "%s  ○○○○  (F Forms)" % f["viet"]
+			_combo_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.45))
 
 
 class Slot extends Control:
