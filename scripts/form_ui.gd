@@ -175,7 +175,8 @@ func _process(_delta: float) -> void:
 	if visible and is_instance_valid(player):
 		# keep the combo / finisher line live without rebuilding the OptionButtons every frame
 		var factive := Forms.form(player.class_id, player.form_id)
-		var fin := ""
+		var fin2: String = ""
 		if player.finisher_t > 0.0:
-			fin = "  Finisher buff: +%d%% (%.1fs)" % [roundi(player.finisher_dmg), player.finisher_t]
-		_status.text = "Combo step %d / %d%s" % [player.combo_step, (factive["combo"] as Array).size() if not factive.is_empty() else 0, fin]
+			fin2 = "  Finisher buff: +%d%% (%.1fs)" % [roundi(player.finisher_dmg), player.finisher_t]
+		var steps2: int = (factive["combo"] as Array).size() if not factive.is_empty() else 0
+		_status.text = "Combo step %d / %d%s" % [player.combo_step, steps2, fin2]
