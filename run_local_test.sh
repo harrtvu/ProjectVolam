@@ -780,6 +780,7 @@ check "practice loot dropped"                          "\[tutorial\] Newbie: pra
 check "step 3: loot pickup"                            "tutorial step 3 done: Loot"                                   p16_Newbie.log
 check "step 4: equipping gear"                         "tutorial step 4 done: Equip gear"                             p16_Newbie.log
 check "step 5: passive web"                            "tutorial step 5 done: Passive web"                            p16_Newbie.log
+check "step 6: Martial Forms"                          "tutorial step 6 done: Martial Forms"                        p16_Newbie.log
 check "finished flag saved"                            "\[tutorial\] Newbie finished the tutorial - flag saved \(done\)" p16_server.log
 check "tutorial can be skipped"                        "tutorial skipped at step 1/5"                                 p16_Skipper.log
 check "skipped flag saved"                             "\[tutorial\] Skipper skipped the tutorial - flag saved \(skipped\)" p16_server.log

@@ -9,7 +9,7 @@ class_name Forms
 ## already understand, so combat code never special-cases Forms beyond combo + lifetap.
 ## Client and server share these pure functions.
 
-const COMBO_WINDOW := 4.0       # seconds to continue the next step of a combo
+const COMBO_WINDOW := 5.0       # seconds to continue the next step of a combo
 const FINISHER_DURATION := 5.0  # seconds the finisher damage buff lasts
 const MAX_LINKS := 2
 
@@ -46,50 +46,60 @@ const FORMS := {
 		{"id": "blade_dance", "name": "Blade Dance", "viet": "Kiếm Vũ",
 			"desc": "Whirl into a dash, whirl again, finish with Thousand Cuts.",
 			"combo": [0, 1, 0, 3], "finisher_dmg": 35, "links": 1, "unlock": 1,
+			"suggest": ["greater_aoe", "added_dmg"],
 			"playstyle": "Vo Lam melee rhythm: clear with Whirl, gap-close, Whirl, execute."},
 		{"id": "death_mark_form", "name": "Death Mark Form", "viet": "Tử Ấn",
 			"desc": "Pierce in, Focus, then Thousand Cuts - the assassin's route.",
 			"combo": [1, 2, 3], "finisher_dmg": 50, "links": 2, "unlock": 6,
+			"suggest": ["culling", "faster_cast"],
 			"playstyle": "PoE single-target burst: set up crits, then dump the finisher."},
 	],
 	"wood": [
 		{"id": "thorn_path", "name": "Thorn Path", "viet": "Gai Lộ",
 			"desc": "Thorn, Roots, Thorn, Bloom - poison the field, then detonate.",
 			"combo": [0, 2, 0, 3], "finisher_dmg": 30, "links": 1, "unlock": 1,
+			"suggest": ["venom", "added_dmg"],
 			"playstyle": "Vo Lam DoT cadence: apply, root, re-apply, bloom."},
 		{"id": "grove_heart_form", "name": "Grove Heart Form", "viet": "Lâm Tâm",
 			"desc": "Regrowth, Roots, Bloom - survive, lock, then plague.",
 			"combo": [1, 2, 3], "finisher_dmg": 40, "links": 2, "unlock": 6,
+			"suggest": ["venom", "fortify"],
 			"playstyle": "PoE sustain mapping: heal through packs while poison ticks."},
 	],
 	"water": [
 		{"id": "frost_tide", "name": "Frost Tide", "viet": "Sương Triều",
 			"desc": "Shard, Nova, Shard, Wave - slow, freeze, finish the line.",
 			"combo": [0, 2, 0, 3], "finisher_dmg": 35, "links": 1, "unlock": 1,
+			"suggest": ["faster_cast", "greater_aoe"],
 			"playstyle": "Vo Lam control chain: poke, freeze, poke, tidal clear."},
 		{"id": "tideweaver", "name": "Tideweaver", "viet": "Triều Chức",
 			"desc": "Rain, Nova, Wave - mend allies, freeze, crash through.",
 			"combo": [1, 2, 3], "finisher_dmg": 45, "links": 2, "unlock": 6,
+			"suggest": ["greater_aoe", "leech"],
 			"playstyle": "PoE support/clear hybrid: heal window into a big Wave."},
 	],
 	"fire": [
 		{"id": "ember_cycle", "name": "Ember Cycle", "viet": "Tàn Luân",
 			"desc": "Fireball, Burst, Fireball, Meteor - stack burns into a crater.",
 			"combo": [0, 1, 0, 2], "finisher_dmg": 40, "links": 1, "unlock": 1,
+			"suggest": ["combust", "added_dmg"],
 			"playstyle": "Vo Lam caster cadence: poke, erupt, poke, skyfall."},
 		{"id": "inferno_form", "name": "Inferno Form", "viet": "Hỏa Ngục",
 			"desc": "Burst, Meteor, Inferno - everything burns at once.",
 			"combo": [1, 2, 3], "finisher_dmg": 55, "links": 2, "unlock": 6,
+			"suggest": ["combust", "greater_aoe"],
 			"playstyle": "PoE screen-clear: AoE into delayed slam into ring of bolts."},
 	],
 	"earth": [
 		{"id": "stone_march", "name": "Stone March", "viet": "Thạch Hành",
 			"desc": "Slam, Stoneskin, Slam, Quake - armour up, then tremors.",
 			"combo": [0, 1, 0, 3], "finisher_dmg": 30, "links": 1, "unlock": 1,
+			"suggest": ["iron_will", "greater_aoe"],
 			"playstyle": "Vo Lam tank rhythm: stun, shield, stun, earthquake."},
 		{"id": "mountain_form", "name": "Mountain Form", "viet": "Sơn Thế",
 			"desc": "Taunt, Stoneskin, Quake - pull the pack and bury it.",
 			"combo": [2, 1, 3], "finisher_dmg": 40, "links": 2, "unlock": 6,
+			"suggest": ["fortify", "iron_will"],
 			"playstyle": "PoE juggernaut: grab aggro, layer defence, slam the pack."},
 	],
 }
@@ -245,4 +255,17 @@ static func describe_supports(supports: Array) -> Array:
 		var sp := support(str(s))
 		if not sp.is_empty():
 			out.append("%s (%s)" % [sp["name"], sp["desc"]])
+	return out
+
+
+## Suggested support ids for a Form (filtered to ones the player can use at `level`).
+static func suggested(cls: String, form_id: String, level: int) -> Array:
+	var f := form(cls, form_id)
+	if f.is_empty():
+		return []
+	var out: Array = []
+	for s in f.get("suggest", []):
+		var sid := str(s)
+		if SUPPORTS.has(sid) and level >= int(SUPPORTS[sid].get("min_level", 1)):
+			out.append(sid)
 	return out

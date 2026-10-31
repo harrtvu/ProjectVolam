@@ -297,9 +297,10 @@ Press **F** to open **Martial Forms**. This is the combat playstyle layer that m
 * **Two Forms per class.** The starter Form (level 1) has a longer combo and **1 support link**.
   The second Form unlocks at **level 6** with a shorter, burstier route and **2 support links**.
 * **Combo routes (Vo Lam).** Each Form lists a sequence of skill slots (e.g. Metal *Blade Dance*:
-  1 → 2 → 1 → 4). Cast them in order within a 4 s window; the HUD above the skill bar shows pips
-  and the next key. Completing the route triggers a **Finisher**: +30–55% skill damage for 5 s
-  (shown as `FINISHER` on the bar). A wrong skill or a timeout resets the meter.
+  1 → 2 → 1 → 4). Cast them in order within a 5 s window; the HUD above the skill bar shows pips,
+  highlights the next skill, and names the next key. Completing the route triggers a **Finisher**:
+  +30–55% skill damage for 5 s (shown as `FINISHER` on the bar, with a gold popup). A wrong skill
+  or a timeout resets the meter.
 * **Support links (PoE).** Socket shared supports into the Form — *Added Firepower*, *Swift Forms*,
   *Expanding Force*, *Venom Coating*, *Combustion*, *Blood Pact Link* (skills cost life instead of
   mana), *Soul Siphon*, *Mountain Guard*, *Culling Strike*. Their mods use the same keys as the
@@ -924,7 +925,7 @@ Sunny Meadow and in every hideout (where the Trade Broker used to be). Press **E
 ### First-time tutorial
 New characters get a short overlay with 5 steps: **move** (WASD), **use a skill** (keys 1-4),
 **pick up loot** (a training drop appears at your feet), **equip gear** (I, then click an item) and **open the
-passive web** (T). Each step is completed by actually doing it. **Skip tutorial** ends it at once.
+passive web** (T), then **Martial Forms** (F). Each step is completed by actually doing it. **Skip tutorial** ends it at once.
 The result (`done`, `skipped`, or `legacy` for characters created before M2) is saved on the character, so
 the tutorial is shown **once per character**.
 
@@ -973,7 +974,7 @@ scripts/handshake.gd   Build version handshake: first RPC on join, mismatches re
 scripts/vendor.gd      NPC vendor rules: rotating stock roll, prices, save validation (preloaded, no class_name)
 scripts/vendor_server.gd Vendor server: persisted stock (vendor.json), rotation timer, buy / sell
 scripts/vendor_ui.gd   Vendor panel: stock list + buy, sell slot, rotation countdown
-scripts/tutorial_ui.gd First-time tutorial overlay (5 steps, skippable)
+scripts/tutorial_ui.gd First-time tutorial overlay (6 steps, skippable)
 tools/boss_trial.sh    Balance trial: one bot per class vs the first zone boss, prints the table
 tools/m2_screenshots.sh Regenerates docs/m2/*.png (needs a display)
 tools/stale_cache_check.sh Starts the game on a .godot cache from an older commit (git-pull regression check)

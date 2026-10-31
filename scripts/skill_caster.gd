@@ -213,9 +213,13 @@ static func cast(p: Node, slot: int, req: Dictionary) -> void:
 		p._srv_log("%s completed Martial Form combo (%s): Finisher +%d%% skill damage for %.0fs" % [
 			p.display_name, ev.get("name", p.form_id), roundi(float(ev.get("dmg", 0))), Forms.FINISHER_DURATION])
 		p.notify("Finisher! +%d%% skill damage" % roundi(float(ev.get("dmg", 0))))
+		NetUtil.popup(p, "FINISHER +%d%%" % roundi(float(ev.get("dmg", 0))), Color(1.0, 0.82, 0.3), -78.0)
+		SkillCaster.fx(p, "ring", p.position, 90.0)
 		p.push_form()
-	elif ev.get("kind") in ["advance", "reset"]:
+	elif ev.get("kind") == "advance":
 		p.push_form()
+	elif ev.get("kind") == "reset" and int(ev.get("step", 0)) > 0:
+		p.push_form()   # restarted combo on the first step of the route
 	if Time.get_ticks_msec() - p._born_ms >= 150:
 		if p._owner_connected():
 			p.client_skill_cast.rpc_id(p.peer_id, slot, float(sk["cd"]))

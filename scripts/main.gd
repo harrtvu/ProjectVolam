@@ -1280,6 +1280,10 @@ func _bot_tutorial(me: Node, zone: Node, delta: float) -> void:
 		4:
 			if _bot_attack_timer <= 0.0:
 				talent_ui.visible = true
+		5:
+			if _bot_attack_timer <= 0.0:
+				_open_exclusive(form_ui, true)
+				form_ui.set_player(me)
 
 
 ## Client: my party changed (members [] = not in a party).
@@ -4633,6 +4637,20 @@ func _form_selftest() -> void:
 	var whirl0: Dictionary = Classes.SKILLS["whirl"]
 	var whirl1: Dictionary = p.skill_def("whirl")
 	check.call(float(whirl1["radius"]) > float(whirl0["radius"]), "greater_aoe grows Whirl radius")
+	# suggested supports + empty form_id defaults
+	var sug: Array = Forms.suggested("metal", "blade_dance", 10)
+	check.call(sug.size() >= 1, "blade_dance has suggestions")
+	check.call(Forms.COMBO_WINDOW >= 5.0, "combo window is at least 5 s")
+	p.form_id = ""
+	p.form_supports = []
+	p.recalc_stats()
+	check.call(p.form_id == Forms.default_form_id("metal"), "empty form_id defaults on recalc")
+	# lifetap cost path: Blood Pact replaces mana with life
+	p.form_id = "blade_dance"
+	p.form_supports = ["lifetap"]
+	p.level = 10
+	p.recalc_stats()
+	check.call(p.tm("flag:lifetap") > 0.0, "lifetap flag from support")
 	p.free()
 	if all_ok:
 		print("FORM SELFTEST: all %d checks passed" % cnt[0])

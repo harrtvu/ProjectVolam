@@ -240,6 +240,9 @@ func _physics_process(delta: float) -> void:
 		_server_tick(delta)
 	else:
 		NetUtil.smooth_follow(self, sync_pos, delta)
+		# Owner clients tick Form timers locally for the HUD; the next push_form() resyncs.
+		if is_local():
+			_client_form_tick(delta)
 
 	# visuals (all peers)
 	var moving := position.distance_to(_last_pos) > 0.3
@@ -571,6 +574,8 @@ func recalc_stats() -> void:
 	crit = Classes.stat(class_id, "crit", level)
 	move_speed = float(Classes.info(class_id)["speed"])
 	# passives + gear affixes + Martial Form support links (one aggregated modifier dictionary)
+	if form_id == "":
+		form_id = Forms.default_form_id(class_id)
 	tmods = Stats.gather(class_id, talents, equipment)
 	Stats.add_into(tmods, Forms.mods(class_id, form_id, form_supports))
 	max_hp += roundi(tm("life_flat"))
@@ -906,6 +911,11 @@ func server_add_xp(amount: int, what := "") -> void:
 				var sk: Dictionary = Classes.SKILLS[Classes.skill_id(class_id, slot)]
 				_srv_log("%s unlocked skill %d: %s (level %d)" % [display_name, slot + 1, sk["name"], level])
 				notify("New skill unlocked: [%d] %s" % [slot + 1, sk["name"]], true)
+		for f in Forms.for_class(class_id):
+			if int(f.get("unlock", 1)) == level:
+				_srv_log("%s unlocked Martial Form: %s (%s) at level %d" % [display_name, f["name"], f["viet"], level])
+				notify("Martial Form unlocked: %s (%s) - press F" % [f["name"], f["viet"]], true)
+				push_form()
 		_srv_log("%s reached level %d (max hp %d, attack %d)" % [display_name, level, max_hp, attack])
 		if _main:
 			_main.broadcast_system("%s reached level %d!" % [display_name, level])
@@ -1568,6 +1578,18 @@ func play_swing() -> void:
 
 
 # ================================================================ combat (server)
+
+## Owner client: countdown Form combo / Finisher for the HUD (server still authoritative).
+func _client_form_tick(delta: float) -> void:
+	if combo_t > 0.0:
+		combo_t = maxf(0.0, combo_t - delta)
+		if combo_t <= 0.0 and combo_step > 0:
+			combo_step = 0
+	if finisher_t > 0.0:
+		finisher_t = maxf(0.0, finisher_t - delta)
+		if finisher_t <= 0.0:
+			finisher_dmg = 0.0
+
 
 ## Server: per-tick buffs, mana regen, cooldowns and delayed skill effects.
 func _combat_tick(delta: float) -> void:

@@ -146,15 +146,25 @@ func _rebuild() -> void:
 		_support_rows.append(opt)
 	if factive.is_empty():
 		_combo.text = "No Form selected."
+		_status.text = ""
 	else:
-		_combo.text = "Active: %s (%s)\nCombo: %s\nFinisher: +%d%% skill damage for %.0fs after the full route." % [
+		var tips: Array = []
+		for sid in Forms.suggested(cls, player.form_id, player.level):
+			var sp: Dictionary = Forms.SUPPORTS[sid]
+			tips.append(str(sp["name"]))
+		var tip_line: String = ("\nSuggested links: " + ", ".join(tips)) if not tips.is_empty() else ""
+		_combo.text = "Active: %s (%s)\nCombo: %s\nFinisher: +%d%% skill damage for %.0fs after the full route.%s" % [
 			factive["name"], factive["viet"], Forms.combo_label(cls, player.form_id),
-			int(factive["finisher_dmg"]), Forms.FINISHER_DURATION]
+			int(factive["finisher_dmg"]), Forms.FINISHER_DURATION, tip_line]
 		var fin: String = ""
 		if player.finisher_t > 0.0:
 			fin = "  Finisher buff: +%d%% (%.1fs)" % [roundi(player.finisher_dmg), player.finisher_t]
-		var steps: int = (factive["combo"] as Array).size() if not factive.is_empty() else 0
-		_status.text = "Combo step %d / %d%s" % [player.combo_step, steps, fin]
+		var steps: int = (factive["combo"] as Array).size()
+		var next_txt: String = ""
+		if player.finisher_t <= 0.0 and steps > 0:
+			var ns: int = int((factive["combo"] as Array)[clampi(player.combo_step, 0, steps - 1)]) + 1
+			next_txt = "  → press %d" % ns
+		_status.text = "Combo step %d / %d%s%s" % [player.combo_step, steps, next_txt, fin]
 
 
 func _pick_form(id: String) -> void:
@@ -175,8 +185,15 @@ func _process(_delta: float) -> void:
 	if visible and is_instance_valid(player):
 		# keep the combo / finisher line live without rebuilding the OptionButtons every frame
 		var factive := Forms.form(player.class_id, player.form_id)
+		if factive.is_empty():
+			_status.text = ""
+			return
 		var fin2: String = ""
 		if player.finisher_t > 0.0:
 			fin2 = "  Finisher buff: +%d%% (%.1fs)" % [roundi(player.finisher_dmg), player.finisher_t]
-		var steps2: int = (factive["combo"] as Array).size() if not factive.is_empty() else 0
-		_status.text = "Combo step %d / %d%s" % [player.combo_step, steps2, fin2]
+		var steps2: int = (factive["combo"] as Array).size()
+		var next_txt: String = ""
+		if player.finisher_t <= 0.0 and steps2 > 0:
+			var ns: int = int((factive["combo"] as Array)[clampi(player.combo_step, 0, steps2 - 1)]) + 1
+			next_txt = "  → press %d" % ns
+		_status.text = "Combo step %d / %d%s%s" % [player.combo_step, steps2, next_txt, fin2]
