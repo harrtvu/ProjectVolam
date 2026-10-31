@@ -4,6 +4,19 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 **Godot 4.2.1** and **GDScript**. The art is Kenney's public-domain (CC0) pixel art; see
 [CREDITS.md](CREDITS.md).
 
+## Tower defense + roguelike slice
+
+The next direction for the project is a **tower defense / roguelike** loop (place towers, pick
+skills, clear a map). A browser-playable vertical slice lives in [`td/`](td/README.md):
+
+```bash
+python3 -m http.server 8080
+# open http://localhost:8080/td/
+```
+
+It reuses this repo’s Kenney monster and skill sprites. The Godot RPG below remains the existing
+playable prototype.
+
 ![in game](docs/screenshot_game.png)
 
 | Whisperwood Forest (Lv 3-7) | Bone Crypt (Lv 6-11) | Frostpeak Ruins (Lv 9-13) |
