@@ -62,7 +62,8 @@ func _draw() -> void:
 	draw_texture_rect(_tex, Rect2(Vector2.ZERO, size), false, Color(1, 1, 1, 0.92))
 	var dot := 2.0 if not big else 3.5
 	for st in z.map.sites:
-		var c: Color = {"camp": Color(1.0, 0.55, 0.15), "elite": Color(1.0, 0.85, 0.2)}.get(st["kind"], Color(0, 0, 0, 0))
+		var c: Color = {"camp": Color(1.0, 0.55, 0.15), "elite": Color(1.0, 0.85, 0.2),
+			"nest": Color(0.75, 0.45, 1.0), "horde": Color(1.0, 0.35, 0.35)}.get(st["kind"], Color(0, 0, 0, 0))
 		if c.a > 0.0:
 			draw_circle(tp.call(z.map.cell_pos(st["cell"])), dot + 0.5, c)
 	if not z.info["boss"].is_empty():
@@ -86,4 +87,4 @@ func _draw() -> void:
 	var font := get_theme_default_font()
 	draw_string(font, Vector2(4, 13 if not big else 18), z.info["name"] + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
 	if big:
-		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   purple: portals   yellow: NPCs   orange: camps   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))
+		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   purple: portals   yellow: NPCs   orange: camps   violet: nests   pink: hordes   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))

@@ -83,7 +83,7 @@ run --join=127.0.0.1 --name=FrostCamper --password=w --class=fire --bot --warp=f
 # a forest Cave Bat pack: overworld cave bats otherwise only respawn if phase-4 bots happen to wipe a bat pack
 CBAT=$(grep -E "BIGMAP SELFTEST forest +packs " $L/bigmap_selftest.log | grep -oE " bat@[0-9]+,[0-9]+" | head -1 | sed -E 's/ bat@//' | awk -F, '{print $1 "," $2+3}')
 run --join=127.0.0.1 --name=BatCamper --password=w --class=water --bot --warp=forest --warp-cell=$CBAT --quit-after=124 > $L/p3_bat_camper.log 2>&1 &
-declare -A LAIR=([forest]=180,110 [crypt]=26,18 [frost]=186,26)   # inside each boss lair (big maps)
+declare -A LAIR=([forest]=332,192 [crypt]=26,18 [frost]=342,32)   # inside each boss lair (360x224 maps)
 declare -A HC=([forest1]=metal [forest2]=wood [forest3]=water [crypt1]=fire [crypt2]=earth [crypt3]=water
                [frost1]=earth [frost2]=fire [frost3]=metal)
 for z in forest crypt frost; do
@@ -102,7 +102,7 @@ b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-tar
 b4 MetalB --class=metal --bot-talents=auto:1 --warp=forest
 b4 WoodA  --class=wood  --bot-talents=auto:0 --bot-aim --warp=forest
 b4 WoodB  --class=wood  --bot-talents=auto:1 --warp=crypt
-b4 WaterA --class=water --bot-talents=goals:a_shatter,a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=180,28
+b4 WaterA --class=water --bot-talents=goals:a_shatter,a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=336,32
 b4 WaterB --class=water --bot-talents=auto:1 --bot-probe --warp=forest
 b4 FireA  --class=fire  --bot-talents=goals:f_quicken,f_shower --bot-aim --warp=crypt
 b4 FireB  --class=fire  --bot-talents=auto:1 --bot-target=far --bot-respec-at=28,31,34,37,40,43,46 --warp=frost
@@ -203,14 +203,14 @@ sleep 2
 run --join=127.0.0.1 --name=Decor --password=d --bot --bot-hideout=2 --quit-after=24 > $L/p10b_bot.log 2>&1 &
 wait
 
-echo "Phase 11 (~25s): client performance in Whisperwood (entrance + boss lair, 200x128 map)..."
+echo "Phase 11 (~25s): client performance in Whisperwood (entrance + boss lair, 360x224 map)..."
 SAVE11="$(pwd)/$L/accounts_p11.json"; rm -f "$SAVE11"
 run --server --save-file="$SAVE11" --debug-start-level=20 --allow-warp --fast-respawn --quit-after=24 > $L/p11_server.log 2>&1 &
 sleep 2
 CAMP=$(grep -E "BIGMAP SELFTEST forest +camps at" $L/bigmap_selftest.log | sed -E 's/.*camps at ([0-9]+),([0-9]+).*/\1,\2/' | awk -F, '{print $1 "," $2+3}')
 run --join=127.0.0.1 --name=Camper --password=b --class=fire --bot --warp=forest --warp-cell=$CAMP --quit-after=20 > $L/p11_camper.log 2>&1 &
 run --join=127.0.0.1 --name=BenchA --password=b --class=metal --bot-idle --warp=forest --bench=8 --quit-after=20 > $L/p11_bench_entrance.log 2>&1 &
-run --join=127.0.0.1 --name=BenchB --password=b --class=earth --bot-idle --warp=forest --warp-cell=178,100 --bench=8 --quit-after=20 > $L/p11_bench_lair.log 2>&1 &
+run --join=127.0.0.1 --name=BenchB --password=b --class=earth --bot-idle --warp=forest --warp-cell=330,185 --bench=8 --quit-after=20 > $L/p11_bench_lair.log 2>&1 &
 wait
 
 echo "Phase 12 (~130s): Guardian kill unlocks a hideout theme (no unlock-all flag), boss decoration drop, Esc-menu Hideout button, patrols walk their routes..."
@@ -347,15 +347,16 @@ check "Bot2 in forest sees only itself"      "zone=forest players=1 Bot2\(" p1_b
 echo; echo "== Big maps & monster groups"
 check "offline big-map self-test passes"   "BIGMAP SELFTEST OK"                                bigmap_selftest.log
 for z in meadow forest crypt frost; do
-  check "$z is ~10x bigger (200x128 vs 64x40)" "BIGMAP SELFTEST $z +size 200x128 \(10.0x the old 64x40 area\)" bigmap_selftest.log
+  check "$z is ~31.5x bigger (360x224 vs 64x40)" "BIGMAP SELFTEST $z +size 360x224 \(31.5x the old 64x40 area\)" bigmap_selftest.log
+  check "$z has nest + horde sites" "BIGMAP SELFTEST $z +nests .+ hordes ." bigmap_selftest.log
   l=$(grep -hE "\[$z\] [0-9]+ monster groups" $L/p3_server.log | head -1)
-  k=0; for kind in pack camp elite patrol guard; do echo "$l" | grep -q "\"$kind\"" && k=$((k+1)); done
-  if [ "$k" -ge 4 ]; then echo "PASS  $z has $k distinct group types ($(echo "$l" | sed -E 's/.*map: //'))"; else echo "FAIL  $z distinct group types ($l)"; fi
+  k=0; for kind in pack nest camp horde elite patrol guard; do echo "$l" | grep -q "\"$kind\"" && k=$((k+1)); done
+  if [ "$k" -ge 5 ]; then echo "PASS  $z has $k distinct group types ($(echo "$l" | sed -E 's/.*map: //'))"; else echo "FAIL  $z distinct group types ($l)"; fi
 done
 if grep -hE "Zone [a-z]+ ready" $L/p3_server.log | grep -q UNREACHABLE; then echo "FAIL  portals, NPCs, boss lairs and monster sites reachable"; else echo "PASS  portals, NPCs, boss lairs and monster sites reachable"; fi
 check "bosses wait in their lairs deep in the zone" "boss Yeti King spawned in its lair"          p3_server.log
 if grep -qhE "group aggro: .* pulled by .* - [1-9][0-9]* groupmates join" $L/*server.log; then echo "PASS  group aggro (pull one, the group comes): $(cat $L/*server.log | grep -cE "group aggro:") pulls"; else echo "FAIL  group aggro"; fi
-for kind in camp elite; do
+for kind in camp elite nest horde; do
   if grep -qhE "group aggro: .*\(group #[0-9]+ $kind of" $L/*server.log; then echo "PASS  a $kind group aggroed together"; else echo "FAIL  a $kind group aggroed together"; fi
 done
 if grep -qhE "group #[0-9]+ [a-z]+ of .* respawned at .*: [2-9][0-9]* members" $L/*server.log; then echo "PASS  groups respawn together ($(cat $L/*server.log | grep -cE "group #[0-9]+ .* respawned at") group respawns)"; else echo "FAIL  groups respawn together"; fi

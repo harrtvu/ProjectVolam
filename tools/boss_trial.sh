@@ -15,7 +15,7 @@ for c in metal wood water fire earth; do
   port=$((${PORT:-7920} + 21 + i)); i=$((i+1)); S="$(pwd)/${P}_${c}_save.json"; rm -f "$S"
   ( "$GODOT" --headless --path . -- --server --port=$port --save-file="$S" --debug-start-level=$LV --allow-warp --no-xp --quit-after=$((SECS+6)) > ${P}_${c}_server.log 2>&1 ) &
   ( sleep 2; "$GODOT" --headless --path . -- --join=127.0.0.1 --port=$port --name=Trial${c^} --password=t --class=$c --bot --bot-no-gear \
-      --bot-talents=auto:0 --bot-smart --bot-hunt=boss --warp=forest --warp-cell=176,104 --quit-after=$SECS > ${P}_${c}_bot.log 2>&1 ) &
+      --bot-talents=auto:0 --bot-smart --bot-hunt=boss --warp=forest --warp-cell=328,186 --quit-after=$SECS > ${P}_${c}_bot.log 2>&1 ) &
 done
 wait
 python3 - "$P" "$LV" "$OUT" <<'PY'

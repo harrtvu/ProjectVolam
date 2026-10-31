@@ -326,7 +326,8 @@ func _make_group(spec_i: int, cell: Vector2i, lv: int) -> void:
 		var mlv := lv
 		var opts := {}
 		match kind:
-			"pack": t = types[0]
+			"pack", "nest": t = types[0]
+			"horde": t = types[k % types.size()]
 			"camp":
 				if k == 0:
 					mlv = lv + 2   # the camp leader
@@ -337,7 +338,8 @@ func _make_group(spec_i: int, cell: Vector2i, lv: int) -> void:
 				if k == 0:
 					opts["elite"] = Dungeons.ELITE_MODS[_rng.randi() % Dungeons.ELITE_MODS.size()]
 					mlv = lv + 1
-		var m: Node = spawn_monster(t, mlv, map.spot_near(cell, _rng, 44.0), grp["id"], false, opts)
+		var scatter := 28.0 if kind == "nest" else (56.0 if kind == "horde" else 44.0)
+		var m: Node = spawn_monster(t, mlv, map.spot_near(cell, _rng, scatter), grp["id"], false, opts)
 		m.group = grp
 		m.patrol = kind == "patrol"
 		grp["members"].append(m)

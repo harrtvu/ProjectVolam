@@ -9,10 +9,10 @@ const H := Zones.H
 const TILE := Zones.TILE
 
 var zone_id := "meadow"
-var w := W              # real size of this map in tiles (200x128 for overworld zones)
+var w := W              # real size of this map in tiles (360x224 for overworld zones)
 var h := H
 ## Overworld only: generated monster sites. [{cell, depth (0 entrance .. 1 farthest), kind, spec}]
-## kind: "pack" | "camp" | "elite" | "patrol" | "" (empty clearing). Deterministic on every peer.
+## kind: "pack" | "nest" | "camp" | "horde" | "elite" | "patrol" | "" (empty clearing). Deterministic on every peer.
 var sites: Array = []
 var _o := Vector2i.ZERO   # offset added by _put/_at while an old 64x40 layout is painted into its core
 var reachable := {}   # Vector2i -> true, walkable cells connected to the zone's respawn point
@@ -326,9 +326,9 @@ func _autotile(first: Vector2i) -> void:
 
 # ---------------------------------------------------------------- big overworld zones
 
-## A 200x128 zone: themed outer terrain, the old 64x40 layout painted into its core (entrance area),
-## then monster sites (clearings / camps / stone circles / crypt rooms) joined by roads, the boss lair
-## and a solid border. Everything comes from _r, so every peer builds the same map.
+## A 360x224 zone: themed outer terrain, the old 64x40 layout painted into its core (entrance area),
+## then monster sites (clearings / camps / nests / hordes / stone circles / crypt rooms) joined by
+## roads, the boss lair and a solid border. Everything comes from _r, so every peer builds the same map.
 func _gen_overworld(id: String) -> void:
 	var noise := FastNoiseLite.new()
 	noise.seed = _r.randi()
@@ -433,17 +433,18 @@ func _gen_sites(id: String) -> void:
 			continue
 		for k in int(g["n"]):
 			specs.append(i)
-	var want := specs.size() + 8
+	var want := specs.size() + 12
+	var min_sep := 13.0 if specs.size() > 30 else 15.0
 	var cells: Array = []
-	for attempt in 6000:
+	for attempt in 14000:
 		if cells.size() >= want:
 			break
 		var c := Vector2i(_r.randi_range(8, w - 9), _r.randi_range(8, h - 9))
-		if core.has_point(c) or Vector2(c).distance_to(Vector2(boss_cell)) < 16.0:
+		if core.has_point(c) or Vector2(c).distance_to(Vector2(boss_cell)) < 18.0:
 			continue
 		var ok := true
 		for o in cells:
-			if Vector2(c).distance_to(Vector2(o)) < 15.0:
+			if Vector2(c).distance_to(Vector2(o)) < min_sep:
 				ok = false
 				break
 		for p in zi["portals"]:
@@ -478,7 +479,8 @@ func _gen_sites(id: String) -> void:
 		if pick >= 0:
 			sites[pick]["spec"] = si
 			sites[pick]["kind"] = str(g["kind"])
-	# carve the sites + boss lair, then roads: each node joins the nearest already-connected one
+	# carve the sites + boss lair, then roads: each node joins the nearest already-connected one.
+	# Portal cells are road nodes too — critical for crypt, whose outer terrain is solid wall.
 	for s in sites:
 		_carve_site(id, s["cell"], str(s["kind"]))
 	if boss_cell.x >= 0:
@@ -491,6 +493,8 @@ func _gen_sites(id: String) -> void:
 		todo.append(s["cell"])
 	if boss_cell.x >= 0:
 		todo.append(boss_cell)
+	for p in zi["portals"]:
+		todo.append((p["rect"] as Rect2i).get_center())
 	while not todo.is_empty():
 		var bi := 0
 		var bj := 0
@@ -544,6 +548,15 @@ func _carve_site(id: String, c: Vector2i, kind: String) -> void:
 			_disc(c, 2.6, func(p): _put(p, fl))
 			for d in [Vector2i(-3, -2), Vector2i(3, -2), Vector2i(-3, 2), Vector2i(3, 2)]:
 				_put(c + d, Tiles.C_BARREL)
+		"nest":   # tight clutch: smaller clearing, littered with mushrooms / rubble (walkable markers)
+			_disc(c, 3.2, func(p): _put(p, _ground_tile(id)))
+			var litter := Tiles.C_RUBBLE if id == "crypt" else (Tiles.F_MUSHROOM if id == "forest" else (Tiles.S_SNOW3 if id == "frost" else Tiles.MUSHROOM))
+			for d in [Vector2i(-2, 0), Vector2i(2, 0), Vector2i(0, -2), Vector2i(0, 2)]:
+				_put(c + d, litter)
+		"horde":  # wide stamped clearing for a large mixed pack
+			_disc(c, 7.0, func(p): _put(p, _ground_tile(id)))
+			var fl2 := Tiles.C_SAND if id == "crypt" else (Tiles.S_FLOOR if id == "frost" else Tiles.FLOOR)
+			_disc(c, 3.5, func(p): _put(p, fl2))
 		"elite":   # standing stones around the elite
 			var st := Tiles.C_PILLAR if id == "crypt" else Tiles.S_ROCK
 			for i in 6:

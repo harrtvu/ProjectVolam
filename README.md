@@ -17,7 +17,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Feature | How it works |
 |---|---|
 | Host / Join / Dedicated server | One project. The main menu has *Account name*, *Password*, *Server address* (default `127.0.0.1`), **Host (listen server)** and **Join**. Run with `--server` for a headless dedicated server. ENet (UDP) on port **7777**. |
-| World & zones | Four big open-world zones, each a **200×128** tile map (32 px tiles, 10× the area of the original 64×40 maps) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter town + wilds), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Monsters live in **groups** (packs, camps, elite packs, patrols, boss guards) that get tougher the farther you go from the zone entrance; a **minimap** and a full zone map (**N**) keep you oriented. Glowing portals at map edges link the zones. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
+| World & zones | Four huge open-world zones, each a **360×224** tile map (32 px tiles, ~31.5× the area of the original 64×40 maps) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter town + wilds), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Monsters live in **groups** (packs, nests, camps, hordes, elite packs, patrols, boss guards) that get tougher the farther you go from the zone entrance; a **minimap** and a full zone map (**N**) keep you oriented. Glowing portals at map edges link the zones. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
 | Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on keys **1-4**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
 | Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, clicking empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
 | Passive web | One shared Path-of-Exile-style web of 175 nodes. Class starts sit on the five-element pentagon, with small/notable/keystone nodes, an adjacency rule, 1 point per level (retroactive), per-node refund and full reset for gold, and farming stats (item quantity/rarity, gold, leech, attack/cast speed, damage vs element). All bonuses flow through one stat aggregator that gear affixes can plug into. See [Passive web](#passive-web-shared-path-of-exile-style). |
@@ -47,8 +47,9 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 |---|---|
 | ![a monster camp](docs/bigmap_groups.png) | ![minimap](docs/bigmap_minimap.png) |
 
-Every overworld zone is **200×128 tiles** (6400×4096 px). The old 64×40 maps were 2560 tiles, the new ones
-25,600, so each zone has **10× the area** (3.1× wider, 3.2× taller).
+Every overworld zone is **360×224 tiles** (11520×7168 px). The old 64×40 maps were 2560 tiles; these are
+80,640, so each zone has **~31.5× the area** (5.6× wider, 5.6× taller). Town cores stay at the same
+anchors as the previous 200×128 maps so existing characters keep their town / portal positions.
 
 | Zone | Levels | Entrance area (the old map) | The new wilds | Boss |
 |---|---|---|---|---|
@@ -74,10 +75,12 @@ Monsters are spawned as **groups** (`Zones.DB[zone]["groups"]`, spawned by `zone
 
 | Group type | What it is | Where |
 |---|---|---|
-| `pack` | 2-6 of one type: slime clutches, Dire Rat (wolf-style) packs, bat swarms, spider nests, ghost hosts, yeti packs, ogre pairs | the entrance area ("core" groups, so new players always find something) and everywhere else |
-| `camp` | a **leader** (+2 levels: Meadow Bandit, Wood Spider, Grave Crawler, Ice Ogre) with mixed members around a camp fire, e.g. bandit archers + boars, crawler + crypt archers + ghosts, ogre + yetis + frost bats | middle to far sites (depth 0.4-1.0) |
-| `elite` | an **elite** (Hasted / Armoured / Brutal / Regenerating, ×2.5 life, +1 level, +40% item quantity / +100% rarity on its drops) leading 2-3 minions inside a stone circle | the far sites (depth 0.6-1.0) |
-| `patrol` | 3-4 monsters that walk a loop between their site and the two nearest sites | anywhere (depth 0.2-0.9) |
+| `pack` | 2-6 of one type: slime / mossling / wolf / spider / skeleton / yeti packs and more | the entrance area ("core" groups) and the wilds |
+| `nest` | a dense clutch of one type (5-7) in a tight clearing — wasps, bats, spiders, ghosts, snow slimes | near-to-mid wilds |
+| `camp` | a **leader** (+2 levels) with mixed members around a camp fire | middle to far sites (depth 0.4-1.0) |
+| `horde` | a large mixed pack (6-9) on a wide stamped clearing — no leader bonus | mid-to-far wilds |
+| `elite` | an **elite** (Hasted / Armoured / Brutal / Regenerating, ×2.5 life, +1 level, +40% IIQ / +100% IIR) leading 2-3 minions inside a stone circle | the far sites (depth 0.6-1.0) |
+| `patrol` | 3-4 monsters that walk a loop between their site and the two nearest sites | anywhere (depth 0.2-0.95) |
 | `guard` | the boss's bodyguards, just inside the lair gate | the boss lair |
 
 * **Difficulty rises away from the entrance**: a site's depth is its distance from the zone entrance divided by the
@@ -87,11 +90,10 @@ Monsters are spawned as **groups** (`Zones.DB[zone]["groups"]`, spawned by `zone
 * **Groups respawn together**: dead members stay down until the *whole* group is dead, then after 1.5× the leader's
   respawn time all members come back around their site (`group #id ... respawned at (x, y): N members`).
   Patrols restart their loop.
-* Elements (Metal > Wood > Earth > Water > Fire > Metal) and level scaling work as before. Sunny Meadow got three new
-  low-level types for variety (Kenney sprites, tinted): **Mossling** (Wood), **Hill Boar** (Fire, lunges) and
-  **Meadow Bandit** (Metal, ranged).
-* Monster counts: about 80 per zone (meadow 79, forest 84, crypt 78, frost 81 incl. bosses), about 320 in total,
-  versus about 65 on the old maps. That's 5× the monsters for 10× the area, so the wilds aren't wall-to-wall.
+* Extra tinted types for variety: **Grey Wolf**, **Stinging Wasp**, **Young Treant**, **Bone Soldier**,
+  **Grave Wraith**, **Ice Wolf**, **Snow Slime** (plus the earlier Mossling / Hill Boar / Meadow Bandit).
+* Monster counts land around **~150-200 per zone** (incl. bosses) on the 360×224 maps — denser camps and nests,
+  but interest management still keeps far packs asleep.
 * Private dungeon instances and hideouts are unchanged (still 64×40, same generator and spawning).
 
 ### Performance: interest management inside a zone
@@ -139,7 +141,8 @@ Characters saved before the big maps have no `map_v` in their save, so their pos
 On login it's shifted by the zone's core offset, which puts them on the same spot of the same landmark (the log says
 `old-map position ... shifted to ...`). Any saved position that isn't on a reachable tile (outside the map, inside a
 wall, stuck in an unreachable pocket) is moved to the nearest reachable tile (`saved position ... relocated to ...`).
-New saves store `"map_v": 2`.
+New saves store `"map_v": 3` (360×224). map_v 2 characters keep their town / portal coords; only map_v 1
+(the original 64×40) is shifted into the core on login.
 
 ## Classes & the five elements
 
@@ -1245,7 +1248,7 @@ To re-export: install the 4.2.1 export templates (Editor → Manage Export Templ
 ## Next steps toward a real MMO
 
 Done so far: player HP/levels, loot & inventory, simple accounts with saving, real pixel art,
-four big 200x128 zones with monster groups and per-zone + distance interest management, 13 monster types and 3 bosses, five elemental
+four huge 360x224 zones with packs/nests/camps/hordes/elites/patrols and per-zone + distance interest management, 20 monster types and 3 bosses, five elemental
 classes with skills, mana, status effects and the element cycle.
 
 1. **Real accounts & database**: move login to a separate auth service (REST API, Argon2

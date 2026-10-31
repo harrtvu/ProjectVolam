@@ -1003,7 +1003,7 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	if typeof(saved_pos) == TYPE_ARRAY and saved_pos.size() == 2:
 		var p := Vector2(float(saved_pos[0]), float(saved_pos[1]))
 		var mv := int(character.get("map_v", 1))
-		if Zones.DB.has(zone_id) and mv < Zones.MAP_VERSION:   # saved before the 10x bigger maps
+		if Zones.DB.has(zone_id) and mv < Zones.BIGMAP_SINCE:   # saved on the original 64x40 maps
 			var moved := Zones.migrate_pos(zone_id, p, mv)
 			_log("Login '%s': old-map position %s in %s shifted to %s (map v%d -> v%d)" % [display, p.round(), zone_id, moved.round(), mv, Zones.MAP_VERSION])
 			p = moved
@@ -4092,7 +4092,11 @@ func _bigmap_selftest() -> void:
 		var same := m2.sites.size() == m.sites.size() and m2.get_used_cells(0).size() == m.get_used_cells(0).size()
 		for i in mini(m.sites.size(), m2.sites.size()):
 			same = same and m.sites[i]["cell"] == m2.sites[i]["cell"] and m.sites[i]["kind"] == m2.sites[i]["kind"]
-		var good: bool = area >= old_area * 9.5 and bad.is_empty() and kinds.size() >= 4 and placed == planned and elite_d > pack_d and same
+		var expect_area := Zones.BIG_W * Zones.BIG_H
+		var kind_n := 0
+		for _k in kinds:
+			kind_n += 1
+		var good: bool = area == expect_area and bad.is_empty() and kind_n >= 5 and placed == planned and elite_d > pack_d and same
 		ok = ok and good
 		print("BIGMAP SELFTEST %-6s size %dx%d (%.1fx the old 64x40 area) | %d reachable cells | %d sites, %d groups placed of %d | group kinds %s | avg depth pack %.2f elite %.2f | deterministic %s | unreachable %s %s" % [
 			id, m.w, m.h, float(area) / old_area, m.reachable.size(), m.sites.size(), placed, planned, kinds, pack_d, elite_d, same, bad, "" if good else "<-- FAIL"])
@@ -4107,15 +4111,25 @@ func _bigmap_selftest() -> void:
 		var camps: Array = []
 		var elites: Array = []
 		var packs: Array = []
+		var nests: Array = []
+		var hordes: Array = []
 		for st in m.sites:
 			if st["kind"] == "camp":
 				camps.append("%d,%d" % [st["cell"].x, st["cell"].y])
 			elif st["kind"] == "elite":
 				elites.append("%d,%d" % [st["cell"].x, st["cell"].y])
+			elif st["kind"] == "nest" and int(st["spec"]) >= 0:
+				nests.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
+			elif st["kind"] == "horde" and int(st["spec"]) >= 0:
+				hordes.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
 			elif st["kind"] == "pack" and int(st["spec"]) >= 0:
 				packs.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
 		print("BIGMAP SELFTEST %-6s camps at %s elites at %s" % [id, " ".join(camps), " ".join(elites)])
 		print("BIGMAP SELFTEST %-6s packs %s" % [id, " ".join(packs)])
+		print("BIGMAP SELFTEST %-6s nests %s hordes %s" % [id, " ".join(nests), " ".join(hordes)])
+		ok = ok and nests.size() >= 1 and hordes.size() >= 1
+		if nests.is_empty() or hordes.is_empty():
+			print("BIGMAP SELFTEST %-6s missing nest/horde sites <-- FAIL" % id)
 		m.free()
 		m2.free()
 	print("BIGMAP SELFTEST OK" if ok else "BIGMAP SELFTEST FAILED")
