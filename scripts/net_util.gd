@@ -31,13 +31,21 @@ static func smooth_follow(node: Node2D, target: Vector2, delta: float) -> void:
 
 ## Floating combat text ("-4", "+15", "LEVEL UP!") that rises and fades.
 ## Client: the locally selected target (monster or player node), or null.
-## Untyped on purpose: it may hold a freed node until Main notices.
+## Untyped on purpose: it may hold a freed node until cleared (monster despawn / zone leave).
 static var selected = null
 static var show_popups := true    # Settings: "show damage numbers / floating text"
 
 
-static func is_selected(n: Object) -> bool:
-	return selected != null and is_instance_valid(selected) and selected == n
+## True if `n` is the live selected target. `n` is untyped so a previously-freed
+## reference (common right after a kill / zone transfer) does not crash the call.
+static func is_selected(n = null) -> bool:
+	if selected != null and not is_instance_valid(selected):
+		selected = null
+	if selected == null or n == null:
+		return false
+	if typeof(n) != TYPE_OBJECT or not is_instance_valid(n):
+		return false
+	return selected == n
 
 
 static func draw_select_ring(ci: CanvasItem, radius: float, col: Color) -> void:
