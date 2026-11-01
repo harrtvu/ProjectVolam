@@ -2184,13 +2184,20 @@ func _process(delta: float) -> void:
 
 
 ## Shows only `zone_id`'s map + entities on this peer (and the entry banner).
+## Menu preview uses announce=false so `_shown_zone` stays empty — otherwise a new
+## character spawning in Sunnyhaven would skip the town banner (meadow was already "shown").
 func _show_zone(zone_id: String, announce := true) -> void:
-	_shown_zone = zone_id
 	for id in zones:
 		zones[id].visible = id == zone_id
-	if announce and banner_label:
+	if not announce:
+		return
+	_shown_zone = zone_id
+	if banner_label:
 		var zi := Zones.info(zone_id)
-		banner_label.text = "%s\n%s" % [zi["name"], ("Safe haven" if str(zi["levels"]) in ["", "-"] else "Safe haven  -  Lv " + zi["levels"]) if zi.get("safe", false) else "Monsters Lv " + zi["levels"]]
+		if zi.has("town"):
+			banner_label.text = "%s\nStarter town  -  %s" % [str(zi["town"]["name"]), zi["name"]]
+		else:
+			banner_label.text = "%s\n%s" % [zi["name"], ("Safe haven" if str(zi["levels"]) in ["", "-"] else "Safe haven  -  Lv " + zi["levels"]) if zi.get("safe", false) else "Monsters Lv " + zi["levels"]]
 		_banner_t = 3.5
 		_log("Entered zone %s (%s)" % [zone_id, zi["name"]])
 		if zi.has("dungeon"):
@@ -2259,7 +2266,10 @@ func _update_hud(delta: float) -> void:
 		_warp_pending = false
 		request_warp.rpc_id(1, _warp_to, _warp_cell)
 	var zi := Zones.info(me.zone.zone_id)
-	zone_label.text = zi["name"] if str(zi["levels"]) in ["", "-"] else "%s  (Lv %s)" % [zi["name"], zi["levels"]]
+	if zi.has("town"):
+		zone_label.text = "%s  (%s)" % [str(zi["town"]["name"]), zi["name"]]
+	else:
+		zone_label.text = zi["name"] if str(zi["levels"]) in ["", "-"] else "%s  (Lv %s)" % [zi["name"], zi["levels"]]
 	if zi.has("dungeon"):
 		var dd: Dictionary = zi["dungeon"]
 		var aq: float = Dungeons.atlas_iiq(me.atlas)

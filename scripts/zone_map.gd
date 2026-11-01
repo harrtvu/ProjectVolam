@@ -625,33 +625,43 @@ func _gen_meadow() -> void:
 		_put(cell, [Tiles.TREE, Tiles.TREE, Tiles.TREE2][_r.randi() % 3])
 
 
-## Paves Sunnyhaven: wall, gates, plaza, shop buildings, portal yard, well and barrels.
+## Paves Sunnyhaven: thick wall, gates, stone plaza, shop buildings, portal yard, well.
 ## NPC cells (merchant 24,18 / device 29,15 / smith 36,17 / vendor 20,22 / master 40,22 / spawn 32,20)
-## stay walkable floor or path.
+## stay walkable floor or path. Built to read clearly at the default camera zoom.
 func _gen_sunnyhaven(spawn: Vector2i) -> void:
-	var wall := Rect2i(16, 8, 30, 22)   # x 16..45, y 8..29
-	# Plaza paving inside the wall.
-	for x in range(wall.position.x + 1, wall.end.x - 1):
-		for y in range(wall.position.y + 1, wall.end.y - 1):
-			_put(Vector2i(x, y), Tiles.PATH_C if (x + y) % 5 == 0 else Tiles.FLOOR)
-	# Perimeter wall.
-	for x in range(wall.position.x, wall.end.x):
-		for y in range(wall.position.y, wall.end.y):
-			if x == wall.position.x or y == wall.position.y or x == wall.end.x - 1 or y == wall.end.y - 1:
-				_put(Vector2i(x, y), Tiles.WALL)
-	# Gates (3 tiles): west wilds, east forest road, north approach, south market.
+	var outer := Rect2i(16, 8, 30, 22)   # x 16..45, y 8..29
+	# Clear a grass apron just outside the wall so the town edge pops against the wilds.
+	for x in range(outer.position.x - 2, outer.end.x + 2):
+		for y in range(outer.position.y - 2, outer.end.y + 2):
+			if x < 0 or y < 0 or x >= W or y >= H:
+				continue
+			if not outer.grow(1).has_point(Vector2i(x, y)):
+				continue
+			if not outer.has_point(Vector2i(x, y)):
+				_put(Vector2i(x, y), Tiles.GRASS)
+	# Stone plaza inside (solid floor reads as a town, not meadow grass).
+	for x in range(outer.position.x + 2, outer.end.x - 2):
+		for y in range(outer.position.y + 2, outer.end.y - 2):
+			_put(Vector2i(x, y), Tiles.FLOOR)
+	# Double-thick perimeter wall (outer + inner ring) so gates/walls are obvious on screen.
+	for ring in [outer, outer.grow(-1)]:
+		for x in range(ring.position.x, ring.end.x):
+			for y in range(ring.position.y, ring.end.y):
+				if x == ring.position.x or y == ring.position.y or x == ring.end.x - 1 or y == ring.end.y - 1:
+					_put(Vector2i(x, y), Tiles.WALL)
+	# Gates (3 tiles wide, cut through both wall rings).
 	for dy in [-1, 0, 1]:
-		_put(Vector2i(wall.position.x, spawn.y + dy), Tiles.PATH_C)
-		_put(Vector2i(wall.end.x - 1, spawn.y + dy), Tiles.PATH_C)
+		for gx in [outer.position.x, outer.position.x + 1, outer.end.x - 2, outer.end.x - 1]:
+			_put(Vector2i(gx, spawn.y + dy), Tiles.PATH_C)
 	for dx in [-1, 0, 1]:
-		_put(Vector2i(spawn.x + dx, wall.position.y), Tiles.PATH_C)
-		_put(Vector2i(spawn.x + dx, wall.end.y - 1), Tiles.PATH_C)
-	# Main streets through the plaza (autotile dresses the edges later).
-	for x in range(wall.position.x + 1, wall.end.x - 1):
-		for dy in [0, 1]:
+		for gy in [outer.position.y, outer.position.y + 1, outer.end.y - 2, outer.end.y - 1]:
+			_put(Vector2i(spawn.x + dx, gy), Tiles.PATH_C)
+	# Main streets (wide) through the plaza — autotile dresses the path edges later.
+	for x in range(outer.position.x + 2, outer.end.x - 2):
+		for dy in [-1, 0, 1]:
 			_put(Vector2i(x, spawn.y + dy), Tiles.PATH_C)
-	for y in range(wall.position.y + 1, wall.end.y - 1):
-		for dx in [0, 1]:
+	for y in range(outer.position.y + 2, outer.end.y - 2):
+		for dx in [-1, 0, 1]:
 			_put(Vector2i(spawn.x + dx, y), Tiles.PATH_C)
 	# Portal yard north of the Map Device (dungeon portals land on map_portal_row = core y 12).
 	for x in range(25, 34):
@@ -662,21 +672,25 @@ func _gen_sunnyhaven(spawn: Vector2i) -> void:
 	_shop(Rect2i(27, 13, 6, 5), Vector2i(29, 17), [Vector2i(28, 14), Vector2i(31, 14)])          # Map Device
 	for dx in [-1, 0, 1]:   # open the pavilion north wall into the portal yard
 		_put(Vector2i(29 + dx, 13), Tiles.PATH_C)
+		_put(Vector2i(29 + dx, 14), Tiles.FLOOR)
 	_shop(Rect2i(34, 14, 7, 6), Vector2i(34, 17), [Vector2i(36, 15), Vector2i(38, 15), Vector2i(39, 18)])  # Blacksmith
 	_shop(Rect2i(18, 20, 5, 5), Vector2i(22, 22), [Vector2i(19, 21), Vector2i(19, 23)])          # Vendor
 	_shop(Rect2i(38, 20, 5, 5), Vector2i(38, 22), [Vector2i(41, 21), Vector2i(41, 23)])          # Hideout Master
-	# Corner watch posts and a well on the south plaza.
-	for c in [Vector2i(18, 10), Vector2i(43, 10), Vector2i(18, 27), Vector2i(43, 27)]:
-		_put(c, Tiles.C_PILLAR)
+	# Corner watch towers (2x2 wall blocks with a pillar) and a well south of the crossroads.
+	for base in [Vector2i(18, 10), Vector2i(42, 10), Vector2i(18, 26), Vector2i(42, 26)]:
+		for dx in [0, 1]:
+			for dy in [0, 1]:
+				_put(base + Vector2i(dx, dy), Tiles.WALL)
+		_put(base + Vector2i(0, 0), Tiles.C_PILLAR)
 	_put(Vector2i(28, 24), Tiles.WATER)
 	_put(Vector2i(29, 24), Tiles.WATER)
 	_put(Vector2i(28, 25), Tiles.WATER2)
 	_put(Vector2i(29, 25), Tiles.WATER)
 	for c in [Vector2i(27, 24), Vector2i(30, 24), Vector2i(27, 25), Vector2i(30, 25), Vector2i(28, 23), Vector2i(29, 26)]:
 		_put(c, Tiles.FLOOR)
-	# Flower beds by the west and east gates.
-	for c in [Vector2i(18, 18), Vector2i(19, 18), Vector2i(18, 23), Vector2i(19, 23),
-			Vector2i(42, 18), Vector2i(43, 18), Vector2i(42, 23), Vector2i(43, 23)]:
+	# Flower beds by the west and east gates (colour against the stone).
+	for c in [Vector2i(19, 18), Vector2i(20, 18), Vector2i(19, 23), Vector2i(20, 23),
+			Vector2i(41, 18), Vector2i(42, 18), Vector2i(41, 23), Vector2i(42, 23)]:
 		_put(c, Tiles.FLOWER)
 
 

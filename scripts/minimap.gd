@@ -89,6 +89,9 @@ func _draw() -> void:
 	draw_circle(tp.call(me.position), dot + 2.5, Color(0, 0, 0, 0.8))   # dark outline so white reads on any ground
 	draw_circle(tp.call(me.position), dot + 1.5, Color.WHITE)          # "white: you" (legend) - no tint
 	var font := get_theme_default_font()
-	draw_string(font, Vector2(4, 13 if not big else 18), z.info["name"] + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
+	var title := str(z.info["town"]["name"]) if z.info.has("town") else str(z.info["name"])
+	if z.info.has("town") and big:
+		title = "%s  —  %s" % [z.info["town"]["name"], z.info["name"]]
+	draw_string(font, Vector2(4, 13 if not big else 18), title + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
 	if big:
 		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   gold box: town   purple: portals   yellow: NPCs   orange: camps   violet: nests   pink: hordes   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))

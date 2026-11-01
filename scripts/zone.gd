@@ -803,7 +803,7 @@ class PortalVisual extends Node2D:
 
 # ---------------------------------------------------------------- Sunnyhaven town signs
 
-## Gate signs for the walled starter town (east = forest road, west = wilds).
+## Gate signs + a big central plaque at the crossroads so the town is obvious on spawn.
 func _spawn_town_signs() -> void:
 	var town: Dictionary = info["town"]
 	var r: Rect2i = town["rect"]
@@ -811,31 +811,34 @@ func _spawn_town_signs() -> void:
 	for spec in [
 		[Vector2i(r.end.x - 1, r.position.y + r.size.y / 2), "east", "%s\n← town   wilds →" % tname],
 		[Vector2i(r.position.x, r.position.y + r.size.y / 2), "west", "← wilds   %s →\ntown" % tname],
+		[info["respawn"] + Vector2i(0, -2), "center", "%s\nStarter Town" % tname],
 	]:
 		var s := TownSignVisual.new()
 		s.position = map.cell_pos(spec[0])
 		s.side = str(spec[1])
 		s.text = str(spec[2])
+		s.big = spec[1] == "center"
 		add_child(s)
 
 
 class TownSignVisual extends Node2D:
 	var side := "east"
 	var text := "Town"
+	var big := false
 	var _t := 0.0
 
 	func _ready() -> void:
-		NetUtil.cull_offscreen(self, 160.0)
-		z_index = 0
+		NetUtil.cull_offscreen(self, 220.0 if big else 160.0)
+		z_index = 1 if big else 0
 		var l := Label.new()
 		l.text = text
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		l.size = Vector2(160, 36)
-		l.position = Vector2(-80, -48)
-		l.add_theme_font_size_override("font_size", 11)
+		l.size = Vector2(220 if big else 160, 40 if big else 36)
+		l.position = Vector2((-110 if big else -80), (-70 if big else -48))
+		l.add_theme_font_size_override("font_size", 18 if big else 11)
 		l.add_theme_color_override("font_color", Color(1.0, 0.92, 0.65))
 		l.add_theme_color_override("font_outline_color", Color.BLACK)
-		l.add_theme_constant_override("outline_size", 4)
+		l.add_theme_constant_override("outline_size", 6 if big else 4)
 		add_child(l)
 
 	func _process(delta: float) -> void:
@@ -843,14 +846,18 @@ class TownSignVisual extends Node2D:
 		queue_redraw()
 
 	func _draw() -> void:
+		var pole_h := 34.0 if big else 28.0
+		var board := Rect2(-36 if big else -22, -52 if big else -36, 72 if big else 44, 28 if big else 22)
 		draw_set_transform(Vector2(0, 10), 0.0, Vector2(1.0, 0.35))
-		draw_circle(Vector2.ZERO, 22.0, Color(0, 0, 0, 0.16))
+		draw_circle(Vector2.ZERO, 28.0 if big else 22.0, Color(0, 0, 0, 0.18))
 		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-		draw_rect(Rect2(-4, -18, 8, 28), Color(0.45, 0.28, 0.12))
-		draw_rect(Rect2(-22, -36, 44, 22), Color(0.55, 0.22, 0.14))
-		draw_rect(Rect2(-20, -34, 40, 18), Color(0.75, 0.35, 0.18))
+		draw_rect(Rect2(-5 if big else -4, -pole_h + 10.0, 10 if big else 8, pole_h), Color(0.45, 0.28, 0.12))
+		draw_rect(board, Color(0.45, 0.16, 0.1))
+		draw_rect(board.grow(-2), Color(0.78, 0.32, 0.16))
 		var pulse := 0.55 + 0.25 * sin(_t * 2.2)
-		draw_circle(Vector2(0, -25), 3.0, Color(1.0, 0.85, 0.35, pulse))
+		draw_circle(Vector2(0, board.position.y + board.size.y * 0.45), 4.0 if big else 3.0, Color(1.0, 0.85, 0.35, pulse))
+		if big:
+			draw_arc(Vector2.ZERO, 40.0 + 3.0 * sin(_t * 1.6), 0.0, TAU, 40, Color(1.0, 0.85, 0.4, 0.35), 2.0)
 
 
 # ---------------------------------------------------------------- dungeon entrance safe area
