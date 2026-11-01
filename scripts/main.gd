@@ -1736,6 +1736,10 @@ func target_request(me: Node) -> Dictionary:
 		return r
 	var req := {}
 	var sel = NetUtil.selected
+	# Clear a stale selection before touching .zone — a freed Object crashes typed checks.
+	if sel != null and not is_instance_valid(sel):
+		NetUtil.selected = null
+		sel = null
 	if NetUtil.is_selected(sel) and sel.zone == me.zone:
 		if sel.has_method("take_damage"):
 			req = {"t": sel.monster_id, "k": "m"}
