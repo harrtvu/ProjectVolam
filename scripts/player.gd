@@ -99,6 +99,13 @@ var _respawn_t := 0.0
 var _since_hit := 99.0
 var _regen_t := 0.0
 var _flash := 0.0
+# ---- client click-to-move (owner only; feeds the same input RPC as arrow keys)
+var _click_goal := Vector2.INF
+var _click_path: Array = []           # world positions along an A* path
+var _click_path_t := 0.0
+var _click_astar: AStarGrid2D
+var _click_astar_zone := ""
+const CLICK_ARRIVE := 14.0
 var _anim_t := 0.0
 var _last_pos := Vector2.ZERO
 var _portal_cd := 1.0
@@ -347,10 +354,15 @@ func _handle_local_input() -> void:
 	var dir := Vector2.ZERO
 	if _main and _main.menu_open():
 		dir = Vector2.ZERO      # Esc menu open: no movement / skill input (the world may continue online)
+		clear_click_goal()
 	elif _main and _main.bot_mode:
 		dir = _main.bot_dir
 	elif not (_main and _main.chat_active):
 		dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		if dir != Vector2.ZERO:
+			clear_click_goal()   # arrow keys override click-to-move
+		elif _click_goal != Vector2.INF:
+			dir = _click_move_dir()
 		if Input.is_action_just_pressed("attack"):
 			request_attack()
 		if Input.is_action_just_pressed("pickup"):
@@ -386,9 +398,84 @@ func _handle_local_input() -> void:
 				request_skill(i)
 	if dead:
 		dir = Vector2.ZERO
+		clear_click_goal()
 	if dir != _last_sent:
 		_last_sent = dir
 		_send("input", dir)
+
+
+## Owner: left-click empty ground → walk there (A* over the zone tile grid).
+func set_click_goal(world_pos: Vector2) -> void:
+	if dead or zone == null or zone.map == null:
+		return
+	var cell: Vector2i = zone.map.local_to_map(world_pos)
+	if not zone.map.is_walkable(cell) or not zone.map.is_reachable(cell):
+		cell = _nearest_walkable(cell)
+	if cell.x < 0:
+		return
+	_click_goal = zone.map.cell_pos(cell)
+	_click_path.clear()
+	_click_path_t = 0.0
+	_rebuild_click_path(true)
+
+
+func clear_click_goal() -> void:
+	_click_goal = Vector2.INF
+	_click_path.clear()
+
+
+func _nearest_walkable(from: Vector2i) -> Vector2i:
+	if zone == null:
+		return Vector2i(-1, -1)
+	if zone.map.is_walkable(from) and zone.map.is_reachable(from):
+		return from
+	for r in range(1, 12):
+		for dx in range(-r, r + 1):
+			for dy in range(-r, r + 1):
+				if maxi(absi(dx), absi(dy)) != r:
+					continue
+				var c := from + Vector2i(dx, dy)
+				if zone.map.is_walkable(c) and zone.map.is_reachable(c):
+					return c
+	return Vector2i(-1, -1)
+
+
+func _rebuild_click_path(force := false) -> void:
+	if zone == null or _click_goal == Vector2.INF:
+		return
+	if _click_astar_zone != zone.zone_id or _click_astar == null:
+		_click_astar_zone = zone.zone_id
+		_click_astar = zone.map.make_astar()
+	var fcell: Vector2i = zone.map.local_to_map(position)
+	var gcell: Vector2i = zone.map.local_to_map(_click_goal)
+	if not force and not _click_path.is_empty():
+		return
+	_click_path.clear()
+	if _click_astar == null:
+		return
+	if not _click_astar.is_in_boundsv(fcell) or not _click_astar.is_in_boundsv(gcell):
+		return
+	if _click_astar.is_point_solid(fcell) or _click_astar.is_point_solid(gcell):
+		return
+	for c in _click_astar.get_id_path(fcell, gcell):
+		_click_path.append(zone.map.cell_pos(c))
+
+
+func _click_move_dir() -> Vector2:
+	if _click_goal == Vector2.INF or zone == null:
+		return Vector2.ZERO
+	if position.distance_to(_click_goal) <= CLICK_ARRIVE:
+		clear_click_goal()
+		return Vector2.ZERO
+	_click_path_t -= get_physics_process_delta_time()
+	if _click_path.is_empty() or _click_path_t <= 0.0:
+		_click_path_t = 0.45
+		_rebuild_click_path(true)
+	while _click_path.size() > 1 and position.distance_to(_click_path[0]) < 10.0:
+		_click_path.pop_front()
+	if _click_path.is_empty():
+		return position.direction_to(_click_goal)
+	return position.direction_to(_click_path[0])
 
 
 ## Picks a potion for quick-use: greater potion for big wounds, else the small one.
@@ -1753,6 +1840,14 @@ func heal(amount: int, from_name: String) -> void:
 func _draw() -> void:
 	if NetUtil.is_selected(self):
 		NetUtil.draw_select_ring(self, 15.0, Color(0.3, 1.0, 0.45))
+	# click-to-move destination marker (owner only)
+	if is_local() and _click_goal != Vector2.INF and not dead:
+		var g := to_local(_click_goal)
+		var pulse := 0.55 + 0.25 * sin(Time.get_ticks_msec() * 0.008)
+		draw_arc(g, 10.0, 0.0, TAU, 24, Color(0.45, 0.95, 0.55, pulse), 2.0)
+		draw_circle(g, 3.0, Color(0.45, 0.95, 0.55, 0.85))
+		draw_line(g + Vector2(-7, 0), g + Vector2(7, 0), Color(0.45, 0.95, 0.55, 0.7), 1.5)
+		draw_line(g + Vector2(0, -7), g + Vector2(0, 7), Color(0.45, 0.95, 0.55, 0.7), 1.5)
 	# ground-target preview (local player holding a skill key / hovering the skill bar)
 	if is_local() and _main and _main.preview_slot >= 0 and not dead:
 		_draw_preview(_main.preview_slot)

@@ -2,6 +2,8 @@ extends HBoxContainer
 ## HUD skill bar: 4 slots with icon, hotkey, mana/life cost, cooldown sweep, lock state.
 ## Also draws the Martial Form combo pips and Finisher buff above the bar.
 
+const HOTKEYS := ["Q", "W", "E", "R"]
+
 var player: Node
 var _slots: Array = []
 var _combo_label: Label
@@ -57,7 +59,7 @@ func _process(_delta: float) -> void:
 			var combo_hint: String = ""
 			if next_combo_slot() == s.index:
 				combo_hint = "\n▶ Next Martial Form combo step"
-			s.tooltip_text = "[%d] %s\n%s\n%s  Cooldown %.1fs  Unlocks at level %d%s%s" % [s.index + 1, sk["name"], sk["desc"],
+			s.tooltip_text = "[%s] %s\n%s\n%s  Cooldown %.1fs  Unlocks at level %d%s%s" % [HOTKEYS[s.index], sk["name"], sk["desc"],
 				cost_line, sk["cd"], Classes.UNLOCK_LEVELS[s.index], aim_hint, combo_hint]
 	if is_instance_valid(player) and _combo_label:
 		var f := Forms.form(player.class_id, player.form_id)
@@ -68,7 +70,7 @@ func _process(_delta: float) -> void:
 			_combo_label.add_theme_color_override("font_color", Color(1.0, 0.75, 0.25))
 		elif player.combo_step > 0:
 			var route: Array = f["combo"]
-			_combo_label.text = "%s  %s  next [%d]" % [f["viet"], _pips_for(route, player.combo_step), int(route[player.combo_step]) + 1]
+			_combo_label.text = "%s  %s  next [%s]" % [f["viet"], _pips_for(route, player.combo_step), HOTKEYS[int(route[player.combo_step])]]
 			_combo_label.add_theme_color_override("font_color", Color(0.7, 0.95, 1.0))
 		else:
 			var route2: Array = f["combo"]
@@ -142,8 +144,9 @@ class Slot extends Control:
 			border_w = 3.0
 			draw_arc(size / 2.0, size.x * 0.48, 0.0, TAU, 28, Color(1.0, 0.85, 0.35, 0.55), 2.0)
 		draw_rect(r, border, false, border_w)
-		draw_string_outline(font, Vector2(4, 14), str(index + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, Color.BLACK)
-		draw_string(font, Vector2(4, 14), str(index + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1, 0.95, 0.7))
+		var hk: String = HOTKEYS[index]
+		draw_string_outline(font, Vector2(4, 14), hk, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, Color.BLACK)
+		draw_string(font, Vector2(4, 14), hk, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(1, 0.95, 0.7))
 		var cost: String = str(life_cost) if lifetap else str(sk["cost"])
 		var cost_col := Color(1.0, 0.55, 0.55) if lifetap else Color(0.6, 0.8, 1.0)
 		draw_string_outline(font, Vector2(size.x - 6 - cost.length() * 7, size.y - 4), cost, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, 4, Color.BLACK)

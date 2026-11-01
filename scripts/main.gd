@@ -41,6 +41,7 @@ const GMScript := preload("res://scripts/gm.gd")
 ##   --bigmap-selftest   offline checks of the big overworld maps (size, reachability, groups, old-save positions)
 ##   --gear-selftest     offline gear checks (drop statistics, orbs, enhancement, resistances)
 ##   --form-selftest     offline Martial Forms checks (combo routes + support links)
+##   --click-move-selftest  host/client: verify click-to-move builds an A* path after login
 ##   --open-smith        open the blacksmith panel when standing next to it (screenshots)
 ##   --debug-tooltip=N   show the tooltip of the N-th gear item in the bag (screenshots)
 ##   --open-sheet        open the character sheet (C) on login (screenshots)
@@ -150,6 +151,7 @@ var tutorial_ui: PanelContainer
 var bot_tutorial := ""             # bot: "full" (do every tutorial step) | "skip"
 static var _last_name := ""       # survives the scene reload of Return to Main Menu
 var aim_selftest := false         # client (tests): --aim-selftest, skill aim = selected target, else the cursor at the key press
+var click_move_selftest := false  # client (tests): --click-move-selftest verifies A* click-to-move after login
 var _test_cursor = null           # aim selftest: stands in for the mouse (headless has none)
 var ui_selftest := false          # client (tests): --ui-selftest checks exclusive windows, N-map layer, tutorial placement
 var show_tutorial := false         # client: show the tutorial even when headless / a bot (tests, screenshots)
@@ -362,32 +364,35 @@ func _ready() -> void:
 # ================================================================ setup
 
 func _setup_input() -> void:
-	_add_action("move_up", [KEY_W, KEY_UP])
-	_add_action("move_down", [KEY_S, KEY_DOWN])
-	_add_action("move_left", [KEY_A, KEY_LEFT])
-	_add_action("move_right", [KEY_D, KEY_RIGHT])
-	_add_action("attack", [KEY_SPACE])
-	_add_action("pickup", [KEY_E])
-	_add_action("use_potion", [KEY_Q])
-	_add_action("inventory", [KEY_I])
-	_add_action("character", [KEY_C])
-	_add_action("skill_1", [KEY_1])
-	_add_action("skill_2", [KEY_2])
-	_add_action("skill_3", [KEY_3])
-	_add_action("skill_4", [KEY_4])
-	_add_action("talents", [KEY_T])
-	_add_action("forms", [KEY_F])
-	_add_action("target_cycle", [KEY_TAB])
-	_add_action("atlas", [KEY_M])
-	_add_action("party_panel", [KEY_P])
-	_add_action("zone_map", [KEY_N])
-	_add_action("fps_overlay", [KEY_F3])
+	# Click-to-move is primary; arrow keys still work. WASD freed so QWER can be skills.
+	_bind_keys("move_up", [KEY_UP])
+	_bind_keys("move_down", [KEY_DOWN])
+	_bind_keys("move_left", [KEY_LEFT])
+	_bind_keys("move_right", [KEY_RIGHT])
+	_bind_keys("attack", [KEY_SPACE])
+	_bind_keys("pickup", [KEY_V])          # interact / pick up (was E; E is skill 3)
+	_bind_keys("use_potion", [KEY_1])      # was Q; Q is skill 1
+	_bind_keys("inventory", [KEY_I])
+	_bind_keys("character", [KEY_C])
+	_bind_keys("skill_1", [KEY_Q])
+	_bind_keys("skill_2", [KEY_W])
+	_bind_keys("skill_3", [KEY_E])
+	_bind_keys("skill_4", [KEY_R])
+	_bind_keys("talents", [KEY_T])
+	_bind_keys("forms", [KEY_F])
+	_bind_keys("target_cycle", [KEY_TAB])
+	_bind_keys("atlas", [KEY_M])
+	_bind_keys("party_panel", [KEY_P])
+	_bind_keys("zone_map", [KEY_N])
+	_bind_keys("fps_overlay", [KEY_F3])
 
 
-func _add_action(action: String, keys: Array) -> void:
+## Always rebind (erase stale editor / old-version key maps so QWER wins over 1-4).
+func _bind_keys(action: String, keys: Array) -> void:
 	if InputMap.has_action(action):
-		return
-	InputMap.add_action(action)
+		InputMap.action_erase_events(action)
+	else:
+		InputMap.add_action(action)
 	for k in keys:
 		var ev := InputEventKey.new()
 		ev.physical_keycode = k
@@ -506,6 +511,7 @@ func _parse_args() -> void:
 	bot_tutorial = str(opts.get("bot-tutorial", ""))
 	ui_selftest = opts.has("ui-selftest")
 	aim_selftest = opts.has("aim-selftest")
+	click_move_selftest = opts.has("click-move-selftest")
 	show_tutorial = bot_tutorial != "" or opts.has("show-tutorial") or ui_selftest
 	_open_vendor = opts.has("open-vendor")
 	bot_party = str(opts.get("bot-party", ""))
@@ -1664,7 +1670,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_dbg_clicks += 1
-		select_at_mouse(event.position)
+		var had := select_at_mouse(event.position)
+		if not had:
+			# empty ground: Path of Exile–style click-to-move
+			var me := _local_player()
+			if me and me.has_method("set_click_goal") and me.zone:
+				var world: Vector2 = me.get_parent().get_global_transform_with_canvas().affine_inverse() * event.position
+				me.set_click_goal(world)
 		get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		# bonus: right-click a monster = select it and attack
@@ -1683,13 +1695,12 @@ func _cursor_zone_pos(me: Node) -> Vector2:
 	return me.position + me.get_local_mouse_position()
 
 
-## Left click: select the monster (or player) under the cursor, or clear. `screen_pos` = the
-## click's own position (not the mouse "now"); the hit area is generous (moving monsters: the drawn
-## position or where the server has it, whichever is closer).
-func select_at_mouse(screen_pos = null) -> void:
+## Left click: select the monster (or player) under the cursor, or clear. Returns true if something
+## was selected (so the caller can skip click-to-move). `screen_pos` = the click's own position.
+func select_at_mouse(screen_pos = null) -> bool:
 	var me := _local_player()
 	if me == null or me.zone == null:
-		return
+		return false
 	var pt := _cursor_zone_pos(me)
 	if screen_pos is Vector2:
 		pt = me.get_parent().get_global_transform_with_canvas().affine_inverse() * screen_pos
@@ -1705,6 +1716,8 @@ func select_at_mouse(screen_pos = null) -> void:
 			best = m
 	if best == null:
 		for p in me.zone.players_root.get_children():
+			if p == me:
+				continue
 			var d: float = (p.position + Vector2(0, -10)).distance_to(pt)
 			if d <= 18.0 and d < best_d:
 				best_d = d
@@ -1712,6 +1725,8 @@ func select_at_mouse(screen_pos = null) -> void:
 	NetUtil.selected = best
 	if best:
 		_log("selected target %s (click %s, %d px from it)" % [best.display_name, pt.round(), roundi(best_d)])
+		if me.has_method("clear_click_goal"):
+			me.clear_click_goal()
 	elif bot_mode:
 		var near := INF
 		for m in me.zone.monsters_root.get_children():
@@ -1721,6 +1736,7 @@ func select_at_mouse(screen_pos = null) -> void:
 	if multiplayer.has_multiplayer_peer() and not multiplayer.is_server():
 		report_selection.rpc_id(1, (best.monster_id if best.has_method("take_damage") else best.peer_id) if best else -1,
 			"m" if best and best.has_method("take_damage") else "p", best.display_name if best else "")
+	return best != null
 
 
 ## Client -> server, log only: what the player selected (so a cast can be matched to it).
@@ -2267,7 +2283,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  F forms  N map  P party\nEnter chat   /invite NAME = party   /gm = cheats (GM)" % here
+	info_label.text = "Players here: %d\nClick ground to move  Arrows move  Space attack\nQ W E R skills  1 potion  V pick up / NPCs\nClick/Tab target  Esc menu / help\nI inventory  C character  T passive  F forms  N map  P party\nEnter chat   /invite NAME = party   /gm = cheats (GM)" % here
 	_hud_declutter()
 	_place_npc_labels()
 	if me == null:
@@ -2314,6 +2330,9 @@ func _update_hud(delta: float) -> void:
 	if aim_selftest and _elapsed > 5.0 and _aim_test_monster(me) != null:
 		aim_selftest = false
 		_run_aim_selftest()
+	if click_move_selftest and _elapsed > 2.0 and me and me.zone:
+		click_move_selftest = false
+		_run_click_move_selftest(me)
 	if _open_inventory:
 		_open_inventory = false
 		toggle_inventory()
@@ -3246,6 +3265,37 @@ func _first_focusable(n: Node) -> Control:
 	return null
 
 
+## --click-move-selftest: set a goal a few tiles away and check A* built a path.
+func _run_click_move_selftest(me: Node) -> void:
+	var cell: Vector2i = me.zone.map.local_to_map(me.position)
+	var goal_cell := cell + Vector2i(6, 0)
+	if not me.zone.map.is_walkable(goal_cell) or not me.zone.map.is_reachable(goal_cell):
+		goal_cell = cell + Vector2i(0, 6)
+	if not me.zone.map.is_walkable(goal_cell) or not me.zone.map.is_reachable(goal_cell):
+		for d in [Vector2i(4, 4), Vector2i(-5, 0), Vector2i(0, -5), Vector2i(8, 2)]:
+			var c: Vector2i = cell + d
+			if me.zone.map.is_walkable(c) and me.zone.map.is_reachable(c):
+				goal_cell = c
+				break
+	var world: Vector2 = me.zone.map.cell_pos(goal_cell)
+	me.set_click_goal(world)
+	var ok: bool = me._click_goal != Vector2.INF and me._click_path.size() >= 2
+	_log("CLICK MOVE SELFTEST: %s (from %s -> %s, path %d steps, goal %s)" % [
+		"PASS" if ok else "FAIL", cell, goal_cell, me._click_path.size(), me._click_goal.round()])
+	# also confirm QWER InputMap bindings
+	var qwer_ok := true
+	for pair in [["skill_1", KEY_Q], ["skill_2", KEY_W], ["skill_3", KEY_E], ["skill_4", KEY_R]]:
+		var found := false
+		for ev in InputMap.action_get_events(str(pair[0])):
+			if ev is InputEventKey and int(ev.physical_keycode) == int(pair[1]):
+				found = true
+				break
+		if not found:
+			qwer_ok = false
+			_log("CLICK MOVE SELFTEST: FAIL skill binding %s missing key" % pair[0])
+	_log("CLICK MOVE SELFTEST QWER bindings: %s" % ("PASS" if qwer_ok else "FAIL"))
+
+
 ## Presses the skill key through Input.parse_input_event like a player (not the bot path).
 func _press_skill_key(keycode: int) -> void:
 	bot_mode = false
@@ -3280,7 +3330,7 @@ func _run_aim_selftest() -> void:
 		NetUtil.selected = m   # (keep testing the aim part)
 	_test_cursor = (me.position + (me.position - m.position).normalized() * 150.0).round()
 	_log("AIM SELFTEST target: selected %s at %s, cursor on the other side at %s" % [m.display_name, m.position.round(), _test_cursor])
-	await _press_skill_key(KEY_1)
+	await _press_skill_key(KEY_Q)
 	await get_tree().create_timer(3.6).timeout
 	NetUtil.selected = null
 	var a: Vector2 = (me.position + Vector2(-130, 40)).round()
@@ -3290,7 +3340,7 @@ func _run_aim_selftest() -> void:
 	var b: Vector2 = (me.position + Vector2(90, -70)).round()
 	_test_cursor = b
 	_log("AIM SELFTEST cursor: no target, cursor rested at %s, moved to %s at the key press" % [a, b])
-	await _press_skill_key(KEY_1)
+	await _press_skill_key(KEY_Q)
 	_test_cursor = null
 	_log("AIM SELFTEST done")
 	await _press_skill_key(KEY_P)   # P toggles the party panel (also without a party)

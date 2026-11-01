@@ -777,7 +777,7 @@ check "corner minimap hidden under the inventory"            "UI SELFTEST minima
 check "C panel fits the window"                              "UI SELFTEST C panel fits the window: PASS"             p16_UiTest.log
 check "tutorial starts for a new character"            "\[tutorial\] Newbie: starting the tutorial \(new character\)"   p16_server.log
 check "step 1: movement"                               "tutorial step 1 done: Move"                                   p16_Newbie.log
-check "step 2: skills (keys 1-4)"                      "tutorial step 2 done: Skills"                                 p16_Newbie.log
+check "step 2: skills (QWER)"                          "tutorial step 2 done: Skills"                                 p16_Newbie.log
 check "practice loot dropped"                          "\[tutorial\] Newbie: practice loot dropped"                   p16_server.log
 check "step 3: loot pickup"                            "tutorial step 3 done: Loot"                                   p16_Newbie.log
 check "step 4: equipping gear"                         "tutorial step 4 done: Equip gear"                             p16_Newbie.log
