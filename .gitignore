@@ -2,3 +2,5 @@
 builds/
 test-logs/
 /workspace/
+tools/Godot_v*.x86_64
+tools/Godot_v*.zip

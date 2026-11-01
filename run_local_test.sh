@@ -2,9 +2,9 @@
 # Headless end-to-end test of Project Volam (dedicated server + bot clients).
 #   Phase 1: fresh save. Bot1/Bot2 level up on meadow slimes; Bot1 walks
 #            meadow -> forest -> meadow through the portals, Bot2 walks to the forest
-#            and stays there (zone + position saved on logout).
-#   Phase 2: server restarted on the same save: restore (incl. zone), wrong password,
-#            duplicate login, passive bot gets defeated and respawns.
+#            and stays there (logout still records progress; next login is Sunnyhaven).
+#   Phase 2: server restarted on the same save: restore in Sunnyhaven (PoE-style town
+#            start), wrong password, duplicate login, passive bot gets defeated and respawns.
 #   Classes: every new account picks a class (bots via --class); between phases 1
 #            and 2 an "old" pre-class account is injected into the save to check the
 #            one-time class prompt. Bots cycle through all 4 skill slots without local
@@ -83,7 +83,7 @@ run --join=127.0.0.1 --name=FrostCamper --password=w --class=fire --bot --warp=f
 # a forest Cave Bat pack: overworld cave bats otherwise only respawn if phase-4 bots happen to wipe a bat pack
 CBAT=$(grep -E "BIGMAP SELFTEST forest +packs " $L/bigmap_selftest.log | grep -oE " bat@[0-9]+,[0-9]+" | head -1 | sed -E 's/ bat@//' | awk -F, '{print $1 "," $2+3}')
 run --join=127.0.0.1 --name=BatCamper --password=w --class=water --bot --warp=forest --warp-cell=$CBAT --quit-after=124 > $L/p3_bat_camper.log 2>&1 &
-declare -A LAIR=([forest]=180,110 [crypt]=26,18 [frost]=186,26)   # inside each boss lair (big maps)
+declare -A LAIR=([forest]=332,192 [crypt]=26,18 [frost]=342,32)   # inside each boss lair (360x224 maps)
 declare -A HC=([forest1]=metal [forest2]=wood [forest3]=water [crypt1]=fire [crypt2]=earth [crypt3]=water
                [frost1]=earth [frost2]=fire [frost3]=metal)
 for z in forest crypt frost; do
@@ -102,7 +102,7 @@ b4 MetalA --class=metal --bot-talents=goals:m_bloodthirst,m_bladestorm --bot-tar
 b4 MetalB --class=metal --bot-talents=auto:1 --warp=forest
 b4 WoodA  --class=wood  --bot-talents=auto:0 --bot-aim --warp=forest
 b4 WoodB  --class=wood  --bot-talents=auto:1 --warp=crypt
-b4 WaterA --class=water --bot-talents=goals:a_shatter,a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=180,28
+b4 WaterA --class=water --bot-talents=goals:a_shatter,a_siphon,a_zero --bot-aim --bot-target=far --bot-hunt=boss --warp=frost --warp-cell=336,32
 b4 WaterB --class=water --bot-talents=auto:1 --bot-probe --warp=forest
 b4 FireA  --class=fire  --bot-talents=goals:f_quicken,f_shower --bot-aim --warp=crypt
 b4 FireB  --class=fire  --bot-talents=auto:1 --bot-target=far --bot-respec-at=28,31,34,37,40,43,46 --warp=frost
@@ -118,6 +118,7 @@ run --join=127.0.0.1 --name=MetalA --password=t --bot --quit-after=8 > $L/p4b_me
 run --join=127.0.0.1 --name=FireB --password=t --bot --quit-after=8 > $L/p4b_fire.log 2>&1 &
 wait
 "$GODOT" --headless --path . -- --talent-selftest > $L/talent_selftest.log 2>&1
+"$GODOT" --headless --path . -- --form-selftest > $L/form_selftest.log 2>&1
 
 echo "Phase 5 (~70s): gear, crafting, blacksmith..."
 SAVE5="$(pwd)/$L/accounts_p5.json"; rm -f "$SAVE5"
@@ -202,14 +203,14 @@ sleep 2
 run --join=127.0.0.1 --name=Decor --password=d --bot --bot-hideout=2 --quit-after=24 > $L/p10b_bot.log 2>&1 &
 wait
 
-echo "Phase 11 (~25s): client performance in Whisperwood (entrance + boss lair, 200x128 map)..."
+echo "Phase 11 (~25s): client performance in Whisperwood (entrance + boss lair, 360x224 map)..."
 SAVE11="$(pwd)/$L/accounts_p11.json"; rm -f "$SAVE11"
 run --server --save-file="$SAVE11" --debug-start-level=20 --allow-warp --fast-respawn --quit-after=24 > $L/p11_server.log 2>&1 &
 sleep 2
 CAMP=$(grep -E "BIGMAP SELFTEST forest +camps at" $L/bigmap_selftest.log | sed -E 's/.*camps at ([0-9]+),([0-9]+).*/\1,\2/' | awk -F, '{print $1 "," $2+3}')
 run --join=127.0.0.1 --name=Camper --password=b --class=fire --bot --warp=forest --warp-cell=$CAMP --quit-after=20 > $L/p11_camper.log 2>&1 &
 run --join=127.0.0.1 --name=BenchA --password=b --class=metal --bot-idle --warp=forest --bench=8 --quit-after=20 > $L/p11_bench_entrance.log 2>&1 &
-run --join=127.0.0.1 --name=BenchB --password=b --class=earth --bot-idle --warp=forest --warp-cell=178,100 --bench=8 --quit-after=20 > $L/p11_bench_lair.log 2>&1 &
+run --join=127.0.0.1 --name=BenchB --password=b --class=earth --bot-idle --warp=forest --warp-cell=330,185 --bench=8 --quit-after=20 > $L/p11_bench_lair.log 2>&1 &
 wait
 
 echo "Phase 12 (~130s): Guardian kill unlocks a hideout theme (no unlock-all flag), boss decoration drop, Esc-menu Hideout button, patrols walk their routes..."
@@ -336,7 +337,8 @@ echo; echo "== Zones"
 check "meadow -> forest (Bot1)"     "Zone transfer: Bot1 meadow -> forest"   p1_server.log
 check "forest -> meadow (Bot1)"     "Zone transfer: Bot1 forest -> meadow"   p1_server.log
 check "client sees zone banner"     "Entered zone forest"                    p1_bot1.log
-check "zone saved + restored"       "Login 'Bot2'.*restored save.*zone forest" p2_server.log
+check "login always returns to Sunnyhaven"  "Login 'Bot2'.*restored save.*zone meadow" p2_server.log
+check "login from wilds announces town"     "Login 'Bot2': entering Sunnyhaven \\(last zone was forest\\)" p2_server.log
 for t in "meadow -> forest" "forest -> crypt" "crypt -> frost" "frost -> crypt" "crypt -> forest" "forest -> meadow"; do
   check "walker $t"                 "Zone transfer: Walker $t"               p3_server.log
 done
@@ -346,22 +348,23 @@ check "Bot2 in forest sees only itself"      "zone=forest players=1 Bot2\(" p1_b
 echo; echo "== Big maps & monster groups"
 check "offline big-map self-test passes"   "BIGMAP SELFTEST OK"                                bigmap_selftest.log
 for z in meadow forest crypt frost; do
-  check "$z is ~10x bigger (200x128 vs 64x40)" "BIGMAP SELFTEST $z +size 200x128 \(10.0x the old 64x40 area\)" bigmap_selftest.log
+  check "$z is ~31.5x bigger (360x224 vs 64x40)" "BIGMAP SELFTEST $z +size 360x224 \(31.5x the old 64x40 area\)" bigmap_selftest.log
+  check "$z has nest + horde sites" "BIGMAP SELFTEST $z +nests .+ hordes ." bigmap_selftest.log
   l=$(grep -hE "\[$z\] [0-9]+ monster groups" $L/p3_server.log | head -1)
-  k=0; for kind in pack camp elite patrol guard; do echo "$l" | grep -q "\"$kind\"" && k=$((k+1)); done
-  if [ "$k" -ge 4 ]; then echo "PASS  $z has $k distinct group types ($(echo "$l" | sed -E 's/.*map: //'))"; else echo "FAIL  $z distinct group types ($l)"; fi
+  k=0; for kind in pack nest camp horde elite patrol guard; do echo "$l" | grep -q "\"$kind\"" && k=$((k+1)); done
+  if [ "$k" -ge 5 ]; then echo "PASS  $z has $k distinct group types ($(echo "$l" | sed -E 's/.*map: //'))"; else echo "FAIL  $z distinct group types ($l)"; fi
 done
 if grep -hE "Zone [a-z]+ ready" $L/p3_server.log | grep -q UNREACHABLE; then echo "FAIL  portals, NPCs, boss lairs and monster sites reachable"; else echo "PASS  portals, NPCs, boss lairs and monster sites reachable"; fi
 check "bosses wait in their lairs deep in the zone" "boss Yeti King spawned in its lair"          p3_server.log
 if grep -qhE "group aggro: .* pulled by .* - [1-9][0-9]* groupmates join" $L/*server.log; then echo "PASS  group aggro (pull one, the group comes): $(cat $L/*server.log | grep -cE "group aggro:") pulls"; else echo "FAIL  group aggro"; fi
-for kind in camp elite; do
+for kind in camp elite nest horde; do
   if grep -qhE "group aggro: .*\(group #[0-9]+ $kind of" $L/*server.log; then echo "PASS  a $kind group aggroed together"; else echo "FAIL  a $kind group aggroed together"; fi
 done
 if grep -qhE "group #[0-9]+ [a-z]+ of .* respawned at .*: [2-9][0-9]* members" $L/*server.log; then echo "PASS  groups respawn together ($(cat $L/*server.log | grep -cE "group #[0-9]+ .* respawned at") group respawns)"; else echo "FAIL  groups respawn together"; fi
 check "elite group leader in the overworld"  "◆ |(Hasted|Armoured|Brutal|Regenerating) [A-Za-z ]+\(Lv[0-9]+\) was slain"   p3_server.log
-check "old save: position shifted into the big map" "Login 'Oldtown': old-map position \(1136, 592\) in meadow shifted to \(5488, 2000\)" p2_server.log
-check "old save: restored at the shifted spot"      "Login 'Oldtown' .*zone meadow, pos \(5488, 2000\)"                               p2_server.log
-check "invalid saved position relocated"            "Login 'Lost': saved position \(99999, -320\) is not a valid spot in crypt - relocated" p2_server.log
+check "old save logs into Sunnyhaven"               "Login 'Oldtown' .*restored save.*zone meadow"                                 p2_server.log
+check "wild/invalid last zone still starts in town" "Login 'Lost': entering Sunnyhaven \\(last zone was crypt\\)"                  p2_server.log
+check "Lost lands in meadow town"                   "Login 'Lost' .*zone meadow"                                                   p2_server.log
 if grep -hE "\] perf: " $L/p3_server.log $L/p4_server.log | awk '{for(i=1;i<=NF;i++){if($i=="monsters,"){t=$(i-1)} if($i=="awake"){a=$(i-1)}} if(a<t) ok=1} END{exit !ok}'; then echo "PASS  interest management: far monsters sleep ($(grep -hE "\] perf: " $L/p3_server.log | tail -1 | sed -E 's/.*perf: //'))"; else echo "FAIL  interest management"; fi
 for f in p11_bench_entrance p11_bench_lair; do
   l=$(grep -h "^BENCH zone=forest" $L/$f.log | head -1)
@@ -445,6 +448,7 @@ check "no line of sight rejected"                "target rejected: .*no line of 
 echo; echo "== Passive web"
 check "offline web self-test (graph + maths)"  "TALENT SELFTEST OK"                       talent_selftest.log
 check "web: every node reachable, 15 keystones" "WEB SELFTEST 1[0-9][0-9] nodes: .*\"keystone\": 15" talent_selftest.log
+check "offline Martial Forms self-test"        "FORM SELFTEST OK"                         form_selftest.log
 check "refund that would disconnect rejected"   "refund [a-z_0-9]+ rejected: refunding .* would disconnect" p4_server.log
 check "single node refunded for gold"           "refunded passive .* for [0-9]+ gold"       p4_server.log
 check "centre keystone allocated (Farmer)"      "Farmer allocated passive Treasure Hunter's Oath \[keystone\]" p4_server.log
@@ -778,6 +782,7 @@ check "practice loot dropped"                          "\[tutorial\] Newbie: pra
 check "step 3: loot pickup"                            "tutorial step 3 done: Loot"                                   p16_Newbie.log
 check "step 4: equipping gear"                         "tutorial step 4 done: Equip gear"                             p16_Newbie.log
 check "step 5: passive web"                            "tutorial step 5 done: Passive web"                            p16_Newbie.log
+check "step 6: Martial Forms"                          "tutorial step 6 done: Martial Forms"                        p16_Newbie.log
 check "finished flag saved"                            "\[tutorial\] Newbie finished the tutorial - flag saved \(done\)" p16_server.log
 check "tutorial can be skipped"                        "tutorial skipped at step 1/5"                                 p16_Skipper.log
 check "skipped flag saved"                             "\[tutorial\] Skipper skipped the tutorial - flag saved \(skipped\)" p16_server.log

@@ -1,7 +1,7 @@
 extends PanelContainer
 ## First-time tutorial for a new character (shown once; the server saves the flag).
-## Five steps, each finished by doing it: move, use a skill (1-4), pick up loot (E),
-## equip it (I), open the passive web (T). "Skip tutorial" ends it at any time.
+## Six steps, each finished by doing it: move, use a skill (1-4), pick up loot (E),
+## equip it (I), open the passive web (T), open Martial Forms (F). "Skip tutorial" ends it at any time.
 
 signal finished(skipped: bool)
 
@@ -11,6 +11,7 @@ const STEPS := [
 	["Loot", "A helmet dropped next to you. Walk onto it and press  E  to pick it up."],
 	["Equip gear", "Press  I  to open your bag and click the helmet to equip it."],
 	["Passive web", "Press  T  to open the passive web. You get 1 point per level - spend them on connected nodes."],
+	["Martial Forms", "Press  F  to open Martial Forms. Cast skills in the combo order for a Finisher, and socket PoE-style support links."],
 ]
 
 var main: Node
@@ -101,6 +102,7 @@ func _process(_delta: float) -> void:
 		2: done = me.bag.size() > int(_baseline)
 		3: done = me.equip_summary() != _baseline
 		4: done = main.talent_ui.visible
+		5: done = main.form_ui != null and main.form_ui.visible
 	if done:
 		main._log("tutorial step %d done: %s" % [step + 1, STEPS[step][0]])
 		step += 1

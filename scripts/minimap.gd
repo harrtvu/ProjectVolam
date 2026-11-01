@@ -62,7 +62,8 @@ func _draw() -> void:
 	draw_texture_rect(_tex, Rect2(Vector2.ZERO, size), false, Color(1, 1, 1, 0.92))
 	var dot := 2.0 if not big else 3.5
 	for st in z.map.sites:
-		var c: Color = {"camp": Color(1.0, 0.55, 0.15), "elite": Color(1.0, 0.85, 0.2)}.get(st["kind"], Color(0, 0, 0, 0))
+		var c: Color = {"camp": Color(1.0, 0.55, 0.15), "elite": Color(1.0, 0.85, 0.2),
+			"nest": Color(0.75, 0.45, 1.0), "horde": Color(1.0, 0.35, 0.35)}.get(st["kind"], Color(0, 0, 0, 0))
 		if c.a > 0.0:
 			draw_circle(tp.call(z.map.cell_pos(st["cell"])), dot + 0.5, c)
 	if not z.info["boss"].is_empty():
@@ -72,6 +73,10 @@ func _draw() -> void:
 	for m in z.monsters_root.get_children():
 		if m.alive and not m.is_boss:
 			draw_circle(tp.call(m.position), dot * 0.6, Color(1.0, 0.25, 0.2, 0.85))
+	if z.info.has("town"):
+		var tr: Rect2i = z.info["town"]["rect"]
+		draw_rect(Rect2(Vector2(tr.position) * k, Vector2(tr.size) * k), Color(0.95, 0.85, 0.45, 0.18))
+		draw_rect(Rect2(Vector2(tr.position) * k, Vector2(tr.size) * k), Color(0.95, 0.8, 0.35, 0.7), false, 1.5)
 	for p in z.info["portals"]:
 		var r: Rect2i = p["rect"]
 		draw_rect(Rect2(Vector2(r.position) * k, Vector2(r.size) * k).grow(1.5), Color(0.7, 0.4, 1.0))
@@ -84,6 +89,9 @@ func _draw() -> void:
 	draw_circle(tp.call(me.position), dot + 2.5, Color(0, 0, 0, 0.8))   # dark outline so white reads on any ground
 	draw_circle(tp.call(me.position), dot + 1.5, Color.WHITE)          # "white: you" (legend) - no tint
 	var font := get_theme_default_font()
-	draw_string(font, Vector2(4, 13 if not big else 18), z.info["name"] + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
+	var title := str(z.info["town"]["name"]) if z.info.has("town") else str(z.info["name"])
+	if z.info.has("town") and big:
+		title = "%s  —  %s" % [z.info["town"]["name"], z.info["name"]]
+	draw_string(font, Vector2(4, 13 if not big else 18), title + ("" if big else "  (N: map)"), HORIZONTAL_ALIGNMENT_LEFT, -1, 11 if not big else 16, Color(1, 0.95, 0.8))
 	if big:
-		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   purple: portals   yellow: NPCs   orange: camps   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))
+		draw_string(font, Vector2(4, size.y - 8), "white: you   cyan: players   gold box: town   purple: portals   yellow: NPCs   orange: camps   violet: nests   pink: hordes   gold: elites   red ring: boss lair   red dots: monsters", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.9, 0.9, 0.9))

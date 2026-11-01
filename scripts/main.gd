@@ -37,6 +37,7 @@ const Vendor := preload("res://scripts/vendor.gd")
 ##   --bench=SECS        client: measure frame time / nodes / physics for SECS seconds, print a BENCH line, quit
 ##   --bigmap-selftest   offline checks of the big overworld maps (size, reachability, groups, old-save positions)
 ##   --gear-selftest     offline gear checks (drop statistics, orbs, enhancement, resistances)
+##   --form-selftest     offline Martial Forms checks (combo routes + support links)
 ##   --open-smith        open the blacksmith panel when standing next to it (screenshots)
 ##   --debug-tooltip=N   show the tooltip of the N-th gear item in the bag (screenshots)
 ##   --open-sheet        open the character sheet (C) on login (screenshots)
@@ -49,7 +50,7 @@ const Vendor := preload("res://scripts/vendor.gd")
 const GAME_TITLE := "Project Volam"
 const DEFAULT_PORT := 7777
 ## Build/protocol version checked on join (handshake.gd). Bump it whenever RPCs or synced data change.
-const BUILD_VERSION := "volam-m2.2"
+const BUILD_VERSION := "volam-m2.3"
 const MAX_PLAYERS := 32
 const SAVE_INTERVAL := 30.0
 const DEFAULT_SAVE_FILE := "user://volam_save/accounts.json"
@@ -70,6 +71,7 @@ const CharacterSheetScript := preload("res://scripts/character_sheet.gd")
 const SkillBarScript := preload("res://scripts/skill_bar.gd")
 const FxScript := preload("res://scripts/fx.gd")
 const TalentUIScript := preload("res://scripts/talent_ui.gd")
+const FormUIScript := preload("res://scripts/form_ui.gd")
 
 var zones := {}             # zone_id -> zone node (every peer builds all of them)
 var menu_cam: Camera2D
@@ -118,6 +120,7 @@ var mp_text: Label
 var class_label: Label
 var skill_bar: HBoxContainer
 var char_sheet: PanelContainer
+var form_ui: PanelContainer
 var class_select: Control
 
 # State
@@ -365,6 +368,7 @@ func _setup_input() -> void:
 	_add_action("skill_3", [KEY_3])
 	_add_action("skill_4", [KEY_4])
 	_add_action("talents", [KEY_T])
+	_add_action("forms", [KEY_F])
 	_add_action("target_cycle", [KEY_TAB])
 	_add_action("atlas", [KEY_M])
 	_add_action("party_panel", [KEY_P])
@@ -571,6 +575,9 @@ func _parse_args() -> void:
 			bot_respec_at.append(float(t))
 	if opts.has("talent-selftest"):
 		_talent_selftest()
+		return
+	if opts.has("form-selftest"):
+		_form_selftest()
 		return
 	if _gear_selftest_flag:
 		_gear_selftest()
@@ -982,29 +989,29 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	var acc := accounts.get_account(pname)
 	var display: String = str(acc.get("name", pname))
 	var character: Dictionary = acc.get("character", {})
-	var zone_id := str(character.get("zone", "meadow"))
+	var last_zone := str(character.get("zone", "meadow"))
 	instances.sync_peer(id)   # open dungeon zones must exist on this peer before anyone could see them
 	hideouts.sync_peer(id)
-	if zone_id == "hideout":   # logged out in the hideout: reopen it and restore there
+	# PoE-style: every login lands in town (Sunnyhaven). Hideout is the only other hub you can
+	# log back into — never resume mid-wilds / mid-dungeon from a saved overworld position.
+	var zone_id := "meadow"
+	var pos: Vector2
+	if last_zone == "hideout":
 		zone_id = hideouts.ensure(peer_accounts[id], display, Hideouts.sanitize(character.get("hideout", {})))
+		var z_ho: Node = zones[zone_id]
+		pos = z_ho.map.spot_near(z_ho.info["respawn"], rng)
+		var saved_ho = character.get("pos", null)
+		if typeof(saved_ho) == TYPE_ARRAY and saved_ho.size() == 2:
+			var hp := Vector2(float(saved_ho[0]), float(saved_ho[1]))
+			if z_ho.map.is_reachable(z_ho.map.local_to_map(hp)):
+				pos = hp
 		_log("Login '%s': restoring into the hideout %s" % [display, zone_id])
-	elif not Zones.exists(zone_id) or Zones.is_dungeon(zone_id) or Zones.is_hideout(zone_id):   # never log back in inside an instance
-		zone_id = "meadow"
+	else:
+		var z_town: Node = zones["meadow"]
+		pos = z_town.map.spot_near(z_town.info["respawn"], rng)
+		if last_zone != "meadow" and last_zone != "":
+			_log("Login '%s': entering Sunnyhaven (last zone was %s)" % [display, last_zone])
 	var z: Node = zones[zone_id]
-	var pos: Vector2 = z.map.spot_near(z.info["respawn"], rng)
-	var saved_pos = character.get("pos", null)
-	if typeof(saved_pos) == TYPE_ARRAY and saved_pos.size() == 2:
-		var p := Vector2(float(saved_pos[0]), float(saved_pos[1]))
-		var mv := int(character.get("map_v", 1))
-		if Zones.DB.has(zone_id) and mv < Zones.MAP_VERSION:   # saved before the 10x bigger maps
-			var moved := Zones.migrate_pos(zone_id, p, mv)
-			_log("Login '%s': old-map position %s in %s shifted to %s (map v%d -> v%d)" % [display, p.round(), zone_id, moved.round(), mv, Zones.MAP_VERSION])
-			p = moved
-		if z.map.is_reachable(z.map.local_to_map(p)) and z.portal_at(p).is_empty():
-			pos = p
-		else:
-			pos = z.map.nearest_reachable_pos(p, z.info["respawn"])
-			_log("Login '%s': saved position %s is not a valid spot in %s - relocated to %s" % [display, p.round(), zone_id, pos.round()])
 	if acc.has("stash"):   # account-wide shared stash (older saves kept it on the character)
 		character = character.duplicate()
 		character["stash"] = acc["stash"]
@@ -1273,6 +1280,10 @@ func _bot_tutorial(me: Node, zone: Node, delta: float) -> void:
 		4:
 			if _bot_attack_timer <= 0.0:
 				talent_ui.visible = true
+		5:
+			if _bot_attack_timer <= 0.0:
+				_open_exclusive(form_ui, true)
+				form_ui.set_player(me)
 
 
 ## Client: my party changed (members [] = not in a party).
@@ -1600,6 +1611,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action("talents"):
 			_open_exclusive(talent_ui, not talent_ui.visible)
 			get_viewport().set_input_as_handled()
+		elif event.is_action("forms"):
+			_open_exclusive(form_ui, not form_ui.visible)
+			if form_ui.visible:
+				form_ui.set_player(_local_player())
+			get_viewport().set_input_as_handled()
 		elif event.is_action("party_panel"):
 			toggle_party_panel()
 			get_viewport().set_input_as_handled()
@@ -1744,7 +1760,7 @@ func handle_escape() -> void:
 		pause_menu.close_menu()
 		return
 	for pn in [["hideout", hideout_ui], ["vendor", vendor_ui], ["map device / merchant", map_ui], ["atlas", atlas_ui], ["blacksmith", smith_ui],
-			["passive web", talent_ui], ["character sheet", char_sheet], ["inventory", inventory_ui]]:
+			["martial forms", form_ui], ["passive web", talent_ui], ["character sheet", char_sheet], ["inventory", inventory_ui]]:
 		if pn[1].visible:
 			pn[1].visible = false
 			item_tip.hide_tip()
@@ -1937,7 +1953,7 @@ static func _rect_hits(r: Rect2, rects: Array) -> bool:
 
 
 func _big_windows() -> Array:
-	return [inventory_ui, char_sheet, talent_ui, atlas_ui, map_ui, hideout_ui, smith_ui, vendor_ui]
+	return [inventory_ui, char_sheet, talent_ui, form_ui, atlas_ui, map_ui, hideout_ui, smith_ui, vendor_ui]
 
 
 func close_windows_except(keep: Array) -> void:
@@ -2168,13 +2184,20 @@ func _process(delta: float) -> void:
 
 
 ## Shows only `zone_id`'s map + entities on this peer (and the entry banner).
+## Menu preview uses announce=false so `_shown_zone` stays empty — otherwise a new
+## character spawning in Sunnyhaven would skip the town banner (meadow was already "shown").
 func _show_zone(zone_id: String, announce := true) -> void:
-	_shown_zone = zone_id
 	for id in zones:
 		zones[id].visible = id == zone_id
-	if announce and banner_label:
+	if not announce:
+		return
+	_shown_zone = zone_id
+	if banner_label:
 		var zi := Zones.info(zone_id)
-		banner_label.text = "%s\n%s" % [zi["name"], ("Safe haven" if str(zi["levels"]) in ["", "-"] else "Safe haven  -  Lv " + zi["levels"]) if zi.get("safe", false) else "Monsters Lv " + zi["levels"]]
+		if zi.has("town"):
+			banner_label.text = "%s\nStarter town  -  %s" % [str(zi["town"]["name"]), zi["name"]]
+		else:
+			banner_label.text = "%s\n%s" % [zi["name"], ("Safe haven" if str(zi["levels"]) in ["", "-"] else "Safe haven  -  Lv " + zi["levels"]) if zi.get("safe", false) else "Monsters Lv " + zi["levels"]]
 		_banner_t = 3.5
 		_log("Entered zone %s (%s)" % [zone_id, zi["name"]])
 		if zi.has("dungeon"):
@@ -2216,7 +2239,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  N map  P party\nEnter chat   /invite NAME = party" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  F forms  N map  P party\nEnter chat   /invite NAME = party" % here
 	_hud_declutter()
 	_place_npc_labels()
 	if me == null:
@@ -2232,6 +2255,8 @@ func _update_hud(delta: float) -> void:
 		_open_talents = false
 		talent_ui.visible = true
 	talent_ui.set_player(me)
+	if form_ui.visible:
+		form_ui.set_player(me)
 	if bot_watch_patrol and not _watch_sent and _elapsed > 3.0 and me.zone.zone_id == "meadow":
 		_watch_sent = true
 		_watch_patrol(me)
@@ -2241,7 +2266,10 @@ func _update_hud(delta: float) -> void:
 		_warp_pending = false
 		request_warp.rpc_id(1, _warp_to, _warp_cell)
 	var zi := Zones.info(me.zone.zone_id)
-	zone_label.text = zi["name"] if str(zi["levels"]) in ["", "-"] else "%s  (Lv %s)" % [zi["name"], zi["levels"]]
+	if zi.has("town"):
+		zone_label.text = "%s  (%s)" % [str(zi["town"]["name"]), zi["name"]]
+	else:
+		zone_label.text = zi["name"] if str(zi["levels"]) in ["", "-"] else "%s  (Lv %s)" % [zi["name"], zi["levels"]]
 	if zi.has("dungeon"):
 		var dd: Dictionary = zi["dungeon"]
 		var aq: float = Dungeons.atlas_iiq(me.atlas)
@@ -4046,6 +4074,18 @@ func _bigmap_selftest() -> void:
 		for k in ["respawn", "blacksmith", "map_device", "merchant", "vendor", "hideout_master"]:
 			if zi.has(k) and not m.is_reachable(zi[k]):
 				bad.append(k)
+		if zi.has("town"):
+			var tr: Rect2i = zi["town"]["rect"]
+			for k2 in ["respawn", "blacksmith", "map_device", "merchant", "vendor", "hideout_master"]:
+				if zi.has(k2) and not tr.has_point(zi[k2]):
+					bad.append("town misses " + k2)
+			# Portal yard + a gate cell must be walkable; the wall itself is solid on purpose.
+			var portal_yard := Vector2i(zi["map_device"].x, int(zi["map_portal_row"]))
+			if not m.is_reachable(portal_yard):
+				bad.append("town portal yard")
+			var wall_sample := tr.position
+			if m.is_walkable(wall_sample):
+				bad.append("town wall missing")
 		if not zi["boss"].is_empty() and not m.is_reachable(zi["boss"]["cell"]):
 			bad.append("boss lair")
 		var kinds := {}
@@ -4074,7 +4114,11 @@ func _bigmap_selftest() -> void:
 		var same := m2.sites.size() == m.sites.size() and m2.get_used_cells(0).size() == m.get_used_cells(0).size()
 		for i in mini(m.sites.size(), m2.sites.size()):
 			same = same and m.sites[i]["cell"] == m2.sites[i]["cell"] and m.sites[i]["kind"] == m2.sites[i]["kind"]
-		var good: bool = area >= old_area * 9.5 and bad.is_empty() and kinds.size() >= 4 and placed == planned and elite_d > pack_d and same
+		var expect_area := Zones.BIG_W * Zones.BIG_H
+		var kind_n := 0
+		for _k in kinds:
+			kind_n += 1
+		var good: bool = area == expect_area and bad.is_empty() and kind_n >= 5 and placed == planned and elite_d > pack_d and same
 		ok = ok and good
 		print("BIGMAP SELFTEST %-6s size %dx%d (%.1fx the old 64x40 area) | %d reachable cells | %d sites, %d groups placed of %d | group kinds %s | avg depth pack %.2f elite %.2f | deterministic %s | unreachable %s %s" % [
 			id, m.w, m.h, float(area) / old_area, m.reachable.size(), m.sites.size(), placed, planned, kinds, pack_d, elite_d, same, bad, "" if good else "<-- FAIL"])
@@ -4089,15 +4133,25 @@ func _bigmap_selftest() -> void:
 		var camps: Array = []
 		var elites: Array = []
 		var packs: Array = []
+		var nests: Array = []
+		var hordes: Array = []
 		for st in m.sites:
 			if st["kind"] == "camp":
 				camps.append("%d,%d" % [st["cell"].x, st["cell"].y])
 			elif st["kind"] == "elite":
 				elites.append("%d,%d" % [st["cell"].x, st["cell"].y])
+			elif st["kind"] == "nest" and int(st["spec"]) >= 0:
+				nests.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
+			elif st["kind"] == "horde" and int(st["spec"]) >= 0:
+				hordes.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
 			elif st["kind"] == "pack" and int(st["spec"]) >= 0:
 				packs.append("%s@%d,%d" % [str(zi["groups"][int(st["spec"])]["types"][0]), st["cell"].x, st["cell"].y])
 		print("BIGMAP SELFTEST %-6s camps at %s elites at %s" % [id, " ".join(camps), " ".join(elites)])
 		print("BIGMAP SELFTEST %-6s packs %s" % [id, " ".join(packs)])
+		print("BIGMAP SELFTEST %-6s nests %s hordes %s" % [id, " ".join(nests), " ".join(hordes)])
+		ok = ok and nests.size() >= 1 and hordes.size() >= 1
+		if nests.is_empty() or hordes.is_empty():
+			print("BIGMAP SELFTEST %-6s missing nest/horde sites <-- FAIL" % id)
 		m.free()
 		m2.free()
 	print("BIGMAP SELFTEST OK" if ok else "BIGMAP SELFTEST FAILED")
@@ -4556,6 +4610,89 @@ func _talent_selftest() -> void:
 				to_ks, Talents.node(ks)["name"], tl.size(), before, p._stat_line(), "; ".join(parts), ", ".join(Stats.describe(p.tmods))])
 			p.free()
 	print("TALENT SELFTEST %s" % ("OK" if all_ok else "FAILED"))
+	get_tree().quit(0 if all_ok else 1)
+
+
+## Offline Martial Forms checks: every class has two Forms, combo routes use real skills,
+## support links sanitize/level-gate, and completing a combo applies the Finisher buff.
+func _form_selftest() -> void:
+	var PS := load("res://scripts/player.gd")
+	var all_ok := true
+	var cnt := [0]
+	var fails: Array = []
+	var check := func(ok: bool, msg: String) -> void:
+		cnt[0] += 1
+		if not ok:
+			all_ok = false
+			fails.append(msg)
+			print("FORM SELFTEST FAIL: %s" % msg)
+	for cls in Classes.ELEMENTS:
+		var list: Array = Forms.for_class(cls)
+		check.call(list.size() == 2, "%s should have 2 Forms, has %d" % [cls, list.size()])
+		for f in list:
+			check.call(int(f["links"]) >= 1 and int(f["links"]) <= Forms.MAX_LINKS, "%s/%s links" % [cls, f["id"]])
+			check.call((f["combo"] as Array).size() >= 2, "%s/%s combo too short" % [cls, f["id"]])
+			for slot in f["combo"]:
+				check.call(Classes.skill_id(cls, int(slot)) != "", "%s/%s combo slot %s" % [cls, f["id"], slot])
+			check.call(Forms.can_select_form(cls, int(f["unlock"]), f["id"]) == "", "%s/%s unlock gate" % [cls, f["id"]])
+			if int(f["unlock"]) > 1:
+				check.call(Forms.can_select_form(cls, int(f["unlock"]) - 1, f["id"]) != "", "%s/%s locked below unlock" % [cls, f["id"]])
+	check.call(Forms.support_ids().size() >= 8, "support pool size")
+	check.call(Forms.can_set_support("metal", 1, "blade_dance", [], 0, "culling") != "", "culling gated by level")
+	check.call(Forms.can_set_support("metal", 10, "blade_dance", [], 0, "culling") == "", "culling ok at 10")
+	check.call(Forms.can_set_support("metal", 10, "blade_dance", [], 1, "added_dmg") != "", "blade_dance has 1 link only")
+	var san := Forms.sanitize("metal", 1, "death_mark_form", ["culling", "added_dmg"])
+	check.call(san["form_id"] == "blade_dance", "sanitize drops locked Form")
+	check.call(san["supports"].is_empty() or not san["supports"].has("culling"), "sanitize drops locked support")
+	# live combo on a throwaway player
+	var p: Node = PS.new()
+	p.class_id = "metal"
+	p.element = "metal"
+	p.level = 10
+	p.form_id = "blade_dance"
+	p.form_supports = ["added_dmg"]
+	p.recalc_stats()
+	check.call(p.tm("ele_dmg_pct") >= 25.0, "support mods land in tmods (got %.1f)" % p.tm("ele_dmg_pct"))
+	var route: Array = Forms.form("metal", "blade_dance")["combo"]
+	for i in route.size():
+		var ev: Dictionary = Forms.on_cast(p, int(route[i]))
+		if i < route.size() - 1:
+			check.call(ev.get("kind") == "advance", "combo step %d advance (got %s)" % [i, ev.get("kind")])
+		else:
+			check.call(ev.get("kind") == "finisher", "combo finisher (got %s)" % ev.get("kind"))
+			check.call(p.finisher_t > 0.0 and p.finisher_dmg >= 30.0, "finisher buff applied")
+	# wrong skill resets
+	p.combo_step = 0
+	p.combo_t = Forms.COMBO_WINDOW
+	Forms.on_cast(p, int(route[0]))
+	var bad: Dictionary = Forms.on_cast(p, (int(route[1]) + 1) % 4 if (int(route[1]) + 1) % 4 != int(route[0]) else (int(route[1]) + 2) % 4)
+	check.call(bad.get("kind") == "reset", "wrong skill resets combo")
+	# skill_def picks up aoe_pct from greater_aoe
+	p.form_supports = ["greater_aoe"]
+	p.recalc_stats()
+	var whirl0: Dictionary = Classes.SKILLS["whirl"]
+	var whirl1: Dictionary = p.skill_def("whirl")
+	check.call(float(whirl1["radius"]) > float(whirl0["radius"]), "greater_aoe grows Whirl radius")
+	# suggested supports + empty form_id defaults
+	var sug: Array = Forms.suggested("metal", "blade_dance", 10)
+	check.call(sug.size() >= 1, "blade_dance has suggestions")
+	check.call(Forms.COMBO_WINDOW >= 5.0, "combo window is at least 5 s")
+	p.form_id = ""
+	p.form_supports = []
+	p.recalc_stats()
+	check.call(p.form_id == Forms.default_form_id("metal"), "empty form_id defaults on recalc")
+	# lifetap cost path: Blood Pact replaces mana with life
+	p.form_id = "blade_dance"
+	p.form_supports = ["lifetap"]
+	p.level = 10
+	p.recalc_stats()
+	check.call(p.tm("flag:lifetap") > 0.0, "lifetap flag from support")
+	p.free()
+	if all_ok:
+		print("FORM SELFTEST: all %d checks passed" % cnt[0])
+	else:
+		print("FORM SELFTEST: %d/%d FAILED: %s" % [fails.size(), cnt[0], fails])
+	print("FORM SELFTEST %s" % ("OK" if all_ok else "FAILED"))
 	get_tree().quit(0 if all_ok else 1)
 
 
@@ -5071,6 +5208,14 @@ func _build_ui() -> void:
 	talent_ui.visible = false
 	hud.add_child(talent_ui)
 
+	form_ui = FormUIScript.new()
+	form_ui.anchor_left = 0.5
+	form_ui.anchor_right = 0.5
+	form_ui.offset_left = -260
+	form_ui.offset_top = 60
+	form_ui.visible = false
+	hud.add_child(form_ui)
+
 	char_sheet = CharacterSheetScript.new()
 	char_sheet.anchor_left = 0.5
 	char_sheet.anchor_right = 0.5
@@ -5085,7 +5230,7 @@ func _build_ui() -> void:
 	# minimap), the tutorial above them, the item tooltip on top of everything.
 	# The tutorial sits under the windows: it docks away from them, and when nothing fits (the tall
 	# C panel) the window stays readable on top.
-	for panel_node in [tutorial_ui, inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, char_sheet, item_tip]:
+	for panel_node in [tutorial_ui, inventory_ui, smith_ui, map_ui, atlas_ui, hideout_ui, vendor_ui, talent_ui, form_ui, char_sheet, item_tip]:
 		hud.move_child(panel_node, -1)
 
 	class_select = ClassSelectScript.new()

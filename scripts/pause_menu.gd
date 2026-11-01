@@ -12,6 +12,7 @@ const CONTROLS := [
 	["Left-click", "Select target (empty ground clears it)"], ["Right-click", "Select monster and attack"],
 	["Tab", "Cycle nearest enemies"], ["E", "Pick up / blacksmith / Map Device / merchant / vendor"],
 	["Q", "Drink a health potion"], ["I", "Inventory"], ["C", "Character sheet"], ["T", "Passive web"],
+	["F", "Martial Forms (Vo Lam combos + PoE support links)"],
 	["N", "Zone map"], ["M", "Atlas"], ["P", "Party panel"], ["H", "Hideout panel / decoration mode (in your hideout)"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
 	["/invite NAME", "Chat: invite a player to your party (or the target frame's button)"], ["/accept  /decline", "Chat: answer a party invite"],
 	["/party", "Chat: list your party"], ["/leave", "Chat: leave your party"], ["/kick NAME", "Chat: remove a member (leader)"], ["/p TEXT", "Chat: party chat"], ["/hideout", "Chat: go to your hideout"],

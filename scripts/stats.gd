@@ -31,6 +31,7 @@ const LABELS := {
 	"attack_speed": ["attack speed", "%"], "cast_speed": ["cast speed (cooldown recovery)", "%"],
 	"life_flat": ["maximum life", ""], "mana_flat": ["maximum mana", ""], "dmg_flat": ["damage", ""],
 	"ele_dmg_pct": ["elemental (skill) damage", "%"], "res_all": ["to all elemental resistances", "%"],
+	"aoe_pct": ["skill area of effect", "%"],
 }
 
 

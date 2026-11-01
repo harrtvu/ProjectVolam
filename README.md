@@ -17,10 +17,11 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Feature | How it works |
 |---|---|
 | Host / Join / Dedicated server | One project. The main menu has *Account name*, *Password*, *Server address* (default `127.0.0.1`), **Host (listen server)** and **Join**. Run with `--server` for a headless dedicated server. ENet (UDP) on port **7777**. |
-| World & zones | Four big open-world zones, each a **200×128** tile map (32 px tiles, 10× the area of the original 64×40 maps) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter town + wilds), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Monsters live in **groups** (packs, camps, elite packs, patrols, boss guards) that get tougher the farther you go from the zone entrance; a **minimap** and a full zone map (**N**) keep you oriented. Glowing portals at map edges link the zones. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
+| World & zones | Four huge open-world zones, each a **360×224** tile map (32 px tiles, ~31.5× the area of the original 64×40 maps) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter town + wilds), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Monsters live in **groups** (packs, nests, camps, hordes, elite packs, patrols, boss guards) that get tougher the farther you go from the zone entrance; a **minimap** and a full zone map (**N**) keep you oriented. Glowing portals at map edges link the zones. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
 | Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on keys **1-4**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
 | Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, clicking empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
 | Passive web | One shared Path-of-Exile-style web of 175 nodes. Class starts sit on the five-element pentagon, with small/notable/keystone nodes, an adjacency rule, 1 point per level (retroactive), per-node refund and full reset for gold, and farming stats (item quantity/rarity, gold, leech, attack/cast speed, damage vs element). All bonuses flow through one stat aggregator that gear affixes can plug into. See [Passive web](#passive-web-shared-path-of-exile-style). |
+| Martial Forms (Vo Lam × PoE) | Press **F**. Each class has two **Martial Forms** (chiêu thức): a Vo Lam-style **combo route** of skill slots and 1–2 PoE-style **support link** sockets. Cast skills in order to fill the combo meter above the skill bar; completing the route triggers a **Finisher** (+% skill damage for a few seconds). Socket supports (Added Firepower, Swift Forms, Expanding Force, Blood Pact, Culling Strike, …) to reshape every skill — same modifier keys as the passive web and gear. Second Form unlocks at level 6 with two links. See [Martial Forms](#martial-forms-vo-lam--path-of-exile). |
 | Players | WASD / arrows to move. The camera follows you, and the sprite flips and waddles while walking. A name + level label and an HP bar float over each head. **Server-authoritative**: clients send only input; the server moves everyone and replicates the results with `MultiplayerSynchronizer`/`MultiplayerSpawner`. |
 | Monsters & bosses | 13 regular monster types plus 3 zone bosses in walled lairs at the far end of their zones, with different behaviours (packs, erratic flyers, lunges, ranged archers, wall-phasing ghosts, armored brutes). Stats and XP scale with monster level, and the name + level float over each head. Every non-starter zone has a boss with a special attack, a big HP bar, chat announcements and guaranteed loot. See [Monsters](#monsters). |
 | Health, death, XP, levels | Monsters chase nearby players and hit them (damage reduced by armor). At 0 HP you become a tombstone and respawn at the current zone's entrance after 4 s with full HP. You slowly regenerate when out of combat. XP per kill = 6 + 4 × monster level (bosses 100 + 20 × level), shared by everyone who hit it. Levelling (20 × level XP per level) raises your stats by your class's growth rates, refills HP and mana, unlocks skills at levels 3/6/10, and announces it in chat. The HUD shows HP/mana/XP bars, class, ATK/DEF, gold, zone and the skill bar. |
@@ -28,7 +29,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Inventory & blacksmith | **I** opens a 40-slot bag with a paper-doll equipment panel. You can click or drag to equip, shift-click or drag onto *Drop* to drop, and ctrl-click twice or drag onto *Destroy* to destroy. Currency stacks. Tooltips compare with what you're wearing. The **blacksmith** (anvil in Sunny Meadow, press **E** next to it) has the crafting/enhancement panel, a vendor, and a 40-slot **account-wide stash**. Potions: click to drink, or **Q**. |
 | NPC vendor | The **Vendor** in Sunny Meadow (and in every hideout) buys your loot for gold and sells potions, orbs and a rotating gear stock (every 2 h and every day). Stock persists across restarts. See [Milestone 2](#milestone-2-solo-play-parties-npc-vendor-tutorial-balance). |
 | Hideout | A private, per-account hideout (Path of Exile style) with its own **Map Device, Ticket Merchant, Vendor and blacksmith + stash**. Enter it through the **Hideout Master** in Sunny Meadow, the `/hideout` chat command or **Esc > Hideout**; leave through the door. Buy Kenney CC0 decorations with gold (or find them in dungeons), place / move / rotate / flip / remove them on a grid in **decoration mode (H)**, move the stations, and pick one of six themes unlocked by Atlas Guardians. See [Hideout](#hideout-path-of-exile-style). |
-| Accounts & saving | The first login with a name creates the account. The password is stored as SHA-256(random salt + password) using `HashingContext`. Later logins need the same password, and an account can't be logged in twice at once. The server saves level, XP, HP, **zone**, position, currency stacks, gold, every item instance (equipped, bag, and the account-wide stash) to JSON on disconnect, on every zone change, every 30 s, and on shutdown, then restores it on the next login (you come back in the zone you left). |
+| Accounts & saving | The first login with a name creates the account. The password is stored as SHA-256(random salt + password) using `HashingContext`. Later logins need the same password, and an account can't be logged in twice at once. The server saves level, XP, HP, currency stacks, gold, every item instance (equipped, bag, and the account-wide stash) to JSON on disconnect, on every zone change, every 30 s, and on shutdown. **Login always starts you in Sunnyhaven** (Path of Exile style) — or in your hideout if you logged out there. Wild / dungeon positions are never resumed. |
 | Chat | Global. **Enter** to type, Enter to send, **Esc** to cancel. The server stamps the sender's zone and name (`[Forest] Harry: hi`). Join/leave/level-up/defeat/boss messages show up in yellow. |
 | Web support | Browsers can't use ENet, so the server can also run in WebSocket mode (`--ws`), and the web build uses WebSockets automatically. |
 
@@ -46,15 +47,25 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 |---|---|
 | ![a monster camp](docs/bigmap_groups.png) | ![minimap](docs/bigmap_minimap.png) |
 
-Every overworld zone is **200×128 tiles** (6400×4096 px). The old 64×40 maps were 2560 tiles, the new ones
-25,600, so each zone has **10× the area** (3.1× wider, 3.2× taller).
+Every overworld zone is **360×224 tiles** (11520×7168 px). The old 64×40 maps were 2560 tiles; these are
+80,640, so each zone has **~31.5× the area** (5.6× wider, 5.6× taller). Town cores stay at the same
+anchors as the previous 200×128 maps so existing characters keep their town / portal positions.
 
 | Zone | Levels | Entrance area (the old map) | The new wilds | Boss |
 |---|---|---|---|---|
-| Sunny Meadow | 1-4 | the town (all NPCs) on the east side, gate to the forest on the east edge | groves, ponds, stone ruins and roads to the west, north and south | - |
+| Sunny Meadow | 1-4 | **Sunnyhaven** walled town (all NPCs, shops, portal yard, gates) on the east side; forest gate on the map's east edge | groves, ponds, stone ruins and roads to the west, north and south | - |
 | Whisperwood Forest | 3-7 | north-west corner (gates to the meadow and the crypt) | dense woods with clearings and ponds to the east and south | Broodmother, lair in the far south-east |
 | Bone Crypt | 6-11 | south-east corner (gates to the forest and Frostpeak) | catacomb halls, 3-wide corridors and sandy caverns to the north and west | The Lich King, lair in the far north-west |
 | Frostpeak Ruins | 9-13 | west side (gate to the crypt) | pine forests, frozen lakes and rocks to the north, east and south | Yeti King, walled fortress in the far north-east |
+
+### Sunnyhaven (starter town)
+
+New characters wake up in **Sunnyhaven**, a walled village inside Sunny Meadow (Vo Lâm–style thôn around the PoE stations):
+
+* **Wall + four gates** onto the wilds roads (west into the meadows, east toward the forest portal, north/south side gates).
+* **Shops** as small buildings on the plaza: Ticket Merchant, Map Device pavilion (opens onto the **portal yard** where dungeon gates appear), Blacksmith forge, Vendor stall, Hideout Master.
+* **Well**, flower beds and corner watch posts; gate signs name the town.
+* NPC / portal / stash coordinates are unchanged (`map_v` stays valid). Wild packs never spawn inside the town rect.
 
 **How a big map is built** (`scripts/zone_map.gd`, `_gen_overworld`, all from the zone's fixed seed):
 1. themed outer terrain from two `FastNoiseLite` layers (tree groves / dense woods / pine forests, lakes, crypt caverns);
@@ -73,10 +84,12 @@ Monsters are spawned as **groups** (`Zones.DB[zone]["groups"]`, spawned by `zone
 
 | Group type | What it is | Where |
 |---|---|---|
-| `pack` | 2-6 of one type: slime clutches, Dire Rat (wolf-style) packs, bat swarms, spider nests, ghost hosts, yeti packs, ogre pairs | the entrance area ("core" groups, so new players always find something) and everywhere else |
-| `camp` | a **leader** (+2 levels: Meadow Bandit, Wood Spider, Grave Crawler, Ice Ogre) with mixed members around a camp fire, e.g. bandit archers + boars, crawler + crypt archers + ghosts, ogre + yetis + frost bats | middle to far sites (depth 0.4-1.0) |
-| `elite` | an **elite** (Hasted / Armoured / Brutal / Regenerating, ×2.5 life, +1 level, +40% item quantity / +100% rarity on its drops) leading 2-3 minions inside a stone circle | the far sites (depth 0.6-1.0) |
-| `patrol` | 3-4 monsters that walk a loop between their site and the two nearest sites | anywhere (depth 0.2-0.9) |
+| `pack` | 2-6 of one type: slime / mossling / wolf / spider / skeleton / yeti packs and more | the entrance area ("core" groups) and the wilds |
+| `nest` | a dense clutch of one type (5-7) in a tight clearing — wasps, bats, spiders, ghosts, snow slimes | near-to-mid wilds |
+| `camp` | a **leader** (+2 levels) with mixed members around a camp fire | middle to far sites (depth 0.4-1.0) |
+| `horde` | a large mixed pack (6-9) on a wide stamped clearing — no leader bonus | mid-to-far wilds |
+| `elite` | an **elite** (Hasted / Armoured / Brutal / Regenerating, ×2.5 life, +1 level, +40% IIQ / +100% IIR) leading 2-3 minions inside a stone circle | the far sites (depth 0.6-1.0) |
+| `patrol` | 3-4 monsters that walk a loop between their site and the two nearest sites | anywhere (depth 0.2-0.95) |
 | `guard` | the boss's bodyguards, just inside the lair gate | the boss lair |
 
 * **Difficulty rises away from the entrance**: a site's depth is its distance from the zone entrance divided by the
@@ -86,11 +99,10 @@ Monsters are spawned as **groups** (`Zones.DB[zone]["groups"]`, spawned by `zone
 * **Groups respawn together**: dead members stay down until the *whole* group is dead, then after 1.5× the leader's
   respawn time all members come back around their site (`group #id ... respawned at (x, y): N members`).
   Patrols restart their loop.
-* Elements (Metal > Wood > Earth > Water > Fire > Metal) and level scaling work as before. Sunny Meadow got three new
-  low-level types for variety (Kenney sprites, tinted): **Mossling** (Wood), **Hill Boar** (Fire, lunges) and
-  **Meadow Bandit** (Metal, ranged).
-* Monster counts: about 80 per zone (meadow 79, forest 84, crypt 78, frost 81 incl. bosses), about 320 in total,
-  versus about 65 on the old maps. That's 5× the monsters for 10× the area, so the wilds aren't wall-to-wall.
+* Extra tinted types for variety: **Grey Wolf**, **Stinging Wasp**, **Young Treant**, **Bone Soldier**,
+  **Grave Wraith**, **Ice Wolf**, **Snow Slime** (plus the earlier Mossling / Hill Boar / Meadow Bandit).
+* Monster counts land around **~150-200 per zone** (incl. bosses) on the 360×224 maps — denser camps and nests,
+  but interest management still keeps far packs asleep.
 * Private dungeon instances and hideouts are unchanged (still 64×40, same generator and spawning).
 
 ### Performance: interest management inside a zone
@@ -132,13 +144,18 @@ players (cyan), portals (purple), town NPCs (yellow), camps (orange), elite circ
 and the monsters you can see (red dots). The terrain is a 1-pixel-per-tile image of the zone's TileMap, so it
 always matches the map size. The camera limits come from the map size too.
 
+### Login hub (Path of Exile style)
+
+Every character enters the game in **Sunnyhaven** (meadow town plaza). Logging out in the wilds, a dungeon, or
+another overworld zone still brings you back to town next time — the last wild zone is only remembered in the
+login log (`entering Sunnyhaven (last zone was forest)`). The one exception is your **hideout**: leave there
+and you log back into the hideout.
+
 ### Old saves
 
-Characters saved before the big maps have no `map_v` in their save, so their position is in old 64×40 coordinates.
-On login it's shifted by the zone's core offset, which puts them on the same spot of the same landmark (the log says
-`old-map position ... shifted to ...`). Any saved position that isn't on a reachable tile (outside the map, inside a
-wall, stuck in an unreachable pocket) is moved to the nearest reachable tile (`saved position ... relocated to ...`).
-New saves store `"map_v": 2`.
+Characters saved before the big maps have no `map_v` in their save. Town cores keep the same anchors across
+200×128 → 360×224 growth (`map_v` 3). Offline `--bigmap-selftest` still checks that a 64×40 coordinate shifted
+by the core offset lands on a reachable town tile; login itself always uses the Sunnyhaven plaza.
 
 ## Classes & the five elements
 
@@ -287,6 +304,33 @@ Press **T** to open the **passive web**. It's one big graph of **175 nodes** tha
 
 Screenshots for every class: `docs/screenshot_web_metal.png`, `_wood`, `_water`, `_fire`, `_earth` (each is a level-20 bot
 that pathed to a class keystone).
+
+## Martial Forms (Vo Lam × Path of Exile)
+
+Press **F** to open **Martial Forms**. This is the combat playstyle layer that mixes
+**Võ Lâm Truyền Kỳ combo routes** with **Path of Exile support gems**:
+
+* **Two Forms per class.** The starter Form (level 1) has a longer combo and **1 support link**.
+  The second Form unlocks at **level 6** with a shorter, burstier route and **2 support links**.
+* **Combo routes (Vo Lam).** Each Form lists a sequence of skill slots (e.g. Metal *Blade Dance*:
+  1 → 2 → 1 → 4). Cast them in order within a 5 s window; the HUD above the skill bar shows pips,
+  highlights the next skill, and names the next key. Completing the route triggers a **Finisher**:
+  +30–55% skill damage for 5 s (shown as `FINISHER` on the bar, with a gold popup). A wrong skill
+  or a timeout resets the meter.
+* **Support links (PoE).** Socket shared supports into the Form — *Added Firepower*, *Swift Forms*,
+  *Expanding Force*, *Venom Coating*, *Combustion*, *Blood Pact Link* (skills cost life instead of
+  mana), *Soul Siphon*, *Mountain Guard*, *Culling Strike*. Their mods use the same keys as the
+  passive web and gear, so `Stats.gather` + `Talents.skill_def_m` apply them automatically.
+* **Server-authoritative.** Form choice and supports are saved with the character. The server
+  validates unlock level, socket count and duplicates; combo / Finisher state is pushed to the owner.
+
+| Class | Starter Form | Ascendant Form (Lv 6) |
+|---|---|---|
+| Metal | Blade Dance (Kiếm Vũ) — Whirl, Pierce, Whirl, Cuts | Death Mark Form (Tử Ấn) — Pierce, Focus, Cuts |
+| Wood | Thorn Path (Gai Lộ) — Thorn, Roots, Thorn, Bloom | Grove Heart Form (Lâm Tâm) — Regrowth, Roots, Bloom |
+| Water | Frost Tide (Sương Triều) — Shard, Nova, Shard, Wave | Tideweaver (Triều Chức) — Rain, Nova, Wave |
+| Fire | Ember Cycle (Tàn Luân) — Fireball, Burst, Fireball, Meteor | Inferno Form (Hỏa Ngục) — Burst, Meteor, Inferno |
+| Earth | Stone March (Thạch Hành) — Slam, Stoneskin, Slam, Quake | Mountain Form (Sơn Thế) — Taunt, Stoneskin, Quake |
 
 ### Centre keystones (trade-offs)
 
@@ -897,7 +941,7 @@ Sunny Meadow and in every hideout (where the Trade Broker used to be). Press **E
 ### First-time tutorial
 New characters get a short overlay with 5 steps: **move** (WASD), **use a skill** (keys 1-4),
 **pick up loot** (a training drop appears at your feet), **equip gear** (I, then click an item) and **open the
-passive web** (T). Each step is completed by actually doing it. **Skip tutorial** ends it at once.
+passive web** (T), then **Martial Forms** (F). Each step is completed by actually doing it. **Skip tutorial** ends it at once.
 The result (`done`, `skipped`, or `legacy` for characters created before M2) is saved on the character, so
 the tutorial is shown **once per character**.
 
@@ -946,7 +990,7 @@ scripts/handshake.gd   Build version handshake: first RPC on join, mismatches re
 scripts/vendor.gd      NPC vendor rules: rotating stock roll, prices, save validation (preloaded, no class_name)
 scripts/vendor_server.gd Vendor server: persisted stock (vendor.json), rotation timer, buy / sell
 scripts/vendor_ui.gd   Vendor panel: stock list + buy, sell slot, rotation countdown
-scripts/tutorial_ui.gd First-time tutorial overlay (5 steps, skippable)
+scripts/tutorial_ui.gd First-time tutorial overlay (6 steps, skippable)
 tools/boss_trial.sh    Balance trial: one bot per class vs the first zone boss, prints the table
 tools/m2_screenshots.sh Regenerates docs/m2/*.png (needs a display)
 tools/stale_cache_check.sh Starts the game on a .godot cache from an older commit (git-pull regression check)
@@ -959,8 +1003,10 @@ scripts/player.gd      Player: input -> server, movement, combat, HP/mana/XP/lev
 scripts/classes.gd     The 5 classes (stats, growth, skills) and the element cycle / multipliers
 scripts/skill_caster.gd Server-side skill logic (checks, target validation/aiming, hit detection, effects)
 scripts/talents.gd      Passive web: node graph generation, allocation/refund rules, skill modifiers
-scripts/stats.gd        Central stat/modifier aggregation (passive web + gear affixes)
+scripts/stats.gd        Central stat/modifier aggregation (passive web + gear affixes + Form supports)
 scripts/talent_ui.gd    Passive web panel (T): pan/zoom view, tooltips, refund/reset
+scripts/forms.gd        Martial Forms: combo routes, Finisher, support link pool and sanitize rules
+scripts/form_ui.gd      Martial Forms panel (F): pick Form, socket supports
 scripts/fx.gd          Client-side skill visual effects (rings, bursts, roots, rain, meteor...)
 scripts/class_select_ui.gd  Class selection screen
 scripts/character_sheet.gd  Character sheet (C)
@@ -1104,8 +1150,9 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min,
 | W A S D / Arrow keys | Move |
 | Space | Basic attack (melee within ~56 px, or a bolt for Water/Fire) |
 | 1 2 3 4 | Use skill 1-4 (or click the skill bar) |
-| C | Character sheet (class, stats, skills, element cycle) |
+| C | Character sheet (class, stats, skills, element cycle, Martial Form) |
 | T | Passive web (drag to pan, wheel to zoom, click to allocate, right-click twice to refund) |
+| F | Martial Forms (combo routes + support links) |
 | Left-click | Select monster/player (empty ground clears) |
 | Right-click | Select monster and attack |
 | Tab | Cycle nearest enemies |
@@ -1214,7 +1261,7 @@ To re-export: install the 4.2.1 export templates (Editor → Manage Export Templ
 ## Next steps toward a real MMO
 
 Done so far: player HP/levels, loot & inventory, simple accounts with saving, real pixel art,
-four big 200x128 zones with monster groups and per-zone + distance interest management, 13 monster types and 3 bosses, five elemental
+four huge 360x224 zones with packs/nests/camps/hordes/elites/patrols and per-zone + distance interest management, 20 monster types and 3 bosses, five elemental
 classes with skills, mana, status effects and the element cycle.
 
 1. **Real accounts & database**: move login to a separate auth service (REST API, Argon2

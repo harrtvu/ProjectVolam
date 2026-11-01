@@ -116,6 +116,16 @@ func _process(_delta: float) -> void:
 	var total := Talents.points_total(player.level)
 	var spent := Talents.points_spent(player.talents)
 	lines.append("")
+	var factive := Forms.form(player.class_id, player.form_id)
+	if not factive.is_empty():
+		var fin: String = ""
+		if player.finisher_t > 0.0:
+			fin = "  Finisher +%d%% (%.1fs)" % [roundi(player.finisher_dmg), player.finisher_t]
+		lines.append("Martial Form (F): %s (%s)%s" % [factive["name"], factive["viet"], fin])
+		lines.append("Combo: %s  (step %d/%d)" % [Forms.combo_label(player.class_id, player.form_id), player.combo_step, (factive["combo"] as Array).size()])
+		var links := Forms.describe_supports(player.form_supports)
+		if not links.is_empty():
+			lines.append("Supports: " + "; ".join(links))
 	lines.append("Passive web (T): %d / %d points spent" % [spent, total])
 	var tnames: Array = []
 	for id in player.talents:

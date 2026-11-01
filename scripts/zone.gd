@@ -111,6 +111,8 @@ func setup(id: String, main_ref: Node) -> void:
 		br.kind = "vendor"
 		br.position = map.cell_pos(info["vendor"])
 		add_child(br)
+	if info.has("town") and not ho:
+		_spawn_town_signs()
 	if info.has("map_device"):
 		map_portal_root = Node2D.new()
 		map_portal_root.name = "MapPortals"
@@ -286,11 +288,12 @@ func _spawn_groups() -> void:
 	for i in specs.size():
 		var g: Dictionary = specs[i]
 		if g.get("core", false):
+			var town_r: Rect2i = info["town"]["rect"] if info.has("town") else Rect2i()
 			for k in int(g["n"]):
 				var cell := Vector2i(-1, -1)
-				for tries in 60:
+				for tries in 80:
 					var c := map.local_to_map(map.random_open_position(_rng, avoid_cells()))
-					if core.has_point(c):
+					if core.has_point(c) and not town_r.has_point(c):
 						cell = c
 						break
 				if cell.x >= 0:
@@ -326,7 +329,8 @@ func _make_group(spec_i: int, cell: Vector2i, lv: int) -> void:
 		var mlv := lv
 		var opts := {}
 		match kind:
-			"pack": t = types[0]
+			"pack", "nest": t = types[0]
+			"horde": t = types[k % types.size()]
 			"camp":
 				if k == 0:
 					mlv = lv + 2   # the camp leader
@@ -337,7 +341,8 @@ func _make_group(spec_i: int, cell: Vector2i, lv: int) -> void:
 				if k == 0:
 					opts["elite"] = Dungeons.ELITE_MODS[_rng.randi() % Dungeons.ELITE_MODS.size()]
 					mlv = lv + 1
-		var m: Node = spawn_monster(t, mlv, map.spot_near(cell, _rng, 44.0), grp["id"], false, opts)
+		var scatter := 28.0 if kind == "nest" else (56.0 if kind == "horde" else 44.0)
+		var m: Node = spawn_monster(t, mlv, map.spot_near(cell, _rng, scatter), grp["id"], false, opts)
 		m.group = grp
 		m.patrol = kind == "patrol"
 		grp["members"].append(m)
@@ -796,7 +801,64 @@ class PortalVisual extends Node2D:
 			draw_circle(p, 2.5, Color(0.9, 0.8, 1.0, 0.8))
 
 
-# ---------------------------------------------------------------- blacksmith station (Sunny Meadow)
+# ---------------------------------------------------------------- Sunnyhaven town signs
+
+## Gate signs + a big central plaque at the crossroads so the town is obvious on spawn.
+func _spawn_town_signs() -> void:
+	var town: Dictionary = info["town"]
+	var r: Rect2i = town["rect"]
+	var tname := str(town.get("name", "Town"))
+	for spec in [
+		[Vector2i(r.end.x - 1, r.position.y + r.size.y / 2), "east", "%s\n← town   wilds →" % tname],
+		[Vector2i(r.position.x, r.position.y + r.size.y / 2), "west", "← wilds   %s →\ntown" % tname],
+		[info["respawn"] + Vector2i(0, -2), "center", "%s\nStarter Town" % tname],
+	]:
+		var s := TownSignVisual.new()
+		s.position = map.cell_pos(spec[0])
+		s.side = str(spec[1])
+		s.text = str(spec[2])
+		s.big = spec[1] == "center"
+		add_child(s)
+
+
+class TownSignVisual extends Node2D:
+	var side := "east"
+	var text := "Town"
+	var big := false
+	var _t := 0.0
+
+	func _ready() -> void:
+		NetUtil.cull_offscreen(self, 220.0 if big else 160.0)
+		z_index = 1 if big else 0
+		var l := Label.new()
+		l.text = text
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.size = Vector2(220 if big else 160, 40 if big else 36)
+		l.position = Vector2((-110 if big else -80), (-70 if big else -48))
+		l.add_theme_font_size_override("font_size", 18 if big else 11)
+		l.add_theme_color_override("font_color", Color(1.0, 0.92, 0.65))
+		l.add_theme_color_override("font_outline_color", Color.BLACK)
+		l.add_theme_constant_override("outline_size", 6 if big else 4)
+		add_child(l)
+
+	func _process(delta: float) -> void:
+		_t += delta
+		queue_redraw()
+
+	func _draw() -> void:
+		var pole_h := 34.0 if big else 28.0
+		var board := Rect2(-36 if big else -22, -52 if big else -36, 72 if big else 44, 28 if big else 22)
+		draw_set_transform(Vector2(0, 10), 0.0, Vector2(1.0, 0.35))
+		draw_circle(Vector2.ZERO, 28.0 if big else 22.0, Color(0, 0, 0, 0.18))
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		draw_rect(Rect2(-5 if big else -4, -pole_h + 10.0, 10 if big else 8, pole_h), Color(0.45, 0.28, 0.12))
+		draw_rect(board, Color(0.45, 0.16, 0.1))
+		draw_rect(board.grow(-2), Color(0.78, 0.32, 0.16))
+		var pulse := 0.55 + 0.25 * sin(_t * 2.2)
+		draw_circle(Vector2(0, board.position.y + board.size.y * 0.45), 4.0 if big else 3.0, Color(1.0, 0.85, 0.35, pulse))
+		if big:
+			draw_arc(Vector2.ZERO, 40.0 + 3.0 * sin(_t * 1.6), 0.0, TAU, 40, Color(1.0, 0.85, 0.4, 0.35), 2.0)
+
 
 # ---------------------------------------------------------------- dungeon entrance safe area
 
