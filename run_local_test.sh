@@ -2,9 +2,9 @@
 # Headless end-to-end test of Project Volam (dedicated server + bot clients).
 #   Phase 1: fresh save. Bot1/Bot2 level up on meadow slimes; Bot1 walks
 #            meadow -> forest -> meadow through the portals, Bot2 walks to the forest
-#            and stays there (zone + position saved on logout).
-#   Phase 2: server restarted on the same save: restore (incl. zone), wrong password,
-#            duplicate login, passive bot gets defeated and respawns.
+#            and stays there (logout still records progress; next login is Sunnyhaven).
+#   Phase 2: server restarted on the same save: restore in Sunnyhaven (PoE-style town
+#            start), wrong password, duplicate login, passive bot gets defeated and respawns.
 #   Classes: every new account picks a class (bots via --class); between phases 1
 #            and 2 an "old" pre-class account is injected into the save to check the
 #            one-time class prompt. Bots cycle through all 4 skill slots without local
@@ -337,7 +337,8 @@ echo; echo "== Zones"
 check "meadow -> forest (Bot1)"     "Zone transfer: Bot1 meadow -> forest"   p1_server.log
 check "forest -> meadow (Bot1)"     "Zone transfer: Bot1 forest -> meadow"   p1_server.log
 check "client sees zone banner"     "Entered zone forest"                    p1_bot1.log
-check "zone saved + restored"       "Login 'Bot2'.*restored save.*zone forest" p2_server.log
+check "login always returns to Sunnyhaven"  "Login 'Bot2'.*restored save.*zone meadow" p2_server.log
+check "login from wilds announces town"     "Login 'Bot2': entering Sunnyhaven \\(last zone was forest\\)" p2_server.log
 for t in "meadow -> forest" "forest -> crypt" "crypt -> frost" "frost -> crypt" "crypt -> forest" "forest -> meadow"; do
   check "walker $t"                 "Zone transfer: Walker $t"               p3_server.log
 done
@@ -361,9 +362,9 @@ for kind in camp elite nest horde; do
 done
 if grep -qhE "group #[0-9]+ [a-z]+ of .* respawned at .*: [2-9][0-9]* members" $L/*server.log; then echo "PASS  groups respawn together ($(cat $L/*server.log | grep -cE "group #[0-9]+ .* respawned at") group respawns)"; else echo "FAIL  groups respawn together"; fi
 check "elite group leader in the overworld"  "◆ |(Hasted|Armoured|Brutal|Regenerating) [A-Za-z ]+\(Lv[0-9]+\) was slain"   p3_server.log
-check "old save: position shifted into the big map" "Login 'Oldtown': old-map position \(1136, 592\) in meadow shifted to \(5488, 2000\)" p2_server.log
-check "old save: restored at the shifted spot"      "Login 'Oldtown' .*zone meadow, pos \(5488, 2000\)"                               p2_server.log
-check "invalid saved position relocated"            "Login 'Lost': saved position \(99999, -320\) is not a valid spot in crypt - relocated" p2_server.log
+check "old save logs into Sunnyhaven"               "Login 'Oldtown' .*restored save.*zone meadow"                                 p2_server.log
+check "wild/invalid last zone still starts in town" "Login 'Lost': entering Sunnyhaven \\(last zone was crypt\\)"                  p2_server.log
+check "Lost lands in meadow town"                   "Login 'Lost' .*zone meadow"                                                   p2_server.log
 if grep -hE "\] perf: " $L/p3_server.log $L/p4_server.log | awk '{for(i=1;i<=NF;i++){if($i=="monsters,"){t=$(i-1)} if($i=="awake"){a=$(i-1)}} if(a<t) ok=1} END{exit !ok}'; then echo "PASS  interest management: far monsters sleep ($(grep -hE "\] perf: " $L/p3_server.log | tail -1 | sed -E 's/.*perf: //'))"; else echo "FAIL  interest management"; fi
 for f in p11_bench_entrance p11_bench_lair; do
   l=$(grep -h "^BENCH zone=forest" $L/$f.log | head -1)

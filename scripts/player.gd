@@ -708,6 +708,8 @@ func equip_summary() -> String:
 	return "{%s}" % ", ".join(parts)
 
 
+## Saved stand position. Hideout keeps its own spot; everywhere else login ignores this and uses
+## the Sunnyhaven plaza (PoE-style). Dungeon logout still records the town arrival cell.
 func _save_pos() -> Array:
 	if zone and Zones.is_hideout(zone.zone_id):
 		return [position.x, position.y]
@@ -717,6 +719,7 @@ func _save_pos() -> Array:
 	return [position.x, position.y]
 
 
+## Last activity zone (for the login log). Login itself only reopens "hideout" or Sunnyhaven.
 func _save_zone() -> String:
 	if zone == null or zone.is_dungeon():
 		return "meadow"
@@ -731,8 +734,8 @@ func to_character() -> Dictionary:
 		"class": class_id,
 		"hp": max_hp if dead else hp,
 		"mp": mp,
-		"pos": _save_pos(), "map_v": Zones.MAP_VERSION,   # positions are in big-map coordinates
-		"zone": _save_zone(),   # never log back in inside a dungeon; "hideout" reopens your hideout
+		"pos": _save_pos(), "map_v": Zones.MAP_VERSION,
+		"zone": _save_zone(),   # remembered for logs; login always opens Sunnyhaven (or hideout)
 		"hideout": hideout.duplicate(true),
 		"gold": gold, "inventory": inventory.duplicate(),
 		"equipment": equipment.duplicate(true), "bag": bag.duplicate(true), "stash": stash.duplicate(true), "items_v": 2,

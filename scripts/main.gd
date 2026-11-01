@@ -989,29 +989,29 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	var acc := accounts.get_account(pname)
 	var display: String = str(acc.get("name", pname))
 	var character: Dictionary = acc.get("character", {})
-	var zone_id := str(character.get("zone", "meadow"))
+	var last_zone := str(character.get("zone", "meadow"))
 	instances.sync_peer(id)   # open dungeon zones must exist on this peer before anyone could see them
 	hideouts.sync_peer(id)
-	if zone_id == "hideout":   # logged out in the hideout: reopen it and restore there
+	# PoE-style: every login lands in town (Sunnyhaven). Hideout is the only other hub you can
+	# log back into — never resume mid-wilds / mid-dungeon from a saved overworld position.
+	var zone_id := "meadow"
+	var pos: Vector2
+	if last_zone == "hideout":
 		zone_id = hideouts.ensure(peer_accounts[id], display, Hideouts.sanitize(character.get("hideout", {})))
+		var z_ho: Node = zones[zone_id]
+		pos = z_ho.map.spot_near(z_ho.info["respawn"], rng)
+		var saved_ho = character.get("pos", null)
+		if typeof(saved_ho) == TYPE_ARRAY and saved_ho.size() == 2:
+			var hp := Vector2(float(saved_ho[0]), float(saved_ho[1]))
+			if z_ho.map.is_reachable(z_ho.map.local_to_map(hp)):
+				pos = hp
 		_log("Login '%s': restoring into the hideout %s" % [display, zone_id])
-	elif not Zones.exists(zone_id) or Zones.is_dungeon(zone_id) or Zones.is_hideout(zone_id):   # never log back in inside an instance
-		zone_id = "meadow"
+	else:
+		var z_town: Node = zones["meadow"]
+		pos = z_town.map.spot_near(z_town.info["respawn"], rng)
+		if last_zone != "meadow" and last_zone != "":
+			_log("Login '%s': entering Sunnyhaven (last zone was %s)" % [display, last_zone])
 	var z: Node = zones[zone_id]
-	var pos: Vector2 = z.map.spot_near(z.info["respawn"], rng)
-	var saved_pos = character.get("pos", null)
-	if typeof(saved_pos) == TYPE_ARRAY and saved_pos.size() == 2:
-		var p := Vector2(float(saved_pos[0]), float(saved_pos[1]))
-		var mv := int(character.get("map_v", 1))
-		if Zones.DB.has(zone_id) and mv < Zones.BIGMAP_SINCE:   # saved on the original 64x40 maps
-			var moved := Zones.migrate_pos(zone_id, p, mv)
-			_log("Login '%s': old-map position %s in %s shifted to %s (map v%d -> v%d)" % [display, p.round(), zone_id, moved.round(), mv, Zones.MAP_VERSION])
-			p = moved
-		if z.map.is_reachable(z.map.local_to_map(p)) and z.portal_at(p).is_empty():
-			pos = p
-		else:
-			pos = z.map.nearest_reachable_pos(p, z.info["respawn"])
-			_log("Login '%s': saved position %s is not a valid spot in %s - relocated to %s" % [display, p.round(), zone_id, pos.round()])
 	if acc.has("stash"):   # account-wide shared stash (older saves kept it on the character)
 		character = character.duplicate()
 		character["stash"] = acc["stash"]

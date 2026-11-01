@@ -29,7 +29,7 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 | Inventory & blacksmith | **I** opens a 40-slot bag with a paper-doll equipment panel. You can click or drag to equip, shift-click or drag onto *Drop* to drop, and ctrl-click twice or drag onto *Destroy* to destroy. Currency stacks. Tooltips compare with what you're wearing. The **blacksmith** (anvil in Sunny Meadow, press **E** next to it) has the crafting/enhancement panel, a vendor, and a 40-slot **account-wide stash**. Potions: click to drink, or **Q**. |
 | NPC vendor | The **Vendor** in Sunny Meadow (and in every hideout) buys your loot for gold and sells potions, orbs and a rotating gear stock (every 2 h and every day). Stock persists across restarts. See [Milestone 2](#milestone-2-solo-play-parties-npc-vendor-tutorial-balance). |
 | Hideout | A private, per-account hideout (Path of Exile style) with its own **Map Device, Ticket Merchant, Vendor and blacksmith + stash**. Enter it through the **Hideout Master** in Sunny Meadow, the `/hideout` chat command or **Esc > Hideout**; leave through the door. Buy Kenney CC0 decorations with gold (or find them in dungeons), place / move / rotate / flip / remove them on a grid in **decoration mode (H)**, move the stations, and pick one of six themes unlocked by Atlas Guardians. See [Hideout](#hideout-path-of-exile-style). |
-| Accounts & saving | The first login with a name creates the account. The password is stored as SHA-256(random salt + password) using `HashingContext`. Later logins need the same password, and an account can't be logged in twice at once. The server saves level, XP, HP, **zone**, position, currency stacks, gold, every item instance (equipped, bag, and the account-wide stash) to JSON on disconnect, on every zone change, every 30 s, and on shutdown, then restores it on the next login (you come back in the zone you left). |
+| Accounts & saving | The first login with a name creates the account. The password is stored as SHA-256(random salt + password) using `HashingContext`. Later logins need the same password, and an account can't be logged in twice at once. The server saves level, XP, HP, currency stacks, gold, every item instance (equipped, bag, and the account-wide stash) to JSON on disconnect, on every zone change, every 30 s, and on shutdown. **Login always starts you in Sunnyhaven** (Path of Exile style) — or in your hideout if you logged out there. Wild / dungeon positions are never resumed. |
 | Chat | Global. **Enter** to type, Enter to send, **Esc** to cancel. The server stamps the sender's zone and name (`[Forest] Harry: hi`). Join/leave/level-up/defeat/boss messages show up in yellow. |
 | Web support | Browsers can't use ENet, so the server can also run in WebSocket mode (`--ws`), and the web build uses WebSockets automatically. |
 
@@ -144,14 +144,18 @@ players (cyan), portals (purple), town NPCs (yellow), camps (orange), elite circ
 and the monsters you can see (red dots). The terrain is a 1-pixel-per-tile image of the zone's TileMap, so it
 always matches the map size. The camera limits come from the map size too.
 
+### Login hub (Path of Exile style)
+
+Every character enters the game in **Sunnyhaven** (meadow town plaza). Logging out in the wilds, a dungeon, or
+another overworld zone still brings you back to town next time — the last wild zone is only remembered in the
+login log (`entering Sunnyhaven (last zone was forest)`). The one exception is your **hideout**: leave there
+and you log back into the hideout.
+
 ### Old saves
 
-Characters saved before the big maps have no `map_v` in their save, so their position is in old 64×40 coordinates.
-On login it's shifted by the zone's core offset, which puts them on the same spot of the same landmark (the log says
-`old-map position ... shifted to ...`). Any saved position that isn't on a reachable tile (outside the map, inside a
-wall, stuck in an unreachable pocket) is moved to the nearest reachable tile (`saved position ... relocated to ...`).
-New saves store `"map_v": 3` (360×224). map_v 2 characters keep their town / portal coords; only map_v 1
-(the original 64×40) is shifted into the core on login.
+Characters saved before the big maps have no `map_v` in their save. Town cores keep the same anchors across
+200×128 → 360×224 growth (`map_v` 3). Offline `--bigmap-selftest` still checks that a 64×40 coordinate shifted
+by the core offset lands on a reachable town tile; login itself always uses the Sunnyhaven plaza.
 
 ## Classes & the five elements
 
