@@ -89,6 +89,7 @@ var combo_step: int = 0          # next index in the Form's combo route
 var combo_t: float = 0.0         # seconds left to continue the combo
 var finisher_t: float = 0.0      # seconds left on the Finisher damage buff
 var finisher_dmg: float = 0.0    # % skill damage from the completed combo
+var gm_god := false              # server: /gm god — skip incoming damage (testing)
 
 var _input_dir := Vector2.ZERO        # server: latest input from owner
 var _last_sent := Vector2(INF, INF)   # owner: last input sent
@@ -776,6 +777,8 @@ func incoming_damage(amount: int, src_element: String) -> int:
 
 func server_take_damage(amount: int, source: String, src_element: String = "", attacker: Node = null) -> void:
 	if dead:
+		return
+	if gm_god:
 		return
 	if attacker and is_instance_valid(attacker):
 		_first_pack_engaged(attacker)
