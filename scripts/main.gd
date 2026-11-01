@@ -1,5 +1,6 @@
 extends Node2D
 const Vendor := preload("res://scripts/vendor.gd")
+const GMScript := preload("res://scripts/gm.gd")
 ## Project Volam - root of the game.
 ## One scene handles everything: main menu, world, networking, accounts, chat and HUD.
 ##
@@ -13,6 +14,8 @@ const Vendor := preload("res://scripts/vendor.gd")
 ##   --ws                use WebSockets instead of ENet (needed for web clients)
 ##   --save-file=PATH    server: where accounts are saved (default user://volam_save/accounts.json)
 ##   --vendor-rotate=SECS  server: vendor stock rotation period (default 2h; stock saved to vendor.json / X_vendor.json beside --save-file=X.json)
+##   --gm=Name1,Name2    server: extra Game Master account names (defaults always include gm, gamemaster, admin)
+##   --bot-gm            bot: after login run /gm kit, gold, heal, god, warp (smoke-test GM cheats)
 ##   --debug-loot        server: much higher gear drop rates (testing)
 ##   --debug-start-level=N  server: brand-new accounts start at level N (testing high zones)
 ##   --fast-respawn      server: monsters/bosses respawn 10x faster (testing)
@@ -179,6 +182,8 @@ var _ba := 0
 var _ba_t := 0.0
 var _open_map_ui := ""
 var bot_idle := false     # test/screenshots: bot stands still and does nothing
+var bot_gm := false        # test: run /gm cheat smoke script after login
+var _bot_gm_step := 0
 var bot_passive := false   # test: bot never attacks (so it gets defeated)
 var bot_dir := Vector2.ZERO
 var bot_class := ""        # --class=fire: class a bot picks when asked
@@ -232,6 +237,9 @@ var save_file := DEFAULT_SAVE_FILE
 var debug_loot := false
 var loot_showcase := false         # server: drop a rarity showcase in the meadow (screenshots)
 var debug_gear := false            # server: debug accounts get a crafting kit (orbs, gold, items)
+## Account names (lowercase) that may use /gm chat cheats. Defaults: gm, gamemaster, admin.
+## Add more with --gm=Name1,Name2. Solo: name the hero "gm" (display-name fallback).
+var gm_names := {"gm": true, "gamemaster": true, "admin": true}
 var debug_level_for := {}          # server (tests): --debug-level-for=MetalA:22,... start level per new account (overrides --debug-start-level)
 var debug_fresh := ""              # server: accounts whose name starts with this skip --debug-start-level (fresh Lv1)
 var debug_full_bag := ""           # server: accounts whose name starts with this get a full bag
@@ -475,9 +483,12 @@ func _parse_args() -> void:
 				opts[kv[0].uri_decode()] = kv[1].uri_decode() if kv.size() > 1 else "true"
 	var port := int(opts.get("port", str(DEFAULT_PORT)))
 	use_ws = opts.has("ws") or OS.has_feature("web")
-	bot_mode = opts.has("bot") or opts.has("bot-passive")
+	bot_mode = opts.has("bot") or opts.has("bot-passive") or opts.has("bot-gm")
 	bot_passive = opts.has("bot-passive") or opts.has("bot-idle")
 	bot_idle = opts.has("bot-idle")
+	bot_gm = opts.has("bot-gm")
+	if bot_gm:
+		bot_idle = true   # stand still while firing /gm commands
 	instance_timeout = float(opts.get("instance-timeout", "0"))
 	debug_real_kit = opts.has("debug-real-kit")
 	complete_timeout = float(opts.get("complete-timeout", "0"))
@@ -528,6 +539,12 @@ func _parse_args() -> void:
 	_open_atlas_arg = str(opts.get("open-atlas", ""))
 	debug_loot = opts.has("debug-loot")
 	debug_gear = opts.has("debug-gear")
+	if opts.has("gm") and str(opts["gm"]) != "true":
+		for n in str(opts["gm"]).split(",", false):
+			var key := n.strip_edges().to_lower()
+			if key != "":
+				gm_names[key] = true
+		_log("GM accounts: %s" % [gm_names.keys()])
 	loot_showcase = opts.has("loot-showcase")
 	debug_full_bag = str(opts.get("debug-full-bag", ""))
 	debug_fresh = str(opts.get("debug-fresh", ""))
@@ -1025,6 +1042,11 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	if node:
 		node.account_key = peer_accounts[id]
 		_push_inventory_later(node)
+		if GMScript.is_gm(self, node):
+			get_tree().create_timer(0.5).timeout.connect(func():
+				if is_instance_valid(node) and not node.is_queued_for_deletion():
+					node.notify("Game Master online. Type /gm for cheat commands (kit, gold, item, warp…).", true))
+			_log("Login '%s': Game Master privileges enabled" % display)
 		if node.tutorial == "pending":
 			_log("[tutorial] %s: starting the tutorial (new character)" % display)
 			get_tree().create_timer(0.4).timeout.connect(_send_tutorial.bind(weakref(node)))   # right after spawn, before the first keypress
@@ -1395,6 +1417,8 @@ func submit_chat(text: String) -> void:
 		return
 	var node := _player_node(id)
 	if node and text.begins_with("/") and parties.chat_command(node, text):
+		return
+	if node and GMScript.chat_command(self, node, text):
 		return
 	if node and text.to_lower() == "/hideout":
 		hideouts.enter(node)
@@ -2243,7 +2267,7 @@ func _update_hud(delta: float) -> void:
 	var here := 0
 	if zones.has(_shown_zone):
 		here = zones[_shown_zone].players_root.get_child_count()
-	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  F forms  N map  P party\nEnter chat   /invite NAME = party" % here
+	info_label.text = "Players here: %d\nWASD move  Space attack  1-4 skills  Q potion\nClick/Tab target  E pick up  Esc menu / help\nI inventory  C character  T passive  F forms  N map  P party\nEnter chat   /invite NAME = party   /gm = cheats (GM)" % here
 	_hud_declutter()
 	_place_npc_labels()
 	if me == null:
@@ -3757,6 +3781,9 @@ func _bot_update(delta: float) -> void:
 	if bot_vendor != "":
 		_bot_vendor(me, zone, delta)
 		return
+	if bot_gm:
+		_bot_gm_script(me, delta)
+		return
 	if bot_idle:
 		bot_dir = Vector2.ZERO
 		if _ui_walk_goal != null and me.position.distance_to(_ui_walk_goal) > 6.0:   # UI selftest walks somewhere
@@ -3847,6 +3874,71 @@ func _bot_update(delta: float) -> void:
 	if not _bot_chatted and _elapsed > 3.0:
 		_bot_chatted = true
 		send_chat("Hello from %s!" % local_name)
+
+
+## Smoke-test Game Master chat cheats (login as gm / --gm=YourName).
+func _bot_gm_script(me: Node, _delta: float) -> void:
+	bot_dir = Vector2.ZERO
+	if _elapsed < 2.0:
+		return
+	match _bot_gm_step:
+		0:
+			_log("gm bot: requesting help")
+			send_chat("/gm")
+			_bot_gm_step = 1
+		1:
+			if _elapsed < 2.5:
+				return
+			send_chat("/gm kit")
+			_bot_gm_step = 2
+		2:
+			if _elapsed < 3.2:
+				return
+			send_chat("/gm gold 5000")
+			_bot_gm_step = 3
+		3:
+			if _elapsed < 3.8:
+				return
+			send_chat("/gm heal")
+			_bot_gm_step = 4
+		4:
+			if _elapsed < 4.4:
+				return
+			send_chat("/gm god")
+			_bot_gm_step = 5
+		5:
+			if _elapsed < 5.0:
+				return
+			send_chat("/gm item iron_sword rare 15")
+			_bot_gm_step = 6
+		6:
+			if _elapsed < 5.6:
+				return
+			send_chat("/gm unique frostbrand")
+			_bot_gm_step = 7
+		7:
+			if _elapsed < 6.2:
+				return
+			send_chat("/gm stack orb_chaos 5")
+			_bot_gm_step = 8
+		8:
+			if _elapsed < 6.8:
+				return
+			_log("gm bot: state gold=%d level=%d bag=%d god=%s inventory_chaos=%s" % [
+				me.gold, me.level, me.bag.size(), me.gm_god, me.inventory.get("orb_chaos", 0)])
+			send_chat("/gm warp forest")
+			_bot_gm_step = 9
+		9:
+			if _elapsed < 8.0:
+				return
+			var zid := ""
+			if me.zone:
+				zid = str(me.zone.zone_id)
+			_log("gm bot finished: zone=%s gold=%d level=%d bag=%d god=%s" % [
+				zid, me.gold, me.level, me.bag.size(), me.gm_god])
+			_bot_gm_step = 10
+		_:
+			pass
 
 
 ## Balance-trial bot: the skill a sensible player would press now (ready, affordable, unlocked,
