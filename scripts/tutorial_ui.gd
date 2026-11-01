@@ -1,14 +1,14 @@
 extends PanelContainer
 ## First-time tutorial for a new character (shown once; the server saves the flag).
-## Six steps, each finished by doing it: move, use a skill (1-4), pick up loot (E),
+## Six steps, each finished by doing it: move (click / arrows), use a skill (QWER), pick up loot (V),
 ## equip it (I), open the passive web (T), open Martial Forms (F). "Skip tutorial" ends it at any time.
 
 signal finished(skipped: bool)
 
 const STEPS := [
-	["Move", "Walk around with  W A S D  (or the arrow keys)."],
-	["Skills", "Use a skill with the keys  1 2 3 4  (the bar at the bottom). Skills target the monster you clicked, else the cursor."],
-	["Loot", "A helmet dropped next to you. Walk onto it and press  E  to pick it up."],
+	["Move", "Click the ground to walk there (or use the arrow keys)."],
+	["Skills", "Use a skill with  Q W E R  (the bar at the bottom). Skills target the monster you clicked, else the cursor."],
+	["Loot", "A helmet dropped next to you. Walk onto it and press  V  to pick it up."],
 	["Equip gear", "Press  I  to open your bag and click the helmet to equip it."],
 	["Passive web", "Press  T  to open the passive web. You get 1 point per level - spend them on connected nodes."],
 	["Martial Forms", "Press  F  to open Martial Forms. Cast skills in the combo order for a Finisher, and socket PoE-style support links."],

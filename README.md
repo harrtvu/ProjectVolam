@@ -18,11 +18,11 @@ A small, working **multiplayer top-down 2D RPG prototype** – the seed of an MM
 |---|---|
 | Host / Join / Dedicated server | One project. The main menu has *Account name*, *Password*, *Server address* (default `127.0.0.1`), **Host (listen server)** and **Join**. Run with `--server` for a headless dedicated server. ENet (UDP) on port **7777**. |
 | World & zones | Four huge open-world zones, each a **360×224** tile map (32 px tiles, ~31.5× the area of the original 64×40 maps) built from Kenney's CC0 pixel art from a fixed seed, so every machine builds the same maps: **Sunny Meadow** (starter town + wilds), **Whisperwood Forest**, **Bone Crypt** and **Frostpeak Ruins**. Monsters live in **groups** (packs, nests, camps, hordes, elite packs, patrols, boss guards) that get tougher the farther you go from the zone entrance; a **minimap** and a full zone map (**N**) keep you oriented. Glowing portals at map edges link the zones. A banner shows the zone name when you enter, and the HUD always shows the current zone. Walls, water, trees, tombs and rocks have collision. See [Zones](#zones). |
-| Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on keys **1-4**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
+| Five elemental classes | Metal, Wood, Water, Fire and Earth (Wu Xing / Ngũ Hành), each with its own stats, growth, sprite, starting kit, basic attack and 4 skills on **Q W E R**. You pick one on a class selection screen at your first login. The element cycle changes damage between players and monsters. See [Classes](#classes--the-five-elements). |
 | Mouse targeting | Left-click a monster (or an ally, for heals) to select it: a ring appears under it and a target frame shows its name, level, element, HP and status effects. **Tab** cycles enemies, clicking empty ground clears it. Skills use the target, otherwise the cursor (directional skills fly toward it, Meteor/Roots land on it with a range/area preview), otherwise the nearest monster. The server validates the target, zone, range and line of sight. See [Mouse targeting](#mouse-targeting). |
 | Passive web | One shared Path-of-Exile-style web of 175 nodes. Class starts sit on the five-element pentagon, with small/notable/keystone nodes, an adjacency rule, 1 point per level (retroactive), per-node refund and full reset for gold, and farming stats (item quantity/rarity, gold, leech, attack/cast speed, damage vs element). All bonuses flow through one stat aggregator that gear affixes can plug into. See [Passive web](#passive-web-shared-path-of-exile-style). |
 | Martial Forms (Vo Lam × PoE) | Press **F**. Each class has two **Martial Forms** (chiêu thức): a Vo Lam-style **combo route** of skill slots and 1–2 PoE-style **support link** sockets. Cast skills in order to fill the combo meter above the skill bar; completing the route triggers a **Finisher** (+% skill damage for a few seconds). Socket supports (Added Firepower, Swift Forms, Expanding Force, Blood Pact, Culling Strike, …) to reshape every skill — same modifier keys as the passive web and gear. Second Form unlocks at level 6 with two links. See [Martial Forms](#martial-forms-vo-lam--path-of-exile). |
-| Players | WASD / arrows to move. The camera follows you, and the sprite flips and waddles while walking. A name + level label and an HP bar float over each head. **Server-authoritative**: clients send only input; the server moves everyone and replicates the results with `MultiplayerSynchronizer`/`MultiplayerSpawner`. |
+| Players | **Click the ground to move** (A* pathfinding) or use the arrow keys. The camera follows you, and the sprite flips and waddles while walking. A name + level label and an HP bar float over each head. **Server-authoritative**: clients send only input; the server moves everyone and replicates the results with `MultiplayerSynchronizer`/`MultiplayerSpawner`. |
 | Monsters & bosses | 13 regular monster types plus 3 zone bosses in walled lairs at the far end of their zones, with different behaviours (packs, erratic flyers, lunges, ranged archers, wall-phasing ghosts, armored brutes). Stats and XP scale with monster level, and the name + level float over each head. Every non-starter zone has a boss with a special attack, a big HP bar, chat announcements and guaranteed loot. See [Monsters](#monsters). |
 | Health, death, XP, levels | Monsters chase nearby players and hit them (damage reduced by armor). At 0 HP you become a tombstone and respawn at the current zone's entrance after 4 s with full HP. You slowly regenerate when out of combat. XP per kill = 6 + 4 × monster level (bosses 100 + 20 × level), shared by everyone who hit it. Levelling (20 × level XP per level) raises your stats by your class's growth rates, refills HP and mana, unlocks skills at levels 3/6/10, and announces it in chat. The HUD shows HP/mana/XP bars, class, ATK/DEF, gold, zone and the skill bar. |
 | Gear & loot (PoE × Vo Lam) | Ten equipment slots (weapon, off-hand, helmet, body, gloves, boots, belt, amulet, 2 rings). Every piece of gear is an **item instance** with a rarity (Normal / Magic / Rare / Unique), rolled prefixes/suffixes gated by item level, and an enhancement level +0..+10. 12 uniques (5 boss uniques + 7 element-themed world uniques). Monster and player **item quantity / rarity** feed the drop rolls. Six crafting orbs and Vo Lam enhancement stones drop from monsters. Ground loot has rarity-coloured labels and beams, with a flash + chime for rares/uniques. Overview: [Gear, loot & crafting](#gear-loot--crafting). Full PoEDB-style tables (bases, uniques, drop rates, affixes, currency weights): **[docs/items.md](docs/items.md)**. |
@@ -960,8 +960,8 @@ Sunny Meadow and in every hideout (where the Trade Broker used to be). Press **E
   changes the rotation period.
 
 ### First-time tutorial
-New characters get a short overlay with 5 steps: **move** (WASD), **use a skill** (keys 1-4),
-**pick up loot** (a training drop appears at your feet), **equip gear** (I, then click an item) and **open the
+New characters get a short overlay: **move** (click the ground / arrow keys), **use a skill** (**Q W E R**),
+**pick up loot** (**V**; a training drop appears at your feet), **equip gear** (I, then click an item), **open the
 passive web** (T), then **Martial Forms** (F). Each step is completed by actually doing it. **Skip tutorial** ends it at once.
 The result (`done`, `skipped`, or `legacy` for characters created before M2) is saved on the character, so
 the tutorial is shown **once per character**.
@@ -1172,18 +1172,19 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min,
 
 | Key | Action |
 |---|---|
-| W A S D / Arrow keys | Move |
+| Left-click ground | Move there (A* pathfinding; green marker shows the destination) |
+| Arrow keys | Move (cancels an active click path) |
 | Space | Basic attack (melee within ~56 px, or a bolt for Water/Fire) |
-| 1 2 3 4 | Use skill 1-4 (or click the skill bar) |
+| Q W E R | Use skill 1–4 (or click the skill bar) |
+| Hold Q/W/E/R | Ground skills: aim preview at the cursor, cast on release |
 | C | Character sheet (class, stats, skills, element cycle, Martial Form) |
 | T | Passive web (drag to pan, wheel to zoom, click to allocate, right-click twice to refund) |
 | F | Martial Forms (combo routes + support links) |
-| Left-click | Select monster/player (empty ground clears) |
+| Left-click target | Select monster/player |
 | Right-click | Select monster and attack |
 | Tab | Cycle nearest enemies |
 | Esc | Close the topmost open panel (vendor, Map Device/merchant, atlas, blacksmith, passive web, character sheet, inventory); with nothing open, open/close the in-game menu |
-| Hold 1-4 | Ground skills: aim preview at the cursor, cast on release |
-| E | Pick up the nearest item (walking over items also picks them up). Next to the blacksmith anvil: open the blacksmith panel. Next to the Map Device / Ticket Merchant: open the dungeon panel |
+| V | Pick up the nearest item (walking over items also picks them up). Next to the blacksmith anvil: open the blacksmith panel. Next to the Map Device / Ticket Merchant: open the dungeon panel |
 | M | Atlas (map of dungeon nodes + atlas passive tree) |
 | N | Zone map (big map of the current zone; the minimap is always in the top-right corner) |
 | F3 | FPS overlay (FPS, frame ms, monsters received by this client, node count); off by default |
@@ -1195,7 +1196,7 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min,
 | Shift-click / Ctrl-click ×2 | Drop an item on the ground / destroy it |
 | Right-click an orb, then click an item | Use a crafting orb anywhere (enhancement stones only at the blacksmith) |
 | Hover an item | Tooltip with affixes, requirements, sell value and a comparison with the equipped item |
-| Q | Drink a health potion |
+| 1 | Drink a health potion |
 | Enter | Open chat / send message |
 | Esc (while typing) | Cancel chat |
 

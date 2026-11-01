@@ -8,10 +8,11 @@ extends Control
 signal closed
 
 const CONTROLS := [
-	["W A S D / Arrows", "Move"], ["Space", "Basic attack"], ["1 2 3 4 (hold = aim ground skills)", "Skills"],
-	["Left-click", "Select target (empty ground clears it)"], ["Right-click", "Select monster and attack"],
-	["Tab", "Cycle nearest enemies"], ["E", "Pick up / blacksmith / Map Device / merchant / vendor"],
-	["Q", "Drink a health potion"], ["I", "Inventory"], ["C", "Character sheet"], ["T", "Passive web"],
+	["Left-click ground / Arrow keys", "Move (click-to-move pathfinds; arrows cancel a click path)"],
+	["Space", "Basic attack"], ["Q W E R (hold = aim ground skills)", "Skills"],
+	["Left-click target", "Select monster/player"], ["Right-click", "Select monster and attack"],
+	["Tab", "Cycle nearest enemies"], ["V", "Pick up / blacksmith / Map Device / merchant / vendor"],
+	["1", "Drink a health potion"], ["I", "Inventory"], ["C", "Character sheet"], ["T", "Passive web"],
 	["F", "Martial Forms (Vo Lam combos + PoE support links)"],
 	["N", "Zone map"], ["M", "Atlas"], ["P", "Party panel"], ["H", "Hideout panel / decoration mode (in your hideout)"], ["Enter", "Chat (Esc cancels)"], ["Esc", "Close the topmost panel, else this menu"],
 	["/invite NAME", "Chat: invite a player to your party (or the target frame's button)"], ["/accept  /decline", "Chat: answer a party invite"],

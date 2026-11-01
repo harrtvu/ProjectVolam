@@ -229,7 +229,8 @@ func handle_world_input(event: InputEvent) -> bool:
 		var i := _decor_at(_cell_under_mouse())
 		if i >= 0:
 			player.request_hideout("rotate" if event.keycode == KEY_R else "flip", {"index": i})
-		return true
+			return true
+		return false   # empty cell: let QWER skills / Forms key reach the game
 	return false
 
 
