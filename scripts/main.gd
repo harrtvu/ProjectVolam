@@ -1,6 +1,7 @@
 extends Node2D
 const Vendor := preload("res://scripts/vendor.gd")
 const GMScript := preload("res://scripts/gm.gd")
+const Forms := preload("res://scripts/forms.gd")
 ## Project Volam - root of the game.
 ## One scene handles everything: main menu, world, networking, accounts, chat and HUD.
 ##
@@ -14,8 +15,8 @@ const GMScript := preload("res://scripts/gm.gd")
 ##   --ws                use WebSockets instead of ENet (needed for web clients)
 ##   --save-file=PATH    server: where accounts are saved (default user://volam_save/accounts.json)
 ##   --vendor-rotate=SECS  server: vendor stock rotation period (default 2h; stock saved to vendor.json / X_vendor.json beside --save-file=X.json)
-##   --gm=Name1,Name2    server: extra Game Master account names (defaults always include gm, gamemaster, admin)
-##   --bot-gm            bot: after login run /gm kit, gold, heal, god, warp (smoke-test GM cheats)
+##   --gm=Name1,Name2    server: enable Game Master chat cheats (/gm …) for these account names only (off by default)
+##   --bot-gm            bot: after login run /gm kit, gold, heal, god, warp (needs --gm=YourName)
 ##   --debug-loot        server: much higher gear drop rates (testing)
 ##   --debug-start-level=N  server: brand-new accounts start at level N (testing high zones)
 ##   --fast-respawn      server: monsters/bosses respawn 10x faster (testing)
@@ -239,9 +240,9 @@ var save_file := DEFAULT_SAVE_FILE
 var debug_loot := false
 var loot_showcase := false         # server: drop a rarity showcase in the meadow (screenshots)
 var debug_gear := false            # server: debug accounts get a crafting kit (orbs, gold, items)
-## Account names (lowercase) that may use /gm chat cheats. Defaults: gm, gamemaster, admin.
-## Add more with --gm=Name1,Name2. Solo: name the hero "gm" (display-name fallback).
-var gm_names := {"gm": true, "gamemaster": true, "admin": true}
+## Account names (lowercase) that may use /gm chat cheats. Empty by default — must pass --gm=Name.
+## Never auto-grants by account name alone (would be an online exploit).
+var gm_names := {}
 var debug_level_for := {}          # server (tests): --debug-level-for=MetalA:22,... start level per new account (overrides --debug-start-level)
 var debug_fresh := ""              # server: accounts whose name starts with this skip --debug-start-level (fresh Lv1)
 var debug_full_bag := ""           # server: accounts whose name starts with this get a full bag
@@ -285,6 +286,8 @@ var bot_route: Array = []
 var bot_dwell := 12.0
 var bot_hunt_boss := false
 var _bot_zone_t := 0.0
+var _bot_avoid_portal_t := 0.0          # after a zone transfer, stay off the arrival pad so we don't bounce back
+var _bot_avoid_portal_pos := Vector2.INF
 var _bot_astar: AStarGrid2D
 var _bot_astar_zone := ""
 var _bot_path: Array = []
@@ -1048,11 +1051,11 @@ func _spawn_logged_in(id: int, pname: String, is_new: bool) -> void:
 	if node:
 		node.account_key = peer_accounts[id]
 		_push_inventory_later(node)
-		if GMScript.is_gm(self, node):
+		if not gm_names.is_empty() and GMScript.is_gm(self, node):
 			get_tree().create_timer(0.5).timeout.connect(func():
 				if is_instance_valid(node) and not node.is_queued_for_deletion():
 					node.notify("Game Master online. Type /gm for cheat commands (kit, gold, item, warp…).", true))
-			_log("Login '%s': Game Master privileges enabled" % display)
+			_log("Login '%s': Game Master privileges enabled (--gm)" % display)
 		if node.tutorial == "pending":
 			_log("[tutorial] %s: starting the tutorial (new character)" % display)
 			get_tree().create_timer(0.4).timeout.connect(_send_tutorial.bind(weakref(node)))   # right after spawn, before the first keypress
@@ -3806,11 +3809,16 @@ func _bot_update(delta: float) -> void:
 		_bot_astar = zone.map.make_astar()
 		_bot_path.clear()
 		_bot_zone_t = 0.0
+		# Big maps: arrival pads sit on the return portal. Stay clear for a few seconds
+		# so a route bot (or idle wander) doesn't immediately bounce back.
+		_bot_avoid_portal_t = 8.0
+		_bot_avoid_portal_pos = me.position
 		if not bot_route.is_empty() and bot_route[0] == zone.zone_id:
 			bot_route.pop_front()
 			if bot_route.is_empty():
 				_log("bot route finished in %s" % zone.zone_id)
 	_bot_zone_t += delta
+	_bot_avoid_portal_t = maxf(0.0, _bot_avoid_portal_t - delta)
 
 	if tutorial_ui.visible and bot_tutorial != "":
 		_bot_tutorial(me, zone, delta)
@@ -3892,6 +3900,15 @@ func _bot_update(delta: float) -> void:
 		bot_dir = Vector2.ZERO
 	else:
 		bot_dir = _bot_steer(zone, me.position, goal_pos, delta)
+
+	# Keep off the arrival portal while the avoid timer runs (unless we're travelling onward).
+	if _bot_avoid_portal_t > 0.0 and _bot_avoid_portal_pos != Vector2.INF \
+			and me.position.distance_to(_bot_avoid_portal_pos) < 160.0 \
+			and not (not bot_route.is_empty() and _bot_zone_t >= bot_dwell):
+		var away: Vector2 = me.position - _bot_avoid_portal_pos
+		if away.length_squared() < 4.0:
+			away = Vector2.RIGHT.rotated(float(hash(zone.zone_id) % 628) / 100.0)
+		bot_dir = away.normalized()
 
 	_bot_attack_timer -= delta
 	if _bot_attack_timer <= 0.0 and not bot_passive:

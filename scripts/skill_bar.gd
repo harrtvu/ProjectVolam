@@ -1,4 +1,5 @@
 extends HBoxContainer
+const Forms := preload("res://scripts/forms.gd")
 ## HUD skill bar: 4 slots with icon, hotkey, mana/life cost, cooldown sweep, lock state.
 ## Also draws the Martial Form combo pips and Finisher buff above the bar.
 

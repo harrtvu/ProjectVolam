@@ -54,15 +54,16 @@ d["accounts"]["lost"] = {"name": "Lost", "salt": salt, "hash": hashlib.sha256((s
 json.dump(d, open(p, "w"), indent="\t")
 PY
 
-echo "Phase 2 (~45s)..."
-run --server --save-file="$SAVE" --quit-after=46 > $L/p2_server.log 2>&1 &
+echo "Phase 2 (~60s)..."
+# --allow-warp: Victim warps into the forest (Sunnyhaven is too far for a 40s walk on 360x224 maps).
+run --server --save-file="$SAVE" --allow-warp --quit-after=62 > $L/p2_server.log 2>&1 &
 sleep 2
 run --join=127.0.0.1 --name=Bot1 --password=pw1 --bot --quit-after=40 > $L/p2_bot1_restore.log 2>&1 &
 run --join=127.0.0.1 --name=Bot2 --password=pw2 --bot --quit-after=10 > $L/p2_bot2_restore.log 2>&1 &
 run --join=127.0.0.1 --name=Oldie --password=old --class=earth --bot --quit-after=30 > $L/p2_oldie.log 2>&1 &
 run --join=127.0.0.1 --name=Oldtown --password=old --bot-idle --quit-after=12 > $L/p2_oldtown.log 2>&1 &
 run --join=127.0.0.1 --name=Lost --password=old --bot-idle --quit-after=12 > $L/p2_lost.log 2>&1 &
-run --join=127.0.0.1 --name=Victim --password=v --class=fire --bot-passive --bot-route=forest --bot-dwell=0 --quit-after=40 > $L/p2_victim.log 2>&1 &
+run --join=127.0.0.1 --name=Victim --password=v --class=fire --bot-passive --warp=forest --quit-after=55 > $L/p2_victim.log 2>&1 &
 sleep 3
 run --join=127.0.0.1 --name=BOT1 --password=pw1 --bot --quit-after=10 > $L/p2_bot1_duplicate.log 2>&1 &
 sleep 10   # Bot2 has logged out again by now
@@ -70,25 +71,32 @@ run --join=127.0.0.1 --name=bot2 --password=WRONG --bot --quit-after=10 > $L/p2_
 wait
 
 "$GODOT" --headless --path . -- --bigmap-selftest > $L/bigmap_selftest.log 2>&1
-echo "Phase 3 (~130s)..."
-run --server --save-file="$SAVE3" --debug-start-level=20 --fast-respawn --allow-warp --quit-after=130 > $L/p3_server.log 2>&1 &
+echo "Phase 3 (~280s)..."
+# Big 360x224 maps: the Walker needs several minutes for crypt↔frost. Campers/hunters share the budget.
+run --server --save-file="$SAVE3" --debug-start-level=20 --fast-respawn --allow-warp --quit-after=280 > $L/p3_server.log 2>&1 &
 sleep 2
-run --join=127.0.0.1 --name=Walker --password=w --class=wood --bot --bot-route=forest,crypt,frost,crypt,forest,meadow --bot-dwell=4 --quit-after=124 > $L/p3_walker.log 2>&1 &
+run --join=127.0.0.1 --name=Walker --password=w --class=wood --bot --bot-route=forest,crypt,frost,crypt,forest,meadow --bot-dwell=2 --quit-after=270 > $L/p3_walker.log 2>&1 &
 # a crypt camp (crawler + archers + ghost): wiped and respawned as a group, so every overworld crypt type is seen respawning
 CCAMP=$(grep -E "BIGMAP SELFTEST crypt +camps at" $L/bigmap_selftest.log | sed -E 's/.*camps at ([0-9]+),([0-9]+).*/\1,\2/' | awk -F, '{print $1 "," $2+3}')
-run --join=127.0.0.1 --name=CryptCamper --password=w --class=fire --bot --warp=crypt --warp-cell=$CCAMP --quit-after=124 > $L/p3_crypt_camper.log 2>&1 &
+run --join=127.0.0.1 --name=CryptCamper --password=w --class=fire --bot --warp=crypt --warp-cell=$CCAMP --quit-after=270 > $L/p3_crypt_camper.log 2>&1 &
 # a frost bat pack: wiped and respawned as a group (the hunters only pass by frost bats, so their respawn was chance-based)
 FBAT=$(grep -E "BIGMAP SELFTEST frost +packs " $L/bigmap_selftest.log | grep -oE "frost_bat@[0-9]+,[0-9]+" | head -1 | sed -E 's/frost_bat@//' | awk -F, '{print $1 "," $2+3}')
-run --join=127.0.0.1 --name=FrostCamper --password=w --class=fire --bot --warp=frost --warp-cell=$FBAT --quit-after=124 > $L/p3_frost_camper.log 2>&1 &
+run --join=127.0.0.1 --name=FrostCamper --password=w --class=fire --bot --warp=frost --warp-cell=$FBAT --quit-after=270 > $L/p3_frost_camper.log 2>&1 &
 # a forest Cave Bat pack: overworld cave bats otherwise only respawn if phase-4 bots happen to wipe a bat pack
 CBAT=$(grep -E "BIGMAP SELFTEST forest +packs " $L/bigmap_selftest.log | grep -oE " bat@[0-9]+,[0-9]+" | head -1 | sed -E 's/ bat@//' | awk -F, '{print $1 "," $2+3}')
-run --join=127.0.0.1 --name=BatCamper --password=w --class=water --bot --warp=forest --warp-cell=$CBAT --quit-after=124 > $L/p3_bat_camper.log 2>&1 &
+run --join=127.0.0.1 --name=BatCamper --password=w --class=water --bot --warp=forest --warp-cell=$CBAT --quit-after=270 > $L/p3_bat_camper.log 2>&1 &
+# dedicated elite killer (overworld elites sit deep; Walker may never reach one)
+# camps/elites share one BIGMAP line: "... camps at … elites at X,Y …"
+ELITE=$(grep -E "BIGMAP SELFTEST forest " $L/bigmap_selftest.log | grep -oE "elites at [0-9]+,[0-9]+" | head -1 | sed 's/elites at //')
+if [ -n "$ELITE" ]; then
+  run --join=127.0.0.1 --name=EliteCamper --password=w --class=fire --bot --warp=forest --warp-cell=$ELITE --quit-after=270 > $L/p3_elite_camper.log 2>&1 &
+fi
 declare -A LAIR=([forest]=332,192 [crypt]=26,18 [frost]=342,32)   # inside each boss lair (360x224 maps)
 declare -A HC=([forest1]=metal [forest2]=wood [forest3]=water [crypt1]=fire [crypt2]=earth [crypt3]=water
                [frost1]=earth [frost2]=fire [frost3]=metal)
 for z in forest crypt frost; do
   for n in 1 2 3; do
-    run --join=127.0.0.1 --name=${z}Hunter$n --password=h --class=${HC[$z$n]} --bot --bot-hunt=boss --warp=$z --warp-cell=${LAIR[$z]} --quit-after=124 > $L/p3_${z}_hunter$n.log 2>&1 &
+    run --join=127.0.0.1 --name=${z}Hunter$n --password=h --class=${HC[$z$n]} --bot --bot-hunt=boss --warp=$z --warp-cell=${LAIR[$z]} --quit-after=270 > $L/p3_${z}_hunter$n.log 2>&1 &
   done
 done
 wait
@@ -361,7 +369,8 @@ for kind in camp elite nest horde; do
   if grep -qhE "group aggro: .*\(group #[0-9]+ $kind of" $L/*server.log; then echo "PASS  a $kind group aggroed together"; else echo "FAIL  a $kind group aggroed together"; fi
 done
 if grep -qhE "group #[0-9]+ [a-z]+ of .* respawned at .*: [2-9][0-9]* members" $L/*server.log; then echo "PASS  groups respawn together ($(cat $L/*server.log | grep -cE "group #[0-9]+ .* respawned at") group respawns)"; else echo "FAIL  groups respawn together"; fi
-check "elite group leader in the overworld"  "◆ |(Hasted|Armoured|Brutal|Regenerating) [A-Za-z ]+\(Lv[0-9]+\) was slain"   p3_server.log
+# ◆ is a client-only glyph; server logs "Hasted Grey Wolf(Lv8) was slain by …"
+check "elite group leader in the overworld"  "(Hasted|Armoured|Brutal|Regenerating) [A-Za-z ]+\(Lv[0-9]+\) was slain"   p3_server.log
 check "old save logs into Sunnyhaven"               "Login 'Oldtown' .*restored save.*zone meadow"                                 p2_server.log
 check "wild/invalid last zone still starts in town" "Login 'Lost': entering Sunnyhaven \\(last zone was crypt\\)"                  p2_server.log
 check "Lost lands in meadow town"                   "Login 'Lost' .*zone meadow"                                                   p2_server.log
@@ -784,7 +793,7 @@ check "step 4: equipping gear"                         "tutorial step 4 done: Eq
 check "step 5: passive web"                            "tutorial step 5 done: Passive web"                            p16_Newbie.log
 check "step 6: Martial Forms"                          "tutorial step 6 done: Martial Forms"                        p16_Newbie.log
 check "finished flag saved"                            "\[tutorial\] Newbie finished the tutorial - flag saved \(done\)" p16_server.log
-check "tutorial can be skipped"                        "tutorial skipped at step 1/5"                                 p16_Skipper.log
+check "tutorial can be skipped"                        "tutorial skipped at step 1/6"                                 p16_Skipper.log
 check "skipped flag saved"                             "\[tutorial\] Skipper skipped the tutorial - flag saved \(skipped\)" p16_server.log
 if grep -qE "\[tutorial\] (Newbie|Skipper): starting" $L/p16b_server.log || grep -q "tutorial started" $L/p16b_Newbie.log $L/p16b_Skipper.log; then echo "FAIL  shown once (not again after a restart + re-login)"; else echo "PASS  shown once (not again after a restart + re-login)"; fi
 if python3 -c "import json,sys; a=json.load(open('$SAVE16'))['accounts']; sys.exit(0 if a['newbie']['character']['tutorial']=='done' and a['skipper']['character']['tutorial']=='skipped' else 1)"; then echo "PASS  tutorial flag stored per character"; else echo "FAIL  tutorial flag stored per character"; fi

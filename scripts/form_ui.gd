@@ -1,4 +1,5 @@
 extends PanelContainer
+const Forms := preload("res://scripts/forms.gd")
 ## Martial Forms panel (F): pick a Vo Lam combo route and socket PoE-style support links.
 
 var player: Node

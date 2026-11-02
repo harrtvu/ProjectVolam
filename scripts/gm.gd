@@ -1,7 +1,7 @@
 class_name GM
 ## Game Master chat commands for faster testing.
-## Enabled for accounts whose name is in Main.gm_names (defaults: gm, gamemaster, admin)
-## plus any --gm=Name1,Name2 flags. Hideout logout still works normally.
+## Off by default. Enable only with server flag --gm=Name1,Name2 (account names).
+## Naming an account "gm" / "admin" alone does NOT grant cheats.
 ##
 ## Commands (type in chat):
 ##   /gm                 help
@@ -47,7 +47,7 @@ static func chat_command(main: Node, p: Node, text: String) -> bool:
 	if not (low == "/gm" or low.begins_with("/gm ")):
 		return false
 	if not is_gm(main, p):
-		p.notify("You are not a Game Master. Use account name 'gm' (or start the server with --gm=YourName).", true)
+		p.notify("You are not a Game Master. The server must be started with --gm=YourAccountName.", true)
 		return true
 	var parts: PackedStringArray = raw.split(" ", false)
 	var sub := parts[1].to_lower() if parts.size() >= 2 else "help"

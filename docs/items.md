@@ -374,7 +374,7 @@ scour 150, regal 250. Gear stock: 8 pieces — 35% normal / 45% magic / 20% rare
 - **Ice Ogres** (+20 IIQ / +30 IIR) and **Treants** (+10 IIQ) are the best regular overworld farmers.
 - Zone bosses are the reliable unique farm; Yeti King drops three uniques every kill.
 - Dungeon elites are the ticket sustain loop (15% base + quantity + Atlas `tq`).
-- For testing without grinding: login as **`gm`** and type `/gm kit` (see [Game Master](../README.md#game-master-testing-cheats)).
+- For testing without grinding: start the server with `--gm=YourName`, log in as that name, and type `/gm kit` (see [Game Master](../README.md#game-master-testing-cheats)).
 
 ---
 

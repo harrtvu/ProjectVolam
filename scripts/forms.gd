@@ -1,4 +1,4 @@
-class_name Forms
+## Martial Forms data (preloaded by consumers; no class_name for stale .godot caches).
 ## Martial Forms: Vo Lam Truyen Ky combo routes + Path of Exile support links.
 ##
 ## Each class has two Forms (chiêu thức / lộ tuyến). An active Form:
