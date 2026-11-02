@@ -1,4 +1,5 @@
 class_name SkillCaster
+const Forms := preload("res://scripts/forms.gd")
 ## Server-side skill logic for all five classes (data in classes.gd).
 ## Every check (level unlock, cooldown, mana, targets, hits) happens here on the
 ## server; clients only send "use skill N" and get cooldowns + visual effects back.

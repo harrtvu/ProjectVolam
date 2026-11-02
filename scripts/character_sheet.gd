@@ -1,4 +1,5 @@
 extends PanelContainer
+const Forms := preload("res://scripts/forms.gd")
 ## Character sheet (C): class, element, stats, skills and the element cycle diagram.
 
 const WheelScript := preload("res://scripts/element_wheel.gd")

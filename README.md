@@ -903,7 +903,7 @@ Party commands are typed in chat. A party has up to 4 members, and an invite exp
 | `/p TEXT` | party chat |
 
 ### Game Master (testing cheats)
-Log in with account name **`gm`**, **`gamemaster`**, or **`admin`** (any password creates the account), or start the server with `--gm=YourName`. Type `/gm` in chat for the full list. Useful commands:
+**Off by default.** Start the server with `--gm=YourName` (comma-separated for several accounts). Only those account names may use `/gm` commands — naming an account `gm` / `admin` alone does **not** grant cheats. Type `/gm` in chat for the full list. Useful commands:
 
 | Command | Effect |
 |---|---|
@@ -918,7 +918,7 @@ Log in with account name **`gm`**, **`gamemaster`**, or **`admin`** (any passwor
 | `/gm kill [radius]` | kill nearby monsters |
 | `/gm ticket` / `/gm atlas` / `/gm clearbag` | dungeon ticket, atlas bootstrap, empty bag |
 
-Smoke test: `godot --headless -- --host --name=gm --password=gm --class=metal --bot --bot-gm --quit-after=10`.
+Smoke test: `godot --headless -- --host --name=gm --password=gm --gm=gm --class=metal --bot-gm --quit-after=10`.
 
 The HUD lists the members with level, class and **current zone**, and the panel updates when someone
 changes zone. When the leader opens a dungeon (Map Device or ticket), **party members may enter
@@ -1128,8 +1128,8 @@ godot --headless --path project-volam -- --server --ws
 | `--bot` | test bot: hunts monsters, collects loot, drinks potions, equips better gear, says hello |
 | `--quit-after=SECS` | quit after N seconds (for automated tests) |
 | `--screenshot=PATH` | save a PNG about 6 s after start (needs a display) |
-| `--gm=Name1,Name2` | server: extra Game Master account names (defaults always include `gm`, `gamemaster`, `admin`) |
-| `--bot-gm` | bot: after login run `/gm` cheat smoke script (`kit`, gold, heal, god, item, warp) |
+| `--gm=Name1,Name2` | server: enable `/gm` cheats for these account names only (no default GM accounts) |
+| `--bot-gm` | bot: after login run `/gm` cheat smoke script (`kit`, gold, heal, god, item, warp); requires `--gm=` |
 | `--debug-gear` | server: debug-level accounts get a crafting kit (every orb, 30 enhancement stones, 2500 gold, sample gear) |
 | `--debug-full-bag=PREFIX` | server: new debug accounts whose name starts with PREFIX start with a full bag (bag-full tests) |
 | `--loot-showcase` | server: drops one item of each rarity + some currency in the meadow when the first player logs in (screenshots) |
@@ -1190,7 +1190,7 @@ GODOT=/path/to/Godot_v4.2.1-stable_linux.x86_64 ./run_local_test.sh   # ~31 min,
 | F3 | FPS overlay (FPS, frame ms, monsters received by this client, node count); off by default |
 | H | In your hideout: open the hideout panel and toggle decoration mode (left-click place / move, right-click remove, R rotate, F flip) |
 | `/hideout` (chat) | Go to your hideout (also **Esc > Hideout** or the Hideout Master in town) |
-| `/gm …` (chat) | Game Master testing cheats (accounts `gm` / `gamemaster` / `admin`, or `--gm=Name`) — see [Game Master](#game-master-testing-cheats) |
+| `/gm …` (chat) | Game Master testing cheats (server must pass `--gm=YourName`) — see [Game Master](#game-master-testing-cheats) |
 | I | Open / close inventory |
 | Click / drag (inventory) | Click gear to equip / unequip, click a potion to drink. Drag between bag, paper doll, Drop, Destroy, blacksmith slot and stash |
 | Shift-click / Ctrl-click ×2 | Drop an item on the ground / destroy it |

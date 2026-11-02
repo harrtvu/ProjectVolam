@@ -1,4 +1,5 @@
 extends CharacterBody2D
+const Forms := preload("res://scripts/forms.gd")
 ## A player character.
 ## Everything important is SERVER-AUTHORITATIVE: the owning client only sends
 ## input and requests (attack, pick up, use, equip); the server simulates
