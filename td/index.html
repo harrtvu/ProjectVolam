@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Volam Outpost — Tower Defense Slice</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">PV</span>
+        <div>
+          <h1>Volam Outpost</h1>
+          <p class="tagline">Tower defense · Roguelike picks · Clear the map</p>
+        </div>
+      </div>
+      <div class="hud-stats" id="hud-stats">
+        <div class="stat"><span class="label">Lives</span><strong id="stat-lives">20</strong></div>
+        <div class="stat"><span class="label">Gold</span><strong id="stat-gold">120</strong></div>
+        <div class="stat"><span class="label">Wave</span><strong id="stat-wave">0 / 8</strong></div>
+        <div class="stat"><span class="label">Kills</span><strong id="stat-kills">0</strong></div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <canvas id="game" width="960" height="520" aria-label="Tower defense map"></canvas>
+
+      <aside class="panel">
+        <section class="panel-block">
+          <h2>Build</h2>
+          <div class="tower-picker" id="tower-picker"></div>
+          <p class="hint">Click a build plot on the map. Press <kbd>U</kbd> or the Upgrade button on a selected tower.</p>
+        </section>
+
+        <section class="panel-block">
+          <h2>Selected</h2>
+          <div id="selection-info" class="selection muted">Nothing selected</div>
+          <button id="btn-upgrade" class="btn" disabled>Upgrade tower</button>
+          <button id="btn-sell" class="btn ghost" disabled>Sell (50%)</button>
+        </section>
+
+        <section class="panel-block">
+          <h2>Skills</h2>
+          <ul id="skill-list" class="skill-list muted"><li>No skills yet — pick after waves.</li></ul>
+        </section>
+
+        <section class="panel-block actions">
+          <button id="btn-start" class="btn primary">Start wave</button>
+          <button id="btn-speed" class="btn ghost">Speed ×1</button>
+          <button id="btn-restart" class="btn ghost">Restart</button>
+        </section>
+      </aside>
+    </main>
+
+    <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+      <div class="overlay-card" id="overlay-card"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
